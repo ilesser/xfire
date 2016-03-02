@@ -1,0 +1,55 @@
+Análisis de las instrucciones ALU:
+
+Immediate
+
+Adds:
+
+Originalmente
+
+===============================
+addi.w addic.w addui.w adduic.w
+===============================
+addi.w:
+ry[31:0] <-32- rx[31:0] + SignExtend32 (imm)
+
+addic.w:
+ry[31:0] <-32- rx[31:0] + SignExtend32 (imm) + Extend32 (rx.c)
+
+addui.w:
+ry[31:0] <-32- UnsignedCasting (rx[31:0]) + Extend32 (imm)
+
+adduic.w:
+ry[31:0] <-32- UnsignedCasting (rx[31:0]) + Extend32 (imm) + Extend32 (rx.c)
+
+===============================
+subi.w subic.w subui.w subuic.w
+===============================
+subi.w:
+ry[31:0] <-32- rx[31:0] - SignExtend32 (imm)
+
+subic.w:
+ry[31:0] <-32- rx[31:0] - SignExtend32 (imm) - Extend32 (rx.c)
+
+subui.w:
+ry[31:0] <-32- UnsignedCasting32 (rx[31:0]) - Extend32 (imm)
+
+subuic.w:
+ry[31:0] <-32- UnsignedCasting32 (rx[31:0]) - Extend32 (imm) - Extend32 (rx.c)
+
+==============
+divi.w divui.w
+==============
+divi.w:
+ry[31:0] <-32- rx[31:0] / SignExtend32 (imm)
+
+divui.w:
+ry[31:0] <-32- UnsignedCasting32 (rx[31:0]) / SignExtend32 (imm)
+
+================
+multi.w multui.w
+================
+multi.w:
+ry[31:0] <-32- rx[31:0] * SignExtend32 (imm)
+
+multui.w:
+ry[31:0] <-32- UnsignedCasting32 (rx[31:0]) * Extend32 (imm)

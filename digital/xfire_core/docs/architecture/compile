@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cp ./latex/*.tex ./
+cp ./latex/*.sty ./
+pdflatex ./main.tex
+pdflatex ./main.tex
+rm *.log
+rm *.aux
+rm *.tex
+rm *.out
+rm *.sty
+rm ./latex/*.aux
+
+mv main.pdf ./pdf/main.pdf
+

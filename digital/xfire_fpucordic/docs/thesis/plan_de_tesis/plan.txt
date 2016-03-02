@@ -1,0 +1,47 @@
+Plan de tesis
+-------------
+
+1 - Introduccion al trabajo de tesis
+      * Comprender el estandar IEEE 754, architectura de CORDIC, BKM (pegarle una mirada).
+      * Escribir capitulo 2 de la tesis titulado: Introduccion teorica a FPU/CORDIC.
+
+2 - Analizar las diferentes arquitecturas digitales propuestas para implementar el sistema MIMO
+      * Leer libros, papers, IEEEXplore, CORDIC normalizado, presteps for hyperbolic with range extension.
+      * Escribir el capitulo 3 de la tesis titulado: Arquitecturas Digitales FPU (high level), CORDIC (low level)
+
+3 - Estudiar la factibilidad de realizar una mejora a las arquitecturas antes mencionadas.
+      * Es este sentido se abren dos caminos posibles:
+         - Si se encuentra una arquitectura que es mejor a las demas (mejor en algun sentido), entonces esa sera implementada
+           en la tesis.
+         - Si no se encuentra una arquitectura mejor, entonces en la tesis se estudiaran las caracteristicas distintivas
+           de las arquitecturas actuales y se optara por una implementacion adecuada para el problema a resolver.
+
+4 - Implementar la arquitectura seleccionada en RTL y desarrollar los bancos de prueba de simulacion para verificar la
+    correcta funcionalidad de la misma. Dicho RTL cumplira con ciertas condiciones de portabilidad y legibilidad del codigo
+    para que el mismo sea efectivamente un IP core. Se escribira el capitulo 4, donde se estudiara la arquitectura desde
+    la implementacion aritmetica a nivel de microarquitectura.
+
+5 - En este punto, hacer la presentacion del tema de tesis a la Comision Curricular, preparar la documentacion
+    correspondiente.
+
+6 - Experimentar el IP core en un ambiente de simulacion y, en la medida que sea posible, en campo. Realizar la sintesis
+    de la misma para distintos dispositivos FPGA, medir recursos utilizados, maxima frequencia de operacion y potencia
+    consumida.
+
+7 - Escribir el capitulo 6 de la tesis titulado: Conclusiones y Trabajos a Futuro. Se extraeran las conclusiones
+    pertinentes sobre los resultados obtenidos y se propondran futuras mejoras de la arquitecturas (si correspondiese)
+    a partir de los resultados obtenidos.
+
+8 - Escribir capitulo 1 de la tesis titulado: Introduccion al Trabajo de Tesis. Se detallaran las hipotesis
+    (problema a resolver), los objetivos y el alcance y la organizacion de la tesis. Escribir los agradecimientos, la
+    dedicatoria y el resumen de la tesis. Escribir todos los anexos que sean convenientes para lograr que la tesis sea
+    autocontenida.
+
+9 - Revisar la tesis por el tutor y por los pares antes de enviarla al jurado: evaluar gramatica, lenguaje usado,
+     resultados, formatos, etc.
+
+10 - Preparar la presentacion (diapositivas) con los objetivos, alcance, introduccion al sistema MIMO, desarrollo de la
+     arquitectura, resultados obtenidos, conclusiones y trabajos a futuros. Ensallar la presentacion delante del tutor
+     y los pares.
+
+11 - Hacer la presentacion de la tesis al jurado.
