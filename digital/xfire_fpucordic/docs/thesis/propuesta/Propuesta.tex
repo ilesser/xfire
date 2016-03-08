@@ -36,48 +36,48 @@
 
 % Definicion de la hoja de firmas.
 \newcommand{\signature}[7]{
-	\vfill
+   \vfill
 
-	\begin{flushright}
-		#1, \today
-	\end{flushright}
-	\vspace{3cm}
+   \begin{flushright}
+      #1, \today
+   \end{flushright}
+   \vspace{3cm}
 
-	\noindent
-	\centering
-	\begin{tabularx}{0.9\textwidth}{cXc}
-		\multicolumn{3}{c}{\rule{5cm}{1pt}}\\
-		\multicolumn{3}{c}{#2}\\
-		\multicolumn{3}{c}{#3}\\
-		\vspace{3cm}\\
-		\rule{5cm}{1pt} & \hspace{2.5cm} & \rule{5cm}{1pt} \\
-		#4 & ~ & #5 \\
-		#6 & ~ & #7
-	\end{tabularx}
-	\vspace{1cm}
+   \noindent
+   \centering
+   \begin{tabularx}{0.9\textwidth}{cXc}
+      \multicolumn{3}{c}{\rule{5cm}{1pt}}\\
+      \multicolumn{3}{c}{#2}\\
+      \multicolumn{3}{c}{#3}\\
+      \vspace{3cm}\\
+      \rule{5cm}{1pt} & \hspace{2.5cm} & \rule{5cm}{1pt} \\
+      #4 & ~ & #5 \\
+      #6 & ~ & #7
+   \end{tabularx}
+   \vspace{1cm}
 }
 
 % Encabezado y Titulo del Documento y de la Tesis.
 \title{
-	{\normalsize
-		Universidad de Buenos Aires\\
-		Facultad de Ingeniería -- Departamento de Electrónica\\
-		Propuesta de Tesis de Ingeniería Electrónica\\
-		\vspace{0.7cm}
-	}
-	Implementación de un procesador RLS-QRD aplicado a filtros de beamforming
+   {\normalsize
+      Universidad de Buenos Aires\\
+      Facultad de Ingeniería -- Departamento de Electrónica\\
+      Propuesta de Tesis de Ingeniería Electrónica\\
+      \vspace{0.7cm}
+   }
+   Implementación de una Unidad de Punto Flotante basado en un sistema Cordic
 }
 
 % Datos de autor: Tesista, Director y Co-director.
-\author{	\textbf{Tesista}															\\
-			Federico Damián Camarda, \textit{Padrón Nro. 87.322}               			\\
-            \texttt{ \href{mailto:fededamian@mail.com}{fededamian@gmail.com}}			\\[2.5ex]
-            \textbf{Director}																\\
-            Ing. Nicolas Alvarez, \textit{Profesor Adjunto}             				\\
-            \texttt{ \href{mailto:nalvare2001@yahoo.com.ar}{nalvare2001@yahoo.com.ar}}  \\[2.5ex]
-            \textbf{Co-director}															\\
-            Ing. Octavio Alpago, \textit{JTP. Interino}               					\\
-            \texttt{ \href{mailto:oalpago@gmail.com}{oalpago@gmail.com}}                \\[2.5ex]
+\author{ \textbf{Tesista}                                                           \\
+         Ignacio Lesser, \textit{Padrón Nro. 90.942}                                \\
+         \texttt{ \href{mailto:ignacio.lesser@gmail.com}{ignaci.lesser@gmail.com}}  \\[2.5ex]
+         \textbf{Director}                                                          \\
+         Ing. Nicolas Alvarez, \textit{Profesor Adjunto}                            \\
+         \texttt{ \href{mailto:nalvare2001@yahoo.com.ar}{nalvare2001@yahoo.com.ar}} \\[2.5ex]
+         \textbf{Co-director}                                                       \\
+         Ing. Octavio Alpago, \textit{JTP. Interino}                                \\
+         \texttt{ \href{mailto:oalpago@gmail.com}{oalpago@gmail.com}}               \\[2.5ex]
        }
 
 % Fecha.
@@ -90,10 +90,10 @@
 \rhead{}
 \lfoot{}
 \cfoot{
-	{\footnotesize
-	\emph{Implementación de un procesador RLS-QRD aplicado a filtros de beamforming}\\
-	Plan de Tesis -- Página \thepage\ de \pageref{LastPage}
-	}
+   {\footnotesize
+   \emph{Implementación de una Unidad de Punto Flotante basado en un sistema Cordic}\\
+   Plan de Tesis -- Página \thepage\ de \pageref{LastPage}
+   }
 }
 \rfoot{}
 \renewcommand{\headrulewidth}{0pt}
@@ -127,7 +127,7 @@ Un \textit{beamformer adaptativo} es un dispositivo que tiene la capacidad de se
 
 \begin{figure}[htb!]
         \centering
-        \includegraphics[width=10cm]{adaptive_beamforming.png}
+        %\includegraphics[width=10cm]{adaptive_beamforming.png}
         \caption{Esquema de un sistema de Beamforming Adaptativo}
         \label{fig:Adaptive_Beamforming}
 \end{figure}
@@ -164,9 +164,9 @@ Se analizarán los modelos y desarrollos algorítmicos para la implementación d
 Asignaturas y otros estudios previstos que son relevantes al desarrollo de la Tesis.
 
 \begin{itemize}
-	\item \textbf{Sistemas Digitales:} Asignatura que abarca la teoría de técnicas de diseño de hardware digital y codificación de sistemas digitales, así como también su síntesis y medición.
-	\item \textbf{Procesos Estocásticos:} Asignatura en la cual se cubren los aspectos teóricos del análisis estadístico realizado sobre los sistemas de comunicaciones.
-	\item \textbf{Procesamiento de Señales:} Asignatura que abarca los conceptos respecto al procesamiento de señales y el uso de filtros adaptativos.
+   \item \textbf{Sistemas Digitales:} Asignatura que abarca la teoría de técnicas de diseño de hardware digital y codificación de sistemas digitales, así como también su síntesis y medición.
+   \item \textbf{Procesos Estocásticos:} Asignatura en la cual se cubren los aspectos teóricos del análisis estadístico realizado sobre los sistemas de comunicaciones.
+   \item \textbf{Procesamiento de Señales:} Asignatura que abarca los conceptos respecto al procesamiento de señales y el uso de filtros adaptativos.
 \end{itemize}
 
 \subsection{Alcance proyectado para la tesis}
@@ -205,10 +205,10 @@ La duración total del trabajo se estima en un año y se considera que la misma 
 En la figura \ref{TablaActividades} se encuentra el plan propuesto para la formación del tesista y el cumplimiento de los objetivos.
 
 \begin{figure}[h!]
-	\label{TablaActividades}
-	%trim option's parameter order: left bottom right top
-	\includegraphics[trim = 20mm 200mm 20mm 25mm, clip, width=\textwidth]{tabla_actividades}
-	\caption{Diagrama de las actividades a realizar por el tesista.}
+   \label{TablaActividades}
+   %trim option's parameter order: left bottom right top
+   \includegraphics[trim = 20mm 200mm 20mm 25mm, clip, width=\textwidth]{tabla_actividades}
+   \caption{Diagrama de las actividades a realizar por el tesista.}
 \end{figure}
 
 \newpage
@@ -225,6 +225,6 @@ En la figura \ref{TablaActividades} se encuentra el plan propuesto para la forma
 
 \newpage
 
-\signature{Buenos Aires}{Sr. Federico Damián Camarda}{Tesista}{Ing. Nicolás Alvarez}{Ing. Octavio Alpago}{Prof. Adjunto, Director}{JTP. Interino, Co-director}
+\signature{Buenos Aires}{Sr. Ignacio Lesser}{Tesista}{Ing. Nicolás Alvarez}{Ing. Octavio Alpago}{Prof. Adjunto, Director}{JTP. Interino, Co-director}
 
 \end{document}
