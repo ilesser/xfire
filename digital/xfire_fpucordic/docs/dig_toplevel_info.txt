@@ -1,0 +1,19 @@
++------------------------------------------------------------------------------+
+| Copyright (c) 2016 Microelectronics Lab. - FIUBA and uLab UTN-FRBA.          |
+| Confidential property of Microelectronics Lab. - FIUBA and uLab UTN-FRBA.    |
+|                                                                              |
+| The information contained in this file is confidential and proprietary.      |
+| Any reproduction, use or disclosure, in whole or in part, of this            |
+| program, including any attempt to obtain a human-readable version of this    |
+| program, without the express, prior written consent of Microelectronics Lab. |
+| FIUBA and uLab UTN-FRBA is strictly prohibited.                              |
+|                                                                              |
++------------------------------------------------------------------------------+
+
+Top level name    :  xfire_fpucordic
+Top level starter :  pdk_admin
+Date              :  2016-03-02
+Process           :  IBM_7RF
+
+Digital top level created by new_dig_toplevel tool ver. 1.0.
+
