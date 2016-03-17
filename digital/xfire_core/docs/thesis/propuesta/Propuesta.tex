@@ -113,41 +113,35 @@
 
 \section{Objeto y Área de la Tesis}
 
-El objetivo principa de este trabajo consiste en diseñar, validar e implementar una microarquitectura RISC\footnote{\label{RISC}: Reduced instruction set
-computer. Técnica de diseño de unidades de procesamiento basadas en el hecho de que un conjunto de instrucciones simples provee una mayor performance al ser
-combinado con una microarquitectura capaz de ejecutar dichas instrucciones en algunos pocos ciclos de máquina.}. El diseño incluirá la completa
-especificación funcional de la microarquitectura y su conjunto de instrucciones (¿agregar algo de que soporta instrucciones CORDIC?). El diseño se validará
-mediante el desarrollo en software de un emulador de la arquitectura; la implementación se realizará en el lenguaje de descripción de hardware Verilog, y se
-sintetizárá en un dispositivo FPGA\footnote{\label{FPGA}Field Programmable Gate Array: dispositivo semiconductor que contiene bloques de lógica cuya
-interconexión y funcionalidad puede ser configurada `in situ' mediante un lenguaje de descripción especializado.}.
+El objetivo principal de este trabajo consiste en diseñar, validar e implementar una microarquitectura RISC\footnote{\label{RISC}: Reduced instruction set computer. Técnica de diseño de unidades de procesamiento basadas en el hecho de que un conjunto de instrucciones simples provee una mayor performance al ser combinado con una microarquitectura capaz de ejecutar dichas instrucciones en algunos pocos ciclos de máquina.}. El diseño incluirá la completa especificación funcional de la microarquitectura y su conjunto de instrucciones (¿agregar algo de que soporta instrucciones CORDIC?). El diseño se validará mediante el desarrollo en software de un emulador de la arquitectura; la implementación se realizará en el lenguaje de descripción de hardware Verilog, y se sintetizárá en un dispositivo FPGA\footnote{\label{FPGA}Field Programmable Gate Array: dispositivo semiconductor que contiene bloques de lógica cuya interconexión y funcionalidad puede ser configurada `in situ' mediante un lenguaje de descripción especializado.}.
 
-El interés en este desarrollo proviene de la necesidad de contar con un núcleo de procesamiento altamente configurable y suficientemente flexible y sencillo
-para distintas aplicaciones dentro del ámbito de la investigación en los laboratorios de microelectrónica (¿y de sistemas embebidos?); sintetizable en FPGA
+El interés en este desarrollo proviene de la necesidad de contar con un núcleo de procesamiento altamente configurable y suficientemente flexible y sencillo para distintas aplicaciones dentro del ámbito de la investigación en los laboratorios de microelectrónica (¿y de sistemas embebidos?); sintetizable en FPGA
 (¿y en silicio?).
 
-El área profesional de relevancia del trabajo de tesis es el diseño de sistemas digitales y su aplicación como base de proyectos de investigación que
-necesiten de un núcleo de procesamiento configurable y sencillo.
+El área profesional de relevancia del trabajo de tesis es el diseño de sistemas digitales y su aplicación como base de proyectos de investigación que necesiten de un núcleo de procesamiento configurable y sencillo.
 
 \newpage
 
-\section{Introducción. Antecedentes}
+\section{Introducción, antecedentes y actualidad}
 
-Las primeras aproximaciones a los procesadores RISC datan de los años 60 y 70, pero poner que MIPS es de los 80 y decir que es la ``estrella''?
+Desde la aparación de los microprocesadores a mediados de los años 70, la tendencia fue el aumento de la complejidad de las arquitecturas, generando un efecto de ``bola de nieve'', al ir superponiendo capas sobre un núcleo central. Existió, entonces, una reacción adversa a esta tendencia. Por ejemplo, la arquitectura experimental de IBM 801; y también en Berkeley, David Patterson y Ditzel fueron los primeros en acuñar el término RISC o \emph{reduced instruction set computer}, para descibir una nueva clase de microarquitectura que deshacía el camino del resto de las arquitecturas hasta el momento, conocidad, en contraposición, como CISC o \emph{complex instruction set computer}. A partir de este antecendente, los principales fabricantes de microprocesadores han lanzado al mercado sus propias implementaciones basadas en los principios establecidos en IBM y Berkeley.
 
-Explicar que retomaron importancia con los sistemas embebidos.
+El concepto de las arquitecturas RISC se basa, principalmenten, en el hecho de que al simplificar la lógica necesaria para la ejecución de una instrucción, permite aumentar la frecuencia de operación de las compuertas que componen la lógica. Además, es posible dividir la ejecución de la instrucciones en etapas sencillas y consuecutivas, permitiendo de esta manera implementar fácilmente optimizaciones como, por ejemplo, una arquitectura de \emph{pipeline}\footnote{\label{Pipeline}: Técnica de diseño...}. Es por eso que el conjunto de instrucciones es sencillo, permitiendo solamente operaciones básicas entre registros internos del microprocesador. El trabajo realizado por cada instrucción, en general, es menor que el generado por una instrucción CISC, pero se hace de manera sencilla y rápida. Es importante notar que nó sólamente la ganancia radica en poder aumentar la frecuencia de operación de la lógica, si no que estas condiciones de diseño facilitan el desarrollo de diseños de bajo consumo, característica muy valorada en el nicho de los sistemas embebidos.
 
-Exlpicar motivación de bajo consumo.
+El mercado de los sistemas embebidos es excesivamente amplio y está inserto en todas las industrias. En un automóvil, por ejemplo, podemos encontrar microprocesadores, en el sistema de frenos, en la central de inyección electrónica, en el sistema de entretenimiento y navegación, etc. La otra arista de vital importancia para el mercado de los sistemas embebidos, es el de los dispositivos móviles, donde se vuelve vital el requerimiento de bajo consumo. Hoy estamos viviendo la revolución de IoT (o \emph{Internet of Things}), que se trata básicamente de sistemas embebidos autónomos que estan conectados a ``la nube'' y pueden ser monitoreados y controlados remotamente a través de \emph{internet}.
+
+En la actualidad dentro del universo de las arquitecturas RISC, se destacan dos: MIPS y ARM. La primera, fue desarrollada por un grupo de investigadores de la Universidad de Stanford (entre ellos John L. Hennessy, pionero del concepto RISC junto a David Patterson, coautores de la bibliografía más reelevante de esta temática). Esta arquitectura, por su sencillez, es la predilecta al momento del desarrollo de cursos enfocados en al arquitectura de computadoras. Pero esta arquitectura no sólo tiene relevancia académica, es muy popular en el mercado de los microprocesadores en sistemas embebidos como equipos de telecomunicaciones, decodificadores de TV digital, y de entretenimiento con ejemplos muy conocidos como \emph{Nintendo} y \emph{PlaySation}. ARM, por otro lado, ha ganado una importante porción del mercado de los embebidos (con un gran aporte de los dispositivos móviles), basando su modelo de negocios en la venta de la propiedad intelectual del diseño de los microprocesadores a las empresas que finalmente fabrican el silicio.
 
 \section{Desarrollo previsto de la Tesis}
 
 \subsection{Teoría, enfoque y métodos a utilizar}
 
-El enfoque de la tesis se basará en un desarrollo teórico del set de instrucciones y de las características de la microarquitectura; y en el desarrollo
-práctico del emulador y el Verilog....
+El enfoque de la tesis se basará en un desarrollo teórico del conjunto de instrucciones y de las características de la microarquitectura; y en el desarrollo
+práctico del emulador y la implementación en lenguaje descriptor de hardware.
 
-Explicar concepto de ``ortogonalidad''
+El concepto central detrás del presente desarollo será el de \textbf{ortogonalidad}, en el sentido de que cada bloque constructivo de la arquitectura sea independiente e indiferenciable del resto de la arquitectura, llevando así al extremo la sencillez del diseño.
 
-Se sopesarán las ventajas de mantener la ``ortogonalidad''....
+Acá me falta....
 
 \subsection{Estudios conexos}
 
@@ -208,6 +202,8 @@ En la figura \ref{TablaActividades} se encuentra el plan propuesto para la forma
 \newpage
 
 \section{Bibliografía}
+
+CAMBIARLA!!!
 
 \begin{thebibliography}{99}
 
