@@ -244,21 +244,16 @@ module xfire_fpucordic #(
    // Salida
    always @* begin
       case(F_z)
-         RANGE_1:
-            dec_size_z_64 = DEC_SIZE_F1_64;
-            dec_size_z_32 = DEC_SIZE_F1_32;
-         RANGE_2:
-            dec_size_z_64 = DEC_SIZE_F2_64;
-            dec_size_z_32 = DEC_SIZE_F2_32;
-         RANGE_4:
-            dec_size_z_64 = DEC_SIZE_F4_64;
-            dec_size_z_32 = DEC_SIZE_F4_32;
-         RANGE_180:
-            dec_size_z_64 = DEC_SIZE_F180_64;
-            dec_size_z_32 = DEC_SIZE_F180_32;
-         default:
-            dec_size_z_64 = {W{1'b0}};
-            dec_size_z_32 = {W{1'b0}};
+         RANGE_1:    dec_size_z_64 = DEC_SIZE_F1_64;
+                     dec_size_z_32 = DEC_SIZE_F1_32;
+         RANGE_2:    dec_size_z_64 = DEC_SIZE_F2_64;
+                     dec_size_z_32 = DEC_SIZE_F2_32;
+         RANGE_4:    dec_size_z_64 = DEC_SIZE_F4_64;
+                     dec_size_z_32 = DEC_SIZE_F4_32;
+         RANGE_180:  dec_size_z_64 = DEC_SIZE_F180_64;
+                     dec_size_z_32 = DEC_SIZE_F180_32;
+         default:    dec_size_z_64 = {W{1'b0}};
+                     dec_size_z_32 = {W{1'b0}};
       endcase
    end
 
@@ -284,16 +279,11 @@ module xfire_fpucordic #(
 // MUX selector de la salida
    always @* begin
       case (cp_xy)
-         "11":
-            rz_o <= rx_reg;
-         "10":
-            rz_o <= rx_reg;
-         "01":
-            rz_o <= ry_reg;
-         "00":
-            rz_o <= rz_mux;
-         default:
-            rz_o <= {W{1'b0}};
+         "11":       rz_o = rx_reg;
+         "10":       rz_o = rx_reg;
+         "01":       rz_o = ry_reg;
+         "00":       rz_o = rz_mux;
+         default:    rz_o = {W{1'b0}};
       end case;
    end
    // -----------------------------------------------------
