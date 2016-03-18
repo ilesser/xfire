@@ -1,0 +1,255 @@
+\chapter{Script Octave de análisis de resultados}
+\label{cap:apB}
+
+\begin{lstlisting}[style=C]
+% -----------------------------------------------------------------------------
+% Name:          rls_analysis.m
+% Version:       1.1
+% Author:        Federico Damian Camarda
+% Date:          09/04/2015
+% Description:   Framework to work with the RLS algorithm.
+% References:    [1] S. Haykin, Adaptive Filter Theory. 3rd edition pp. 562.
+%                    RLS Algorithm.
+%                [2] S. Haykin, Adaptive Filter Theory. 3rd edition pp. 598.
+%                    QRD RLS Algorithm.
+% -----------------------------------------------------------------------------
+%
+% Block Diagram:
+%
+%              _________                  _____
+%  u(n) ----> |         | ---> d(n) ---> |+    |
+%        |    |    W    |                |     |
+%        |    |_________|                | sum |
+%        |     _________                 |     | ---> e(n)
+%        |    |         |                |     |
+%        ---> |  W_est  | ---> y(n) ---> |-    |
+%             |_________|                |_____|
+%
+% The u(n) signal is filtered with the W system to generate the desired signal
+% d(n). The W system is manually defined.
+%
+% The RLS algorithm is used to compute the W_est filter, an estimated system
+% that, when filtering u(n) with W_est it outputs a signal y(n) that minimizes
+% the cost function J(n) = |e(n)|^2 = |d(n) - y(n)|^2
+% -----------------------------------------------------------------------------
+
+% Initialize environment.
+clc                            % Clean terminal.
+clear all                      % Clear environment.
+close all                      % Close windows.
+diary('rls_analysis.term')     % File where terminal output will be saved on.
+diary on                       % Save terminal output on.
+
+% Control parameters.
+enable_plots_rls         = 0;
+enable_plots_rls_qr      = 0;
+enable_plots_rls_qr_hard = 0;
+enable_plots_precision   = 1;
+enable_debug             = 0;
+enable_hard_file         = 1;
+
+% Samples related signals.
+N      = 300;                  % Number of samples.
+n      = 1:N;                  % Samples' index.
+
+% Filter related signals.
+W      = [2 -1 0 0 -1 2]';     % Unknown System coefficients.
+N_w    = length(W);            % Filter weigths length.
+n_w    = 1:N_w;                % Filter weigths index.
+An     = 5000;                 % Multiplying constant.
+u      = randn(1, N);          % Input to the filter.
+u      = An * u / max(abs(u)); % Normalized input.
+
+% Observed signal.
+d      = filter(W, 1, u);
+
+% -----------------------------------------------------------------------------
+%                     1. Standard RLS Algorithm : Equations
+% -----------------------------------------------------------------------------
+
+% RLS Algorithm implemented by the equations described in [1].
+% Zero padding of N_w values is applied to u(n). The reason is that the input
+% of the algorithm requries that the first vector is [ 0 0 ... 0 u(n) ],
+% the next [ 0 0 ... u(n) u(n-1) ], and so on until the vector is completed.
+
+lambda = 0.9375;                 % RLS forgetting factor.
+v      = 1;                      % Initial input variance estimate.
+P      = eye([N_w, N_w]) / v;    % Initial inverse correlation matrix.
+W_est  = zeros(N_w, 1);          % Initial weights.
+u      = [zeros(1, N_w - 1), u]; % System input u(n) with zero padding.
+y      = [ ];                    % Output of the estimated system.
+e      = [ ];                    % A posteriori error.
+xi     = [ ];                    % A priori error. (xi: from the greek letter)
+
+% Open file descriptor to save input vectors.
+fid    = fopen('input_vectors_matlab.txt','wt');
+
+% Start algorithm.
+for i=1:N                       % All time steps.
+    % Take the last N_w samples from the observation.
+    U     = u(i + N_w - n_w)';  % e.g. for i=1, => 6,5,4,3,2,1;
+                                %      for i=2, => 7,6,5,4,3,2;
+
+    % Save vector in a file.
+    fprintf(fid,'%f ',U);
+    fprintf(fid,'%f ',d(i));
+    fprintf(fid,'\n');
+
+    % Save the estimated output.
+    y(i)  = W_est' * U;
+    
+    % Filter gain.
+    K     = (1 / lambda) * P * U / (1 + (1 / lambda) * U' * P * U);
+
+    % Error signal equation. A priori error.
+    xi(i) = d(i) - W_est' * U;
+
+    % Filter coefficients.
+    W_est = W_est + K * xi(i);
+
+    % Error signal equation. A posteriori error.
+    e(i)  = d(i) - W_est' * U;
+
+    % Inverse correlation matrix update.
+    P     = (1 / lambda) * P - (1 / lambda) * K * U' * P;
+end
+
+% Close file descriptor.
+fclose(fid);
+
+% -----------------------------------------------------------------------------
+%                      2. Compute the results with hardware
+% -----------------------------------------------------------------------------
+
+% Process hardware results if flag is enable.
+if(enable_hard_file)
+    % Give time to the operator to process the samlpes.
+    disp('Samples are ready to be processed.');
+    pause
+
+    % Read the hardware results and store them in hard_matrix_16.
+    for i=n
+       hard_matrix_16(:,:,i)=dlmread('hardware_result_matlab.dat',' ',
+                                     [(i-1)*7 0 (i-1)*7+6 6]);
+    end
+
+    % Read the software results and store them in soft_matrix_16.
+    for i=n
+       soft_matrix_16(:,:,i)=dlmread('software_result_matlab.dat',' ',
+                                     [(i-1)*7 0 (i-1)*7+6 6]);
+    end
+
+    % Mean value of the matrix
+    for i=1:N-1
+        hard_matrix_mean_value(i) = sum(sum(hard_matrix_16(:,:, i+1)))/49;
+        soft_matrix_mean_value(i) = sum(sum(soft_matrix_16(:,:, i+1)))/49;
+        error_matrix_mean_value(i) = (sum(sum(soft_matrix_16(:,:, i+1))) - 
+                                      sum(sum(hard_matrix_16(:,:, i+1))))/49;
+        error_matrix_mean_value_rel(i) = error_matrix_mean_value(i) / 2^(16-1);
+        error_matrix_mean_value_per(i) = error_matrix_mean_value_rel(i) * 100;
+    end
+end
+
+% -----------------------------------------------------------------------------
+%                        3. QRD RLS Algorithm : Equations
+% -----------------------------------------------------------------------------
+
+% QRD-RLS Algorithm implemented by the matrix equations described in [2].
+% Since the QR decomposition gives a lower triangular matrix, and Haykin
+% describes an upper triangular matrix, everything is transposed.
+%
+%  |lambda_sqrt_qr * Phi_sqrt_qr'(n-1)  lambda_sqrt_qr * P_qr(n-1)|  *  Q = 
+%  |              U_qr'                               d(n)        |
+%
+%  |       Phi_sqrt_qr'(n)                         P_qr(n)        |
+%  |               0                         xi_qr * gamma_sqrt(n)|
+%
+lambda_sqrt_qr = sqrt(lambda);    % Square root of the forgetting factor.
+Phi_sqrt_qr    = zeros(N_w, N_w); % Square root of the correlation matrix.
+P_qr           = zeros(N_w, 1);   % Cross-correlation vector.
+W_est_qr       = zeros(N_w, 1);   % Initial weights.
+y_qr           = [ ];             % Output of the estimated system.
+e_qr           = [ ];             % A posteriori error.
+xi_qr          = [ ];             % A priori error. (xi: from the greek letter)
+R_max          = [ ];             % Maximum value of the R matrix.
+
+hard_Phi_sqrt_qr    = zeros(N_w, N_w); % Square root of the correlation matrix.
+hard_P_qr           = zeros(N_w, 1);   % Cross-correlation vector.
+hard_W_est_qr       = zeros(N_w, 1);   % Initial weights.
+
+% Start algorithm.
+for i=1:N-1                      % All time steps minus one casue of hard.
+    % Take the last N_w samples from the observation.
+    U_qr         = u(i + N_w - n_w)';   % for i=1, => 3,2,1; 
+                                        % for i=2, => 4,3,2;
+
+    % Save the estimated output.
+    y_qr(i)      = W_est_qr' * U_qr;
+    
+    % Create the input matrix to compute the QR decomposition. This matrix
+    % is the result of the concatenation of other matrices as described above:
+    A_qr = [ [U_qr' d(i)] ; [lambda_sqrt_qr * Phi_sqrt_qr' lambda_sqrt_qr * P_qr]];
+
+    % Calculate the QR decomposition.
+    [Q,R]        = qr(A_qr);
+
+    % Extract the new Phi_sqrt_qr matrix from the R matrix.
+    for column = n_w
+        Phi_sqrt_qr(column, :) = R(1:N_w, column)';
+    end
+
+    % Extract the new P_qr vector from the R matrix.
+    P_qr         = R(1:N_w, N_w + 1);
+
+    % Error signal equation. A priori error.
+    xi_qr(i)     = d(i) - W_est_qr' * U_qr;
+
+    % Filter coefficients. 
+    Phi_sqrt_qr_inv = inv(Phi_sqrt_qr);
+    W_est_qr     = (P_qr' * Phi_sqrt_qr_inv)';
+
+    % Error signal equation. A posteriori error.
+    e_qr(i)      = d(i) - W_est_qr' * U_qr;
+
+    % Save the maximum value of the R matrix:
+    R_max(i)     = max(max(abs(R)));
+
+    if(enable_hard_file)
+    % Extract the new Phi_sqrt_qr matrix from the R matrix.
+        for column = n_w
+            hard_Phi_sqrt_qr(column, :) = hard_matrix_16(1:N_w, column, i+1)';
+        end
+
+        % Save the estimated output.
+        hard_y_qr(i)      = hard_W_est_qr' * U_qr;
+    
+        % Extract the new P_qr vector from the R matrix.
+        hard_P_qr         = hard_matrix_16(1:N_w, N_w + 1, i+1);
+    
+        % Error signal equation. A priori error.
+        hard_xi_qr(i)     = d(i) - hard_W_est_qr' * U_qr;
+    
+        % Filter coefficients. 
+        hard_Phi_sqrt_qr_inv = inv(hard_Phi_sqrt_qr);
+        hard_W_est_qr     = (hard_P_qr' * hard_Phi_sqrt_qr_inv)';
+    
+        % Error signal equation. A posteriori error.
+        hard_e_qr(i)      = d(i) - hard_W_est_qr' * U_qr;
+    
+        % Save the maximum value of the R matrix:
+        hard_R_max(i)     = max(max(abs(hard_matrix_16(:, :, i+1))));
+
+    end
+
+    % Debug.
+    if enable_debug
+        disp(['Iteration: ', num2str(i)]);
+        U_qr
+        A_qr
+        R
+        Phi_sqrt_qr
+        P_qr
+        W_est_qr
+    end
+end
+\end{lstlisting}

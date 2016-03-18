@@ -1,0 +1,260 @@
+\section{Internal Registers}
+\label{sec:registers}
+The reset state of all the registers is 0 including the special purpose registers. Exception to this rule is the L0
+register when implemented, whose reset value is 0x800000000.
+
+\subsection{General Purpose Registers}
+\label{ssec:gprs}
+\begin{itemize}
+   \item There are 32 general purpose registers (GPRs) named R0, R1, $\ldots$ R31.
+   \item The GPRs can be used as even-odd pairs holding long integer registers named R0, R2, R4, $\ldots$, R30.
+   \item Each GPR has 4 flag bits: carry (C), negative (N), overflow (V), zero (Z) which store the ALU operation status. The negative
+         flag is implicit and corresponds to the MSB of the GPR (bit 31).
+%    \item When loading data into a GPR from memory, negative (N) and zero (Z) flags are consistent with the data loaded, and carry (C)
+%          and overflow (V) are zeroed.
+%    \item When an ALU operation writes back double words on pair registers, the even register holding the lower bits of the long data has its carry (C) and
+%          overflow (V) flags zeroed; and negative (N) and zero (Z) flags consistent with the data hold by the register, the odd register holding the upper bits of the
+%          long data, has all flags consistent with the operation.
+   \item When loading data into a GPR from memory, carry (C), overflow(V) and zero (Z) flags are left unmodified; negative (N) flag is implicit in the data
+	 loaded in the register.
+   \item When an ALU operation writes back double words on pair of registers, the even register holding the lower bits of the long data has its carry (C),
+         overflow (V) and zero (Z) flags unmodified; negative (N) flag is implicit in the data hold by the register, the odd register holding the upper bits
+         of the long data, has all flags consistent with the operation.
+   \item Byte and half data types are loaded into the low portion of GPRs from memory with either zeros or sign bit replicated to fill
+         the 32 bits depending on the instruction.
+   \item There are 32 single-precision floating point registers (FPRs) named F0, F1, $\ldots$, F31.
+   \item The FPRs can be used as even-odd pairs holding double-precision floating point registers named F0, F2, F4, $\ldots$, F30.
+   \item Each FPR has 4 flag bits: is-a-number (A), is-infinity (I), negative (N), zero (Z) which store the FPU operation status. The negative
+         flag is implicit and corresponds to the MSB of the FPR (bit 31).
+%    \item When loading data into a FPR from memory, all flags are consistent with the data loaded.
+%    \item When an FPU operation writes back double floats on pair registers, the even register holding the lower bits of the double float has all its flags consistent
+%          with the floating point number represented by this register, the odd register holding the upper bits of the double float has all its flags consistent with
+%          the operation.
+   \item When loading data into a FPR from memory, is-a-number (A), is-infinity (I), and zero (Z) are left unmodified; negative (N) flag is implicit in
+         the data loaded in the register.
+   \item When an FPU operation writes back double floats on pair registers, the even register holding the lower bits of the double float has its is-a-number
+         (A), is-infinity (I), and zero (Z) flags unmodified; negative (N) flag is implicit in the data loaded in the register, the odd register holding the
+         upper bits of the double float has all its flags consistent with the operation.
+\end{itemize}
+
+\subsection{Special Purpose Registers}
+\label{ssec:sprs}
+The procesor provides a set of special registers, some of them are accesible with special instructions. Special registers are:
+\begin{itemize}
+   \item The config register (CFG) is 6 bits wide and stores the configuration status of the processor. Its content is set and read with
+         special register instructions. Since special moving instructions transfer 32 bits, bits from 31 down to 6 are discarded on write,
+         and return zero on read.
+
+         Bit 0 stores the execution mode. If unset, the processor is running in supervisor mode. If set, it is running in user mode.
+         Read section \ref{sec:modes} for more information on execution modes.
+
+         Bit 1 stores the configuration support for nested exceptions. If unset, the processor does not provide support for nested exceptions,
+         while if set, it does.
+         Read subsection \ref{ssec:exception_handling} for more information on the nested exceptions support.
+
+         Bits 3 down to 2 selects the system tick timer operation mode. Bit 2 selects free running mode. If unset, the system tick timer is in free runing mode. If set
+         is in auto stop mode. When running in auto stop mode, bit 3 works as system tick timer start. This bit is not sticky, meaning that it goes back to '0' one
+         clock cycle after it was written and always returns '0' on read.
+         Read subsection \ref{ssec:sys_tick} for more information on the systick exception.
+
+         Bits 5 down to 4 selects the rounding mode for floating point operations. The encoding is as follows:
+         \begin{itemize}
+          \item '00’: RN - Round to nearest
+          \item '01’: RZ - Round towards zero
+          \item '10’: RP - Round towards plus infinity
+          \item '11’: RM - Round towards minus infinity
+         \end{itemize}
+   \item The system timer period register (STP) is a 22 bits register that configures the system timer reload value.
+         Read subsection \ref{ssec:sys_tick} for more information on the systick exception.
+   \item The mask register (MR) is 33 bits wide and provides the mechanisms to enable or disable the corresponding source of interruption
+         or cause. The most significant bit is the global mask bit. This bit is not software accesible; this means that instructions
+         cannot read or write to this special bit and its content is set and read automatically by the architecture. When it is set, all
+         exceptions are disabled. Its content is set and read with special register instructions. Read section \ref{sec:exceptions}
+         for more information on this register.
+   \item The instruction register (IR) is 32 bits wide and stores the opcode of the instruction that is being executed. Its content is
+         read with special register instructions. A writing operation on this register has no effect.
+   \item The system timer register (TMR) is 32 bits wide and corresponds to a 32 bits down counter that generates the systick exception
+         when reaches zero. The reload value of the system timer can be configured trough the STP register. This register is read only for software:
+         a writing operation has no efect on this register. Read subsection \ref{ssec:sys_tick} for more information on this register.
+   \item The peripheral write data register (PWD) is 32 bits wide and provides outgoing communication with peripherals. Its content is
+         set and read with special register instructions.
+   \item The peripheral write address register (PWA) is 32 bits wide and provides addressing for peripherals. Its content is
+         set and read with special register instructions.
+   \item The peripheral read data register (PRD) is 32 bits wide and provides incoming communication with peripherals. Its content is
+         read with special register instructions. A writing operation on this register has no effect.
+   \item The peripheral read address register (PRA) is 32 bits wide and provides incomming identification of peripherals. Its content is read
+         with special register instructions. A writing operation on this register has no effect.
+   \item The program counter (PC) is 30 bits wide addressing a memory space which ranges from \texttt{0x00000000} to \texttt{0xFFFFFFFC}.
+         This register is not software addressable. The current address is given by $4*PC$.
+   \item The cause register (CR) is 32 bits wide and stores the cause of exceptions and interrupts. Each bit represents a different
+         exception cause / interrupt source. When an exception or interrupt condition is detected, the corresponding bit must be set, and
+         shall remain set until the event is handled. The hardware is responsible of reseting the corresponding bit when execution of the
+         handler is started. This register is not software addressable. Read section \ref{sec:exceptions} for more information on this register.
+   \item The link register stack (LRS) is a set of 32 registers named $L0,L1,\ldots,L31$ which store the return address (PC + 1) value \textbf{only}
+         from exceptions. Each register is 36 bits wide. This register file is optional and adds support for nested exceptions. If not supported,
+         then one link register (L0) must be implemented. These registers are not software addressable. Read subsection \ref{ssec:exception_handling} for
+         more information.
+   \item The exception stack pointer (ESP) is a 5 bits wide register and points to the top of the LRS. This register is optional and adds support for
+         nested interruptions. Read subsection \ref{ssec:exception_handling} for more information.
+\end{itemize}
+
+The structure and organization of registers is shown in Tables \ref{tbl:general_reg_organization} and \ref{tbl:special_reg_organization}.
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[bitwidth=0.9em,endianness=big]{40}
+      \bitheader{0-34}\\
+      \bitbox[]{4}{R0}        & \bitbox[r]{1}{}    & \bitbox{1}{C}      & \bitbox{1}{V}      & \bitbox{1}{Z}      & \bitbox{1}{N} & \bitbox[rbt]{31}{}\\
+      \bitbox[]{4}{R1}        & \bitbox[r]{1}{}    & \bitbox{1}{C}      & \bitbox{1}{V}      & \bitbox{1}{Z}      & \bitbox{1}{N} & \bitbox[rbt]{31}{}\\
+      \bitbox[]{4}{}          & \bitbox[r]{1}{}    & \bitbox[lrt]{1}{}  & \bitbox[lrt]{1}{}  & \bitbox[lrt]{1}{}  & \bitbox[ltr]{1}{} & \bitbox[rt]{31}{} \\
+      \bitbox[]{4}{$\vdots$}  & \bitbox[r]{1}{}    & \bitbox[lr]{1}{$\vdots$}        & \bitbox[lr]{1}{$\vdots$} & \bitbox[lr]{1}{$\vdots$} & \bitbox[lr]{1}{$\vdots$} & \bitbox[r]{31}{$\vdots$} \\
+      \bitbox[]{4}{}          & \bitbox[r]{1}{}    & \bitbox[lrb]{1}{}  & \bitbox[lrb]{1}{}  & \bitbox[lrb]{1}{}  & \bitbox[lbr]{1}{} & \bitbox[rb]{31}{} \\
+      \bitbox[]{4}{R31}       & \bitbox[r]{1}{}    & \bitbox{1}{C}      & \bitbox{1}{V}      & \bitbox{1}{Z}      & \bitbox{1}{N} & \bitbox[rbt]{31}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-34}\\
+      \bitbox[]{4}{F0}        & \bitbox[r]{1}{}      & \bitbox{1}{A}      & \bitbox{1}{I}      & \bitbox{1}{Z}      & \bitbox{1}{N} & \bitbox[rbt]{31}{}\\
+      \bitbox[]{4}{F1}        & \bitbox[r]{1}{}      & \bitbox{1}{A}      & \bitbox{1}{I}      & \bitbox{1}{Z}      & \bitbox{1}{N} & \bitbox[rbt]{31}{}\\
+      \bitbox[]{4}{}          & \bitbox[r]{1}{}      & \bitbox[lrt]{1}{} & \bitbox[lrt]{1}{}  & \bitbox[lrt]{1}{}  & \bitbox[ltr]{1}{} & \bitbox[rt]{31}{} \\
+      \bitbox[]{4}{$\vdots$}  & \bitbox[r]{1}{}      & \bitbox[lr]{1}{$\vdots$}   & \bitbox[lr]{1}{$\vdots$} & \bitbox[lr]{1}{$\vdots$} & \bitbox[lr]{1}{$\vdots$} & \bitbox[r]{31}{$\vdots$} \\
+      \bitbox[]{4}{}          & \bitbox[r]{1}{}      & \bitbox[lrb]{1}{} & \bitbox[lrb]{1}{}  & \bitbox[lrb]{1}{}  & \bitbox[lbr]{1}{} & \bitbox[rb]{31}{} \\
+      \bitbox[]{4}{F31}       & \bitbox[r]{1}{}      & \bitbox{1}{A}      & \bitbox{1}{I} & \bitbox{1}{Z} & \bitbox{1}{N} & \bitbox[rbt]{31}{}\\
+      \bitbox[]{40}{} \\
+
+    \end{bytefield}
+  \end{center}
+  \caption{General registers structure and organization.}
+  \label{fig:general_reg_organization}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[bitwidth=0.9em,endianness=big]{40}
+
+      \bitheader{0-5}\\
+      \bitbox[]{4}{CFG}     & \bitbox[]{30}{}     & \bitbox[lrtb]{2}{} & \bitbox[lrtb]{2}{} & \bitbox[lrtb]{1}{}  & \bitbox[lrtb]{1}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-21}\\
+      \bitbox[]{4}{STP}      & \bitbox[]{14}{}      & \bitbox{22}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-32}\\
+      \bitbox[]{4}{MR}     & \bitbox[]{3}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{IR}      & \bitbox[]{4}{}      & \bitbox{32}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{TMR}     & \bitbox[]{4}{}      & \bitbox{32}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{PWD}      & \bitbox[]{4}{}      & \bitbox{32}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{PWA}      & \bitbox[]{4}{}      & \bitbox{32}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{PRD}      & \bitbox[]{4}{}      & \bitbox{32}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{PRA}      & \bitbox[]{4}{}     & \bitbox{32}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-29}\\
+      \bitbox[]{4}{PC}      & \bitbox[]{6}{}      & \bitbox{30}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{CR}     & \bitbox[]{4}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}
+                           & \bitbox[lrtb]{1}{} & \bitbox[lrtb]{1}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-35}\\
+      \bitbox[]{4}{L0}       & \bitbox{6}{}             & \bitbox{30}{}\\
+      \bitbox[]{4}{L1}       & \bitbox{6}{}             & \bitbox{30}{}\\
+      \bitbox[]{4}{}         & \bitbox[lrt]{6}{}        & \bitbox[lrt]{30}{}\\
+      \bitbox[]{4}{$\vdots$} & \bitbox[lr]{6}{$\vdots$} & \bitbox[lr]{30}{$\vdots$}\\
+      \bitbox[]{4}{}         & \bitbox[lrb]{6}{}        & \bitbox[lrb]{30}{}\\
+      \bitbox[]{4}{L31}      & \bitbox{6}{}             & \bitbox{30}{}\\
+      \bitbox[]{40}{} \\
+
+      \bitheader{0-4}\\
+      \bitbox[]{4}{ESP}     & \bitbox[]{31}{}      & \bitbox{5}{}\\
+      \bitbox[]{40}{} \\
+
+    \end{bytefield}
+    \caption{Special registers structure and organization.}
+    \label{tbl:special_reg_organization}
+  \end{center}
+\end{figure}
+
+
+\subsubsection{Addressing of Special Registers}
+\label{sssec:sprs_addressing}
+Software addressable special registers are set and read with special register instructions called \emph{movi2s} and \emph{movs2i}. For
+more informtion on this instructions, read section \ref{sec:isa}.
+Special registers addressing is shown in Table \ref{tbl:special_reg_addresses}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|X|X[c]|X[c]|X[c]|X|X|}
+    \hline
+    \rowfont[c]\bfseries
+    Register Name & Mapped Address & Hardware Size [bits] & Software Size [bits] & Hardware Access & Software Access \\
+    \hline
+    \hline
+    CFG      & 0x00     & 6        & 32       & Read only      & Read-Write     \\
+    \hline
+    STP      & 0x01     & 22       & 32       & Read only      & Read-Write     \footnote{10 higher bits return zero on read and are zeroed on write.} \\
+    \hline
+    MR       & 0x02     & 33       & 32       & Read-Write     & Read-Write     \footnote{Except bit 33 which is non software accessible.}\\
+    \hline
+    IR       & 0x03     & 32       & 32       & Read-Write     & Read only      \\
+    \hline
+    TMR      & 0x04     & 32       & 32       & Read-Write     & Read only      \\
+    \hline
+    PWD      & 0x05     & 32       & 32       & Non accessible & Read-Write     \\
+    \hline
+    PWA      & 0x06     & 32       & 32       & Non accessible & Read-Write     \\
+    \hline
+    PRD      & 0x07     & 32       & 32       & Read only      & Read only      \\
+    \hline
+    PRA      & 0x08     & 32       & 32       & Read only      & Read only      \\
+    \hline
+    PC       & NA       & 30       & 0        & Read-Write     & Non accessible \\
+    \hline
+    CR       & NA       & 32       & 0        & Read-Write     & Non accessible \\
+    \hline
+    L0       & NA       & 36       & 0        & Read-Write     & Non accessible \\
+    \hline
+    $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$       & $\vdots$       \\
+    \hline
+    L31      & NA       & 36       & 0        & Read-Write     & Non accessible \\
+    \hline
+    ESP      & NA       & 5        & 0        & Read-Write     & Non accessible \\
+    \hline
+    \end{tabu}
+  \caption{Special registers addressing.}
+  \label{tbl:special_reg_addresses}
+  \end{center}
+\end{table}

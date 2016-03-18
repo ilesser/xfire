@@ -1,0 +1,340 @@
+Clasificación de instrucciones por estructura y argumentos del opcode
+=====================================================================
+
+Type 0:	Sin registros como argumentos
+	|-2--|-30---------------------------------------------------------|
+	|----|------------------------------------------------------------|
+	|0 0 |Argumento                                                   |
+	|----|------------------------------------------------------------|
+
+Type 1:	Un registro de argumento
+	|-2--|-25-----------------------------------------------|-5--------|
+	|----|--------------------------------------------------|----------|
+	|0 1 |Argumento                                         |Rx        |
+	|----|--------------------------------------------------|----------|
+
+Type 2:	Dos registros de argumento
+	|-2--|-20-------------------------------------|-5--------|-5--------|
+	|----|----------------------------------------|----------|----------|
+	|1 0 |Argumento                               |Ry        |Rx        |
+	|----|----------------------------------------|----------|----------|
+
+Type 3:	Tres registros de argumento
+	|-2--|-15---------------------------|-5--------|-5--------|-5--------|
+	|----|------------------------------|----------|----------|----------|
+	|1 1 |Argumento                     |Rz        |Ry        |Rx        |
+	|----|------------------------------|----------|----------|----------|
+
+El campo argumento lo definimos a continuación con los subtipos y variantes que tenemos.
+
+Agrupación por tipo
+===================
+
+Type 0:
+1 Subtipo con tres grupos de una función para encodear. Dentro del argumento debemos encodearlas individualmente.
+	* Sin registros
+		- Jump
+			/ Argumento tiene 1 cosas: 
+				+ Desplazamiento relativo al PC.
+		- Trap
+			/ No tiene argumento.
+		- Rfe
+			/ No tiene argumento.
+
+Type 1: 
+Total de 24 instrucciones a encodear en dos subtipos. Dentro del argumento debemos encodear estos dos subtipos y sus grupos.
+	* Rx como registro de origen (2 grupos):
+		- Jump register:
+			/ Rx es el registro que tiene la dirección a la que se salta. Argumento no lo utiliza.
+		- Branches:
+			/Rx es el registro sobre el que se chequea condición de salto. Argumento tiene 2 cosas:
+				+ Desplazamiento relativo al PC.
+				+ Encoding de la función: 16 distintas, 8 con registro entero, 8 con registro floating.
+	* Rx como registro de destino (2 grupos):
+		- Load immediate: 
+			/ Rx se carga con el immediato. Argumento tiene 2 cosas:
+				+ El immediato.
+				+ Encoding de la función: 5 distintas.
+		- Jump and link:
+			/ Rx se carga con la dirección de link. Argumento tiene 1 cosa:
+				+ Desplazamiento relativo al PC.
+
+Type 2:
+Total de 56 instrucciones, en dos subtipos, uno utiliza Rx y Ry como origen, el otro utiliza Rx como destino. Dentro del argumento debemos encodear estos 2 subtipos y sus grupos.
+
+	* Rx como destino, Ry como origen (6 grupos):
+		- Moves (incluye 2 de registros especiales direccionables):
+			/ Rx es el destino del move.
+			/ Ry es el origen del move. 
+			/ Argumento tiene 1 cosa:
+				+ Encoding de la función: 10 distintas.
+		- Moves con nibbles (para los flags):
+			/ Rx es el destino del move.
+			/ Ry es el orígen del move.
+			/ Argumento tiene 2 cosas:
+				+ # de Nibble.
+				+ Encoding de la función: 2 distintas.
+		- Conversions:
+			/ Rx es el destino de la conversión.
+			/ Rx es el orígen de la conversión.
+			/ Argumento tiene 1 cosa:
+				+ Encoding de la función: 12 distintas.
+		- ALU immediate:
+			/ Rx es el registro donde se guarda el resultado.
+			/ Ry es uno de los operandos.
+			/ Argumento tiene 2 cosas:
+				+ Dato immediato.
+				+ Encoding de la función: 22 distintas.
+		- Load: 
+			/ Rx es el registro donde se guarda el dato a loadear.
+			/ Ry es el puntero a la memoria para direccionar.
+			/ Argumento tiene 2 cosas:
+				+ Desplazamiento relativo a Ry en la memoria
+				+ Encoding de la función: 6 distintas.
+		- Jump register and link:
+			/ Rx se carga con la direccion de link.
+			/ Ry es el rgistro que tiene la dirección a la que se salta.
+			/ No tiene argumento.
+	* Rx y Ry como origen (1 grupo):
+		- Store:
+			/ Rx es el registro de donde se saca el dato a storear.
+			/ Ry es el puntero a la memoria para direccionar.
+			/ Argumento tiene 2 cosas:
+				+ Desplazamiento relativo a Ry en la memoria
+				+ Encoding de la función: 4 distintas.
+
+Type 3:
+Total de 50 instrucciones (faltan considerar las de cordic). Todas utilizan Rx como destino y Ry y Rz como orígen. Dentro del argumento debemos encodear la función.
+	* Rx como destino, Ry y Rz como orígen:
+		- Operaciones entre registros:
+			/ Rx es el resultado de la operación.
+			/ Ry es operando.
+			/ Rz es operando.
+			/ Argumento tiene 1 cosa:
+				+ Encoding de la función: 50 ( + cordic) distintas.
+
+Encoding de grupos y funciones
+==============================
+
+Nomenclatura TwSxGyFz, donde 'w' es el tipo, 'x' el subtipo, 'y' el grupo y 'z' la función. 
+
+Type 0 tiene 1 subtipo, compuesto 3 grupos de una función cada uno.
+	* Subtipo 0
+		- Llamemos T0S0G0F0 a Jump
+		- Llamemos T0S0G1F0 a Trap
+		- Llamemos T0S0G2F0 a RFE
+Type 1 tiene 2 subtipos, cada uno con dos grupos.
+	* Subtipo 0
+		- Llamemos T1S0G0F0 a Jump Register
+		- Llamemos T1S0G1Fz a los Branches (con 0 <= z <= 15)
+	* Subtipo 1
+		- Llamemos T1S1G0Fz a los Load Immediate (con 0 <= z <= 4)
+		- Llamemos T1S1G1F0 a Jump and Link
+Type 2 tiene 2 subtipos, uno de 6 grupos y otro de 1 grupo y sus funciones.
+	* Subtipo 0
+		- Llamemos T2S0G0Fz a los Moves (con 0 <= z <= 9)
+		- Llamemos T2S0G1Fz a los Moves con nibbles (con 0 <= z <= 1)
+		- Llamemos T2S0G2Fz a los Conversions (con 0 <= z <= 11)
+		- Llamemos T2S0G3Fz a los ALU Immediate (con 0 <= z <= 21)
+		- Llamemos T2S0G4Fz a los Load (con 0 <= z <= 5)
+		- Llamemos T2S0G5F0 a Jump Register and Link
+	* Subtipo 1
+		- Llamemos T2S1G0Fz a los Store (con 0 <= z <= 3)
+Type 3 tiene 1 subtipo con un sólo grupo de 50+ funciones.
+	* Subtipo 0
+		- Llamemos T3S0G0Fz a los ALU registers (con 0 <= z <= 49+)
+
+Usaremos esta clasificación para armar el campo que encodea la función dentro del espacio que llamamos argumento (El tipo ya está encodeado en los dos primeros bits según la primer clasificación).
+
+Subtipos tenemos 0 o 1. Basta con un sólo bit.
+
+Grupos, el caso más extenso es de 0 a 5. Con tres bits es suficiente.
+
+Funciones, el peor caso es el de ALU, podría ser 64 o 128 (dependiendo de la cantidad de instruccioens cordic que tengamos), con lo cual son 7 u 8 bits.
+
+Hay dos opciones, que el campo de encoding de la función sea del mismo largo para todos los tipos. Con lo cual tendríamos que ese campo tiene (considerando 8 bits para ALU) 12 bits. El problema de este esquema es que las instrucciones de tipo 2 ciertos grupos necesitan dato immediato y desplazamiento, y ese campo quedaría reducido a
+8 bits. Lo cual da un espacio muy chico para datos immediatos y desplazamientos.
+Entonces aparece la otra opción, que subtipos y grupos sean los únicos que están en todos los tipos de instrucciones y que los grupos que necesitan identificar función tengan los bits necesarios para hacerlo, en ese esquema el encoding quedaría de la siguiente manera:
+
+###################################################################################
+Type 0: Sin registros como argumentos #############################################
+	  2    1  3      26                                                       #
+	|-T--|-S|-G----|-Desplazamiento-------------------------------------||||||#
+	|----|--|------|----------------------------------------------------||||||#
+	| 0 0| 0| 0 0 0| 26 bits                                            ||||||# Jump
+	|----|--|------|----------------------------------------------------||||||# T1S0G0F0
+                                                                                  #
+	|-T--|-S|-G----|-Zeros----------------------------------------------||||||#
+	|----|--|------|----------------------------------------------------||||||#
+	| 0 0|0 | 0 0 1| 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0||||||# Trap
+	|----|--|------|----------------------------------------------------||||||# T1S0G1F0
+                                                                                  #
+	|-T--|-S|-G----|-Zeros----------------------------------------------||||||#
+	|----|--|------|----------------------------------------------------||||||#
+	| 0 0| 0| 0 1 0| 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0||||||# RFE
+	|----|--|------|----------------------------------------------------||||||# T1S0G2F0
+                                                                                  #
+                                                                                  #
+###################################################################################
+Type 1: Un registro de argumento ##################################################
+	  2    1  3      21                                                       #
+	|-T--|-S|-G----|-Zeros------------------------------------|-Origen---|||||#
+	|----|--|------|------------------------------------------|----------|||||#
+	| 0 1| 0| 0 0 0| 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0| Rx       |||||# Jump Register
+	|----|--|------|------------------------------------------|----------|||||# T1S0G0F0
+                                                                                  #
+	|-T--|-S|-G----|-Funct--|-Desplazamiento-------------------|-Origen---||||#
+	|----|--|------|--------|----------------------------------|----------||||#
+	| 0 1| 0| 0 0 1|z0z1z2z3| 17 bits                          | Rx       ||||# Branches     
+	|----|--|------|--------|----------------------------------|----------||||# T1S0G1Fz
+                                                                                  #
+	|-T--|-S|-G----|-Funct|-Immediato--------------------------|-Destino--||||#
+	|----|--|------|------|------------------------------------|----------||||#
+	| 0 1| 1| 0 0 0|z0z1z2| 18 bits                            | Rx       ||||# Load Immediate
+	|----|--|------|------|------------------------------------|----------||||# T1S1G0Fz
+                                                                                  #
+	|-T--|-S|-G----|-Desplazamiento---------------------------|-Destino--|||||#
+	|----|--|------|------------------------------------------|----------|||||#
+	| 0 1| 1| 0 0 1| 21 bits                                  | Rx       |||||# Jump and Link
+	|----|--|------|------------------------------------------|----------|||||# T1S1G1F0
+###################################################################################
+Type 2: Dos registros de argumento ################################################
+	#  2    1  3      21                                                      #
+	#|-T--|-S|-G----|-Funct--|-Zeros------------------|-Origen---|-Destino--||#
+	#|----|--|------|--------|------------------------|----------|----------||#
+	#| 1 0| 0| 0 0 0|z0z1z2z3| 0 0 0 0 0 0 0 0 0 0 0 0| Ry       | Rx       ||# Moves
+	#|----|--|------|--------|------------------------|----------|----------||# T2S0G0Fz
+        #                                                                         #
+	#|-T--|-S|-G----|-F|Nibble|-Zeros------------------|-Origen---|-Destino--|#
+	#|----|--|------|--|------|------------------------|----------|----------|#
+	#| 1 0| 0| 0 0 1|z0|n0n1n2| 0 0 0 0 0 0 0 0 0 0 0 0| Ry       | Rx       |# Moves con nibbles
+	#|----|--|------|--|------|------------------------|----------|----------|# T2S0G1Fz
+        #                                                                         #
+	#|-T--|-S|-G----|-Funct--|-Zeros------------------|-Origen---|-Destino--||#
+	#|----|--|------|--------|------------------------|----------|----------||#
+	#| 1 0| 0| 0 1 0|z0z1z2z3| 0 0 0 0 0 0 0 0 0 0 0 0| Ry       | Rx       ||# Conversions
+	#|----|--|------|--------|------------------------|----------|----------||# T2S0G2Fz
+        #                                                                         #
+	#|-T--|-S|-G----|-Funct----|-Immediate------------|-Origen---|-Destino--||#
+	#|----|--|------|----------|----------------------|----------|----------||#
+	#| 1 0| 0| 0 1 1|z0z1z2z3z4| 11 bits              | Ry       | Rx       ||# ALU Immediate
+	#|----|--|------|----------|----------------------|----------|----------||# T2S0G3Fz
+        #                                                                         #
+	#|-T--|-S|-G----|-Funct|-Desplazamiento-----------|-Origen---|-Destino--||#
+	#|----|--|------|------|--------------------------|----------|----------||#
+	#| 1 0| 0| 1 0 0|z0z1z2| 13 bits                  | Ry       | Rx       ||# Load
+	#|----|--|------|------|--------------------------|----------|----------||# T2S0G4Fz
+        #                                                                         #
+	#|-T--|-S|-G----|-Zeros--------------------------|-Origen---|-Destino--|||#
+	#|----|--|------|--------------------------------|----------|----------|||#
+	#| 1 0| 0| 1 0 1| 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0| Ry       | Rx       |||# Jump register and link
+	#|----|--|------|--------------------------------|----------|----------|||# T2S0G5F0
+        #                                                                         #
+	#|-T--|-S|-G----|-Function---------|-Zeros--------|-Origen---|-Destino--||#
+	#|----|--|------|------------------|--------------|----------|----------||#
+	#| 1 0| 0| 1 1 0|z0z1z2z3z4z5z6z7z8| 0 0 0 0 0 0 0| Ry       | Rx       ||# ALU Single Register
+	#|----|--|------|------------------|--------------|----------|----------||# T2S0G6Fz
+        #                                                                         #
+	#|-T--|-S|-G----|-Fun|-Desplazamiento------------|-Origen---|-Origen---|||#
+	#|----|--|------|----|---------------------------|----------|----------|||#
+	#| 1 0| 1| 0 0 0|z0z1| 14 bits                   | Ry       | Rx       |||# Store
+	#|----|--|------|----|---------------------------|----------|----------|||# T2S1G0Fz
+###################################################################################
+Type 3: Tres registros de argumento ###############################################
+	#|-T--|-S|-G----|-Function---------|-Zer|-Origen---|-Origen---|-Destino--|##
+	#|----|--|------|------------------|----|----------|----------|----------|##
+	#| 1 1| 0| 0 0 0|z0z1z2z3z4z5z6z7z8| 0 0| Rz       | Ry       | Rx       |## ALU 2 registers
+	#|----|--|------|------------------|----|----------|----------|----------|## T3S0G0Fz
+###################################################################################
+
+IMPORTANTE PARA OCTAVIO!!! LEE DESDE ACA!!!!!!
+
+Desglose del campo función en todas las ALU
+
+##########################
+#|-M|-B|-P|-Oper-|-Var--|#
+#|--|--|--|------|------|#
+#|m0|b0|p0|o0o1o2|v0v1v2|#
+#|--|--|--|------|------|#
+##########################
+M: Campo de 1 bit que indica el modo: 0 = Normal, 1 = Matemático (cordic).
+B: Campo de 1 bit que indica el banco de registros a utilizar: 0 = GPR, 1 = FPR.
+P: Campo de 1 bit que indica la precisión a utilizar: 0 = 32 bits, 1 = 64 bits.
+Oper: Campo de 3 bit que indica que operación realizar: 0 = add, 1 = sub, 2 = mul, 3 = div, 4 = logical, 5 = shift. La disponibilidad de
+cada una depende del campo B.
+Var: Campo de 2 bits que inidica que variante de la operación realizar (solo para enteros). El significado depende del campo P.
+
+Operaciones con un registro:
+Con M = 0:
+==========
+B = 0 o 1. P = 0 o 1. Oper y Var sólo pueden valer 0. Cualquier otro juego de valores son inválidos.
+
+
+Con M = 1:
+==========
+B = 0 o 1. P = 0 o 1.
+Var puede valer 0 (modo circular) o 1 (modo hiperbólico). 2, 3, 4, 5, 6 y 7 son valores inválidos.
+Oper = 0 => Cosenos.
+	Var = 0 => Cos(Ry)
+	Var = 1 => Cosh(Ry)
+Oper = 1 => Senos.
+	Var = 0 => Sin(Ry)
+	Var = 1 => Sinh(Ry)
+Oper = 2 => Raíces.
+	Var = 0 => sqrt(1+Ry^2)
+	Var = 1 => sqrt(1-Ry^2)
+Oper = 3 => Arcotangentes.
+	Var = 0 => atan(Ry)
+	Var = 1 => atanh(Ry)
+Oper = 4
+	Var = 0 => Invalido
+	Var = 1 => ln(Ry)
+Oper = 5 =>
+	Var = 0 => Invalido
+	Var = 1 => sqrt(Ry)
+Oper = 6 o 7, inválidas.
+
+Operaciones con dos registros:
+
+Con M = 0:
+==========
+B = 0 => Oper puede ser cualquiera entre 0 y 5. 6 y 7 son inválidos.
+Significado del capo Var
+Oper = 0, 1, 2 o 3 => Aritméticos
+  Var = 0 => Signed
+  Var = 1 => Unsigned
+  Var = 2 => With carry (Sólo para Oper = 0 o 1, con oper = 2 o 3 no es válido).
+  Var = 3 => Unsigned add with carry (Sólo para Oper = 0 o 1, con oper = 2 o 3 no es válido).
+  Var = 4 hasta 7 no válido.
+Oper = 4
+  Var = 0 => And
+  Var = 1 => Or
+  Var = 2 => Xor
+Oper = 5
+  Var = 0 => Shift left
+  Var = 1 => Shif right logical
+  Var = 2 => Shift right arithmetical
+  Var = 3 => Rotate left
+  Var = 4 => Rotate right
+
+B = 1 => Oper puede ser cualquiera entre 0 y 3. (Los FPR0s no pueden ser operados ni con lógica ni con rotaciones!!!)
+  Var = 0 Siempre!!!
+
+Con M = 1:
+==========
+Var puede valer 0 (modo circular) o 1 (modo hiperbólico). 2, 3, 4, 5, 6 y 7 son valores inválidos.
+
+Oper = 0
+	Var = 0 => Ry * Cos(Rz)
+	Var = 1 => Ry * Cosh(Rz)
+Oper = 1
+	Var = 0 => Ry * Sin(Rz)
+	Var = 1 => Ry * Sinh(Rz)
+Oper = 2
+	Var = 0 => sqrt(Ry^2 Rz^2)
+	Var = 1 => Invalid
+Oper = 3
+	Var = 0 => atan(Ry,Rz)
+	Var = 1 => Invalid
+Oper = 4, 5, 6 o 7 => Invalid
+
