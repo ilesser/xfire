@@ -1,0 +1,46 @@
+###############################################################################
+#
+# Esta es una lista de cosas a hacer en caso de que se quiera implementar
+# el algoritmo BKM.
+#
+###############################################################################
+
+   1)    Implementar el algoritmo BKM en punto flotante en octave
+
+   2)    Implementar el algoritmo BKM en punto fijo en octave
+         Este scripts seria el modelo golden del RTL de "bkm_core"
+            * Parametrizar en funcion del tamanio de palabra
+            * Agregar el "range reduction"
+
+   3)    Comparar la version de punto fijo (2) contra la version de punto flotante (1)
+         Verificar que los errores sean dentro de los esperado
+
+   4)    Escribir un script que implemente diferente operacion con el script
+         del punto 2).
+         Este scripts seria el modelo golden del RTL de "bkm_fixed"
+
+   5)    Escribir un script que tome el resultado de (4) y lo convierta a punto
+         flotante
+         Este scripts seria el modelo golden del RTL de "bkm_float"
+
+   6)    Escribir un script que permita generar archivos de texto plano con las
+         entradas y salidas del algoritmo. Estos archivos se usaran para en un
+         testbech para estimular el DUT.
+         Debe poderse seleccionar 3 tipos de estimulos:
+            * Sequencial en un rango
+            * Casos especiales
+            * Valores random
+
+   7)    Diseniar la arquitectura del BKM
+
+   8)    Escribir el RTL del "bkm_core"
+
+   9)    Validar el "bkm_core" con el script de (6)
+
+   10)   Escribir el RTL del "bkm_fixed"
+
+   11)   Validar el "bkm_fixed" con el script de (6)
+
+   12)   Escribir el RTL del "bkm_float"
+
+   13)   Validar el "bkm_float" con el script de (6)
