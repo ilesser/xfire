@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cp ./latex/*.tex ./
+pdflatex ./tesis.tex
+pdflatex ./tesis.tex
+rm *.log
+rm *.aux
+rm *.tex
+rm *.sty
+rm *.out
+rm *.lot
+rm *.lof
+rm *.toc
+rm *.idx
+mv tesis.pdf ./pdf/tesis.pdf
+
+if [ "$1" == "-s" ]; then
+	evince ./pdf/tesis.pdf
+fi

@@ -1,0 +1,32 @@
+\section{Data types}
+\label{sec:data_types}
+
+Integer supported data types are: \emph{byte} (8 bits), \emph{half} (16 bits), \emph{word} (32 bits), \emph{double word} (64 bits).
+Floating point supported data types are: \emph{single-precision} (32 bits) and \emph{double-precision} (64 bits). Data sizes are shown in
+figure \ref{fig:data_sizes}.
+
+\begin{itemize}
+   \item \emph{Byte} is also referred as \emph{char}.
+   \item \emph{Half} is also referred as \emph{short}.
+   \item \emph{Word} is also referred as \emph{integer}.
+   \item \emph{Double word} is also referred as \emph{long}.
+   \item \emph{Single-precision floating point} is also referred as \emph{float}.
+   \item \emph{Double-precision floating point} is also referred as \emph{double}.
+\end{itemize}
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[bitwidth=0.6em,endianness=big]{74}
+      \bitheader{0,7,15,31,63}\\
+      \bitbox[]{10}{Byte, char}   & \bitbox[]{56}{} & \bitbox[lrbt]{8}{}\\
+      \bitbox[]{10}{Half, short}  & \bitbox[]{48}{} & \bitbox[lrbt]{16}{}\\
+      \bitbox[]{10}{Word}         & \bitbox[]{32}{} & \bitbox[lrbt]{32}{}\\
+      \bitbox[]{10}{Long}         & \bitbox[lrbt]{64}{}\\
+      \bitbox[]{10}{Float}        & \bitbox[]{32}{} & \bitbox[lrbt]{32}{}\\
+      \bitbox[]{10}{Double}       & \bitbox[lrbt]{64}{}\\
+    \end{bytefield}
+    \caption{Data sizes.}
+    \label{fig:data_sizes}
+  \end{center} 
+\end{figure}
+

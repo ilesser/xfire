@@ -1,0 +1,27 @@
+\section{Operating modes}
+\label{sec:modes}
+The processor has two different operating modes: \emph{supervisor mode}
+and \emph{user mode}.
+
+In supervisor mode, all instructions can be executed and the CFG[0]
+register is unset.
+
+In user mode, some instructions can not be executed. Any attempt to execute
+one of those instructions causes an invalid operation exception (E2). The user
+mode is indicated by setting CFG[0].
+
+The privileged instructions (those that can only be executed in supervisor mode)
+are the following:
+
+\begin{itemize}
+\item \texttt{movi2s}
+\item \texttt{movs2i}
+\item \texttt{rfe}
+\end{itemize}
+
+The reset mode is always supervisor mode.
+
+The instruction \emph{trap} is used by user programs to generate software exceptions (providing a mechanism to implement system calls).
+
+The \emph{rfe} returns the processor to user mode. Another way to return the processor
+to user mode is by setting CFG[0].

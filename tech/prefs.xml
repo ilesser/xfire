@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!-- created by Custom Designer build#  ,on -->
+<file-format version="1.0" name="synopsysPrefs">
+        <preferences>
+                <pref value="{allModels.inc ff} {wafer.inc } {design.inc } {/usr/repos/projects/xfire/tech/tech_spice.inc }" name="saHSPICEModelsFiles"/>
+                <pref value="/usr/pdks/IBM_7RF/kit/analog/hspice/models" name="saHSPICEModelsIncludePath"/>
+                <pref value="auCdl schematic symbol" name="xtCDLViewSearchList"/>
+                <pref value="auCdl" name="xtCDLViewStopList"/>
+                <pref value="true" name="xtDRCCalibreHierarchicalRunMode"/>
+                <pref value="false" name="xtDRCCalibreLoadRunset"/>
+                <pref value="" name="xtDRCCalibreOptions"/>
+                <pref value="false" name="xtDRCCalibreOverrideRunsetFile"/>
+                <pref value="/usr/pdks/IBM_7RF/mentor/calibre/DRC/cmrf7sf.drc.cal" name="xtDRCCalibreRunsetFile"/>
+                <pref value="true" name="xtDRCCalibreSVRFOverwrite"/>
+                <pref value="" name="xtDRCCalibreSelectWindow"/>
+                <pref value="" name="xtDRCCalibreVariables"/>
+                <pref value="true" name="xtDRCExportStream"/>
+                <pref value="localhost" name="xtDRCHostList"/>
+                <pref value="true" name="xtDRCLaunchDebugger"/>
+                <pref value="OpenAccess" name="xtDRCLayDBFormat"/>
+                <pref value="localhost" name="xtDRCRunHost"/>
+                <pref value="Calibre" name="xtDRCTool"/>
+                <pref value="true" name="xtDRCViewOutput"/>
+                <pref value="false" name="xtLVSCalibreAutoMatch"/>
+                <pref value="true" name="xtLVSCalibreGenerateCCI"/>
+                <pref value="" name="xtLVSCalibreHCellsFile"/>
+                <pref value="true" name="xtLVSCalibreHierarchicalRunMode"/>
+                <pref value="SPICE" name="xtLVSCalibreLayInputNetlistFormat"/>
+                <pref value="false" name="xtLVSCalibreLoadRunset"/>
+                <pref value="" name="xtLVSCalibreOptions"/>
+                <pref value="false" name="xtLVSCalibreOverrideRunsetFile"/>
+                <pref value="/usr/pdks/IBM_7RF/mentor/calibre/LVS/cmrf7sf.lvs.cal" name="xtLVSCalibreRunsetFile"/>
+                <pref value="true" name="xtLVSCalibreSVRFOverwrite"/>
+                <pref value="" name="xtLVSCalibreVariables"/>
+                <pref value="true" name="xtLVSExportStream"/>
+                <pref value="false" name="xtLVSExtractOnly"/>
+                <pref value="localhost" name="xtLVSHostList"/>
+                <pref value="true" name="xtLVSLaunchDebugger"/>
+                <pref value="OpenAccess" name="xtLVSLayDBFormat"/>
+                <pref value="true" name="xtLVSNetlistTopAsModule"/>
+                <pref value="localhost" name="xtLVSRunHost"/>
+                <pref value="OpenAccess" name="xtLVSSchDBFormat"/>
+                <pref value="SPICE" name="xtLVSSchInputNetlistFormat"/>
+                <pref value="CDL" name="xtLVSSchNetlister"/>
+                <pref value="/usr/pdks/IBM_7RF/synopsys/hercules/StarRCXT/star_cmdfile_6AM.cmd" name="xtLPEStarRunsetFile"/>
+                <pref value="/usr/pdks/IBM_7RF/synopsys/hercules/StarRCXT/device.map" name="xtStarOADeviceMappingFile"/>
+                <pref value="/usr/pdks/IBM_7RF/kit/analog/cmrf7sf/cmrf7sf.layermap" name="xtStarOALayerMappingFile"/>
+                <pref value="/usr/pdks/IBM_7RF/synopsys/hercules/StarRCXT/tcad/cmrf7sf_nominal_6AM_detailed.nxtgrd" name="xtStarTcadGrdFile"/>
+                <pref value="/usr/pdks/IBM_7RF/synopsys/hercules/StarRCXT/tcad/cmrf7sf_6AM_CalibreLVS.map" name="xtStarMappingFile"/>
+                <pref value="Calibre" name="xtLVSTool"/>
+                <pref value="true" name="xtLVSViewOutput"/>
+                <pref value="/usr/pdks/IBM_7RF/kit/analog/cmrf7sf/cmrf7sf.layermap" name="xtPVLayerMapFile"/>
+                <pref value="true" name="lePinLabel"/>
+                <pref value="M1 label" name="lePinLabelLPP"/>
+        	<pref value="localhost" name="xtLPEHostList"/>
+                <pref value="Calibre" name="xtLPELVSTool"/>
+                <pref value="true" name="xtLPEOpenParasiticView"/>
+                <pref value="localhost" name="xtLPERunHost"/>
+                <pref value="true" name="xtLPEStarLoadRunset"/>
+                <pref value="OA" name="xtLPEStarNetlistFormat"/>
+                <pref value="-clean" name="xtLPEStarOptions"/>
+                <pref value="YES" name="xtStarXref"/>
+                <pref value="starrc" name="xtStarOAViewName"/>
+                <pref value="StarRC" name="xtLPETool"/>
+                <pref value="true" name="xtLPEViewOutput"/>
+	</preferences>
+</file-format>
