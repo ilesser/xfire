@@ -7,7 +7,7 @@ function [E,L,err]=bkm(E1,L1,bkm_mode,N)
 %     L_{n+1} = L_n - ln( 1 + d_n * 2-n )
 %
 % With n = 1,2,...,N, j^2 = -1 y d_n € {0, +-1, +-j, +-1+-j }
-% E1 and L1 are complex numbers within the convergence range.
+% E1 and L1 are row complex vectors within the convergence range.
 % For E-mode the converge range is:
 %
 %     L1 € R1 = [-0.829802...; +0.868876...] + j * 0.749780 * [-1; 1]
@@ -47,34 +47,44 @@ function [E,L,err]=bkm(E1,L1,bkm_mode,N)
    %   atan_lut(:,i) = dy(i) * atan( 2.^(-n) ./ (1 + dx(i) * 2.^(-n) ) );
    %endfor
 
+   % Initialize variables
+   if ( strcmp(bkm_mode,"E") || strcmp(bkm_mode,"E-mode") )
+      bkm_mode = "E";
+      K  = length(L1);
+      %E1 = ones(1,K) * E1;
+   end
+   if ( strcmp(bkm_mode,"L") || strcmp(bkm_mode,"L-mode") )
+      bkm_mode = "L";
+      K  = length(E1);
+      %L1 = ones(1,K) * L1;
+   end
+
+   E = zeros(N+1,K);
+   L = zeros(N+1,K);
+
+   E(1,:) = E1;
+   L(1,:) = L1;
+
    % Iterate on n
-   E = zeros(N+1,1);
-   L = zeros(N+1,1);
-
-   E(1) = E1;
-   L(1) = L1;
-
    for n=(1:N);
 
-      d_n      = get_d_n( n, E(n), L(n), bkm_mode );
-      dx_n     = real(d_n);
-      dy_n     = imag(d_n);
+      d_n      = get_d_n( n, E(n,:), L(n,:), bkm_mode );
 
-      E(n+1)   = E(n) * (1 + d_n * 2^-n);
-      L(n+1)   = L(n) - log(1 + d_n * 2^-n);
+      E(n+1,:)   = E(n,:) .*   (1 + d_n * 2^-n);
+      L(n+1,:)   = L(n,:) - log(1 + d_n * 2^-n);
 
    endfor
 
 
-   E_ideal = E1*exp(L1);
+   E_ideal = E1.* exp(L1);
    L_ideal = L1 + log(E1);
 
-   err_E   = ( E(N+1) - E_ideal ) / E_ideal;
-   err_L   = ( L(N+1) - L_ideal ) / L_ideal;
+   err_E   = ( E(N+1,:) - E_ideal ) ./ E_ideal;
+   err_L   = ( L(N+1,:) - L_ideal ) ./ L_ideal;
 
-   if ( bkm_mode == "E" || bkm_mode == "E-mode" )
+   if ( bkm_mode == "E" )
       err = err_E;
-   elseif ( bkm_mode == "L" || bkm_mode == "L-mode" )
+   elseif ( bkm_mode == "L" )
       err = err_L;
    else
       err = -1;
@@ -87,7 +97,11 @@ endfunction
 
 function dn = get_d_n( n, En, Ln, bkm_mode )
 
-   if ( bkm_mode == "E" || bkm_mode == "E-mode" )
+
+   if ( bkm_mode == "E" )
+
+      dxn = zeros(1, length(Ln));
+      dyn = zeros(1, length(Ln));
 
       % Truncate 2^n * Lx after the 3rd fractional digit
       Lxn = fix(real(Ln)*2^n*2^3)/2^3;
@@ -95,23 +109,18 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
       % Truncate 2^n * Ly after the 4th fractional digit
       Lyn = fix(imag(Ln)*2^n*2^4)/2^4;
 
-      if     ( Lxn <= -5/8 )
-         dxn = -1;
-      elseif ( Lxn >= -1/2 && Lxn <= 1/4 )
-         dxn = 0;
-      elseif ( Lxn >= 3/8 )
-         dxn = 1;
-      end
+      dxn(Lxn <= -5/8              ) = -1;
+      dxn(Lxn >= -1/2 && Lxn <= 1/4) = 0;
+      dxn(Lxn >=  3/8              ) =  1;
 
-      if     ( Lyn <= -13/16 )
-         dyn = -1;
-      elseif ( Lyn >= -3/4 && Lyn <= 3/4 )
-         dyn = 0;
-      elseif ( Lyn >= 13/16 )
-         dyn = 1;
-      end
+      dyn(Lyn <= -13/16            ) = -1;
+      dyn(Lyn >= -3/4 && Lyn <= 3/4) = 0;
+      dyn(Lyn >=  13/16            ) =  1;
 
-   elseif ( bkm_mode == "L" || bkm_mode == "L-mode" )
+   elseif ( bkm_mode == "L" )
+
+      dxn = zeros(length(En), 1);
+      dyn = zeros(length(En), 1);
 
       % Get the new sequence
       En  = 2^n * (En-1);
@@ -136,9 +145,6 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
          dyn = -1;
       end
 
-   else
-      dxn = 0;
-      dyn = 0;
    end
 
    dn = dxn + j * dyn;
