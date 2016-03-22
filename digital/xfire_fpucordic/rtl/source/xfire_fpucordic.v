@@ -96,11 +96,6 @@ module xfire_fpucordic #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   // Constants defined in xfire_fpucordic.vh
-   //constant E_SIZE_S:   integer := 8;
-   //constant F_SIZE_S:   integer := 23;
-   //constant E_SIZE_D:   integer := 11;
-   //constant F_SIZE_D:   integer := 52;
 
    reg               start_reg;
    reg   [1:0]       format_reg;
