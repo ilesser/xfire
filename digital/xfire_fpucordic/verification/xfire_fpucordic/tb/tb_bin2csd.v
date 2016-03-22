@@ -46,6 +46,7 @@ module tb_bin2csd ();
    // -----------------------------------------------------
    localparam        W=4;
    reg   [W-1:0]     tb_x;
+   reg   [2*W-1:0]   res;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -78,14 +79,21 @@ module tb_bin2csd ();
    // TB Control
    // -----------------------------------------------------
    initial begin
-      $monitor ("Time = %t tb_x = %b wire_y = %b B = %b",$time, tb_x, wire_y, duv.B);
+      $monitor ("Time = %8t tb_x = %b \twire_y = %b B = %b\n\t\t\t\tres    = %b\n\n",$time, tb_x, wire_y, duv.B, res);
       $dumpfile("tb_bin2csd.vcd");
-      $dumpvars(0,tb_bin2csd);
-      #1    tb_x = 4'b0000;
-      #1    tb_x = 4'b0010;
-      #1    tb_x = 4'b0110;
-      #1    tb_x = 4'b0111;
-      #1    tb_x = 4'b0110;
+      $dumpvars(:,   tb_bin2csd);
+      //$dumpvars(0,   tb_bin2csd);
+      //$dumpvars(1,   duv.cxB,
+      //               duv.cyB,
+      //               duv.sxB,
+      //               duv.syB);
+      #1    tb_x = 4'b0000;   res = 8'b00000000;
+      #1    tb_x = 4'b0001;   res = 8'b00000001;
+      #1    tb_x = 4'b0010;   res = 8'b00000100;
+      #1    tb_x = 4'b0100;   res = 8'b00010000;
+      #1    tb_x = 4'b1000;   res = 8'b01000000;
+      #1    tb_x = 4'b0110;   res = 8'b01001100;
+      #1    tb_x = 4'b0111;   res = 8'b01000011;
       #10   $finish;     //finish after 20 time units
    end
 
