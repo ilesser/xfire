@@ -53,7 +53,7 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
          % EE1 and LL1 are size KExKL = K1xK2
          [EE1, LL1] = ndgrid(E1, L1);
       else
-         if( KE > 1 )
+         if( length(E1) > 1 )
             % If L1 is a matrix and E1 a vector
             fprintf 'Error: Cannot use a matrix and a vector.\n'
             exit
@@ -65,7 +65,7 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
          end
       end
    else
-      if( KL > 1 )
+      if( length(L1) > 1 )
             % If E1 is a matrix and L1 a vector
             fprintf 'Error: Cannot use a matrix and a vector.\n'
             exit
@@ -106,13 +106,9 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
    % Calculate error vs ideal value
    if ( bkm_mode == 'E' )
       E_ideal  = EE1.* exp(LL1);
-      %err     = ( E(:,:,N+1) - E_ideal ) ./ E_ideal;
-      %err     = ( E(:,:,N+1) - E_ideal ) ;
       err      = ( E - E_ideal ) ;
    elseif ( bkm_mode == 'L' )
       L_ideal  = LL1 + log(EE1);
-      %err     = ( L(:,:,N+1) - L_ideal ) ./ L_ideal;
-      %err     = ( L(:,:,N+1) - L_ideal ) ;
       err      = ( L - L_ideal ) ;
    end
 
