@@ -1,4 +1,4 @@
-function [E,L,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
+function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
 % Runs the N steps BKM algorithm for the specified mode with inputs E1 and L1.
 %
 % These are the steps:
@@ -38,21 +38,54 @@ function [E,L,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
    elseif ( strcmp(bkm_mode,'L') || strcmp(bkm_mode,'L-mode') )
       bkm_mode = 'L';
    else
-      display 'Error: Unrecognized bkm_mode argument.'
+      fprintf 'Error: Unrecognized bkm_mode argument.\n'
+      fprintf 'Info:  Allowed values are {E, E-mode, L, L-mode}.\n'
       exit
    end
 
-   % Find out E1 and L1 lengths
-   KE = length(E1);
-   KL = length(L1);
 
-   % EE1 and LL1 are size KLxKE
-   [EE1, LL1] = meshgrid(E1, L1);
 
-   % E and L are size KLxKExN+1
-   E = zeros(KL,KE,N+1);
-   L = zeros(KL,KE,N+1);
+   if( isvector(E1) )
+      if( isvector(L1) )
+         % If both of them are vectores then I have to create the matrix
+         K1 = length(E1);
+         K2 = length(L1);
+         % EE1 and LL1 are size KExKL = K1xK2
+         [EE1, LL1] = ndgrid(E1, L1);
+      else
+         if( KE > 1 )
+            % If L1 is a matrix and E1 a vector
+            fprintf 'Error: Cannot use a matrix and a vector.\n'
+            exit
+         else
+            % If L1 is a matrix and E1 is a number
+            [K1, K2]  = size(L1);
+            EE1 = E1 * ones(K1,K2);
+            LL1 = L1;
+         end
+      end
+   else
+      if( KL > 1 )
+            % If E1 is a matrix and L1 a vector
+            fprintf 'Error: Cannot use a matrix and a vector.\n'
+            exit
+      else
+         % If E1 is a matrix and L1 is a number
+         [K1, K2]  = size(E1);
+         EE1 = E1;
+         LL1 = L1 * ones(K1,K2);
+      end
 
+   end
+
+   % d is size K1xK2xN
+   d = zeros(K1,K2,N);
+
+   % E and L are size K1xK2xN+1
+   E = zeros(K1,K2,N+1);
+   L = zeros(K1,K2,N+1);
+
+   % Initialize first step
    E(:,:,1) = EE1;
    L(:,:,1) = LL1;
 
@@ -60,12 +93,15 @@ function [E,L,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
    % Iterate on n
    for n=(1:N);
 
-      d_n         = get_d_n( n, E(:,:,n), L(:,:,n), bkm_mode );
+      d(:,:,n)    = get_d_n( n, E(:,:,n), L(:,:,n), bkm_mode );
 
-      E(:,:,n+1)  = E(:,:,n) .*   (1 + d_n * 2^-n);
-      L(:,:,n+1)  = L(:,:,n) - log(1 + d_n * 2^-n);
+      E(:,:,n+1)  = E(:,:,n) .*   (1 + d(:,:,n) * 2^-n);
+      L(:,:,n+1)  = L(:,:,n) - log(1 + d(:,:,n) * 2^-n);
 
-   endfor
+   end
+
+   % Disable broadcasting warning to calculate the error
+   warning ("off", "Octave:broadcast");
 
    % Calculate error vs ideal value
    if ( bkm_mode == 'E' )
@@ -78,17 +114,18 @@ function [E,L,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
       %err     = ( L(:,:,N+1) - L_ideal ) ./ L_ideal;
       %err     = ( L(:,:,N+1) - L_ideal ) ;
       err      = ( L - L_ideal ) ;
-   else
-      err = -1;
    end
+
+   % Enable broadcasting warning again
+   warning ("on", "Octave:broadcast");
 
 endfunction
 
 function dn = get_d_n( n, En, Ln, bkm_mode )
 
-   [KL, KE] = size(En);
+   [K1, K2] = size(En);
 
-   drn = din = zeros(KL,KE);
+   drn = din = zeros(K1,K2);
 
    if ( bkm_mode == 'E' )
 
@@ -109,12 +146,12 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
    elseif ( bkm_mode == 'L' )
 
       % Get the new sequence
-      En
-      en  = 2^n * (En-1)
+      En;
+      en  = 2^n * (En-1);
 
       % Truncate real and imaginary parts after their 4th fractional digit
-      ern = fix(real(en)*2^4)/2^4
-      ein = fix(imag(en)*2^4)/2^4
+      ern = fix(real(en)*2^4)/2^4;
+      ein = fix(imag(en)*2^4)/2^4;
 
       drn(ern <= -1/2              ) = +1;
       drn(ern >  -1/2 && ern <= 1/2) =  0;
@@ -126,7 +163,6 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
 
    end
 
-   dn = drn + j * din
-   display ''
+   dn = drn + j * din;
 
 end
