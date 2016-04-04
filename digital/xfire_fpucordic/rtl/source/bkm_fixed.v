@@ -34,8 +34,8 @@
 //    - y2        : Imaginary part of z2 input (two's complement, W bits).
 //
 //  Data outputs:
-//    - xo        : Real      part of zo output (two's complement, W bits).
-//    - yo        : Imaginary part of zo output (two's complement, W bits).
+//    - x3        : Real      part of zo output (two's complement, W bits).
+//    - y3        : Imaginary part of zo output (two's complement, W bits).
 //    - flags     : Result flags (logic, 4 bits).
 //    - done      : Active high done strobe signal (logic, 1 bit).
 //
@@ -239,10 +239,10 @@ module bkm_fixed #(
       .start               (bkm_post_start),
       .format              (bkm_post_format),
       .op                  (bkm_post_op),
-      .E_r_in              (E_r_Np1),
-      .E_i_in              (E_i_Np1),
-      .L_r_in              (L_r_Np1),
-      .L_i_in              (L_i_Np1),
+      .E                   (E_r_out),
+      .E                   (E_i_out),
+      .L                   (L_r_out),
+      .L                   (L_i_out),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
