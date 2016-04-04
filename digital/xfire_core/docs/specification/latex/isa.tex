@@ -1,0 +1,1004 @@
+% Cargar CSV con ISA
+\DTLsetseparator{|}
+\DTLloaddb[]{isa}{latex/isa/isa.csv}
+% \DTLloadrawdb[]{isa}{latex/isa/isa.ddb}
+
+\section{Instruction Set Architecture}
+\label{sec:isa}
+
+\subsection{Instruction format}
+\label{ssec:instruction_format}
+There are four intruction main types according to how many registers are used as arguments of the instruction, named Type 0, 1, 2 and 3. The type of
+instruction is identified by the two most significant bits of the opcode. This types of instructions are further organized in groups, which identify if
+the registers are used as sources or destinations and the role of the remaining bits of the opcode, such as immediate data, displacement, subopcodes or
+size of the operation (width of the affected data).
+
+\subsubsection{Type 0 instructions}
+\label{sssec:type_0}
+Type 0 instructions are encoded with only two bits (bits 28 and 29). Usage of the 28 remaining bits depend on the instruction itself. This type of
+instructions are further divided in two groups: A and B. Group A has a 28 bit displacement field. Group B does not specify those bits. The enconding
+structure is shown in figure \ref{fig:type_0_encoding_structure}.
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[endianness=big,bitwidth=0.9em]{40}
+       \bitbox[]{8}{Group} & \bitbox[]{32}{Encoding Structure}\\
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{2}{2} & \bitbox[]{28}{28 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group A} & \bitbox{2}{T} & \bitbox{2}{O} & \bitbox{28}{Displacement}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{2}{2} & \bitbox[]{28}{28 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group B} & \bitbox{2}{T} & \bitbox{2}{O} & \bitbox{28}{Undefined}\\
+    \end{bytefield}
+  \end{center}
+  \caption{Type 0 instruction encoding structure}
+  \label{fig:type_0_encoding_structure}
+\end{figure}
+
+\subsubsection{Type 1 instructions}
+\label{sssec:type_1}
+Type 1 instructions are encoded with four bits (bits 26 to 29) and make use of one register, either as source or destination of the operation. This type
+of instructions is further divided in four groups: A, B, C and D. Group A uses a source register (addressed by bits 21 to 25) and a twenty one bits
+displacement field (bits 0 to 20). Group B uses a destination register (addressed by bits 16 to 20) and a 16 bits displacement field (bits 0 to 15),
+leaving 5 bits unespecified (bits 21 to 25). Group C uses a source register (addressed by bits 21 to 25), a 4 bits subopcode (bits 17 to 20) and a 17 bits
+displacement field (bits 0 to 16). Group D uses a destination register (addressed by bits 16 to 20) and a 16 bits immediate field (bits 0 to 15), leaving 5
+bits unespecified (bits 21 to 25). The encoding structure is shown in figure \ref{fig:type_1_encoding_structure}.
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[endianness=big,bitwidth=0.9em]{40}
+       \bitbox[]{8}{Group} & \bitbox[]{32}{Encoding Structure}\\
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{21}{21 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group A} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src} & \bitbox{21}{Displacement}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{16}{16 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group B} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{Undefined} & \bitbox{5}{R dst} & \bitbox{16}{Displacement}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{4}{4 bits} & \bitbox[]{17}{17 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group C} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src} & \bitbox{4}{Sub Op} & \bitbox{17}{Displacement}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{16}{16 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group D} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{Undefined} & \bitbox{5}{R dst} & \bitbox{16}{Immediate}\\
+    \end{bytefield}
+  \end{center}
+  \caption{Type 1 instruction encoding structure}
+  \label{fig:type_1_encoding_structure}
+\end{figure}
+
+\subsubsection{Type 2 instructions}
+\label{sssec:type_2}
+Type 2 instructions are encoded with four bits (bits 26 to 29) and make use of two registers, one being always source and the other one either source or
+destination of the operation. This type of instructions are further divided in five groups: A, B, C, D and E. Group A uses a source register (bits 21 to
+25), a destination register (bits 16 to 20), a 5 bits subopcode (bits 4 to 8), a 2 bits variation specifier (bits 9 and 10), leaving 9 bits unespecified
+(bits 0 to 3 and 11 to 15). Group B uses a source register (bits 21 to 25), a destination register (bits 16 to 20) and a 16 bits displacement field (bits 0
+to 15). Group C uses a source register (bits 21 to 25), a destination register (bits 16 to 20) and a 16 bits immediate field (bits 0 to 15). Group D uses
+two source registers (bits 21 to 25 and 16 to 20) and a 16 bits displacement field (bits 0 to 15). Group E uses a source register (bits 21 to 25), a
+destination register (bits 16 to 20), a two bits subopcode field (bits 14 and 15), a three bits data field (bits 11 to 13), leaving 11 bits unespecified
+(bits 0 to 10). The encoding structure is shown in figure \ref{fig:type_2_encoding_structure}.
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[endianness=big,bitwidth=0.9em]{40}
+       \bitbox[]{8}{Group} & \bitbox[]{32}{Encoding Structure}\\
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{2}{2} & \bitbox[]{5}{5 bits} & \bitbox[]{4}{4 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group A} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src} & \bitbox{5}{R dst} & \bitbox{5}{Undefined} & \bitbox{2}{V} & \bitbox{5}{Sub Op} & \bitbox{4}{Undef}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{16}{16 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group B} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src} & \bitbox{5}{R dst} & \bitbox{16}{Displacement}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{16}{16 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group C} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src} & \bitbox{5}{R dst} & \bitbox{16}{Immediate}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{16}{16 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group D} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src 1} & \bitbox{5}{R src 2} & \bitbox{16}{Displacement}\\
+       
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{2}{2} & \bitbox[]{3}{3 bits} & \bitbox[]{11}{11 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{Group E} & \bitbox{2}{T} & \bitbox{4}{Opcode} & \bitbox{5}{R src} & \bitbox{5}{R dst} & \bitbox{2}{SO} & \bitbox{3}{Nib} & \bitbox{11}{Undefined}\\
+    \end{bytefield}
+  \end{center}
+  \caption{Type 2 instruction encoding structure}
+  \label{fig:type_2_encoding_structure}
+\end{figure}
+
+\subsubsection{Type 3 instructions}
+\label{sssec:type_3}
+Type 3 instructions make use of three registers, two sources and one destination. This type of instructions are not further divided in groups. All three 
+registers are encoded with five bits each (bits 21 to 25 and bits 11 to 15 for source registers and bits 16 to 20 for destination register), a 5 bits
+subopcode field (bits 4 to 8), a 2 bits variation specifier (bits 9 and 10), leaving 8 bits undefined (bits 0 to 3 and 26 to 29). The encoding structure is
+shown in figure \ref{fig:type_3_encoding_structure}.
+
+\begin{figure}
+  \begin{center}
+    \begin{bytefield}[endianness=big,bitwidth=0.9em]{40}
+       \bitbox[]{8}{Group} & \bitbox[]{32}{Encoding Structure}\\
+       \bitbox[]{40}{}\\
+       
+       \bitbox[]{8}{} & \bitbox[]{2}{2} & \bitbox[]{4}{4 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{5}{5 bits} & \bitbox[]{2}{2} & \bitbox[]{5}{5 bits} & \bitbox[]{4}{4 bits}\\
+       \bitheader{0-31}\\
+       \bitbox[]{8}{All} & \bitbox{2}{T} & \bitbox{4}{Undef} & \bitbox{5}{R src 1} & \bitbox{5}{R dst} & \bitbox{5}{R src 2} & \bitbox{2}{V} & \bitbox{5}{Sub Op} & \bitbox{4}{Undef}\\
+    \end{bytefield}
+  \end{center}
+  \caption{Type 3 instruction encoding structure}
+  \label{fig:type_3_encoding_structure}
+\end{figure}
+
+\subsection{Full instruction set}
+\label{ssec:full_isa}
+
+\subsubsection{Arranged by type}
+\label{sssec:isa_by_type}
+
+This sections tabulates instructions organized by type.\\
+\begin{itemize}
+  \item Type 0 instructions are summarized in table \ref{tbl:type_0}.
+  \item Type 1 instructions are summarized in table \ref{tbl:type_1}.
+  \item Type 2 instructions are summarized in table \ref{tbl:type_2}.
+  \item Type 3 instructions are summarized in table \ref{tbl:type_3}.
+\end{itemize}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {llX[l]}
+      \hline
+      \multicolumn{2}{c}{Mnemonic} & Description \\
+      \DTLforeach*[\DTLiseq{\type}{0} \and \DTLiseq{\group}{A}]
+        {isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \shortdescription=shortdescription,
+	  \type=type,
+	  \group=group}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \shortdescription
+	}
+      \DTLforeach*[\DTLiseq{\type}{0} \and \DTLiseq{\group}{B}]
+        {isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \shortdescription=shortdescription,
+	  \type=type,
+	  \group=group}
+	{
+	  \DTLiffirstrow{\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \shortdescription
+	} \\\hline
+    \end{tabu}
+  \end{center}
+\end{table}
+
+\subsubsection{Arranged by function}
+\label{sssec:isa_by_function}
+This section further tabulates instructions according to their functional behavior, listed as follows:
+
+\begin{itemize}
+  \item Register data transfer are summarized in table \ref{tbl:register_data_transfer_instructions}.
+  \item Memory data transfer are summarized in table \ref{tbl:memory_data_transfer_instructions}.
+  \item Arithmetic are summarized in table \ref{tbl:arithmetic_instructions}.
+  \item Cordic are summarized in table \ref{tbl:cordic_instructions}.
+  \item Logic are summarized in table \ref{tbl:logic_instructions}.
+  \item Control are summarized in table \ref{tbl:control_instructions}.
+  \item Data are summarized type conversion in table \ref{tbl:data_type_conversion_instructions}.
+\end{itemize}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Register data transfer} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Register data transfer} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Register data transfer instructions}
+  \label{tbl:register_data_transfer_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Memory data transfer} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Memory data transfer} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Memory data transfer} \and \DTLiseq{\subfamily}{2}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Memory data transfer instructions}
+  \label{tbl:memory_data_transfer_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description%
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{0}]{isa}{
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{1}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{2}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+    \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{3}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{4}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{5}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop 
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{6}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{7}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{8}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{9}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily} % Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{10}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \\\hline
+    \end{tabu}
+  \caption{Arithmetic instructions}
+  \label{tbl:arithmetic_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{0}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{1}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{2}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{3}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{4}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{5}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{6}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{7}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{8}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{9}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{10}]{isa}{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline}{\\}
+	  \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Arithmetic instructions}
+  \label{tbl:arithmetic_instructions}
+  \end{center}
+\end{table}
+
+\begin{center}
+  \begin{longtabu} to \textwidth {|ll|X[l]|}
+  \caption{Cordic instructions}
+  \label{tbl:cordic_instructions}\\
+    \hline
+    \multicolumn{2}{|c|}{Mnemonic} & Description
+    \\\hline
+    \endfirsthead
+    \hline
+    \multicolumn{3}{|c|}{-- Continued from previous page}
+    \\\hline
+    \multicolumn{2}{|c|}{Mnemonic} & Description
+    \\\hline\hline
+    \endhead
+    \hline \multicolumn{3}{|r|}{{Continued on next page}}
+    \\\hline
+    \endfoot
+    \\\hline
+    \endlastfoot
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{0}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{1}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{2}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{3}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{4}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{5}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{6}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{7}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{8}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{9}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{10}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{11}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{12}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{13}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{14}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{15}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+  \end{longtabu}
+\end{center}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{2}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{3}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{4}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Logic instructions}
+  \label{tbl:logic_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{2}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{3}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Control instructions}
+  \label{tbl:control_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Data type conversion}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Data type conversion instructions}
+  \label{tbl:data_type_conversion_instructions}
+  \end{center}
+\end{table}
+
+
+\subsubsection{Conventions for semantic descriptions}
+\label{sssec:semantic_conventions}
+
+The following sections gives the detailed specification of the instructions set. For the semantic descrition
+a high level formal language is adopted. It is worth to mention that as any high level language,
+there are more than one way to express the same operation. Since that, the instruction descriptions
+are arbitrary.
+
+\subsubsection{Predefined variables}
+\label{sssec:predefined_variables}
+They are used to refer parts of the procesor.
+
+\begin{itemize}
+\item $pc$: Program counter, stores 32 bits unsigned integers. It is incremented in 4 positions since
+      it indexes instruction words of 32 bits width. It means that two consecutive instructions in the program memory are in the addresses
+      pc and pc + 4. The pc content must be always a multiple of 4.
+\item $m[]$: Array that represents the data memory. It is addressed by bytes (8 bits) but it can
+      returns bytes (8 bits), halfs (16 bits) and words (32 bits). As mentioned in section \ref{ssec:data_memory}, halfs and words must be
+      aligned.
+\item $im[]$: Array that represents the instruction memory. It is addressed by words (32 bits).
+\item $alu_{x}.c$, $alu_{x}.v$, $alu_{x}.z$, $alu_{x}.n$: Repersent ALU operation output flags ($x=0$ is for low GPR and $x=1$ is for high GPR).
+\item $r_{x}$, $r_{y}$, $r_{z}$: Represent any of the 32 general purpose integer registers R0, $\dots$, R31.
+\item $r_{x}.c$, $r_{x}.v$, $r_{x}.z$, $r_{x}.n$: Represent the associated flags to register $r_{x}$.
+\item $fpu_{x}.a$, $fpu_{x}.i$, $fpu_{x}.z$, $fpu_{x}.n$: Repersent FPU operation output flags ($x=0$ is for low FPR and $x=1$ is for high FPR).
+\item $f_{x}$, $f_{y}$, $f_{z}$: Represent any of the 32 floating point registers F0, $\dots$, F31.
+\item $f_{x}.a$, $f_{x}.i$, $f_{x}.z$, $f_{x}.n$: Represent the associated flags to register $f_{x}$.
+\item $imm_{n}$, $disp_{n}$, $nib_{n}$: Represent constants included in instructions. ``$n$'' indicates the bit width of
+      the constants.%, 16 bits for I-type instructions, 21 bits for B-type instructions, 26 bits for J-type instructions and 3 bits for C-type instructions.
+\item $cnv_{x}.c$, $cnv_{x}.v$, $cnv_{x}.z$, $cnv_{x}.n$, $cnv_{x}.a$, $cnv_{x}.i$: Represent CU operation output flags ($x=0$ is for low GPR or FPR
+      and $x=1$ is for high GPR or FPR).
+\item $cordic_{x}.c$, $cordic_{x}.v$, $cordic_{x}.z$, $cordic_{x}.n$, $cordic_{x}.a$, $cordic_{x}.i$: Represent Cordic operation output flags
+      ($x=0$ is for low GPR or FPR and $x=1$ is for high GPR or FPR).
+\end{itemize}
+
+\subsubsection{Numbers}
+\label{sssec:isa_numbers}
+When the description of the instruction implies the use of a number, it can be expressed in the proper radix
+in order to clarify the notation. The convention adopted is like in C programming language. The native type
+is radix 10. Radix 16 is noted by the prefix 0x and binary numbers by 0b.
+
+\subsubsection{Literals}
+\label{sssec:isa_literals}
+Logic values are indicated by the symbols `0'\ and `1'.
+
+\subsubsection{Operators and expressions}
+\label{sssec:isa_operators_expressions}
+\begin{itemize}
+\item Assignments: The used symbol is ``$\longleftarrow_n$'', where $n$ represents the number of bits of the assigment.
+\item Arithmetic and logic operators: They can be used for representing any operation between predefined variables and GPR's / FPR's. Addition (``$+$''),
+      subtraction (``$-$''), multiplication (``$*$''), division (``$/$''), remainder (``$\%$''), logic AND (``\&''), logic OR (``\textbar''),
+      logic XOR (``$\wedge$''), logic inversion (``$\sim$''), sine (``$sin$''), cosine (``$cos$''), hyperbolic sine (``$sinh$''),
+      hyperbolic cosine (``$cosh$''), arctangent (``$atan$''), natural logarithm (``$ln$''), square root (``$sqrt$''), A? (``$a?$''), B? (``$b?$'').
+\item Comparison: They return ``true'' or ``false'' to be used in flow control statements like
+      ``if''. Equal than (``$==$''), not equal than(``$!=$''), less than (``$<$''), less or equal than (``$<=$''),
+      greater than (``$>$''), greater or equal than (``$>=$'').
+\item Logic concatenation: It permits to concatenate any expression of the same type. It is noted by ``\#''.
+\item Range of bits: $V[$x:y$]$ represents a range of bits of the variable $V$ from the position $x$ to the
+      position $y$.
+\item Particular bit: $V[$x$]$ represents a particular bit of the variable $V$ in the position $x$.
+\item Logic extension: $x_{n}(V)$ extends the variable $V$ with left side zeros to fit a $n$ bits size.
+\item Signed extension: $sx_{n}(V)$ extends the variable $V$ with its most significant bit to fit a $n$ bits size.
+\item Unsigned casting: $U_n(V)$, the variable $V$ is as an $n$ bits unsigned integer.
+\item Logic replication: $n(V)$, the variable $V$ is replicated by $n$ at bit level.
+\item Decision statement: the only one defined statement is ``if ( $<$logic\_condition$>$) then $<$expressions$>$ [else $<e$xpressions$>$ endif]''.
+\end{itemize}
+
+\subsection{Source and destination operands}
+\label{ssec:isa_operands}
+
+As a general overview, the operands have the functions described in table \ref{tbl:operands_functions}.
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|c|c|c|l|}
+\hline
+\textbf{Type} & \textbf{Subtype} & \textbf{Group} & \textbf{Operation} \\
+\hline
+\hline
+0 & 0 & 0 & $pc \longleftarrow pc + disp$                  \\
+  &   & 1 & No arguments                                  \\
+  &   & 2 & No arguments                                   \\
+\hline
+\hline
+1 & 0 & 0 & $pc \longleftarrow r_x$                        \\
+  &   & 1 & $pc \longleftarrow pc + displ$                 \\
+\hline
+  & 1 & 0 & $r_x \longleftarrow imm$                       \\
+  &   & 1 & $r_x \longleftarrow pc + 1$                    \\
+\hline
+\hline
+2 & 0 & 0 & $r_{x} \longleftarrow r_{y}$                       \\
+  &   & 1 & $r_{x} \longleftarrow r_{y}$                       \\
+  &   & 2 & $r_{x} \longleftarrow r_{y}$                       \\
+  &   & 3 & $r_{x} \longleftarrow r_{y} \dagger imm$           \\
+  &   & 4 & $r_{x} \longleftarrow m[r_{y} + dis]$              \\
+  &   & 5 & $r_{x} \longleftarrow pc; pc \longleftarrow r_{y}$ \\
+\hline
+  & 1 & 0 & $mem[r_{y} + dis] \longleftarrow r_{x}$            \\
+\hline
+\hline
+3 & 0 & 0 & $r_{x} \longleftarrow r_{y} \dagger r_{z}$         \\
+\hline
+\end{tabular}
+\end{center}
+\begin{center}
+\footnotesize{\textbf{Note:} ``$\dagger$'' represents any arithmetic or logical operation.} 
+\end{center}
+\caption{Operands functions in instructions}
+\label{tbl:operands_functions}
+\end{table}
+
+
+\section{Full instruction set description}
+\label{sec:full_isa_description}
+This section will give a full description of all the instructions opcodes and their behavior and manipulation of architecture resources.
+The listing will be ordered by type, subtype and group. As a first step, all executed instructions load it's opcode to the IR. This is
+noted as $ir \longleftarrow_{30} im[pc]$, and this expression should be prepended to all operations noted within the following
+description.
+
+\DTLforeach*{isa}{
+  \type=type,
+  \mnemonic=mnemonic,
+  \args=args,
+  \shortdescription=shortdescription,
+  \description=description,\coding=coding,
+  \operation=operation,
+  \flags=flags,
+  \notes=notes,
+  \assemblertranslationsandvalidations=assemblertranslationsandvalidations,
+  \cpuvalidations=cpuvalidations}
+  {%
+    \subsubsection{\mnemonic \enspace - \shortdescription}
+      \label{sssec:\mnemonic}
+      \begin{tabu} to \textwidth {lcX[l]}
+	Mnemonic             & : & \texttt{\mnemonic} \texttt{\args} \\
+	Coding               & : & \texttt{\coding} \\
+	Operation            & : & \begin{tabu} to \textwidth {X[l]} \operation \end{tabu} \\
+	Assember Validations & : & \texttt{\assemblertranslationsandvalidations} \\
+	CPU Validations      & : & \texttt{\cpuvalidations} \\
+	Affected flags       & : & \begin{tabu} to \textwidth {X[l]} \flags \end{tabu} \\
+	Notes                & : & \notes \\
+      \end{tabu}
+  }\\
