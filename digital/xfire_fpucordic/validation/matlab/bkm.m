@@ -1,4 +1,4 @@
-function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
+function [E,L,d,err]=bkm(E1, L1, bkm_mode , N )
 % Runs the N steps BKM algorithm for the specified mode with inputs E1 and L1.
 %
 % These are the steps:
@@ -33,17 +33,33 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
    % Initialize variables
+   % Fill in unset optional values.
+   switch nargin
+      case 0
+         E1       = 0;
+         L1       = 0;
+         bkm_mode = 'E';
+         N        = 64;
+      case 1
+         L1       = 0;
+         bkm_mode = 'E';
+         N        = 64;
+      case 2
+         bkm_mode = 'E';
+         N        = 64;
+      case 3
+         N        = 64;
+   end
+
+
+   % Check for bkm_mode
    if ( strcmp(bkm_mode,'E') || strcmp(bkm_mode,'E-mode') )
       bkm_mode = 'E';
    elseif ( strcmp(bkm_mode,'L') || strcmp(bkm_mode,'L-mode') )
       bkm_mode = 'L';
    else
-      fprintf 'Error: Unrecognized bkm_mode argument.\n'
-      fprintf 'Info:  Allowed values are {E, E-mode, L, L-mode}.\n'
-      exit
+      error('%s is not a recognized bkm_mode. You can use {E, E-mode, L, L-mode}',bkm_mode)
    end
-
-
 
    if( isvector(E1) )
       if( isvector(L1) )
@@ -55,7 +71,7 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
       else
          if( length(E1) > 1 )
             % If L1 is a matrix and E1 a vector
-            fprintf 'Error: Cannot use a matrix and a vector.\n'
+            error('Cannot use a matrix and a vector.\n')
             exit
          else
             % If L1 is a matrix and E1 is a number
@@ -67,7 +83,7 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
    else
       if( length(L1) > 1 )
             % If E1 is a matrix and L1 a vector
-            fprintf 'Error: Cannot use a matrix and a vector.\n'
+            error('Cannot use a matrix and a vector.\n')
             exit
       else
          % If E1 is a matrix and L1 is a number
@@ -101,27 +117,28 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode = 'E', N = 64)
    end
 
    % Disable broadcasting warning to calculate the error
-   warning ("off", "Octave:broadcast");
+   %warning ("off", "Octave:broadcast");
 
    % Calculate error vs ideal value
    if ( bkm_mode == 'E' )
-      E_ideal  = EE1.* exp(LL1);
+      E_ideal  = repmat( EE1.* exp(LL1), [1 1 N+1]);
       err      = ( E - E_ideal ) ;
    elseif ( bkm_mode == 'L' )
-      L_ideal  = LL1 + log(EE1);
+      L_ideal  = repmat( LL1 + log(EE1), [1 1 N+1]);
       err      = ( L - L_ideal ) ;
    end
 
    % Enable broadcasting warning again
-   warning ("on", "Octave:broadcast");
+   %warning ("on", "Octave:broadcast");
 
-endfunction
+end
 
 function dn = get_d_n( n, En, Ln, bkm_mode )
 
    [K1, K2] = size(En);
 
-   drn = din = zeros(K1,K2);
+   drn = zeros(K1,K2);
+   din = zeros(K1,K2);
 
    if ( bkm_mode == 'E' )
 
@@ -132,11 +149,11 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
       Lin = fix(imag(Ln)*2^n*2^4)/2^4;
 
       drn(Lrn <= -5/8              ) = -1;
-      drn(Lrn >= -1/2 && Lrn <= 1/4) =  0;
+      drn(Lrn >= -1/2 & Lrn <= 1/4 ) =  0;
       drn(Lrn >=  3/8              ) = +1;
 
       din(Lin <= -13/16            ) = -1;
-      din(Lin >= -3/4 && Lin <= 3/4) =  0;
+      din(Lin >= -3/4 & Lin <= 3/4 ) =  0;
       din(Lin >=  13/16            ) = +1;
 
    elseif ( bkm_mode == 'L' )
@@ -150,11 +167,11 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
       ein = fix(imag(en)*2^4)/2^4;
 
       drn(ern <= -1/2              ) = +1;
-      drn(ern >  -1/2 && ern <= 1/2) =  0;
+      drn(ern >  -1/2 & ern <= 1/2 ) =  0;
       drn(ern >   1/2              ) = -1;
 
       din(ein <= -1/2              ) = +1;
-      din(ein >  -1/2 && ein <= 1/2) =  0;
+      din(ein >  -1/2 & ein <= 1/2 ) =  0;
       din(ein >   1/2              ) = -1;
 
    end
