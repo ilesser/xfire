@@ -344,30 +344,53 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
    \right.
 \end{equation}
 
+\chapter{Architecture}
+
+   \section{BKM Float}
+
+   \section{BKM Fixed}
+
+      \begin{figure}[h]
+         \centering
+         \includegraphics[width=1.0\textwidth]{./figures/bkm_fixed.png}
+         \caption{Arquitecture del bloque BKM fixed.}
+         \label{fig:bkm_fixed}
+      \end{figure}
+
+      \begin{table}[h]
+      \centering
+      \begin{tabular}{lccl}
+         \hline
+         Puerto            &  Tama\~no    &  Direcci\'on    &  Descripci\'on                                                  \\ \hline \hline
+         \verb|clk      |  &  1  bit      &  Input          &  Clock signal                                                   \\ \hline
+         \verb|arst     |  &  1  bit      &  Input          &  Active high asynchronous reset signal                          \\ \hline
+         \verb|srst     |  &  1  bit      &  Input          &  Active high synchronous reset signal                           \\ \hline
+         \verb|enable   |  &  1  bit      &  Input          &  Active high enable signal                                      \\ \hline
+         \verb|start    |  &  1  bit      &  Input          &  Active high start signal                                       \\ \hline
+         \verb|format   |  &  2  bit      &  Input          &  Format specifier (0/1): MSB for complex/real, LSB for 64/32 bits\\ \hline
+         \verb|op       |  &  5  bits     &  Input          &  Operation code                                                 \\ \hline
+         \verb|x_1      |  &  64 bits     &  Input          &  Real      part of input variable z1                            \\ \hline
+         \verb|y_1      |  &  64 bits     &  Input          &  Imaginary part of input variable z1                            \\ \hline
+         \verb|x_2      |  &  64 bits     &  Input          &  Real      part of input variable z2                            \\ \hline
+         \verb|y_2      |  &  64 bits     &  Input          &  Imaginary part of input variable z2                            \\ \hline
+         \verb|x_3      |  &  64 bits     &  Output         &  Real      part of output variable z3                           \\ \hline
+         \verb|y_3      |  &  64 bits     &  Output         &  Imaginary part of output variable z3                           \\ \hline
+         \verb|flags    |  &  1  bit      &  Output         &  Active high invert output signal                               \\ \hline
+         \verb|done     |  &  1  bit      &  Output         &  Active high done signal: Stays asserted until start strobe     \\ \hline
+      \end{tabular}
+      \caption{Puertos del bloque op decoder.}
+      \label{tab:bkm_fixed_ports}
+      \end{table}
+
+      \subsection{BKM Pre}
+      \subsection{BKM Post}
+      \subsection{BKM Fixed control logic}
+
+
+   \section{BKM Core}
+
+
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
