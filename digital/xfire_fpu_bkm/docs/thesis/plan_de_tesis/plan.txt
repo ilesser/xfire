@@ -2,12 +2,12 @@ Plan de tesis
 -------------
 
 1 - Introduccion al trabajo de tesis
-      * Comprender el estandar IEEE 754, architectura de CORDIC, BKM (pegarle una mirada).
-      * Escribir capitulo 2 de la tesis titulado: Introduccion teorica a FPU/CORDIC.
+      * Comprender el estandar IEEE 754, architectura de CORDIC, BKM .
+      * Escribir capitulo 2 de la tesis titulado: Introduccion teorica a CORDIC/BKM and FPU.
 
-2 - Analizar las diferentes arquitecturas digitales propuestas para implementar el sistema MIMO
-      * Leer libros, papers, IEEEXplore, CORDIC normalizado, presteps for hyperbolic with range extension.
-      * Escribir el capitulo 3 de la tesis titulado: Arquitecturas Digitales FPU (high level), CORDIC (low level)
+2 - Analizar las diferentes arquitecturas digitales propuestas para implementar la FPU
+      * Leer libros, papers, IEEEXplore, CORDIC normalizado, presteps for hyperbolic with range extension,BKM.
+      * Escribir el capitulo 3 de la tesis titulado: Arquitecturas Digitales FPU (high level), BKM (low level)
 
 3 - Estudiar la factibilidad de realizar una mejora a las arquitecturas antes mencionadas.
       * Es este sentido se abren dos caminos posibles:
