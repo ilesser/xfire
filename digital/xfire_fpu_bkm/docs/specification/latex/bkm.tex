@@ -462,6 +462,30 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
 
    \section{BKM Fixed}
 
+      \subsection{Funci\'on}
+      Este bloque toma las entradas $z_1 = x_1+j y_1$ y $z_2 = x_2+j y_2$ y calcula $z_3 = f_{\text{op}}(z1,z2)$ siendo $f_{\text{op}}(z1,z2)$ una operaci\'on definida por la varaiable op.
+      A continuaci\'on se detalla la lista de operaciones posibles y sus c\'odigos de operaci\'on.
+
+      \begin{table}[h]
+      \centering
+      \begin{tabular}{clll}
+         \hline
+         Código de operación  &  Operación      &  Descripci\'on                 &  Tiempo de ejecuci\'on          \\ \hline \hline
+         000000               &  $\exp(z1)$     &                                &  N                              \\ \hline
+         000000               &  $\ln(z1)$      &                                &  N                              \\ \hline
+         000000               &  $\cosh(z1)$    &  $\frac{e^{z_1}+e^{-z_1}}{2}$  &  2N                             \\ \hline
+         000000               &  $\sinh(z1)$    &  $\frac{e^{z_1}-e^{-z_1}}{2}$  &  2N                             \\ \hline
+         000000               &  $\tanh(z1)$    &  $\frac{e^{2z_1}-1}{e^{2z_1}+1}$  &  2N                             \\ \hline
+         000000               &  $\arctanh(z1)$ &  doble                         &  2N                             \\ \hline
+         000000               &  $\cos(z1)$     &  doble                         &  2N                             \\ \hline
+         000000               &  $\sin(z1)$     &  doble                         &  2N                             \\ \hline
+         000000               &  $\arctan(z1)$  &  doble                         &  2N                             \\ \hline
+         000000               &  $\tan(z1)$     &  doble                         &  2N                             \\ \hline
+      \end{tabular}
+      \caption{Operaciones del bkm\_fixed.}
+      \label{tab:bkm_fixed_operations}
+      \end{table}
+
       \begin{figure}[h]
          \centering
          \includegraphics[width=1.0\textwidth]{./figures/bkm_fixed.png}
@@ -494,24 +518,6 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
       \label{tab:bkm_fixed_ports}
       \end{table}
 
-      \begin{table}[h]
-      \centering
-      \begin{tabular}{cl}
-         \hline
-         Código de operación  &  Operación   &  Descripci\'on                                                  \\ \hline \hline
-         000000               &  $\exp(z1)$  &  Descripci\'on                                                  \\ \hline
-         000000               &  $\ln(z1)$   &  Descripci\'on                                                  \\ \hline
-         000000               &  $\cos(z1)$  &  Descripci\'on doble                                            \\ \hline
-         000000               &  $\sin(z1)$  &  Descripci\'on doble                                            \\ \hline
-         000000               &  $\atan(z1)$ &  Descripci\'on doble                                            \\ \hline
-         000000               &  $\tan(z1)$  &  Descripci\'on doble                                            \\ \hline
-         000000               &  $\cosh(z1)$ &  Descripci\'on doble                                            \\ \hline
-         000000               &  $\sinh(z1)$ &  Descripci\'on doble                                            \\ \hline
-         000000               &  $\atanh(z1)$&  Descripci\'on doble                                            \\ \hline
-      \end{tabular}
-      \caption{Operaciones del bkm\_fixed.}
-      \label{tab:bkm_fixed_operations}
-      \end{table}
 
       \subsection{BKM Pre}
       Este bloque se encarga de 
