@@ -1,0 +1,108 @@
+\section{TODO's y discusiones}
+\subsection{Hablado en Marzo}
+\begin{itemize}
+ \item Operaciones sobre long: OK y agregado al doc
+ \item Z y N son consistentes con el resultado intermedio: OK y agregado al doc
+ \item ALU con bus de 64 bits: OK y agregado al doc
+ \item Register file con 2 enable de escritura y data\_in de 64 bits => ataca a la alu con los 64 bits y ataca a la memoria con 32: Nada
+ que aclarar en este documento. Esto tiene más que ver con la implementación
+ \item Se discutió si utilizar interrupciones sin vectorizar => ganas flexibilidad en el tratamiento de la IRQ pero perdes en
+ flexibilidad de definición de interrupciones. Quedó pendiente
+\end{itemize}
+
+\subsection{Abril}
+\begin{itemize}
+ \item Se habló sobre como implementar excepciones:
+ Excepciones -> 32 causas distintas. Una de ellas es interrupción. La gestión de interrupción se encargará el periferico correspondiente.
+La condición de excepción se levanta en la etapa que corresponda, y se transfiere hasta la ultima etapa del pipe, en donde se va a
+transferir al registro de causa (para evitar que se me levanten varios bits de excepción al mismo tiempo y poder chequear ese registro
+(andeado con la máscara) y hacerle or a todos los bits del resultado para ver si hay excepción).
+Ver de vectorizar 32 saltos con 2 instrucciones, una para saltar y otra para hacer el return from exception.
+ \item Mapeo de periféricos: Dos opciones, una es segmentar la memoria (usando el bit mas alto para elegir entre memoria y periféricos).
+La otra es poner un bit en un registro y en función de ese bit, se elige a quién le hablo. Otro esquema (descartado por complejidad) es
+el de escribir en un reg especial de 32 bits donde una parte se usa para direccionar los periféricos y otra para pasarle o recibir datos.
+El problema de esto es que te deja limitado en la cantidad de periféricos desde la definición de los bits de este registro.
+\end{itemize}
+
+Sobre las excepciones, se implementa un un registro de causa de 32 bits (CR) y un registro de máscaras (MR). Una de las excepciones es
+interrupciones, que se manejan con un periférico (standard\_interrupt\_controller).
+El mapa de memoria de datos se divide en dos (mapeados con el MSB de la dirección). La parte baja se usa para direccionar la memoria de
+datos y la parte alta para los periféricos.
+Hay un set de periféricos que deben ser implementados sí o sí (obligatorios). Otros se pueden llegar a implementar opcionalmente.
+Los periféricos deben definirse con tres cosas:
+\begin{itemize}
+ \item Registros internos
+ \item Mapeo en memoria (direcciones)
+ \item Puertos
+\end{itemize}
+
+\subsection{Mayo}
+Lo propuesto fue:
+\begin{enumerate}
+  \item El micro tiene una linea de entrada de interrupcion externa (1 bit) que corresponde a una exception mas y se atiende como cualquier otra excepcion.
+  \item hay un registro de mascara de excepciones.
+  \item las excepciones tienen prioridad: hay que determinar cuales son las prioridades (ni recuerdo que excepciones habiamos dicho de poner pero supongo que habra interrupcion, invalid operation, alu error -tipo div by zero- etc).
+	\textcolor{red}{Según lo teníamos definido antes, las prioridades se manejan por soft!}
+  \item Cuando hay una interrupcion externa, se salta a una posicion de memoria determinada (no me acuerdo cual pusiste en el PDF) y se atiende la interrupcion. El address the boot (valor del PC luego del reset) es 0x0000.
+        \textcolor{red}{Cuando hay una excepción se salta a la dir 0x000000F0 y de ahí se hace todo el manejo por soft. Igual esto se podría cambiar}
+  \item el espacio de memoria de programa empieza a partir de 1K (0x0400) \textcolor{red}{Eso es para dejar espacio para código de booteo???}
+  \item Las interrupciones se atienden mediante un controlador de interrupciones programable (PIC): en la rutina de interrupcion el micro consulta al PIC preguntando el address del periferico que interrumpe y el dato.
+        \textcolor{red}{Esto lo dejé planteado para ver como lo resolvemos en la sección de interrupciones}
+  \item El micro tiene 3 registros especiales para interfaceo de perifericos:\\
+      * DPW (data periphal write - 32bits): directamente cableado a un puerto de salida, corresponde al dato que el micro escribe al periferico.\\
+      * DPR (data periphal read - 32bits): directamente cableado a un puerto de entrada, corresponde al dato que el micro lee desde el periferico.\\
+      * PAD (peripheral address - 16 bits): directamente cableado a un puerto de salida, corresponde al address del periferico que el micro direcciona. Este registro de 16 bits genera un espacio de 16K posibles perifericos ya que al igual que las memorias de datos e instrucciones, los perifericos son direccionados de a bytes.\\
+	Estos tres registros son escritos y leidos con las instrucciones movi2s y movs2i. Esto hace que los perifericos sean transparantes para una MMU, la MMU solo se ocupa de memoria de programa + datos y no de perifericos.
+	\textcolor{red}{Ya están agregados estos registros}
+  \item El PIC siempre debe ir en el address 0x0000 direccionada por el PAD. Todo otro periferico se direcciona a partir de la direccion 0x0004 del PAD.
+        \textcolor{red}{Esto es para que el micro le pueda hablar al PIC??? Yo lo que hice es que el PIC provee un set de registros específios que se
+        usan con movi2s y movs2i, para configurarlo... haría falta esto???}
+  \item No hay perifericos obligatorios a excepcion del PIC. Dependen de la aplicacion. El PIC es el unico obligatorio.
+\end{enumerate}
+
+\subsection{Mayo 2}
+Resolvimos casi todo lo dejado pendiente. Aún sigue pendiente definir de forma urgente cómo se comunican los periféricos con el PIC para mandarle data al CPU.\\
+Falta generar un criterio de prioridad de excepciones y explicitarlo en el documento.\\
+
+\subsection{Junio}
+\begin{enumerate}
+ \item Todavía falta ver lo del protocolo de periféricos y el PIC, definirlos bien y documentarlos
+ \item Branch delay slot: definir el branch delay slot de las instrucciones de branching y de las excepciones. Pueden ser distintos. \textcolor{red}{Lo que definamos de BDS va a definir en cuanto hay que incrementar el PC!!!}
+ \item Meter las instrucciones del cordic de nacho \textcolor{red}{-> esto sería una "isa extension"???}
+ \item Actualizar gráficos de formato de instrucciones
+ \item Por definición r31 es el return address (las instrucciones de jal y jalr escriben en el 31 y no puede modificarse ese comportamiento. Convención que el stack pointer sea el r30. \textcolor{red}{Esto done tenemos que aclararlo / agregarlo???}
+ \item Agregar modos de ejecución supervisor - user
+ \item Agregar IR - Instruction Register, es un registro que se carga con el opcode de la instrucción que se está ejecutando.
+ \item Se agregó un bit de máscara global que es sólo accesible por hardware (o sea, existe y es el bit 32 del registro de máscaras, pero
+ por soft sólo se puede acceder de los bits 0 a 31). Ese bit NO DEBE enmascarar al reset, porque por su funcionamiento, se activa cuando
+ entramos en la ejecución de un handler de excepciones, esto denota que no existen excepciones anidadas, y se desactiva al finalizar la
+ ejecución del handler. Si ese bit enmascarara al reset (que es la excepcion de máxima prioridad), no podría resetearse el micro mientras
+ se está ejecutando un handler, cosa que no es deseable.
+ \item Resta aclarar cómo se cargan los flags de registros al levantar de memoria los datos, dado que en realidad los flags son
+ resultantes de las operaciones sobre los registros, pero algunos deberían ser siempre coherentes con el dato levantado de memoria (por
+ ejemplo Z).
+ \item Definir el mecanismo con el que se sale del handler de excepción (rfe) que se hace con los bits de máscara.
+ \item Definir la excepcion TRAP que genera una excepción por software.
+ \item Cómo se baja el flag de la excepción que se empieza a atender? Puede ser o bien apenas saltamos al handler, porque si lo hacemos
+ al final (con el rfe) tenemos dos problemas, que no sabemos de qué excepción venimos y no sabemos si efectivamente se había levantado
+ nuevamente esa excepcion (que podría ser el caso de las interrupciones)). Una cosa importante acá también es que es IMPORTANTE que un
+ handler no pueda generar excepciones (o sea, un driver mal escrito podría hacer cagadas...).
+\end{enumerate}
+
+En cuanto a los modos de ejecución:
+\begin{enumerate}
+ \item necesitamos un stack pointer de supervisor distinto al de user el cual es R31?
+ \item hay que agregar el registro especial US de un solo bit al mapa de registros
+ \item en la descripcion del handling de la exception indicar que ademas de que el registro
+   L guarda el program counter, el registro US se pone en '0' y el global mask en '1'.
+   Cuando viene la instrucion RFE al salir de la rutina de exception ser restaura el
+   valor del program counter, el global\_mask va a '0' y el US va a '1'.
+ \item en los I/O del micro debe estar como salida el bit S del registro US, asi la MMU sabe
+   si los accesos a memoria son en modo supervisor o usuario.
+\end{enumerate}
+
+Si vemos un poco lo que pasa en MIPS con los system calls, básicamente, se sigue un protocolo (medio similar a la ABI) de en qué registros
+guardar ciertas cosas y el micro levanta la data de esos registros para operar en las system calls, que creo que se resuelven completamente
+por soft. O sea, sería, una vez más, en pos de simplicidad, relegar el laburo al soft, como lo venimos haciendo.\\
+Octavio dice de meter un campo inmediato para poner el tipo de syscall pero capaz que manejándonos con los registros no hace falta. Ahora
+lo que sé es que cada micro define sus system calls... por sentido común y / o experiencia, cuales deberíamos meter???

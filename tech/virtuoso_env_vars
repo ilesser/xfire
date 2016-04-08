@@ -1,0 +1,2 @@
+echo "loadContext(\"/usr/pdks/IBM_7RF/cadence/skill/ibmPdkProcs610.cxt\")" > ./temp/process_init.il
+echo "hiRegTimer(\"ibmPdkInit()\" 1)"  >> ./temp/process_init.il
