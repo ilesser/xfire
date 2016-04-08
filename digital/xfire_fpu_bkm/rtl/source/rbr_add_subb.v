@@ -4,7 +4,7 @@
 // Description:
 // ------------
 //
-// Redundant Binary Representation (RBR) adder
+// Redundant Binary Representation (RBR) adder/substractor
 //
 // Digit |  Value interpreted
 // ------|-------------------
@@ -25,6 +25,8 @@
 // ----------
 //
 //  Data inputs:
+//    - subb_a    : Add/sub a (logic, 1 bit).
+//    - subb_b    : Add/sub b (logic, 1 bit).
 //    - a         : Summand a (RBR, 2*W bits).
 //    - b         : Summand b (RBR, 2*W bits).
 //
@@ -38,6 +40,7 @@
 // History:
 // --------
 //
+//    - 2016-04-08 - ilesser - Converted to adder/subbstracter.
 //    - 2016-04-08 - ilesser - Original version.
 //
 // -----------------------------------------------------------------------------
@@ -54,12 +57,14 @@ module rbr_add #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    input   reg   [2*W-1:0]   a,
-    input   reg   [2*W-1:0]   b,
+    input   wire              subb_a,
+    input   wire              subb_b,
+    input   wire  [2*W-1:0]   a,
+    input   wire  [2*W-1:0]   b,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [2*W-1:0]   s,
+    output  reg   [2*W-1:0]   s
   );
 // *****************************************************************************
 
@@ -70,34 +75,51 @@ module rbr_add #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire [2*W-1:0] c;
-   reg  [W-1:0]   sa;
+   reg   [W-1:0]     sa;
+   wire  [2*W-1:0]   c;
+   reg   [2*W-1:0]   a_neg;
+   reg   [2*W-1:0]   b_neg;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-   initial
-      c[1]  = 1'b1;
-      c[0]  = 1'b0;
+   always @(*) begin
+      if (subb_a=1'b1)
+         a_neg = ~a;
+      else
+         a_neg = a;
+      end
+      if (subb_b=1'b1)
+         b_neg = ~b;
+      else
+         b_neg = b;
+      end
+   end
 
+   initial
+      c[1]  = 1'b1;  // if add: c = 10   if subb: c = 01 ??? TODO
+      c[0]  = 1'b0;  //          0                 0
    genvar i;
    generate
       for (i=0; i < W-1; i=i+1) begin
          always @(*) begin
 
-            {c[2*(i+1)+1], sa[i]}      = a[2*i+1]  + a[2*i] + b[2*i+1];
+            {c[2*(i+1)+1], sa[i]}      = a_neg[2*i+1] + a_neg[2*i]   + b_neg[2*i+1];
 
-            {c[2*(i+1)  ], s[2*i+1]}   = sa[i]     + b[2*i] + c[2*i+1];
+            {c[2*(i+1)  ], s[2*i+1]}   = sa[i]        + b_neg[2*i]   + c[2*i+1];
 
             s[2*i] = c[2*i];
 
          end
       end
    endgenerate
+
    // -----------------------------------------------------
    // Digit-by-digit diagram
    // -----------------------------------------------------
+   // If want to invert a or b sign just negate each digit
+   //
    //                   a           b
    //                    i           i
    //                   | |         | |
