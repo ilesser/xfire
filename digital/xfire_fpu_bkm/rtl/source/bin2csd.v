@@ -8,12 +8,12 @@
 // It follows this equation to calculate the CSD representation of x:
 //
 //    y = CSD(x)
-//    x = x_{W-1} x_{W-2} ... x_1 x_0
-//    y = y_{2*W-1} y_{2*W-2} ... y_1 y_0
+//    x = [x_{W-1}   x_{W-2}   ... x_1 x_0]
+//    y = [y_{2*W-1} y_{2*W-2} ... y_1 y_0]
 //
-//    B_0 = 0
-//    B_i = B_i +   x_{i+1} + x_i
-//    y_i = B_i - 2*x_{i+1} + x_i
+//    B_0     = 0
+//    B_{i+1} = B_i +   x_{i+1} + x_i
+//    y_i     = B_i - 2*x_{i+1} + x_i
 //
 // B_i behaves as the carry out of a full adder so it follows the rules of
 // binary addition, i.e. B_{i+1} is 1 if there are 2 or 3 ones among
