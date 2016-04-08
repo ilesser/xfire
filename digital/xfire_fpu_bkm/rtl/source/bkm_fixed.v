@@ -72,27 +72,27 @@ module bkm_fixed #(
     // ----------------------------------
     // Clock, reset & enable inputs
     // ----------------------------------
-    input wire                clk,
-    input wire                arst,
-    input wire                srst,
-    input wire                enable,
+    input   wire                 clk,
+    input   wire                 arst,
+    input   wire                 srst,
+    input   wire                 enable,
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    input wire                start,
-    input wire [1:0]          format,
-    input wire [OPSIZE-1:0]   op,
-    input reg  [W-1:0]        x1,
-    input reg  [W-1:0]        y1,
-    input reg  [W-1:0]        x2,
-    input reg  [W-1:0]        y2,
+    input   wire                 start,
+    input   wire  [1:0]          format,
+    input   wire  [OPSIZE-1:0]   op,
+    input   reg   [W-1:0]        x1,
+    input   reg   [W-1:0]        y1,
+    input   reg   [W-1:0]        x2,
+    input   reg   [W-1:0]        y2,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    input reg  [W-1:0]        x3,
-    input reg  [W-1:0]        y3,
-    output wire[FLO_FSIZE-1:0]flags,
-    output wire               done
+    output  reg   [W-1:0]        x3,
+    output  reg   [W-1:0]        y3,
+    output  wire  [FLO_FSIZE-1:0]flags,
+    output  wire                 done
   );
 // *****************************************************************************
 
