@@ -85,21 +85,24 @@ module rbr_add_subb #(
    // Combinational logic
    // -----------------------------------------------------
    always @(*) begin
-      if (subb_a=1'b1)
+      if (subb_a == 1'b1) begin
          a_neg = ~a;
-      else
+      end
+      else begin
          a_neg = a;
       end
-      if (subb_b=1'b1)
+      if (subb_b == 1'b1) begin
          b_neg = ~b;
-      else
+      end
+      else begin
          b_neg = b;
       end
    end
 
-   initial
-      c[1]  = 1'b1;  // if add: c = 10   if subb: c = 01 ??? TODO
-      c[0]  = 1'b0;  //          0                 0
+   // Initial values
+   assign c[1]  = 1'b1;  // if add: c = 10   if subb: c = 01 ??? TODO
+   assign c[0]  = 1'b0;  //          0                 0
+
    genvar i;
    generate
       for (i=0; i < W-1; i=i+1) begin
@@ -153,7 +156,7 @@ module rbr_add_subb #(
 // *****************************************************************************
 `ifdef RTL_DEBUG
 
-   XXXXX TO FILL IN HERE XXXXX
+   //XXXXX TO FILL IN HERE XXXXX
 
 `endif
 // *****************************************************************************
