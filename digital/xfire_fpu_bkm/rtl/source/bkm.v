@@ -56,7 +56,7 @@
 //
 // -----------------------------------------------------------------------------
 
-`include "bkm.vh"
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -94,7 +94,7 @@ module bkm #(
     input reg  [W-1:0]        E_i_out,
     input reg  [W-1:0]        L_r_out,
     input reg  [W-1:0]        L_i_out,
-    output wire[FLO_FSIZE-1:0]flags,
+    output wire[`FSIZE-1:0]   flags,
     output wire               done
   );
 // *****************************************************************************
@@ -106,19 +106,18 @@ module bkm #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire [XXXXX-1:0]  XXXXX;
-   reg  [XXXXX-1:0]  XXXXX;
+   reg  [W-1:0]  dummy;
    // -----------------------------------------------------
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         XXXXX
+         dummy = {W{1'b0}};
       end
       else if (srst) begin
-         XXXXX
+         dummy = {W{1'b0}};
       end
       else if (enable) begin
-         XXXXX
+         dummy = {W,{1'b1}};
       end
    end
 
@@ -129,7 +128,7 @@ module bkm #(
 // *****************************************************************************
 `ifdef RTL_DEBUG
 
-   XXXXX TO FILL IN HERE XXXXX
+   //XXXXX TO FILL IN HERE XXXXX
 
 `endif
 // *****************************************************************************
