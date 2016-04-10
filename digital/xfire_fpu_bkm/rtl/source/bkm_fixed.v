@@ -55,7 +55,7 @@
 //
 // -----------------------------------------------------------------------------
 
-`include "bkm_fixed.vh"
+`include "bkm_fixed_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -81,7 +81,7 @@ module bkm_fixed #(
     // ----------------------------------
     input   wire                 start,
     input   wire  [1:0]          format,
-    input   wire  [OPSIZE-1:0]   op,
+    input   wire  [`OPSIZE-1:0]  op,
     input   reg   [W-1:0]        x1,
     input   reg   [W-1:0]        y1,
     input   reg   [W-1:0]        x2,
@@ -91,7 +91,7 @@ module bkm_fixed #(
     // ----------------------------------
     output  reg   [W-1:0]        x3,
     output  reg   [W-1:0]        y3,
-    output  wire  [FLO_FSIZE-1:0]flags,
+    output  wire  [`FSIZE-1:0]   flags,
     output  wire                 done
   );
 // *****************************************************************************
@@ -104,37 +104,37 @@ module bkm_fixed #(
    // Internal signals
    // -----------------------------------------------------
    // BKM Pre control wires
-   wire              bkm_pre_enable;
-   wire              bkm_pre_start;
-   wire  [1:0]       bkm_pre_format;
-   wire  [OPSIZE-1:0]bkm_pre_op;
-   wire              bkm_pre_done;
+   wire                 bkm_pre_enable;
+   wire                 bkm_pre_start;
+   wire  [1:0]          bkm_pre_format;
+   wire  [`OPSIZE-1:0]  bkm_pre_op;
+   wire                 bkm_pre_done;
 
    // BKM Core control wires
-   wire              bkm_core_enable;
-   wire              bkm_core_start;
-   wire  [1:0]       bkm_core_format;
-   wire              bkm_core_mode;
-   wire              bkm_core_done;
-   wire  [F-1:0]     bkm_core_flags;
+   wire                 bkm_core_enable;
+   wire                 bkm_core_start;
+   wire  [1:0]          bkm_core_format;
+   wire                 bkm_core_mode;
+   wire                 bkm_core_done;
+   wire  [`FSIZE-1:0]   bkm_core_flags;
 
    // BKM Core Signal Path
-   wire  [W-1:0]     E_r_in
-   wire  [W-1:0]     E_i_in
-   wire  [W-1:0]     L_r_in
-   wire  [W-1:0]     L_i_in
-   wire  [W-1:0]     E_r_out
-   wire  [W-1:0]     E_i_out
-   wire  [W-1:0]     L_r_out
-   wire  [W-1:0]     L_i_out
+   wire  [W-1:0]        E_r_in;
+   wire  [W-1:0]        E_i_in;
+   wire  [W-1:0]        L_r_in;
+   wire  [W-1:0]        L_i_in;
+   wire  [W-1:0]        E_r_out;
+   wire  [W-1:0]        E_i_out;
+   wire  [W-1:0]        L_r_out;
+   wire  [W-1:0]        L_i_out;
 
    // BKM Post control wires
-   wire              bkm_post_enable;
-   wire              bkm_post_start;
-   wire  [1:0]       bkm_post_format;
-   wire              bkm_post_op;
-   wire              bkm_post_done;
-   wire  [F-1:0]     bkm_post_flags;
+   wire                 bkm_post_enable;
+   wire                 bkm_post_start;
+   wire  [1:0]          bkm_post_format;
+   wire                 bkm_post_op;
+   wire                 bkm_post_done;
+   wire  [`FSIZE-1:0]   bkm_post_flags;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -323,7 +323,7 @@ module bkm_fixed #(
 // *****************************************************************************
 `ifdef RTL_DEBUG
 
-   XXXXX TO FILL IN HERE XXXXX
+   //XXXXX TO FILL IN HERE XXXXX
 
 `endif
 // *****************************************************************************
