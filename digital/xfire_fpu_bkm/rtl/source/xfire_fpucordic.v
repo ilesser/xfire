@@ -77,14 +77,14 @@ module xfire_fpucordic #(
     // ----------------------------------
     input wire                start,
     input wire [1:0]          format,
-    input wire [OPSIZE-1:0]   op,
+    input wire [`OPSIZE-1:0]  op,
     input reg  [W-1:0]        rx,
     input reg  [W-1:0]        ry,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
     output reg [W-1:0]        rz,
-    output wire[FLO_FSIZE-1:0]flags,
+    output wire[`FLO_FSIZE-1:0]flags,
     output wire               done
   );
 // *****************************************************************************
@@ -99,9 +99,9 @@ module xfire_fpucordic #(
 
    reg               start_reg;
    reg   [1:0]       format_reg;
-   reg   [OPSIZE-1]  op_reg;
+   reg   [`OPSIZE-1] op_reg;
 
-   wire  [FSIZE-1:0] cor_flags;
+   wire  [`FSIZE-1:0]cor_flags;
 
    wire  [1:0]       cp_xy;
 
@@ -145,18 +145,6 @@ module xfire_fpucordic #(
 
 
    // -----------------------------------------------------
-
-   always @(posedge clk or posedge arst) begin
-      if (arst) begin
-         XXXXX
-      end
-      else if (srst) begin
-         XXXXX
-      end
-      else if (enable) begin
-         XXXXX
-      end
-   end
 
    // -----------------------------------------------------
    // Combinational logic
@@ -238,17 +226,17 @@ module xfire_fpucordic #(
 
    // Salida
    always @* begin
-      case(F_z)
+      case(f_z)
          RANGE_1:    dec_size_z_64 = DEC_SIZE_F1_64;
-                     dec_size_z_32 = DEC_SIZE_F1_32;
+                     //dec_size_z_32 = DEC_SIZE_F1_32;
          RANGE_2:    dec_size_z_64 = DEC_SIZE_F2_64;
-                     dec_size_z_32 = DEC_SIZE_F2_32;
+                     //dec_size_z_32 = DEC_SIZE_F2_32;
          RANGE_4:    dec_size_z_64 = DEC_SIZE_F4_64;
-                     dec_size_z_32 = DEC_SIZE_F4_32;
+                     //dec_size_z_32 = DEC_SIZE_F4_32;
          RANGE_180:  dec_size_z_64 = DEC_SIZE_F180_64;
-                     dec_size_z_32 = DEC_SIZE_F180_32;
+                     //dec_size_z_32 = DEC_SIZE_F180_32;
          default:    dec_size_z_64 = {W{1'b0}};
-                     dec_size_z_32 = {W{1'b0}};
+                     //dec_size_z_32 = {W{1'b0}};
       endcase
    end
 
@@ -274,12 +262,12 @@ module xfire_fpucordic #(
 // MUX selector de la salida
    always @* begin
       case (cp_xy)
-         "11":       rz_o = rx_reg;
-         "10":       rz_o = rx_reg;
-         "01":       rz_o = ry_reg;
-         "00":       rz_o = rz_mux;
-         default:    rz_o = {W{1'b0}};
-      end case;
+         2'b11:       rz = rx_reg;
+         2'b10:       rz = rx_reg;
+         2'b01:       rz = ry_reg;
+         2'b00:       rz = rz_mux;
+         default:     rz = {W{1'b0}};
+      endcase
    end
    // -----------------------------------------------------
 
@@ -293,7 +281,7 @@ module xfire_fpucordic #(
     // Parameters
     // ----------------------------------
       .W                   (W),
-      .OPSIZE              (OPSIZE)
+      .OPSIZE              (`OPSIZE)
    ) in_register_0 (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -388,7 +376,7 @@ module xfire_fpucordic #(
       .in_64               (format_64),
       .clear               (start_i),
       .start               (tc_i_x_start),
-      .fixed               ('1'),
+      .fixed               (1),
       .dec_size            (dec_size_x),
     // ----------------------------------
     // Data outputs
@@ -421,7 +409,7 @@ module xfire_fpucordic #(
       .in_64               (format_64),
       .clear               (start_i),
       .start               (tc_i_y_start),
-      .fixed               ('1'),
+      .fixed               (1),
       .dec_size            (dec_size_y),
     // ----------------------------------
     // Data outputs
@@ -477,7 +465,7 @@ module xfire_fpucordic #(
       .W                   (W),
       .LOG2W               (LOG2W),
       .N                   (N),
-      .LOG2N               (LOG2N
+      .LOG2N               (LOG2N)
    ) cordic_fixed_0 (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -499,12 +487,12 @@ module xfire_fpucordic #(
     // ----------------------------------
       .flags_o             (cor_flags),
       .rz_o                (rz_cor),
-      .done_o              (cor_done
+      .done_o              (cor_done)
    );
 
 
-   assign cor_ov     = cor_flags(FLO_FLAG_OV_POS);
-   assign cor_zero   = cor_flags(FLO_FLAG_ZERO_POS);
+   assign cor_ov     = cor_flags[FLO_FLAG_OV_POS];
+   assign cor_zero   = cor_flags[FLO_FLAG_ZERO_POS];
 
    mapper_out_32_64 #(
     // ----------------------------------
@@ -523,7 +511,7 @@ module xfire_fpucordic #(
       .x_o                 (rz_map)
    );
 
-   tc_fix_to_float (#
+   tc_fix_to_float #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
@@ -548,7 +536,7 @@ module xfire_fpucordic #(
       .clear               (start_i),
       .start               (tc_z_start),
       .signed_i            (signed_out),
-      .fixed               ('1'),
+      .fixed               (1),
       .dec_size            (dec_size_z),
     // ----------------------------------
     // Data outputs
@@ -566,7 +554,7 @@ module xfire_fpucordic #(
 // *****************************************************************************
 `ifdef RTL_DEBUG
 
-   XXXXX TO FILL IN HERE XXXXX
+   //XXXXX TO FILL IN HERE XXXXX
 
 `endif
 // *****************************************************************************
