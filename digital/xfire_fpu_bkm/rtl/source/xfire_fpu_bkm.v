@@ -39,7 +39,7 @@
 //
 // -----------------------------------------------------------------------------
 
-`include "XXXXXXXX.vh"
+`include "xfire_fpu_bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -48,26 +48,35 @@ module xfire_fpu_bkm #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter XXXXX   = XXXXX,
-    parameter XXXXX   = XXXXX
+    parameter W      = 64,
+    parameter LOG2W  = 6,
+    parameter N      = 64,
+    parameter LOG2N  = 6
   ) (
     // ----------------------------------
     // Clock, reset & enable inputs
     // ----------------------------------
-    input wire               clk,
-    input wire               arst,
-    input wire               srst,
-    input wire               enable,
+    input   wire                 clk,
+    input   wire                 arst,
+    input   wire                 srst,
+    input   wire                 enable,
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    input wire  [XXXXX-1:0]  XXXXXXX,
-    input wire  [XXXXX-1:0]  XXXXXXX,
+    input   wire                 start,
+    input   wire  [1:0]          format,
+    input   wire  [`OPSIZE-1:0]  op,
+    input   reg   [W-1:0]        x1,
+    input   reg   [W-1:0]        y1,
+    input   reg   [W-1:0]        x2,
+    input   reg   [W-1:0]        y2,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output reg  [XXXXX-1:0]  XXXXXXX,
-    output wire [XXXXX-1:0]  XXXXXXX
+    output  reg   [W-1:0]        x3,
+    output  reg   [W-1:0]        y3,
+    output  wire  [`FSIZE-1:0]   flags,
+    output  wire                 done
   );
 // *****************************************************************************
 
@@ -78,19 +87,18 @@ module xfire_fpu_bkm #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire [XXXXX-1:0]  XXXXX;
-   reg  [XXXXX-1:0]  XXXXX;
+   reg  [W-1:0]  dummy;
    // -----------------------------------------------------
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         XXXXX
+         dummy = {W{1'b0}};
       end
       else if (srst) begin
-         XXXXX
+         dummy = {W{1'b0}};
       end
       else if (enable) begin
-         XXXXX
+         dummy = x1;
       end
    end
 
@@ -101,7 +109,7 @@ module xfire_fpu_bkm #(
 // *****************************************************************************
 `ifdef RTL_DEBUG
 
-   XXXXX TO FILL IN HERE XXXXX
+   //XXXXX TO FILL IN HERE XXXXX
 
 `endif
 // *****************************************************************************
