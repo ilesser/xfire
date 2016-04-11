@@ -239,10 +239,10 @@ module bkm_fixed #(
       .start               (bkm_post_start),
       .format              (bkm_post_format),
       .op                  (bkm_post_op),
-      .E                   (E_r_out),
-      .E                   (E_i_out),
-      .L                   (L_r_out),
-      .L                   (L_i_out),
+      .E_r                 (E_r_out),
+      .E_i                 (E_i_out),
+      .L_r                 (L_r_out),
+      .L_i                 (L_i_out),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -256,12 +256,8 @@ module bkm_fixed #(
    // -----------------------------------------------------
    // BKM Fixed Control Logic
    // -----------------------------------------------------
-   bkm_control_logic #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-      .W                   (W)
-   ) bkm_control_logic (
+   bkm_fixed_control_logic
+   bkm_fixed_control_logic (
     // ----------------------------------
     // Clock, reset & enable inputs
     // ----------------------------------
