@@ -5,3 +5,4 @@ syntax: glob
 *.swp
 
 digital/*/rtl/html/html
+digital/*/verification/*/temp
