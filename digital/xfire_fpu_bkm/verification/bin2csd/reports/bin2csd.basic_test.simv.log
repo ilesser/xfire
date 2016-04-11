@@ -1,0 +1,48 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/bin2csd.basic_test.simv.log +TESTSEED=1607543230 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 10 15:53 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1607543230
+*******************************************************
+
+Time =        0 tb_x = xxxx 	wire_y = xxxxxxxx B = xxxx0
+				res    = xxxxxxxx
+
+
+Time =     1000 tb_x = 0000 	wire_y = x0000000 B = x0000
+				res    = 00000000
+
+
+Time =     2000 tb_x = 0001 	wire_y = x0000001 B = x0000
+				res    = 00000001
+
+
+Time =     3000 tb_x = 0010 	wire_y = x0000110 B = x0000
+				res    = 00000100
+
+
+Time =     4000 tb_x = 0100 	wire_y = x0011000 B = x0000
+				res    = 00010000
+
+
+Time =     5000 tb_x = 1000 	wire_y = x1100000 B = x0000
+				res    = 01000000
+
+
+Time =     6000 tb_x = 0110 	wire_y = x1101110 B = x1100
+				res    = 01001100
+
+
+Time =     7000 tb_x = 0111 	wire_y = x1100011 B = x1110
+				res    = 01000011
+
+
+$finish called from file "./temp/tb_bin2csd.v", line 615.
+$finish at simulation time                17000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 17000 ps
+CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
+Sun Apr 10 15:53:15 2016
