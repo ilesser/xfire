@@ -96,18 +96,15 @@ module bin2csd #(
    reg   [W-1:0]        sB;
 
    // Variables for y_i generation
-   reg   [W-1:0]   cxB [0:1];
-   reg   [W-1:0]   sxB;
-   reg   [W-1:0]   cyB [0:2];
-   reg   [W-1:0]   syB [0:1];
+   reg   [W-1:0]   cr;
+   reg   [W-1:0]   cl;
 
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-   initial
-      B[0]  = 1'b0;
+   assign B[0]  = 1'b0;
 
    genvar i;
    generate
@@ -122,18 +119,39 @@ module bin2csd #(
             // Generation of y_i
             // y_i = B_i + x_i - 2 x_{i+1}
 
-            // Initialize carries to 0 to add and 1 to substract
-            cxB[0][i] = 1'b0;
-            cyB[0][i] = 1'b1;
+            //    0     x              0     x              0     x
+            //           i                    i                    i
+            // +  0     B           +  0     B           +  1     B
+            //           i    ===>            i    ===>            i
+            // -  x     0           + ~x     1           + ~x     0
+            //     i+1                 i+1                   i+1
+            //                      +  0     1
+            //   ----------           ---------            ----------
+            //    yl    yr             yl    yr             yl    yr
+            //     i     i              i     i              i     i
 
-            // First add x_i and B_i
-            {cxB[1][i], sxB[i]}     = x[i]    + B[i]      + cxB[0][i];
+            {cr[i], y[2*i]  } =  x[i]   + B[i] + 1'b1;
+            {cl[i], y[2*i+1]} = ~x[i+1] + 1'b1 + c[i];
 
-            // To the result substract 2 x_{i+1}
-            {cyB[1][i], syB[0][i]}  = 1'b1    + sxB[i]    + cyB[0][i];
-            {cyB[2][i], syB[1][i]}  = ~x[i+1] + cxB[1][i] + cyB[1][i];
+            // --------------------------------------------------------------------------
+            // Digit-by-digit diagram
+            // --------------------------------------------------------------------------
+            //                   1  ~x        x    B       1              x   x     B
+            //                   |   |i+1     |i   |i      |              |i+1|i    |i
+            //                   |   |        |    |       |              |   |     |
+            //                   |   |        |    |       |              |   |     |
+            //                 +-------+    +-------+      |            +-------+   |
+            //                 |       |    |       |      |            |       |   |
+            //           X-----|  FA   |----|  FA   |------+       B ---|  FA   |---+
+            //            cl   |       | cr |       |               i+1 |       |
+            //             i   +-------+  i +-------+                   +-------+
+            //                     |            |                           |
+            //                     |            |                           |
+            //                     +-----++---- +                           X
+            //                           ||
+            //                           y
+            //                            i
 
-            y[2*i+1:2*i] = {syB[1][i], syB[0][i]};
          end
 
       end
