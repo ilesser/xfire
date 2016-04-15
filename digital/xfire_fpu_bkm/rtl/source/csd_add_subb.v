@@ -4,15 +4,23 @@
 // Description:
 // ------------
 //
-// Cannonic Signed Digit (CSD) adder/substractor
+// Cannonic Signed Digit (CSD) adder/substractor using borrow save representation.
 //
-// Digit |  Value interpreted
-// ------|-------------------
-// 00    |  0
-// 01    | +1
-// 10    | -1
-// 11    |  0
 //
+// Borrow save:
+//
+//    y  = { y , y }      s stands for sign and d for data
+//     BS     s   d
+//
+//    y  =  y - y
+//     csd   d   s
+//
+// BS Digit |  CSD Value
+// ---------|------------
+// 00       |  0
+// 01       | +1
+// 10       | -1
+// 11       |  0
 //
 // Taken from :
 // Gustavo A. Ruiz, Mercedes Granda, "Efficient canonic signed digit recording".
@@ -29,13 +37,13 @@
 // ----------
 //
 //  Data inputs:
-//    - subb_a    : Add/sub a (logic, 1 bit).
-//    - subb_b    : Add/sub b (logic, 1 bit).
+//    - subb_a    : Add(0)/sub(1) a (logic, 1 bit).
+//    - subb_b    : Add(0)/sub(1) b (logic, 1 bit).
 //    - a         : Summand a (CSD, 2*W bits).
 //    - b         : Summand b (CSD, 2*W bits).
 //
 //  Data outputs:
-//    - c         : Result c=a+b (CSD, 2*W bits).
+//    - c         : Result c = (-1)^subb_a * a + (-1)^subb_b * b (CSD, 2*W bits).
 //
 //  Parameters:
 //    - W         : Word width (natural, default: 64).
@@ -44,7 +52,7 @@
 // History:
 // --------
 //
-//    - 2016-04-10 - ilesser - Changed representation to CSD (see paper in desc).
+//    - 2016-04-10 - ilesser - Changed representation to BS (see paper in desc).
 //    - 2016-04-08 - ilesser - Converted to adder/subbstracter.
 //    - 2016-04-08 - ilesser - Original version.
 //
@@ -76,6 +84,50 @@ module rbr_add_subb #(
 // *****************************************************************************
 // Architecture
 // *****************************************************************************
+// This architecture is implemented using two full adders in a similar way as a
+// 4-to-2-CS-adder but with the bits representing the sign bit inverted
+// *****************************************************************************
+// ESTE GRAFICO QUE HICE ACA ES UN CARRY SAVE ADDER 4-TO-2 ADDER
+// si agarro esto e invierto a_i^s, b_i^s, c_i^s y c^{i+1}_s lo
+// convierto en un BORROW SAVE ADDER 4-TO-2 ADDER
+//
+// Despues eso puedo usarlo con un wallace tree para poder hacer las sumas
+// y finalmente convertilo a una notacion no redundante
+//
+//         subb      a    subb   b
+//             a      i       b   i
+//           |       | |    |    | |
+//           |       | |    |    | |
+//           |     +-----+  |  +-----+
+//           |     |     |  |  |     |
+//           +-----| XOR |  +--| XOR |
+//                 |     |     |     |
+//                 +-----+     +-----+
+//                   | |         | |
+//                   | |         | |
+//                   | |         | |
+//                   O |         | |
+//                 +-----+       | |
+//                 |     |       | |
+//           +----O| FA  |O------+ |
+//           |     |     |         |
+//           |     +-----+         |
+//           |        |            |
+//           |      p | +----------+
+//           |       i| |
+//           |      +-----+
+//           |      |     |
+//   c    ---+   +--| FA  |O----------c
+//    i+1 -------+  |     |       +--- i
+//                  +-----+       |
+//                     |          |
+//                     |+---------+
+//                     ||
+//                     ||
+//                     s
+//                      i
+//
+// *****************************************************************************
 
    // -----------------------------------------------------
    // Internal signals
@@ -104,6 +156,11 @@ module rbr_add_subb #(
       end
    end
 
+   assign a_n     = ~a;
+   assign b_n     = ~b;
+   assign a_xor   =  a^subb_a;
+   assign b_xor   =  b^subb_b;
+
    // Initial values
    assign c[1]  = 1'b1;  // if add: c = 10   if subb: c = 01 ??? TODO
    assign c[0]  = 1'b0;  //          0                 0
@@ -122,6 +179,7 @@ module rbr_add_subb #(
          end
       end
    endgenerate
+   // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Digit-by-digit diagram
@@ -129,22 +187,22 @@ module rbr_add_subb #(
    // If want to invert a or b sign just negate each digit
    // ai    bi    ci  | pi |  ci+1  si  | representation    carry    sum
    //-----------------|----|------------|-------------------------------
-   // 00    00    00  | 0  |  00    00  |  0 +  0 +  0       0        0
-   // 00    00    01  | 0  |  00    01  |  0 +  0 +  1       0        1
-   // 00    00    10  | 0  |  00    10  |  0 +  0 + -1       0       -1
-   // 00    00    11  | 0  |  00    11  |  0 +  0 +  0       0        0
+   // 00    00    00  | 0  |  00    10  |  0 +  0 +  0       0        0
+   // 00    00    01  | 0  |  00    11  |  0 +  0 +  1       0        1
+   // 00    00    10  | 0  |  01    00  |  0 +  0 + -1       0       -1
+   // 00    00    11  | 0  |  01    01  |  0 +  0 +  0       0        0
    // 00    01    00  | 0  |  00    10  |  0 +  1 +  0       0        1
    // 00    01    01  | 0  |  00    11  |  0 +  1 +  1       1        0    <-- error en el dato del carry 
    // 00    01    10  | 0  |  01    00  |  0 +  1 + -1       0        0
    // 00    01    11  | 0  |  01    01  |  0 +  1 +  0       0        1
-   // 00    10    00  | 1  |  00    10  |  0 + -1 +  0       0       -1
-   // 00    10    01  | 1  |  00    01  |  0 + -1 +  1       0        0    <--- error en el dato de la suma xq el carry in se propaga directamente
-   // 00    10    10  | 1  |  01    10  |  0 + -1 + -1      -1        0    <-- error en el signo  y dato del carry
-   // 00    10    11  | 1  |  01    11  |  0 + -1 +  0       0       -1
-   // 00    11    00  | 0  |  00    10  |  0 +  0 +  0       0        0
-   // 00    11    01  | 0  |  00    11  |  0 +  0 +  1       0        1
-   // 00    11    10  | 0  |  01    00  |  0 +  0 + -1       0       -1
-   // 00    11    11  | 0  |  01    01  |  0 +  0 +  0       0        0
+   // 00    10    00  | 1  |  10    10  |  0 + -1 +  0       0       -1
+   // 00    10    01  | 1  |  10    01  |  0 + -1 +  1       0        0    <--- error en el dato de la suma xq el carry in se propaga directamente
+   // 00    10    10  | 1  |  11    10  |  0 + -1 + -1      -1        0    <-- error en el signo  y dato del carry
+   // 00    10    11  | 1  |  11    11  |  0 + -1 +  0       0       -1
+   // 00    11    00  | 0  |  10    10  |  0 +  0 +  0       0        0
+   // 00    11    01  | 0  |  10    11  |  0 +  0 +  1       0        1
+   // 00    11    10  | 0  |  11    00  |  0 +  0 + -1       0       -1
+   // 00    11    11  | 0  |  11    01  |  0 +  0 +  0       0        0
    // 01    00    00  | 1  |  0C    S0  |  1 +  0 +  0       0        1
    // 01    00    01  | 1  |  0C    S1  |  1 +  0 +  1       1        0
    // 01    00    10  | 1  |  0C    S0  |  1 +  0 + -1       0        0
@@ -164,42 +222,11 @@ module rbr_add_subb #(
 
    // 01    01    01    0     10    01
    // 01    01    10    0     11    10
-
-
-
-
-   // ESTE GRAFICO QUE HICE ACA ES UN CARRY SAVE ADDER 4-TO-2 ADDER
-   // si agarro esto e invierto a_i^s, b_i^s, c_i^s y c^{i+1}_s lo
-   // convierto en un BORROW SAVE ADDER 4-TO-2 ADDER
-   //
-   // Despues eso puedo usarlo con un wallace tree para poder hacer las sumas
-   // y finalmente convertilo a una notacion no redundante
-   //
-   //                   a           b
-   //                    i           i
-   //                   | |         | |
-   //                   | |         | |
-   //                 +-----+       | |
-   //                 |     |       | |
-   //           +-----| FA  |-------+ |
-   //           |     |     |         |
-   //           |     +-----+         |
-   //           |        |            |
-   //           |      p | +----------+
-   //           |       i| |
-   //           |      +-----+
-   //           |      |     |
-   //   c    ---+   +--| FA  |-----------c
-   //    i+1 -------+  |     |       +--- i
-   //                  +-----+       |
-   //                     |          |
-   //                     |+---------+
-   //                     ||
-   //                     ||
-   //                     s
-   //                      i
-   //
    // -----------------------------------------------------
+
+
+
+
 
 // *****************************************************************************
 
