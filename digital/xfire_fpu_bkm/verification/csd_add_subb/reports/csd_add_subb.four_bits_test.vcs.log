@@ -1,10 +1,10 @@
 Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/bkm.v ./temp/bkm_fixed.v \
 ./temp/bkm_pre_processing.v ./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v \
 ./temp/simlib_clk_osc.v ./temp/bkm_fixed_control_logic.v ./temp/tb_csd_add_subb.v \
-./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/csd_add_subb.basic_test.vcs.log \
+./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/csd_add_subb.four_bits_test.vcs.log \
 +define+RTL_DEBUG +vcs+lic+wait +warn=all +lint=all -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Sat Apr 16 19:49:13 2016
+            Version I-2014.03 -- Sat Apr 16 19:45:04 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -949,13 +949,6 @@ Lint-[ONGS] Output never gets set
   Output port 'done' has never been assigned to any value.
 
 
-Warning-[TEIF] Task enabled inside a function
-./temp/tb_csd_add_subb.v, 827
-"add_error;"
-  Task 'add_error' is enabled inside function 'csd2bs', it may bring delays 
-  into the function.
-
-
 Lint-[PCWM-L] Port connection width mismatch
 ./temp/tb_csd_add_subb.v, 84
 "csd_add_subb #(W) duv( .subb_a (tb_subb_a),  .subb_b (tb_subb_b),  .a (tb_a),  .b (tb_b),  .c (wire_c),  .s (wire_s));"
@@ -1044,13 +1037,6 @@ Warning-[SIOB] Select index out of bounds
   The select index is out of declared bounds : [63:0].
   In module : bin2csd.
 
-
-Warning-[TEIF] Task enabled inside a function
-./temp/tb_csd_add_subb.v, 827
-"add_error;"
-  Task 'add_error' is enabled inside function 'csd2bs', it may bring delays 
-  into the function.
-
 Starting vcs inline pass...
 7 modules and 0 UDP read.
 recompiling module bkm_fixed
@@ -1075,4 +1061,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: .244 seconds to compile + .046 seconds to elab + .125 seconds to link
+CPU time: .233 seconds to compile + .046 seconds to elab + .118 seconds to link

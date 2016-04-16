@@ -213,8 +213,8 @@ module csd_add_subb #(
             // The carry sign bit inverters cancell each other
             // So I only have to invert the sign bit of a, b ans s
             {c_s[i+1],   p[i]} = ~a_s[i] + a_d[i] + ~b_s[i];
-            {c_d[i+1], s_s[i]} =    p[i] + b_d[i] +  c_s[i];
-                       s_d[i]  =                     c_d[i];
+            {c_d[i+1], s_s[i]} =             p[i] +  b_d[i] +  c_s[i];
+                       s_d[i]  =                               c_d[i];
 
             s[2*i+1:2*i] = {~s_s[i], s_d[i]};
 

@@ -1,11 +1,11 @@
-Command: ./simv -ucli -do simv.tcl -l ../reports/csd_add_subb.basic_test.simv.log +TESTSEED=1239938714 +VERBOSITY=0
+Command: ./simv -ucli -do simv.tcl -l ../reports/csd_add_subb.basic_test.simv.log +TESTSEED=3292272025 +VERBOSITY=0
 Chronologic VCS simulator copyright 1991-2014
 Contains Synopsys proprietary information.
-Compiler version I-2014.03; Runtime version I-2014.03;  Apr 16 18:39 2016
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 16 19:49 2016
 ucli% run
 
 *******************************************************
-Test Seed:  1239938714
+Test Seed:  1002695271
 *******************************************************
 
 convierto          -2 a BS: 1000
@@ -13,119 +13,125 @@ convierto          -1 a BS: 0010
 convierto           0 a BS: 0000
 convierto           1 a BS: 0001
 convierto           2 a BS: 0100
-Time =        0 tb_a = 00 tb_b = 00 tb_s = 00 wire_s = 11
+Time =        0 tb_a = 00000000 tb_b = 00000000 tb_s = 00000000 wire_s = 00000011
 
-Time =     1000 tb_a = 00 tb_b = 01 tb_s = 01 wire_s = 01
+Time =     1000 tb_a = 00000000 tb_b = 00000001 tb_s = 00000001 wire_s = 00000001
 
-Time =     2000 tb_a = 00 tb_b = 10 tb_s = 10 wire_s = 10
+Time =     2000 tb_a = 00000000 tb_b = 00000010 tb_s = 00000010 wire_s = 00001110
 
-[3] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+[3] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =     3000 tb_a = 00 tb_b = 00 tb_s = 00 wire_s = 11
+Time =     3000 tb_a = 00000000 tb_b = 00000000 tb_s = 00000000 wire_s = 00000011
 
-Time =     4000 tb_a = 01 tb_b = 00 tb_s = 01 wire_s = 01
+Time =     4000 tb_a = 00000001 tb_b = 00000000 tb_s = 00000001 wire_s = 00000001
 
-Time =     5000 tb_a = 01 tb_b = 01 tb_s = 00 wire_s = 11
+Time =     5000 tb_a = 00000001 tb_b = 00000001 tb_s = 00000000 wire_s = 00000111
 
-Time =     6000 tb_a = 01 tb_b = 10 tb_s = 00 wire_s = 11
+[6] ERROR: 	Expected result: 01 00000000
+		Obtained result: 00 00000111		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =     7000 tb_a = 01 tb_b = 00 tb_s = 01 wire_s = 01
+Time =     6000 tb_a = 00000001 tb_b = 00000010 tb_s = 00000000 wire_s = 00000011
 
-Time =     8000 tb_a = 10 tb_b = 00 tb_s = 10 wire_s = 10
+Time =     7000 tb_a = 00000001 tb_b = 00000000 tb_s = 00000001 wire_s = 00000001
 
-[9] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+Time =     8000 tb_a = 00000010 tb_b = 00000000 tb_s = 00000010 wire_s = 00001110
 
-Time =     9000 tb_a = 10 tb_b = 01 tb_s = 00 wire_s = 11
+[9] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-[10] ERROR: 	Expected result: 00 00
-		Obtained result: 01 00		. Instance: tb_csd_add_subb.load_operands_test
+Time =     9000 tb_a = 00000010 tb_b = 00000001 tb_s = 00000000 wire_s = 00001111
 
-Time =    10000 tb_a = 10 tb_b = 10 tb_s = 00 wire_s = 11
+[10] ERROR: 	Expected result: 00 00000000
+		Obtained result: 00 00001111		. Instance: tb_csd_add_subb.load_operands_test
 
-[11] ERROR: 	Expected result: 10 00
-		Obtained result: 00 00		. Instance: tb_csd_add_subb.load_operands_test
+Time =    10000 tb_a = 00000010 tb_b = 00000010 tb_s = 00000000 wire_s = 00001011
 
-Time =    11000 tb_a = 10 tb_b = 00 tb_s = 10 wire_s = 10
+[11] ERROR: 	Expected result: 10 00000000
+		Obtained result: 00 00001011		. Instance: tb_csd_add_subb.load_operands_test
 
-[12] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+Time =    11000 tb_a = 00000010 tb_b = 00000000 tb_s = 00000010 wire_s = 00001110
 
-Time =    12000 tb_a = 00 tb_b = 00 tb_s = 00 wire_s = 11
+[12] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    13000 tb_a = 00 tb_b = 01 tb_s = 01 wire_s = 01
+Time =    12000 tb_a = 00000000 tb_b = 00000000 tb_s = 00000000 wire_s = 00000011
 
-Time =    14000 tb_a = 00 tb_b = 10 tb_s = 10 wire_s = 10
+Time =    13000 tb_a = 00000000 tb_b = 00000001 tb_s = 00000001 wire_s = 00000001
 
-[15] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+Time =    14000 tb_a = 00000000 tb_b = 00000010 tb_s = 00000010 wire_s = 00001110
 
-Time =    15000 tb_a = 00 tb_b = 00 tb_s = 00 wire_s = 11
+[15] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    17000 tb_a = 00 tb_b = 01 tb_s = 01 wire_s = 01
+Time =    15000 tb_a = 00000000 tb_b = 00000000 tb_s = 00000000 wire_s = 00000011
 
-Time =    18000 tb_a = 00 tb_b = 10 tb_s = 10 wire_s = 10
+Time =    17000 tb_a = 00000000 tb_b = 00000001 tb_s = 00000001 wire_s = 00000001
 
-[19] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+Time =    18000 tb_a = 00000000 tb_b = 00000010 tb_s = 00000010 wire_s = 00001110
 
-Time =    19000 tb_a = 00 tb_b = 11 tb_s = 00 wire_s = 11
+[19] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-[20] ERROR: 	Expected result: 00 00
-		Obtained result: 01 00		. Instance: tb_csd_add_subb.load_operands_test
+Time =    19000 tb_a = 00000000 tb_b = 00000011 tb_s = 00000000 wire_s = 00001111
 
-Time =    20000 tb_a = 01 tb_b = 00 tb_s = 01 wire_s = 01
+[20] ERROR: 	Expected result: 00 00000000
+		Obtained result: 00 00001111		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    21000 tb_a = 01 tb_b = 01 tb_s = 00 wire_s = 11
+Time =    20000 tb_a = 00000001 tb_b = 00000000 tb_s = 00000001 wire_s = 00000001
 
-Time =    22000 tb_a = 01 tb_b = 10 tb_s = 00 wire_s = 11
+Time =    21000 tb_a = 00000001 tb_b = 00000001 tb_s = 00000000 wire_s = 00000111
 
-Time =    23000 tb_a = 01 tb_b = 11 tb_s = 01 wire_s = 01
+[22] ERROR: 	Expected result: 01 00000000
+		Obtained result: 00 00000111		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    24000 tb_a = 10 tb_b = 00 tb_s = 10 wire_s = 10
+Time =    22000 tb_a = 00000001 tb_b = 00000010 tb_s = 00000000 wire_s = 00000011
 
-[25] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+Time =    23000 tb_a = 00000001 tb_b = 00000011 tb_s = 00000001 wire_s = 00000001
 
-Time =    25000 tb_a = 10 tb_b = 01 tb_s = 00 wire_s = 11
+Time =    24000 tb_a = 00000010 tb_b = 00000000 tb_s = 00000010 wire_s = 00001110
 
-[26] ERROR: 	Expected result: 00 00
-		Obtained result: 01 00		. Instance: tb_csd_add_subb.load_operands_test
+[25] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    26000 tb_a = 10 tb_b = 10 tb_s = 00 wire_s = 11
+Time =    25000 tb_a = 00000010 tb_b = 00000001 tb_s = 00000000 wire_s = 00001111
 
-[27] ERROR: 	Expected result: 10 00
-		Obtained result: 00 00		. Instance: tb_csd_add_subb.load_operands_test
+[26] ERROR: 	Expected result: 00 00000000
+		Obtained result: 00 00001111		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    27000 tb_a = 10 tb_b = 11 tb_s = 10 wire_s = 10
+Time =    26000 tb_a = 00000010 tb_b = 00000010 tb_s = 00000000 wire_s = 00001011
 
-[28] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+[27] ERROR: 	Expected result: 10 00000000
+		Obtained result: 00 00001011		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    28000 tb_a = 11 tb_b = 00 tb_s = 00 wire_s = 11
+Time =    27000 tb_a = 00000010 tb_b = 00000011 tb_s = 00000010 wire_s = 00001110
 
-Time =    29000 tb_a = 11 tb_b = 01 tb_s = 01 wire_s = 01
+[28] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
 
-Time =    30000 tb_a = 11 tb_b = 10 tb_s = 10 wire_s = 10
+Time =    28000 tb_a = 00000011 tb_b = 00000000 tb_s = 00000000 wire_s = 00000011
 
-[31] ERROR: 	Expected result: 00 10
-		Obtained result: 01 10		. Instance: tb_csd_add_subb.load_operands_test
+Time =    29000 tb_a = 00000011 tb_b = 00000001 tb_s = 00000001 wire_s = 00000001
 
-Time =    31000 tb_a = 11 tb_b = 11 tb_s = 00 wire_s = 11
+Time =    30000 tb_a = 00000011 tb_b = 00000010 tb_s = 00000010 wire_s = 00001110
 
-[32] ERROR: 	Expected result: 00 00
-		Obtained result: 01 00		. Instance: tb_csd_add_subb.load_operands_test
+[31] ERROR: 	Expected result: 00 00000010
+		Obtained result: 00 00001110		. Instance: tb_csd_add_subb.load_operands_test
+
+Time =    31000 tb_a = 00000011 tb_b = 00000011 tb_s = 00000000 wire_s = 00001111
+
+[32] ERROR: 	Expected result: 00 00000000
+		Obtained result: 00 00001111		. Instance: tb_csd_add_subb.load_operands_test
 
 
 
 TIME     : 32
 WARNINGS : 0
-ERRORS   : 14
+ERRORS   : 16
 INFOS    : 0
 NOTES    : 0
-MESSAGES : 14
-TESTSEED : 1239938714
+MESSAGES : 16
+TESTSEED : 1002695271
 
 
 ............. TEST FAILED .............
@@ -143,4 +149,4 @@ $finish at simulation time                32000
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 32000 ps
 CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
-Sat Apr 16 18:39:53 2016
+Sat Apr 16 19:49:14 2016

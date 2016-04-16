@@ -46,7 +46,7 @@ task basic_test;
    begin
 
       $monitor("Time = %8t tb_a = %b tb_b = %b tb_s = %b wire_s = %b\n",$time, tb_a, tb_b, tb_s, wire_s);
-      $dumpfile("tb_csd_add_subb_basic_test.vcd");
+      $dumpfile("../waves/tb_csd_add_subb_basic_test.vcd");
       $dumpvars();
 
       // test csd2bs
