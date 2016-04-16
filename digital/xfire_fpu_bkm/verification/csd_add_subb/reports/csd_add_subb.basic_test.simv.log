@@ -1,0 +1,57 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/csd_add_subb.basic_test.simv.log +TESTSEED=4019403523 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 16 14:42 2016
+ucli% run
+
+*******************************************************
+Test Seed:   275563773
+*******************************************************
+
+Time =        0 tb_a = 00 tb_b = 00 wire_s = 10 tb_res = 00
+
+[1] ERROR: 	Expected result: 00
+		Obtained result: 10
+. Instance: tb_csd_add_subb.load_operands_test
+Time =     1000 tb_a = 00 tb_b = 01 wire_s = 00 tb_res = 01
+
+[2] ERROR: 	Expected result: 01
+		Obtained result: 00
+. Instance: tb_csd_add_subb.load_operands_test
+Time =     2000 tb_a = 00 tb_b = 10 wire_s = 00 tb_res = 10
+
+[3] ERROR: 	Expected result: 10
+		Obtained result: 00
+. Instance: tb_csd_add_subb.load_operands_test
+Time =     3000 tb_a = 00 tb_b = 11 wire_s = 10 tb_res = 11
+
+[4] ERROR: 	Expected result: 11
+		Obtained result: 10
+. Instance: tb_csd_add_subb.load_operands_test
+
+
+TIME     : 4
+WARNINGS : 0
+ERRORS   : 4
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 4
+TESTSEED : 275563773
+
+
+............. TEST FAILED .............
+    _________    ____   __________
+   / ____/   |  / / /  / ____/ __ \
+  / /__ / /| | / / /  / __/ / / / /
+ / ___// ___ |/ / /__/ /___/ /_/ /
+/_/   /_/  |_/_/____/_____/_____/
+
+............. TEST FAILED .............
+
+
+$finish called from file "./temp/tb_csd_add_subb.v", line 235.
+$finish at simulation time                 4000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 4000 ps
+CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
+Sat Apr 16 14:42:06 2016

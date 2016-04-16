@@ -60,7 +60,7 @@ task basic_test;
       #1    tb_x = 4'b1000;   res = 8'b01000000;
       #1    tb_x = 4'b0110;   res = 8'b01001100;
       #1    tb_x = 4'b0111;   res = 8'b01000011;
-      #10   $finish;     //finish after 20 time units
+      //#10   $finish;     //finish after 20 time units
 
    end
 
