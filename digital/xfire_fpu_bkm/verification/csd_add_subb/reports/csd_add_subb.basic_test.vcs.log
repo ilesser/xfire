@@ -1,10 +1,10 @@
 Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/bkm.v ./temp/bkm_fixed.v \
 ./temp/bkm_pre_processing.v ./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v \
-./temp/tb_bin2csd.v ./temp/simlib_clk_osc.v ./temp/bkm_fixed_control_logic.v ./temp/bkm_post_processing.v \
-./temp/bin2csd.v -l ./reports/bin2csd.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait \
-+warn=all +lint=all -sverilog -debug
+./temp/simlib_clk_osc.v ./temp/bkm_fixed_control_logic.v ./temp/tb_csd_add_subb.v \
+./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/csd_add_subb.basic_test.vcs.log \
++define+RTL_DEBUG +vcs+lic+wait +warn=all +lint=all -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Sat Apr 16 13:32:20 2016
+            Version I-2014.03 -- Sat Apr 16 14:42:05 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -227,132 +227,6 @@ Lint-[VCDE] Compiler directive encountered
 ./temp/fadder.v, 90
   Verilog compiler directive encountered "`endif".
 
-Parsing design file './temp/tb_bin2csd.v'
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 32
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 33
-  Verilog compiler directive encountered "`timescale".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 113
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 114
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 115
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 116
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 117
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 119
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 120
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 121
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 122
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 123
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 124
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 126
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 127
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 128
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 129
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 130
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 132
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 133
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 134
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 135
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 136
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 138
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
-./temp/tb_bin2csd.v, 386
-  Verilog compiler directive encountered "`define".
-
 Parsing design file './temp/simlib_clk_osc.v'
 
 Lint-[VCDE] Compiler directive encountered
@@ -516,6 +390,132 @@ Lint-[VCDE] Compiler directive encountered
 ./temp/bkm_fixed_control_logic.v, 135
   Verilog compiler directive encountered "`endif".
 
+Parsing design file './temp/tb_csd_add_subb.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 33
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 127
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 128
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 129
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 130
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 131
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 133
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 134
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 135
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 136
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 137
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 138
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 140
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 141
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 142
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 143
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 144
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 146
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 147
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 148
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 149
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 150
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 152
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 400
+  Verilog compiler directive encountered "`define".
+
 Parsing design file './temp/bkm_post_processing.v'
 
 Lint-[VCDE] Compiler directive encountered
@@ -574,11 +574,39 @@ Lint-[VCDE] Compiler directive encountered
 
 Top Level Modules:
        bkm_fixed
-       csd_add_subb
        xfire_fpu_bkm
        fadder
-       tb_bin2csd
        simlib_clk_osc
+       tb_csd_add_subb
+       bin2csd
+
+Lint-[IWU] Implicit wire is used
+./temp/csd_add_subb.v, 160
+  No type is specified for wire 'a_n'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/csd_add_subb.v, 161
+  No type is specified for wire 'b_n'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/csd_add_subb.v, 162
+  No type is specified for wire 'a_xor'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/csd_add_subb.v, 163
+  No type is specified for wire 'b_xor'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
 TimeScale is 1 ns / 1 ps
 
 Lint-[UI] Unused input
@@ -783,34 +811,6 @@ Lint-[ONGS] Output never gets set
 ./temp/bkm_pre_processing.v, 94
 "done"
   Output port 'done' has never been assigned to any value.
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 160
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign a_n = (~a);  
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 161
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign b_n = (~b);  
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 162
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign a_xor = (a ^ subb_a);  
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 163
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign b_xor = (b ^ subb_b);  
 
 
 Lint-[UI] Unused input
@@ -1073,27 +1073,69 @@ Lint-[ONGS] Output never gets set
 
 Warning-[SIOB] Select index out of bounds
 ./temp/bin2csd.v, 118
-"x[(3 + 1)]"
-  The select index is out of declared bounds : [3:0].
-  In module instance : duv 
+"x[(63 + 1)]"
+  The select index is out of declared bounds : [63:0].
   In module : bin2csd.
 
 
 Warning-[SIOB] Select index out of bounds
 ./temp/bin2csd.v, 135
-"x[(3 + 1)]"
-  The select index is out of declared bounds : [3:0].
-  In module instance : duv 
+"x[(63 + 1)]"
+  The select index is out of declared bounds : [63:0].
   In module : bin2csd.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/csd_add_subb.v, 174
+"c[((2 * (0 + 1)) + 1)]"
+  The select index is out of declared bounds : [1:0].
+  In module instance : duv 
+  In module : csd_add_subb.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/csd_add_subb.v, 176
+"c[(2 * (0 + 1))]"
+  The select index is out of declared bounds : [1:0].
+  In module instance : duv 
+  In module : csd_add_subb.
+
+
+Lint-[CAWM-L] Width mismatch
+./temp/csd_add_subb.v, 160
+  Continuous assignment width mismatch
+  1 bits (lhs) versus 2 bits (rhs).
+  Source info: assign a_n = (~a);  
+
+
+Lint-[CAWM-L] Width mismatch
+./temp/csd_add_subb.v, 161
+  Continuous assignment width mismatch
+  1 bits (lhs) versus 2 bits (rhs).
+  Source info: assign b_n = (~b);  
+
+
+Lint-[CAWM-L] Width mismatch
+./temp/csd_add_subb.v, 162
+  Continuous assignment width mismatch
+  1 bits (lhs) versus 2 bits (rhs).
+  Source info: assign a_xor = (a ^ subb_a);  
+
+
+Lint-[CAWM-L] Width mismatch
+./temp/csd_add_subb.v, 163
+  Continuous assignment width mismatch
+  1 bits (lhs) versus 2 bits (rhs).
+  Source info: assign b_xor = (b ^ subb_b);  
 
 Starting vcs inline pass...
 7 modules and 0 UDP read.
 recompiling module bkm_fixed
-recompiling module csd_add_subb
 recompiling module xfire_fpu_bkm
 recompiling module fadder
-recompiling module tb_bin2csd
 recompiling module simlib_clk_osc
+recompiling module tb_csd_add_subb
+recompiling module bin2csd
 All of 7 modules done
 rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
 ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
@@ -1110,4 +1152,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: .222 seconds to compile + .038 seconds to elab + .122 seconds to link
+CPU time: .223 seconds to compile + .046 seconds to elab + .121 seconds to link
