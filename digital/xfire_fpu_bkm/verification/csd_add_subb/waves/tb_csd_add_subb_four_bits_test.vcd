@@ -1,0 +1,591 @@
+$date
+	Sat Apr 16 19:45:06 2016
+$end
+
+$version
+	Synopsys VCS version I-2014.03
+$end
+
+$timescale
+	1ps
+$end
+
+$comment Csum: 1 5f10eebee958c128 $end
+
+
+$scope module bkm_fixed $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 $ enable $end
+$var wire 1 % start $end
+$var wire 2 & format [1:0] $end
+$var wire 6 ' op [5:0] $end
+$var reg 64 ( x1 [63:0] $end
+$var reg 64 ) y1 [63:0] $end
+$var reg 64 * x2 [63:0] $end
+$var reg 64 + y2 [63:0] $end
+$var reg 64 , x3 [63:0] $end
+$var reg 64 - y3 [63:0] $end
+$var wire 4 . flags [3:0] $end
+$var wire 1 / done $end
+$var wire 1 0 bkm_pre_enable $end
+$var wire 1 1 bkm_pre_start $end
+$var wire 2 2 bkm_pre_format [1:0] $end
+$var wire 6 3 bkm_pre_op [5:0] $end
+$var wire 1 4 bkm_pre_done $end
+$var wire 1 5 bkm_core_enable $end
+$var wire 1 6 bkm_core_start $end
+$var wire 2 7 bkm_core_format [1:0] $end
+$var wire 1 8 bkm_core_mode $end
+$var wire 1 9 bkm_core_done $end
+$var wire 4 : bkm_core_flags [3:0] $end
+$var wire 64 ; E_r_in [63:0] $end
+$var wire 64 < E_i_in [63:0] $end
+$var wire 64 = L_r_in [63:0] $end
+$var wire 64 > L_i_in [63:0] $end
+$var wire 64 ? E_r_out [63:0] $end
+$var wire 64 @ E_i_out [63:0] $end
+$var wire 64 A L_r_out [63:0] $end
+$var wire 64 B L_i_out [63:0] $end
+$var wire 1 C bkm_post_enable $end
+$var wire 1 D bkm_post_start $end
+$var wire 2 E bkm_post_format [1:0] $end
+$var wire 1 F bkm_post_op $end
+$var wire 1 G bkm_post_done $end
+$var wire 4 H bkm_post_flags [3:0] $end
+
+$scope module bkm_pre_processign $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 0 enable $end
+$var wire 1 1 start $end
+$var wire 2 2 format [1:0] $end
+$var wire 6 3 op [5:0] $end
+$var reg 64 I x1 [63:0] $end
+$var reg 64 J y1 [63:0] $end
+$var reg 64 K x2 [63:0] $end
+$var reg 64 L y2 [63:0] $end
+$var reg 64 M x3 [63:0] $end
+$var reg 64 N y3 [63:0] $end
+$var reg 64 O E_r [63:0] $end
+$var reg 64 P E_i [63:0] $end
+$var reg 64 Q L_r [63:0] $end
+$var reg 64 R L_i [63:0] $end
+$var wire 1 4 done $end
+$var reg 64 S dummy [63:0] $end
+$upscope $end
+
+
+$scope module bkm_core $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 5 enable $end
+$var wire 1 6 start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var reg 64 T E_r_in [63:0] $end
+$var reg 64 U E_i_in [63:0] $end
+$var reg 64 V L_r_in [63:0] $end
+$var reg 64 W L_i_in [63:0] $end
+$var reg 64 X E_r_out [63:0] $end
+$var reg 64 Y E_i_out [63:0] $end
+$var reg 64 Z L_r_out [63:0] $end
+$var reg 64 [ L_i_out [63:0] $end
+$var wire 4 : flags [3:0] $end
+$var wire 1 9 done $end
+$var reg 64 \ dummy [63:0] $end
+$upscope $end
+
+
+$scope module bkm_post_processign $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 C enable $end
+$var wire 1 D start $end
+$var wire 2 E format [1:0] $end
+$var wire 6 ] op [5:0] $end
+$var reg 64 ^ E_r [63:0] $end
+$var reg 64 _ E_i [63:0] $end
+$var reg 64 ` L_r [63:0] $end
+$var reg 64 a L_i [63:0] $end
+$var reg 64 b x [63:0] $end
+$var reg 64 c y [63:0] $end
+$var wire 4 H flags [3:0] $end
+$var wire 1 G done $end
+$var reg 64 d dummy [63:0] $end
+$upscope $end
+
+
+$scope module bkm_fixed_control_logic $end
+$var reg 1 e clk $end
+$var reg 1 f arst $end
+$var reg 1 g srst $end
+$var reg 1 h enable $end
+$var reg 1 i start $end
+$var reg 2 j format [1:0] $end
+$var reg 6 k op [5:0] $end
+$var reg 1 l bkm_pre_done $end
+$var reg 1 m bkm_core_done $end
+$var reg 4 n bkm_core_flags [3:0] $end
+$var reg 1 o bkm_post_done $end
+$var reg 4 p bkm_post_flags [3:0] $end
+$var reg 1 q bkm_pre_enable $end
+$var reg 1 r bkm_pre_start $end
+$var reg 2 s bkm_pre_format [1:0] $end
+$var reg 6 t bkm_pre_op [5:0] $end
+$var reg 1 u bkm_core_enable $end
+$var reg 1 v bkm_core_start $end
+$var reg 2 w bkm_core_format [1:0] $end
+$var reg 1 x bkm_core_mode $end
+$var reg 1 y bkm_post_enable $end
+$var reg 1 z bkm_post_start $end
+$var reg 2 { bkm_post_format [1:0] $end
+$var reg 6 | bkm_post_op [5:0] $end
+$var reg 4 } flags [3:0] $end
+$var reg 1 ~ done $end
+$var reg 1 "! dummy $end
+$upscope $end
+
+$upscope $end
+
+
+$scope module xfire_fpu_bkm $end
+$var wire 1 "" clk $end
+$var wire 1 "# arst $end
+$var wire 1 "$ srst $end
+$var wire 1 "% enable $end
+$var wire 1 "& start $end
+$var wire 2 "' format [1:0] $end
+$var wire 6 "( op [5:0] $end
+$var reg 64 ") x1 [63:0] $end
+$var reg 64 "* y1 [63:0] $end
+$var reg 64 "+ x2 [63:0] $end
+$var reg 64 ", y2 [63:0] $end
+$var reg 64 "- x3 [63:0] $end
+$var reg 64 ". y3 [63:0] $end
+$var wire 4 "/ flags [3:0] $end
+$var wire 1 "0 done $end
+$var reg 64 "1 dummy [63:0] $end
+$upscope $end
+
+
+$scope module fadder $end
+$var wire 1 "2 a $end
+$var wire 1 "3 b $end
+$var wire 1 "4 ci $end
+$var wire 1 "5 s $end
+$var wire 1 "6 co $end
+$var wire 1 "7 w1 $end
+$var wire 1 "8 w2 $end
+$var wire 1 "9 w3 $end
+$upscope $end
+
+
+$scope module simlib_clk_osc $end
+$var wire 1 ": stop $end
+$var wire 1 "; clk_out $end
+$var reg 1 "< state $end
+$var reg 1 "= osc_clk $end
+$var reg 1 "> latched_osc_clk $end
+$upscope $end
+
+
+$scope module tb_csd_add_subb $end
+$var reg 1 "? tb_subb_a $end
+$var reg 1 "@ tb_subb_b $end
+$var reg 8 "A tb_a [7:0] $end
+$var reg 8 "B tb_b [7:0] $end
+$var reg 8 "C tb_s [7:0] $end
+$var wire 1 "D wire_c $end
+$var wire 8 "E wire_s [7:0] $end
+$var reg 1 "F sim_clk $end
+$var integer 32 "G testseed $end
+$var integer 32 "H errors $end
+$var integer 32 "I messages $end
+$var integer 32 "J warnings $end
+$var integer 32 "K infos $end
+$var integer 32 "L notes $end
+$var integer 32 "M testseed_orig $end
+$var integer 32 "N arg_int $end
+$var integer 32 "O verbosity $end
+
+$scope function constrained_rand_int $end
+$var integer 32 "P constrained_rand_int $end
+$var integer 32 "Q low_limit $end
+$var integer 32 "R high_limit $end
+$var integer 32 "S range $end
+$var integer 32 "T rnd1 $end
+$var integer 32 "U rnd2 $end
+$var integer 32 "V rnd3 $end
+$upscope $end
+
+
+$scope function abs $end
+$var real 64 "W abs $end
+$var real 64 "X x $end
+$upscope $end
+
+
+$scope function clog2 $end
+$var integer 32 "Y clog2 $end
+$var integer 32 "Z x $end
+$var integer 32 "[ i $end
+$upscope $end
+
+
+$scope function sin $end
+$var real 64 "\ sin $end
+$var real 64 "] x $end
+$var real 64 "^ x1 $end
+$var real 64 "_ y $end
+$var real 64 "` y2 $end
+$var real 64 "a y3 $end
+$var real 64 "b y5 $end
+$var real 64 "c y7 $end
+$var real 64 "d sum $end
+$var real 64 "e sign $end
+$upscope $end
+
+
+$scope function cos $end
+$var real 64 "f cos $end
+$var real 64 "g x $end
+$upscope $end
+
+
+$scope task add_error $end
+$upscope $end
+
+
+$scope task add_warning $end
+$upscope $end
+
+
+$scope task add_info $end
+$upscope $end
+
+
+$scope task add_note $end
+$upscope $end
+
+
+$scope task test_failed $end
+$upscope $end
+
+
+$scope task test_passed $end
+$upscope $end
+
+
+$scope task finish_sim $end
+$upscope $end
+
+
+$scope task run_clk $end
+$var integer 32 "h clk_cycles $end
+$var integer 32 "i counter $end
+$upscope $end
+
+
+$scope task four_bits_test $end
+$upscope $end
+
+
+$scope task load_operands_test $end
+$var reg 1 "j subb_a $end
+$var reg 1 "k subb_b $end
+$var reg 8 "l a [7:0] $end
+$var reg 8 "m b [7:0] $end
+$var reg 2 "n c [1:0] $end
+$var reg 8 "o s [7:0] $end
+$var reg 2 "p c_res [1:0] $end
+$var reg 8 "q s_res [7:0] $end
+$upscope $end
+
+
+$scope module duv $end
+$var wire 1 "r subb_a $end
+$var wire 1 "s subb_b $end
+$var wire 8 "t a [7:0] $end
+$var wire 8 "u b [7:0] $end
+$var reg 2 "v c [1:0] $end
+$var reg 8 "w s [7:0] $end
+$var reg 8 "x a_inv [7:0] $end
+$var reg 8 "y b_inv [7:0] $end
+$var reg 4 "z a_s [3:0] $end
+$var reg 4 "{ a_d [3:0] $end
+$var reg 4 "| b_s [3:0] $end
+$var reg 4 "} b_d [3:0] $end
+$var reg 5 "~ c_s [4:0] $end
+$var reg 5 #! c_d [4:0] $end
+$var reg 4 #" s_s [3:0] $end
+$var reg 4 ## s_d [3:0] $end
+$var reg 4 #$ p [3:0] $end
+$upscope $end
+
+$upscope $end
+
+
+$scope module bin2csd $end
+$var wire 64 #% x [63:0] $end
+$var reg 128 #& y [127:0] $end
+$var reg 65 #' B [64:0] $end
+$var reg 64 #( sB [63:0] $end
+$var reg 64 #) cr [63:0] $end
+$var reg 64 #* cl [63:0] $end
+$upscope $end
+
+$enddefinitions $end
+
+#0
+$dumpvars
+z9
+x5
+x8
+x6
+zf
+zm
+xu
+xx
+xv
+zo
+xy
+xz
+zl
+xq
+xr
+x"!
+zh
+zg
+zi
+zG
+xC
+xF
+xD
+z4
+x0
+x1
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx P
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx <
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz @
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx O
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ;
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz ?
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx R
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx >
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz B
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Q
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx =
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz A
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx U
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz Y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx T
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz X
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx W
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz [
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx V
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+bzzzz :
+bxx 7
+bzzzz n
+bxx w
+bzzzz p
+bxx {
+bxxxxxx |
+bxx s
+bxxxxxx t
+bxxxx }
+bzz j
+bzzzzzz k
+bzzzz H
+bxx E
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz _
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz ^
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz a
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz `
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx d
+b00000x ]
+bxx 2
+bxxxxxx 3
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx I
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx K
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx M
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx J
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx N
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx S
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx b
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx *
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ,
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx )
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx +
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "1
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ")
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "-
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ",
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ".
+x"7
+x"8
+x"9
+z">
+0"=
+x"<
+0"r
+0"s
+0"j
+0"k
+0"F
+0"?
+0"@
+1"D
+b1000 "{
+b01000010 "x
+b0001 "z
+b00000000000000000000000000000000 "N
+b0100 "}
+b00010010 "y
+b0001 "|
+b11001 #!
+b11100 "~
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "[
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "P
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "R
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Q
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "S
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "T
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "U
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "V
+b01000010 "t
+b00010010 "u
+b01 "v
+b11101011 "w
+b00000000000000000000000000000000 "H
+b00000000000000000000000000000000 "K
+b01000010 "l
+b00010010 "m
+b01 "n
+bxx "p
+b11101011 "o
+bxxxxxxxx "q
+b00000000000000000000000000000000 "I
+b00000000000000000000000000000000 "L
+b1000 #$
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "h
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "i
+b1001 ##
+b0000 #"
+b01000010 "A
+b00010010 "B
+b11101011 "C
+b01111111110000000101100101101011 "G
+b01111111110000000101100101101011 "M
+b00000000000000000000000000000000 "O
+b00000000000000000000000000000000 "J
+b11101011 "E
+r0.000000000000000  "W
+r0.000000000000000  "X
+r0.000000000000000  "f
+r0.000000000000000  "g
+r0.000000000000000  "e
+r0.000000000000000  "\
+r0.000000000000000  "d
+r0.000000000000000  "]
+r0.000000000000000  "^
+r0.000000000000000  "_
+r0.000000000000000  "`
+r0.000000000000000  "a
+r0.000000000000000  "b
+r0.000000000000000  "c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 #'
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #)
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #(
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #&
+x"5
+x"6
+0";
+ze
+x~
+z!
+z"
+z#
+z$
+z%
+bzz &
+bzzzzzz '
+bxxxx .
+x/
+z""
+z"#
+z"$
+z"%
+z"&
+bzz "'
+bzzzzzz "(
+bzzzz "/
+z"0
+z"2
+z"3
+z"4
+z":
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz #%
+$end
+#1000
+b01 "p
+b11101011 "q
+1"k
+b00 "n
+b00011111 "o
+1"@
+1"s
+b00011111 "C
+b11011 #!
+b1001 #$
+b0101 "}
+b0000 "|
+b00010001 "y
+b11101111 "w
+b11101111 "E
+b1011 ##
+b11111 #!
+b1011 #$
+b11000 "~
+b0111 "}
+b0010 "|
+b00011101 "y
+b11011111 "w
+b11011111 "E
+b1111 ##
+b0100 #"
+b10111 #!
+b1111 #$
+b10000 "~
+b0011 "}
+b0110 "|
+b00101101 "y
+b00011111 "w
+b00011111 "E
+b0111 ##
+b1100 #"
+b00111 #!
+b00 "v
+0"D
+b0111 #$
+b1011 "}
+b1110 "|
+b11101101 "y
+#2000
+b00 "p
+b00011111 "q

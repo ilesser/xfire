@@ -44,7 +44,7 @@ module tb_csd_add_subb ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam        W = 1;
+   localparam        W = 4;
    reg               tb_subb_a;
    reg               tb_subb_b;
    reg   [2*W-1:0]   tb_a;
