@@ -4,36 +4,42 @@
 // Description:
 // ------------
 //
-// Binary to Cannonic Signed Digit (CSD) representation.
+// Binary two's complement to Cannonic Signed Digit (CSD) representation.
 // It follows this equation to calculate the CSD representation of x:
 //
-//    y = CSD(x)
-//    x = [x_{W-1}   x_{W-2}   ... x_1 x_0]
-//    y = [y_{2*W-1} y_{2*W-2} ... y_1 y_0]
+//    y   = CSD(x)
+//    x   = [x_{W-1}   x_{W-2} ... x_1 x_0]
+//    y   = [y_{W-1}   y_{W-2} ... y_1 y_0]
+//    y_i = {y_i^s y_i^d}
 //
-//    B_0     = 0
-//    B_{i+1} = B_i +   x_{i+1} + x_i
-//    y_i     = B_i - 2*x_{i+1} + x_i
 //
-// B_i behaves as the carry out of a full adder so it follows the rules of
-// binary addition, i.e. B_{i+1} is 1 if there are 2 or 3 ones among
-// B_i, x_{i+1} and x_i.
+//    h_{-1}  = 0
+//    k_{-1}  = 0
 //
-// y_i is taken from 3 full adders.
+//    h_{i+1} = h_i  &  x_{i+1};    for i even
+//    k_{i+1} = k_i  |  x_{i+1};    for i even
 //
-//          0        B_i
-//       +  0        x_i
-//       -  x_{i+1}  0
-//         --------------
-//       cy y1_i     y0_i     -->   y_i = {y1_i, y0_i}
+//    h_{i+1} = h_i  |  x_{i+1};    for i odd
+//    k_{i+1} = k_i  &  x_{i+1};    for i odd
 //
+//    y_i^d  = ~h_{i+1} &  k_i       for i odd
+//    y_i^d  =  h_i     & ~k_{i+1}   for i even
+//
+//    y_i^s  = ~h_i     &  k_{i+1}   for i odd
+//    y_i^s  =  h_{i+1} & ~k_i       for i odd
+//
+//    y_{W-1}^d  = ~h_{W-2} &  k_{W-1}   for W-1 odd
+//    y_{W-1}^d  =  h_{W-1} & ~k_{W-2}   for W-1 even
+//
+//    y_{W-1}^s  = ~h_{W-1} &  k_{W-2}   for W-1 odd
+//    y_{W-1}^s  =  h_{W-2} & ~k_{W-1}   for W-1 even
+//    TODO: review if this equations are 100% accurate
 //
 //
 // Taken from :
-// Geetanjali  Wasson, "IEEE-754 compliant Algorithms for Fast Multiplication
-//                      of Double Precision Floating Point Numbers".
-// International   Journal   of   Research   in   Computer   Science,
-// 1   (1):   pp.   1-7 , September   2011.   doi:10.7815/ijorcs.11.2011.001
+// Gustavo A. Ruiz, Mercedes Granda, "Efficient canonic signed digit recording".
+// Microelectronics Journal 42 ( September 2011) 1090-1097, Elsevier.
+// https://www.researchgate.net/publication/220254523_Efficient_canonic_signed_digit_recoding
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
@@ -91,72 +97,57 @@ module bin2csd #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   // Variables for B_i generation
-   reg   [W:0]          B;
-   reg   [W-1:0]        sB;
-
-   // Variables for y_i generation
-   reg   [W-1:0]   cr;
-   reg   [W-1:0]   cl;
-
+   reg   [W-1:0]  h;
+   reg   [W-1:0]  k;
+   reg   [W-1:0]  y_s;
+   reg   [W-1:0]  y_d;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-   assign B[0]  = 1'b0;
+
+   // i=0 first bit
+   assign h[0] = x[0];
+   assign k[0] = 1'b0;
 
    genvar i;
    generate
-      for (i=0; i < W; i=i+1) begin
+      for (i=0; i < W-1; i=i+1) begin
 
          always @(*) begin
 
-            // Generation of B_i
-            // B_{i+1} is the carry of x_{i+1} + x_i + B_i
-            {B[i+1],    sB[i]}      = x[i+1]  + x[i]      + B[i];
+            // i+1 is odd
+            if ( (i+1)%2 ) begin
 
-            // Generation of y_i
-            // y_i = B_i + x_i - 2 x_{i+1}
+               h[i+1] = h[i]   &  x[i+1];
+               k[i+1] = k[i]   |  x[i+1];
+               y_s[i] = h[i+1] & ~k[i];
+               y_d[i] = h[i]   & ~k[i+1];
 
-            //    0     x              0     x              0     x
-            //           i                    i                    i
-            // +  0     B           +  0     B           +  1     B
-            //           i    ===>            i    ===>            i
-            // -  x     0           + ~x     1           + ~x     0
-            //     i+1                 i+1                   i+1
-            //                      +  0     1
-            //   ----------           ---------            ----------
-            //    yl    yr             yl    yr             yl    yr
-            //     i     i              i     i              i     i
+            end
+            else begin // i+1 is even
 
-            {cr[i], y[2*i]  } =  x[i]   + B[i] + 1'b1;
-            {cl[i], y[2*i+1]} = ~x[i+1] + 1'b1 + cr[i];
+               h[i+1] = h[i]   |  x[i+1];
+               k[i+1] = k[i]   &  x[i+1];
+               y_s[i] = k[i+1] & ~h[i];
+               y_d[i] = k[i]   & ~h[i+1];
 
-            // --------------------------------------------------------------------------
-            // Digit-by-digit diagram
-            // --------------------------------------------------------------------------
-            //                  ~x   1        x    B       1              x   x     B
-            //                   |i+1|        |i   |i      |              |i+1|i    |i
-            //                   |   |        |    |       |              |   |     |
-            //                   |   |        |    |       |              |   |     |
-            //                 +-------+    +-------+      |            +-------+   |
-            //                 |       |    |       |      |            |       |   |
-            //           X-----|  FA   |----|  FA   |------+       B ---|  FA   |---+
-            //            cl   |       | cr |       |               i+1 |       |
-            //             i   +-------+  i +-------+                   +-------+
-            //                     |            |                           |
-            //                     |            |                           |
-            //                     +-----++---- +                           X
-            //                           ||
-            //                           y
-            //                            i
+            end
+
+            y[2*i+1:2*i] = {y_s[i], y_d[i]};
 
          end
 
       end
    endgenerate
 
+   // i=W-1 last bit
+   // TODO: change the last bit depending of W-1 being even or odd!
+   assign y_s[W-1] = k[W-1] & ~h[W-2];
+   assign y_d[W-1] = h[W-1] & ~k[W-2];
+
+   assign y[2*(W-1)+1:2*(W-1)] = {y_s[W-1], y_d[W-1]};
    // -----------------------------------------------------
 
 // *****************************************************************************

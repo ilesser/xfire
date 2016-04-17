@@ -4,7 +4,7 @@ Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/bkm.v ./temp/b
 ./temp/bin2csd.v -l ./reports/bin2csd.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait \
 +warn=all +lint=all -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Sat Apr 16 13:32:20 2016
+            Version I-2014.03 -- Sat Apr 16 21:25:03 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -127,41 +127,13 @@ Lint-[VCDE] Compiler directive encountered
   Verilog compiler directive encountered "`timescale".
 
 
-Lint-[IWU] Implicit wire is used
-./temp/csd_add_subb.v, 160
-  No type is specified for wire 'a_n'. Default wire type is being applied 
-  according to the IEEE spec.
-  See the Verilog LRM(1364-2005), section 4.5.
-
-
-Lint-[IWU] Implicit wire is used
-./temp/csd_add_subb.v, 161
-  No type is specified for wire 'b_n'. Default wire type is being applied 
-  according to the IEEE spec.
-  See the Verilog LRM(1364-2005), section 4.5.
-
-
-Lint-[IWU] Implicit wire is used
-./temp/csd_add_subb.v, 162
-  No type is specified for wire 'a_xor'. Default wire type is being applied 
-  according to the IEEE spec.
-  See the Verilog LRM(1364-2005), section 4.5.
-
-
-Lint-[IWU] Implicit wire is used
-./temp/csd_add_subb.v, 163
-  No type is specified for wire 'b_xor'. Default wire type is being applied 
-  according to the IEEE spec.
-  See the Verilog LRM(1364-2005), section 4.5.
-
-
 Lint-[VCDE] Compiler directive encountered
-./temp/csd_add_subb.v, 237
+./temp/csd_add_subb.v, 286
   Verilog compiler directive encountered "`ifdef".
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/csd_add_subb.v, 241
+./temp/csd_add_subb.v, 290
   Verilog compiler directive encountered "`endif".
 
 Parsing design file './temp/xfire_fpu_bkm.v'
@@ -564,12 +536,12 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/bin2csd.v, 168
+./temp/bin2csd.v, 136
   Verilog compiler directive encountered "`ifdef".
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/bin2csd.v, 172
+./temp/bin2csd.v, 140
   Verilog compiler directive encountered "`endif".
 
 Top Level Modules:
@@ -783,34 +755,6 @@ Lint-[ONGS] Output never gets set
 ./temp/bkm_pre_processing.v, 94
 "done"
   Output port 'done' has never been assigned to any value.
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 160
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign a_n = (~a);  
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 161
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign b_n = (~b);  
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 162
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign a_xor = (a ^ subb_a);  
-
-
-Lint-[CAWM-L] Width mismatch
-./temp/csd_add_subb.v, 163
-  Continuous assignment width mismatch
-  1 bits (lhs) versus 128 bits (rhs).
-  Source info: assign b_xor = (b ^ subb_b);  
 
 
 Lint-[UI] Unused input
@@ -1070,22 +1014,6 @@ Lint-[ONGS] Output never gets set
 "done"
   Output port 'done' has never been assigned to any value.
 
-
-Warning-[SIOB] Select index out of bounds
-./temp/bin2csd.v, 118
-"x[(3 + 1)]"
-  The select index is out of declared bounds : [3:0].
-  In module instance : duv 
-  In module : bin2csd.
-
-
-Warning-[SIOB] Select index out of bounds
-./temp/bin2csd.v, 135
-"x[(3 + 1)]"
-  The select index is out of declared bounds : [3:0].
-  In module instance : duv 
-  In module : bin2csd.
-
 Starting vcs inline pass...
 7 modules and 0 UDP read.
 recompiling module bkm_fixed
@@ -1110,4 +1038,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: .222 seconds to compile + .038 seconds to elab + .122 seconds to link
+CPU time: .292 seconds to compile + .051 seconds to elab + .125 seconds to link
