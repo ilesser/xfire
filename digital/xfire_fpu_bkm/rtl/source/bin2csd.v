@@ -66,6 +66,7 @@
 // History:
 // --------
 //
+//    - 2016-03-17 - ilesser   - Working version. Using a ripple carry architecture.
 //    - 2016-03-15 - ilesser   - Initial version
 //
 // -----------------------------------------------------------------------------
@@ -117,21 +118,21 @@ module bin2csd #(
 
          always @(*) begin
 
-            // i+1 is odd
-            if ( (i+1)%2 ) begin
+            // i is odd
+            if ( i%2 ) begin
 
-               h[i+1] = h[i]   &  x[i+1];
-               k[i+1] = k[i]   |  x[i+1];
-               y_s[i] = h[i+1] & ~k[i];
-               y_d[i] = h[i]   & ~k[i+1];
+               h[i+1] =  h[i]   |  x[i+1];
+               k[i+1] =  k[i]   &  x[i+1];
+               y_s[i] = ~h[i]   &  k[i+1];
+               y_d[i] = ~h[i+1] &  k[i];
 
             end
-            else begin // i+1 is even
+            else begin // i is even
 
-               h[i+1] = h[i]   |  x[i+1];
-               k[i+1] = k[i]   &  x[i+1];
-               y_s[i] = k[i+1] & ~h[i];
-               y_d[i] = k[i]   & ~h[i+1];
+               h[i+1] =  h[i]   &  x[i+1];
+               k[i+1] =  k[i]   |  x[i+1];
+               y_s[i] =  h[i+1] & ~k[i];
+               y_d[i] =  h[i]   & ~k[i+1];
 
             end
 
@@ -143,9 +144,18 @@ module bin2csd #(
    endgenerate
 
    // i=W-1 last bit
-   // TODO: change the last bit depending of W-1 being even or odd!
-   assign y_s[W-1] = k[W-1] & ~h[W-2];
-   assign y_d[W-1] = h[W-1] & ~k[W-2];
+   if ( (W-1)%2 ) begin // W-1 is odd
+
+      assign y_s[W-1] =  ~h[W-2] &  k[W-1];
+      assign y_d[W-1] =  ~h[W-1] &  k[W-2];
+
+   end
+   else begin  // W-1 is even
+
+      assign y_s[W-1] =   h[W-1] & ~k[W-2];
+      assign y_d[W-1] =   h[W-2] & ~k[W-1];
+
+   end
 
    assign y[2*(W-1)+1:2*(W-1)] = {y_s[W-1], y_d[W-1]};
    // -----------------------------------------------------
