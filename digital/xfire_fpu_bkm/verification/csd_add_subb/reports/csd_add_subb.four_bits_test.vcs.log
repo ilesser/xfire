@@ -1,10 +1,10 @@
 Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/bkm.v ./temp/bkm_fixed.v \
 ./temp/bkm_pre_processing.v ./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v \
-./temp/simlib_clk_osc.v ./temp/bkm_fixed_control_logic.v ./temp/tb_csd_add_subb.v \
+./temp/simlib_clk_osc.v ./temp/bkm_fixed_control_logic.v ./temp/csd2bin.v ./temp/tb_csd_add_subb.v \
 ./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/csd_add_subb.four_bits_test.vcs.log \
 +define+RTL_DEBUG +vcs+lic+wait +warn=all +lint=all -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Sat Apr 16 19:45:04 2016
+            Version I-2014.03 -- Mon Apr 18 20:54:02 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -362,6 +362,22 @@ Lint-[VCDE] Compiler directive encountered
 ./temp/bkm_fixed_control_logic.v, 135
   Verilog compiler directive encountered "`endif".
 
+Parsing design file './temp/csd2bin.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 138
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 142
+  Verilog compiler directive encountered "`endif".
+
 Parsing design file './temp/tb_csd_add_subb.v'
 
 Lint-[VCDE] Compiler directive encountered
@@ -536,12 +552,12 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/bin2csd.v, 168
+./temp/bin2csd.v, 169
   Verilog compiler directive encountered "`ifdef".
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/bin2csd.v, 172
+./temp/bin2csd.v, 173
   Verilog compiler directive encountered "`endif".
 
 Top Level Modules:
@@ -549,6 +565,7 @@ Top Level Modules:
        xfire_fpu_bkm
        fadder
        simlib_clk_osc
+       csd2bin
        tb_csd_add_subb
        bin2csd
 TimeScale is 1 ns / 1 ps
@@ -1023,29 +1040,16 @@ Lint-[ONGS] Output never gets set
 "done"
   Output port 'done' has never been assigned to any value.
 
-
-Warning-[SIOB] Select index out of bounds
-./temp/bin2csd.v, 118
-"x[(63 + 1)]"
-  The select index is out of declared bounds : [63:0].
-  In module : bin2csd.
-
-
-Warning-[SIOB] Select index out of bounds
-./temp/bin2csd.v, 135
-"x[(63 + 1)]"
-  The select index is out of declared bounds : [63:0].
-  In module : bin2csd.
-
 Starting vcs inline pass...
-7 modules and 0 UDP read.
+8 modules and 0 UDP read.
 recompiling module bkm_fixed
 recompiling module xfire_fpu_bkm
 recompiling module fadder
 recompiling module simlib_clk_osc
+recompiling module csd2bin
 recompiling module tb_csd_add_subb
 recompiling module bin2csd
-All of 7 modules done
+All of 8 modules done
 rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
 ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
 --no-whole-archive
@@ -1061,4 +1065,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: .233 seconds to compile + .046 seconds to elab + .118 seconds to link
+CPU time: .334 seconds to compile + .044 seconds to elab + .113 seconds to link

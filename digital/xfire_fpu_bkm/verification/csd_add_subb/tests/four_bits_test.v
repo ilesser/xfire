@@ -50,18 +50,18 @@ task four_bits_test;
       $dumpvars();
 
       // First test
-      // 7 + 3 = 10
-      // 7 = 4'b0111 => 4'b100| in CSD
-      // 7 = 8'b01000010
+      // 4 + 3 = 7
+      // 4 = 4'b0100 => 4'b0100 in CSD
+      // 4 = 8'b00010000
 
       // 3 = 4'b0011 => 4'b010| in CSD
       // 3 = 8'b00010010
 
-      // 10= 4'b1010 => 4'b1010 in CSD == 5'b10||0 = 16-4-2=10 TODO!!!! THIS IS NOT CSD because it has two nonzero digits
-      // 10= 8'b01000100
+      // 7 = 4'b0111 => 4'b100| in CSD == 5'b10||0 = 16-4-2=10 TODO!!!! THIS IS NOT CSD because it has two nonzero digits
+      // 7 = 8'b01000010
 
       // operands       subb_a subb_b  a            b            c      s
-      load_operands_test(1'b0, 1'b0, 8'b01000010, 8'b00010010, 2'b01, 8'b11101011);
+      load_operands_test(1'b0, 1'b0, 8'b00010000, 8'b00010010, 2'b00, 8'b01001110);
 
 
       // First test
@@ -73,7 +73,7 @@ task four_bits_test;
       // 3 = 8'b00010010
 
       // 4 = 4'b0100 => 4'b0100 in CSD
-      // 10= 8'b01000100
+      // 4 = 8'b00010000
 
       // operands       subb_a subb_b  a            b            c      s
       load_operands_test(1'b0, 1'b1, 8'b01000010, 8'b00010010, 2'b00, 8'b00011111);
@@ -81,6 +81,27 @@ task four_bits_test;
 
       // NOTE: Apparently when it does perform calculations on the ith bit and
       // the result is 0 it usually encodes it a 11 rathen than 00
+
+      //  n    2's COMP    CSD
+      //  0    0000        0000  -->   00000000
+      //  1    0001        0001  -->   00000001
+      //  2    0010        0010  -->   00000100
+      //  3    0011        010|  -->   00010010
+      //  4    0100        0100  -->   00010000
+      //  5    0101        0101  -->   00010001
+      //  6    0110        10|0  -->   01001000
+      //  7    0111        100|  -->   01000010
+      // -8    1000        |000  -->   10000000
+      // -7    1001        |001  -->   10000001
+      // -6    1010        |010  -->   10000100
+      // -5    1011        0|0|  -->   00100010
+      // -4    1100        0|00  -->   00100000
+      // -3    1101        0|01  -->   00100001
+      // -2    1110        00|0  -->   00001000
+      // -1    1111        000|  -->   00000010
+
+      //                   +     +     -4             7                    3
+      load_operands_test(1'b0, 1'b0, 8'b00100000, 8'b01000010, 2'b00, 8'b00011110);
    end
 
 // *****************************************************************************
