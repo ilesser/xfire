@@ -1,18 +1,18 @@
-Command: ./simv -ucli -do simv.tcl -l ../reports/csd_add_subb.four_bits_test.simv.log +TESTSEED=2143312235 +VERBOSITY=0
+Command: ./simv -ucli -do simv.tcl -l ../reports/csd_add_subb.four_bits_test.simv.log +TESTSEED=466777108 +VERBOSITY=0
 Chronologic VCS simulator copyright 1991-2014
 Contains Synopsys proprietary information.
-Compiler version I-2014.03; Runtime version I-2014.03;  Apr 16 19:45 2016
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 18 20:54 2016
 ucli% run
 
 *******************************************************
-Test Seed:  2143312235
+Test Seed:   466777108
 *******************************************************
 
 Time =        0 
-	tb_a   = 01000010 
+	tb_a   = 00010000 
 	tb_b   = 00010010 
-	tb_s   = 11101011 
-	wire_s = 11101011
+	tb_s   = 01001110 
+	wire_s = 01001110
 
 Time =     1000 
 	tb_a   = 01000010 
@@ -20,30 +20,39 @@ Time =     1000
 	tb_s   = 00011111 
 	wire_s = 00011111
 
+Time =     2000 
+	tb_a   = 00100000 
+	tb_b   = 01000010 
+	tb_s   = 00011110 
+	wire_s = 01101110
+
+[3] ERROR: 	Expected result: 00 00011110
+		Obtained result: 00 01101110		. Instance: tb_csd_add_subb.load_operands_test
 
 
-TIME     : 2
+
+TIME     : 3
 WARNINGS : 0
-ERRORS   : 0
+ERRORS   : 1
 INFOS    : 0
 NOTES    : 0
-MESSAGES : 0
-TESTSEED : 2143312235
+MESSAGES : 1
+TESTSEED : 466777108
 
 
-............. TEST PASSED .............
-    ____  ___   __________ __________
-   / __ \/   | / ___/ ___// ____/ __ \
-  / /_/ / /| | \__ \\__ \/ __/ / / / /
- / ____/ ___ |___/ /__/ / /___/ /_/ /
-/_/   /_/  |_/____/____/_____/_____/
+............. TEST FAILED .............
+    _________    ____   __________
+   / ____/   |  / / /  / ____/ __ \
+  / /__ / /| | / / /  / __/ / / / /
+ / ___// ___ |/ / /__/ /___/ /_/ /
+/_/   /_/  |_/_/____/_____/_____/
 
-.......................................
+............. TEST FAILED .............
 
 
-$finish called from file "./temp/tb_csd_add_subb.v", line 253.
-$finish at simulation time                 2000
+$finish called from file "./temp/tb_csd_add_subb.v", line 237.
+$finish at simulation time                 3000
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 2000 ps
-CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
-Sat Apr 16 19:45:06 2016
+Time: 3000 ps
+CPU Time:      0.160 seconds;       Data structure size:   0.0Mb
+Mon Apr 18 20:54:03 2016

@@ -1,5 +1,5 @@
 $date
-	Sat Apr 16 19:45:06 2016
+	Mon Apr 18 20:54:03 2016
 $end
 
 $version
@@ -10,7 +10,7 @@ $timescale
 	1ps
 $end
 
-$comment Csum: 1 5f10eebee958c128 $end
+$comment Csum: 1 9589835f5bd6dcea $end
 
 
 $scope module bkm_fixed $end
@@ -194,66 +194,75 @@ $var reg 1 "> latched_osc_clk $end
 $upscope $end
 
 
+$scope module csd2bin $end
+$var wire 128 "? x [127:0] $end
+$var reg 64 "@ y [63:0] $end
+$var reg 65 "A c [64:0] $end
+$var reg 64 "B x_s [63:0] $end
+$var reg 64 "C x_d [63:0] $end
+$upscope $end
+
+
 $scope module tb_csd_add_subb $end
-$var reg 1 "? tb_subb_a $end
-$var reg 1 "@ tb_subb_b $end
-$var reg 8 "A tb_a [7:0] $end
-$var reg 8 "B tb_b [7:0] $end
-$var reg 8 "C tb_s [7:0] $end
-$var wire 1 "D wire_c $end
-$var wire 8 "E wire_s [7:0] $end
-$var reg 1 "F sim_clk $end
-$var integer 32 "G testseed $end
-$var integer 32 "H errors $end
-$var integer 32 "I messages $end
-$var integer 32 "J warnings $end
-$var integer 32 "K infos $end
-$var integer 32 "L notes $end
-$var integer 32 "M testseed_orig $end
-$var integer 32 "N arg_int $end
-$var integer 32 "O verbosity $end
+$var reg 1 "D tb_subb_a $end
+$var reg 1 "E tb_subb_b $end
+$var reg 8 "F tb_a [7:0] $end
+$var reg 8 "G tb_b [7:0] $end
+$var reg 8 "H tb_s [7:0] $end
+$var wire 1 "I wire_c $end
+$var wire 8 "J wire_s [7:0] $end
+$var reg 1 "K sim_clk $end
+$var integer 32 "L testseed $end
+$var integer 32 "M errors $end
+$var integer 32 "N messages $end
+$var integer 32 "O warnings $end
+$var integer 32 "P infos $end
+$var integer 32 "Q notes $end
+$var integer 32 "R testseed_orig $end
+$var integer 32 "S arg_int $end
+$var integer 32 "T verbosity $end
 
 $scope function constrained_rand_int $end
-$var integer 32 "P constrained_rand_int $end
-$var integer 32 "Q low_limit $end
-$var integer 32 "R high_limit $end
-$var integer 32 "S range $end
-$var integer 32 "T rnd1 $end
-$var integer 32 "U rnd2 $end
-$var integer 32 "V rnd3 $end
+$var integer 32 "U constrained_rand_int $end
+$var integer 32 "V low_limit $end
+$var integer 32 "W high_limit $end
+$var integer 32 "X range $end
+$var integer 32 "Y rnd1 $end
+$var integer 32 "Z rnd2 $end
+$var integer 32 "[ rnd3 $end
 $upscope $end
 
 
 $scope function abs $end
-$var real 64 "W abs $end
-$var real 64 "X x $end
+$var real 64 "\ abs $end
+$var real 64 "] x $end
 $upscope $end
 
 
 $scope function clog2 $end
-$var integer 32 "Y clog2 $end
-$var integer 32 "Z x $end
-$var integer 32 "[ i $end
+$var integer 32 "^ clog2 $end
+$var integer 32 "_ x $end
+$var integer 32 "` i $end
 $upscope $end
 
 
 $scope function sin $end
-$var real 64 "\ sin $end
-$var real 64 "] x $end
-$var real 64 "^ x1 $end
-$var real 64 "_ y $end
-$var real 64 "` y2 $end
-$var real 64 "a y3 $end
-$var real 64 "b y5 $end
-$var real 64 "c y7 $end
-$var real 64 "d sum $end
-$var real 64 "e sign $end
+$var real 64 "a sin $end
+$var real 64 "b x $end
+$var real 64 "c x1 $end
+$var real 64 "d y $end
+$var real 64 "e y2 $end
+$var real 64 "f y3 $end
+$var real 64 "g y5 $end
+$var real 64 "h y7 $end
+$var real 64 "i sum $end
+$var real 64 "j sign $end
 $upscope $end
 
 
 $scope function cos $end
-$var real 64 "f cos $end
-$var real 64 "g x $end
+$var real 64 "k cos $end
+$var real 64 "l x $end
 $upscope $end
 
 
@@ -286,8 +295,8 @@ $upscope $end
 
 
 $scope task run_clk $end
-$var integer 32 "h clk_cycles $end
-$var integer 32 "i counter $end
+$var integer 32 "m clk_cycles $end
+$var integer 32 "n counter $end
 $upscope $end
 
 
@@ -296,47 +305,47 @@ $upscope $end
 
 
 $scope task load_operands_test $end
-$var reg 1 "j subb_a $end
-$var reg 1 "k subb_b $end
-$var reg 8 "l a [7:0] $end
-$var reg 8 "m b [7:0] $end
-$var reg 2 "n c [1:0] $end
-$var reg 8 "o s [7:0] $end
-$var reg 2 "p c_res [1:0] $end
-$var reg 8 "q s_res [7:0] $end
+$var reg 1 "o subb_a $end
+$var reg 1 "p subb_b $end
+$var reg 8 "q a [7:0] $end
+$var reg 8 "r b [7:0] $end
+$var reg 2 "s c [1:0] $end
+$var reg 8 "t s [7:0] $end
+$var reg 2 "u c_res [1:0] $end
+$var reg 8 "v s_res [7:0] $end
 $upscope $end
 
 
 $scope module duv $end
-$var wire 1 "r subb_a $end
-$var wire 1 "s subb_b $end
-$var wire 8 "t a [7:0] $end
-$var wire 8 "u b [7:0] $end
-$var reg 2 "v c [1:0] $end
-$var reg 8 "w s [7:0] $end
-$var reg 8 "x a_inv [7:0] $end
-$var reg 8 "y b_inv [7:0] $end
-$var reg 4 "z a_s [3:0] $end
-$var reg 4 "{ a_d [3:0] $end
-$var reg 4 "| b_s [3:0] $end
-$var reg 4 "} b_d [3:0] $end
-$var reg 5 "~ c_s [4:0] $end
-$var reg 5 #! c_d [4:0] $end
-$var reg 4 #" s_s [3:0] $end
-$var reg 4 ## s_d [3:0] $end
-$var reg 4 #$ p [3:0] $end
+$var wire 1 "w subb_a $end
+$var wire 1 "x subb_b $end
+$var wire 8 "y a [7:0] $end
+$var wire 8 "z b [7:0] $end
+$var reg 2 "{ c [1:0] $end
+$var reg 8 "| s [7:0] $end
+$var reg 8 "} a_inv [7:0] $end
+$var reg 8 "~ b_inv [7:0] $end
+$var reg 4 #! a_s [3:0] $end
+$var reg 4 #" a_d [3:0] $end
+$var reg 4 ## b_s [3:0] $end
+$var reg 4 #$ b_d [3:0] $end
+$var reg 5 #% c_s [4:0] $end
+$var reg 5 #& c_d [4:0] $end
+$var reg 4 #' s_s [3:0] $end
+$var reg 4 #( s_d [3:0] $end
+$var reg 4 #) p [3:0] $end
 $upscope $end
 
 $upscope $end
 
 
 $scope module bin2csd $end
-$var wire 64 #% x [63:0] $end
-$var reg 128 #& y [127:0] $end
-$var reg 65 #' B [64:0] $end
-$var reg 64 #( sB [63:0] $end
-$var reg 64 #) cr [63:0] $end
-$var reg 64 #* cl [63:0] $end
+$var wire 64 #* x [63:0] $end
+$var reg 128 #+ y [127:0] $end
+$var reg 64 #, h [63:0] $end
+$var reg 64 #- k [63:0] $end
+$var reg 64 #. y_s [63:0] $end
+$var reg 64 #/ y_d [63:0] $end
 $upscope $end
 
 $enddefinitions $end
@@ -440,79 +449,83 @@ x"9
 z">
 0"=
 x"<
-0"r
-0"s
-0"j
-0"k
-0"F
-0"?
-0"@
-1"D
-b1000 "{
-b01000010 "x
-b0001 "z
-b00000000000000000000000000000000 "N
-b0100 "}
-b00010010 "y
-b0001 "|
-b11001 #!
-b11100 "~
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Y
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "[
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Z
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "P
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "R
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Q
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "S
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "T
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1 "A
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "C
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "B
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "@
+0"w
+0"x
+0"o
+0"p
+0"K
+0"D
+0"E
+0"I
+b0100 #"
+b00010000 "}
+b0000 #!
+b00000000000000000000000000000000 "S
+b0100 #$
+b00010010 "~
+b0001 ##
+b01010 #&
+b11101 #%
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "^
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "`
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "_
 bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "U
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "W
 bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "V
-b01000010 "t
-b00010010 "u
-b01 "v
-b11101011 "w
-b00000000000000000000000000000000 "H
-b00000000000000000000000000000000 "K
-b01000010 "l
-b00010010 "m
-b01 "n
-bxx "p
-b11101011 "o
-bxxxxxxxx "q
-b00000000000000000000000000000000 "I
-b00000000000000000000000000000000 "L
-b1000 #$
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "h
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "i
-b1001 ##
-b0000 #"
-b01000010 "A
-b00010010 "B
-b11101011 "C
-b01111111110000000101100101101011 "G
-b01111111110000000101100101101011 "M
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "X
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "[
+b00010000 "y
+b00010010 "z
+b00 "{
+b01001110 "|
+b00000000000000000000000000000000 "M
+b00000000000000000000000000000000 "P
+b00010000 "q
+b00010010 "r
+b00 "s
+bxx "u
+b01001110 "t
+bxxxxxxxx "v
+b00000000000000000000000000000000 "N
+b00000000000000000000000000000000 "Q
+b0101 #)
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "m
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "n
+b1010 #(
+b1100 #'
+b00010000 "F
+b00010010 "G
+b01001110 "H
+b00011011110100100111010000010100 "L
+b00011011110100100111010000010100 "R
+b00000000000000000000000000000000 "T
 b00000000000000000000000000000000 "O
-b00000000000000000000000000000000 "J
-b11101011 "E
-r0.000000000000000  "W
-r0.000000000000000  "X
-r0.000000000000000  "f
-r0.000000000000000  "g
-r0.000000000000000  "e
+b01001110 "J
 r0.000000000000000  "\
-r0.000000000000000  "d
 r0.000000000000000  "]
-r0.000000000000000  "^
-r0.000000000000000  "_
-r0.000000000000000  "`
+r0.000000000000000  "k
+r0.000000000000000  "l
+r0.000000000000000  "j
 r0.000000000000000  "a
+r0.000000000000000  "i
 r0.000000000000000  "b
 r0.000000000000000  "c
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 #'
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #*
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #)
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #(
-bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #&
+r0.000000000000000  "d
+r0.000000000000000  "e
+r0.000000000000000  "f
+r0.000000000000000  "g
+r0.000000000000000  "h
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz #,
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 #-
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #+
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #/
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #.
 x"5
 x"6
 0";
@@ -540,52 +553,116 @@ z"2
 z"3
 z"4
 z":
-bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz #%
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "?
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz #*
 $end
 #1000
-b01 "p
-b11101011 "q
-1"k
-b00 "n
-b00011111 "o
-1"@
-1"s
-b00011111 "C
-b11011 #!
-b1001 #$
-b0101 "}
-b0000 "|
-b00010001 "y
-b11101111 "w
-b11101111 "E
-b1011 ##
-b11111 #!
-b1011 #$
-b11000 "~
-b0111 "}
-b0010 "|
-b00011101 "y
-b11011111 "w
-b11011111 "E
-b1111 ##
-b0100 #"
-b10111 #!
-b1111 #$
-b10000 "~
-b0011 "}
-b0110 "|
-b00101101 "y
-b00011111 "w
-b00011111 "E
-b0111 ##
-b1100 #"
-b00111 #!
-b00 "v
-0"D
+b00 "u
+b01001110 "v
+1"p
+b01000010 "q
+b00011111 "t
+1"E
+1"x
+b01000010 "F
+b01000010 "y
+b00011111 "H
+b01001100 "|
+b01001100 "J
+b1101 #'
+b0101 #$
+b0000 ##
+b0001 #!
+b00010001 "~
+b00010010 "}
+b01110 #&
+b0111 #)
+b11001 #%
 b0111 #$
-b1011 "}
-b1110 "|
-b11101101 "y
+b0010 ##
+b00011101 "~
+b01011100 "|
+b01011100 "J
+b1110 #(
+b00110 #&
+b10001 #%
+b0011 #$
+b0110 ##
+b0000 #"
+b00101101 "~
+b00000010 "}
+b00011100 "|
+b00011100 "J
+b0110 #(
+b1011 #$
+b1110 ##
+b1000 #"
+b11101101 "~
+b01000010 "}
+b00111 #&
+b10000 #%
+b00011111 "|
+b00011111 "J
+b0111 #(
+b1100 #'
 #2000
-b00 "p
-b00011111 "q
+b00011111 "v
+0"p
+b00100000 "q
+b01000010 "r
+b00011110 "t
+0"E
+0"x
+b00100000 "F
+b00100000 "y
+b01000010 "G
+b01000010 "z
+b00011110 "H
+b00011101 "|
+b00011101 "J
+b1101 #'
+b00101 #&
+b1010 #$
+b1111 ##
+b0000 #!
+b11101110 "~
+b01000000 "}
+b00011001 "|
+b00011001 "J
+b0101 #(
+b00001 #&
+b0101 #)
+b10100 #%
+b1000 #$
+b1101 ##
+b11100010 "~
+b00101001 "|
+b00101001 "J
+b0001 #(
+b1001 #'
+b01001 #&
+b1001 ##
+b0100 #!
+b11000010 "~
+b01100000 "}
+b01101001 "|
+b01101001 "J
+b1001 #(
+b0001 ##
+b0000 #"
+b01000010 "~
+b00100000 "}
+b01000 #&
+b10101 #%
+b01101010 "|
+b01101010 "J
+b1000 #(
+b1000 #'
+b01010 #&
+b01101110 "|
+b01101110 "J
+b1010 #(
+#3000
+b01101110 "v
+b00000000000000000000000000000001 "M
+b00000000000000000000000000000001 "N
