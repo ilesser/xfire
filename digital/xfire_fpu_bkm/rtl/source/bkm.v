@@ -34,10 +34,13 @@
 //    - L_i_in    : Imaginary part of Logarithmic input (two's complement, W bits).
 //
 //  Data outputs:
+      // TODO: move to Zn zn notation?
 //    - E_r_out   : Real      part of Exponential input (two's complement, W bits).
 //    - E_i_out   : Imaginary part of Exponential input (two's complement, W bits).
 //    - L_r_out   : Real      part of Logarithmic input (two's complement, W bits).
 //    - L_i_out   : Imaginary part of Logarithmic input (two's complement, W bits).
+//    - Z_r_out   : Real      part of the result (two's complement, W bits).
+//    - Z_i_out   : Imaginary part of the result (two's complement, W bits).
 //    - flags     : Result flags (logic, 4 bits).
 //    - done      : Active high done strobe signal (logic, 1 bit).
 //
@@ -52,6 +55,7 @@
 // History:
 // --------
 //
+//    - 2016-04-19 - ilesser - Built architecture scafold.
 //    - 2016-04-04 - ilesser - Original version.
 //
 // -----------------------------------------------------------------------------
@@ -83,18 +87,21 @@ module bkm #(
     input wire                start,
     input wire                mode,
     input wire [1:0]          format,
-    input reg  [W-1:0]        E_r_in,
-    input reg  [W-1:0]        E_i_in,
-    input reg  [W-1:0]        L_r_in,
-    input reg  [W-1:0]        L_i_in,
+    input wire [W-1:0]        E_r_in,
+    input wire [W-1:0]        E_i_in,
+    input wire [W-1:0]        L_r_in,
+    input wire [W-1:0]        L_i_in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    input reg  [W-1:0]        E_r_out,
-    input reg  [W-1:0]        E_i_out,
-    input reg  [W-1:0]        L_r_out,
-    input reg  [W-1:0]        L_i_out,
-    output wire[`FSIZE-1:0]   flags,
+    // TODO: move to Zn zn notation?
+    //output reg  [W-1:0]        E_r_out,
+    //output reg  [W-1:0]        E_i_out,
+    //output reg  [W-1:0]        L_r_out,
+    //output reg  [W-1:0]        L_i_out,
+    output reg  [W-1:0]       Z_r_out,
+    output reg  [W-1:0]       Z_i_out,
+    output wire [`FSIZE-1:0]  flags,
     output wire               done
   );
 // *****************************************************************************
@@ -106,21 +113,311 @@ module bkm #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg  [W-1:0]  dummy;
+   reg   [W-1:0]  E_r_in_reg;
+   reg   [W-1:0]  E_i_in_reg;
+   reg   [W-1:0]  L_r_in_reg;
+   reg   [W-1:0]  L_i_in_reg;
    // -----------------------------------------------------
 
+   // -----------------------------------------------------
+   // Input register
+   // -----------------------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         dummy = {W{1'b0}};
+         E_r_in_reg = {W{1'b0}};
+         E_i_in_reg = {W{1'b0}};
+         L_r_in_reg = {W{1'b0}};
+         L_i_in_reg = {W{1'b0}};
       end
       else if (srst) begin
-         dummy = {W{1'b0}};
+         E_r_in_reg = {W{1'b0}};
+         E_i_in_reg = {W{1'b0}};
+         L_r_in_reg = {W{1'b0}};
+         L_i_in_reg = {W{1'b0}};
       end
       else if (enable) begin
-         dummy = {W,{1'b1}};
+         E_r_in_reg = E_r_in;
+         E_i_in_reg = E_i_in;
+         L_r_in_reg = L_r_in;
+         L_i_in_reg = L_i_in;
       end
    end
+   // -----------------------------------------------------
 
+   // -----------------------------------------------------
+   // Input precision selection
+   // -----------------------------------------------------
+   input_precision_selection #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) input_precision_selection (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .format              (format),
+      .E_r_in              (E_r_in_reg),
+      .E_i_in              (E_i_in_reg),
+      .L_r_in              (L_r_in_reg),
+      .L_i_in              (L_i_in_reg),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      .E_r_out             (E_r_prec_in),
+      .E_i_out             (E_i_prec_in),
+      .L_r_out             (L_r_prec_in),
+      .L_i_out             (L_i_prec_in)
+   );
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // BKM Range reduction
+   // -----------------------------------------------------
+   bkm_range_reduction #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) bkm_range_reduction (
+    // ----------------------------------
+    // Clock, reset & enable inputs
+    // ----------------------------------
+      .clk                 (clk),
+      .arst                (arst),
+      .srst                (srst),
+      .enable              (range_red_enable),
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .start               (range_red_start),
+      .mode                (mode),
+      .format              (format),
+      .E_r_in              (E_r_prec_in),
+      .E_i_in              (E_i_prec_in),
+      .L_r_in              (L_r_prec_in),
+      .L_i_in              (L_i_prec_in),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      //TODO: add the different constants for range reduction
+      .E_r_out             (E_r_0),
+      .E_i_out             (E_i_0),
+      .L_r_out             (L_r_0),
+      .L_i_out             (L_i_0),
+      .done                (range_red_done)
+   );
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // BKM First step
+   // -----------------------------------------------------
+   bkm_first_step #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W),
+      .LOG2W               (LOG2W),
+      .N                   (N),
+      .LOG2N               (LOG2N)
+   ) bkm_first_step (
+    // ----------------------------------
+    // Clock, reset & enable inputs
+    // ----------------------------------
+      .clk                 (clk),
+      .arst                (arst),
+      .srst                (srst),
+      .enable              (bkm_step_1_enable),
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .start               (bkm_step_1_start),
+      .mode                (mode),
+      .format              (format),
+      .E_r_in              (E_r_0),
+      .E_i_in              (E_i_0),
+      .L_r_in              (L_r_0),
+      .L_i_in              (L_i_0),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      // TODO: move to Zn zn notation?
+      //.E_r_out             (E_r_N),
+      //.E_i_out             (E_i_N),
+      //.L_r_out             (L_r_N),
+      //.L_i_out             (L_i_N),
+      .Z_r_out             (Z_r_1),
+      .Z_i_out             (Z_i_1),
+      .z_r_out             (z_r_1),
+      .z_i_out             (z_i_1),
+      .flags               (bkm_step_1_flags),
+      .done                (bkm_step_1_done)
+   );
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // BKM Steps
+   // -----------------------------------------------------
+   // Here you can choose differents architectures for the
+   // steps: rolled, unrolled, pipelined or mixed.
+   // -----------------------------------------------------
+   bkm_steps_rolled #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W),
+      .LOG2W               (LOG2W),
+      .N                   (N),
+      .LOG2N               (LOG2N)
+   ) bkm_steps (
+    // ----------------------------------
+    // Clock, reset & enable inputs
+    // ----------------------------------
+      .clk                 (clk),
+      .arst                (arst),
+      .srst                (srst),
+      .enable              (bkm_steps_enable),
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .start               (bkm_steps_start),
+      .mode                (mode),
+      .format              (format),
+      // TODO: move to Zn zn notation?
+      //.E_r_in              (E_r_1),
+      //.E_i_in              (E_i_1),
+      //.L_r_in              (L_r_1),
+      //.L_i_in              (L_i_1),
+      .Z_r_in              (Z_r_1),
+      .Z_i_in              (Z_i_1),
+      .z_r_in              (z_r_1),
+      .z_i_in              (z_i_1),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      // TODO: move to Zn zn notation?
+      //.E_r_out             (E_r_N),
+      //.E_i_out             (E_i_N),
+      //.L_r_out             (L_r_N),
+      //.L_i_out             (L_i_N),
+      .Z_r_out             (Z_r_N),
+      .Z_i_out             (Z_i_N),
+      //.z_r_out             (z_r_N),
+      //.z_i_out             (z_i_N),
+      .flags               (bkm_steps_flags),
+      .done                (bkm_steps_done)
+   );
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // BKM Range extension
+   // -----------------------------------------------------
+   bkm_range_extension #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) bkm_range_extension (
+    // ----------------------------------
+    // Clock, reset & enable inputs
+    // ----------------------------------
+      .clk                 (clk),
+      .arst                (arst),
+      .srst                (srst),
+      .enable              (range_ext_enable),
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .start               (range_ext_start),
+      .mode                (mode),
+      .format              (format),
+      //TODO: add the different constants from range reduction
+      // TODO: move to Zn zn notation?
+      //.E_r_in              (E_r_prec_in),
+      //.E_i_in              (E_i_prec_in),
+      //.L_r_in              (L_r_prec_in),
+      //.L_i_in              (L_i_prec_in),
+      .Z_r_in              (Z_r_N),
+      .Z_i_in              (Z_i_N),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      // TODO: move to Zn zn notation?
+      //.E_r_out             (E_r_0),
+      //.E_i_out             (E_i_0),
+      //.L_r_out             (L_r_0),
+      //.L_i_out             (L_i_0),
+      .Z_r_out             (Z_r_range_ext),
+      .Z_i_out             (Z_i_range_ext),
+      .flags               (range_ext_flags),
+      .done                (range_ext_done)
+   );
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Output precision selection
+   // -----------------------------------------------------
+   output_precision_selection #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) output_precision_selection (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .format              (format),
+      // TODO: move to Zn zn notation?
+      //.E_r_in              (E_r_range_ext),
+      //.E_i_in              (E_i_range_ext),
+      //.L_r_in              (L_r_range_ext),
+      //.L_i_in              (L_i_range_ext),
+      .Z_r_in              (Z_r_range_ext),
+      .Z_i_in              (Z_i_range_ext),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      // TODO: move to Zn zn notation?
+      //.E_r_out             (E_r_prec_out),
+      //.E_i_out             (E_i_prec_out),
+      //.L_r_out             (L_r_prec_out),
+      //.L_i_out             (L_i_prec_out)
+      .Z_r_out             (Z_r_prec_out),
+      .Z_i_out             (Z_i_prec_out)
+   );
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Output register
+   // -----------------------------------------------------
+   always @(posedge clk or posedge arst) begin
+      if (arst) begin
+      // TODO: move to Zn zn notation?
+         //E_r_out = {W{1'b0}};
+         //E_i_out = {W{1'b0}};
+         //L_r_out = {W{1'b0}};
+         //L_i_out = {W{1'b0}};
+         Z_r_out = {W{1'b0}};
+         Z_i_out = {W{1'b0}};
+      end
+      else if (srst) begin
+         //E_r_out = {W{1'b0}};
+         //E_i_out = {W{1'b0}};
+         //L_r_out = {W{1'b0}};
+         //L_i_out = {W{1'b0}};
+         Z_r_out = {W{1'b0}};
+         Z_i_out = {W{1'b0}};
+      end
+      else if (enable) begin
+         //E_r_out = E_r_prec_out;
+         //E_i_out = E_i_prec_out;
+         //L_r_out = L_r_prec_out;
+         //L_i_out = L_i_prec_out;
+         Z_r_out = Z_r_prec_out;
+         Z_i_out = Z_i_prec_out;
+      end
+   end
+   // -----------------------------------------------------
 // *****************************************************************************
 
 // *****************************************************************************
