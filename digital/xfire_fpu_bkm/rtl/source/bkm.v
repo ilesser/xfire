@@ -113,10 +113,41 @@ module bkm #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [W-1:0]  E_r_in_reg;
-   reg   [W-1:0]  E_i_in_reg;
-   reg   [W-1:0]  L_r_in_reg;
-   reg   [W-1:0]  L_i_in_reg;
+   // Input register
+   reg   [W-1:0]     E_r_in_reg;
+   reg   [W-1:0]     E_i_in_reg;
+   reg   [W-1:0]     L_r_in_reg;
+   reg   [W-1:0]     L_i_in_reg;
+
+   // Input precision selection
+   wire  [W-1:0]     E_r_prec_in;
+   wire  [W-1:0]     E_i_prec_in;
+   wire  [W-1:0]     L_r_prec_in;
+   wire  [W-1:0]     L_i_prec_in;
+
+   // BKM Range reduction
+   wire  [W-1:0]     E_r_0;
+   wire  [W-1:0]     E_i_0;
+   wire  [W-1:0]     L_r_0;
+   wire  [W-1:0]     L_i_0;
+
+   // BKM First step
+   wire  [2*W-1:0]   Z_r_1;
+   wire  [2*W-1:0]   Z_i_1;
+   wire  [W-1:0]     z_r_1;
+   wire  [W-1:0]     z_i_1;
+
+   // BKM Steps
+   wire  [2*W-1:0]   Z_r_N;
+   wire  [2*W-1:0]   Z_i_N;
+
+   // BKM Range extension
+   wire  [W-1:0]     Z_r_range_ext;
+   wire  [W-1:0]     Z_i_range_ext;
+
+   // BKM Range extension
+   wire  [W-1:0]     Z_r_prec_out;
+   wire  [W-1:0]     Z_i_prec_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
