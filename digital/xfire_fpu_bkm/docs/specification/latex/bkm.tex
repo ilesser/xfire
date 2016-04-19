@@ -250,7 +250,8 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
 
 \chapter{BKM}
 
-   \section{Origenes}
+   \section{El algoritmo}
+   \subsection{Origenes}
 
    Consideremos el paso básico del algoritmo CORDIC en modo trigonométrico (con m=1).
    Si definimos el número complejo $E_n = x_n + j \, y_n$ con $j=\sqrt{-1}$, obtenemos $E_{n+1} = E_n (1+j \, d_n 2^{-n})$, esta relación es similar al paso básico del algorithmo de Briggs.
@@ -267,6 +268,26 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
 \end{equation}
 
    con $d_n = d_n^r + j d_n^i $ y $d_n^r, d_n^i \in \{ 0, \pm 1 \}$ y $\ln z = t$ es el número complejo $t$ tal que $\exp{t} = z$ y cuya parte imaginaria está entre $-\pi$ y $\pi$.
+
+
+   \subsection{N\'umero de constantes}
+
+   Este algoritmo requiere que se almacenen las constantes referidas a $\ln(1 + d_n 2^{-n})$.
+
+   \begin{equation} \label{eq:bkm_constants}
+      \left\{
+         \begin{aligned}
+            \Re \{\ln(1 + d_n 2^{-n})\} &= \frac{1}{2} \ln[ 1 + d_n^r \, 2^{-n+1} + ({d_n^r}^2 + {d_n^i}^2) \, 2^{-2n} ] \\
+            \Im \{\ln(1 + d_n 2^{-n})\} &= d_n^i \, \arctan{ \left( \frac{2^{-n}}{1+d_n^r 2^{-n}} \right) }
+         \end{aligned}
+      \right.
+   \end{equation}
+
+   %TODO: aca nose si es 4 N o 9/2 N
+   En la equaci\'on ~\ref{equ:bkm_constants} podemos observar que la parte real de las constantes posee simer\'ia con respecto a $d_n^i$ y que la parte imaginaria s\'olo depende del valor de $d_n^r$ (su signo puede invertirse en el hardware).
+   Siguiendo estas deducciones llegamos a que se necesitan $8 =!= 9$ t\'erminos por cada valor de $n$. Por lo tanto, para obtener aproximadamente $N$ bits de precisi\'on necesitamos almacenar $8=!=9 N$ constantes. Este resultado puede mejorarse observando que si $n > N/2$ entonces $\ln(\cdot)$ y $\arctan(\cdot)$ pueden reemplazarse por $ d_n^r \, 2^{-n+1}$ y $2^{-n}$ con una exactitud de $2^{-N}$ bits.
+   Entonces s\'olo necesitamos almacenar $4 N =!= 9/2 N$ constantes.
+
 
 
 \section{E-mode}
@@ -298,7 +319,7 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
       \begin{aligned}
          l_n         &= 2^n L_n \,\,\text{con 4 digitos de precisión decimal} \\
          l_{n+1}     &= 2 l_n   - 2^{n+1} \ln( 1 + d_n 2^{-n} )                                             \\
-         l_{n+1}^r   &= 2 l_n^r - 2^{n}   \ln[ 1 + d_n^r \, 2^{-n+1} - ({d_n^r}^2 + {d_n^i}^2) \, 2^{-2n} ] \\
+         l_{n+1}^r   &= 2 l_n^r - 2^{n}   \ln[ 1 + d_n^r \, 2^{-n+1} + ({d_n^r}^2 + {d_n^i}^2) \, 2^{-2n} ] \\
          l_{n+1}^i   &= 2 l_n^i - 2^{n+1} d_n^i \, \arctan{ \left( \frac{2^{-n}}{1+d_n^r 2^{-n}} \right) }
       \end{aligned}
    \right.
