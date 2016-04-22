@@ -23,13 +23,18 @@
 //    - srst     : High active synchronous reset (logic, 1 bit).
 //
 //  Data inputs:
-//    - XXXXX    : XXXXXXXXXX (XXXXX, XXXX bits).
+//    - format    : Format code (logic, 2 bits).   FF
+//                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
+//                                                 |---> Complex:    0 for complex args, 1 for real args
+//    - X_in    : Real      part of the result input (two's complement, W bits).
+//    - Y_in    : Imaginary part of the result input (two's complement, W bits).
 //
 //  Data outputs:
-//    - XXXXX    : XXXXXXXXXX (XXXXX, XXXX bits).
+//    - X_out   : Real      part of the result output (two's complement, W bits).
+//    - Y_out   : Imaginary part of the result output (two's complement, W bits).
 //
 //  Parameters:
-//    - XXXXX    : XXXXXXXXXX (XXXXX, default: XXXXX).
+//    - W         : Word width (natural, default: 64).
 //
 // -----------------------------------------------------------------------------
 // History:
@@ -39,7 +44,7 @@
 //
 // -----------------------------------------------------------------------------
 
-`include "XXXXXXXX.vh"
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -54,12 +59,12 @@ module output_precision_selection #(
     // Data inputs
     // ----------------------------------
     input wire  [W-1:0]       X_in,
-    input wire  [W-1:0]       X_in,
+    input wire  [W-1:0]       Y_in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
     output reg  [W-1:0]       X_out,
-    output reg  [W-1:0]       X_out
+    output reg  [W-1:0]       Y_out
   );
 // *****************************************************************************
 
@@ -74,22 +79,22 @@ module output_precision_selection #(
 
    always @(*) begin
       case (format)
-         FORMAT_REAL_32:
+         `FORMAT_REAL_32:
                         begin
                            X_out = {{W/2{X_in[W/2-1]}},X_in};
                            Y_out = {W{1'b0}};
                         end
-         FORMAT_REAL_64:
+         `FORMAT_REAL_64:
                         begin
                            X_out = X_in;
                            Y_out = {W{1'b0}};
                         end
-         FORMAT_CMPLX_32:
+         `FORMAT_CMPLX_32:
                         begin
                            X_out = {{W/2{X_in[W/2-1]}},X_in};
                            Y_out = {{W/2{Y_in[W/2-1]}},Y_in};
                         end
-         FORMAT_CMPLX_64:
+         `FORMAT_CMPLX_64:
                         begin
                            X_out = X_in;
                            Y_out = Y_in;

@@ -27,5 +27,14 @@
 // Define size for flags
 `define FSIZE     4
 
+
+//    - format    : Format code (logic, 2 bits).   FF
+//                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
+//                                                 |---> Complex:    0 for complex args, 1 for real args
+
+`define FORMAT_REAL_32  2b01
+`define FORMAT_REAL_64  2b00
+`define FORMAT_CMPLX_32 2b10
+`define FORMAT_CMPLX_64 2b11
 // *****************************************************************************
 

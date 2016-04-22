@@ -42,6 +42,8 @@
 //
 // -----------------------------------------------------------------------------
 
+`include "bkm_defs.vh"
+
 // *****************************************************************************
 // Interface
 // *****************************************************************************
@@ -80,31 +82,41 @@ module input_precision_selection #(
 
    always @(*) begin
       case (format)
-         FORMAT_REAL_32:
+         `FORMAT_REAL_32:
+                        begin
                            E_x_out = {{W/2{E_x_in[W/2-1]}},E_x_in};
                            E_y_out = {W{1'b0}};
                            L_x_out = {{W/2{L_x_in[W/2-1]}},L_x_in};
                            L_y_out = {W{1'b0}};
-         FORMAT_REAL_64:
+                        end
+         `FORMAT_REAL_64:
+                        begin
                            E_x_out = E_x_in;
                            E_y_out = {W{1'b0}};
                            L_x_out = L_x_in;
                            L_y_out = {W{1'b0}};
-         FORMAT_CMPLX_32:
+                        end
+         `FORMAT_CMPLX_32:
+                        begin
                            E_x_out = {{W/2{E_x_in[W/2-1]}},E_x_in};
                            E_y_out = {{W/2{E_y_in[W/2-1]}},E_y_in};
                            L_x_out = {{W/2{L_x_in[W/2-1]}},L_x_in};
                            L_y_out = {{W/2{L_y_in[W/2-1]}},L_y_in};
-         FORMAT_CMPLX_64:
+                        end
+         `FORMAT_CMPLX_64:
+                        begin
                            E_x_out = E_x_in;
                            E_y_out = E_y_in;
                            L_x_out = L_x_in;
                            L_y_out = L_y_in;
+                        end
          default:
+                        begin
                            E_x_out = {W{1'b0}};
                            E_y_out = {W{1'b0}};
                            L_x_out = {W{1'b0}};
                            L_y_out = {W{1'b0}};
+                        end
       endcase
    end
 
