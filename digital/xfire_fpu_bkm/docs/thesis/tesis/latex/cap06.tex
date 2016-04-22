@@ -1,0 +1,32 @@
+\chapter{Conclusiones y trabajos a futuro}
+
+El alcance propuesto para el presente trabajo se basó en los siguientes puntos:
+
+\begin{itemize}
+    \item IP Core codificado en el lenguaje Verilog de un procesador de descomposición QR.
+    \item Resultado de mediciones pertinentes al diseño del procesador.
+    \item Análisis comparativo de procesamiento entre el procesador desarrollado y desarrollos de terceros.
+    \item Proposición de trabajos futuros y/o mejoras.
+\end{itemize}
+
+Se logró implementar satisfactoriamente un procesador de descomposición QR basado en la arquitectura de Walke\cite{Walke}. Dicha implementación se resume en 14 códigos fuente que contienen la lógica y descripción del hardware en lenguaje Verilog. Adicionalmente, se desarrollaron distintas herramientas que permitieron ensayar el procesador en base a diferentes necesidades.
+
+Como parte del ensayo del procesador, se obtuvieron métricas desde diferentes fuentes. Por un lado, se presentó el resumen de síntesis para cuatro tecnologías FPGA diferentes, utilizando tres valores de longitud de palabra. Dicho resumen permitió conocer el porcentaje de área de ocupación en el chip requerida para implementar el procesador. Este dato es de gran importancia dado que permite entender la cantidad de recursos necesarios para integrar el procesador como un módulo de una implementación mayor, como por ejemplo, un \textit{transceiver} digital.
+
+Se verificó que, en dispositivos FPGA de alta gama, la ocupación se encuentra dentro del 1\%, lo cual permite concluir que el mismo podría ser incluido en un proyecto utilizando dichas tecnologías, sin generar un impacto apreciable en el área de chip. Se obtuvieron parámetros de \textit{timing}, como lo es el máximo \textit{clock} de operación, el cual permite definir la latencia y el \textit{throughput} del hardware. Se obtuvo como resultado que el hardware es capaz de procesar hasta 2 \textit{MSamples} por segundo, el cual es un resultado muy satisfactorio. Por otro lado, se logró identificar la precisión del procesador contrastándolo contra una implementación en software utilizando aritmética de punto flotante de doble precisión, y adicionalmente realizar una estimación de los pesos de un sistema ejemplo mediante el agregado de ecuaciones de sustitución en software. En base a los resultados obtenidos se puede analizar el rendimiento de la implementación y determinar en qué aplicaciones puede ser utilizada.
+
+En base a los resultados de síntesis y de medición, fue posible contrastar la implementación con otras publicaciones similares, con ciertas limitaciones originadas en el hecho de que las arquitecturas y los dispositivos FPGA utilizados son diferentes. Como conclusión general, se puede decir que se implementó una arquitectura capaz de resolver matrices de mayor rango que otras ($7 \times 7$ en contraste con $3 \times 4$) utilizando menor porcentaje de área de chip y velocidad similar, si se toma como referencia la publicación de la Universidad de Victoria \cite{DongdongQR}, la cual presentaba más semejanzas entre las tres analizadas.
+
+Este trabajo presenta una primera implementación de un procesador de descomposición QR, con un gran número de posibilidades para mejorar y optimizar el diseño. Como potenciales trabajos a futuro, en el contexto de la presente tesis, se destacan los siguientes:
+
+\begin{enumerate}
+	\item Complementar el hardware desarrollado, que consta únicamente del procesador de descomposición QR, con el hardware de sustitución, con el objetivo de conseguir el hardware requerido para la obtención de los pesos de un filtro adaptativo.
+	\item Ensayar el \textit{beamformer} en un ambiente de prueba real, mediante el uso de \textit{front-ends} con antenas y conversores AD.
+    \item Modificar el \textit{pipeline} y realizar otro tipo de optimizaciones, con el objeto de lograr mejorar las métricas (aumentar el máximo \textit{clock} utilizable, disminuir la latencia y aumentar el \textit{throughput}, o reducir el área de chip).
+	\item Modificar el hardware para operar con números complejos, representando las componentes IQ de la modulación en cuadratura.
+	\item Parametrizar el hardware para operar con distintos números de filas y columnas, como por ejemplo, matrices de $N \times N$ igual a $3 \times 3$, $4 \times 4$ o $5 \times 5$. En función del número de columnas, se podrán utilizar 2 antenas + 1 señal deseada, 3 antenas + 1 señal deseada ó 4 antenas + 1 señal deseada, respectivamente.
+	\item Modificar el hardware para operar con otros mapeos diferentes al de Walke\cite{Walke}, con mayor número de procesadores para lograr \textit{throughputs} mas altos.
+	\item Sintetizar y ensayar el hardware en un dispositivo FPGA \textit{state of the art}, como por ejemplo Virtex7.
+	\item Incorporar la posibilidad de cambiar el algoritmo de rotación (algoritmo CORDIC en el hardware implementado) por otros, como ejemplo Gram Schmidt, o SGR (Squared Givens Rotations).
+	\item Modificar el hardware para operar con memoria RAM en lugar de una unidad de registros.
+\end{enumerate}

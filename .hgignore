@@ -1,0 +1,8 @@
+# use glob syntax
+syntax: glob
+
+*.directory
+*.swp
+
+digital/*/rtl/html/html
+digital/*/verification/*/temp

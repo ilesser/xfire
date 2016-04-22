@@ -1,0 +1,24 @@
+\section{Peripherals}
+\label{sec:peripherals}
+The only peripheral thas is mandatory is the Programable Interruption Controller (PIC), and it provides the mechanism available for the
+peripherals to be able to talk back to the CPU. For more information on the PIC, please read section \ref{ssec:pic}.\\
+Comunication with peripherals is achieved through four special registers PWD, PRD, PWA, and PRA and interruptions. Whenever a peripheral should be
+written the sequence that must be followed is:
+
+\begin{itemize}
+ \item PWA must be set using \emph{movi2s} with the peripheral address.
+ \item PWD must be set using \emph{movi2s} instruction to copy the information from one of the GPR's. Automatically,
+       a strobe is generated on the \emph{dpw\_en} output pin.
+\end{itemize}
+
+\textcolor{red}{Incluir diagramas para graficar estas secuencias.}
+
+Whenever a peripheral needs to comunicate data back to the CPU, the PIC is the only mechanism provided. Please read section \ref{ssec:pic}
+for more information.
+
+\subsection{Peripherals addressing}
+\label{ssec:peripheral_addressing}
+Peripherals address space is 8 bits wide, so a maximum of 256 peripherals is allowed. Being the PIC the only mandatory peripheral, its
+address is well defined and it is \texttt{0x00}.
+
+\input{./latex/programable_interrupt_controller}
