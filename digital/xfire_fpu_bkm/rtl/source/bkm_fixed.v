@@ -208,10 +208,8 @@ module bkm_fixed #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .E_r_out             (E_r_out),
-      .E_i_out             (E_i_out),
-      .L_r_out             (L_r_out),
-      .L_i_out             (L_i_out),
+      .X_out               (x_bkm),
+      .Y_out               (y_bkm),
       .flags               (bkm_core_flags),
       .done                (bkm_core_done)
    );
@@ -239,15 +237,13 @@ module bkm_fixed #(
       .start               (bkm_post_start),
       .format              (bkm_post_format),
       .op                  (bkm_post_op),
-      .E_r                 (E_r_out),
-      .E_i                 (E_i_out),
-      .L_r                 (L_r_out),
-      .L_i                 (L_i_out),
+      .x_in                (x_bkm),
+      .y_in                (y_bkm),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .x                   (x3),
-      .y                   (y3),
+      .x_out               (x3),
+      .y_out               (y3),
       .flags               (bkm_post_flags),
       .done                (bkm_post_done)
    );
