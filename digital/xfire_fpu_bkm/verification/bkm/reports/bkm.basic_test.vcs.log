@@ -1,0 +1,193 @@
+Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precision_selection.v \
+./temp/bkm.v ./temp/bkm_first_step.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
+./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v ./temp/simlib_clk_osc.v \
+./temp/bkm_range_reduction.v ./temp/bkm_fixed_control_logic.v ./temp/bkm_range_extension.v \
+./temp/csd2bin.v ./temp/tb_bkm.v ./temp/output_precision_selection.v ./temp/bkm_steps.v \
+./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/bkm.basic_test.vcs.log \
++define+RTL_DEBUG +vcs+lic+wait +warn=all -sverilog -debug
+                         Chronologic VCS (TM)
+            Version I-2014.03 -- Sat Apr 23 16:09:32 2016
+               Copyright (c) 1991-2014 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '././temp/input_precision_selection.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file '././temp/input_precision_selection.v'.
+Parsing design file './temp/bkm.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm.v'.
+Parsing design file './temp/bkm_first_step.v'
+Parsing design file './temp/bkm_fixed.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_fixed.v'.
+Parsing design file './temp/bkm_pre_processing.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_pre_processing.v'.
+Parsing design file './temp/csd_add_subb.v'
+Parsing design file './temp/xfire_fpu_bkm.v'
+Parsing included file './temp/xfire_fpu_bkm_defs.vh'.
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/xfire_fpu_bkm_defs.vh'.
+Back to file './temp/xfire_fpu_bkm.v'.
+Parsing design file './temp/fadder.v'
+Parsing design file './temp/simlib_clk_osc.v'
+Parsing included file './temp/simlib_defs.vh'.
+Back to file './temp/simlib_clk_osc.v'.
+Parsing design file './temp/bkm_range_reduction.v'
+Parsing design file './temp/bkm_fixed_control_logic.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_fixed_control_logic.v'.
+Parsing design file './temp/bkm_range_extension.v'
+Parsing design file './temp/csd2bin.v'
+Parsing design file './temp/tb_bkm.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/tb_bkm.v'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/tb_bkm.v'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/tb_bkm.v'.
+Parsing design file './temp/output_precision_selection.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/output_precision_selection.v'.
+Parsing design file './temp/bkm_steps.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_steps.v'.
+Parsing design file './temp/bkm_post_processing.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_post_processing.v'.
+Parsing design file './temp/bin2csd.v'
+Top Level Modules:
+       bkm_fixed
+       csd_add_subb
+       xfire_fpu_bkm
+       fadder
+       csd2bin
+       tb_bkm
+       bin2csd
+
+Warning-[AOUP] Attempt to override undefined parameter
+./temp/bkm.v, 287
+  Attempting to override undefined parameter "LOG2W", will ignore it.
+
+
+Warning-[AOUP] Attempt to override undefined parameter
+./temp/bkm.v, 287
+  Attempting to override undefined parameter "N", will ignore it.
+
+
+Warning-[AOUP] Attempt to override undefined parameter
+./temp/bkm.v, 287
+  Attempting to override undefined parameter "LOG2N", will ignore it.
+
+TimeScale is 1 ns / 1 ps
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm.v, 331
+"bkm_steps #(W, LOG2W, N, LOG2N) bkm_steps( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_steps_enable),  .start (bkm_steps_start),  .mode (mode),  .format (format),  .X_in (X_1),  .Y_in (Y_1),  .x_in (x_1),  .y_in (y_1),  .X_out (X_N),  .Y_out (Y_N),  .flags (bkm_steps_flags),  .done (bkm_steps_done));"
+  The following 1-bit expression is connected to 4-bit port "flags" of module 
+  "bkm_steps", instance "bkm_steps".
+  Expression: bkm_steps_flags
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm_fixed.v, 191
+"bkm #(W, LOG2W, N, LOG2N) bkm_core( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_core_enable),  .start (bkm_core_start),  .mode (bkm_core_mode),  .format (bkm_core_format),  .E_x_in (E_x_in),  .E_y_in (E_y_in),  .L_x_in (L_x_in),  .L_y_in (L_y_in),  .X_out (x_bkm),  .Y_out (y_bkm),  .flags (bkm_core_flags),  .done (bkm_core_done));"
+  The following 1-bit expression is connected to 64-bit port "X_out" of module
+  "bkm", instance "bkm_core".
+  Expression: x_bkm
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm_fixed.v, 191
+"bkm #(W, LOG2W, N, LOG2N) bkm_core( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_core_enable),  .start (bkm_core_start),  .mode (bkm_core_mode),  .format (bkm_core_format),  .E_x_in (E_x_in),  .E_y_in (E_y_in),  .L_x_in (L_x_in),  .L_y_in (L_y_in),  .X_out (x_bkm),  .Y_out (y_bkm),  .flags (bkm_core_flags),  .done (bkm_core_done));"
+  The following 1-bit expression is connected to 64-bit port "Y_out" of module
+  "bkm", instance "bkm_core".
+  Expression: y_bkm
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm_fixed.v, 227
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 6-bit port "op" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: bkm_post_op
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm_fixed.v, 227
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 64-bit port "x_in" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: x_bkm
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm_fixed.v, 227
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 64-bit port "y_in" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: y_bkm
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm_fixed.v, 257
+"bkm_fixed_control_logic bkm_fixed_control_logic( .clk (clk),  .arst (arst),  .srst (srst),  .enable (enable),  .start (start),  .format (format),  .op (op),  .bkm_pre_done (bkm_pre_done),  .bkm_core_done (bkm_core_done),  .bkm_core_flags (bkm_core_flags),  .bkm_post_done (bkm_post_done),  .bkm_post_flags (bkm_post_flags),  .bkm_pre_enable (bkm_pre_enable),  .bkm_pre_start (bkm_pre_start),  .bkm_pre_format (bkm_pre_format),  .bkm_pre_op (bkm_pre_op),  .bkm_core_enable (bkm_core_enable),  .bkm_core_start (bkm_core_start),  .bkm_core_format (bkm_core_format),  .bkm_core_mode (bkm_core_mode),  .bkm_post_enable (bkm_post_enable),  .bkm_post_start (bkm_post_start),  .bkm_post_format (bkm_post_format),  .bkm_post_op (bkm_post_op),  .flags (flags),  .done (done));"
+  The following 1-bit expression is connected to 6-bit port "bkm_post_op" of 
+  module "bkm_fixed_control_logic", instance "bkm_fixed_control_logic".
+  Expression: bkm_post_op
+  	use +lint=PCWM for more details
+
+
+Warning-[CWUC] Concatenations with unsized constants
+./temp/tb_bkm.v, 691
+"4"
+  An unsized constant '4' is used in the concatenation. The unsized constant 
+  will be used as a 32-bit constant.
+
+Starting vcs inline pass...
+9 modules and 0 UDP read.
+recompiling module bkm
+recompiling module bkm_fixed
+recompiling module csd_add_subb
+recompiling module xfire_fpu_bkm
+recompiling module fadder
+recompiling module csd2bin
+recompiling module tb_bkm
+recompiling module bin2csd
+All of 9 modules done
+rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
+--no-whole-archive
+ld -m elf_i386 -shared -o .//../simv.daidir//_csrc0.so 5NrI_d.o 5NrIB_d.o SIM_l.o \
+
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv  -m32 -m32   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ \
+-Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  _csrc1.so _csrc0.so     rmapats_mop.o \
+rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /usr/synopsys/vcs/linux/lib/libvirsim.so \
+/usr/synopsys/vcs/linux/lib/librterrorinf.so /usr/synopsys/vcs/linux/lib/libsnpsmalloc.so \
+/usr/synopsys/vcs/linux/lib/libvcsnew.so /usr/synopsys/vcs/linux/lib/libuclinative.so \
+-Wl,-whole-archive /usr/synopsys/vcs/linux/lib/libvcsucli.so -Wl,-no-whole-archive \
+/usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
+-ldl -lm  -lc -lpthread -ldl 
+../simv up to date
+CPU time: .509 seconds to compile + .109 seconds to elab + .119 seconds to link

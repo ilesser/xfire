@@ -119,14 +119,14 @@ module bkm_fixed #(
    wire  [`FSIZE-1:0]   bkm_core_flags;
 
    // BKM Core Signal Path
-   wire  [W-1:0]        E_r_in;
-   wire  [W-1:0]        E_i_in;
-   wire  [W-1:0]        L_r_in;
-   wire  [W-1:0]        L_i_in;
-   wire  [W-1:0]        E_r_out;
-   wire  [W-1:0]        E_i_out;
-   wire  [W-1:0]        L_r_out;
-   wire  [W-1:0]        L_i_out;
+   wire  [W-1:0]        E_x_in;
+   wire  [W-1:0]        E_y_in;
+   wire  [W-1:0]        L_x_in;
+   wire  [W-1:0]        L_y_in;
+   wire  [W-1:0]        E_x_out;
+   wire  [W-1:0]        E_y_out;
+   wire  [W-1:0]        L_x_out;
+   wire  [W-1:0]        L_y_out;
 
    // BKM Post control wires
    wire                 bkm_post_enable;
@@ -168,10 +168,10 @@ module bkm_fixed #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .E_r                 (E_r_in),
-      .E_i                 (E_i_in),
-      .L_r                 (L_r_in),
-      .L_i                 (L_i_in),
+      .E_x                 (E_x_in),
+      .E_y                 (E_y_in),
+      .L_x                 (L_x_in),
+      .L_y                 (L_y_in),
       .done                (bkm_pre_done)
    );
    // -----------------------------------------------------
@@ -201,10 +201,10 @@ module bkm_fixed #(
       .start               (bkm_core_start),
       .mode                (bkm_core_mode),
       .format              (bkm_core_format),
-      .E_r_in              (E_r_in),
-      .E_i_in              (E_i_in),
-      .L_r_in              (L_r_in),
-      .L_i_in              (L_i_in),
+      .E_x_in              (E_x_in),
+      .E_y_in              (E_y_in),
+      .L_x_in              (L_x_in),
+      .L_y_in              (L_y_in),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
