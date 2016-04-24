@@ -98,19 +98,19 @@ module bkm_post_processing #(
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         done = 1'b0;
-         x_out = {W{1'b0}};
-         y_out = {W{1'b0}};
+         done  <= 1'b0;
+         x_out <= {W{1'b0}};
+         y_out <= {W{1'b0}};
       end
       else if (srst) begin
-         done = 1'b0;
-         x_out = {W{1'b0}};
-         y_out = {W{1'b0}};
+         done  <= 1'b0;
+         x_out <= {W{1'b0}};
+         y_out <= {W{1'b0}};
       end
       else if (enable) begin
-         done = start;
-         x_out = x_in;
-         y_out = y_in;
+         done  <= start;
+         x_out <= x_in;
+         y_out <= y_in;
       end
    end
 

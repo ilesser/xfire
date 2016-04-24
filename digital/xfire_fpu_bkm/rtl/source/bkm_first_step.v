@@ -105,32 +105,32 @@ module bkm_first_step #(
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         done     = 1'b0;
-         X_out    = {W{1'b0}};
-         Y_out    = {W{1'b0}};
+         done    <= 1'b0;
+         X_out   <= {W{1'b0}};
+         Y_out   <= {W{1'b0}};
       end
       else if (srst) begin
-         done     = 1'b0;
-         X_out    = {W{1'b0}};
-         Y_out    = {W{1'b0}};
+         done    <= 1'b0;
+         X_out   <= {W{1'b0}};
+         Y_out   <= {W{1'b0}};
       end
       else if (enable) begin
-         done     = start;
+         done    <= start;
          case(mode)
             `MODE_E:
                begin
-                  X_out    = E_x_in;
-                  Y_out    = E_y_in;
+                  X_out   <= E_x_in;
+                  Y_out   <= E_y_in;
                end
             `MODE_L:
                begin
-                  X_out    = L_x_in;
-                  Y_out    = L_y_in;
+                  X_out   <= L_x_in;
+                  Y_out   <= L_y_in;
                end
             default:
                begin
-                  X_out    = {W{1'b0}};
-                  Y_out    = {W{1'b0}};
+                  X_out   <= {W{1'b0}};
+                  Y_out   <= {W{1'b0}};
                end
          endcase
       end

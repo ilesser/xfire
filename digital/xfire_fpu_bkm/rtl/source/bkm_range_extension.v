@@ -81,11 +81,13 @@ module bkm_range_extension #(
     input wire [W-1:0]        k3,
     input wire [W-1:0]        X_in,
     input wire [W-1:0]        Y_in,
+    input wire [`FSIZE-1:0]   flags_in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
     output reg [W-1:0]        X_out,
     output reg [W-1:0]        Y_out,
+    output reg [`FSIZE-1:0]   flags_out,
     output reg                done
   );
 // *****************************************************************************
@@ -101,19 +103,22 @@ module bkm_range_extension #(
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         done     = 1'b0;
-         X_out    = {W{1'b0}};
-         Y_out    = {W{1'b0}};
+         X_out       <= {W{1'b0}};
+         Y_out       <= {W{1'b0}};
+         flags_out   <= {`FSIZE{1'b0}};
+         done        <= 1'b0;
       end
       else if (srst) begin
-         done     = 1'b0;
-         X_out    = {W{1'b0}};
-         Y_out    = {W{1'b0}};
+         X_out       <= {W{1'b0}};
+         Y_out       <= {W{1'b0}};
+         flags_out   <= {`FSIZE{1'b0}};
+         done        <= 1'b0;
       end
       else if (enable) begin
-         done     = start;
-         X_out    = X_in;
-         Y_out    = Y_in;
+         X_out       <= X_in;
+         Y_out       <= Y_in;
+         flags_out   <= flags_in;
+         done        <= start;
       end
    end
 

@@ -115,25 +115,25 @@ module bkm_range_reduction #(
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         done     = 1'b0;
-         E_x_out  = {W{1'b0}};
-         E_y_out  = {W{1'b0}};
-         L_x_out  = {W{1'b0}};
-         L_y_out  = {W{1'b0}};
+         done    <= 1'b0;
+         E_x_out <= {W{1'b0}};
+         E_y_out <= {W{1'b0}};
+         L_x_out <= {W{1'b0}};
+         L_y_out <= {W{1'b0}};
       end
       else if (srst) begin
-         done     = 1'b0;
-         E_x_out  = {W{1'b0}};
-         E_y_out  = {W{1'b0}};
-         L_x_out  = {W{1'b0}};
-         L_y_out  = {W{1'b0}};
+         done    <= 1'b0;
+         E_x_out <= {W{1'b0}};
+         E_y_out <= {W{1'b0}};
+         L_x_out <= {W{1'b0}};
+         L_y_out <= {W{1'b0}};
       end
       else if (enable) begin
-         done     = start;
-         E_x_out  = E_x_in;
-         E_y_out  = E_y_in;
-         L_x_out  = L_x_in;
-         L_y_out  = L_y_in;
+         done    <= start;
+         E_x_out <= E_x_in;
+         E_y_out <= E_y_in;
+         L_x_out <= L_x_in;
+         L_y_out <= L_y_in;
       end
    end
 

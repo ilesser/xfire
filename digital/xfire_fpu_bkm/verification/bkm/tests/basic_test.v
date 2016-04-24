@@ -47,7 +47,7 @@ task basic_test;
 
    begin
 
-      $monitor("Time = %8t x = %h y = %h flags = %b done = %b\n",$time, x, y, flags, done);
+      $monitor("Time = %8t x = %h y = %h flags = %b done = %b\n",$time, bkm_x, bkm_y, bkm_flags, bkm_done);
       $dumpfile("../waves/tb_bkm_basic_test.vcd");
       $dumpvars();
 
@@ -56,15 +56,27 @@ task basic_test;
       tb_arst    = 1'b0;
       tb_srst    = 1'b0;
       tb_start   = 1'b0;
-      tb_start   = 1'b0;
-      #1;
-      run_clk(5);
+      tb_mode    = 1'b0;
+      tb_format  = 2'b00;
+      run_clk(2);
       tb_arst    = 1'b1;
       run_clk(2);
       tb_arst    = 1'b0;
 
-      //          mode     format            E_x         E_y         L_x         L_y         X_out       Y_out       flags
-      load_bkm( `MODE_E, `FORMAT_REAL_32, {W,{1'b0}}, {W,{1'b0}}, {W,{1'b0}}, {W,{1'b0}}, {W,{1'b0}}, {W,{1'b0}}, {`FSIZE,{1'b0}} );
+      //          mode     format          E_x        E_y        L_x        L_y        X_out      Y_out       flags
+      //       --------------------------------------------------------------------------------------------------------------
+      load_bkm( `MODE_E, `FORMAT_REAL_64, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {`FSIZE{1'b0}} );
+      load_bkm( `MODE_E, `FORMAT_REAL_64, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b0}}, {`FSIZE{1'b0}} );
+
+      load_bkm( `MODE_E, `FORMAT_REAL_32, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {`FSIZE{1'b0}} );
+      load_bkm( `MODE_E, `FORMAT_REAL_32, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b0}}, {`FSIZE{1'b0}} );
+      //       --------------------------------------------------------------------------------------------------------------
+      load_bkm( `MODE_E, `FORMAT_CMPLX_64,{W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {`FSIZE{1'b0}} );
+      load_bkm( `MODE_E, `FORMAT_CMPLX_64,{W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {`FSIZE{1'b0}} );
+
+      load_bkm( `MODE_E, `FORMAT_CMPLX_32,{W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {W{1'b0}}, {`FSIZE{1'b0}} );
+      load_bkm( `MODE_E, `FORMAT_CMPLX_32,{W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {W{1'b1}}, {`FSIZE{1'b0}} );
+      //       --------------------------------------------------------------------------------------------------------------
 
       tb_stop = 1'b1;
    end
