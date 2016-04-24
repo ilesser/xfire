@@ -91,8 +91,8 @@ module bkm #(
     // ----------------------------------
     output reg  [W-1:0]       X_out,
     output reg  [W-1:0]       Y_out,
-    output wire [`FSIZE-1:0]  flags,
-    output wire               done
+    output reg  [`FSIZE-1:0]  flags,
+    output reg                done
   );
 // *****************************************************************************
 
@@ -104,6 +104,7 @@ module bkm #(
    // Internal signals
    // -----------------------------------------------------
    // Input register
+   reg               input_reg_enable;
    reg   [W-1:0]     E_x_in_reg;
    reg   [W-1:0]     E_y_in_reg;
    reg   [W-1:0]     L_x_in_reg;
@@ -116,47 +117,84 @@ module bkm #(
    wire  [W-1:0]     L_y_prec_in;
 
    // BKM Range reduction
+   reg               range_red_enable;
+   reg               range_red_start;
+   reg               range_red_done;
    wire  [W-1:0]     E_x_0;
    wire  [W-1:0]     E_y_0;
    wire  [W-1:0]     L_x_0;
    wire  [W-1:0]     L_y_0;
+   wire  [W-1:0]     a;
+   wire  [W-1:0]     b;
+   wire  [W-1:0]     k1;
+   wire  [W-1:0]     k2;
+   wire  [W-1:0]     k3;
 
    // BKM First step
-   wire  [2*W-1:0]   X_1;
-   wire  [2*W-1:0]   Y_1;
+   reg               bkm_step_1_enable;
+   reg               bkm_step_1_start;
+   reg               bkm_step_1_done;
+   wire  [W-1:0]     X_1;
+   wire  [W-1:0]     Y_1;
    wire  [W-1:0]     x_1;
    wire  [W-1:0]     y_1;
 
    // BKM Steps
-   wire  [2*W-1:0]   X_N;
-   wire  [2*W-1:0]   Y_N;
+   reg               bkm_steps_enable;
+   reg               bkm_steps_start;
+   reg               bkm_steps_done;
+   wire  [W-1:0]     X_N;
+   wire  [W-1:0]     Y_N;
 
    // BKM Range extension
+   reg               range_ext_enable;
+   reg               range_ext_start;
+   reg               range_ext_done;
    wire  [W-1:0]     X_range_ext;
    wire  [W-1:0]     Y_range_ext;
 
-   // BKM Range extension
+   // Output precision selection
    wire  [W-1:0]     X_prec_out;
    wire  [W-1:0]     Y_prec_out;
+
+   // Output register
+   wire              output_reg_enable;
    // -----------------------------------------------------
+
+   // TODO: ENABLES and STARTS/DONE!!
+   assign input_reg_enable    = enable;
+   assign range_red_enable    = enable;
+   assign bkm_step_1_enable   = enable;
+   assign bkm_steps_enable    = enable;
+   assign range_ext_enable    = enable;
+   assign output_reg_enable   = enable;
+
+   //     range_red_start  <-- start
+   assign bkm_step_1_start    = range_red_done;
+   assign bkm_steps_start     = bkm_step_1_done;
+   assign range_ext_start     = bkm_steps_done;
+   //     done             <-- range_ext_done
 
    // -----------------------------------------------------
    // Input register
    // -----------------------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
+         range_red_start = 1'b0;
          E_x_in_reg = {W{1'b0}};
          E_y_in_reg = {W{1'b0}};
          L_x_in_reg = {W{1'b0}};
          L_y_in_reg = {W{1'b0}};
       end
       else if (srst) begin
+         range_red_start = 1'b0;
          E_x_in_reg = {W{1'b0}};
          E_y_in_reg = {W{1'b0}};
          L_x_in_reg = {W{1'b0}};
          L_y_in_reg = {W{1'b0}};
       end
-      else if (enable_input__reg) begin
+      else if (input_reg_enable) begin
+         range_red_start = start;
          E_x_in_reg = E_x_in;
          E_y_in_reg = E_y_in;
          L_x_in_reg = L_x_in;
@@ -225,6 +263,11 @@ module bkm #(
       .E_y_out             (E_y_0),
       .L_x_out             (L_x_0),
       .L_y_out             (L_y_0),
+      .a                   (a),
+      .b                   (b),
+      .k1                  (k1),
+      .k2                  (k2),
+      .k3                  (k3),
       .done                (range_red_done)
    );
    // -----------------------------------------------------
@@ -237,9 +280,6 @@ module bkm #(
     // Parameters
     // ----------------------------------
       .W                   (W),
-      .LOG2W               (LOG2W),
-      .N                   (N),
-      .LOG2N               (LOG2N)
    ) bkm_first_step (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -265,7 +305,7 @@ module bkm #(
       .Y_out               (Y_1),
       .x_out               (x_1),
       .y_out               (y_1),
-      .flags               (bkm_step_1_flags),
+      //.flags               (bkm_step_1_flags),
       .done                (bkm_step_1_done)
    );
    // -----------------------------------------------------
@@ -276,7 +316,7 @@ module bkm #(
    // Here you can choose differents architectures for the
    // steps: rolled, unrolled, pipelined or mixed.
    // -----------------------------------------------------
-   bkm_steps_rolled #(
+   bkm_steps #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
@@ -334,7 +374,11 @@ module bkm #(
       .start               (range_ext_start),
       .mode                (mode),
       .format              (format),
-      //TODO: add the different constants from range reduction
+      .a                   (a),
+      .b                   (b),
+      .k1                  (k1),
+      .k2                  (k2),
+      .k3                  (k3),
       .X_in                (X_N),
       .Y_in                (Y_N),
     // ----------------------------------
@@ -342,7 +386,7 @@ module bkm #(
     // ----------------------------------
       .X_out               (X_range_ext),
       .Y_out               (Y_range_ext),
-      .flags               (range_ext_flags),
+      //.flags               (range_ext_flags),
       .done                (range_ext_done)
    );
    // -----------------------------------------------------
@@ -375,14 +419,17 @@ module bkm #(
    // -----------------------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
+         done     = 1'b0;
          X_out = {W{1'b0}};
          Y_out = {W{1'b0}};
       end
       else if (srst) begin
+         done     = 1'b0;
          X_out = {W{1'b0}};
          Y_out = {W{1'b0}};
       end
-      else if (enable_output_reg) begin
+      else if (output_reg_enable) begin
+         done  = range_ext_done;
          X_out = X_prec_out;
          Y_out = Y_prec_out;
       end

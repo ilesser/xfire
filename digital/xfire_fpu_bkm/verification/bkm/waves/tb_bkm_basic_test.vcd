@@ -1,0 +1,3046 @@
+$date
+	Sat Apr 23 16:09:34 2016
+$end
+
+$version
+	Synopsys VCS version I-2014.03
+$end
+
+$timescale
+	1ps
+$end
+
+$comment Csum: 1 98cb9cc42976e843 $end
+
+
+$scope module bkm_fixed $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 $ enable $end
+$var wire 1 % start $end
+$var wire 2 & format [1:0] $end
+$var wire 6 ' op [5:0] $end
+$var reg 64 ( x1 [63:0] $end
+$var reg 64 ) y1 [63:0] $end
+$var reg 64 * x2 [63:0] $end
+$var reg 64 + y2 [63:0] $end
+$var reg 64 , x3 [63:0] $end
+$var reg 64 - y3 [63:0] $end
+$var wire 4 . flags [3:0] $end
+$var wire 1 / done $end
+$var wire 1 0 bkm_pre_enable $end
+$var wire 1 1 bkm_pre_start $end
+$var wire 2 2 bkm_pre_format [1:0] $end
+$var wire 6 3 bkm_pre_op [5:0] $end
+$var wire 1 4 bkm_pre_done $end
+$var wire 1 5 bkm_core_enable $end
+$var wire 1 6 bkm_core_start $end
+$var wire 2 7 bkm_core_format [1:0] $end
+$var wire 1 8 bkm_core_mode $end
+$var wire 1 9 bkm_core_done $end
+$var wire 4 : bkm_core_flags [3:0] $end
+$var wire 64 ; E_x_in [63:0] $end
+$var wire 64 < E_y_in [63:0] $end
+$var wire 64 = L_x_in [63:0] $end
+$var wire 64 > L_y_in [63:0] $end
+$var wire 64 ? E_x_out [63:0] $end
+$var wire 64 @ E_y_out [63:0] $end
+$var wire 64 A L_x_out [63:0] $end
+$var wire 64 B L_y_out [63:0] $end
+$var wire 1 C bkm_post_enable $end
+$var wire 1 D bkm_post_start $end
+$var wire 2 E bkm_post_format [1:0] $end
+$var wire 1 F bkm_post_op $end
+$var wire 1 G bkm_post_done $end
+$var wire 4 H bkm_post_flags [3:0] $end
+$var wire 1 I x_bkm $end
+$var wire 1 J y_bkm $end
+
+$scope module bkm_pre_processign $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 0 enable $end
+$var wire 1 1 start $end
+$var wire 2 2 format [1:0] $end
+$var wire 6 3 op [5:0] $end
+$var wire 64 K x1 [63:0] $end
+$var wire 64 L y1 [63:0] $end
+$var wire 64 M x2 [63:0] $end
+$var wire 64 N y2 [63:0] $end
+$var wire 64 O x3 [63:0] $end
+$var wire 64 P y3 [63:0] $end
+$var reg 64 Q E_x [63:0] $end
+$var reg 64 R E_y [63:0] $end
+$var reg 64 S L_x [63:0] $end
+$var reg 64 T L_y [63:0] $end
+$var reg 1 U done $end
+$upscope $end
+
+
+$scope module bkm_core $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 5 enable $end
+$var wire 1 6 start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 ; E_x_in [63:0] $end
+$var wire 64 < E_y_in [63:0] $end
+$var wire 64 = L_x_in [63:0] $end
+$var wire 64 > L_y_in [63:0] $end
+$var reg 64 V X_out [63:0] $end
+$var reg 64 W Y_out [63:0] $end
+$var reg 4 X flags [3:0] $end
+$var reg 1 Y done $end
+$var reg 1 Z input_reg_enable $end
+$var reg 64 [ E_x_in_reg [63:0] $end
+$var reg 64 \ E_y_in_reg [63:0] $end
+$var reg 64 ] L_x_in_reg [63:0] $end
+$var reg 64 ^ L_y_in_reg [63:0] $end
+$var wire 64 _ E_x_prec_in [63:0] $end
+$var wire 64 ` E_y_prec_in [63:0] $end
+$var wire 64 a L_x_prec_in [63:0] $end
+$var wire 64 b L_y_prec_in [63:0] $end
+$var reg 1 c range_red_enable $end
+$var reg 1 d range_red_start $end
+$var reg 1 e range_red_done $end
+$var wire 64 f E_x_0 [63:0] $end
+$var wire 64 g E_y_0 [63:0] $end
+$var wire 64 h L_x_0 [63:0] $end
+$var wire 64 i L_y_0 [63:0] $end
+$var wire 64 j a [63:0] $end
+$var wire 64 k b [63:0] $end
+$var wire 64 l k1 [63:0] $end
+$var wire 64 m k2 [63:0] $end
+$var wire 64 n k3 [63:0] $end
+$var reg 1 o bkm_step_1_enable $end
+$var reg 1 p bkm_step_1_start $end
+$var reg 1 q bkm_step_1_done $end
+$var wire 64 r X_1 [63:0] $end
+$var wire 64 s Y_1 [63:0] $end
+$var wire 64 t x_1 [63:0] $end
+$var wire 64 u y_1 [63:0] $end
+$var reg 1 v bkm_steps_enable $end
+$var reg 1 w bkm_steps_start $end
+$var reg 1 x bkm_steps_done $end
+$var wire 64 y X_N [63:0] $end
+$var wire 64 z Y_N [63:0] $end
+$var reg 1 { range_ext_enable $end
+$var reg 1 | range_ext_start $end
+$var reg 1 } range_ext_done $end
+$var wire 64 ~ X_range_ext [63:0] $end
+$var wire 64 "! Y_range_ext [63:0] $end
+$var wire 64 "" X_prec_out [63:0] $end
+$var wire 64 "# Y_prec_out [63:0] $end
+$var wire 1 "$ output_reg_enable $end
+$var wire 1 "% bkm_steps_flags $end
+
+$scope module input_precision_selection $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 "& E_x_in [63:0] $end
+$var wire 64 "' E_y_in [63:0] $end
+$var wire 64 "( L_x_in [63:0] $end
+$var wire 64 ") L_y_in [63:0] $end
+$var reg 64 "* E_x_out [63:0] $end
+$var reg 64 "+ E_y_out [63:0] $end
+$var reg 64 ", L_x_out [63:0] $end
+$var reg 64 "- L_y_out [63:0] $end
+$upscope $end
+
+
+$scope module bkm_range_reduction $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 ". enable $end
+$var wire 1 "/ start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 _ E_x_in [63:0] $end
+$var wire 64 ` E_y_in [63:0] $end
+$var wire 64 a L_x_in [63:0] $end
+$var wire 64 b L_y_in [63:0] $end
+$var reg 64 "0 E_x_out [63:0] $end
+$var reg 64 "1 E_y_out [63:0] $end
+$var reg 64 "2 L_x_out [63:0] $end
+$var reg 64 "3 L_y_out [63:0] $end
+$var reg 64 "4 a [63:0] $end
+$var reg 64 "5 b [63:0] $end
+$var reg 64 "6 k1 [63:0] $end
+$var reg 64 "7 k2 [63:0] $end
+$var reg 64 "8 k3 [63:0] $end
+$var reg 1 "9 done $end
+$upscope $end
+
+
+$scope module bkm_first_step $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 ": enable $end
+$var wire 1 "; start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 f E_x_in [63:0] $end
+$var wire 64 g E_y_in [63:0] $end
+$var wire 64 h L_x_in [63:0] $end
+$var wire 64 i L_y_in [63:0] $end
+$var reg 64 "< X_out [63:0] $end
+$var reg 64 "= Y_out [63:0] $end
+$var reg 64 "> x_out [63:0] $end
+$var reg 64 "? y_out [63:0] $end
+$var reg 1 "@ done $end
+$upscope $end
+
+
+$scope module bkm_steps $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 "A enable $end
+$var wire 1 "B start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 r X_in [63:0] $end
+$var wire 64 s Y_in [63:0] $end
+$var wire 64 t x_in [63:0] $end
+$var wire 64 u y_in [63:0] $end
+$var reg 64 "C X_out [63:0] $end
+$var reg 64 "D Y_out [63:0] $end
+$var reg 4 "E flags [3:0] $end
+$var reg 1 "F done $end
+$upscope $end
+
+
+$scope module bkm_range_extension $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 "G enable $end
+$var wire 1 "H start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 j a [63:0] $end
+$var wire 64 k b [63:0] $end
+$var wire 64 l k1 [63:0] $end
+$var wire 64 m k2 [63:0] $end
+$var wire 64 n k3 [63:0] $end
+$var wire 64 y X_in [63:0] $end
+$var wire 64 z Y_in [63:0] $end
+$var reg 64 "I X_out [63:0] $end
+$var reg 64 "J Y_out [63:0] $end
+$var reg 1 "K done $end
+$upscope $end
+
+
+$scope module output_precision_selection $end
+$var wire 2 7 format [1:0] $end
+$var wire 64 ~ X_in [63:0] $end
+$var wire 64 "! Y_in [63:0] $end
+$var reg 64 "L X_out [63:0] $end
+$var reg 64 "M Y_out [63:0] $end
+$upscope $end
+
+$upscope $end
+
+
+$scope module bkm_post_processign $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 C enable $end
+$var wire 1 D start $end
+$var wire 2 E format [1:0] $end
+$var wire 6 "N op [5:0] $end
+$var wire 64 "O x_in [63:0] $end
+$var wire 64 "P y_in [63:0] $end
+$var reg 64 "Q x_out [63:0] $end
+$var reg 64 "R y_out [63:0] $end
+$var reg 4 "S flags [3:0] $end
+$var reg 1 "T done $end
+$upscope $end
+
+
+$scope module bkm_fixed_control_logic $end
+$var reg 1 "U clk $end
+$var reg 1 "V arst $end
+$var reg 1 "W srst $end
+$var reg 1 "X enable $end
+$var reg 1 "Y start $end
+$var reg 2 "Z format [1:0] $end
+$var reg 6 "[ op [5:0] $end
+$var reg 1 "\ bkm_pre_done $end
+$var reg 1 "] bkm_core_done $end
+$var reg 4 "^ bkm_core_flags [3:0] $end
+$var reg 1 "_ bkm_post_done $end
+$var reg 4 "` bkm_post_flags [3:0] $end
+$var reg 1 "a bkm_pre_enable $end
+$var reg 1 "b bkm_pre_start $end
+$var reg 2 "c bkm_pre_format [1:0] $end
+$var reg 6 "d bkm_pre_op [5:0] $end
+$var reg 1 "e bkm_core_enable $end
+$var reg 1 "f bkm_core_start $end
+$var reg 2 "g bkm_core_format [1:0] $end
+$var reg 1 "h bkm_core_mode $end
+$var reg 1 "i bkm_post_enable $end
+$var reg 1 "j bkm_post_start $end
+$var reg 2 "k bkm_post_format [1:0] $end
+$var reg 6 "l bkm_post_op [5:0] $end
+$var reg 4 "m flags [3:0] $end
+$var reg 1 "n done $end
+$var reg 1 "o dummy $end
+$upscope $end
+
+$upscope $end
+
+
+$scope module csd_add_subb $end
+$var wire 1 "p subb_a $end
+$var wire 1 "q subb_b $end
+$var wire 128 "r a [127:0] $end
+$var wire 128 "s b [127:0] $end
+$var reg 2 "t c [1:0] $end
+$var reg 128 "u s [127:0] $end
+$var reg 128 "v a_inv [127:0] $end
+$var reg 128 "w b_inv [127:0] $end
+$var reg 64 "x a_s [63:0] $end
+$var reg 64 "y a_d [63:0] $end
+$var reg 64 "z b_s [63:0] $end
+$var reg 64 "{ b_d [63:0] $end
+$var reg 65 "| c_s [64:0] $end
+$var reg 65 "} c_d [64:0] $end
+$var reg 64 "~ s_s [63:0] $end
+$var reg 64 #! s_d [63:0] $end
+$var reg 64 #" p [63:0] $end
+$upscope $end
+
+
+$scope module xfire_fpu_bkm $end
+$var wire 1 ## clk $end
+$var wire 1 #$ arst $end
+$var wire 1 #% srst $end
+$var wire 1 #& enable $end
+$var wire 1 #' start $end
+$var wire 2 #( format [1:0] $end
+$var wire 6 #) op [5:0] $end
+$var reg 64 #* x1 [63:0] $end
+$var reg 64 #+ y1 [63:0] $end
+$var reg 64 #, x2 [63:0] $end
+$var reg 64 #- y2 [63:0] $end
+$var reg 64 #. x3 [63:0] $end
+$var reg 64 #/ y3 [63:0] $end
+$var wire 4 #0 flags [3:0] $end
+$var wire 1 #1 done $end
+$var reg 64 #2 dummy [63:0] $end
+$upscope $end
+
+
+$scope module fadder $end
+$var wire 1 #3 a $end
+$var wire 1 #4 b $end
+$var wire 1 #5 ci $end
+$var wire 1 #6 s $end
+$var wire 1 #7 co $end
+$var wire 1 #8 w1 $end
+$var wire 1 #9 w2 $end
+$var wire 1 #: w3 $end
+$upscope $end
+
+
+$scope module csd2bin $end
+$var wire 128 #; x [127:0] $end
+$var reg 64 #< y [63:0] $end
+$var reg 65 #= c [64:0] $end
+$var reg 64 #> x_s [63:0] $end
+$var reg 64 #? x_d [63:0] $end
+$upscope $end
+
+
+$scope module tb_bkm $end
+$var reg 1 #@ tb_stop $end
+$var reg 1 #A tb_clk $end
+$var reg 1 #B tb_arst $end
+$var reg 1 #C tb_srst $end
+$var reg 1 #D tb_enable $end
+$var reg 1 #E tb_start $end
+$var reg 1 #F tb_mode $end
+$var reg 2 #G tb_format [1:0] $end
+$var reg 64 #H tb_E_x [63:0] $end
+$var reg 64 #I tb_E_y [63:0] $end
+$var reg 64 #J tb_L_x [63:0] $end
+$var reg 64 #K tb_L_y [63:0] $end
+$var wire 1 #L done $end
+$var wire 4 #M flags [3:0] $end
+$var wire 64 #N x [63:0] $end
+$var wire 64 #O y [63:0] $end
+$var reg 1 #P sim_clk $end
+$var integer 32 #Q testseed $end
+$var integer 32 #R errors $end
+$var integer 32 #S messages $end
+$var integer 32 #T warnings $end
+$var integer 32 #U infos $end
+$var integer 32 #V notes $end
+$var integer 32 #W testseed_orig $end
+$var integer 32 #X arg_int $end
+$var integer 32 #Y verbosity $end
+
+$scope function constrained_rand_int $end
+$var integer 32 #Z constrained_rand_int $end
+$var integer 32 #[ low_limit $end
+$var integer 32 #\ high_limit $end
+$var integer 32 #] range $end
+$var integer 32 #^ rnd1 $end
+$var integer 32 #_ rnd2 $end
+$var integer 32 #` rnd3 $end
+$upscope $end
+
+
+$scope function abs $end
+$var real 64 #a abs $end
+$var real 64 #b x $end
+$upscope $end
+
+
+$scope function clog2 $end
+$var integer 32 #c clog2 $end
+$var integer 32 #d x $end
+$var integer 32 #e i $end
+$upscope $end
+
+
+$scope function sin $end
+$var real 64 #f sin $end
+$var real 64 #g x $end
+$var real 64 #h x1 $end
+$var real 64 #i y $end
+$var real 64 #j y2 $end
+$var real 64 #k y3 $end
+$var real 64 #l y5 $end
+$var real 64 #m y7 $end
+$var real 64 #n sum $end
+$var real 64 #o sign $end
+$upscope $end
+
+
+$scope function cos $end
+$var real 64 #p cos $end
+$var real 64 #q x $end
+$upscope $end
+
+
+$scope task add_error $end
+$upscope $end
+
+
+$scope task add_warning $end
+$upscope $end
+
+
+$scope task add_info $end
+$upscope $end
+
+
+$scope task add_note $end
+$upscope $end
+
+
+$scope task test_failed $end
+$upscope $end
+
+
+$scope task test_passed $end
+$upscope $end
+
+
+$scope task finish_sim $end
+$upscope $end
+
+
+$scope task run_clk $end
+$var integer 32 #r clk_cycles $end
+$var integer 32 #s counter $end
+$upscope $end
+
+
+$scope task basic_test $end
+$upscope $end
+
+
+$scope task load_bkm $end
+$var reg 1 #t mode $end
+$var reg 2 #u format [1:0] $end
+$var reg 64 #v E_x [63:0] $end
+$var reg 64 #w E_y [63:0] $end
+$var reg 64 #x L_x [63:0] $end
+$var reg 64 #y L_y [63:0] $end
+$var reg 64 #z X [63:0] $end
+$var reg 64 #{ Y [63:0] $end
+$var reg 4 #| flags [3:0] $end
+$upscope $end
+
+
+$scope module clk_osc $end
+$var wire 1 #} stop $end
+$var wire 1 #~ clk_out $end
+$var reg 1 $! state $end
+$var reg 1 $" osc_clk $end
+$var reg 1 $# latched_osc_clk $end
+$upscope $end
+
+
+$scope module duv $end
+$var wire 1 $$ clk $end
+$var wire 1 $% arst $end
+$var wire 1 $& srst $end
+$var wire 1 $' enable $end
+$var wire 1 $( start $end
+$var wire 1 $) mode $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $+ E_x_in [63:0] $end
+$var wire 64 $, E_y_in [63:0] $end
+$var wire 64 $- L_x_in [63:0] $end
+$var wire 64 $. L_y_in [63:0] $end
+$var reg 64 $/ X_out [63:0] $end
+$var reg 64 $0 Y_out [63:0] $end
+$var reg 4 $1 flags [3:0] $end
+$var reg 1 $2 done $end
+$var reg 1 $3 input_reg_enable $end
+$var reg 64 $4 E_x_in_reg [63:0] $end
+$var reg 64 $5 E_y_in_reg [63:0] $end
+$var reg 64 $6 L_x_in_reg [63:0] $end
+$var reg 64 $7 L_y_in_reg [63:0] $end
+$var wire 64 $8 E_x_prec_in [63:0] $end
+$var wire 64 $9 E_y_prec_in [63:0] $end
+$var wire 64 $: L_x_prec_in [63:0] $end
+$var wire 64 $; L_y_prec_in [63:0] $end
+$var reg 1 $< range_red_enable $end
+$var reg 1 $= range_red_start $end
+$var reg 1 $> range_red_done $end
+$var wire 64 $? E_x_0 [63:0] $end
+$var wire 64 $@ E_y_0 [63:0] $end
+$var wire 64 $A L_x_0 [63:0] $end
+$var wire 64 $B L_y_0 [63:0] $end
+$var wire 64 $C a [63:0] $end
+$var wire 64 $D b [63:0] $end
+$var wire 64 $E k1 [63:0] $end
+$var wire 64 $F k2 [63:0] $end
+$var wire 64 $G k3 [63:0] $end
+$var reg 1 $H bkm_step_1_enable $end
+$var reg 1 $I bkm_step_1_start $end
+$var reg 1 $J bkm_step_1_done $end
+$var wire 64 $K X_1 [63:0] $end
+$var wire 64 $L Y_1 [63:0] $end
+$var wire 64 $M x_1 [63:0] $end
+$var wire 64 $N y_1 [63:0] $end
+$var reg 1 $O bkm_steps_enable $end
+$var reg 1 $P bkm_steps_start $end
+$var reg 1 $Q bkm_steps_done $end
+$var wire 64 $R X_N [63:0] $end
+$var wire 64 $S Y_N [63:0] $end
+$var reg 1 $T range_ext_enable $end
+$var reg 1 $U range_ext_start $end
+$var reg 1 $V range_ext_done $end
+$var wire 64 $W X_range_ext [63:0] $end
+$var wire 64 $X Y_range_ext [63:0] $end
+$var wire 64 $Y X_prec_out [63:0] $end
+$var wire 64 $Z Y_prec_out [63:0] $end
+$var wire 1 $[ output_reg_enable $end
+$var wire 1 $\ bkm_steps_flags $end
+
+$scope module input_precision_selection $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $] E_x_in [63:0] $end
+$var wire 64 $^ E_y_in [63:0] $end
+$var wire 64 $_ L_x_in [63:0] $end
+$var wire 64 $` L_y_in [63:0] $end
+$var reg 64 $a E_x_out [63:0] $end
+$var reg 64 $b E_y_out [63:0] $end
+$var reg 64 $c L_x_out [63:0] $end
+$var reg 64 $d L_y_out [63:0] $end
+$upscope $end
+
+
+$scope module bkm_range_reduction $end
+$var wire 1 $$ clk $end
+$var wire 1 $% arst $end
+$var wire 1 $& srst $end
+$var wire 1 $e enable $end
+$var wire 1 $f start $end
+$var wire 1 $) mode $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $8 E_x_in [63:0] $end
+$var wire 64 $9 E_y_in [63:0] $end
+$var wire 64 $: L_x_in [63:0] $end
+$var wire 64 $; L_y_in [63:0] $end
+$var reg 64 $g E_x_out [63:0] $end
+$var reg 64 $h E_y_out [63:0] $end
+$var reg 64 $i L_x_out [63:0] $end
+$var reg 64 $j L_y_out [63:0] $end
+$var reg 64 $k a [63:0] $end
+$var reg 64 $l b [63:0] $end
+$var reg 64 $m k1 [63:0] $end
+$var reg 64 $n k2 [63:0] $end
+$var reg 64 $o k3 [63:0] $end
+$var reg 1 $p done $end
+$upscope $end
+
+
+$scope module bkm_first_step $end
+$var wire 1 $$ clk $end
+$var wire 1 $% arst $end
+$var wire 1 $& srst $end
+$var wire 1 $q enable $end
+$var wire 1 $r start $end
+$var wire 1 $) mode $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $? E_x_in [63:0] $end
+$var wire 64 $@ E_y_in [63:0] $end
+$var wire 64 $A L_x_in [63:0] $end
+$var wire 64 $B L_y_in [63:0] $end
+$var reg 64 $s X_out [63:0] $end
+$var reg 64 $t Y_out [63:0] $end
+$var reg 64 $u x_out [63:0] $end
+$var reg 64 $v y_out [63:0] $end
+$var reg 1 $w done $end
+$upscope $end
+
+
+$scope module bkm_steps $end
+$var wire 1 $$ clk $end
+$var wire 1 $% arst $end
+$var wire 1 $& srst $end
+$var wire 1 $x enable $end
+$var wire 1 $y start $end
+$var wire 1 $) mode $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $K X_in [63:0] $end
+$var wire 64 $L Y_in [63:0] $end
+$var wire 64 $M x_in [63:0] $end
+$var wire 64 $N y_in [63:0] $end
+$var reg 64 $z X_out [63:0] $end
+$var reg 64 ${ Y_out [63:0] $end
+$var reg 4 $| flags [3:0] $end
+$var reg 1 $} done $end
+$upscope $end
+
+
+$scope module bkm_range_extension $end
+$var wire 1 $$ clk $end
+$var wire 1 $% arst $end
+$var wire 1 $& srst $end
+$var wire 1 $~ enable $end
+$var wire 1 %! start $end
+$var wire 1 $) mode $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $C a [63:0] $end
+$var wire 64 $D b [63:0] $end
+$var wire 64 $E k1 [63:0] $end
+$var wire 64 $F k2 [63:0] $end
+$var wire 64 $G k3 [63:0] $end
+$var wire 64 $R X_in [63:0] $end
+$var wire 64 $S Y_in [63:0] $end
+$var reg 64 %" X_out [63:0] $end
+$var reg 64 %# Y_out [63:0] $end
+$var reg 1 %$ done $end
+$upscope $end
+
+
+$scope module output_precision_selection $end
+$var wire 2 $* format [1:0] $end
+$var wire 64 $W X_in [63:0] $end
+$var wire 64 $X Y_in [63:0] $end
+$var reg 64 %% X_out [63:0] $end
+$var reg 64 %& Y_out [63:0] $end
+$upscope $end
+
+$upscope $end
+
+$upscope $end
+
+
+$scope module bin2csd $end
+$var wire 64 %' x [63:0] $end
+$var reg 128 %( y [127:0] $end
+$var reg 64 %) h [63:0] $end
+$var reg 64 %* k [63:0] $end
+$var reg 64 %+ y_s [63:0] $end
+$var reg 64 %, y_d [63:0] $end
+$upscope $end
+
+$enddefinitions $end
+
+#0
+$dumpvars
+x9
+bxxxx :
+z"V
+x"]
+x"_
+x"i
+x"j
+x"\
+x"a
+x"b
+z"X
+z"W
+z"Y
+xG
+xC
+xF
+x"T
+xD
+x4
+x0
+xU
+x1
+x"o
+xI
+xJ
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Q
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz ?
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx R
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz @
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx S
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz A
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx T
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz B
+bxxxx "^
+bxx "g
+b0000 "`
+bxx "k
+bxxxxxx "l
+bxx "c
+bxxxxxx "d
+bxxxx "m
+bzz "Z
+bzzzzzz "[
+b0000 H
+bxx E
+b0000 "S
+b00000x "N
+bxx 2
+bxxxxxx 3
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx K
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx M
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx O
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx N
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx P
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx *
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ,
+b000000000000000000000000000000000000000000000000000000000000000x "O
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Q
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx )
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx +
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -
+b000000000000000000000000000000000000000000000000000000000000000x "P
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "R
+x"@
+x":
+x";
+x"K
+x"G
+x"H
+x"9
+x".
+x"/
+xq
+xo
+xp
+x"F
+x"A
+x"B
+xx
+xv
+0"%
+xw
+xY
+xZ
+x}
+x{
+x|
+xe
+xc
+xd
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx f
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx [
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "0
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx _
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx g
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "1
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx `
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx h
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "2
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx a
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx i
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ^
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "3
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx b
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx r
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx V
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ""
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ~
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx s
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx W
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "#
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "!
+b0000000000000000000000000000000000000000000000000000000000000000 j
+b0000000000000000000000000000000000000000000000000000000000000000 k
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "<
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "=
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "I
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "J
+b0000000000000000000000000000000000000000000000000000000000000000 "4
+b0000000000000000000000000000000000000000000000000000000000000000 "5
+b0000000000000000000000000000000000000000000000000000000000000000 "6
+b0000000000000000000000000000000000000000000000000000000000000000 "7
+b0000000000000000000000000000000000000000000000000000000000000000 "8
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "C
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "D
+b0000 "E
+bxxxx X
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "&
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "'
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "(
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ",
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ")
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "-
+b0000000000000000000000000000000000000000000000000000000000000000 l
+b0000000000000000000000000000000000000000000000000000000000000000 m
+b0000000000000000000000000000000000000000000000000000000000000000 n
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "M
+b0000000000000000000000000000000000000000000000000000000000000000 t
+b0000000000000000000000000000000000000000000000000000000000000000 ">
+b0000000000000000000000000000000000000000000000000000000000000000 u
+b0000000000000000000000000000000000000000000000000000000000000000 "?
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "v
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "x
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "{
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "w
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "z
+bxx "t
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "}
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "|
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #"
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "u
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #!
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "~
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #2
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #,
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #.
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #+
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #-
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #/
+x#8
+x#9
+x#:
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1 #=
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz #?
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz #>
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #<
+x#L
+bxxxx #M
+0$#
+x#t
+0$"
+0#P
+x$!
+0#}
+0#B
+1#D
+x#F
+0#C
+0#E
+0#@
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #N
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #O
+b00000000000000000000000000000000 #X
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #e
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #d
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #\
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #[
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #]
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #^
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #_
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #`
+b00000000000000000000000000000000 #R
+b00000000000000000000000000000000 #U
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #v
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #w
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #x
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #{
+bxxxx #|
+bxx #u
+b00000000000000000000000000000000 #S
+b00000000000000000000000000000000 #V
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #r
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #s
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #H
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #I
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #J
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #K
+bxx #G
+b01011001001000111100011100001111 #Q
+b01011001001000111100011100001111 #W
+b00000000000000000000000000000000 #Y
+b00000000000000000000000000000000 #T
+r0.000000000000000  #a
+r0.000000000000000  #b
+r0.000000000000000  #p
+r0.000000000000000  #q
+r0.000000000000000  #o
+r0.000000000000000  #f
+r0.000000000000000  #n
+r0.000000000000000  #g
+r0.000000000000000  #h
+r0.000000000000000  #i
+r0.000000000000000  #j
+r0.000000000000000  #k
+r0.000000000000000  #l
+r0.000000000000000  #m
+x$w
+1$q
+x$r
+x%$
+1$~
+x%!
+x$p
+1$e
+x$f
+x$J
+1$H
+x$I
+x$}
+1$x
+x$y
+x$Q
+1$O
+0$\
+x$P
+x$2
+1$3
+x$V
+1$T
+x$U
+x$>
+1$<
+x$=
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $?
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $4
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $g
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $8
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $@
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $5
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $h
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $9
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $A
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $6
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $i
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $:
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $B
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $7
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $j
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $;
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $K
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $R
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $/
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $Y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $W
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $S
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $0
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $X
+b0000000000000000000000000000000000000000000000000000000000000000 $C
+b0000000000000000000000000000000000000000000000000000000000000000 $D
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $s
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $t
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %"
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %#
+b0000000000000000000000000000000000000000000000000000000000000000 $k
+b0000000000000000000000000000000000000000000000000000000000000000 $l
+b0000000000000000000000000000000000000000000000000000000000000000 $m
+b0000000000000000000000000000000000000000000000000000000000000000 $n
+b0000000000000000000000000000000000000000000000000000000000000000 $o
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ${
+b0000 $|
+bxxxx $1
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $]
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $a
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $^
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $b
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $_
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $`
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $d
+b0000000000000000000000000000000000000000000000000000000000000000 $E
+b0000000000000000000000000000000000000000000000000000000000000000 $F
+b0000000000000000000000000000000000000000000000000000000000000000 $G
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %%
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %&
+b0000000000000000000000000000000000000000000000000000000000000000 $M
+b0000000000000000000000000000000000000000000000000000000000000000 $u
+b0000000000000000000000000000000000000000000000000000000000000000 $N
+b0000000000000000000000000000000000000000000000000000000000000000 $v
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz %)
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 %*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %(
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %,
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %+
+x5
+x"$
+x#6
+x#7
+0#~
+1$'
+1$[
+z"U
+x"n
+x"e
+x"f
+x"h
+z!
+z"
+z#
+bxx 7
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ;
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx <
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx =
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx >
+z$
+z%
+bzz &
+bzzzzzz '
+bxxxx .
+x6
+x8
+x/
+z"p
+z"q
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "r
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "s
+z##
+z#$
+z#%
+z#&
+z#'
+bzz #(
+bzzzzzz #)
+bzzzz #0
+z#1
+z#3
+z#4
+z#5
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz #;
+0$%
+0$&
+0$(
+x$)
+bxx $*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $+
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $,
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $-
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $.
+0$$
+0#A
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz %'
+$end
+#1000
+b00000000000000000000000000000101 #r
+b00000000000000000000000000000000 #s
+#5000
+1#P
+b00000000000000000000000000000001 #s
+1$"
+1#~
+1#A
+1$$
+0$=
+0$f
+0$p
+0$>
+0$I
+0$r
+0$w
+0$J
+0$P
+0$y
+b0000000000000000000000000000000000000000000000000000000000000000 $s
+b0000000000000000000000000000000000000000000000000000000000000000 $K
+b0000000000000000000000000000000000000000000000000000000000000000 $t
+b0000000000000000000000000000000000000000000000000000000000000000 $L
+#10000
+0#P
+0$"
+0#~
+0#A
+0$$
+#15000
+1#P
+b00000000000000000000000000000010 #s
+1$"
+1#~
+1#A
+1$$
+0$}
+0$Q
+0$U
+0%!
+b0000000000000000000000000000000000000000000000000000000000000000 $z
+b0000000000000000000000000000000000000000000000000000000000000000 $R
+b0000000000000000000000000000000000000000000000000000000000000000 ${
+b0000000000000000000000000000000000000000000000000000000000000000 $S
+0%$
+0$V
+b0000000000000000000000000000000000000000000000000000000000000000 %"
+b0000000000000000000000000000000000000000000000000000000000000000 $W
+b0000000000000000000000000000000000000000000000000000000000000000 %#
+b0000000000000000000000000000000000000000000000000000000000000000 $X
+b0000000000000000000000000000000000000000000000000000000000000000 %&
+b0000000000000000000000000000000000000000000000000000000000000000 $Z
+b0000000000000000000000000000000000000000000000000000000000000000 %%
+b0000000000000000000000000000000000000000000000000000000000000000 $Y
+#20000
+0#P
+0$"
+0#~
+0#A
+0$$
+#25000
+1#P
+b00000000000000000000000000000011 #s
+1$"
+1#~
+1#A
+1$$
+0$2
+0#L
+b0000000000000000000000000000000000000000000000000000000000000000 $/
+b0000000000000000000000000000000000000000000000000000000000000000 #N
+b0000000000000000000000000000000000000000000000000000000000000000 $0
+b0000000000000000000000000000000000000000000000000000000000000000 #O
+#30000
+0#P
+0$"
+0#~
+0#A
+0$$
+#35000
+1#P
+b00000000000000000000000000000100 #s
+1$"
+1#~
+1#A
+1$$
+#40000
+0#P
+0$"
+0#~
+0#A
+0$$
+#45000
+1#P
+b00000000000000000000000000000101 #s
+1$"
+1#~
+1#A
+1$$
+#46000
+1#B
+1$%
+b00000000000000000000000000000010 #r
+b00000000000000000000000000000000 #s
+b0000000000000000000000000000000000000000000000000000000000000000 $4
+b0000000000000000000000000000000000000000000000000000000000000000 $]
+b0000000000000000000000000000000000000000000000000000000000000000 $5
+b0000000000000000000000000000000000000000000000000000000000000000 $^
+b0000000000000000000000000000000000000000000000000000000000000000 $6
+b0000000000000000000000000000000000000000000000000000000000000000 $_
+b0000000000000000000000000000000000000000000000000000000000000000 $7
+b0000000000000000000000000000000000000000000000000000000000000000 $`
+b0000000000000000000000000000000000000000000000000000000000000000 $g
+b0000000000000000000000000000000000000000000000000000000000000000 $?
+b0000000000000000000000000000000000000000000000000000000000000000 $h
+b0000000000000000000000000000000000000000000000000000000000000000 $@
+b0000000000000000000000000000000000000000000000000000000000000000 $i
+b0000000000000000000000000000000000000000000000000000000000000000 $A
+b0000000000000000000000000000000000000000000000000000000000000000 $j
+b0000000000000000000000000000000000000000000000000000000000000000 $B
+b0000000000000000000000000000000000000000000000000000000000000000 $d
+b0000000000000000000000000000000000000000000000000000000000000000 $;
+b0000000000000000000000000000000000000000000000000000000000000000 $c
+b0000000000000000000000000000000000000000000000000000000000000000 $:
+b0000000000000000000000000000000000000000000000000000000000000000 $b
+b0000000000000000000000000000000000000000000000000000000000000000 $9
+b0000000000000000000000000000000000000000000000000000000000000000 $a
+b0000000000000000000000000000000000000000000000000000000000000000 $8
+#50000
+0#P
+0$"
+0#~
+0#A
+0$$
+#55000
+1#P
+b00000000000000000000000000000001 #s
+1$"
+1#~
+1#A
+1$$
+#60000
+0#P
+0$"
+0#~
+0#A
+0$$
+#65000
+1#P
+b00000000000000000000000000000010 #s
+1$"
+1#~
+1#A
+1$$
+#66000
+0#B
+0$%
+0#t
+b01 #u
+b0000000000000000000000000000000000000000000000000000000010000000 #v
+b0000000000000000000000000000000000000000000000000000000010000000 #w
+b0000000000000000000000000000000000000000000000000000000010000000 #x
+b0000000000000000000000000000000000000000000000000000000010000000 #y
+b0000000000000000000000000000000000000000000000000000000010000000 #z
+b0000000000000000000000000000000000000000000000000000000010000000 #{
+b1000 #|
+#70000
+0#P
+0$"
+0#~
+0#A
+0$$
+#75000
+1#P
+1$"
+1#~
+1#A
+1$$
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $4
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $]
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $5
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $^
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $6
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $_
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $7
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $`
+#76000
+0#F
+0$)
+b01 #G
+b01 $*
+b0000000000000000000000000000000000000000000000000000000010000000 #H
+b0000000000000000000000000000000000000000000000000000000010000000 $+
+b0000000000000000000000000000000000000000000000000000000010000000 #I
+b0000000000000000000000000000000000000000000000000000000010000000 $,
+b0000000000000000000000000000000000000000000000000000000010000000 #J
+b0000000000000000000000000000000000000000000000000000000010000000 $-
+b0000000000000000000000000000000000000000000000000000000010000000 #K
+b0000000000000000000000000000000000000000000000000000000010000000 $.
+1#E
+1$(
+b00000000000000000000000000000001 #r
+b00000000000000000000000000000000 #s
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $:
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $a
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $8
+#80000
+0#P
+0$"
+0#~
+0#A
+0$$
+#85000
+1#P
+b00000000000000000000000000000001 #s
+1$"
+1#~
+1#A
+1$$
+1$=
+1$f
+b0000000000000000000000000000000000000000000000000000000010000000 $4
+b0000000000000000000000000000000000000000000000000000000010000000 $]
+b0000000000000000000000000000000000000000000000000000000010000000 $5
+b0000000000000000000000000000000000000000000000000000000010000000 $^
+b0000000000000000000000000000000000000000000000000000000010000000 $6
+b0000000000000000000000000000000000000000000000000000000010000000 $_
+b0000000000000000000000000000000000000000000000000000000010000000 $7
+b0000000000000000000000000000000000000000000000000000000010000000 $`
+1$p
+1$>
+1$I
+1$r
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $g
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $?
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $i
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $A
+1$w
+1$J
+1$P
+1$y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $s
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $K
+b0000000000000000000000000000000000000000000000000000000010000000 $c
+b0000000000000000000000000000000000000000000000000000000010000000 $:
+b0000000000000000000000000000000000000000000000000000000010000000 $a
+b0000000000000000000000000000000000000000000000000000000010000000 $8
+#86000
+0#E
+0$(
+b00000000000000000000000010000000 #r
+b00000000000000000000000000000000 #s
+#90000
+0#P
+0$"
+0#~
+0#A
+0$$
+#95000
+1#P
+b00000000000000000000000000000001 #s
+1$"
+1#~
+1#A
+1$$
+0$=
+0$f
+0$p
+0$>
+0$I
+0$r
+b0000000000000000000000000000000000000000000000000000000010000000 $g
+b0000000000000000000000000000000000000000000000000000000010000000 $?
+b0000000000000000000000000000000000000000000000000000000010000000 $i
+b0000000000000000000000000000000000000000000000000000000010000000 $A
+1$}
+1$Q
+1$U
+1%!
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $R
+1%$
+1$V
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %"
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $W
+0$w
+0$J
+0$P
+0$y
+b0000000000000000000000000000000000000000000000000000000010000000 $s
+b0000000000000000000000000000000000000000000000000000000010000000 $K
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %%
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $Y
+#100000
+0#P
+0$"
+0#~
+0#A
+0$$
+#105000
+1#P
+b00000000000000000000000000000010 #s
+1$"
+1#~
+1#A
+1$$
+1$2
+1#L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $/
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #N
+0$}
+0$Q
+0$U
+0%!
+b0000000000000000000000000000000000000000000000000000000010000000 $z
+b0000000000000000000000000000000000000000000000000000000010000000 $R
+0%$
+0$V
+b0000000000000000000000000000000000000000000000000000000010000000 %"
+b0000000000000000000000000000000000000000000000000000000010000000 $W
+b0000000000000000000000000000000000000000000000000000000010000000 %%
+b0000000000000000000000000000000000000000000000000000000010000000 $Y
+#110000
+0#P
+0$"
+0#~
+0#A
+0$$
+#115000
+1#P
+b00000000000000000000000000000011 #s
+1$"
+1#~
+1#A
+1$$
+0$2
+0#L
+b0000000000000000000000000000000000000000000000000000000010000000 $/
+b0000000000000000000000000000000000000000000000000000000010000000 #N
+#120000
+0#P
+0$"
+0#~
+0#A
+0$$
+#125000
+1#P
+b00000000000000000000000000000100 #s
+1$"
+1#~
+1#A
+1$$
+#130000
+0#P
+0$"
+0#~
+0#A
+0$$
+#135000
+1#P
+b00000000000000000000000000000101 #s
+1$"
+1#~
+1#A
+1$$
+#140000
+0#P
+0$"
+0#~
+0#A
+0$$
+#145000
+1#P
+b00000000000000000000000000000110 #s
+1$"
+1#~
+1#A
+1$$
+#150000
+0#P
+0$"
+0#~
+0#A
+0$$
+#155000
+1#P
+b00000000000000000000000000000111 #s
+1$"
+1#~
+1#A
+1$$
+#160000
+0#P
+0$"
+0#~
+0#A
+0$$
+#165000
+1#P
+b00000000000000000000000000001000 #s
+1$"
+1#~
+1#A
+1$$
+#170000
+0#P
+0$"
+0#~
+0#A
+0$$
+#175000
+1#P
+b00000000000000000000000000001001 #s
+1$"
+1#~
+1#A
+1$$
+#180000
+0#P
+0$"
+0#~
+0#A
+0$$
+#185000
+1#P
+b00000000000000000000000000001010 #s
+1$"
+1#~
+1#A
+1$$
+#190000
+0#P
+0$"
+0#~
+0#A
+0$$
+#195000
+1#P
+b00000000000000000000000000001011 #s
+1$"
+1#~
+1#A
+1$$
+#200000
+0#P
+0$"
+0#~
+0#A
+0$$
+#205000
+1#P
+b00000000000000000000000000001100 #s
+1$"
+1#~
+1#A
+1$$
+#210000
+0#P
+0$"
+0#~
+0#A
+0$$
+#215000
+1#P
+b00000000000000000000000000001101 #s
+1$"
+1#~
+1#A
+1$$
+#220000
+0#P
+0$"
+0#~
+0#A
+0$$
+#225000
+1#P
+b00000000000000000000000000001110 #s
+1$"
+1#~
+1#A
+1$$
+#230000
+0#P
+0$"
+0#~
+0#A
+0$$
+#235000
+1#P
+b00000000000000000000000000001111 #s
+1$"
+1#~
+1#A
+1$$
+#240000
+0#P
+0$"
+0#~
+0#A
+0$$
+#245000
+1#P
+b00000000000000000000000000010000 #s
+1$"
+1#~
+1#A
+1$$
+#250000
+0#P
+0$"
+0#~
+0#A
+0$$
+#255000
+1#P
+b00000000000000000000000000010001 #s
+1$"
+1#~
+1#A
+1$$
+#260000
+0#P
+0$"
+0#~
+0#A
+0$$
+#265000
+1#P
+b00000000000000000000000000010010 #s
+1$"
+1#~
+1#A
+1$$
+#270000
+0#P
+0$"
+0#~
+0#A
+0$$
+#275000
+1#P
+b00000000000000000000000000010011 #s
+1$"
+1#~
+1#A
+1$$
+#280000
+0#P
+0$"
+0#~
+0#A
+0$$
+#285000
+1#P
+b00000000000000000000000000010100 #s
+1$"
+1#~
+1#A
+1$$
+#290000
+0#P
+0$"
+0#~
+0#A
+0$$
+#295000
+1#P
+b00000000000000000000000000010101 #s
+1$"
+1#~
+1#A
+1$$
+#300000
+0#P
+0$"
+0#~
+0#A
+0$$
+#305000
+1#P
+b00000000000000000000000000010110 #s
+1$"
+1#~
+1#A
+1$$
+#310000
+0#P
+0$"
+0#~
+0#A
+0$$
+#315000
+1#P
+b00000000000000000000000000010111 #s
+1$"
+1#~
+1#A
+1$$
+#320000
+0#P
+0$"
+0#~
+0#A
+0$$
+#325000
+1#P
+b00000000000000000000000000011000 #s
+1$"
+1#~
+1#A
+1$$
+#330000
+0#P
+0$"
+0#~
+0#A
+0$$
+#335000
+1#P
+b00000000000000000000000000011001 #s
+1$"
+1#~
+1#A
+1$$
+#340000
+0#P
+0$"
+0#~
+0#A
+0$$
+#345000
+1#P
+b00000000000000000000000000011010 #s
+1$"
+1#~
+1#A
+1$$
+#350000
+0#P
+0$"
+0#~
+0#A
+0$$
+#355000
+1#P
+b00000000000000000000000000011011 #s
+1$"
+1#~
+1#A
+1$$
+#360000
+0#P
+0$"
+0#~
+0#A
+0$$
+#365000
+1#P
+b00000000000000000000000000011100 #s
+1$"
+1#~
+1#A
+1$$
+#370000
+0#P
+0$"
+0#~
+0#A
+0$$
+#375000
+1#P
+b00000000000000000000000000011101 #s
+1$"
+1#~
+1#A
+1$$
+#380000
+0#P
+0$"
+0#~
+0#A
+0$$
+#385000
+1#P
+b00000000000000000000000000011110 #s
+1$"
+1#~
+1#A
+1$$
+#390000
+0#P
+0$"
+0#~
+0#A
+0$$
+#395000
+1#P
+b00000000000000000000000000011111 #s
+1$"
+1#~
+1#A
+1$$
+#400000
+0#P
+0$"
+0#~
+0#A
+0$$
+#405000
+1#P
+b00000000000000000000000000100000 #s
+1$"
+1#~
+1#A
+1$$
+#410000
+0#P
+0$"
+0#~
+0#A
+0$$
+#415000
+1#P
+b00000000000000000000000000100001 #s
+1$"
+1#~
+1#A
+1$$
+#420000
+0#P
+0$"
+0#~
+0#A
+0$$
+#425000
+1#P
+b00000000000000000000000000100010 #s
+1$"
+1#~
+1#A
+1$$
+#430000
+0#P
+0$"
+0#~
+0#A
+0$$
+#435000
+1#P
+b00000000000000000000000000100011 #s
+1$"
+1#~
+1#A
+1$$
+#440000
+0#P
+0$"
+0#~
+0#A
+0$$
+#445000
+1#P
+b00000000000000000000000000100100 #s
+1$"
+1#~
+1#A
+1$$
+#450000
+0#P
+0$"
+0#~
+0#A
+0$$
+#455000
+1#P
+b00000000000000000000000000100101 #s
+1$"
+1#~
+1#A
+1$$
+#460000
+0#P
+0$"
+0#~
+0#A
+0$$
+#465000
+1#P
+b00000000000000000000000000100110 #s
+1$"
+1#~
+1#A
+1$$
+#470000
+0#P
+0$"
+0#~
+0#A
+0$$
+#475000
+1#P
+b00000000000000000000000000100111 #s
+1$"
+1#~
+1#A
+1$$
+#480000
+0#P
+0$"
+0#~
+0#A
+0$$
+#485000
+1#P
+b00000000000000000000000000101000 #s
+1$"
+1#~
+1#A
+1$$
+#490000
+0#P
+0$"
+0#~
+0#A
+0$$
+#495000
+1#P
+b00000000000000000000000000101001 #s
+1$"
+1#~
+1#A
+1$$
+#500000
+0#P
+0$"
+0#~
+0#A
+0$$
+#505000
+1#P
+b00000000000000000000000000101010 #s
+1$"
+1#~
+1#A
+1$$
+#510000
+0#P
+0$"
+0#~
+0#A
+0$$
+#515000
+1#P
+b00000000000000000000000000101011 #s
+1$"
+1#~
+1#A
+1$$
+#520000
+0#P
+0$"
+0#~
+0#A
+0$$
+#525000
+1#P
+b00000000000000000000000000101100 #s
+1$"
+1#~
+1#A
+1$$
+#530000
+0#P
+0$"
+0#~
+0#A
+0$$
+#535000
+1#P
+b00000000000000000000000000101101 #s
+1$"
+1#~
+1#A
+1$$
+#540000
+0#P
+0$"
+0#~
+0#A
+0$$
+#545000
+1#P
+b00000000000000000000000000101110 #s
+1$"
+1#~
+1#A
+1$$
+#550000
+0#P
+0$"
+0#~
+0#A
+0$$
+#555000
+1#P
+b00000000000000000000000000101111 #s
+1$"
+1#~
+1#A
+1$$
+#560000
+0#P
+0$"
+0#~
+0#A
+0$$
+#565000
+1#P
+b00000000000000000000000000110000 #s
+1$"
+1#~
+1#A
+1$$
+#570000
+0#P
+0$"
+0#~
+0#A
+0$$
+#575000
+1#P
+b00000000000000000000000000110001 #s
+1$"
+1#~
+1#A
+1$$
+#580000
+0#P
+0$"
+0#~
+0#A
+0$$
+#585000
+1#P
+b00000000000000000000000000110010 #s
+1$"
+1#~
+1#A
+1$$
+#590000
+0#P
+0$"
+0#~
+0#A
+0$$
+#595000
+1#P
+b00000000000000000000000000110011 #s
+1$"
+1#~
+1#A
+1$$
+#600000
+0#P
+0$"
+0#~
+0#A
+0$$
+#605000
+1#P
+b00000000000000000000000000110100 #s
+1$"
+1#~
+1#A
+1$$
+#610000
+0#P
+0$"
+0#~
+0#A
+0$$
+#615000
+1#P
+b00000000000000000000000000110101 #s
+1$"
+1#~
+1#A
+1$$
+#620000
+0#P
+0$"
+0#~
+0#A
+0$$
+#625000
+1#P
+b00000000000000000000000000110110 #s
+1$"
+1#~
+1#A
+1$$
+#630000
+0#P
+0$"
+0#~
+0#A
+0$$
+#635000
+1#P
+b00000000000000000000000000110111 #s
+1$"
+1#~
+1#A
+1$$
+#640000
+0#P
+0$"
+0#~
+0#A
+0$$
+#645000
+1#P
+b00000000000000000000000000111000 #s
+1$"
+1#~
+1#A
+1$$
+#650000
+0#P
+0$"
+0#~
+0#A
+0$$
+#655000
+1#P
+b00000000000000000000000000111001 #s
+1$"
+1#~
+1#A
+1$$
+#660000
+0#P
+0$"
+0#~
+0#A
+0$$
+#665000
+1#P
+b00000000000000000000000000111010 #s
+1$"
+1#~
+1#A
+1$$
+#670000
+0#P
+0$"
+0#~
+0#A
+0$$
+#675000
+1#P
+b00000000000000000000000000111011 #s
+1$"
+1#~
+1#A
+1$$
+#680000
+0#P
+0$"
+0#~
+0#A
+0$$
+#685000
+1#P
+b00000000000000000000000000111100 #s
+1$"
+1#~
+1#A
+1$$
+#690000
+0#P
+0$"
+0#~
+0#A
+0$$
+#695000
+1#P
+b00000000000000000000000000111101 #s
+1$"
+1#~
+1#A
+1$$
+#700000
+0#P
+0$"
+0#~
+0#A
+0$$
+#705000
+1#P
+b00000000000000000000000000111110 #s
+1$"
+1#~
+1#A
+1$$
+#710000
+0#P
+0$"
+0#~
+0#A
+0$$
+#715000
+1#P
+b00000000000000000000000000111111 #s
+1$"
+1#~
+1#A
+1$$
+#720000
+0#P
+0$"
+0#~
+0#A
+0$$
+#725000
+1#P
+b00000000000000000000000001000000 #s
+1$"
+1#~
+1#A
+1$$
+#730000
+0#P
+0$"
+0#~
+0#A
+0$$
+#735000
+1#P
+b00000000000000000000000001000001 #s
+1$"
+1#~
+1#A
+1$$
+#740000
+0#P
+0$"
+0#~
+0#A
+0$$
+#745000
+1#P
+b00000000000000000000000001000010 #s
+1$"
+1#~
+1#A
+1$$
+#750000
+0#P
+0$"
+0#~
+0#A
+0$$
+#755000
+1#P
+b00000000000000000000000001000011 #s
+1$"
+1#~
+1#A
+1$$
+#760000
+0#P
+0$"
+0#~
+0#A
+0$$
+#765000
+1#P
+b00000000000000000000000001000100 #s
+1$"
+1#~
+1#A
+1$$
+#770000
+0#P
+0$"
+0#~
+0#A
+0$$
+#775000
+1#P
+b00000000000000000000000001000101 #s
+1$"
+1#~
+1#A
+1$$
+#780000
+0#P
+0$"
+0#~
+0#A
+0$$
+#785000
+1#P
+b00000000000000000000000001000110 #s
+1$"
+1#~
+1#A
+1$$
+#790000
+0#P
+0$"
+0#~
+0#A
+0$$
+#795000
+1#P
+b00000000000000000000000001000111 #s
+1$"
+1#~
+1#A
+1$$
+#800000
+0#P
+0$"
+0#~
+0#A
+0$$
+#805000
+1#P
+b00000000000000000000000001001000 #s
+1$"
+1#~
+1#A
+1$$
+#810000
+0#P
+0$"
+0#~
+0#A
+0$$
+#815000
+1#P
+b00000000000000000000000001001001 #s
+1$"
+1#~
+1#A
+1$$
+#820000
+0#P
+0$"
+0#~
+0#A
+0$$
+#825000
+1#P
+b00000000000000000000000001001010 #s
+1$"
+1#~
+1#A
+1$$
+#830000
+0#P
+0$"
+0#~
+0#A
+0$$
+#835000
+1#P
+b00000000000000000000000001001011 #s
+1$"
+1#~
+1#A
+1$$
+#840000
+0#P
+0$"
+0#~
+0#A
+0$$
+#845000
+1#P
+b00000000000000000000000001001100 #s
+1$"
+1#~
+1#A
+1$$
+#850000
+0#P
+0$"
+0#~
+0#A
+0$$
+#855000
+1#P
+b00000000000000000000000001001101 #s
+1$"
+1#~
+1#A
+1$$
+#860000
+0#P
+0$"
+0#~
+0#A
+0$$
+#865000
+1#P
+b00000000000000000000000001001110 #s
+1$"
+1#~
+1#A
+1$$
+#870000
+0#P
+0$"
+0#~
+0#A
+0$$
+#875000
+1#P
+b00000000000000000000000001001111 #s
+1$"
+1#~
+1#A
+1$$
+#880000
+0#P
+0$"
+0#~
+0#A
+0$$
+#885000
+1#P
+b00000000000000000000000001010000 #s
+1$"
+1#~
+1#A
+1$$
+#890000
+0#P
+0$"
+0#~
+0#A
+0$$
+#895000
+1#P
+b00000000000000000000000001010001 #s
+1$"
+1#~
+1#A
+1$$
+#900000
+0#P
+0$"
+0#~
+0#A
+0$$
+#905000
+1#P
+b00000000000000000000000001010010 #s
+1$"
+1#~
+1#A
+1$$
+#910000
+0#P
+0$"
+0#~
+0#A
+0$$
+#915000
+1#P
+b00000000000000000000000001010011 #s
+1$"
+1#~
+1#A
+1$$
+#920000
+0#P
+0$"
+0#~
+0#A
+0$$
+#925000
+1#P
+b00000000000000000000000001010100 #s
+1$"
+1#~
+1#A
+1$$
+#930000
+0#P
+0$"
+0#~
+0#A
+0$$
+#935000
+1#P
+b00000000000000000000000001010101 #s
+1$"
+1#~
+1#A
+1$$
+#940000
+0#P
+0$"
+0#~
+0#A
+0$$
+#945000
+1#P
+b00000000000000000000000001010110 #s
+1$"
+1#~
+1#A
+1$$
+#950000
+0#P
+0$"
+0#~
+0#A
+0$$
+#955000
+1#P
+b00000000000000000000000001010111 #s
+1$"
+1#~
+1#A
+1$$
+#960000
+0#P
+0$"
+0#~
+0#A
+0$$
+#965000
+1#P
+b00000000000000000000000001011000 #s
+1$"
+1#~
+1#A
+1$$
+#970000
+0#P
+0$"
+0#~
+0#A
+0$$
+#975000
+1#P
+b00000000000000000000000001011001 #s
+1$"
+1#~
+1#A
+1$$
+#980000
+0#P
+0$"
+0#~
+0#A
+0$$
+#985000
+1#P
+b00000000000000000000000001011010 #s
+1$"
+1#~
+1#A
+1$$
+#990000
+0#P
+0$"
+0#~
+0#A
+0$$
+#995000
+1#P
+b00000000000000000000000001011011 #s
+1$"
+1#~
+1#A
+1$$
+#1000000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1005000
+1#P
+b00000000000000000000000001011100 #s
+1$"
+1#~
+1#A
+1$$
+#1010000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1015000
+1#P
+b00000000000000000000000001011101 #s
+1$"
+1#~
+1#A
+1$$
+#1020000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1025000
+1#P
+b00000000000000000000000001011110 #s
+1$"
+1#~
+1#A
+1$$
+#1030000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1035000
+1#P
+b00000000000000000000000001011111 #s
+1$"
+1#~
+1#A
+1$$
+#1040000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1045000
+1#P
+b00000000000000000000000001100000 #s
+1$"
+1#~
+1#A
+1$$
+#1050000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1055000
+1#P
+b00000000000000000000000001100001 #s
+1$"
+1#~
+1#A
+1$$
+#1060000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1065000
+1#P
+b00000000000000000000000001100010 #s
+1$"
+1#~
+1#A
+1$$
+#1070000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1075000
+1#P
+b00000000000000000000000001100011 #s
+1$"
+1#~
+1#A
+1$$
+#1080000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1085000
+1#P
+b00000000000000000000000001100100 #s
+1$"
+1#~
+1#A
+1$$
+#1090000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1095000
+1#P
+b00000000000000000000000001100101 #s
+1$"
+1#~
+1#A
+1$$
+#1100000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1105000
+1#P
+b00000000000000000000000001100110 #s
+1$"
+1#~
+1#A
+1$$
+#1110000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1115000
+1#P
+b00000000000000000000000001100111 #s
+1$"
+1#~
+1#A
+1$$
+#1120000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1125000
+1#P
+b00000000000000000000000001101000 #s
+1$"
+1#~
+1#A
+1$$
+#1130000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1135000
+1#P
+b00000000000000000000000001101001 #s
+1$"
+1#~
+1#A
+1$$
+#1140000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1145000
+1#P
+b00000000000000000000000001101010 #s
+1$"
+1#~
+1#A
+1$$
+#1150000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1155000
+1#P
+b00000000000000000000000001101011 #s
+1$"
+1#~
+1#A
+1$$
+#1160000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1165000
+1#P
+b00000000000000000000000001101100 #s
+1$"
+1#~
+1#A
+1$$
+#1170000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1175000
+1#P
+b00000000000000000000000001101101 #s
+1$"
+1#~
+1#A
+1$$
+#1180000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1185000
+1#P
+b00000000000000000000000001101110 #s
+1$"
+1#~
+1#A
+1$$
+#1190000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1195000
+1#P
+b00000000000000000000000001101111 #s
+1$"
+1#~
+1#A
+1$$
+#1200000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1205000
+1#P
+b00000000000000000000000001110000 #s
+1$"
+1#~
+1#A
+1$$
+#1210000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1215000
+1#P
+b00000000000000000000000001110001 #s
+1$"
+1#~
+1#A
+1$$
+#1220000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1225000
+1#P
+b00000000000000000000000001110010 #s
+1$"
+1#~
+1#A
+1$$
+#1230000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1235000
+1#P
+b00000000000000000000000001110011 #s
+1$"
+1#~
+1#A
+1$$
+#1240000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1245000
+1#P
+b00000000000000000000000001110100 #s
+1$"
+1#~
+1#A
+1$$
+#1250000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1255000
+1#P
+b00000000000000000000000001110101 #s
+1$"
+1#~
+1#A
+1$$
+#1260000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1265000
+1#P
+b00000000000000000000000001110110 #s
+1$"
+1#~
+1#A
+1$$
+#1270000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1275000
+1#P
+b00000000000000000000000001110111 #s
+1$"
+1#~
+1#A
+1$$
+#1280000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1285000
+1#P
+b00000000000000000000000001111000 #s
+1$"
+1#~
+1#A
+1$$
+#1290000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1295000
+1#P
+b00000000000000000000000001111001 #s
+1$"
+1#~
+1#A
+1$$
+#1300000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1305000
+1#P
+b00000000000000000000000001111010 #s
+1$"
+1#~
+1#A
+1$$
+#1310000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1315000
+1#P
+b00000000000000000000000001111011 #s
+1$"
+1#~
+1#A
+1$$
+#1320000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1325000
+1#P
+b00000000000000000000000001111100 #s
+1$"
+1#~
+1#A
+1$$
+#1330000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1335000
+1#P
+b00000000000000000000000001111101 #s
+1$"
+1#~
+1#A
+1$$
+#1340000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1345000
+1#P
+b00000000000000000000000001111110 #s
+1$"
+1#~
+1#A
+1$$
+#1350000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1355000
+1#P
+b00000000000000000000000001111111 #s
+1$"
+1#~
+1#A
+1$$
+#1360000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1365000
+1#P
+b00000000000000000000000010000000 #s
+1$"
+1#~
+1#A
+1$$
+#1370000
+0#P
+0$"
+0#~
+0#A
+0$$
+#1375000
+1#P
+1$"
+1#~
+1#A
+1$$
+#1376000
+1#@
+1#}

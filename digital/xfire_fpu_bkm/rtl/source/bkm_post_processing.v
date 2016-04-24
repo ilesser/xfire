@@ -28,10 +28,10 @@
 //                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
 //                                                 |---> Complex:    0 for complex args, 1 for real args
 //    - op        : Operation code (logic, XXX bits).
-//    - E_r       : Real      part of E input (two's complement, W bits).
-//    - E_i       : Imaginary part of E input (two's complement, W bits).
-//    - L_r       : Real      part of E input (two's complement, W bits).
-//    - L_i       : Imaginary part of E input (two's complement, W bits).
+//    - E_x       : Real      part of E input (two's complement, W bits).
+//    - E_y       : Imaginary part of E input (two's complement, W bits).
+//    - L_x       : Real      part of E input (two's complement, W bits).
+//    - L_y       : Imaginary part of E input (two's complement, W bits).
 //
 //  Data outputs:
 //    - x         : Real      part of z output (two's complement, W bits).
@@ -73,17 +73,15 @@ module bkm_post_processing #(
     input   wire                 start,
     input   wire  [1:0]          format,
     input   wire  [`OPSIZE-1:0]  op,
-    input   reg   [W-1:0]        E_r,
-    input   reg   [W-1:0]        E_i,
-    input   reg   [W-1:0]        L_r,
-    input   reg   [W-1:0]        L_i,
+    input   wire  [W-1:0]        x_in,
+    input   wire  [W-1:0]        y_in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [W-1:0]        x,
-    output  reg   [W-1:0]        y,
-    output  wire  [`FSIZE-1:0]   flags,
-    output  wire                 done
+    output  reg   [W-1:0]        x_out,
+    output  reg   [W-1:0]        y_out,
+    output  reg   [`FSIZE-1:0]   flags,
+    output  reg                  done
   );
 // *****************************************************************************
 
@@ -94,18 +92,25 @@ module bkm_post_processing #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg  [W-1:0]  dummy;
    // -----------------------------------------------------
+
+   assign flags = {`FSIZE{1'b0}};
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         dummy = {W{1'b0}};
+         done = 1'b0;
+         x_out = {W{1'b0}};
+         y_out = {W{1'b0}};
       end
       else if (srst) begin
-         dummy = {W{1'b0}};
+         done = 1'b0;
+         x_out = {W{1'b0}};
+         y_out = {W{1'b0}};
       end
       else if (enable) begin
-         dummy = {W,{1'b1}};
+         done = start;
+         x_out = x_in;
+         y_out = y_in;
       end
    end
 

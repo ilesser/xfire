@@ -1,0 +1,45 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/bkm.basic_test.simv.log +TESTSEED=1495516943 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 23 16:09 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1495516943
+*******************************************************
+
+Time =        0 x = xxxxxxxxxxxxxxxx y = xxxxxxxxxxxxxxxx flags = xxxx done = x
+
+Time =    25000 x = 0000000000000000 y = 0000000000000000 flags = xxxx done = 0
+
+Time =   105000 x = xxxxxxxxxxxxxxxx y = 0000000000000000 flags = xxxx done = 1
+
+Time =   115000 x = 0000000000000080 y = 0000000000000000 flags = xxxx done = 0
+
+
+
+TIME     : 1376
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 1495516943
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_bkm.v", line 309.
+$finish at simulation time              1376000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1376000 ps
+CPU Time:      0.160 seconds;       Data structure size:   0.0Mb
+Sat Apr 23 16:09:34 2016

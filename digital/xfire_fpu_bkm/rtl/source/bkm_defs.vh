@@ -24,17 +24,25 @@
 // Definitions
 // *****************************************************************************
 
+//`define W         64
+//`define LOG2W     6
+//`define N         64
+//`define LOG2N     6
+
 // Define size for flags
 `define FSIZE     4
 
+// Define operation modes
+`define MODE_E 1'b0
+`define MODE_L 1'b1
 
 //    - format    : Format code (logic, 2 bits).   FF
 //                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
 //                                                 |---> Complex:    0 for complex args, 1 for real args
 
-`define FORMAT_REAL_32  2b01
-`define FORMAT_REAL_64  2b00
-`define FORMAT_CMPLX_32 2b10
-`define FORMAT_CMPLX_64 2b11
+`define FORMAT_REAL_32  2'b01
+`define FORMAT_REAL_64  2'b00
+`define FORMAT_CMPLX_32 2'b10
+`define FORMAT_CMPLX_64 2'b11
 // *****************************************************************************
 
