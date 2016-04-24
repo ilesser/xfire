@@ -180,25 +180,25 @@ module bkm #(
    // -----------------------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         range_red_start = 1'b0;
-         E_x_in_reg = {W{1'b0}};
-         E_y_in_reg = {W{1'b0}};
-         L_x_in_reg = {W{1'b0}};
-         L_y_in_reg = {W{1'b0}};
+         range_red_start  <= 1'b0;
+         E_x_in_reg       <= {W{1'b0}};
+         E_y_in_reg       <= {W{1'b0}};
+         L_x_in_reg       <= {W{1'b0}};
+         L_y_in_reg       <= {W{1'b0}};
       end
       else if (srst) begin
-         range_red_start = 1'b0;
-         E_x_in_reg = {W{1'b0}};
-         E_y_in_reg = {W{1'b0}};
-         L_x_in_reg = {W{1'b0}};
-         L_y_in_reg = {W{1'b0}};
+         range_red_start  <= 1'b0;
+         E_x_in_reg       <= {W{1'b0}};
+         E_y_in_reg       <= {W{1'b0}};
+         L_x_in_reg       <= {W{1'b0}};
+         L_y_in_reg       <= {W{1'b0}};
       end
       else if (input_reg_enable) begin
-         range_red_start = start;
-         E_x_in_reg = E_x_in;
-         E_y_in_reg = E_y_in;
-         L_x_in_reg = L_x_in;
-         L_y_in_reg = L_y_in;
+         range_red_start  <= start;
+         E_x_in_reg       <= E_x_in;
+         E_y_in_reg       <= E_y_in;
+         L_x_in_reg       <= L_x_in;
+         L_y_in_reg       <= L_y_in;
       end
    end
    // -----------------------------------------------------
@@ -279,7 +279,7 @@ module bkm #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
+      .W                   (W)
    ) bkm_first_step (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -381,12 +381,13 @@ module bkm #(
       .k3                  (k3),
       .X_in                (X_N),
       .Y_in                (Y_N),
+      .flags_in            (bkm_steps_flags),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
       .X_out               (X_range_ext),
       .Y_out               (Y_range_ext),
-      //.flags               (range_ext_flags),
+      .flags_out           (range_ext_flags),
       .done                (range_ext_done)
    );
    // -----------------------------------------------------
@@ -419,19 +420,22 @@ module bkm #(
    // -----------------------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         done     = 1'b0;
-         X_out = {W{1'b0}};
-         Y_out = {W{1'b0}};
+         X_out <= {W{1'b0}};
+         Y_out <= {W{1'b0}};
+         flags <= {`FSIZE{1'b0}};
+         done  <= 1'b0;
       end
       else if (srst) begin
-         done     = 1'b0;
-         X_out = {W{1'b0}};
-         Y_out = {W{1'b0}};
+         X_out <= {W{1'b0}};
+         Y_out <= {W{1'b0}};
+         flags <= {`FSIZE{1'b0}};
+         done  <= 1'b0;
       end
       else if (output_reg_enable) begin
-         done  = range_ext_done;
-         X_out = X_prec_out;
-         Y_out = Y_prec_out;
+         X_out <= X_prec_out;
+         Y_out <= Y_prec_out;
+         flags <= range_ext_flags;
+         done  <= range_ext_done;
       end
    end
    // -----------------------------------------------------

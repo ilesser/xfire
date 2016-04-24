@@ -6,7 +6,7 @@ Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precisio
 ./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/bkm.basic_test.vcs.log \
 +define+RTL_DEBUG +vcs+lic+wait +warn=all -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Sat Apr 23 16:09:32 2016
+            Version I-2014.03 -- Sun Apr 24 16:05:25 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -78,29 +78,32 @@ Top Level Modules:
        csd2bin
        tb_bkm
        bin2csd
-
-Warning-[AOUP] Attempt to override undefined parameter
-./temp/bkm.v, 287
-  Attempting to override undefined parameter "LOG2W", will ignore it.
-
-
-Warning-[AOUP] Attempt to override undefined parameter
-./temp/bkm.v, 287
-  Attempting to override undefined parameter "N", will ignore it.
-
-
-Warning-[AOUP] Attempt to override undefined parameter
-./temp/bkm.v, 287
-  Attempting to override undefined parameter "LOG2N", will ignore it.
-
 TimeScale is 1 ns / 1 ps
 
 Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm.v, 331
+./temp/bkm.v, 328
 "bkm_steps #(W, LOG2W, N, LOG2N) bkm_steps( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_steps_enable),  .start (bkm_steps_start),  .mode (mode),  .format (format),  .X_in (X_1),  .Y_in (Y_1),  .x_in (x_1),  .y_in (y_1),  .X_out (X_N),  .Y_out (Y_N),  .flags (bkm_steps_flags),  .done (bkm_steps_done));"
   The following 1-bit expression is connected to 4-bit port "flags" of module 
   "bkm_steps", instance "bkm_steps".
   Expression: bkm_steps_flags
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm.v, 364
+"bkm_range_extension #(W) bkm_range_extension( .clk (clk),  .arst (arst),  .srst (srst),  .enable (range_ext_enable),  .start (range_ext_start),  .mode (mode),  .format (format),  .a (a),  .b (b),  .k1 (k1),  .k2 (k2),  .k3 (k3),  .X_in (X_N),  .Y_in (Y_N),  .flags_in (bkm_steps_flags),  .X_out (X_range_ext),  .Y_out (Y_range_ext),  .flags_out (range_ext_flags),  .done (range_ext_done));"
+  The following 1-bit expression is connected to 4-bit port "flags_in" of 
+  module "bkm_range_extension", instance "bkm_range_extension".
+  Expression: bkm_steps_flags
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+./temp/bkm.v, 364
+"bkm_range_extension #(W) bkm_range_extension( .clk (clk),  .arst (arst),  .srst (srst),  .enable (range_ext_enable),  .start (range_ext_start),  .mode (mode),  .format (format),  .a (a),  .b (b),  .k1 (k1),  .k2 (k2),  .k3 (k3),  .X_in (X_N),  .Y_in (Y_N),  .flags_in (bkm_steps_flags),  .X_out (X_range_ext),  .Y_out (Y_range_ext),  .flags_out (range_ext_flags),  .done (range_ext_done));"
+  The following 1-bit expression is connected to 4-bit port "flags_out" of 
+  module "bkm_range_extension", instance "bkm_range_extension".
+  Expression: range_ext_flags
   	use +lint=PCWM for more details
 
 
@@ -157,13 +160,6 @@ Warning-[PCWM-W] Port connection width mismatch
   Expression: bkm_post_op
   	use +lint=PCWM for more details
 
-
-Warning-[CWUC] Concatenations with unsized constants
-./temp/tb_bkm.v, 691
-"4"
-  An unsized constant '4' is used in the concatenation. The unsized constant 
-  will be used as a 32-bit constant.
-
 Starting vcs inline pass...
 9 modules and 0 UDP read.
 recompiling module bkm
@@ -190,4 +186,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: .509 seconds to compile + .109 seconds to elab + .119 seconds to link
+CPU time: .514 seconds to compile + .106 seconds to elab + .124 seconds to link

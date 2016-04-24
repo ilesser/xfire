@@ -105,25 +105,25 @@ module bkm_pre_processing #(
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         done = 1'b0;
-         E_x = {W{1'b0}};
-         E_y = {W{1'b0}};
-         L_x = {W{1'b0}};
-         L_y = {W{1'b0}};
+         done <= 1'b0;
+         E_x  <= {W{1'b0}};
+         E_y  <= {W{1'b0}};
+         L_x  <= {W{1'b0}};
+         L_y  <= {W{1'b0}};
       end
       else if (srst) begin
-         done = 1'b0;
-         E_x = {W{1'b0}};
-         E_y = {W{1'b0}};
-         L_x = {W{1'b0}};
-         L_y = {W{1'b0}};
+         done <= 1'b0;
+         E_x  <= {W{1'b0}};
+         E_y  <= {W{1'b0}};
+         L_x  <= {W{1'b0}};
+         L_y  <= {W{1'b0}};
       end
       else if (enable) begin
-         done = start;
-         E_x = x1;
-         E_y = y1;
-         L_x = x2;
-         L_y = y2;
+         done <= start;
+         E_x  <= x1;
+         E_y  <= y1;
+         L_x  <= x2;
+         L_y  <= y2;
       end
    end
 
