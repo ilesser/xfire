@@ -1,0 +1,954 @@
+Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precision_selection.v \
+./temp/bkm.v ./temp/bkm_first_step.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
+./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v ./temp/simlib_clk_osc.v \
+./temp/bkm_range_reduction.v ./temp/tb_barrel_shifter.v ./temp/bkm_fixed_control_logic.v \
+./temp/bkm_range_extension.v ./temp/csd2bin.v ./temp/output_precision_selection.v \
+./temp/bkm_steps.v ./temp/barrel_shifter.v ./temp/bkm_post_processing.v ./temp/bin2csd.v \
+-l ./reports/barrel_shifter.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all \
++lint=all -sverilog -debug
+                         Chronologic VCS (TM)
+            Version I-2014.03 -- Mon Apr 25 19:50:04 2016
+               Copyright (c) 1991-2014 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '././temp/input_precision_selection.v'
+
+Lint-[VCDE] Compiler directive encountered
+././temp/input_precision_selection.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+././temp/input_precision_selection.v, 46
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file '././temp/input_precision_selection.v'.
+
+Lint-[VCDE] Compiler directive encountered
+././temp/input_precision_selection.v, 129
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+././temp/input_precision_selection.v, 133
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm.v, 59
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm.v'.
+
+Lint-[IWU] Implicit wire is used
+./temp/bkm.v, 351
+  No type is specified for wire 'bkm_steps_flags'. Default wire type is being 
+  applied according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/bkm.v, 391
+  No type is specified for wire 'range_ext_flags'. Default wire type is being 
+  applied according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm.v, 448
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm.v, 452
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_first_step.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_first_step.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_first_step.v, 145
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_first_step.v, 149
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_fixed.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 59
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed.v'.
+
+Lint-[IWU] Implicit wire is used
+./temp/bkm_fixed.v, 212
+  No type is specified for wire 'x_bkm'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/bkm_fixed.v, 213
+  No type is specified for wire 'y_bkm'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 317
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 321
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_pre_processing.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 57
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_pre_processing.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 136
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 140
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/csd_add_subb.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd_add_subb.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd_add_subb.v, 286
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd_add_subb.v, 290
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/xfire_fpu_bkm.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 43
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/xfire_fpu_bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/xfire_fpu_bkm_defs.vh'.
+Back to file './temp/xfire_fpu_bkm.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 111
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 115
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/fadder.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 86
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 90
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/simlib_clk_osc.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_clk_osc.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_clk_osc.v, 45
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/simlib_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 34
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 35
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 38
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 39
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 40
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 41
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 42
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 47
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 48
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 49
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 51
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 52
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 53
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 54
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 55
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 57
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/simlib_clk_osc.v'.
+Parsing design file './temp/bkm_range_reduction.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_range_reduction.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_range_reduction.v, 146
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_range_reduction.v, 150
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/tb_barrel_shifter.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 33
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 129
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 130
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 131
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 132
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 133
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 135
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 136
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 137
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 138
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 139
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 140
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 142
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 143
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 144
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 145
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 146
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 148
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 149
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 150
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 151
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 152
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 154
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 402
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 598
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 599
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 601
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 602
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 604
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 605
+  Verilog compiler directive encountered "`define".
+
+Parsing design file './temp/bkm_fixed_control_logic.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 51
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_control_logic.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 131
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 135
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_range_extension.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_range_extension.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_range_extension.v, 131
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_range_extension.v, 135
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/csd2bin.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 138
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 142
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/output_precision_selection.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/output_precision_selection.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/output_precision_selection.v, 48
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/output_precision_selection.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/output_precision_selection.v, 117
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/output_precision_selection.v, 121
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_steps.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_steps.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_steps.v, 43
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_steps.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_steps.v, 119
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_steps.v, 123
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/barrel_shifter.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/barrel_shifter.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Error-[SE] Syntax error
+  Following verilog source has syntax error :
+  "./temp/barrel_shifter.v", 101: token is '['
+           m[i][LOG2W] = dir ? in[W-1-i] : in[i];
+             ^
+
+1 error
+CPU time: .065 seconds to compile

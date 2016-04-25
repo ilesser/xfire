@@ -1,0 +1,37 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/barrel_shifter.basic_test.simv.log +TESTSEED=2330403657 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 25 19:49 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1964563639
+*******************************************************
+
+
+
+TIME     : 0
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 1964563639
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_barrel_shifter.v", line 253.
+$finish at simulation time                    0
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 0 ps
+CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
+Mon Apr 25 19:49:55 2016
