@@ -77,9 +77,6 @@ module barrel_shifter #(
    reg   in0 [0:W-1][0:LOG2W-1];
    reg   in1 [0:W-1][0:LOG2W-1];
    reg   m   [0:W-1][0:LOG2W];
-   //reg    in0 [W-1:0] [LOG2W-1:0];
-   //reg    in1 [W-1:0] [LOG2W-1:0];
-   //reg    m   [W-1:0] [LOG2W:0];
 
    // -----------------------------------------------------
    // Combinational logic
@@ -88,8 +85,7 @@ module barrel_shifter #(
    // Select the bit that gets shifted in from the left
    assign s = shift_t ? in[W-1] : 1'b0;
 
-   genvar i;
-   genvar j;
+   genvar i,j;
    generate
       for (i=0; i < W; i=i+1) begin
 
@@ -97,8 +93,7 @@ module barrel_shifter #(
          // and run a 'to right' shift
 
          // Pre data reversal
-         //m[i][LOG2W] = dir ? in[W-1-i] : in[i];
-         //m[i][LOG2W] = in[i];
+         assign m[i][LOG2W] = dir ? in[W-1-i] : in[i];
 
          for (j=0; j < LOG2W; j=j+1) begin
 
@@ -115,8 +110,7 @@ module barrel_shifter #(
          end // for j
 
          // Post data reversal
-         //out[i] = dir ? m[W-1-i][0] : m[i][0];
-         //out[i] = m[i][0];
+         assign out[i] = dir ? m[W-1-i][0] : m[i][0];
 
       end // for i
 
