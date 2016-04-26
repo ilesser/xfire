@@ -44,7 +44,7 @@ module tb_barrel_shifter ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam        W = 64;
+   localparam        W     = 64;
    localparam        LOG2W = 6;
    reg               tb_dir;
    reg               tb_op;
@@ -85,6 +85,7 @@ module tb_barrel_shifter ();
       .dir(tb_dir),
       .op(tb_op),
       .shift_t(tb_shift_t),
+      .sel(tb_sel),
       .in(tb_in),
       .out(wire_out)
    );

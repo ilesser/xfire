@@ -53,13 +53,22 @@ task basic_test;
 
    begin
 
-      $monitor("Time = %8t dir = %b op = %b shift_t = %b sel = %d in = %d\n\t\texpected = %d\n\t\tobtained = %d",$time, tb_dir, tb_op, tb_shift_t, tb_sel, tb_in, tb_out, wire_out);
+      $monitor("Time = %8t dir = %b op = %b shift_t = %b sel = %h in = %h\n\t\texpected = %h\n\t\tobtained = %h",$time, tb_dir, tb_op, tb_shift_t, tb_sel, tb_in, tb_out, wire_out);
       $dumpfile("../waves/tb_barrel_shifter_basic_test.vcd");
       $dumpvars();
 
 
       //                      dir         op          shift_t      sel   in  out
       load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   0, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   1, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   4, 4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,  -4,-4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,  16, 8   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 262 );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 65  );
+      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 4192);
+      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   0, 524, 524 );
+      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 1048);
 
 
    end
@@ -104,14 +113,11 @@ task load_barrel_shifter;
       tb_in       = in;
       tb_out      = out;
 
-      if ( wire_out != tb_out ) begin
-         `ERR_MSG2(Expected result: %b\n\t\t  Obtained result: %b\t, tb_out, wire_out);
+      #1;
+      if ( wire_out !== tb_out ) begin
+         `ERR_MSG2(Expected result: %b\n\t   Obtained result: %b\t, tb_out, wire_out);
          $display("");
       end
-
-      //$display("X = %h  Y = %h   F = %b", X, Y, F);
-      //$display("x = %h  y = %h   f = %b", bkm_x, bkm_y, bkm_flags);
-      //$display("err_x = %b err_y = %b  err_f = %b", err_x, err_y, err_f );
 
    end
 

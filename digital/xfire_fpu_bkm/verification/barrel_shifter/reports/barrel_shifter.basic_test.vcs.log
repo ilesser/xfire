@@ -7,7 +7,7 @@ Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precisio
 -l ./reports/barrel_shifter.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all \
 +lint=all -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Mon Apr 25 19:50:04 2016
+            Version I-2014.03 -- Tue Apr 26 08:13:32 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -576,11 +576,6 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 129
-  Verilog compiler directive encountered "`define".
-
-
-Lint-[VCDE] Compiler directive encountered
 ./temp/tb_barrel_shifter.v, 130
   Verilog compiler directive encountered "`define".
 
@@ -601,7 +596,7 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 135
+./temp/tb_barrel_shifter.v, 134
   Verilog compiler directive encountered "`define".
 
 
@@ -631,7 +626,7 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 142
+./temp/tb_barrel_shifter.v, 141
   Verilog compiler directive encountered "`define".
 
 
@@ -656,7 +651,7 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 148
+./temp/tb_barrel_shifter.v, 147
   Verilog compiler directive encountered "`define".
 
 
@@ -681,17 +676,17 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 154
+./temp/tb_barrel_shifter.v, 153
   Verilog compiler directive encountered "`define".
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 402
+./temp/tb_barrel_shifter.v, 155
   Verilog compiler directive encountered "`define".
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 598
+./temp/tb_barrel_shifter.v, 403
   Verilog compiler directive encountered "`define".
 
 
@@ -701,7 +696,7 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 601
+./temp/tb_barrel_shifter.v, 600
   Verilog compiler directive encountered "`define".
 
 
@@ -711,12 +706,17 @@ Lint-[VCDE] Compiler directive encountered
 
 
 Lint-[VCDE] Compiler directive encountered
-./temp/tb_barrel_shifter.v, 604
+./temp/tb_barrel_shifter.v, 603
   Verilog compiler directive encountered "`define".
 
 
 Lint-[VCDE] Compiler directive encountered
 ./temp/tb_barrel_shifter.v, 605
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_barrel_shifter.v, 606
   Verilog compiler directive encountered "`define".
 
 Parsing design file './temp/bkm_fixed_control_logic.v'
@@ -944,11 +944,2832 @@ Lint-[VCDE] Compiler directive encountered
   Verilog compiler directive encountered "`timescale".
 
 
-Error-[SE] Syntax error
-  Following verilog source has syntax error :
-  "./temp/barrel_shifter.v", 101: token is '['
-           m[i][LOG2W] = dir ? in[W-1-i] : in[i];
-             ^
+Lint-[VCDE] Compiler directive encountered
+./temp/barrel_shifter.v, 134
+  Verilog compiler directive encountered "`ifdef".
 
-1 error
-CPU time: .065 seconds to compile
+
+Lint-[VCDE] Compiler directive encountered
+./temp/barrel_shifter.v, 138
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_post_processing.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 53
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 37
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 44
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_post_processing.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 123
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 127
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bin2csd.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 169
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 173
+  Verilog compiler directive encountered "`endif".
+
+Top Level Modules:
+       bkm_fixed
+       csd_add_subb
+       xfire_fpu_bkm
+       fadder
+       simlib_clk_osc
+       tb_barrel_shifter
+       csd2bin
+       bin2csd
+TimeScale is 1 ns / 1 ps
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm.v, 328
+"bkm_steps #(W, LOG2W, N, LOG2N) bkm_steps( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_steps_enable),  .start (bkm_steps_start),  .mode (mode),  .format (format),  .X_in (X_1),  .Y_in (Y_1),  .x_in (x_1),  .y_in (y_1),  .X_out (X_N),  .Y_out (Y_N),  .flags (bkm_steps_flags),  .done (bkm_steps_done));"
+  The following 1-bit expression is connected to 4-bit port "flags" of module 
+  "bkm_steps", instance "bkm_steps".
+  Expression: bkm_steps_flags
+  The expression is from module bkm, instance bkm_core 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm.v, 364
+"bkm_range_extension #(W) bkm_range_extension( .clk (clk),  .arst (arst),  .srst (srst),  .enable (range_ext_enable),  .start (range_ext_start),  .mode (mode),  .format (format),  .a (a),  .b (b),  .k1 (k1),  .k2 (k2),  .k3 (k3),  .X_in (X_N),  .Y_in (Y_N),  .flags_in (bkm_steps_flags),  .X_out (X_range_ext),  .Y_out (Y_range_ext),  .flags_out (range_ext_flags),  .done (range_ext_done));"
+  The following 1-bit expression is connected to 4-bit port "flags_in" of 
+  module "bkm_range_extension", instance "bkm_range_extension".
+  Expression: bkm_steps_flags
+  The expression is from module bkm, instance bkm_core 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm.v, 364
+"bkm_range_extension #(W) bkm_range_extension( .clk (clk),  .arst (arst),  .srst (srst),  .enable (range_ext_enable),  .start (range_ext_start),  .mode (mode),  .format (format),  .a (a),  .b (b),  .k1 (k1),  .k2 (k2),  .k3 (k3),  .X_in (X_N),  .Y_in (Y_N),  .flags_in (bkm_steps_flags),  .X_out (X_range_ext),  .Y_out (Y_range_ext),  .flags_out (range_ext_flags),  .done (range_ext_done));"
+  The following 1-bit expression is connected to 4-bit port "flags_out" of 
+  module "bkm_range_extension", instance "bkm_range_extension".
+  Expression: range_ext_flags
+  The expression is from module bkm, instance bkm_core 
+
+
+Lint-[UI] Unused input
+./temp/bkm_first_step.v, 79
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 191
+"bkm #(W, LOG2W, N, LOG2N) bkm_core( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_core_enable),  .start (bkm_core_start),  .mode (bkm_core_mode),  .format (bkm_core_format),  .E_x_in (E_x_in),  .E_y_in (E_y_in),  .L_x_in (L_x_in),  .L_y_in (L_y_in),  .X_out (x_bkm),  .Y_out (y_bkm),  .flags (bkm_core_flags),  .done (bkm_core_done));"
+  The following 1-bit expression is connected to 64-bit port "X_out" of module
+  "bkm", instance "bkm_core".
+  Expression: x_bkm
+  The expression is from module bkm_fixed
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 191
+"bkm #(W, LOG2W, N, LOG2N) bkm_core( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_core_enable),  .start (bkm_core_start),  .mode (bkm_core_mode),  .format (bkm_core_format),  .E_x_in (E_x_in),  .E_y_in (E_y_in),  .L_x_in (L_x_in),  .L_y_in (L_y_in),  .X_out (x_bkm),  .Y_out (y_bkm),  .flags (bkm_core_flags),  .done (bkm_core_done));"
+  The following 1-bit expression is connected to 64-bit port "Y_out" of module
+  "bkm", instance "bkm_core".
+  Expression: y_bkm
+  The expression is from module bkm_fixed
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 227
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 6-bit port "op" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: bkm_post_op
+  The expression is from module bkm_fixed
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 227
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 64-bit port "x_in" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: x_bkm
+  The expression is from module bkm_fixed
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 227
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 64-bit port "y_in" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: y_bkm
+  The expression is from module bkm_fixed
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 257
+"bkm_fixed_control_logic bkm_fixed_control_logic( .clk (clk),  .arst (arst),  .srst (srst),  .enable (enable),  .start (start),  .format (format),  .op (op),  .bkm_pre_done (bkm_pre_done),  .bkm_core_done (bkm_core_done),  .bkm_core_flags (bkm_core_flags),  .bkm_post_done (bkm_post_done),  .bkm_post_flags (bkm_post_flags),  .bkm_pre_enable (bkm_pre_enable),  .bkm_pre_start (bkm_pre_start),  .bkm_pre_format (bkm_pre_format),  .bkm_pre_op (bkm_pre_op),  .bkm_core_enable (bkm_core_enable),  .bkm_core_start (bkm_core_start),  .bkm_core_format (bkm_core_format),  .bkm_core_mode (bkm_core_mode),  .bkm_post_enable (bkm_post_enable),  .bkm_post_start (bkm_post_start),  .bkm_post_format (bkm_post_format),  .bkm_post_op (bkm_post_op),  .flags (flags),  .done (done));"
+  The following 1-bit expression is connected to 6-bit port "bkm_post_op" of 
+  module "bkm_fixed_control_logic", instance "bkm_fixed_control_logic".
+  Expression: bkm_post_op
+  The expression is from module bkm_fixed
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 79
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 80
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 85
+  Following is an unused input.
+  Source info: x3
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 86
+  Following is an unused input.
+  Source info: y3
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 67
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 68
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 69
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 71
+  Following is an unused input.
+  Source info: y1
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 72
+  Following is an unused input.
+  Source info: x2
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 73
+  Following is an unused input.
+  Source info: y2
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 77
+"x3"
+  Output port 'x3' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 78
+"y3"
+  Output port 'y3' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 79
+"flags"
+  Output port 'flags' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 80
+"done"
+  Output port 'done' has never been assigned to any value.
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_reduction.v, 80
+  Following is an unused input.
+  Source info: mode
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_reduction.v, 81
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 69
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 70
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 71
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 73
+  Following is an unused input.
+  Source info: bkm_pre_done
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 75
+  Following is an unused input.
+  Source info: bkm_core_done
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 76
+  Following is an unused input.
+  Source info: bkm_core_flags
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 78
+  Following is an unused input.
+  Source info: bkm_post_done
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 79
+  Following is an unused input.
+  Source info: bkm_post_flags
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 84
+"bkm_pre_enable"
+  Output port 'bkm_pre_enable' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 85
+"bkm_pre_start"
+  Output port 'bkm_pre_start' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 86
+"bkm_pre_format"
+  Output port 'bkm_pre_format' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 87
+"bkm_pre_op"
+  Output port 'bkm_pre_op' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 89
+"bkm_core_enable"
+  Output port 'bkm_core_enable' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 90
+"bkm_core_start"
+  Output port 'bkm_core_start' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 91
+"bkm_core_format"
+  Output port 'bkm_core_format' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 92
+"bkm_core_mode"
+  Output port 'bkm_core_mode' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 94
+"bkm_post_enable"
+  Output port 'bkm_post_enable' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 95
+"bkm_post_start"
+  Output port 'bkm_post_start' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 96
+"bkm_post_format"
+  Output port 'bkm_post_format' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 97
+"bkm_post_op"
+  Output port 'bkm_post_op' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 99
+"flags"
+  Output port 'flags' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 100
+"done"
+  Output port 'done' has never been assigned to any value.
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 76
+  Following is an unused input.
+  Source info: mode
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 77
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 78
+  Following is an unused input.
+  Source info: a
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 79
+  Following is an unused input.
+  Source info: b
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 80
+  Following is an unused input.
+  Source info: k1
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 81
+  Following is an unused input.
+  Source info: k2
+
+
+Lint-[UI] Unused input
+./temp/bkm_range_extension.v, 82
+  Following is an unused input.
+  Source info: k3
+
+
+Lint-[UI] Unused input
+./temp/bkm_steps.v, 68
+  Following is an unused input.
+  Source info: mode
+
+
+Lint-[UI] Unused input
+./temp/bkm_steps.v, 69
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_steps.v, 72
+  Following is an unused input.
+  Source info: x_in
+
+
+Lint-[UI] Unused input
+./temp/bkm_steps.v, 73
+  Following is an unused input.
+  Source info: y_in
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 75
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 76
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((0 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((0 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((0 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((0 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((0 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((0 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((1 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((1 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((1 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((1 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((1 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((1 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((2 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((2 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((2 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((2 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((2 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((2 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((3 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((3 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((3 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((3 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((3 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((3 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((4 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((4 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((4 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((4 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((4 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((4 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((5 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((5 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((5 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((5 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((5 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((5 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((6 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((6 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((6 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((6 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((6 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((6 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((7 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((7 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((7 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((7 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((7 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((7 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((8 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((8 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((8 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((8 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((8 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((8 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((9 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((9 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((9 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((9 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((9 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((9 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((10 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((10 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((10 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((10 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((10 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((10 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((11 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((11 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((11 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((11 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((11 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((11 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((12 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((12 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((12 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((12 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((12 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((12 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((13 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((13 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((13 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((13 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((13 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((13 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((14 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((14 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((14 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((14 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((14 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((14 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((15 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((15 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((15 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((15 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((15 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((15 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((16 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((16 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((16 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((16 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((16 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((16 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((17 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((17 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((17 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((17 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((17 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((17 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((18 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((18 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((18 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((18 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((18 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((18 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((19 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((19 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((19 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((19 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((19 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((19 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((20 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((20 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((20 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((20 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((20 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((20 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((21 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((21 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((21 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((21 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((21 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((21 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((22 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((22 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((22 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((22 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((22 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((22 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((23 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((23 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((23 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((23 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((23 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((23 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((24 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((24 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((24 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((24 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((24 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((24 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((25 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((25 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((25 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((25 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((25 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((25 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((26 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((26 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((26 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((26 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((26 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((26 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((27 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((27 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((27 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((27 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((27 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((27 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((28 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((28 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((28 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((28 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((28 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((28 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((29 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((29 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((29 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((29 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((29 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((29 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((30 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((30 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((30 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((30 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((30 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((30 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((31 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((31 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((31 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((31 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((31 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((31 - (W - 1)) + (2 ** 5)) - 1)][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((32 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((32 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((32 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((32 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((32 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(32 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((33 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((33 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((33 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((33 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((33 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(33 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((34 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((34 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((34 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((34 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((34 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(34 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((35 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((35 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((35 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((35 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((35 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(35 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((36 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((36 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((36 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((36 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((36 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(36 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((37 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((37 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((37 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((37 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((37 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(37 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((38 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((38 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((38 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((38 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((38 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(38 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((39 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((39 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((39 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((39 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((39 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(39 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((40 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((40 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((40 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((40 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((40 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(40 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((41 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((41 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((41 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((41 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((41 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(41 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((42 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((42 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((42 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((42 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((42 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(42 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((43 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((43 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((43 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((43 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((43 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(43 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((44 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((44 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((44 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((44 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((44 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(44 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((45 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((45 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((45 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((45 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((45 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(45 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((46 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((46 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((46 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((46 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((46 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(46 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((47 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((47 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((47 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((47 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((47 - (W - 1)) + (2 ** 4)) - 1)][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(47 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((48 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((48 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((48 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((48 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(48 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(48 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((49 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((49 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((49 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((49 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(49 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(49 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((50 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((50 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((50 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((50 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(50 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(50 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((51 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((51 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((51 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((51 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(51 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(51 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((52 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((52 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((52 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((52 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(52 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(52 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((53 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((53 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((53 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((53 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(53 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(53 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((54 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((54 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((54 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((54 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(54 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(54 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((55 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((55 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((55 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((55 - (W - 1)) + (2 ** 3)) - 1)][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(55 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(55 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((56 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((56 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((56 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(56 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(56 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(56 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((57 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((57 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((57 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(57 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(57 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(57 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((58 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((58 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((58 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(58 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(58 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(58 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((59 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((59 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((59 - (W - 1)) + (2 ** 2)) - 1)][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(59 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(59 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(59 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((60 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((60 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(60 + (2 ** 2))][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(60 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(60 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(60 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((61 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((61 - (W - 1)) + (2 ** 1)) - 1)][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(61 + (2 ** 2))][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(61 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(61 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(61 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(((62 - (W - 1)) + (2 ** 0)) - 1)][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(62 + (2 ** 1))][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(62 + (2 ** 2))][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(62 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(62 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(62 + (2 ** 5))][(5 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(63 + (2 ** 0))][(0 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(63 + (2 ** 1))][(1 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(63 + (2 ** 2))][(2 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(63 + (2 ** 3))][(3 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(63 + (2 ** 4))][(4 + 1)]
+
+
+Lint-[IRIMW] Illegal range in memory word
+./temp/barrel_shifter.v, 114
+  The range is illegal in memory word. 
+  Expression : m[(63 + (2 ** 5))][(5 + 1)]
+
+Starting vcs inline pass...
+9 modules and 0 UDP read.
+recompiling module bkm_fixed
+recompiling module csd_add_subb
+recompiling module xfire_fpu_bkm
+recompiling module fadder
+recompiling module simlib_clk_osc
+recompiling module tb_barrel_shifter
+recompiling module csd2bin
+recompiling module bin2csd
+All of 9 modules done
+rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
+--no-whole-archive
+ld -m elf_i386 -shared -o .//../simv.daidir//_csrc0.so 5NrI_d.o 5NrIB_d.o SIM_l.o \
+
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv  -m32 -m32   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ \
+-Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  _csrc1.so _csrc0.so     rmapats_mop.o \
+rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /usr/synopsys/vcs/linux/lib/libvirsim.so \
+/usr/synopsys/vcs/linux/lib/librterrorinf.so /usr/synopsys/vcs/linux/lib/libsnpsmalloc.so \
+/usr/synopsys/vcs/linux/lib/libvcsnew.so /usr/synopsys/vcs/linux/lib/libuclinative.so \
+-Wl,-whole-archive /usr/synopsys/vcs/linux/lib/libvcsucli.so -Wl,-no-whole-archive \
+/usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
+-ldl -lm  -lc -lpthread -ldl 
+../simv up to date
+CPU time: 1.025 seconds to compile + .050 seconds to elab + .121 seconds to link
