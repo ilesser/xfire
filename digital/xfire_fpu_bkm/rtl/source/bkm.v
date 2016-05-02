@@ -4,7 +4,10 @@
 // Description:
 // ------------
 //
-// BKM
+// Implements the BKM algorithm for the inputs E = E_x + j E_y and L = L_x + j L_y.
+// Use mode to determine if you are in E-mode (1'b0) or L-mode (1'b0).
+// Use format to determine the format of the inputs/outputs. You can choose
+// between 32/64 bit complex or real data.
 //
 // -----------------------------------------------------------------------------
 // File name:
@@ -105,10 +108,12 @@ module bkm #(
    // -----------------------------------------------------
    // Input register
    reg               input_reg_enable;
-   reg   [W-1:0]     E_x_in_reg;
-   reg   [W-1:0]     E_y_in_reg;
-   reg   [W-1:0]     L_x_in_reg;
-   reg   [W-1:0]     L_y_in_reg;
+   reg               mode_latched,
+   reg   [1:0]       format_latched,
+   reg   [W-1:0]     E_x_in_latched;
+   reg   [W-1:0]     E_y_in_latched;
+   reg   [W-1:0]     L_x_in_latched;
+   reg   [W-1:0]     L_y_in_latched;
 
    // Input precision selection
    wire  [W-1:0]     E_x_prec_in;
@@ -130,14 +135,14 @@ module bkm #(
    wire  [W-1:0]     k2;
    wire  [W-1:0]     k3;
 
-   // BKM First step
-   reg               bkm_step_1_enable;
-   reg               bkm_step_1_start;
-   reg               bkm_step_1_done;
+   // BKM Pre step
+   reg               bkm_pre_step_enable;
+   reg               bkm_pre_step_start;
+   reg               bkm_pre_step_done;
    wire  [W-1:0]     X_1;
    wire  [W-1:0]     Y_1;
-   wire  [W-1:0]     x_1;
-   wire  [W-1:0]     y_1;
+   wire  [W-1:0]     u_1;
+   wire  [W-1:0]     v_1;
 
    // BKM Steps
    reg               bkm_steps_enable;
@@ -180,25 +185,31 @@ module bkm #(
    // -----------------------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         range_red_start  <= 1'b0;
-         E_x_in_reg       <= {W{1'b0}};
-         E_y_in_reg       <= {W{1'b0}};
-         L_x_in_reg       <= {W{1'b0}};
-         L_y_in_reg       <= {W{1'b0}};
+         range_red_start   <= 1'b0;
+         mode_latched      <= 1'b0;
+         format_latched    <= 2'b00;
+         E_x_in_latched    <= {W{1'b0}};
+         E_y_in_latched    <= {W{1'b0}};
+         L_x_in_latched    <= {W{1'b0}};
+         L_y_in_latched    <= {W{1'b0}};
       end
       else if (srst) begin
-         range_red_start  <= 1'b0;
-         E_x_in_reg       <= {W{1'b0}};
-         E_y_in_reg       <= {W{1'b0}};
-         L_x_in_reg       <= {W{1'b0}};
-         L_y_in_reg       <= {W{1'b0}};
+         range_red_start   <= 1'b0;
+         mode_latched      <= 1'b0;
+         format_latched    <= 2'b00;
+         E_x_in_latched    <= {W{1'b0}};
+         E_y_in_latched    <= {W{1'b0}};
+         L_x_in_latched    <= {W{1'b0}};
+         L_y_in_latched    <= {W{1'b0}};
       end
       else if (input_reg_enable) begin
-         range_red_start  <= start;
-         E_x_in_reg       <= E_x_in;
-         E_y_in_reg       <= E_y_in;
-         L_x_in_reg       <= L_x_in;
-         L_y_in_reg       <= L_y_in;
+         range_red_start   <= start;
+         mode_latched      <= mode;
+         format_latched    <= format;
+         E_x_in_latched    <= E_x_in;
+         E_y_in_latched    <= E_y_in;
+         L_x_in_latched    <= L_x_in;
+         L_y_in_latched    <= L_y_in;
       end
    end
    // -----------------------------------------------------
@@ -215,11 +226,11 @@ module bkm #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .format              (format),
-      .E_x_in              (E_x_in_reg),
-      .E_y_in              (E_y_in_reg),
-      .L_x_in              (L_x_in_reg),
-      .L_y_in              (L_y_in_reg),
+      .format              (format_latched),
+      .E_x_in              (E_x_in_latched),
+      .E_y_in              (E_y_in_latched),
+      .L_x_in              (L_x_in_latched),
+      .L_y_in              (L_y_in_latched),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -250,8 +261,8 @@ module bkm #(
     // Data inputs
     // ----------------------------------
       .start               (range_red_start),
-      .mode                (mode),
-      .format              (format),
+      .mode                (mode_latched),
+      .format              (format_latched),
       .E_x_in              (E_x_prec_in),
       .E_y_in              (E_y_prec_in),
       .L_x_in              (L_x_prec_in),
@@ -280,20 +291,20 @@ module bkm #(
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) bkm_first_step (
+   ) bkm_pre_step (
     // ----------------------------------
     // Clock, reset & enable inputs
     // ----------------------------------
       .clk                 (clk),
       .arst                (arst),
       .srst                (srst),
-      .enable              (bkm_step_1_enable),
+      .enable              (bkm_pre_step_enable),
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .start               (bkm_step_1_start),
-      .mode                (mode),
-      .format              (format),
+      .start               (bkm_pre_step_start),
+      .mode                (mode_latched),
+      .format              (format_latched),
       .E_x_in              (E_x_0),
       .E_y_in              (E_y_0),
       .L_x_in              (L_x_0),
@@ -303,10 +314,10 @@ module bkm #(
     // ----------------------------------
       .X_out               (X_1),
       .Y_out               (Y_1),
-      .x_out               (x_1),
-      .y_out               (y_1),
+      .u_out               (u_1),
+      .v_out               (v_1),
       //.flags               (bkm_step_1_flags),
-      .done                (bkm_step_1_done)
+      .done                (bkm_pre_step_done)
    );
    // -----------------------------------------------------
 
@@ -336,8 +347,8 @@ module bkm #(
     // Data inputs
     // ----------------------------------
       .start               (bkm_steps_start),
-      .mode                (mode),
-      .format              (format),
+      .mode                (mode_latched),
+      .format              (format_latched),
       .X_in                (X_1),
       .Y_in                (Y_1),
       .x_in                (x_1),
@@ -372,8 +383,8 @@ module bkm #(
     // Data inputs
     // ----------------------------------
       .start               (range_ext_start),
-      .mode                (mode),
-      .format              (format),
+      .mode                (mode_latched),
+      .format              (format_latched),
       .a                   (a),
       .b                   (b),
       .k1                  (k1),
