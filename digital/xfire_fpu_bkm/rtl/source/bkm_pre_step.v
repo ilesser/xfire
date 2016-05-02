@@ -4,8 +4,20 @@
 // Description:
 // ------------
 //
-// XXXXX FILL IN HERE XXXXX
+// Converts E/Y inputs into Z/w output.
+// In this representation Z = X + j Y represents the data path and w = u + j v
+// the control path.
 //
+//
+// E-mode
+// ------
+// Z = E
+// w = 2^1 * L
+//
+// L-mode
+// ------
+// Z = L
+// w = 2^1 * (E-1)
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
@@ -34,8 +46,11 @@
 //    - L_y_in    : Imaginary part of Logarithmic input (two's complement, W bits).
 //
 //  Data outputs:
-//    - X_out     : Real      part of the result (two's complement, W bits).
-//    - Y_out     : Imaginary part of the result (two's complement, W bits).
+//    TODO change Z to CSD???
+//    - X_out     : Real      part of the data output (two's complement, W bits).
+//    - Y_out     : Imaginary part of the data output (two's complement, W bits).
+//    - u_out     : Real      part of the control output (two's complement, W bits).
+//    - v_out     : Imaginary part of the control output (two's complement, W bits).
 //    - flags     : Result flags (logic, 4 bits).
 //    - done      : Active high done strobe signal (logic, 1 bit).
 //
@@ -50,6 +65,7 @@
 // History:
 // --------
 //
+//    - 2016-05-01 - ilesser - Renamed pre step, changed control path to w = u+jv
 //    - 2016-04-23 - ilesser - Original version.
 //
 // -----------------------------------------------------------------------------
@@ -57,7 +73,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module bkm_first_step #(
+module bkm_pre_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
@@ -85,8 +101,8 @@ module bkm_first_step #(
     // ----------------------------------
     output reg [W-1:0]        X_out,
     output reg [W-1:0]        Y_out,
-    output reg [W-1:0]        x_out,
-    output reg [W-1:0]        y_out,
+    output reg [W-1:0]        u_out,
+    output reg [W-1:0]        v_out,
     output reg                done
   );
 // *****************************************************************************
@@ -100,19 +116,21 @@ module bkm_first_step #(
    // -----------------------------------------------------
    // -----------------------------------------------------
 
-   assign x_out   = {W{1'b0}};
-   assign y_out   = {W{1'b0}};
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
          done    <= 1'b0;
          X_out   <= {W{1'b0}};
          Y_out   <= {W{1'b0}};
+         u_out   <= {W{1'b0}};
+         v_out   <= {W{1'b0}};
       end
       else if (srst) begin
          done    <= 1'b0;
          X_out   <= {W{1'b0}};
          Y_out   <= {W{1'b0}};
+         u_out   <= {W{1'b0}};
+         v_out   <= {W{1'b0}};
       end
       else if (enable) begin
          done    <= start;
@@ -121,16 +139,23 @@ module bkm_first_step #(
                begin
                   X_out   <= E_x_in;
                   Y_out   <= E_y_in;
+                  u_out   <= L_x_in*2;
+                  v_out   <= L_y_in*2;
                end
             `MODE_L:
                begin
                   X_out   <= L_x_in;
                   Y_out   <= L_y_in;
+                  // TODO esta resta de aca se podria hacer muy facil en CSD
+                  u_out   <= (E_x_in-{W-1{1'b0},1'b1})*2;
+                  v_out   <= E_y_in*2;
                end
             default:
                begin
                   X_out   <= {W{1'b0}};
                   Y_out   <= {W{1'b0}};
+                  u_out   <= {W{1'b0}};
+                  v_out   <= {W{1'b0}};
                end
          endcase
       end
