@@ -108,8 +108,8 @@ module bkm #(
    // -----------------------------------------------------
    // Input register
    reg               input_reg_enable;
-   reg               mode_latched,
-   reg   [1:0]       format_latched,
+   reg               mode_latched;
+   reg   [1:0]       format_latched;
    reg   [W-1:0]     E_x_in_latched;
    reg   [W-1:0]     E_y_in_latched;
    reg   [W-1:0]     L_x_in_latched;
@@ -169,14 +169,14 @@ module bkm #(
    // TODO: ENABLES and STARTS/DONE!!
    assign input_reg_enable    = enable;
    assign range_red_enable    = enable;
-   assign bkm_step_1_enable   = enable;
+   assign bkm_pre_step_enable = enable;
    assign bkm_steps_enable    = enable;
    assign range_ext_enable    = enable;
    assign output_reg_enable   = enable;
 
    //     range_red_start  <-- start
-   assign bkm_step_1_start    = range_red_done;
-   assign bkm_steps_start     = bkm_step_1_done;
+   assign bkm_pre_step_start  = range_red_done;
+   assign bkm_steps_start     = bkm_pre_step_done;
    assign range_ext_start     = bkm_steps_done;
    //     done             <-- range_ext_done
 
@@ -284,9 +284,9 @@ module bkm #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // BKM First step
+   // BKM Pre step
    // -----------------------------------------------------
-   bkm_first_step #(
+   bkm_pre_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
@@ -316,7 +316,6 @@ module bkm #(
       .Y_out               (Y_1),
       .u_out               (u_1),
       .v_out               (v_1),
-      //.flags               (bkm_step_1_flags),
       .done                (bkm_pre_step_done)
    );
    // -----------------------------------------------------

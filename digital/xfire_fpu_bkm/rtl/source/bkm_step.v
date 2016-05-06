@@ -143,9 +143,18 @@ module bkm_step #(
    // Internal signals
    // -----------------------------------------------------
    // For the data path
+   wire  [1:0]          d_n;        // d_n is encoded in ones complement
+   wire                 d_n_data_x;
+   wire                 d_n_data_y;
+   wire                 d_n_sign_x;
+   wire                 d_n_sign_y;
    reg   [`FSIZE-1:0]   flags_int;
 
    // For the control path
+   wire                 d_n_data_u;
+   wire                 d_n_data_v;
+   wire                 d_n_sign_u;
+   wire                 d_n_sign_v;
 
    // -----------------------------------------------------
 
@@ -187,7 +196,7 @@ module bkm_step #(
     // ----------------------------------
       .W                   (2*W),
       .LOG2W               (LOG2W+1)
-   ) barrel_shifter_x(
+   ) barrel_shifter_y(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
@@ -206,14 +215,20 @@ module bkm_step #(
    // -----------------------------------------------------
    // Calculate signs and data from d_n
    // -----------------------------------------------------
-   assign d_n_data_x = d_n[];
-   assign d_n_data_y = d_n[];
-   assign d_n_sign_x = d_n[];
-   assign d_n_sign_y = d_n[];
-   assign d_n_data_u = d_n[];
-   assign d_n_data_v = d_n[];
-   assign d_n_sign_u = d_n[];
-   assign d_n_sign_v = d_n[];
+
+   //            real   imag
+   //              |      |
+   //            .---.  .---.
+   //            |   |  |   |
+   //    d_n = [ Xs  Xd Ys  Yd ]
+   assign d_n_data_x = d_n[0];
+   assign d_n_sign_x = d_n[1];
+   assign d_n_data_y = d_n[2];
+   assign d_n_sign_y = d_n[3];
+   assign d_n_data_u = d_n[0];
+   assign d_n_sign_u = d_n[1];
+   assign d_n_data_v = d_n[2];
+   assign d_n_sign_v = d_n[3];
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -224,12 +239,12 @@ module bkm_step #(
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) multipĺy_by_d_n  (
+   ) multipĺy_by_d_n_csd (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .d_x                 (d_n_data_x), // calculate
-      .d_y                 (d_n_data_y), // calculate
+      .d_x                 (d_n_data_x),
+      .d_y                 (d_n_data_y),
       .X_in                (X_n_shifted),
       .Y_in                (Y_n_shifted),
     // ----------------------------------
@@ -249,8 +264,8 @@ module bkm_step #(
                   begin
                      sign_a_x = 1'b0;  // add
                      sign_a_y = 1'b0;  // add
-                     sign_b_x = d_n_sign_x;  // calculate
-                     sign_b_y = d_n_sign_y;  // calculate
+                     sign_b_x = d_n_sign_x;
+                     sign_b_y = d_n_sign_y;
                      a_x      = X_n;
                      a_y      = Y_n;
                      b_x      = X_n_shifted_times_d_n;
