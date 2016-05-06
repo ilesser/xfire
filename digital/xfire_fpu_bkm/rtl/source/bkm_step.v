@@ -148,6 +148,18 @@ module bkm_step #(
    wire                 d_n_data_y;
    wire                 d_n_sign_x;
    wire                 d_n_sign_y;
+   wire                 sign_a_x;
+   wire                 sign_a_y;
+   wire                 sign_b_x;
+   wire                 sign_b_y;
+   wire  [2*W-1:0]      a_x;
+   wire  [2*W-1:0]      a_y;
+   wire  [2*W-1:0]      b_x;
+   wire  [2*W-1:0]      b_y;
+   wire  [2*W-1:0]      lut_x;
+   wire  [2*W-1:0]      lut_y;
+   wire  [2*W-1:0]      X_n_shifted_times_d_n;
+   wire  [2*W-1:0]      Y_n_shifted_times_d_n;
    reg   [`FSIZE-1:0]   flags_int;
 
    // For the control path
@@ -155,6 +167,18 @@ module bkm_step #(
    wire                 d_n_data_v;
    wire                 d_n_sign_u;
    wire                 d_n_sign_v;
+   wire                 sign_a_u;
+   wire                 sign_a_v;
+   wire                 sign_b_u;
+   wire                 sign_b_v;
+   wire  [2*W-1:0]      a_u;
+   wire  [2*W-1:0]      a_v;
+   wire  [2*W-1:0]      b_u;
+   wire  [2*W-1:0]      b_v;
+   wire  [2*W-1:0]      lut_u;
+   wire  [2*W-1:0]      lut_v;
+   wire  [2*W-1:0]      u_n_times_d_n;
+   wire  [2*W-1:0]      v_n_times_d_n;
 
    // -----------------------------------------------------
 
@@ -231,36 +255,36 @@ module bkm_step #(
    assign d_n_sign_v = d_n[3];
    // -----------------------------------------------------
 
-   // -----------------------------------------------------
-   // Multiply by d_n
-   // -----------------------------------------------------
-   multipĺy_by_d_csd #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-      .W                   (W)
-   ) multipĺy_by_d_n_csd (
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
-      .d_x                 (d_n_data_x),
-      .d_y                 (d_n_data_y),
-      .X_in                (X_n_shifted),
-      .Y_in                (Y_n_shifted),
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
-      .X_out               (X_n_shifted_times_d_n),
-      .Y_out               (Y_n_shifted_times_d_n)
-   );
+ //  // -----------------------------------------------------
+ //  // Multiply by d_n
+ //  // -----------------------------------------------------
+ //  //multipĺy_by_d_csd #(
+ //  // // ----------------------------------
+ //  // // Parameters
+ //   // ----------------------------------
+ //     .W                  (W)
+ //  ) multipĺy_by_d_n_csd (
+ //   // ----------------------------------
+ //   // Data inputs
+ //   // ----------------------------------
+ //     .d_x                 (d_n_data_x),
+ //     .d_y                 (d_n_data_y),
+ //     .X_in                (X_n_shifted),
+ //     .Y_in                (Y_n_shifted),
+ //   // ----------------------------------
+ //   // Data outputs
+ //   // ----------------------------------
+ //   .X_out               (X_n_shifted_times_d_n),
+ //   .Y_out               (Y_n_shifted_times_d_n)
+ //);
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Mux the inputs of the CSD complex adder
    // -----------------------------------------------------
    always @(*) begin
-      case(mode) begin
-         `E_MODE:
+      case(mode)
+         `MODE_E:
                   begin
                      sign_a_x = 1'b0;  // add
                      sign_a_y = 1'b0;  // add
@@ -271,7 +295,7 @@ module bkm_step #(
                      b_x      = X_n_shifted_times_d_n;
                      b_y      = Y_n_shifted_times_d_n;
                   end
-         `L_MODE:
+         `MODE_L:
                   begin
                      sign_a_x = 1'b0;  // add
                      sign_a_y = 1'b0;  // add
@@ -343,33 +367,33 @@ module bkm_step #(
    // -----------------------------------------------------
    // Multiply by d_n
    // -----------------------------------------------------
-   multipĺy_by_d #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-      .W                   (W)
-   ) multipĺy_by_d_n  (
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
-      .d_x                 (d_n_data_u), // calculate
-      .d_y                 (d_n_data_v), // calculate
-      .X_in                (u_n),
-      .Y_in                (v_n),
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
-      .X_out               (u_n_times_d_n),
-      .Y_out               (v_n_times_d_n)
-   );
-   // -----------------------------------------------------
+//   multipĺy_by_d #(
+//    // ----------------------------------
+//    // Parameters
+//    // ----------------------------------
+//      .W                   (W)
+//   ) multipĺy_by_d_n  (
+//    // ----------------------------------
+//    // Data inputs
+//    // ----------------------------------
+//      .d_x                 (d_n_data_u), // calculate
+//      .d_y                 (d_n_data_v), // calculate
+//      .X_in                (u_n),
+//      .Y_in                (v_n),
+//    // ----------------------------------
+//    // Data outputs
+//    // ----------------------------------
+//      .X_out               (u_n_times_d_n),
+//      .Y_out               (v_n_times_d_n)
+//   );
+//   // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Mux the inputs of the two's complement complex adder
    // -----------------------------------------------------
    always @(*) begin
-      case(mode) begin
-         `E_MODE:
+      case(mode)
+         `MODE_E:
                   begin
                      sign_a_u = 1'b0;  // add
                      sign_a_v = 1'b0;  // add
@@ -380,7 +404,7 @@ module bkm_step #(
                      b_u      = lut_u;
                      b_v      = lut_v;
                   end
-         `L_MODE:
+         `MODE_L:
                   begin
                      sign_a_u = 1'b0;  // add
                      sign_a_v = 1'b0;  // add
