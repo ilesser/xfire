@@ -147,7 +147,7 @@ module bkm_pre_step #(
                   X_out   <= L_x_in;
                   Y_out   <= L_y_in;
                   // TODO esta resta de aca se podria hacer muy facil en CSD
-                  u_out   <= (E_x_in-{W-1{1'b0},1'b1})*2;
+                  u_out   <= (E_x_in-{{W-1{1'b0}},1'b1})*2;
                   v_out   <= E_y_in*2;
                end
             default:
