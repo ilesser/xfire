@@ -82,6 +82,8 @@ module multiply_by_d_csd #(
    reg   [2*W-1:0]      y_dx;
    reg   [2*W-1:0]      x_dy;
    reg   [2*W-1:0]      y_dy;
+   wire  [1:0]          c_x;
+   wire  [1:0]          c_y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -101,8 +103,8 @@ module multiply_by_d_csd #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              ( d_x),
-      .subb_b              (~d_y),
+      .subb_a              ( d_x[1]),  // TODO: extract sign
+      .subb_b              (~d_y[1]),  // TODO: extract sign
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
@@ -121,8 +123,8 @@ module multiply_by_d_csd #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (d_y),
-      .subb_b              (d_x),
+      .subb_a              (d_y[1]),  // TODO: extract sign
+      .subb_b              (d_x[1]),  // TODO: extract sign
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------

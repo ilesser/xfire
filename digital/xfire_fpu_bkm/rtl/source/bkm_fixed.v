@@ -123,18 +123,16 @@ module bkm_fixed #(
    wire  [W-1:0]        E_y_in;
    wire  [W-1:0]        L_x_in;
    wire  [W-1:0]        L_y_in;
-   wire  [W-1:0]        E_x_out;
-   wire  [W-1:0]        E_y_out;
-   wire  [W-1:0]        L_x_out;
-   wire  [W-1:0]        L_y_out;
+   wire  [W-1:0]        X_bkm;
+   wire  [W-1:0]        Y_bkm;
 
    // BKM Post control wires
    wire                 bkm_post_enable;
    wire                 bkm_post_start;
    wire  [1:0]          bkm_post_format;
-   wire                 bkm_post_op;
-   wire                 bkm_post_done;
+   wire  [`OPSIZE-1:0]  bkm_post_op;
    wire  [`FSIZE-1:0]   bkm_post_flags;
+   wire                 bkm_post_done;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -208,8 +206,8 @@ module bkm_fixed #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .X_out               (x_bkm),
-      .Y_out               (y_bkm),
+      .X_out               (X_bkm),
+      .Y_out               (Y_bkm),
       .flags               (bkm_core_flags),
       .done                (bkm_core_done)
    );
@@ -237,8 +235,8 @@ module bkm_fixed #(
       .start               (bkm_post_start),
       .format              (bkm_post_format),
       .op                  (bkm_post_op),
-      .x_in                (x_bkm),
-      .y_in                (y_bkm),
+      .x_in                (X_bkm),
+      .y_in                (Y_bkm),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
