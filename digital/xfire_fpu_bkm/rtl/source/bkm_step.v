@@ -171,6 +171,8 @@ module bkm_step #(
    wire  [2*W-1:0]      s_y;
 
    // For the control path
+   wire  [1:0]          d_n_u;
+   wire  [1:0]          d_n_v;
    wire                 d_n_data_u;
    wire                 d_n_data_v;
    wire                 d_n_sign_u;
@@ -216,7 +218,7 @@ module bkm_step #(
       .dir                 (DIR_RIGHT),
       .op                  (OP_SHIFT),
       .shift_t             (SHIFT_ARITHMETIC),
-      .sel                 ({1'b0,n}),
+      .sel                 ({n,1'b0}), // select with 2*n
       .in                  (X_n),
     // ----------------------------------
     // Data outputs
@@ -241,7 +243,7 @@ module bkm_step #(
       .dir                 (DIR_RIGHT),
       .op                  (OP_SHIFT),
       .shift_t             (SHIFT_ARITH),
-      .sel                 ({1'b0,n}),
+      .sel                 ({n,1'b0}),
       .in                  (Y_n),
     // ----------------------------------
     // Data outputs
@@ -385,26 +387,26 @@ module bkm_step #(
    // -----------------------------------------------------
    // Multiply by d_n
    // -----------------------------------------------------
-//   multipĺy_by_d #(
-//    // ----------------------------------
-//    // Parameters
-//    // ----------------------------------
-//      .W                   (W)
-//   ) multipĺy_by_d_n  (
-//    // ----------------------------------
-//    // Data inputs
-//    // ----------------------------------
-//      .d_x                 (d_n_data_u), // calculate
-//      .d_y                 (d_n_data_v), // calculate
-//      .X_in                (u_n),
-//      .Y_in                (v_n),
-//    // ----------------------------------
-//    // Data outputs
-//    // ----------------------------------
-//      .X_out               (u_n_times_d_n),
-//      .Y_out               (v_n_times_d_n)
-//   );
-//   // -----------------------------------------------------
+   multiply_by_d #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) multiply_by_d (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .d_x                 (d_n_u), // calculate
+      .d_y                 (d_n_v), // calculate
+      .x_in                (u_n),
+      .y_in                (v_n),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      .x_out               (u_n_times_d_n),
+      .y_out               (v_n_times_d_n)
+   );
+   // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Mux the inputs of the two's complement complex adder

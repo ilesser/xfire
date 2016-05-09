@@ -4,17 +4,14 @@
 // Description:
 // ------------
 //
-// Cannonic Signed Digit (CSD) complex multiplication by d.
+// Two's complement complex multiplication by d.
 // Possible values for d: {0, +-1, +-j, 1+-j, -1+-j}
 //
-// z_in  = x_in + j y_in
-// d     = d_x  + j d_y
-// z_out = z_in * d
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// multiply_by_d_csd.v
+// multiply_by_d.v
 //
 // -----------------------------------------------------------------------------
 // Interface:
@@ -23,12 +20,12 @@
 //  Data inputs:
 //    - d_x       : Real part of d (one's complement, 2 bits).
 //    - d_y       : Imag part of d (ones's complement, 2 bits).
-//    - x_in      : Real part of z (CSD, 2*W bits).
-//    - y_in      : Imag part of z (CSD, 2*W bits).
+//    - x_in      : Real part of z (two's complement, W bits).
+//    - y_in      : Imag part of z (two's complement, W bits).
 //
 //  Data outputs:
-//    - x_out     : Result x_out = x * dx - y * dy (CSD, 2*W bits).
-//    - y_out     : Result y_out = x * dy + y * dx (CSD, 2*W bits).
+//    - x_out     : Result x_out = x * dx - y * dy (two's complement, W bits).
+//    - y_out     : Result y_out = x * dy + y * dx (two's complement, W bits).
 //
 //  Parameters:
 //    - W         : Word width (natural, default: 64).
@@ -44,7 +41,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module multiply_by_d_csd #(
+module multiply_by_d #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
@@ -55,13 +52,13 @@ module multiply_by_d_csd #(
     // ----------------------------------
     input   wire  [1:0]       d_x,
     input   wire  [1:0]       d_y,
-    input   wire  [2*W-1:0]   x_in,
-    input   wire  [2*W-1:0]   y_in,
+    input   wire  [W-1:0]     x_in,
+    input   wire  [W-1:0]     y_in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [2*W-1:0]   x_out,
-    output  reg   [2*W-1:0]   y_out
+    output  reg   [W-1:0]     x_out,
+    output  reg   [W-1:0]     y_out
   );
 // *****************************************************************************
 
@@ -79,14 +76,14 @@ module multiply_by_d_csd #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [2*W-1:0]      x_dx_dy;
-   reg   [2*W-1:0]      y_dx_dy;
-   reg   [2*W-1:0]      x_dx;
-   reg   [2*W-1:0]      y_dx;
-   reg   [2*W-1:0]      x_dy;
-   reg   [2*W-1:0]      y_dy;
-   wire  [1:0]          c_x;
-   wire  [1:0]          c_y;
+   reg   [W-1:0]        x_dx_dy;
+   reg   [W-1:0]        y_dx_dy;
+   reg   [W-1:0]        x_dx;
+   reg   [W-1:0]        y_dx;
+   reg   [W-1:0]        x_dy;
+   reg   [W-1:0]        y_dy;
+   wire                 c_x;
+   wire                 c_y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -208,5 +205,6 @@ module multiply_by_d_csd #(
 // *****************************************************************************
 
 endmodule
+
 
 
