@@ -107,63 +107,65 @@ module bkm #(
    // Internal signals
    // -----------------------------------------------------
    // Input register
-   reg               input_reg_enable;
-   reg               mode_latched;
-   reg   [1:0]       format_latched;
-   reg   [W-1:0]     E_x_in_latched;
-   reg   [W-1:0]     E_y_in_latched;
-   reg   [W-1:0]     L_x_in_latched;
-   reg   [W-1:0]     L_y_in_latched;
+   reg                  input_reg_enable;
+   reg                  mode_latched;
+   reg   [1:0]          format_latched;
+   reg   [W-1:0]        E_x_in_latched;
+   reg   [W-1:0]        E_y_in_latched;
+   reg   [W-1:0]        L_x_in_latched;
+   reg   [W-1:0]        L_y_in_latched;
 
    // Input precision selection
-   wire  [W-1:0]     E_x_prec_in;
-   wire  [W-1:0]     E_y_prec_in;
-   wire  [W-1:0]     L_x_prec_in;
-   wire  [W-1:0]     L_y_prec_in;
+   wire  [W-1:0]        E_x_prec_in;
+   wire  [W-1:0]        E_y_prec_in;
+   wire  [W-1:0]        L_x_prec_in;
+   wire  [W-1:0]        L_y_prec_in;
 
    // BKM Range reduction
-   reg               range_red_enable;
-   reg               range_red_start;
-   reg               range_red_done;
-   wire  [W-1:0]     E_x_0;
-   wire  [W-1:0]     E_y_0;
-   wire  [W-1:0]     L_x_0;
-   wire  [W-1:0]     L_y_0;
-   wire  [W-1:0]     a;
-   wire  [W-1:0]     b;
-   wire  [W-1:0]     k1;
-   wire  [W-1:0]     k2;
-   wire  [W-1:0]     k3;
+   reg                  range_red_enable;
+   reg                  range_red_start;
+   reg                  range_red_done;
+   wire  [W-1:0]        E_x_0;
+   wire  [W-1:0]        E_y_0;
+   wire  [W-1:0]        L_x_0;
+   wire  [W-1:0]        L_y_0;
+   wire  [W-1:0]        a;
+   wire  [W-1:0]        b;
+   wire  [W-1:0]        k1;
+   wire  [W-1:0]        k2;
+   wire  [W-1:0]        k3;
 
    // BKM Pre step
-   reg               bkm_pre_step_enable;
-   reg               bkm_pre_step_start;
-   reg               bkm_pre_step_done;
-   wire  [W-1:0]     X_1;
-   wire  [W-1:0]     Y_1;
-   wire  [W-1:0]     u_1;
-   wire  [W-1:0]     v_1;
+   reg                  bkm_pre_step_enable;
+   reg                  bkm_pre_step_start;
+   reg                  bkm_pre_step_done;
+   wire  [W-1:0]        X_1;
+   wire  [W-1:0]        Y_1;
+   wire  [W-1:0]        u_1;
+   wire  [W-1:0]        v_1;
 
    // BKM Steps
-   reg               bkm_steps_enable;
-   reg               bkm_steps_start;
-   reg               bkm_steps_done;
-   wire  [W-1:0]     X_N;
-   wire  [W-1:0]     Y_N;
+   reg                  bkm_steps_enable;
+   reg                  bkm_steps_start;
+   reg                  bkm_steps_done;
+   wire  [`FSIZE-1:0]   bkm_steps_flags;
+   wire  [W-1:0]        X_N;
+   wire  [W-1:0]        Y_N;
 
    // BKM Range extension
-   reg               range_ext_enable;
-   reg               range_ext_start;
-   reg               range_ext_done;
-   wire  [W-1:0]     X_range_ext;
-   wire  [W-1:0]     Y_range_ext;
+   reg                  range_ext_enable;
+   reg                  range_ext_start;
+   reg                  range_ext_done;
+   wire  [`FSIZE-1:0]   range_ext_flags;
+   wire  [W-1:0]        X_range_ext;
+   wire  [W-1:0]        Y_range_ext;
 
    // Output precision selection
-   wire  [W-1:0]     X_prec_out;
-   wire  [W-1:0]     Y_prec_out;
+   wire  [W-1:0]        X_prec_out;
+   wire  [W-1:0]        Y_prec_out;
 
    // Output register
-   wire              output_reg_enable;
+   wire                 output_reg_enable;
    // -----------------------------------------------------
 
    // TODO: ENABLES and STARTS/DONE!!
@@ -350,8 +352,8 @@ module bkm #(
       .format              (format_latched),
       .X_in                (X_1),
       .Y_in                (Y_1),
-      .x_in                (x_1),
-      .y_in                (y_1),
+      .u_in                (u_1),
+      .v_in                (v_1),
     // ----------------------------------
     // Data outputs
     // ----------------------------------

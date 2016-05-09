@@ -53,8 +53,10 @@ module complex_add_subb #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    //input   wire              subb_a,
-    input   wire              subb_b,
+    input   wire              subb_a_x,
+    input   wire              subb_a_y,
+    input   wire              subb_b_x,
+    input   wire              subb_b_y,
     input   wire  [W-1:0]     a_x,
     input   wire  [W-1:0]     a_y,
     input   wire  [W-1:0]     b_x,
@@ -82,8 +84,8 @@ module complex_add_subb #(
    //reg   [W-1:0]     a_y_inv;// inverted version of a_y
    reg   [W-1:0]     b_x_inv;// inverted version of b_x
    reg   [W-1:0]     b_y_inv;// inverted version of b_y
-   reg   [W-1:0]     cxx;  // x carry vector
-   reg   [W-1:0]     cyy;  // y carry vector
+   reg   [W:0]       cxx;  // x carry vector
+   reg   [W:0]       cyy;  // y carry vector
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -91,8 +93,8 @@ module complex_add_subb #(
    // -----------------------------------------------------
 
    // Initial values
-   assign cxx[0] = subb_b;
-   assign cyy[0] = subb_b;
+   assign cxx[0] = subb_b_x;
+   assign cyy[0] = subb_b_y;
 
    genvar i;
    generate
@@ -101,10 +103,10 @@ module complex_add_subb #(
 
             // Flipping all the bits when substracting
             // Invert a and b depending on subb_a and subb_b
-            //a_x_inv[i] = a_x[i] ^ subb_a;
-            //a_y_inv[i] = a_y[i] ^ subb_a;
-            b_x_inv[i] = b_x[i] ^ subb_b;
-            b_y_inv[i] = b_y[i] ^ subb_b;
+            //a_x_inv[i] = a_x[i] ^ subb_a_x;
+            //a_y_inv[i] = a_y[i] ^ subb_a_y;
+            b_x_inv[i] = b_x[i] ^ subb_b_x;
+            b_y_inv[i] = b_y[i] ^ subb_b_y;
 
             // Ripple carry adder
             // TODO add logic to invert a ?? Is it necessary??

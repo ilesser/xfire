@@ -33,8 +33,10 @@
 // ----------
 //
 //  Data inputs:
-//    - subb_a    : Add(0)/sub(1) a (logic, 1 bit).
-//    - subb_b    : Add(0)/sub(1) b (logic, 1 bit).
+//    - subb_a_x  : Add(0)/sub(1) real part of a (logic, 1 bit).
+//    - subb_a_y  : Add(0)/sub(1) imag part of a (logic, 1 bit).
+//    - subb_b_x  : Add(0)/sub(1) real part of b (logic, 1 bit).
+//    - subb_b_y  : Add(0)/sub(1) imag part of b (logic, 1 bit).
 //    - a_x       : Real part of summand a (CSD, 2*W bits).
 //    - a_y       : Imaginary part of summand a (CSD, 2*W bits).
 //    - b_x       : Real part of summand b (CSD, 2*W bits).
@@ -69,8 +71,10 @@ module complex_csd_add_subb #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    input   wire              subb_a,
-    input   wire              subb_b,
+    input   wire              subb_a_x,
+    input   wire              subb_a_y,
+    input   wire              subb_b_x,
+    input   wire              subb_b_y,
     input   wire  [2*W-1:0]   a_x,
     input   wire  [2*W-1:0]   a_y,
     input   wire  [2*W-1:0]   b_x,
@@ -112,8 +116,8 @@ module complex_csd_add_subb #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (subb_a),
-      .subb_b              (subb_b),
+      .subb_a              (subb_a_x),
+      .subb_b              (subb_b_x),
       .a                   (a_x),
       .b                   (b_x),
     // ----------------------------------
@@ -136,8 +140,8 @@ module complex_csd_add_subb #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (subb_a),
-      .subb_b              (subb_b),
+      .subb_a              (subb_a_y),
+      .subb_b              (subb_b_y),
       .a                   (a_y),
       .b                   (b_y),
     // ----------------------------------
