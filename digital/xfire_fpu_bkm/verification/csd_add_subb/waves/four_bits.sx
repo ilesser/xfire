@@ -1,0 +1,55 @@
+### Custom WaveView session file (version H-2013.03-SP1 build 0523) ###
+### saved at 19:43:46 on Sat Apr 16 2016 ###
+wdf 0 "/home/ilesser/repos/xfire/digital/xfire_fpu_bkm/verification/csd_add_subb/waves/tb_csd_add_subb_four_bits_test.vcd" load=used 
+scalar list
+waveview_begin 1  stack  offset=0 name_b=445 mntr_b=445 name_width=430 "name=waveview 1" 
+  panel_begin digital pidx=0 spath=true marker=on vecname=a[7:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=20 "name=tb_csd_add_subb/duv/a[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=1 spath=true marker=on vecname=a_d[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/a_d[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=2 spath=true marker=on vecname=a_s[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/a_s[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=3 spath=true marker=on vecname=b_s[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/b_s[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=4 spath=true marker=on vecname=c_s[4:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_s[4:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=5 spath=true marker=on vecname=p[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/p[3:0]" disp=show 
+  panel_end
+  panel_begin separator pidx=6 spath=true "right-click to modify separator label" 
+  panel_end
+  panel_begin digital pidx=7 spath=true marker=on vecname=p[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/p[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=8 spath=true marker=on vecname=b_d[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/b_d[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=9 spath=true marker=on vecname=c_s[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_s[4:0]" bitidx=3 disp=show 
+    line src=wdf lidx=1 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_s[4:0]" bitidx=2 disp=show 
+    line src=wdf lidx=2 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_s[4:0]" bitidx=1 disp=show 
+    line src=wdf lidx=3 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_s[4:0]" bitidx=0 disp=show 
+  panel_end
+  panel_begin digital pidx=10 spath=true marker=on vecname=c_d[4:1] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_d[4:0]" bitidx=4 disp=show 
+    line src=wdf lidx=1 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_d[4:0]" bitidx=3 disp=show 
+    line src=wdf lidx=2 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_d[4:0]" bitidx=2 disp=show 
+    line src=wdf lidx=3 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_d[4:0]" bitidx=1 disp=show 
+  panel_end
+  panel_begin digital pidx=11 spath=true marker=on vecname=s_s[3:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/s_s[3:0]" disp=show 
+  panel_end
+  panel_begin separator pidx=12 spath=true "right-click to modify separator label" 
+  panel_end
+  panel_begin digital pidx=13 spath=true marker=on vecname=s[7:0] radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/s[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=14 spath=true marker=on vecname=c_s[4] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_csd_add_subb/duv/c_s[4:0]" bitidx=4 disp=show 
+  panel_end
+waveview_end

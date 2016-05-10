@@ -1,0 +1,46 @@
+Plan de tesis
+-------------
+
+1 - Introduccion al trabajo de tesis
+      * Comprender la teoria de los procesadores RISC.
+      * Escribir capitulo 2 de la tesis titulado: Teoria de los procesadores RISC. Ortogonalidad como premisa fundamental.
+
+2 - Desarrollo del Xfire ISA
+      * Leer libros, papers, IEEEXplore
+      * Escribir el capitulo 3 de la tesis titulado: The Xfire ISA
+         Comparacion con otras architecturas: ARM, MIPS, DLX, RISC V, Open RISC, MicroBlaze, Nios2, MSP430
+      * Description de los tradeoffs y toma de decisiones
+      * Anexo: detailed ISA description document
+
+3 - ABI
+    Assembler
+    Emulator
+    binutils unix
+
+4 - Implementar la arquitectura seleccionada en RTL y desarrollar los bancos de prueba de simulacion para verificar la
+    correcta funcionalidad de la misma. Dicho RTL cumplira con ciertas condiciones de portabilidad y legibilidad del codigo
+    para que el mismo sea efectivamente un IP core. Se escribira el capi�tulo 4, donde se estudiara la arquitectura desde
+    la implementacion a nivel de microarquitectura.
+
+5 - Experimentar el IP core en un ambiente de simulacion y, en la medida que sea posible, en campo. Realizar la sintesis
+    de la misma para distintos dispositivos FPGA, medir recursos utilizados, maxima frequencia de operacion y potencia
+    consumida.
+
+6 - Escribir el capitulo 6 de la tesis titulado: Conclusiones y Trabajos a Futuro. Se extraeran las conclusiones
+    pertinentes sobre los resultados obtenidos y se propondran futuras mejoras de la arquitecturas (si correspondiese)
+    a partir de los resultados obtenidos.
+
+7 - Escribir capitulo 1 de la tesis titulado: Introduccion al Trabajo de Tesis. Se detallaran las hipotesis
+    (problema a resolver), los objetivos y el alcance y la organizacion de la tesis. Escribir los agradecimientos, la
+    dedicatoria y el resumen de la tesis. Escribir todos los anexos que sean convenientes para lograr que la tesis sea
+    autocontenida.
+
+8 - Revisar la tesis por el tutor y por los pares antes de enviarla al jurado: evaluar gramatica, lenguaje usado,
+    resultados, formatos, etc.
+
+9 - Preparar la presentacion (diapositivas) con los objetivos, alcance, introduccion al sistema MIMO, desarrollo de la
+     arquitectura, resultados obtenidos, conclusiones y trabajos a futuros. Ensallar la presentacion delante del tutor
+     y los pares.
+
+10 - Hacer la presentacion de la tesis al jurado.
+

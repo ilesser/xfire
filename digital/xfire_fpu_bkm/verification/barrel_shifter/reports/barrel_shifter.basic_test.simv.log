@@ -1,0 +1,67 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/barrel_shifter.basic_test.simv.log +TESTSEED=1887571177 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 26 08:13 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1887571177
+*******************************************************
+
+Time =        0 dir = 0 op = 0 shift_t = 1 sel = 00 in = 0000000000000000
+		expected = 0000000000000000
+		obtained = 0000000000000000
+Time =     1000 dir = 0 op = 0 shift_t = 1 sel = 00 in = 0000000000000001
+		expected = 0000000000000001
+		obtained = 0000000000000001
+Time =     2000 dir = 0 op = 0 shift_t = 1 sel = 00 in = 0000000000000004
+		expected = 0000000000000004
+		obtained = 0000000000000004
+Time =     3000 dir = 0 op = 0 shift_t = 1 sel = 00 in = fffffffffffffffc
+		expected = fffffffffffffffc
+		obtained = fffffffffffffffc
+Time =     4000 dir = 0 op = 0 shift_t = 1 sel = 01 in = 0000000000000010
+		expected = 0000000000000008
+		obtained = 0000000000000008
+Time =     5000 dir = 0 op = 0 shift_t = 1 sel = 01 in = 000000000000020c
+		expected = 0000000000000106
+		obtained = 0000000000000106
+Time =     6000 dir = 0 op = 0 shift_t = 1 sel = 03 in = 000000000000020c
+		expected = 0000000000000041
+		obtained = 0000000000000041
+Time =     7000 dir = 1 op = 0 shift_t = 1 sel = 03 in = 000000000000020c
+		expected = 0000000000001060
+		obtained = 0000000000001060
+Time =     8000 dir = 1 op = 0 shift_t = 1 sel = 00 in = 000000000000020c
+		expected = 000000000000020c
+		obtained = 000000000000020c
+Time =     9000 dir = 1 op = 0 shift_t = 1 sel = 01 in = 000000000000020c
+		expected = 0000000000000418
+		obtained = 0000000000000418
+
+
+TIME     : 10
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 1887571177
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_barrel_shifter.v", line 254.
+$finish at simulation time                10000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 10000 ps
+CPU Time:      0.190 seconds;       Data structure size:   0.0Mb
+Tue Apr 26 08:13:34 2016

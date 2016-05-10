@@ -1,0 +1,77 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/bkm.basic_test.simv.log +TESTSEED=4203148059 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 24 16:05 2016
+ucli% run
+
+*******************************************************
+Test Seed:    91819237
+*******************************************************
+
+Time =        0 x = xxxxxxxxxxxxxxxx y = xxxxxxxxxxxxxxxx flags = xxxx done = x
+
+Time =     5000 x = xxxxxxxxxxxxxxxx y = 0000000000000000 flags = 000x done = x
+
+Time =    16000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 0
+
+Time =    95000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 1
+
+Time =   105000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 0
+
+Time =  1385000 x = ffffffffffffffff y = 0000000000000000 flags = 0000 done = 1
+
+Time =  1395000 x = ffffffffffffffff y = 0000000000000000 flags = 0000 done = 0
+
+Time =  2675000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 1
+
+Time =  2685000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 0
+
+Time =  3965000 x = ffffffffffffffff y = 0000000000000000 flags = 0000 done = 1
+
+Time =  3975000 x = ffffffffffffffff y = 0000000000000000 flags = 0000 done = 0
+
+Time =  5245000 x = ffffffffffffffff y = ffffffffffffffff flags = 0000 done = 0
+
+Time =  5255000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 1
+
+Time =  5265000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 0
+
+Time =  6545000 x = ffffffffffffffff y = ffffffffffffffff flags = 0000 done = 1
+
+Time =  6555000 x = ffffffffffffffff y = ffffffffffffffff flags = 0000 done = 0
+
+Time =  7835000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 1
+
+Time =  7845000 x = 0000000000000000 y = 0000000000000000 flags = 0000 done = 0
+
+Time =  9125000 x = ffffffffffffffff y = ffffffffffffffff flags = 0000 done = 1
+
+Time =  9135000 x = ffffffffffffffff y = ffffffffffffffff flags = 0000 done = 0
+
+
+
+TIME     : 10356
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 91819237
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_bkm.v", line 309.
+$finish at simulation time             10356000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 10356000 ps
+CPU Time:      0.160 seconds;       Data structure size:   0.0Mb
+Sun Apr 24 16:05:26 2016

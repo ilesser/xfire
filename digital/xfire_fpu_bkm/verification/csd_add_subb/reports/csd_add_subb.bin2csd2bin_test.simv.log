@@ -1,0 +1,247 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/csd_add_subb.bin2csd2bin_test.simv.log +TESTSEED=1310457905 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 19 00:13 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1310457905
+*******************************************************
+
+Time =        0 
+	tb_x_bin = 0000 
+	tb_y_bin = 0000 
+	tb_z_bin = 0000 
+	z_bin    = 0000
+
+Time =     1000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0001 
+	tb_z_bin = 0001 
+	z_bin    = 0001
+
+Time =     2000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0010 
+	tb_z_bin = 0010 
+	z_bin    = 0010
+
+Time =     3000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0011 
+	tb_z_bin = 0011 
+	z_bin    = 0011
+
+Time =     4000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0100 
+	tb_z_bin = 0100 
+	z_bin    = 0100
+
+Time =     5000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0101 
+	tb_z_bin = 0101 
+	z_bin    = 0101
+
+Time =     6000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0110 
+	tb_z_bin = 0110 
+	z_bin    = 0110
+
+Time =     7000 
+	tb_x_bin = 0000 
+	tb_y_bin = 0111 
+	tb_z_bin = 0111 
+	z_bin    = 0111
+
+Time =     8000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1000 
+	tb_z_bin = 1000 
+	z_bin    = 1000
+
+Time =     9000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1001 
+	tb_z_bin = 1001 
+	z_bin    = 1001
+
+Time =    10000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1010 
+	tb_z_bin = 1010 
+	z_bin    = 1010
+
+Time =    11000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1011 
+	tb_z_bin = 1011 
+	z_bin    = 1011
+
+Time =    12000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1100 
+	tb_z_bin = 1100 
+	z_bin    = 1100
+
+Time =    13000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1101 
+	tb_z_bin = 1101 
+	z_bin    = 1101
+
+Time =    14000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1110 
+	tb_z_bin = 1110 
+	z_bin    = 1110
+
+Time =    15000 
+	tb_x_bin = 0000 
+	tb_y_bin = 1111 
+	tb_z_bin = 1111 
+	z_bin    = 1111
+
+Time =    16000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0000 
+	tb_z_bin = 0001 
+	z_bin    = 0001
+
+Time =    17000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0001 
+	tb_z_bin = 0010 
+	z_bin    = 0010
+
+Time =    18000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0010 
+	tb_z_bin = 0011 
+	z_bin    = 0011
+
+Time =    19000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0011 
+	tb_z_bin = 0100 
+	z_bin    = 0100
+
+Time =    20000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0100 
+	tb_z_bin = 0101 
+	z_bin    = 0101
+
+Time =    21000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0101 
+	tb_z_bin = 0110 
+	z_bin    = 0110
+
+Time =    22000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0110 
+	tb_z_bin = 0111 
+	z_bin    = 0111
+
+Time =    23000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0111 
+	tb_z_bin = 1000 
+	z_bin    = 1000
+
+Time =    24000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1000 
+	tb_z_bin = 1001 
+	z_bin    = 1001
+
+Time =    25000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1001 
+	tb_z_bin = 1010 
+	z_bin    = 1010
+
+Time =    26000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1010 
+	tb_z_bin = 1011 
+	z_bin    = 1011
+
+Time =    27000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1011 
+	tb_z_bin = 1100 
+	z_bin    = 1100
+
+Time =    28000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1100 
+	tb_z_bin = 1101 
+	z_bin    = 1101
+
+Time =    29000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1101 
+	tb_z_bin = 1110 
+	z_bin    = 1110
+
+Time =    30000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1110 
+	tb_z_bin = 1111 
+	z_bin    = 1111
+
+Time =    31000 
+	tb_x_bin = 0001 
+	tb_y_bin = 1111 
+	tb_z_bin = 0000 
+	z_bin    = 0000
+
+Time =    32000 
+	tb_x_bin = 0101 
+	tb_y_bin = 0011 
+	tb_z_bin = 0010 
+	z_bin    = 0010
+
+Time =    33000 
+	tb_x_bin = 0101 
+	tb_y_bin = 0011 
+	tb_z_bin = 1000 
+	z_bin    = 1000
+
+Time =    34000 
+	tb_x_bin = 0001 
+	tb_y_bin = 0111 
+	tb_z_bin = 1000 
+	z_bin    = 1000
+
+
+
+TIME     : 35
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 1310457905
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_csd_add_subb.v", line 304.
+$finish at simulation time                35000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 35000 ps
+CPU Time:      0.160 seconds;       Data structure size:   0.0Mb
+Tue Apr 19 00:13:17 2016
