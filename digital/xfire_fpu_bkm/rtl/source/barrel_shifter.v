@@ -83,7 +83,9 @@ module barrel_shifter #(
    // -----------------------------------------------------
 
    // Select the bit that gets shifted in from the left
-   assign s = shift_t ? in[W-1] : 1'b0;
+   always @(*) begin
+      s = shift_t ? in[W-1] : 1'b0;
+   end
 
    genvar i,j;
    generate
@@ -93,24 +95,28 @@ module barrel_shifter #(
          // and run a 'to right' shift
 
          // Pre data reversal
-         assign m[i][LOG2W] = dir ? in[W-1-i] : in[i];
+         always @(*) begin
+            m[i][LOG2W] = dir ? in[W-1-i] : in[i];
+         end
 
          for (j=0; j < LOG2W; j=j+1) begin
 
             always @(*) begin
 
-               m[i][j] = sel[j] ? in1[i][j] : in0[i][j];
+               m[i][j]     = sel[j] ? in1[i][j] : in0[i][j];
 
-               in0[i][j] = m[i][j+1];
+               in0[i][j]   = m[i][j+1];
 
-               in1[i][j] = (i <= (W-1)-2**j) ? m[i+2**j][j+1] : op ? m[i-(W-1)+2**j-1][j+1] : s;
+               in1[i][j]   = (i <= (W-1)-2^j) ? m[i+2^j][j+1] : op ? m[i-(W-1)+2^j-1][j+1] : s;
 
             end // always
 
          end // for j
 
          // Post data reversal
-         assign out[i] = dir ? m[W-1-i][0] : m[i][0];
+         always @(*) begin
+            out[i] = dir ? m[W-1-i][0] : m[i][0];
+         end
 
       end // for i
 

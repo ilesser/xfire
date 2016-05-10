@@ -227,7 +227,9 @@ module csd_add_subb #(
 
 
    // I do have to invert the last carry
-   assign c[1:0] = {~c_s[W], c_d[W]};
+   always @(*) begin
+      c[1:0] = {~c_s[W], c_d[W]};
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------

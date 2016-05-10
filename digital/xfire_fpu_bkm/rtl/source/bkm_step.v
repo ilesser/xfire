@@ -243,7 +243,7 @@ module bkm_step #(
       .dir                 (DIR_RIGHT),
       .op                  (OP_SHIFT),
       .shift_t             (SHIFT_ARITH),
-      .sel                 ({n,1'b0}),
+      .sel                 ({n,1'b0}), // select with 2*n
       .in                  (Y_n),
     // ----------------------------------
     // Data outputs
@@ -308,8 +308,10 @@ module bkm_step #(
                   begin
                      sign_a_x = 1'b0;  // add
                      sign_a_y = 1'b0;  // add
-                     sign_b_x = d_n_sign_x;
-                     sign_b_y = d_n_sign_y;
+                     sign_b_x = 1'b0;  // add
+                     sign_b_y = 1'b0;  // add
+                     //sign_b_x = d_n_sign_x;
+                     //sign_b_y = d_n_sign_y;
                      a_x      = X_n;
                      a_y      = Y_n;
                      b_x      = X_n_shifted_times_d_n;
@@ -334,8 +336,10 @@ module bkm_step #(
                      sign_b_y = 1'b0;
                      a_x      = X_n;
                      a_y      = Y_n;
-                     b_x      = {W{1'b0}};
-                     b_y      = {W{1'b0}};
+                     b_x      = X_n_shifted_times_d_n;
+                     b_y      = Y_n_shifted_times_d_n;
+                     //b_x      = {W{1'b0}};
+                     //b_y      = {W{1'b0}};
                   end
       endcase
    end
@@ -376,6 +380,7 @@ module bkm_step #(
    // -----------------------------------------------------
    assign   X_np1    = s_x;
    assign   Y_np1    = s_y;
+   //TODO: use carry signals for some type of check?
    // -----------------------------------------------------
 
 // *****************************************************************************
@@ -396,8 +401,8 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .d_x                 (d_n_u), // calculate
-      .d_y                 (d_n_v), // calculate
+      .d_x                 (d_n_u),
+      .d_y                 (d_n_v),
       .x_in                (u_n),
       .y_in                (v_n),
     // ----------------------------------
@@ -428,8 +433,10 @@ module bkm_step #(
                   begin
                      sign_a_u = 1'b0;  // add
                      sign_a_v = 1'b0;  // add
-                     sign_b_u = d_n_sign_u;  // calculate
-                     sign_b_v = d_n_sign_v;  // calculate
+                     sign_b_u = 1'b0;  // add
+                     sign_b_v = 1'b0;  // add
+                     //sign_b_u = d_n_sign_u;
+                     //sign_b_v = d_n_sign_v;
                      a_u      = u_n + d_n_data_u; // calculate
                      a_v      = v_n + d_n_data_v; // calculate
                      b_u      = u_n_times_d_n;
@@ -439,12 +446,18 @@ module bkm_step #(
                   begin
                      sign_a_u = 1'b0;
                      sign_a_v = 1'b0;
-                     sign_b_u = 1'b0;
-                     sign_b_v = 1'b0;
-                     a_u      = {W{1'b0}};
-                     a_v      = {W{1'b0}};
-                     b_u      = {W{1'b0}};
-                     b_v      = {W{1'b0}};
+                     sign_b_u = 1'b1;
+                     sign_b_v = 1'b1;
+                     a_u      = u_n;
+                     a_v      = v_n;
+                     b_u      = lut_u;
+                     b_v      = lut_v;
+                     //sign_b_u = 1'b0;
+                     //sign_b_v = 1'b0;
+                     //a_u      = {W{1'b0}};
+                     //a_v      = {W{1'b0}};
+                     //b_u      = {W{1'b0}};
+                     //b_v      = {W{1'b0}};
                   end
       endcase
    end

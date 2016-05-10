@@ -110,7 +110,9 @@ module csd2bin #(
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-   assign c[0] = 1'b1;
+   always @(*) begin
+      c[0] = 1'b1;
+   end
 
    genvar i;
    generate

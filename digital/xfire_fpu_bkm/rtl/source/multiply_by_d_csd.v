@@ -22,7 +22,7 @@
 //
 //  Data inputs:
 //    - d_x       : Real part of d (one's complement, 2 bits).
-//    - d_y       : Imag part of d (ones's complement, 2 bits).
+//    - d_y       : Imag part of d (one's complement, 2 bits).
 //    - x_in      : Real part of z (CSD, 2*W bits).
 //    - y_in      : Imag part of z (CSD, 2*W bits).
 //
@@ -106,8 +106,8 @@ module multiply_by_d_csd #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              ( d_x[1]),  // TODO: extract sign
-      .subb_b              (~d_y[1]),  // TODO: extract sign
+      .subb_a              ( d_x[1]),
+      .subb_b              (~d_y[1]),
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
@@ -126,8 +126,8 @@ module multiply_by_d_csd #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (d_y[1]),  // TODO: extract sign
-      .subb_b              (d_x[1]),  // TODO: extract sign
+      .subb_a              (d_y[1]),
+      .subb_b              (d_x[1]),
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
@@ -146,10 +146,10 @@ module multiply_by_d_csd #(
    generate
       for (i=0; i < 2*W; i=i+1) begin
          always @(*) begin
-            // Flipping all the bits when substracting
-            // Invert a and b depending on subb_a and subb_b
-            x_dx[i] = x_in[i] ^ d_x;
-            y_dx[i] = y_in[i] ^ d_x;
+            // Flipping all the bits is equivalent to negation
+            // Invert x and y depending on the sign of d_x
+            x_dx[i] = x_in[i] ^ d_x[1];
+            y_dx[i] = y_in[i] ^ d_x[1];
          end
       end
    endgenerate
@@ -162,10 +162,10 @@ module multiply_by_d_csd #(
    generate
       for (i=0; i < 2*W; i=i+1) begin
          always @(*) begin
-            // Flipping all the bits when substracting
-            // Invert a and b depending on subb_a and subb_b
-            x_dy[i] = y_in[i] ^ ~d_y;
-            y_dy[i] = x_in[i] ^  d_y;
+            // Flipping all the bits is equivalent to negation
+            // Invert x and y depending on the sign of d_y
+            x_dy[i] = y_in[i] ^ ~d_y[1];
+            y_dy[i] = x_in[i] ^  d_y[1];
          end
       end
    endgenerate
@@ -179,14 +179,17 @@ module multiply_by_d_csd #(
    // -----------------------------------------------------
    always @(*) begin
       casex({d_x,d_y})
+         // If d_x == 0
          4'b00XX: begin
                      x_out = x_dy;
                      y_out = y_dy;
                   end
+         // If d_y == 0
          4'bXX00: begin
                      x_out = x_dx;
                      y_out = y_dx;
                   end
+         // If d_x != 0 ^ d_y != 0
          default: begin
                      x_out = x_dx_dy;
                      y_out = y_dx_dy;
