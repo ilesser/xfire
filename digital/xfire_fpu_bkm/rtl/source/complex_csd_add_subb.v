@@ -82,10 +82,10 @@ module complex_csd_add_subb #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [1:0]       c_x,
-    output  reg   [1:0]       c_y,
-    output  reg   [2*W-1:0]   s_x,
-    output  reg   [2*W-1:0]   s_y
+    output  wire  [1:0]       c_x,
+    output  wire  [1:0]       c_y,
+    output  wire  [2*W-1:0]   s_x,
+    output  wire  [2*W-1:0]   s_y
   );
 // *****************************************************************************
 

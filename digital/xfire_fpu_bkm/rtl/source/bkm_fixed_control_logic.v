@@ -57,25 +57,25 @@ module bkm_fixed_control_logic
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
-   input   reg                  clk,
-   input   reg                  arst,
-   input   reg                  srst,
-   input   reg                  enable,
+   input   wire                 clk,
+   input   wire                 arst,
+   input   wire                 srst,
+   input   wire                 enable,
    // ----------------------------------
    // Data inputs
    // ----------------------------------
    // From outer world
-   input   reg                  start,
-   input   reg   [1:0]          format,
-   input   reg   [`OPSIZE-1:0]  op,
+   input   wire                 start,
+   input   wire  [1:0]          format,
+   input   wire  [`OPSIZE-1:0]  op,
    // From BKM Pre
-   input   reg                  bkm_pre_done,
+   input   wire                 bkm_pre_done,
    // From BKM Core
-   input   reg                  bkm_core_done,
-   input   reg   [`FSIZE-1:0]   bkm_core_flags,
+   input   wire                 bkm_core_done,
+   input   wire  [`FSIZE-1:0]   bkm_core_flags,
    // From BKM Post
-   input   reg                  bkm_post_done,
-   input   reg   [`FSIZE-1:0]   bkm_post_flags,
+   input   wire                 bkm_post_done,
+   input   wire  [`FSIZE-1:0]   bkm_post_flags,
    // ----------------------------------
    // Data outputs
    // ----------------------------------

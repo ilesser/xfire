@@ -82,15 +82,15 @@ module bkm_fixed #(
     input   wire                 start,
     input   wire  [1:0]          format,
     input   wire  [`OPSIZE-1:0]  op,
-    input   reg   [W-1:0]        x1,
-    input   reg   [W-1:0]        y1,
-    input   reg   [W-1:0]        x2,
-    input   reg   [W-1:0]        y2,
+    input   wire  [W-1:0]        x1,
+    input   wire  [W-1:0]        y1,
+    input   wire  [W-1:0]        x2,
+    input   wire  [W-1:0]        y2,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [W-1:0]        x3,
-    output  reg   [W-1:0]        y3,
+    output  wire  [W-1:0]        x3,
+    output  wire  [W-1:0]        y3,
     output  wire  [`FSIZE-1:0]   flags,
     output  wire                 done
   );
