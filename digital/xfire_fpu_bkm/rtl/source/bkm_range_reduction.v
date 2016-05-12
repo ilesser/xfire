@@ -56,6 +56,8 @@
 //
 // -----------------------------------------------------------------------------
 
+`include "bkm_defs.vh"
+
 // *****************************************************************************
 // Interface
 // *****************************************************************************
@@ -107,11 +109,6 @@ module bkm_range_reduction #(
    // -----------------------------------------------------
    // -----------------------------------------------------
 
-   assign a       = {W{1'b0}};
-   assign b       = {W{1'b0}};
-   assign k1      = {W{1'b0}};
-   assign k2      = {W{1'b0}};
-   assign k3      = {W{1'b0}};
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
@@ -120,6 +117,11 @@ module bkm_range_reduction #(
          E_y_out <= {W{1'b0}};
          L_x_out <= {W{1'b0}};
          L_y_out <= {W{1'b0}};
+         a       <= {W{1'b0}};
+         b       <= {W{1'b0}};
+         k1      <= {W{1'b0}};
+         k2      <= {W{1'b0}};
+         k3      <= {W{1'b0}};
       end
       else if (srst) begin
          done    <= 1'b0;
@@ -127,6 +129,11 @@ module bkm_range_reduction #(
          E_y_out <= {W{1'b0}};
          L_x_out <= {W{1'b0}};
          L_y_out <= {W{1'b0}};
+         a       <= {W{1'b0}};
+         b       <= {W{1'b0}};
+         k1      <= {W{1'b0}};
+         k2      <= {W{1'b0}};
+         k3      <= {W{1'b0}};
       end
       else if (enable) begin
          done    <= start;
@@ -134,6 +141,11 @@ module bkm_range_reduction #(
          E_y_out <= E_y_in;
          L_x_out <= L_x_in;
          L_y_out <= L_y_in;
+         a       <= {W{1'b0}};
+         b       <= {W{1'b0}};
+         k1      <= {W{1'b0}};
+         k2      <= {W{1'b0}};
+         k3      <= {W{1'b0}};
       end
    end
 

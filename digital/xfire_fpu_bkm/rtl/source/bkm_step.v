@@ -215,9 +215,9 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .dir                 (DIR_RIGHT),
-      .op                  (OP_SHIFT),
-      .shift_t             (SHIFT_ARITHMETIC),
+      .dir                 (`DIR_RIGHT),
+      .op                  (`OP_SHIFT),
+      .shift_t             (`SHIFT_ARITH),
       .sel                 ({n,1'b0}), // select with 2*n
       .in                  (X_n),
     // ----------------------------------
@@ -240,9 +240,9 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .dir                 (DIR_RIGHT),
-      .op                  (OP_SHIFT),
-      .shift_t             (SHIFT_ARITH),
+      .dir                 (`DIR_RIGHT),
+      .op                  (`OP_SHIFT),
+      .shift_t             (`SHIFT_ARITH),
       .sel                 ({n,1'b0}), // select with 2*n
       .in                  (Y_n),
     // ----------------------------------
@@ -378,8 +378,10 @@ module bkm_step #(
    // -----------------------------------------------------
    // Output assignment for Z_n+1
    // -----------------------------------------------------
-   assign   X_np1    = s_x;
-   assign   Y_np1    = s_y;
+   always @(*) begin
+      X_np1    = s_x;
+      Y_np1    = s_y;
+   end
    //TODO: use carry signals for some type of check?
    // -----------------------------------------------------
 
@@ -476,9 +478,9 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .dir                 (DIR_RIGHT),
-      .op                  (OP_SHIFT),
-      .shift_t             (SHIFT_ARITHMETIC),
+      .dir                 (`DIR_RIGHT),
+      .op                  (`OP_SHIFT),
+      .shift_t             (`SHIFT_ARITH),
       .sel                 (n),
       .in                  (b_u),
     // ----------------------------------
@@ -501,9 +503,9 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .dir                 (DIR_RIGHT),
-      .op                  (OP_SHIFT),
-      .shift_t             (SHIFT_ARITHMETIC),
+      .dir                 (`DIR_RIGHT),
+      .op                  (`OP_SHIFT),
+      .shift_t             (`SHIFT_ARITH),
       .sel                 (n),
       .in                  (b_v),
     // ----------------------------------
@@ -546,8 +548,10 @@ module bkm_step #(
    // -----------------------------------------------------
    // Output assignment for w_n+1
    // -----------------------------------------------------
-   assign   u_np1    = s_u << 1;
-   assign   v_np1    = s_v << 1;
+   always @(*) begin
+      u_np1    = s_u << 1;
+      v_np1    = s_v << 1;
+   end
    // -----------------------------------------------------
 
 // *****************************************************************************

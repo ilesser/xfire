@@ -152,25 +152,6 @@ module csd_add_subb #(
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-   //always @(*) begin
-   //   if (subb_a == 1'b1) begin
-   //      a_inv = ~a;
-   //   end
-   //   else begin
-   //      a_inv = a;
-   //   end
-   //   if (subb_b == 1'b1) begin
-   //      b_inv = ~b;
-   //   end
-   //   else begin
-   //      b_inv = b;
-   //   end
-   //end
-   //
-
-   // Initial values
-   //assign c[1:0]  = 2'b00;  // if add: c = 10   if subb: c = 01 ??? TODO
-                            //          0                 0
 
    // Initial values
    // CSD 0 = {0,0} o {1,1} in BS but sign digit has to be inverted
@@ -194,15 +175,6 @@ module csd_add_subb #(
             // Invert a and b depending on subb_a and subb_b
             a_inv[2*i+1:2*i] = a[2*i+1:2*i] ^ {2{subb_a}};
             b_inv[2*i+1:2*i] = b[2*i+1:2*i] ^ {2{subb_b}};
-            //a_inv[2*i+1] = a[2*i+1] ^ subb_a;
-            //a_inv[2*i  ] = a[2*i  ] ^ subb_a;
-            //b_inv[2*i+1] = b[2*i+1] ^ subb_b;
-            //b_inv[2*i  ] = b[2*i  ] ^ subb_b;
-
-            //a_s[i] = a_inv[2*i+1];
-            //a_d[i] = a_inv[2*i];
-            //b_s[i] = b_inv[2*i+1];
-            //b_d[i] = b_inv[2*i];
 
             // Split the CSD numbers into its BS representation
             // _s stands for sign bit and _d for data bit
@@ -218,9 +190,6 @@ module csd_add_subb #(
 
             s[2*i+1:2*i] = {~s_s[i], s_d[i]};
 
-            //{c[2*(i+1)  ], s[2*i+1]}   =  p[i]         + b_inv[2*i]   +  c[2*i+1];
-            //s[2*i+1] = ~s[2*i+1]
-            //s[2*i]   = c[2*i];
          end
       end
    endgenerate

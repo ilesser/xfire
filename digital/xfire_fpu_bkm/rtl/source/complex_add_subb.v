@@ -64,12 +64,14 @@ module complex_add_subb #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg               c_x,
-    output  reg               c_y,
-    output  reg   [W-1:0]     s_x,
-    output  reg   [W-1:0]     s_y
+    output  wire              c_x,
+    output  wire              c_y,
+    output  wire  [W-1:0]     s_x,
+    output  wire  [W-1:0]     s_y
   );
 // *****************************************************************************
+
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Architecture
@@ -80,49 +82,58 @@ module complex_add_subb #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   //reg   [W-1:0]     a_x_inv;// inverted version of a_x
-   //reg   [W-1:0]     a_y_inv;// inverted version of a_y
-   reg   [W-1:0]     b_x_inv;// inverted version of b_x
-   reg   [W-1:0]     b_y_inv;// inverted version of b_y
-   reg   [W:0]       cxx;  // x carry vector
-   reg   [W:0]       cyy;  // y carry vector
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
 
-   // Initial values
-   assign cxx[0] = subb_b_x;
-   assign cyy[0] = subb_b_y;
+   // -----------------------------------------------------
+   // X Adder/subb
+   // -----------------------------------------------------
+   add_subb #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) add_subb_x (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .subb_a              (subb_a_x),
+      .subb_b              (subb_b_x),
+      .a                   (a_x),
+      .b                   (b_x),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      .c                   (c_x),
+      .s                   (s_x)
+   );
+   // -----------------------------------------------------
 
-   genvar i;
-   generate
-      for (i=0; i < W; i=i+1) begin
-         always @(*) begin
-
-            // Flipping all the bits when substracting
-            // Invert a and b depending on subb_a and subb_b
-            //a_x_inv[i] = a_x[i] ^ subb_a_x;
-            //a_y_inv[i] = a_y[i] ^ subb_a_y;
-            b_x_inv[i] = b_x[i] ^ subb_b_x;
-            b_y_inv[i] = b_y[i] ^ subb_b_y;
-
-            // Ripple carry adder
-            // TODO add logic to invert a ?? Is it necessary??
-            //{c_x[i+1], s_x[i]} = a_x_inv[i] + b_x_inv[i] + c_x[i];
-            //{c_y[i+1], s_y[i]} = a_y_inv[i] + b_y_inv[i] + c_y[i];
-            {cxx[i+1], s_x[i]} = a_x[i] + b_x_inv[i] + cxx[i];
-            {cyy[i+1], s_y[i]} = a_y[i] + b_y_inv[i] + cyy[i];
-
-         end
-      end
-   endgenerate
-
-   // Carry output
-   assign c_x = cxx[W];
-   assign c_y = cyy[W];
-
+   // -----------------------------------------------------
+   // Y Adder/subb
+   // -----------------------------------------------------
+   add_subb #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (W)
+   ) add_subb_y (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .subb_a              (subb_a_y),
+      .subb_b              (subb_b_y),
+      .a                   (a_y),
+      .b                   (b_y),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      .c                   (c_y),
+      .s                   (s_y)
+   );
    // -----------------------------------------------------
 
 // *****************************************************************************

@@ -66,10 +66,10 @@ module xfire_fpu_bkm #(
     input   wire                 start,
     input   wire  [1:0]          format,
     input   wire  [`OPSIZE-1:0]  op,
-    input   reg   [W-1:0]        x1,
-    input   reg   [W-1:0]        y1,
-    input   reg   [W-1:0]        x2,
-    input   reg   [W-1:0]        y2,
+    input   wire  [W-1:0]        x1,
+    input   wire  [W-1:0]        y1,
+    input   wire  [W-1:0]        x2,
+    input   wire  [W-1:0]        y2,
     // ----------------------------------
     // Data outputs
     // ----------------------------------

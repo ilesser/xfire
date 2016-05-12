@@ -124,7 +124,7 @@ module bkm #(
    // BKM Range reduction
    reg                  range_red_enable;
    reg                  range_red_start;
-   reg                  range_red_done;
+   wire                 range_red_done;
    wire  [W-1:0]        E_x_0;
    wire  [W-1:0]        E_y_0;
    wire  [W-1:0]        L_x_0;
@@ -138,7 +138,7 @@ module bkm #(
    // BKM Pre step
    reg                  bkm_pre_step_enable;
    reg                  bkm_pre_step_start;
-   reg                  bkm_pre_step_done;
+   wire                 bkm_pre_step_done;
    wire  [W-1:0]        X_1;
    wire  [W-1:0]        Y_1;
    wire  [W-1:0]        u_1;
@@ -147,7 +147,7 @@ module bkm #(
    // BKM Steps
    reg                  bkm_steps_enable;
    reg                  bkm_steps_start;
-   reg                  bkm_steps_done;
+   wire                 bkm_steps_done;
    wire  [`FSIZE-1:0]   bkm_steps_flags;
    wire  [W-1:0]        X_N;
    wire  [W-1:0]        Y_N;
@@ -155,7 +155,7 @@ module bkm #(
    // BKM Range extension
    reg                  range_ext_enable;
    reg                  range_ext_start;
-   reg                  range_ext_done;
+   wire                 range_ext_done;
    wire  [`FSIZE-1:0]   range_ext_flags;
    wire  [W-1:0]        X_range_ext;
    wire  [W-1:0]        Y_range_ext;
@@ -165,22 +165,24 @@ module bkm #(
    wire  [W-1:0]        Y_prec_out;
 
    // Output register
-   wire                 output_reg_enable;
+   reg                  output_reg_enable;
    // -----------------------------------------------------
 
    // TODO: ENABLES and STARTS/DONE!!
-   assign input_reg_enable    = enable;
-   assign range_red_enable    = enable;
-   assign bkm_pre_step_enable = enable;
-   assign bkm_steps_enable    = enable;
-   assign range_ext_enable    = enable;
-   assign output_reg_enable   = enable;
+   always @(*) begin
+      input_reg_enable    = enable;
+      range_red_enable    = enable;
+      bkm_pre_step_enable = enable;
+      bkm_steps_enable    = enable;
+      range_ext_enable    = enable;
+      output_reg_enable   = enable;
 
-   //     range_red_start  <-- start
-   assign bkm_pre_step_start  = range_red_done;
-   assign bkm_steps_start     = bkm_pre_step_done;
-   assign range_ext_start     = bkm_steps_done;
-   //     done             <-- range_ext_done
+      //     range_red_start  <-- start
+      bkm_pre_step_start  = range_red_done;
+      bkm_steps_start     = bkm_pre_step_done;
+      range_ext_start     = bkm_steps_done;
+      //     done             <-- range_ext_done
+   end
 
    // -----------------------------------------------------
    // Input register

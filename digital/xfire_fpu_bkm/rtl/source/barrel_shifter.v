@@ -76,7 +76,7 @@ module barrel_shifter #(
    reg   s;
    reg   in0 [0:W-1][0:LOG2W-1];
    reg   in1 [0:W-1][0:LOG2W-1];
-   reg   m   [0:W-1][0:LOG2W];
+   reg   muxs[0:W-1][0:LOG2W];
 
    // -----------------------------------------------------
    // Combinational logic
@@ -96,18 +96,25 @@ module barrel_shifter #(
 
          // Pre data reversal
          always @(*) begin
-            m[i][LOG2W] = dir ? in[W-1-i] : in[i];
+            muxs[i][LOG2W] = dir ? in[W-1-i] : in[i];
          end
 
          for (j=0; j < LOG2W; j=j+1) begin
 
             always @(*) begin
 
-               m[i][j]     = sel[j] ? in1[i][j] : in0[i][j];
+               muxs[i][j]     = sel[j] ? in1[i][j] : in0[i][j];
 
-               in0[i][j]   = m[i][j+1];
+               in0[i][j]   = muxs[i][j+1];
 
-               in1[i][j]   = (i <= (W-1)-2^j) ? m[i+2^j][j+1] : op ? m[i-(W-1)+2^j-1][j+1] : s;
+               //in1[i][j]   = (i <= (W-1)-2^j) ? muxs[i+2^j][j+1] : op ? muxs[i-(W-1)+2^j-1][j+1] : s;
+               if (i <= (W-1)-2^j) begin
+                  in1[i][j] = muxs[i+2^j][j+1];
+               end
+               if (i >  (W-1)-2^j) begin
+                  in1[i][j] = op ? muxs[i-(W-1)+2^j-1][j+1] : s;
+               end
+
 
             end // always
 
@@ -115,7 +122,7 @@ module barrel_shifter #(
 
          // Post data reversal
          always @(*) begin
-            out[i] = dir ? m[W-1-i][0] : m[i][0];
+            out[i] = dir ? muxs[W-1-i][0] : muxs[i][0];
          end
 
       end // for i

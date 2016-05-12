@@ -109,8 +109,10 @@ module bin2csd #(
    // -----------------------------------------------------
 
    // i=0 first bit
-   assign h[0] = x[0];
-   assign k[0] = 1'b0;
+   always @(*) begin
+      h[0] = x[0];
+      k[0] = 1'b0;
+   end
 
    genvar i;
    generate
@@ -143,21 +145,23 @@ module bin2csd #(
       end
    endgenerate
 
-   // i=W-1 last bit
-   if ( (W-1)%2 ) begin // W-1 is odd
+   always @(*) begin
+      // i=W-1 last bit
+      if ( (W-1)%2 ) begin // W-1 is odd
 
-      assign y_s[W-1] =  ~h[W-2] &  k[W-1];
-      assign y_d[W-1] =  ~h[W-1] &  k[W-2];
+         y_s[W-1] =  ~h[W-2] &  k[W-1];
+         y_d[W-1] =  ~h[W-1] &  k[W-2];
 
+      end
+      else begin  // W-1 is even
+
+         y_s[W-1] =   h[W-1] & ~k[W-2];
+         y_d[W-1] =   h[W-2] & ~k[W-1];
+
+      end
+
+      y[2*(W-1)+1:2*(W-1)] = {y_s[W-1], y_d[W-1]};
    end
-   else begin  // W-1 is even
-
-      assign y_s[W-1] =   h[W-1] & ~k[W-2];
-      assign y_d[W-1] =   h[W-2] & ~k[W-1];
-
-   end
-
-   assign y[2*(W-1)+1:2*(W-1)] = {y_s[W-1], y_d[W-1]};
    // -----------------------------------------------------
 
 // *****************************************************************************

@@ -144,7 +144,6 @@ module bkm_steps #(
    reg   [`FSIZE-1:0]   flags_int;
    // -----------------------------------------------------
 
-   assign flags_int = {`FSIZE{1'b0}};
 
    always @(posedge clk or posedge arst) begin
       if (arst) begin
@@ -152,18 +151,21 @@ module bkm_steps #(
          X_out <= {W{1'b0}};
          Y_out <= {W{1'b0}};
          flags <= {`FSIZE{1'b0}};
+         flags_int <= {`FSIZE{1'b0}};
       end
       else if (srst) begin
          done  <= 1'b0;
          X_out <= {W{1'b0}};
          Y_out <= {W{1'b0}};
          flags <= {`FSIZE{1'b0}};
+         flags_int <= {`FSIZE{1'b0}};
       end
       else if (enable) begin
          done  <= start;
          X_out <= X_in;
          Y_out <= Y_in;
          flags <= flags_int;
+         flags_int <= {`FSIZE{1'b0}};
       end
    end
 

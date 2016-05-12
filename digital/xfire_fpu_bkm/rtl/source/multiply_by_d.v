@@ -76,14 +76,26 @@ module multiply_by_d #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [W-1:0]        x_dx_dy;
-   reg   [W-1:0]        y_dx_dy;
+   wire                 d_x_sign;
+   wire                 d_x_data;
+   wire                 d_y_sign;
+   wire                 d_y_data;
+   wire                 cx_dx_dy;
+   wire                 cy_dx_dy;
+   wire  [W-1:0]        x_dx_dy;
+   wire  [W-1:0]        y_dx_dy;
+   reg   [W:0]          cx_dx;
+   reg   [W:0]          cy_dx;
+   reg   [W-1:0]        x_dx_inv;
+   reg   [W-1:0]        y_dx_inv;
    reg   [W-1:0]        x_dx;
    reg   [W-1:0]        y_dx;
+   reg   [W:0]          cx_dy;
+   reg   [W:0]          cy_dy;
+   reg   [W-1:0]        x_dy_inv;
+   reg   [W-1:0]        y_dy_inv;
    reg   [W-1:0]        x_dy;
    reg   [W-1:0]        y_dy;
-   wire                 c_x;
-   wire                 c_y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -91,46 +103,55 @@ module multiply_by_d #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
+   // Obtain d signs and data
+   // -----------------------------------------------------
+   assign d_x_sign = d_x[1];
+   assign d_x_data = d_x[0];
+   assign d_y_sign = d_y[1];
+   assign d_y_data = d_y[0];
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
    // If dx != 0 ^ dy == 0 then
    // z * d = z_dx_dy = (x dx - y dy) + j (x dy + y dx)
    // -----------------------------------------------------
-   csd_add_subb #(
+   add_subb #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) csd_add_subb_x (
+   ) add_subb_x (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              ( d_x[1]),  // TODO: extract sign
-      .subb_b              (~d_y[1]),  // TODO: extract sign
+      .subb_a              ( d_x_sign),
+      .subb_b              (~d_y_sign),
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .c                   (c_x),
+      .c                   (cx_dx_dy),
       .s                   (x_dx_dy)
    );
 
-   csd_add_subb #(
+   add_subb #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) csd_add_subb_y (
+   ) add_subb_y (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (d_y[1]),  // TODO: extract sign
-      .subb_b              (d_x[1]),  // TODO: extract sign
+      .subb_a              (d_y_sign),
+      .subb_b              (d_x_sign),
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .c                   (c_y),
+      .c                   (cy_dx_dy),
       .s                   (y_dx_dy)
    );
    // -----------------------------------------------------
@@ -139,14 +160,22 @@ module multiply_by_d #(
    // If dx != 0 ^ dy == 0 then
    // z * d = z_dx = (x + j y) dx
    // -----------------------------------------------------
+   always @(*) begin
+      cx_dx[0] = d_x_sign;
+      cy_dx[0] = d_x_sign;
+   end
+
    genvar i;
    generate
-      for (i=0; i < 2*W; i=i+1) begin
+      for (i=0; i < W; i=i+1) begin
          always @(*) begin
-            // Flipping all the bits when substracting
+            // Ripple carry adder to invert and add 1
             // Invert a and b depending on subb_a and subb_b
-            x_dx[i] = x_in[i] ^ d_x;
-            y_dx[i] = y_in[i] ^ d_x;
+            x_dx_inv[i] = x_in[i] ^ d_x_sign;
+            y_dx_inv[i] = y_in[i] ^ d_x_sign;
+
+            {cx_dx[i+1], x_dx[i]} = x_dx_inv[i] + cx_dx[i];
+            {cy_dx[i+1], y_dx[i]} = y_dx_inv[i] + cy_dx[i];
          end
       end
    endgenerate
@@ -156,13 +185,21 @@ module multiply_by_d #(
    // If dx == 0 ^ dy != 0 then
    // z * d = z_dy = (-y + j x) dy
    // -----------------------------------------------------
+   always @(*) begin
+      cx_dy[0] =~d_y_sign;
+      cy_dy[0] = d_y_sign;
+   end
+
    generate
-      for (i=0; i < 2*W; i=i+1) begin
+      for (i=0; i < W; i=i+1) begin
          always @(*) begin
-            // Flipping all the bits when substracting
+            // Ripple carry adder to invert and add 1
             // Invert a and b depending on subb_a and subb_b
-            x_dy[i] = y_in[i] ^ ~d_y;
-            y_dy[i] = x_in[i] ^  d_y;
+            x_dy_inv[i] = y_in[i] ^ ~d_y_sign;
+            y_dy_inv[i] = x_in[i] ^  d_y_sign;
+
+            {cx_dy[i+1], x_dy[i]} = y_dy_inv[i] + cx_dy[i];
+            {cy_dy[i+1], y_dy[i]} = x_dy_inv[i] + cy_dy[i];
          end
       end
    endgenerate
@@ -176,14 +213,22 @@ module multiply_by_d #(
    // -----------------------------------------------------
    always @(*) begin
       casex({d_x,d_y})
-         4'b00XX: begin
+         // d is 0
+         4'bX0X0: begin
+                     x_out = {W{1'b0}};
+                     y_out = {W{1'b0}};
+                  end
+         // d has only imaginary part
+         4'bX0X1: begin
                      x_out = x_dy;
                      y_out = y_dy;
                   end
-         4'bXX00: begin
+         // d has only real part
+         4'bX1X0: begin
                      x_out = x_dx;
                      y_out = y_dx;
                   end
+         // d has real and imaginary parts
          default: begin
                      x_out = x_dx_dy;
                      y_out = y_dx_dy;
