@@ -69,6 +69,7 @@ task basic_test;
       load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 4192);
       load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   0, 524, 524 );
       load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 1048);
+      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   6, 524, 3144);
 
 
    end
