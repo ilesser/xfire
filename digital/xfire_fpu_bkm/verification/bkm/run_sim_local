@@ -646,7 +646,6 @@ if [ "${tool}" == "iverilog"  ]; then
 fi
 
 if [ "${tool}" == "vcs" ]; then
-      #+lint=all \
    ${VCS_PATH}/bin/vcs \
       +incdir+./temp \
       +incdir+../../../rtl/source/ \
@@ -655,6 +654,7 @@ if [ "${tool}" == "vcs" ]; then
       +define+RTL_DEBUG \
       +vcs+lic+wait \
       +warn=all \
+      +lint=PCWM\
       -sverilog \
       -debug
    mv csrc ./temp/
