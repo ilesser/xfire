@@ -1,12 +1,14 @@
 Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precision_selection.v \
-./temp/bkm.v ./temp/bkm_first_step.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
-./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v ./temp/simlib_clk_osc.v \
-./temp/bkm_range_reduction.v ./temp/bkm_fixed_control_logic.v ./temp/bkm_range_extension.v \
-./temp/csd2bin.v ./temp/tb_bkm.v ./temp/output_precision_selection.v ./temp/bkm_steps.v \
-./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/bkm.basic_test.vcs.log \
-+define+RTL_DEBUG +vcs+lic+wait +warn=all -sverilog -debug
+./temp/bkm.v ./temp/multiply_by_d_csd.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
+./temp/csd_add_subb.v ./temp/complex_csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v \
+./temp/simlib_clk_osc.v ./temp/bkm_step.v ./temp/multiply_by_d.v ./temp/bkm_range_reduction.v \
+./temp/bkm_fixed_control_logic.v ./temp/bkm_range_extension.v ./temp/complex_add_subb.v \
+./temp/csd2bin.v ./temp/tb_bkm.v ./temp/output_precision_selection.v ./temp/bkm_pre_step.v \
+./temp/bkm_steps.v ./temp/barrel_shifter.v ./temp/bkm_post_processing.v ./temp/bin2csd.v \
+-l ./reports/bkm.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all +lint=PCWM \
+-sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Sun Apr 24 16:05:25 2016
+            Version I-2014.03 -- Mon May  9 16:29:28 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -20,7 +22,7 @@ Back to file '././temp/input_precision_selection.v'.
 Parsing design file './temp/bkm.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm.v'.
-Parsing design file './temp/bkm_first_step.v'
+Parsing design file './temp/multiply_by_d_csd.v'
 Parsing design file './temp/bkm_fixed.v'
 Parsing included file './temp/bkm_fixed_defs.vh'.
 Parsing included file './temp/bkm_defs.vh'.
@@ -32,6 +34,7 @@ Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm_fixed_defs.vh'.
 Back to file './temp/bkm_pre_processing.v'.
 Parsing design file './temp/csd_add_subb.v'
+Parsing design file './temp/complex_csd_add_subb.v'
 Parsing design file './temp/xfire_fpu_bkm.v'
 Parsing included file './temp/xfire_fpu_bkm_defs.vh'.
 Parsing included file './temp/bkm_fixed_defs.vh'.
@@ -43,6 +46,10 @@ Parsing design file './temp/fadder.v'
 Parsing design file './temp/simlib_clk_osc.v'
 Parsing included file './temp/simlib_defs.vh'.
 Back to file './temp/simlib_clk_osc.v'.
+Parsing design file './temp/bkm_step.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_step.v'.
+Parsing design file './temp/multiply_by_d.v'
 Parsing design file './temp/bkm_range_reduction.v'
 Parsing design file './temp/bkm_fixed_control_logic.v'
 Parsing included file './temp/bkm_fixed_defs.vh'.
@@ -50,6 +57,7 @@ Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm_fixed_defs.vh'.
 Back to file './temp/bkm_fixed_control_logic.v'.
 Parsing design file './temp/bkm_range_extension.v'
+Parsing design file './temp/complex_add_subb.v'
 Parsing design file './temp/csd2bin.v'
 Parsing design file './temp/tb_bkm.v'
 Parsing included file './temp/bkm_defs.vh'.
@@ -61,9 +69,11 @@ Back to file './temp/tb_bkm.v'.
 Parsing design file './temp/output_precision_selection.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/output_precision_selection.v'.
+Parsing design file './temp/bkm_pre_step.v'
 Parsing design file './temp/bkm_steps.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm_steps.v'.
+Parsing design file './temp/barrel_shifter.v'
 Parsing design file './temp/bkm_post_processing.v'
 Parsing included file './temp/bkm_fixed_defs.vh'.
 Parsing included file './temp/bkm_defs.vh'.
@@ -72,105 +82,4239 @@ Back to file './temp/bkm_post_processing.v'.
 Parsing design file './temp/bin2csd.v'
 Top Level Modules:
        bkm_fixed
-       csd_add_subb
        xfire_fpu_bkm
        fadder
+       bkm_step
        csd2bin
        tb_bkm
        bin2csd
 TimeScale is 1 ns / 1 ps
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm.v, 328
-"bkm_steps #(W, LOG2W, N, LOG2N) bkm_steps( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_steps_enable),  .start (bkm_steps_start),  .mode (mode),  .format (format),  .X_in (X_1),  .Y_in (Y_1),  .x_in (x_1),  .y_in (y_1),  .X_out (X_N),  .Y_out (Y_N),  .flags (bkm_steps_flags),  .done (bkm_steps_done));"
-  The following 1-bit expression is connected to 4-bit port "flags" of module 
-  "bkm_steps", instance "bkm_steps".
-  Expression: bkm_steps_flags
-  	use +lint=PCWM for more details
+Warning-[IWNF] Implicit wire has no fanin
+./temp/bkm_step.v, 219
+  Implicit wire 'DIR_RIGHT' does not have any driver, please make sure this is
+  intended.
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm.v, 364
-"bkm_range_extension #(W) bkm_range_extension( .clk (clk),  .arst (arst),  .srst (srst),  .enable (range_ext_enable),  .start (range_ext_start),  .mode (mode),  .format (format),  .a (a),  .b (b),  .k1 (k1),  .k2 (k2),  .k3 (k3),  .X_in (X_N),  .Y_in (Y_N),  .flags_in (bkm_steps_flags),  .X_out (X_range_ext),  .Y_out (Y_range_ext),  .flags_out (range_ext_flags),  .done (range_ext_done));"
-  The following 1-bit expression is connected to 4-bit port "flags_in" of 
-  module "bkm_range_extension", instance "bkm_range_extension".
-  Expression: bkm_steps_flags
-  	use +lint=PCWM for more details
+Warning-[IWNF] Implicit wire has no fanin
+./temp/bkm_step.v, 220
+  Implicit wire 'OP_SHIFT' does not have any driver, please make sure this is 
+  intended.
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm.v, 364
-"bkm_range_extension #(W) bkm_range_extension( .clk (clk),  .arst (arst),  .srst (srst),  .enable (range_ext_enable),  .start (range_ext_start),  .mode (mode),  .format (format),  .a (a),  .b (b),  .k1 (k1),  .k2 (k2),  .k3 (k3),  .X_in (X_N),  .Y_in (Y_N),  .flags_in (bkm_steps_flags),  .X_out (X_range_ext),  .Y_out (Y_range_ext),  .flags_out (range_ext_flags),  .done (range_ext_done));"
-  The following 1-bit expression is connected to 4-bit port "flags_out" of 
-  module "bkm_range_extension", instance "bkm_range_extension".
-  Expression: range_ext_flags
-  	use +lint=PCWM for more details
+Warning-[IWNF] Implicit wire has no fanin
+./temp/bkm_step.v, 221
+  Implicit wire 'SHIFT_ARITHMETIC' does not have any driver, please make sure 
+  this is intended.
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm_fixed.v, 191
-"bkm #(W, LOG2W, N, LOG2N) bkm_core( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_core_enable),  .start (bkm_core_start),  .mode (bkm_core_mode),  .format (bkm_core_format),  .E_x_in (E_x_in),  .E_y_in (E_y_in),  .L_x_in (L_x_in),  .L_y_in (L_y_in),  .X_out (x_bkm),  .Y_out (y_bkm),  .flags (bkm_core_flags),  .done (bkm_core_done));"
-  The following 1-bit expression is connected to 64-bit port "X_out" of module
-  "bkm", instance "bkm_core".
-  Expression: x_bkm
-  	use +lint=PCWM for more details
+Warning-[IWNF] Implicit wire has no fanin
+./temp/bkm_step.v, 246
+  Implicit wire 'SHIFT_ARITH' does not have any driver, please make sure this 
+  is intended.
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm_fixed.v, 191
-"bkm #(W, LOG2W, N, LOG2N) bkm_core( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_core_enable),  .start (bkm_core_start),  .mode (bkm_core_mode),  .format (bkm_core_format),  .E_x_in (E_x_in),  .E_y_in (E_y_in),  .L_x_in (L_x_in),  .L_y_in (L_y_in),  .X_out (x_bkm),  .Y_out (y_bkm),  .flags (bkm_core_flags),  .done (bkm_core_done));"
-  The following 1-bit expression is connected to 64-bit port "Y_out" of module
-  "bkm", instance "bkm_core".
-  Expression: y_bkm
-  	use +lint=PCWM for more details
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_step.v, 396
+"multiply_by_d #(W) multiply_by_d( .d_x (d_n_data_u),  .d_y (d_n_data_v),  .x_in (u_n),  .y_in (v_n),  .x_out (u_n_times_d_n),  .y_out (v_n_times_d_n));"
+  The following 1-bit expression is connected to 2-bit port "d_x" of module 
+  "multiply_by_d", instance "multiply_by_d".
+  Expression: d_n_data_u
+  The expression is from module bkm_step
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm_fixed.v, 227
-"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
-  The following 1-bit expression is connected to 6-bit port "op" of module 
-  "bkm_post_processing", instance "bkm_post_processign".
-  Expression: bkm_post_op
-  	use +lint=PCWM for more details
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_step.v, 396
+"multiply_by_d #(W) multiply_by_d( .d_x (d_n_data_u),  .d_y (d_n_data_v),  .x_in (u_n),  .y_in (v_n),  .x_out (u_n_times_d_n),  .y_out (v_n_times_d_n));"
+  The following 1-bit expression is connected to 2-bit port "d_y" of module 
+  "multiply_by_d", instance "multiply_by_d".
+  Expression: d_n_data_v
+  The expression is from module bkm_step
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm_fixed.v, 227
-"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
-  The following 1-bit expression is connected to 64-bit port "x_in" of module 
-  "bkm_post_processing", instance "bkm_post_processign".
-  Expression: x_bkm
-  	use +lint=PCWM for more details
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm_fixed.v, 227
-"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .x_in (x_bkm),  .y_in (y_bkm),  .x_out (x3),  .y_out (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
-  The following 1-bit expression is connected to 64-bit port "y_in" of module 
-  "bkm_post_processing", instance "bkm_post_processign".
-  Expression: y_bkm
-  	use +lint=PCWM for more details
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
 
 
-Warning-[PCWM-W] Port connection width mismatch
-./temp/bkm_fixed.v, 257
-"bkm_fixed_control_logic bkm_fixed_control_logic( .clk (clk),  .arst (arst),  .srst (srst),  .enable (enable),  .start (start),  .format (format),  .op (op),  .bkm_pre_done (bkm_pre_done),  .bkm_core_done (bkm_core_done),  .bkm_core_flags (bkm_core_flags),  .bkm_post_done (bkm_post_done),  .bkm_post_flags (bkm_post_flags),  .bkm_pre_enable (bkm_pre_enable),  .bkm_pre_start (bkm_pre_start),  .bkm_pre_format (bkm_pre_format),  .bkm_pre_op (bkm_pre_op),  .bkm_core_enable (bkm_core_enable),  .bkm_core_start (bkm_core_start),  .bkm_core_format (bkm_core_format),  .bkm_core_mode (bkm_core_mode),  .bkm_post_enable (bkm_post_enable),  .bkm_post_start (bkm_post_start),  .bkm_post_format (bkm_post_format),  .bkm_post_op (bkm_post_op),  .flags (flags),  .done (done));"
-  The following 1-bit expression is connected to 6-bit port "bkm_post_op" of 
-  module "bkm_fixed_control_logic", instance "bkm_fixed_control_logic".
-  Expression: bkm_post_op
-  	use +lint=PCWM for more details
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_dx[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 149
+"x_in[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_dx[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 150
+"y_in[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[64]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[65]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[66]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[67]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[68]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[69]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[70]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[71]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[72]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[73]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[74]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[75]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[76]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[77]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[78]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[79]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[80]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[81]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[82]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[83]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[84]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[85]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[86]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[87]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[88]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[89]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[90]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[91]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[92]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[93]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[94]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[95]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[96]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[97]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[98]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[99]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[100]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[101]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[102]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[103]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[104]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[105]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[106]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[107]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[108]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[109]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[110]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[111]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[112]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[113]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[114]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[115]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[116]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[117]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[118]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[119]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[120]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[121]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[122]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[123]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[124]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[125]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[126]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"x_dy[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 165
+"y_in[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"y_dy[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Warning-[SIOB] Select index out of bounds
+./temp/multiply_by_d.v, 166
+"x_in[127]"
+  The select index is out of declared bounds : [63:0].
+  In module instance : multiply_by_d 
+  In module : multiply_by_d.
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 103
+"csd_add_subb #(W) csd_add_subb_x( .subb_a (d_x[1]),  .subb_b ((~d_y[1])),  .a (x_in),  .b (y_in),  .c (c_x),  .s (x_dx_dy));"
+  The following 64-bit expression is connected to 128-bit port "a" of module 
+  "csd_add_subb", instance "csd_add_subb_x".
+  Expression: x_in
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 103
+"csd_add_subb #(W) csd_add_subb_x( .subb_a (d_x[1]),  .subb_b ((~d_y[1])),  .a (x_in),  .b (y_in),  .c (c_x),  .s (x_dx_dy));"
+  The following 64-bit expression is connected to 128-bit port "b" of module 
+  "csd_add_subb", instance "csd_add_subb_x".
+  Expression: y_in
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 103
+"csd_add_subb #(W) csd_add_subb_x( .subb_a (d_x[1]),  .subb_b ((~d_y[1])),  .a (x_in),  .b (y_in),  .c (c_x),  .s (x_dx_dy));"
+  The following 1-bit expression is connected to 2-bit port "c" of module 
+  "csd_add_subb", instance "csd_add_subb_x".
+  Expression: c_x
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 103
+"csd_add_subb #(W) csd_add_subb_x( .subb_a (d_x[1]),  .subb_b ((~d_y[1])),  .a (x_in),  .b (y_in),  .c (c_x),  .s (x_dx_dy));"
+  The following 64-bit expression is connected to 128-bit port "s" of module 
+  "csd_add_subb", instance "csd_add_subb_x".
+  Expression: x_dx_dy
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 123
+"csd_add_subb #(W) csd_add_subb_y( .subb_a (d_y[1]),  .subb_b (d_x[1]),  .a (x_in),  .b (y_in),  .c (c_y),  .s (y_dx_dy));"
+  The following 64-bit expression is connected to 128-bit port "a" of module 
+  "csd_add_subb", instance "csd_add_subb_y".
+  Expression: x_in
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 123
+"csd_add_subb #(W) csd_add_subb_y( .subb_a (d_y[1]),  .subb_b (d_x[1]),  .a (x_in),  .b (y_in),  .c (c_y),  .s (y_dx_dy));"
+  The following 64-bit expression is connected to 128-bit port "b" of module 
+  "csd_add_subb", instance "csd_add_subb_y".
+  Expression: y_in
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 123
+"csd_add_subb #(W) csd_add_subb_y( .subb_a (d_y[1]),  .subb_b (d_x[1]),  .a (x_in),  .b (y_in),  .c (c_y),  .s (y_dx_dy));"
+  The following 1-bit expression is connected to 2-bit port "c" of module 
+  "csd_add_subb", instance "csd_add_subb_y".
+  Expression: c_y
+  The expression is from module multiply_by_d, instance multiply_by_d 
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/multiply_by_d.v, 123
+"csd_add_subb #(W) csd_add_subb_y( .subb_a (d_y[1]),  .subb_b (d_x[1]),  .a (x_in),  .b (y_in),  .c (c_y),  .s (y_dx_dy));"
+  The following 64-bit expression is connected to 128-bit port "s" of module 
+  "csd_add_subb", instance "csd_add_subb_y".
+  Expression: y_dx_dy
+  The expression is from module multiply_by_d, instance multiply_by_d 
 
 Starting vcs inline pass...
-9 modules and 0 UDP read.
+14 modules and 0 UDP read.
 recompiling module bkm
 recompiling module bkm_fixed
 recompiling module csd_add_subb
+recompiling module complex_csd_add_subb
 recompiling module xfire_fpu_bkm
 recompiling module fadder
+recompiling module bkm_step
+recompiling module multiply_by_d
+recompiling module complex_add_subb
 recompiling module csd2bin
 recompiling module tb_bkm
+recompiling module barrel_shifter
 recompiling module bin2csd
-All of 9 modules done
+All of 14 modules done
 rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
 ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
 --no-whole-archive
@@ -186,4 +4330,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: .514 seconds to compile + .106 seconds to elab + .124 seconds to link
+CPU time: 2.509 seconds to compile + .165 seconds to elab + .131 seconds to link
