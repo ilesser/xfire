@@ -64,15 +64,6 @@ module add_subb #(
 // *****************************************************************************
 // Architecture
 // *****************************************************************************
-// This architecture is implemented using two full adders in a similar way as a
-// 4-to-2-CS-adder but with the bits representing the sign bit inverted
-// *****************************************************************************
-// ESTE GRAFICO QUE HICE ACA ES UN CARRY SAVE ADDER 4-TO-2 ADDER
-// si agarro esto e invierto a_i^s, b_i^s, c_i^s y c^{i+1}_s lo
-// convierto en un BORROW SAVE ADDER 4-TO-2 ADDER
-//
-// Despues eso puedo usarlo con un wallace tree para poder hacer las sumas
-// y finalmente convertilo a una notacion no redundante
 //
 //         subb           subb
 //             a      a       b   b

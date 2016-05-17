@@ -1,0 +1,157 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.basic_test.simv.log +TESTSEED=4119158505 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  May 17 19:06 2016
+ucli% run
+
+*******************************************************
+Test Seed:   175808791
+*******************************************************
+
+Time =        0 tb_a =   0 tb_b =   0 tb_s = 0   0 s_res = 0   0
+
+Time =     1000 tb_a =   0 tb_b =   1 tb_s = 0   1 s_res = 0   1
+
+Time =     2000 tb_a =   0 tb_b =   2 tb_s = 0   2 s_res = 0   2
+
+Time =     3000 tb_a =   0 tb_b =   3 tb_s = 0   3 s_res = 0   3
+
+Time =     4000 tb_a =   0 tb_b =   4 tb_s = 0   4 s_res = 0   4
+
+Time =     5000 tb_a =   1 tb_b =   0 tb_s = 0   1 s_res = 0   1
+
+Time =     6000 tb_a =   1 tb_b =   1 tb_s = 0   2 s_res = 0   2
+
+Time =     7000 tb_a =   1 tb_b =   2 tb_s = 0   3 s_res = 0   3
+
+Time =     8000 tb_a =   1 tb_b =   3 tb_s = 0   4 s_res = 0   4
+
+Time =     9000 tb_a =   1 tb_b =   4 tb_s = 0   5 s_res = 0   5
+
+Time =    10000 tb_a =   2 tb_b =   0 tb_s = 0   2 s_res = 0   2
+
+Time =    11000 tb_a =   2 tb_b =   1 tb_s = 0   3 s_res = 0   3
+
+Time =    12000 tb_a =   2 tb_b =   2 tb_s = 0   4 s_res = 0   4
+
+Time =    13000 tb_a =   2 tb_b =   3 tb_s = 0   5 s_res = 0   5
+
+Time =    14000 tb_a =   2 tb_b =   4 tb_s = 0   6 s_res = 0   6
+
+Time =    15000 tb_a =   3 tb_b =   0 tb_s = 0   3 s_res = 0   3
+
+Time =    16000 tb_a =   3 tb_b =   1 tb_s = 0   4 s_res = 0   4
+
+Time =    17000 tb_a =   3 tb_b =   2 tb_s = 0   5 s_res = 0   5
+
+Time =    18000 tb_a =   3 tb_b =   3 tb_s = 0   6 s_res = 0   6
+
+Time =    19000 tb_a =   3 tb_b =   4 tb_s = 0   7 s_res = 0   7
+
+Time =    20000 tb_a =   4 tb_b =   0 tb_s = 0   4 s_res = 0   4
+
+Time =    21000 tb_a =   4 tb_b =   1 tb_s = 0   5 s_res = 0   5
+
+Time =    22000 tb_a =   4 tb_b =   2 tb_s = 0   6 s_res = 0   6
+
+Time =    23000 tb_a =   4 tb_b =   3 tb_s = 0   7 s_res = 0   7
+
+Time =    24000 tb_a =   4 tb_b =   4 tb_s = 0   8 s_res = 0   8
+
+Time =    25000 tb_a =   0 tb_b =   0 tb_s = 0   0 s_res = 1   0
+
+[26] ERROR: 	Expected result: 0 00000000
+		Obtained result: 1 00000000		. Instance: tb_add_subb.load_operands
+
+Time =    26000 tb_a =   0 tb_b =   1 tb_s = 0 255 s_res = 0 255
+
+Time =    27000 tb_a =   0 tb_b =   2 tb_s = 0 254 s_res = 0 254
+
+Time =    28000 tb_a =   0 tb_b =   3 tb_s = 0 253 s_res = 0 253
+
+Time =    29000 tb_a =   0 tb_b =   4 tb_s = 0 252 s_res = 0 252
+
+Time =    30000 tb_a =   1 tb_b =   0 tb_s = 0   1 s_res = 1   1
+
+[31] ERROR: 	Expected result: 0 00000001
+		Obtained result: 1 00000001		. Instance: tb_add_subb.load_operands
+
+Time =    31000 tb_a =   1 tb_b =   1 tb_s = 0   0 s_res = 1   0
+
+[32] ERROR: 	Expected result: 0 00000000
+		Obtained result: 1 00000000		. Instance: tb_add_subb.load_operands
+
+Time =    32000 tb_a =   1 tb_b =   2 tb_s = 0 255 s_res = 0 255
+
+Time =    33000 tb_a =   1 tb_b =   3 tb_s = 0 254 s_res = 0 254
+
+Time =    34000 tb_a =   1 tb_b =   4 tb_s = 0 253 s_res = 0 253
+
+Time =    35000 tb_a =   2 tb_b =   0 tb_s = 0   2 s_res = 1   2
+
+[36] ERROR: 	Expected result: 0 00000010
+		Obtained result: 1 00000010		. Instance: tb_add_subb.load_operands
+
+Time =    36000 tb_a =   2 tb_b =   1 tb_s = 0   1 s_res = 1   1
+
+[37] ERROR: 	Expected result: 0 00000001
+		Obtained result: 1 00000001		. Instance: tb_add_subb.load_operands
+
+Time =    37000 tb_a =   2 tb_b =   2 tb_s = 0   0 s_res = 1   0
+
+[38] ERROR: 	Expected result: 0 00000000
+		Obtained result: 1 00000000		. Instance: tb_add_subb.load_operands
+
+Time =    38000 tb_a =   2 tb_b =   3 tb_s = 0 255 s_res = 0 255
+
+Time =    39000 tb_a =   2 tb_b =   4 tb_s = 0 254 s_res = 0 254
+
+Time =    40000 tb_a =   3 tb_b =   0 tb_s = 0   3 s_res = 1   3
+
+[41] ERROR: 	Expected result: 0 00000011
+		Obtained result: 1 00000011		. Instance: tb_add_subb.load_operands
+
+Time =    41000 tb_a =   3 tb_b =   1 tb_s = 0   2 s_res = 1   2
+
+[42] ERROR: 	Expected result: 0 00000010
+		Obtained result: 1 00000010		. Instance: tb_add_subb.load_operands
+
+Time =    42000 tb_a =   3 tb_b =   2 tb_s = 0   1 s_res = 1   1
+
+[43] ERROR: 	Expected result: 0 00000001
+		Obtained result: 1 00000001		. Instance: tb_add_subb.load_operands
+
+Time =    43000 tb_a =   3 tb_b =   3 tb_s = 0   0 s_res = 1   0
+
+[44] ERROR: 	Expected result: 0 00000000
+		Obtained result: 1 00000000		. Instance: tb_add_subb.load_operands
+
+Time =    44000 tb_a =   3 tb_b =   4 tb_s = 0 255 s_res = 0 255
+
+
+
+TIME     : 45
+WARNINGS : 0
+ERRORS   : 10
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 10
+TESTSEED : 175808791
+
+
+............. TEST FAILED .............
+    _________    ____   __________
+   / ____/   |  / / /  / ____/ __ \
+  / /__ / /| | / / /  / __/ / / / /
+ / ___// ___ |/ / /__/ /___/ /_/ /
+/_/   /_/  |_/_/____/_____/_____/
+
+............. TEST FAILED .............
+
+
+$finish called from file "./temp/tb_add_subb.v", line 239.
+$finish at simulation time                45000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 45000 ps
+CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
+Tue May 17 19:06:29 2016

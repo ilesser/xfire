@@ -12,7 +12,7 @@
 // Description:
 // ------------
 //
-// XXXXX FILL IN HERE XXXXX
+// Testbench for add_subb block.
 //
 // -----------------------------------------------------------------------------
 // File name:
@@ -24,13 +24,14 @@
 // History:
 // --------
 //
-//    - 2016-05-17 - ilesser - Original version.
+//    - 2016-05-17 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
-`define SIM_CLK_PERIOD_NS XXXXX
+`define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`include "XXXXXXXX.vh"
+`define W 8
+
 
 // *****************************************************************************
 // Interface
@@ -45,58 +46,49 @@ module tb_add_subb ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   reg  [XXXXX-1:0]  tb_XXXXX;
-   reg  [XXXXX-1:0]  tb_XXXXX;
+   localparam        W = `W;
+   reg               tb_subb_a;
+   reg               tb_subb_b;
+   reg   [W-1:0]     tb_a;
+   reg   [W-1:0]     tb_b;
+   reg               tb_c;
+   reg   [W-1:0]     tb_s;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire [XXXXX-1:0]  wire_XXXXX;
-   wire [XXXXX-1:0]  wire_XXXXX;
+   wire              c_res;
+   wire  [W-1:0]     s_res;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Transactors
    // -----------------------------------------------------
-   <transactor_name> <transactor_name> (
-      <port_mapping>
-   );
-
-   <transactor_name> <transactor_name> (
-      <port_mapping>
-   );
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
-   <monitor_name> <monitor_name> (
-      <port_mapping>
-   );
-
-   <monitor_name> <monitor_name> (
-      <port_mapping>
-   );
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
-   <checker_name> <checker_name> (
-      <port_mapping>
-   );
-
-   <checker_name> <checker_name> (
-      <port_mapping>
-   );
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   <block_name> duv (
-      <port_mapping>
+   add_subb #(
+      .W(W)
+   ) duv (
+      .subb_a  (tb_subb_a),
+      .subb_b  (tb_subb_b),
+      .a       (tb_a),
+      .b       (tb_b),
+      .c       (c_res),
+      .s       (s_res)
    );
    // -----------------------------------------------------
 
