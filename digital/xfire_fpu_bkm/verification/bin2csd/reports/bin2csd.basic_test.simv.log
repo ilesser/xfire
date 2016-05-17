@@ -1,0 +1,85 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/bin2csd.basic_test.simv.log +TESTSEED=677736717 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Apr 17 04:04 2016
+ucli% run
+
+*******************************************************
+Test Seed:   677736717
+*******************************************************
+
+Time =        0 tb_x = 00000 	wire_y = 0000000000 
+				res    = 0000000000
+
+
+Time =     1000 tb_x = 00001 	wire_y = 0000000001 
+				res    = 0000000001
+
+
+Time =     2000 tb_x = 00010 	wire_y = 0000000100 
+				res    = 0000000100
+
+
+Time =     3000 tb_x = 00100 	wire_y = 0000010000 
+				res    = 0000010000
+
+
+Time =     4000 tb_x = 01000 	wire_y = 0001000000 
+				res    = 0001000000
+
+
+Time =     5000 tb_x = 10000 	wire_y = 1000000000 
+				res    = 1000000000
+
+
+Time =     6000 tb_x = 00110 	wire_y = 0001001000 
+				res    = 0001001000
+
+
+Time =     7000 tb_x = 00111 	wire_y = 0001000010 
+				res    = 0001000010
+
+
+Time =     8000 tb_x = 10111 	wire_y = 0010000010 
+				res    = 0010000010
+
+
+Time =     9000 tb_x = 11111 	wire_y = 0000000010 
+				res    = 0000000010
+
+
+Time =    10000 tb_x = 00011 	wire_y = 0000010010 
+				res    = 0000010010
+
+
+Time =    11000 tb_x = 01011 	wire_y = 0100100010 
+				res    = 0100100010
+
+
+
+
+TIME     : 12
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 677736717
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_bin2csd.v", line 237.
+$finish at simulation time                12000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 12000 ps
+CPU Time:      0.150 seconds;       Data structure size:   0.0Mb
+Sun Apr 17 04:04:50 2016
