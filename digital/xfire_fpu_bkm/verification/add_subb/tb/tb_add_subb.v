@@ -30,7 +30,7 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 8
+`define W 4
 
 
 // *****************************************************************************
@@ -46,20 +46,20 @@ module tb_add_subb ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam        W = `W;
-   reg               tb_subb_a;
-   reg               tb_subb_b;
-   reg   [W-1:0]     tb_a;
-   reg   [W-1:0]     tb_b;
-   reg               tb_c;
-   reg   [W-1:0]     tb_s;
+   localparam              W = `W;
+   reg                     tb_subb_a;
+   reg                     tb_subb_b;
+   reg   signed   [W-1:0]  tb_a;
+   reg   signed   [W-1:0]  tb_b;
+   reg                     tb_c;
+   reg   signed   [W-1:0]  tb_s;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire              c_res;
-   wire  [W-1:0]     s_res;
+   wire                    c_res;
+   wire  signed   [W-1:0]  s_res;
    // -----------------------------------------------------
 
    // -----------------------------------------------------

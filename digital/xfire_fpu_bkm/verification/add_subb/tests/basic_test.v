@@ -45,7 +45,7 @@ task basic_test;
 
    begin
 
-      $monitor("Time = %8t tb_a = %d tb_b = %d tb_s = %b %d s_res = %b %d\n",$time, tb_a, tb_b, tb_c, tb_s, c_res, s_res);
+      $monitor("Time = %8t subb_a = %b subb_b = %b tb_a = %6d tb_b = %6d tb_s = %b %6d s_res = %b %6d\n",$time, tb_subb_a, tb_subb_b, tb_a, tb_b, tb_c, tb_s, c_res, s_res);
       $dumpfile("../waves/tb_add_subb_basic_test.vcd");
       $dumpvars();
 
@@ -55,18 +55,27 @@ task basic_test;
       load_operands(1'b0,  1'b0,     `W'd0,  `W'd2, 1'b0,  `W'd2);
       load_operands(1'b0,  1'b0,     `W'd0,  `W'd3, 1'b0,  `W'd3);
       load_operands(1'b0,  1'b0,     `W'd0,  `W'd4, 1'b0,  `W'd4);
+      load_operands(1'b0,  1'b0,     `W'd0,  `W'd5, 1'b0,  `W'd5);
+      load_operands(1'b0,  1'b0,     `W'd0,  `W'd6, 1'b0,  `W'd6);
+      load_operands(1'b0,  1'b0,     `W'd0,  `W'd7, 1'b0,  `W'd7);
 
       load_operands(1'b0,  1'b0,     `W'd1,  `W'd0, 1'b0,  `W'd1);
       load_operands(1'b0,  1'b0,     `W'd1,  `W'd1, 1'b0,  `W'd2);
       load_operands(1'b0,  1'b0,     `W'd1,  `W'd2, 1'b0,  `W'd3);
       load_operands(1'b0,  1'b0,     `W'd1,  `W'd3, 1'b0,  `W'd4);
       load_operands(1'b0,  1'b0,     `W'd1,  `W'd4, 1'b0,  `W'd5);
+      load_operands(1'b0,  1'b0,     `W'd1,  `W'd5, 1'b0,  `W'd6);
+      load_operands(1'b0,  1'b0,     `W'd1,  `W'd6, 1'b0,  `W'd7);
+      load_operands(1'b0,  1'b0,     `W'd1,  `W'd7, 1'b1,  `W'd0);
 
       load_operands(1'b0,  1'b0,     `W'd2,  `W'd0, 1'b0,  `W'd2);
       load_operands(1'b0,  1'b0,     `W'd2,  `W'd1, 1'b0,  `W'd3);
       load_operands(1'b0,  1'b0,     `W'd2,  `W'd2, 1'b0,  `W'd4);
       load_operands(1'b0,  1'b0,     `W'd2,  `W'd3, 1'b0,  `W'd5);
       load_operands(1'b0,  1'b0,     `W'd2,  `W'd4, 1'b0,  `W'd6);
+      load_operands(1'b0,  1'b0,     `W'd1,  `W'd5, 1'b0,  `W'd7);
+      load_operands(1'b0,  1'b0,     `W'd1,  `W'd6, 1'b1,  `W'd0);
+      load_operands(1'b0,  1'b0,     `W'd1,  `W'd7, 1'b1,  `W'd1);
 
       load_operands(1'b0,  1'b0,     `W'd3,  `W'd0, 1'b0,  `W'd3);
       load_operands(1'b0,  1'b0,     `W'd3,  `W'd1, 1'b0,  `W'd4);
