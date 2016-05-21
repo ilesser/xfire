@@ -349,7 +349,7 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
 
    Los algoritmos para calcular funciones elementales generalmente convergen en un dominio acotado. Para calcular $f(x)$ dado un valor arbitrario $x$, usualmente tenemos que encontrar un valor $x'$ perteneciente al dominio de convergencia del algoritmo que calcula $f$, luego $f(x)$ puede deducirse de $f(x')$. Este proceso se denomina \textit{reducción de rango} de entrada (del inglés \textit{range reduction} ).
 
-   Si I es un intervalo que contienen al cero y su longitud es mayor que $\rho$, podemos computar para cualquier número real $x$ un número entero $k$ tal que $x-k\rho \in I$. Esto puede lograrse aplicando unos pocos pasos de un algoritmo similar a una división SRT. Supongamos que queremos calcular  $\exp(x+jy)$. BKM nospermite evaluar la función exponencial compleja dentro del rectángulo $R_1 = [-s_1^r; r_1^r] + j [-r_1^i; r_1^i]$.
+   Si I es un intervalo que contienen al cero y su longitud es mayor que $\rho$, podemos computar para cualquier número real $x$ un número entero $k$ tal que $x-k\rho \in I$. Esto puede lograrse aplicando unos pocos pasos de un algoritmo similar a una división SRT. Supongamos que queremos calcular  $\exp(x+jy)$. El algoritmo BKM nos permite evaluar la función exponencial compleja dentro del rectángulo $R_1 = [-s_1^r; r_1^r] + j [-r_1^i; r_1^i]$.
    La reducción del rango de entrada puede lograrse de la siguiente manera cuando la entrada es $z_{in} = x_{in} + j y_{in}$:
 
    \begin{enumerate}
@@ -366,7 +366,6 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
                   K_4 &= -1      & \text{and} \quad & \gamma_4 &= 0                  \\
                   K_5 &= -1-j    & \text{and} \quad & \gamma_5 &= -\frac{1}{2}\ln(2) \\
                   K_6 &= -j      & \text{and} \quad & \gamma_6 &= 0                  \\
-                  K_5 &= -1-j    & \text{and} \quad & \gamma_5 &= -\frac{1}{2}\ln(2) \\
                   K_7 &=\ \ 1-j  & \text{and} \quad & \gamma_7 &= -\frac{1}{2}\ln(2) \\
                \end{aligned}
             \right.
@@ -448,7 +447,7 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
       \end{aligned}
    \end{equation}
       }
-      \item{Si me encuentro en la parte superior del semicuadrante I ($y>x$) entonces definir $z'=z*(1-j)$ y luego $\ln(z')=\ln(z)-\frac{1}{2}\ln(2)-j\frac{\pi}{4}$. De caso contrario $z'=z$
+   \item{Si me encuentro en la parte superior del semicuadrante I ($y>x$) entonces definir $z'=z*e^{-j\pi / 4}=z*(1-j)$ y luego $\ln(z')=\ln(z)-\frac{1}{2}\ln(2)-j\frac{\pi}{4}$. De caso contrario $z'=z$
          \begin{equation} \label{eq:L_range_ext_2}
             \left\{
                \begin{aligned}
@@ -457,18 +456,21 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
                \end{aligned}
             \right.
          \end{equation}
-
+      De esta manera $z'$ cumple que $y \leq x$, osea que esta siempre en la parte inferior del semicuadrante I.
       }
-      \item{
+
+   \item{La primera linea convierte el rango $[45;26.565]$ en $[0;-18.435]$. La segunda linea convierte el rango $[14.035;26.565]$ en $[-12.529;0]$. La tercera linea mantiene el rango $[0;14.035]$. Por lo tanto $z''$ pertenece al rango de $[-12.529;14.036]$ en grados.
          \begin{equation} \label{eq:L_range_ext_3}
             \left\{
                \begin{aligned}
-                  z'' &= z'*(1-j)            \,\,\,\,\,  \text{si}\, \frac{x}{2} \leq y \leq        x       \,\,\,\,\,\,\text{luego}\,\, \ln(z'')=\ln(z')-\frac{1}{2}\ln(2)-j\frac{\pi}{4}\\
-                  z'' &= z'*(1-\frac{j}{2})  \,\,\,\,\,  \text{si}\, \frac{x}{4} \leq y \leq  \frac{x}{2}       \,\,\,\,\text{luego}\,\, \ln(z'')=\ln(z')-\frac{1}{2}\ln(2)-j\frac{\pi}{8}\\
-                  z'' &= z' \quad\quad\quad\quad\quad    \text{si}\, 0           \leq y \leq  \frac{x}{4}   \,\,\,\,\,\,\text{luego}\,\, \ln(z'')=\ln(z')                                 \\
+                  z'' &= z'*(1-j)            \,\,\,\,\,  \text{si}\, \frac{x'}{2} \leq y' \leq        x'       \,\,\,\,\,\,\text{luego}\,\,\,\frac{-x''}{3}  \leq y''\leq        0\, \,\,\,\,\,\,y \,\,\,\ln(z'')=\ln(z')-\frac{1}{2}\ln(2)-j\frac{\pi}{4}\\
+                  z'' &= z'*(1-\frac{j}{2})  \,\,\,\,\,  \text{si}\, \frac{x'}{4} \leq y' \leq  \frac{x'}{2}       \,\,\,\,\text{luego}\,\,\,\frac{-2x''}{9} \leq y''\leq        0\,         \,\,y \,\,\,\ln(z'')=\ln(z')-\frac{1}{2}\ln(2)-j\frac{\pi}{8}\\
+                  z'' &= z' \quad\quad\quad\quad\quad    \text{si}\, 0           \leq y' \leq  \frac{x'}{4}   \,\,\,\,\,\,\text{luego}\,\,\,\,\,\,\,\,\,\,\,\quad\quad\quad\quad\quad\quad\quad    \,    \ln(z'')=\ln(z')                                 \\
                \end{aligned}
             \right.
          \end{equation}
+
+         Finalmente $\frac{-x''}{3} \leq y'' \leq  \frac{x''}{4}$. De esta manera queda dentro del rango especificado en el paper de 99.
       }
    \item{Elegir un numero entero $k$ que verifique que $0.6 \leq x_{BKM} \leq 1.4$ y luego definir $z_{BKM}=2^k z''$. Luego $\ln(z_{BKM})=\ln(z'')+k \ln(2)$.}
    \end{enumerate}
