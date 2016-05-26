@@ -8,7 +8,7 @@ Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precisio
 -l ./reports/add_subb.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all \
 -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Wed May 18 08:33:31 2016
+            Version I-2014.03 -- Thu May 26 18:02:59 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -23,6 +23,13 @@ Parsing design file './temp/bkm.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm.v'.
 Parsing design file './temp/tb_add_subb.v'
+
+Warning-[DCTTSW] Decimal constant truncated
+  Constant '16' is truncated to 4 bits: 0.
+  "./temp/tb_add_subb.v", 893
+  Source info:       load_operands(1'b0,  1'b0,    -`W'd8, -`W'd8, 1'b0, 
+  -`W'd16);
+
 Parsing design file './temp/multiply_by_d_csd.v'
 Parsing design file './temp/bkm_fixed.v'
 Parsing included file './temp/bkm_fixed_defs.vh'.
@@ -130,4 +137,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: 2.802 seconds to compile + .152 seconds to elab + .138 seconds to link
+CPU time: 2.840 seconds to compile + .159 seconds to elab + .144 seconds to link
