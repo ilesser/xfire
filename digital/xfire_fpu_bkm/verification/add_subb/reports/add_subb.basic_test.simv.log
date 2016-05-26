@@ -1,11 +1,11 @@
-Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.basic_test.simv.log +TESTSEED=3582010887 +VERBOSITY=0
+Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.basic_test.simv.log +TESTSEED=597928168 +VERBOSITY=0
 Chronologic VCS simulator copyright 1991-2014
 Contains Synopsys proprietary information.
-Compiler version I-2014.03; Runtime version I-2014.03;  May 18 08:33 2016
+Compiler version I-2014.03; Runtime version I-2014.03;  May 26 18:03 2016
 ucli% run
 
 *******************************************************
-Test Seed:   712956409
+Test Seed:   597928168
 *******************************************************
 
 Time =        0 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 0      0
@@ -24,134 +24,44 @@ Time =     6000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      6 tb_s = 0      
 
 Time =     7000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      7 tb_s = 0      7 s_res = 0      7
 
-Time =     8000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 0      1
+Time =     8000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -1 tb_s = 0     -1 s_res = 0     -1
 
-Time =     9000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      1 tb_s = 0      2 s_res = 0      2
+Time =     9000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -2 tb_s = 0     -2 s_res = 0     -2
 
-Time =    10000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      2 tb_s = 0      3 s_res = 0      3
+Time =    10000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -3 tb_s = 0     -3 s_res = 0     -3
 
-Time =    11000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      3 tb_s = 0      4 s_res = 0      4
+Time =    11000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -4 tb_s = 0     -4 s_res = 0     -4
 
-Time =    12000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      4 tb_s = 0      5 s_res = 0      5
+Time =    12000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -5 tb_s = 0     -5 s_res = 0     -5
 
-Time =    13000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      6 s_res = 0      6
+Time =    13000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -6 tb_s = 0     -6 s_res = 0     -6
 
-Time =    14000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 0      7 s_res = 0      7
+Time =    14000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -7 tb_s = 0     -7 s_res = 0     -7
 
-Time =    15000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 1      0 s_res = 0     -8
+Time =    15000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -8 tb_s = 0     -8 s_res = 0     -8
 
-[16] ERROR: 	Expected result: 1 0000
+Time =    16000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 0      1
+
+Time =    17000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      1 tb_s = 0      2 s_res = 0      2
+
+Time =    18000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      2 tb_s = 0      3 s_res = 0      3
+
+Time =    19000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      3 tb_s = 0      4 s_res = 0      4
+
+Time =    20000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      4 tb_s = 0      5 s_res = 0      5
+
+Time =    21000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      6 s_res = 0      6
+
+Time =    22000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 0      7 s_res = 0      7
+
+Time =    23000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 1      0 s_res = 0     -8
+
+[24] ERROR: 	Expected result: 1 0000
 		Obtained result: 0 1000		. Instance: tb_add_subb.load_operands
 
-Time =    16000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 0      2
-
-Time =    17000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      1 tb_s = 0      3 s_res = 0      3
-
-Time =    18000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      2 tb_s = 0      4 s_res = 0      4
-
-Time =    19000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      3 tb_s = 0      5 s_res = 0      5
-
-Time =    20000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      4 tb_s = 0      6 s_res = 0      6
-
-Time =    21000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      7 s_res = 0      6
-
-[22] ERROR: 	Expected result: 0 0111
-		Obtained result: 0 0110		. Instance: tb_add_subb.load_operands
-
-Time =    22000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 1      0 s_res = 0      7
-
-[23] ERROR: 	Expected result: 1 0000
-		Obtained result: 0 0111		. Instance: tb_add_subb.load_operands
-
-Time =    23000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 1      1 s_res = 0     -8
-
-[24] ERROR: 	Expected result: 1 0001
-		Obtained result: 0 1000		. Instance: tb_add_subb.load_operands
-
-Time =    24000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 0      3
-
-Time =    25000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      1 tb_s = 0      4 s_res = 0      4
-
-Time =    26000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      2 tb_s = 0      5 s_res = 0      5
-
-Time =    27000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      3 tb_s = 0      6 s_res = 0      6
-
-Time =    28000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      4 tb_s = 0      7 s_res = 0      7
-
-Time =    29000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      0 tb_s = 0      4 s_res = 0      4
-
-Time =    30000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      1 tb_s = 0      5 s_res = 0      5
-
-Time =    31000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      2 tb_s = 0      6 s_res = 0      6
-
-Time =    32000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      3 tb_s = 0      7 s_res = 0      7
-
-Time =    33000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      4 tb_s = 0     -8 s_res = 0     -8
-
-Time =    34000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 0      0
-
-Time =    35000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      1 tb_s = 0     -1 s_res = 0     -1
-
-Time =    36000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      2 tb_s = 0     -2 s_res = 0     -2
-
-Time =    37000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      3 tb_s = 0     -3 s_res = 0     -3
-
-Time =    38000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      4 tb_s = 0     -4 s_res = 0     -4
-
-Time =    39000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 0      1
-
-Time =    40000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      1 tb_s = 0      0 s_res = 0      0
-
-Time =    41000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      2 tb_s = 0     -1 s_res = 0     -1
-
-Time =    42000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      3 tb_s = 0     -2 s_res = 0     -2
-
-Time =    43000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      4 tb_s = 0     -3 s_res = 0     -3
-
-Time =    44000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 0      2
-
-Time =    45000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      1 tb_s = 0      1 s_res = 0      1
-
-Time =    46000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      2 tb_s = 0      0 s_res = 0      0
-
-Time =    47000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      3 tb_s = 0     -1 s_res = 0     -1
-
-Time =    48000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      4 tb_s = 0     -2 s_res = 0     -2
-
-Time =    49000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 0      3
-
-Time =    50000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      1 tb_s = 0      2 s_res = 0      2
-
-Time =    51000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      2 tb_s = 0      1 s_res = 0      1
-
-Time =    52000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      3 tb_s = 0      0 s_res = 0      0
-
-Time =    53000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      4 tb_s = 0     -1 s_res = 0     -1
-
-
-
-TIME     : 54
-WARNINGS : 0
-ERRORS   : 4
-INFOS    : 0
-NOTES    : 0
-MESSAGES : 4
-TESTSEED : 712956409
-
-
-............. TEST FAILED .............
-    _________    ____   __________
-   / ____/   |  / / /  / ____/ __ \
-  / /__ / /| | / / /  / __/ / / / /
- / ___// ___ |/ / /__/ /___/ /_/ /
-/_/   /_/  |_/_/____/_____/_____/
-
-............. TEST FAILED .............
-
-
-$finish called from file "./temp/tb_add_subb.v", line 239.
-$finish at simulation time                54000
+$finish called from file "./temp/tb_add_subb.v", line 971.
+$finish at simulation time                24000
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 54000 ps
+Time: 24000 ps
 CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
-Wed May 18 08:33:35 2016
+Thu May 26 18:03:03 2016
