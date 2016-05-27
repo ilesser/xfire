@@ -104,7 +104,9 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
-
+% Paquete para incluir diagramas realizados en DIA
+\usepackage{tikz}
+\tikzset{every node/.style={scale=0.75}}
 
 % % XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 % % With this we ensure that the chapter and section
@@ -270,7 +272,7 @@
 % Cuerpo principal
 \mainmatter
 \include{cap01}
-% \include{cap02}
+\include{cap02}
 % \include{cap03}
 % \include{cap04}
 % \include{cap05}
