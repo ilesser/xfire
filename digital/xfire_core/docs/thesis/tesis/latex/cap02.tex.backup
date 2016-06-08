@@ -58,7 +58,7 @@ En la figura \ref{fig:C02-primer_circuito_integrado} puede verse el primer circu
   \label{fig:C02-primer_circuito_integrado}
 \end{figure}
 
-La ley de Moore, no es una ley en el sentido científico, sino más bien una observación del ritmo de avance de la industria de aquellos momentos. Al momento de publicar esas declaraciones, Moore trabajaba en los Laboratorios de Fairchild Semiconductor, donde trabajaba junto a Robert Noyce. Ellos fueron los fundadores de Intel en 1968. El ritmo de crecimiento de la insdustria de los Semiconductores dió lugar así, entre otras cosas, a la creación de los microprocesadores.
+La ley de Moore, no es una ley en el sentido científico, sino más bien una observación del ritmo de avance de la industria de aquellos momentos. Al momento de publicar esas declaraciones, Moore trabajaba en los Laboratorios de \emph{Fairchild Semiconductor}, donde trabajaba junto a Robert Noyce. Ellos fueron los fundadores de Intel en 1968. El ritmo de crecimiento de la insdustria de los Semiconductores dió lugar así, entre otras cosas, a la creación de los microprocesadores.
 
 \subsection{Microprocesadores}
 
@@ -72,8 +72,8 @@ En 1968, la armada de los Estados Unidos le encomienda a la empresa Garret Air R
   \centering
   \includegraphics[scale=0.5]{./figures/C02-f14_tomcat}
   \captionsetup{justification=centering}
-  \caption{Grumman F14 Tomcat, avión de combate de la US Navy cuyos sistemas de vuelo eran controlados por la CADC.}
-  \label{fig:C02-f14_tomcat}
+  \caption{Primer circuito integrado presentado por Texas Instruments, Inc. el 12 de Septiembre de 1958}
+  \label{fig:C02-primer_circuito_integrado}
 \end{figure}
 
 
@@ -81,46 +81,14 @@ En 1968, la armada de los Estados Unidos le encomienda a la empresa Garret Air R
 
 Un diseño de Lee Boysel\footnote{Nota sobre Lee Boysel} que data del año 1969 dentro de Texas Instruments\footnote{Nota sobre TI}, era un componente de una implementación en partes de un microprocesador de 24 bits, compuesto por tres chips iguales: AL1. Durante un juicio por patentes, se demostró que una sóla AL1 junto con memorias ROM y RAM e I/O era capaz de funcionar como CPU.
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{./figures/C02-al1}
-  \captionsetup{justification=centering}
-  \caption{Imágen microscópica de la AL1 desarrollada por Four-Phase Systems Inc..}
-  \label{fig:C02-al1}
-\end{figure}
-
-
 \subsubsection{Pico/General Instruments}
 
-En 1971, Pico y General Instruments (GI) colaboraron en el diseño de circuitos integrados con el objetivo de fabricar una implementación de un diseño de \emph{chip} único para la calculadora Monroe/Litton Royal Digital III Calcultator. Integraba en el mismo \emph{chip}, memoria ROM y RAM llamado PICO1/GI250. Pico era un emprendimiento de cinco ingenieros de diseño de GI, que tenían la visión de crear esta arquitectura en un único \emph{chip}. Contaban con experiencia previa en diseños de \emph{chipsets} tanto de GI como de Marconi-Elliot\footnote{Nota sobre Marconi-Elliot}. Algunos de ellos habían trabajado para Elliot Automation para crear una computadora de 8 bits en tecnología MOS, y habían ayudado a establecer un laboratorio de investigación en tecnologías MOS en Escocia en el año 1967. El mercado de las calculadoras estaba en pleno auge, con lo cuál estos diseños supusieron un éxito comercial para Pico y GI. GI, por su parte continuó con la innovación en microprocesadores microcontroladores\footnote{Nota sobre diferencia entre microprocesador y microcontrolador} y la división GI Microelectronics se convirtió en 1987 en Microchip PIC microcontroller.
-
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{./figures/C02-pico1_gi250}
-  \captionsetup{justification=centering}
-  \caption{Imágen microscópica del PICO1/GI250- Desarrollo colaborativo entre Pico y General Instruments de \emph{chip} único para la Monroe/Litton Royal Digital III Calcultator.}
-  \label{fig:C02-pico1_gi250}
-\end{figure}
+En 1971, Pico y General Instruments (GI) colaboraron en el diseño de circuitos integrados con el objetivo de fabricar una implementación de un diseño de \emph{chip} único para la calculadora Monroe/Litton Royal Digital III Calcultator. Integraba en el mismo \emph{chip}, memoria ROM y RAM. Pico era un emprendimiento de cinco ingenieros de diseño de GI, que tenían la visión de crear esta arquitectura en un único \emph{chip}. Contaban con experiencia previa en diseños de \emph{chipsets} tanto de GI como de Marconi-Elliot\footnote{Nota sobre Marconi-Elliot}. Algunos de ellos habían trabajado para Elliot Automation para crear una computadora de 8 bits en tecnología MOS, y habían ayudado a establecer un laboratorio de investigación en tecnologías MOS en Escocia en el año 1967. El mercado de las calculadoras estaba en pleno auge, con lo cuál estos diseños supusieron un éxito comercial para Pico y GI. GI, por su parte continuó con la innovación en microprocesadores microcontroladores\footnote{Nota sobre diferencia entre microprocesador y microcontrolador} y la división GI Microelectronics se convirtió en 1987 en Microchip PIC microcontroller.
 
 \subsubsection{Intel 4004}
 
-El Intel 4004 es generalmente el reconocido como el primer microprocesador comercial disponible en el mercado. El primer anuncio respecto de este dispositivo data del 15 de Noviembre de 1971, en la publicación Electronic News\footnote{Nota sobre Electronic News}. El diseño nace a partir del requerimiento de una compañía japonesa fabricante de calculadoras llamado Busicom\footnote{Nota sobre Busicom}, que le encomienda a Intel la tarea de desarrollar un \emph{chipset} para calculadoras de escritorio de alto rendimiento. El diseño original requerido por Busicom especificaba un \emph{chipset} compuesto por 7 \emph{chips} diferentes para la realización de una CPU de propósito específico cuyo programa estuviera almacenado en una ROM y sus datos guardados memoria de lectura y escritura implementada con registros de desplazamiento. Intel le asignó el proyecto a Ted Hoff\footnote{Nota sobre Ted Hoff}, quien propuso simplificar el diseño utilizando almacenamiento en memoria RAM dinámica y una arquitectura de CPU de propósito general. El diseño propuesto por Hoff implementaba la solución en 4 \emph{chips}: uno de ROM para almacenar el programa, uno de RAM dinámica para almacenar los datos, un dispositivo sencillo de I/O y una CPU de 4 bits. A pesar de no ser específicamente un diseñador de circuitos integrados, el supuso que se podía integrar todo el CPU en un único \emph{chip}. Estas especificaciones surgieron de la interacción de Hoff con un empleado a su cargo, el ingeniero de software llamado Stanley Mazor\footnote{Nota sobre Stanley Mazor} y un ingeniero de Busicom llamado Masatoshi Shima\footnote{Nota sobre Masatoshi Shima}. Este proyecto se llamó MCS-4 y no fué hasta que Intel contratara al italiano Federico Faggin\footnote{Nota sobre Federico Faggin} que empezó a tomar su forma definitiva. Faggin venía de desarollar en 1968 en Fairchild Semiconductor una teconología de compuertas de silicio (SGT o \emph{Silicon Gate Technology}\footnote{Nota sobre SGT, o también llamada Self-aligned Gate}), técnica que se sigue aplicando hoy en día. Faggin también era responsable del desarrollo de la técnica llamada \emph{Random Logic} que permitió la síntesis de descripciones complejas de lógica en hardware sencillo, como compuertas AND y OR. En el momento en el que se estaba desarrollando el proyecto MCS-4, el responsable del área de diseño de MOS de Intel era Leslie L. Vadász, cuya atención estaba enfocada en el mercado de memorias. Fue gracias a esto que le otorgó el liderazgo del proyecto MCS-4 a Faggin, quien fue finalmente el responsable de llevar el proyecto hasta la concepción final del 4004 gracias a la aplicación de las técnicas de diseño y fabricación antes mencionadas. Las primeras unidades del 4004 fueron entregadas a Busicom en Marzo de 1971.
+El Intel 4004 es generalmente el reconocido como el primer microprocesador comercial disponible en el mercado. El primer anuncio respecto de este dispositivo data del 15 de Noviembre de 1971, en la publicación Electronic News\footnote{Nota sobre Electronic News}. El diseño nace a partir del requerimiento de una compañía japonesa fabricante de calculadoras llamado Busicom\footnote{Nota sobre Busicom}, que le encomienda a Intel la tarea de desarrollar un \emph{chipset} para calculadoras de escritorio de alto rendimiento. El diseño original requerido por Busicom especificaba un \emph{chipset} compuesto por 7 \emph{chips} diferentes para la realización de una CPU de propósito específico cuyo programa estuviera almacenado en una ROM y sus datos guardados memoria de lectura y escritura implementada con registros de desplazamiento. Intel le asignó el proyecto a Ted Hoff\footnote{Nota sobre Ted Hoff}, quien propuso simplificar el diseño utilizando almacenamiento en memoria RAM dinámica y una arquitectura de CPU de propósito general. El diseño propuesto por Hoff implementaba la solución en 4 \emph{chips}: uno de ROM para almacenar el programa, uno de RAM dinámica para almacenar los datos, un dispositivo sencillo de I/O y una CPU de 4 bits. A pesar de no ser específicamente un diseñador de circuitos integrados, el supuso que se podía integrar todo el CPU en un único \emph{chip}. Estas especificaciones surgieron de la interacción de Hoff con un empleado a su cargo, el ingeniero de software llamado Stanley Mazor\footnote{Nota sobre Stanley Mazor} y un ingeniero de Busicom llamado Masatoshi Shima\footnote{Nota sobre Masatoshi Shima}. Este proyecto se llamó MCS-4 y no fué hasta que Intel contratara al italiano Federico Faggin\emph{Nota sobre Federico Faggin} que empezó a tomar su forma definitiva. Faggin venía de desarollar en 1968 en Fairchild Semiconductor una teconología de compuertas de silicio (SGT o \emph{Silicon Gate Technology}\footnote{Nota sobre SGT, o también llamada Self-aligned Gate}), técnica que se sigue aplicando hoy en día. Faggin también era responsable del desarrollo de la técnica llamada \emph{Random Logic} que permitió la síntesis de descripciones complejas de lógica en hardware sencillo, como compuertas AND y OR. En el momento en el que se estaba desarrollando el proyecto MCS-4, el responsable del área de diseño de MOS de Intel era Leslie L. Vadász, cuya atención estaba enfocada en el mercado de memorias. Fue gracias a esto que le otorgó el liderazgo del proyecto MCS-4 a Faggin, quien fue finalmente el responsable de llevar el proyecto hasta la concepción final del 4004 gracias a la aplicación de las técnicas de diseño y fabricación antes mencionadas. Las primeras unidades del 4004 fueron entregadas a Busicom en Marzo de 1971.
 
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{./figures/C02-intel_4004}
-  \captionsetup{justification=centering}
-  \caption{Encapsulado del Intel 4004; que es considerado el primer microprocesador comercial en ser introducido en el mercado.}
-  \label{fig:C02-intel_4004}
-\end{figure}
-
-\section{Evolución hacia las arquitecturas modernas}
-
-Un poco de historia hacia las arquitecturas modernas que se manejan hoy en día. Explicar diferentes clasificaciones de las arquitecturas
-
-\subsection{El conjunto de instrucciones}
-
-RISC vs CISC
 
 % \chapter{Teoría de los sistemas MIMO}
 % 
