@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<project name="Tesis de Ingenier&#xED;a Electr&#xF3;nica" company="FIUBA" manager="Federico Dami&#xE1;n Camarda" phase="" project-start="20130520T000000Z" mrproject-version="2" calendar="1">
+  <properties/>
+  <phases/>
+  <calendars>
+    <day-types>
+      <day-type id="0" name="Working" description="A default working day"/>
+      <day-type id="1" name="Nonworking" description="A default non working day"/>
+      <day-type id="2" name="Use base" description="Use day from base calendar"/>
+    </day-types>
+    <calendar id="1" name="Default">
+      <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
+      <overridden-day-types>
+        <overridden-day-type id="0">
+          <interval start="0800" end="1200"/>
+          <interval start="1300" end="1700"/>
+        </overridden-day-type>
+      </overridden-day-types>
+      <days/>
+    </calendar>
+  </calendars>
+  <tasks>
+    <task id="1" name="Fase 1: Introduccion al trabajo de tesis." note="" work="1728000" start="20130520T000000Z" end="20130809T170000Z" work-start="20130520T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="Comprender la teor&#xED;a de los sistemas MIMO." note="" work="1152000" start="20130520T000000Z" end="20130712T170000Z" work-start="20130520T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="3" name="Escribir cap&#xED;tulo 2 de la tesis titulado: Teor&#xED;a de los Sistemas MIMO." note="" work="576000" start="20130712T170000Z" end="20130809T170000Z" work-start="20130715T080000Z" percent-complete="96" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="2" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="4" name="Presentar el borrado del cap&#xED;tulo para revisi&#xF3;n inicial al tutor." note="" work="0" start="20130809T170000Z" end="20130809T170000Z" work-start="20130809T170000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="3" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="5" name="Fase 2: Analisis de las diferentes arquitecturas digitales propuestas para implementar el sistema MIMO." note="" work="460800" start="20130809T170000Z" end="20130902T170000Z" work-start="20130812T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="1" type="FS"/>
+      </predecessors>
+      <task id="6" name="Leer libros, papers, IEEEXplore. Buscar material asociado a distintas arquitecturas de implementaci&#xF3;n." note="" work="432000" start="20130809T170000Z" end="20130830T170000Z" work-start="20130812T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="7" name="Escribir el cap&#xED;tulo 3 de la tesis titulado: Arquitecturas Digitales para la Implementaci&#xF3;n de Sistemas MIMO." note="" work="28800" start="20130830T170000Z" end="20130902T170000Z" work-start="20130902T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="6" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="8" name="Presentar el borrado del cap&#xED;tulo para revisi&#xF3;n inicial al tutor." note="" work="0" start="20130902T170000Z" end="20130902T170000Z" work-start="20130902T170000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="7" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="9" name="Fase 3: Estudio de la factibilidad de realizaci&#xF3;n de mejoras en las arquitecturas antes mencionadas." note="" work="288000" start="20130902T170000Z" end="20130909T170000Z" work-start="20130903T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="5" type="FS"/>
+      </predecessors>
+      <task id="10" name="Si se encuentra una arquitectura que es mejor a las demas (mejor en alg&#xFA;n sentido), entonces esa ser&#xE1; implementada en la tesis." note="" work="144000" start="20130902T170000Z" end="20130909T170000Z" work-start="20130903T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="11" name="Si no se encuentra una arquitectura mejor, entonces en la tesis se estudiar&#xE1;n las caracter&#xED;&#xAD;sticas distintivas de las arquitecturas actuales y se optar&#xE1; por una implementacion adecuada para el problema a resolver." note="" work="144000" start="20130902T170000Z" end="20130909T170000Z" work-start="20130903T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="12" name="Fase 4: Implementaci&#xF3;n de la arquitectura seleccionada en RTL." note="" work="3168000" start="20130909T170000Z" end="20131125T170000Z" work-start="20130910T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="9" type="FS"/>
+      </predecessors>
+      <task id="13" name="Se generar&#xE1; un IP core en RTL para implementar un sistema MIMO." note="" work="1152000" start="20130909T170000Z" end="20131104T170000Z" work-start="20130910T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="14" name="Desarrollar los bancos de prueba de simulaci&#xF3;n para verificar la correcta funcionalidad del sistema." note="" work="432000" start="20131104T170000Z" end="20131125T170000Z" work-start="20131105T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="13" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="15" name="Se escribir&#xE1; el capi&#xAD;tulo 4, donde se estudiar&#xE1; la arquitectura desde la implementacion aritm&#xE9;tica a nivel de microarquitectura." note="" work="1584000" start="20130909T170000Z" end="20131125T170000Z" work-start="20130910T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="16" name="Fase 5: Hacer la presentacion del tema de tesis a la Comision Curricular." note="" work="144000" start="20131125T170000Z" end="20131202T170000Z" work-start="20131126T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="12" type="FS"/>
+      </predecessors>
+      <task id="17" name="Preparar la documentaci&#xF3;n correspondiente." note="" work="144000" start="20131125T170000Z" end="20131202T170000Z" work-start="20131126T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="18" name="Fase 6: Experimentar el IP core en un ambiente de simulaci&#xF3;n y, en la medida que sea posible, en campo." note="" work="576000" start="20131202T170000Z" end="20131230T170000Z" work-start="20131203T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="16" type="FS"/>
+      </predecessors>
+      <task id="19" name="Realizar la s&#xED;ntesis de la misma para distintos dispositivos FPGA, medir recursos utilizados, m&#xE1;xima frequencia de operaci&#xF3;n y potencia consumida. Si es posible, se realizar&#xE1; la s&#xED;ntesis f&#xED;&#xAD;sica del dispositivo sobre alg&#xFA;n proceso CMOS estandar." note="" work="576000" start="20131202T170000Z" end="20131230T170000Z" work-start="20131203T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="20" name="Fase 7: Escribir el cap&#xED;&#xAD;tulo 6 de la tesis titulado: Conclusiones y Trabajos a Futuro." note="" work="432000" start="20131230T170000Z" end="20140120T170000Z" work-start="20131231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="18" type="FS"/>
+      </predecessors>
+      <task id="21" name="Se extraer&#xE1;n las conclusiones pertinentes sobre los resultados obtenidos y se propondr&#xE1;n futuras mejoras de la arquitectura (si correspondiese) a partir de los resultados obtenidos." note="" work="432000" start="20131230T170000Z" end="20140120T170000Z" work-start="20131231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="22" name="Fase 8: Escribir cap&#xED;tulo 1 de la tesis titulado: Introducci&#xF3;n al Trabajo de Tesis." note="" work="604800" start="20140120T170000Z" end="20140218T170000Z" work-start="20140121T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="20" type="FS"/>
+      </predecessors>
+      <task id="23" name="Se detallar&#xE1;n las hip&#xF3;tesis (problema a resolver), los objetivos y el alcance y la organizaci&#xF3;n de la tesis." note="" work="432000" start="20140120T170000Z" end="20140210T170000Z" work-start="20140121T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="24" name="Escribir los agradecimientos, la dedicatoria y el resumen de la tesis." note="" work="28800" start="20140210T170000Z" end="20140211T170000Z" work-start="20140211T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="23" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="25" name="Escribir todos los anexos que sean convenientes para lograr que la tesis sea autocontenida." note="" work="144000" start="20140211T170000Z" end="20140218T170000Z" work-start="20140212T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="24" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="26" name="Fase 9: Revisar la tesis por el tutor y por los pares antes de enviarla al jurado." note="" work="288000" start="20140218T170000Z" end="20140304T170000Z" work-start="20140219T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="22" type="FS"/>
+      </predecessors>
+      <task id="27" name="Evaluar gram&#xE1;tica, lenguaje usado, resultados, formatos, etc." note="" work="288000" start="20140218T170000Z" end="20140304T170000Z" work-start="20140219T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="28" name="Fase 10: Preparar la presentaci&#xF3;n (diapositivas)." note="" work="432000" start="20140304T170000Z" end="20140325T170000Z" work-start="20140305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="26" type="FS"/>
+      </predecessors>
+      <task id="29" name="Incluir objetivos, alcance, introduccion al sistema MIMO, desarrollo de la arquitectura, resultados obtenidos, conclusiones y trabajos a futuros." note="" work="288000" start="20140304T170000Z" end="20140318T170000Z" work-start="20140305T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="30" name="Ensallar la presentacion delante del tutor y los pares." note="" work="144000" start="20140318T170000Z" end="20140325T170000Z" work-start="20140319T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="29" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="31" name="Fase 11: Hacer la presentacion de la tesis al jurado." note="" work="144000" start="20140325T170000Z" end="20140401T170000Z" work-start="20140326T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="28" type="FS"/>
+      </predecessors>
+      <task id="32" name="Realizar la presentaci&#xF3;n formal de la tesis." note="" work="144000" start="20140325T170000Z" end="20140401T170000Z" work-start="20140326T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+  </tasks>
+  <resource-groups/>
+  <resources/>
+  <allocations/>
+</project>
