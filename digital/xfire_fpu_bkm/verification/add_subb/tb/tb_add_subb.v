@@ -47,12 +47,15 @@ module tb_add_subb ();
    // Testbench controlled variables and signals
    // -----------------------------------------------------
    localparam              W = `W;
+   localparam              CNT_SIZE = 2 * `W + 2;
+   reg                     clk, rst, ena;
    reg                     tb_subb_a;
    reg                     tb_subb_b;
    reg   signed   [W-1:0]  tb_a;
    reg   signed   [W-1:0]  tb_b;
    reg                     tb_c;
    reg   signed   [W-1:0]  tb_s;
+   reg            [`CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -65,11 +68,26 @@ module tb_add_subb ();
    // -----------------------------------------------------
    // Transactors
    // -----------------------------------------------------
+   always @(posedge clk)
+       if (reset) begin
+          cnt <= {`CNT_SIZE{1'b0}} ;
+       end else if (ena) begin
+          cnt <= cnt + 1;
+       end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
+   $monitor("Time = %8t subb_a = %b subb_b = %b tb_a = %6d tb_b = %6d tb_s = %b %6d s_res = %b %6d\n",$time, tb_subb_a, tb_subb_b, tb_a, tb_b, tb_c, tb_s, c_res, s_res);
+
+   always @(posedge clk) begin
+      if (tb_c != c_res || tb_s != s_res) begin
+         `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+         $display("");
+         $finish();
+      end
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
