@@ -1,11 +1,11 @@
-Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.seq_test.simv.log +TESTSEED=740784910 +VERBOSITY=0
+Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.seq_test.simv.log +TESTSEED=3438722610 +VERBOSITY=0
 Chronologic VCS simulator copyright 1991-2014
 Contains Synopsys proprietary information.
-Compiler version I-2014.03; Runtime version I-2014.03;  Jun  9 23:21 2016
+Compiler version I-2014.03; Runtime version I-2014.03;  Jun 10 17:43 2016
 ucli% run
 
 *******************************************************
-Test Seed:   740784910
+Test Seed:   856244686
 *******************************************************
 
 Time =        0 subb_a = x subb_b = x tb_a =           x tb_b =           x tb_s = x           x s_res = x           x
@@ -26,15 +26,3073 @@ Time =    86000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      6 tb_s = 0      
 
 Time =    96000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      7 tb_s = 0      7 s_res = 0      7
 
+Time =   106000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -8 tb_s = 1     -8 s_res = 0     -8
+
+[115] WARNING: 	Expected result: 1 1000
+			Obtained result: 0 1000		. Instance: tb_add_subb
+Time =   116000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -7 tb_s = 1     -7 s_res = 0     -7
+
+[125] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =   126000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -6 tb_s = 1     -6 s_res = 0     -6
+
+[135] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =   136000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -5 tb_s = 1     -5 s_res = 0     -5
+
+[145] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   146000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -4 tb_s = 1     -4 s_res = 0     -4
+
+[155] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   156000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -3 tb_s = 1     -3 s_res = 0     -3
+
+[165] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   166000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -2 tb_s = 1     -2 s_res = 0     -2
+
+[175] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   176000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -1 tb_s = 1     -1 s_res = 0     -1
+
+[185] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   186000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 0      1
+
+Time =   196000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      1 tb_s = 0      2 s_res = 0      2
+
+Time =   206000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      2 tb_s = 0      3 s_res = 0      3
+
+Time =   216000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      3 tb_s = 0      4 s_res = 0      4
+
+Time =   226000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      4 tb_s = 0      5 s_res = 0      5
+
+Time =   236000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      6 s_res = 0      6
+
+Time =   246000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 0      7 s_res = 0      7
+
+Time =   256000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 0     -8 s_res = 0     -8
+
+Time =   266000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -8 tb_s = 1     -7 s_res = 0     -7
+
+[275] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =   276000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -7 tb_s = 1     -6 s_res = 0     -6
+
+[285] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =   286000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -6 tb_s = 1     -5 s_res = 0     -5
+
+[295] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   296000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -5 tb_s = 1     -4 s_res = 0     -4
+
+[305] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   306000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -4 tb_s = 1     -3 s_res = 0     -3
+
+[315] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   316000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -3 tb_s = 1     -2 s_res = 0     -2
+
+[325] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   326000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -2 tb_s = 1     -1 s_res = 0     -1
+
+[335] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   336000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -1 tb_s = 0      0 s_res = 1      0
+
+[345] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   346000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 0      2
+
+Time =   356000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      1 tb_s = 0      3 s_res = 0      3
+
+Time =   366000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      2 tb_s = 0      4 s_res = 0      4
+
+Time =   376000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      3 tb_s = 0      5 s_res = 0      5
+
+Time =   386000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      4 tb_s = 0      6 s_res = 0      6
+
+Time =   396000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      5 tb_s = 0      7 s_res = 0      7
+
+Time =   406000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      6 tb_s = 0     -8 s_res = 0     -8
+
+Time =   416000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      7 tb_s = 0     -7 s_res = 0     -7
+
+Time =   426000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -8 tb_s = 1     -6 s_res = 0     -6
+
+[435] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =   436000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -7 tb_s = 1     -5 s_res = 0     -5
+
+[445] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   446000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -6 tb_s = 1     -4 s_res = 0     -4
+
+[455] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   456000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -5 tb_s = 1     -3 s_res = 0     -3
+
+[465] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   466000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -4 tb_s = 1     -2 s_res = 0     -2
+
+[475] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   476000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -3 tb_s = 1     -1 s_res = 0     -1
+
+[485] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   486000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -2 tb_s = 0      0 s_res = 1      0
+
+[495] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   496000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -1 tb_s = 0      1 s_res = 1      1
+
+[505] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   506000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 0      3
+
+Time =   516000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      1 tb_s = 0      4 s_res = 0      4
+
+Time =   526000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      2 tb_s = 0      5 s_res = 0      5
+
+Time =   536000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      3 tb_s = 0      6 s_res = 0      6
+
+Time =   546000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      4 tb_s = 0      7 s_res = 0      7
+
+Time =   556000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      5 tb_s = 0     -8 s_res = 0     -8
+
+Time =   566000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      6 tb_s = 0     -7 s_res = 0     -7
+
+Time =   576000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      7 tb_s = 0     -6 s_res = 0     -6
+
+Time =   586000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -8 tb_s = 1     -5 s_res = 0     -5
+
+[595] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   596000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -7 tb_s = 1     -4 s_res = 0     -4
+
+[605] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   606000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -6 tb_s = 1     -3 s_res = 0     -3
+
+[615] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   616000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -5 tb_s = 1     -2 s_res = 0     -2
+
+[625] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   626000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -4 tb_s = 1     -1 s_res = 0     -1
+
+[635] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   636000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -3 tb_s = 0      0 s_res = 1      0
+
+[645] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   646000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -2 tb_s = 0      1 s_res = 1      1
+
+[655] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   656000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -1 tb_s = 0      2 s_res = 1      2
+
+[665] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =   666000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      0 tb_s = 0      4 s_res = 0      4
+
+Time =   676000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      1 tb_s = 0      5 s_res = 0      5
+
+Time =   686000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      2 tb_s = 0      6 s_res = 0      6
+
+Time =   696000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      3 tb_s = 0      7 s_res = 0      7
+
+Time =   706000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      4 tb_s = 0     -8 s_res = 0     -8
+
+Time =   716000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      5 tb_s = 0     -7 s_res = 0     -7
+
+Time =   726000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      6 tb_s = 0     -6 s_res = 0     -6
+
+Time =   736000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      7 tb_s = 0     -5 s_res = 0     -5
+
+Time =   746000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -8 tb_s = 1     -4 s_res = 0     -4
+
+[755] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   756000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -7 tb_s = 1     -3 s_res = 0     -3
+
+[765] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   766000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -6 tb_s = 1     -2 s_res = 0     -2
+
+[775] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   776000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -5 tb_s = 1     -1 s_res = 0     -1
+
+[785] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   786000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -4 tb_s = 0      0 s_res = 1      0
+
+[795] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   796000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -3 tb_s = 0      1 s_res = 1      1
+
+[805] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   806000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -2 tb_s = 0      2 s_res = 1      2
+
+[815] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =   816000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -1 tb_s = 0      3 s_res = 1      3
+
+[825] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =   826000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      0 tb_s = 0      5 s_res = 0      5
+
+Time =   836000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      1 tb_s = 0      6 s_res = 0      6
+
+Time =   846000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      2 tb_s = 0      7 s_res = 0      7
+
+Time =   856000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      3 tb_s = 0     -8 s_res = 0     -8
+
+Time =   866000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      4 tb_s = 0     -7 s_res = 0     -7
+
+Time =   876000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      5 tb_s = 0     -6 s_res = 0     -6
+
+Time =   886000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      6 tb_s = 0     -5 s_res = 0     -5
+
+Time =   896000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      7 tb_s = 0     -4 s_res = 0     -4
+
+Time =   906000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -8 tb_s = 1     -3 s_res = 0     -3
+
+[915] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   916000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -7 tb_s = 1     -2 s_res = 0     -2
+
+[925] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   926000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -6 tb_s = 1     -1 s_res = 0     -1
+
+[935] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   936000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -5 tb_s = 0      0 s_res = 1      0
+
+[945] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   946000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -4 tb_s = 0      1 s_res = 1      1
+
+[955] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   956000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -3 tb_s = 0      2 s_res = 1      2
+
+[965] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =   966000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -2 tb_s = 0      3 s_res = 1      3
+
+[975] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =   976000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -1 tb_s = 0      4 s_res = 1      4
+
+[985] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =   986000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      0 tb_s = 0      6 s_res = 0      6
+
+Time =   996000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      1 tb_s = 0      7 s_res = 0      7
+
+Time =  1006000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      2 tb_s = 0     -8 s_res = 0     -8
+
+Time =  1016000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      3 tb_s = 0     -7 s_res = 0     -7
+
+Time =  1026000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      4 tb_s = 0     -6 s_res = 0     -6
+
+Time =  1036000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      5 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1046000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      6 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1056000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      7 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1066000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -8 tb_s = 1     -2 s_res = 0     -2
+
+[1075] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1076000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -7 tb_s = 1     -1 s_res = 0     -1
+
+[1085] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1086000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -6 tb_s = 0      0 s_res = 1      0
+
+[1095] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1096000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -5 tb_s = 0      1 s_res = 1      1
+
+[1105] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1106000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -4 tb_s = 0      2 s_res = 1      2
+
+[1115] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  1116000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -3 tb_s = 0      3 s_res = 1      3
+
+[1125] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  1126000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -2 tb_s = 0      4 s_res = 1      4
+
+[1135] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  1136000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -1 tb_s = 0      5 s_res = 1      5
+
+[1145] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  1146000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      0 tb_s = 0      7 s_res = 0      7
+
+Time =  1156000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      1 tb_s = 0     -8 s_res = 0     -8
+
+Time =  1166000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      2 tb_s = 0     -7 s_res = 0     -7
+
+Time =  1176000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      3 tb_s = 0     -6 s_res = 0     -6
+
+Time =  1186000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      4 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1196000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      5 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1206000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      6 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1216000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      7 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1226000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -8 tb_s = 1     -1 s_res = 0     -1
+
+[1235] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1236000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -7 tb_s = 0      0 s_res = 1      0
+
+[1245] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1246000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -6 tb_s = 0      1 s_res = 1      1
+
+[1255] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1256000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -5 tb_s = 0      2 s_res = 1      2
+
+[1265] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  1266000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -4 tb_s = 0      3 s_res = 1      3
+
+[1275] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  1276000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -3 tb_s = 0      4 s_res = 1      4
+
+[1285] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  1286000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -2 tb_s = 0      5 s_res = 1      5
+
+[1295] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  1296000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -1 tb_s = 0      6 s_res = 1      6
+
+[1305] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  1306000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      0 tb_s = 1     -8 s_res = 0     -8
+
+[1315] WARNING: 	Expected result: 1 1000
+			Obtained result: 0 1000		. Instance: tb_add_subb
+Time =  1316000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      1 tb_s = 1     -7 s_res = 0     -7
+
+[1325] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  1326000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      2 tb_s = 1     -6 s_res = 0     -6
+
+[1335] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  1336000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      3 tb_s = 1     -5 s_res = 0     -5
+
+[1345] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1346000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      4 tb_s = 1     -4 s_res = 0     -4
+
+[1355] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1356000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      5 tb_s = 1     -3 s_res = 0     -3
+
+[1365] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1366000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      6 tb_s = 1     -2 s_res = 0     -2
+
+[1375] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1376000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      7 tb_s = 1     -1 s_res = 0     -1
+
+[1385] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1386000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -8 tb_s = 1      0 s_res = 1      0
+
+Time =  1396000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -7 tb_s = 1      1 s_res = 1      1
+
+Time =  1406000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -6 tb_s = 1      2 s_res = 1      2
+
+Time =  1416000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -5 tb_s = 1      3 s_res = 1      3
+
+Time =  1426000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -4 tb_s = 1      4 s_res = 1      4
+
+Time =  1436000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -3 tb_s = 1      5 s_res = 1      5
+
+Time =  1446000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -2 tb_s = 1      6 s_res = 1      6
+
+Time =  1456000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -1 tb_s = 1      7 s_res = 1      7
+
+Time =  1466000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      0 tb_s = 1     -7 s_res = 0     -7
+
+[1475] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  1476000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      1 tb_s = 1     -6 s_res = 0     -6
+
+[1485] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  1486000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      2 tb_s = 1     -5 s_res = 0     -5
+
+[1495] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1496000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      3 tb_s = 1     -4 s_res = 0     -4
+
+[1505] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1506000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      4 tb_s = 1     -3 s_res = 0     -3
+
+[1515] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1516000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      5 tb_s = 1     -2 s_res = 0     -2
+
+[1525] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1526000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      6 tb_s = 1     -1 s_res = 0     -1
+
+[1535] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1536000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      7 tb_s = 0      0 s_res = 1      0
+
+[1545] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1546000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -8 tb_s = 1      1 s_res = 1      1
+
+Time =  1556000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -7 tb_s = 1      2 s_res = 1      2
+
+Time =  1566000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -6 tb_s = 1      3 s_res = 1      3
+
+Time =  1576000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -5 tb_s = 1      4 s_res = 1      4
+
+Time =  1586000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -4 tb_s = 1      5 s_res = 1      5
+
+Time =  1596000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -3 tb_s = 1      6 s_res = 1      6
+
+Time =  1606000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -2 tb_s = 1      7 s_res = 1      7
+
+Time =  1616000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -1 tb_s = 1     -8 s_res = 1     -8
+
+Time =  1626000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      0 tb_s = 1     -6 s_res = 0     -6
+
+[1635] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  1636000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      1 tb_s = 1     -5 s_res = 0     -5
+
+[1645] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1646000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      2 tb_s = 1     -4 s_res = 0     -4
+
+[1655] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1656000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      3 tb_s = 1     -3 s_res = 0     -3
+
+[1665] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1666000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      4 tb_s = 1     -2 s_res = 0     -2
+
+[1675] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1676000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      5 tb_s = 1     -1 s_res = 0     -1
+
+[1685] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1686000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      6 tb_s = 0      0 s_res = 1      0
+
+[1695] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1696000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      7 tb_s = 0      1 s_res = 1      1
+
+[1705] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1706000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -8 tb_s = 1      2 s_res = 1      2
+
+Time =  1716000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -7 tb_s = 1      3 s_res = 1      3
+
+Time =  1726000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -6 tb_s = 1      4 s_res = 1      4
+
+Time =  1736000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -5 tb_s = 1      5 s_res = 1      5
+
+Time =  1746000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -4 tb_s = 1      6 s_res = 1      6
+
+Time =  1756000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -3 tb_s = 1      7 s_res = 1      7
+
+Time =  1766000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -2 tb_s = 1     -8 s_res = 1     -8
+
+Time =  1776000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -1 tb_s = 1     -7 s_res = 1     -7
+
+Time =  1786000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      0 tb_s = 1     -5 s_res = 0     -5
+
+[1795] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1796000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      1 tb_s = 1     -4 s_res = 0     -4
+
+[1805] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1806000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      2 tb_s = 1     -3 s_res = 0     -3
+
+[1815] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1816000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      3 tb_s = 1     -2 s_res = 0     -2
+
+[1825] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1826000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      4 tb_s = 1     -1 s_res = 0     -1
+
+[1835] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1836000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      5 tb_s = 0      0 s_res = 1      0
+
+[1845] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1846000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      6 tb_s = 0      1 s_res = 1      1
+
+[1855] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1856000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      7 tb_s = 0      2 s_res = 1      2
+
+[1865] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  1866000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -8 tb_s = 1      3 s_res = 1      3
+
+Time =  1876000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -7 tb_s = 1      4 s_res = 1      4
+
+Time =  1886000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -6 tb_s = 1      5 s_res = 1      5
+
+Time =  1896000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -5 tb_s = 1      6 s_res = 1      6
+
+Time =  1906000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -4 tb_s = 1      7 s_res = 1      7
+
+Time =  1916000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -3 tb_s = 1     -8 s_res = 1     -8
+
+Time =  1926000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -2 tb_s = 1     -7 s_res = 1     -7
+
+Time =  1936000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -1 tb_s = 1     -6 s_res = 1     -6
+
+Time =  1946000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      0 tb_s = 1     -4 s_res = 0     -4
+
+[1955] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1956000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      1 tb_s = 1     -3 s_res = 0     -3
+
+[1965] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1966000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      2 tb_s = 1     -2 s_res = 0     -2
+
+[1975] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1976000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      3 tb_s = 1     -1 s_res = 0     -1
+
+[1985] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1986000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      4 tb_s = 0      0 s_res = 1      0
+
+[1995] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1996000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      5 tb_s = 0      1 s_res = 1      1
+
+[2005] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2006000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      6 tb_s = 0      2 s_res = 1      2
+
+[2015] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2016000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      7 tb_s = 0      3 s_res = 1      3
+
+[2025] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2026000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -8 tb_s = 1      4 s_res = 1      4
+
+Time =  2036000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -7 tb_s = 1      5 s_res = 1      5
+
+Time =  2046000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -6 tb_s = 1      6 s_res = 1      6
+
+Time =  2056000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -5 tb_s = 1      7 s_res = 1      7
+
+Time =  2066000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -4 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2076000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -3 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2086000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -2 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2096000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -1 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2106000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      0 tb_s = 1     -3 s_res = 0     -3
+
+[2115] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  2116000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      1 tb_s = 1     -2 s_res = 0     -2
+
+[2125] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2126000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      2 tb_s = 1     -1 s_res = 0     -1
+
+[2135] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2136000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+[2145] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2146000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      4 tb_s = 0      1 s_res = 1      1
+
+[2155] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2156000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      5 tb_s = 0      2 s_res = 1      2
+
+[2165] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2166000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      6 tb_s = 0      3 s_res = 1      3
+
+[2175] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2176000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      7 tb_s = 0      4 s_res = 1      4
+
+[2185] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  2186000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -8 tb_s = 1      5 s_res = 1      5
+
+Time =  2196000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -7 tb_s = 1      6 s_res = 1      6
+
+Time =  2206000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -6 tb_s = 1      7 s_res = 1      7
+
+Time =  2216000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -5 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2226000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -4 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2236000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -3 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2246000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -2 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2256000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -1 tb_s = 1     -4 s_res = 1     -4
+
+Time =  2266000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      0 tb_s = 1     -2 s_res = 0     -2
+
+[2275] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2276000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      1 tb_s = 1     -1 s_res = 0     -1
+
+[2285] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2286000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+[2295] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2296000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      3 tb_s = 0      1 s_res = 1      1
+
+[2305] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2306000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      4 tb_s = 0      2 s_res = 1      2
+
+[2315] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2316000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      5 tb_s = 0      3 s_res = 1      3
+
+[2325] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2326000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      6 tb_s = 0      4 s_res = 1      4
+
+[2335] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  2336000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      7 tb_s = 0      5 s_res = 1      5
+
+[2345] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  2346000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -8 tb_s = 1      6 s_res = 1      6
+
+Time =  2356000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -7 tb_s = 1      7 s_res = 1      7
+
+Time =  2366000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -6 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2376000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -5 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2386000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -4 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2396000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -3 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2406000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -2 tb_s = 1     -4 s_res = 1     -4
+
+Time =  2416000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -1 tb_s = 1     -3 s_res = 1     -3
+
+Time =  2426000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      0 tb_s = 1     -1 s_res = 0     -1
+
+[2435] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2436000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+[2445] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2446000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+[2455] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2456000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      3 tb_s = 0      2 s_res = 1      2
+
+[2465] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2466000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      4 tb_s = 0      3 s_res = 1      3
+
+[2475] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2476000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      5 tb_s = 0      4 s_res = 1      4
+
+[2485] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  2486000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      6 tb_s = 0      5 s_res = 1      5
+
+[2495] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  2496000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      7 tb_s = 0      6 s_res = 1      6
+
+[2505] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  2506000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -8 tb_s = 1      7 s_res = 1      7
+
+Time =  2516000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -7 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2526000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -6 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2536000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -5 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2546000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -4 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2556000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -3 tb_s = 1     -4 s_res = 1     -4
+
+Time =  2566000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -2 tb_s = 1     -3 s_res = 1     -3
+
+Time =  2576000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -1 tb_s = 1     -2 s_res = 1     -2
+
+Time =  2586000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 1      0
+
+[2595] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2596000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      1 tb_s = 1     -1 s_res = 0     -1
+
+[2605] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2606000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      2 tb_s = 1     -2 s_res = 0     -2
+
+[2615] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2616000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      3 tb_s = 1     -3 s_res = 0     -3
+
+[2625] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  2626000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      4 tb_s = 1     -4 s_res = 0     -4
+
+[2635] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  2636000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      5 tb_s = 1     -5 s_res = 0     -5
+
+[2645] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  2646000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      6 tb_s = 1     -6 s_res = 0     -6
+
+[2655] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  2656000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =      7 tb_s = 1     -7 s_res = 0     -7
+
+[2665] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  2666000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -8 tb_s = 0     -8 s_res = 0     -8
+
+Time =  2676000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -7 tb_s = 0      7 s_res = 0      7
+
+Time =  2686000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -6 tb_s = 0      6 s_res = 0      6
+
+Time =  2696000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -5 tb_s = 0      5 s_res = 0      5
+
+Time =  2706000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -4 tb_s = 0      4 s_res = 0      4
+
+Time =  2716000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -3 tb_s = 0      3 s_res = 0      3
+
+Time =  2726000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -2 tb_s = 0      2 s_res = 0      2
+
+Time =  2736000 subb_a = 0 subb_b = 1 tb_a =      0 tb_b =     -1 tb_s = 0      1 s_res = 0      1
+
+Time =  2746000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 1      1
+
+[2755] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2756000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+[2765] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2766000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      2 tb_s = 1     -1 s_res = 0     -1
+
+[2775] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2776000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      3 tb_s = 1     -2 s_res = 0     -2
+
+[2785] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2786000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      4 tb_s = 1     -3 s_res = 0     -3
+
+[2795] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  2796000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      5 tb_s = 1     -4 s_res = 0     -4
+
+[2805] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  2806000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      6 tb_s = 1     -5 s_res = 0     -5
+
+[2815] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  2816000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      7 tb_s = 1     -6 s_res = 0     -6
+
+[2825] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  2826000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -8 tb_s = 0     -7 s_res = 0     -7
+
+Time =  2836000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -7 tb_s = 0     -8 s_res = 0     -8
+
+Time =  2846000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -6 tb_s = 0      7 s_res = 0      7
+
+Time =  2856000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -5 tb_s = 0      6 s_res = 0      6
+
+Time =  2866000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -4 tb_s = 0      5 s_res = 0      5
+
+Time =  2876000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -3 tb_s = 0      4 s_res = 0      4
+
+Time =  2886000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -2 tb_s = 0      3 s_res = 0      3
+
+Time =  2896000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =     -1 tb_s = 0      2 s_res = 0      2
+
+Time =  2906000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 1      2
+
+[2915] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2916000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      1 tb_s = 0      1 s_res = 1      1
+
+[2925] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2926000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+[2935] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2936000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      3 tb_s = 1     -1 s_res = 0     -1
+
+[2945] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2946000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      4 tb_s = 1     -2 s_res = 0     -2
+
+[2955] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2956000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      5 tb_s = 1     -3 s_res = 0     -3
+
+[2965] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  2966000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      6 tb_s = 1     -4 s_res = 0     -4
+
+[2975] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  2976000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      7 tb_s = 1     -5 s_res = 0     -5
+
+[2985] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  2986000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -8 tb_s = 0     -6 s_res = 0     -6
+
+Time =  2996000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -7 tb_s = 0     -7 s_res = 0     -7
+
+Time =  3006000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -6 tb_s = 0     -8 s_res = 0     -8
+
+Time =  3016000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -5 tb_s = 0      7 s_res = 0      7
+
+Time =  3026000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -4 tb_s = 0      6 s_res = 0      6
+
+Time =  3036000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -3 tb_s = 0      5 s_res = 0      5
+
+Time =  3046000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -2 tb_s = 0      4 s_res = 0      4
+
+Time =  3056000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =     -1 tb_s = 0      3 s_res = 0      3
+
+Time =  3066000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 1      3
+
+[3075] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  3076000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      1 tb_s = 0      2 s_res = 1      2
+
+[3085] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  3086000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+[3095] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  3096000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+[3105] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  3106000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      4 tb_s = 1     -1 s_res = 0     -1
+
+[3115] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  3116000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      5 tb_s = 1     -2 s_res = 0     -2
+
+[3125] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  3126000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      6 tb_s = 1     -3 s_res = 0     -3
+
+[3135] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  3136000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      7 tb_s = 1     -4 s_res = 0     -4
+
+[3145] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  3146000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -8 tb_s = 0     -5 s_res = 0     -5
+
+Time =  3156000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -7 tb_s = 0     -6 s_res = 0     -6
+
+Time =  3166000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -6 tb_s = 0     -7 s_res = 0     -7
+
+Time =  3176000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -5 tb_s = 0     -8 s_res = 0     -8
+
+Time =  3186000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -4 tb_s = 0      7 s_res = 0      7
+
+Time =  3196000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -3 tb_s = 0      6 s_res = 0      6
+
+Time =  3206000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -2 tb_s = 0      5 s_res = 0      5
+
+Time =  3216000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =     -1 tb_s = 0      4 s_res = 0      4
+
+Time =  3226000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      0 tb_s = 0      4 s_res = 1      4
+
+[3235] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  3236000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      1 tb_s = 0      3 s_res = 1      3
+
+[3245] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  3246000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      2 tb_s = 0      2 s_res = 1      2
+
+[3255] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  3256000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      3 tb_s = 0      1 s_res = 1      1
+
+[3265] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  3266000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      4 tb_s = 0      0 s_res = 1      0
+
+[3275] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  3276000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      5 tb_s = 1     -1 s_res = 0     -1
+
+[3285] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  3286000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      6 tb_s = 1     -2 s_res = 0     -2
+
+[3295] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  3296000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =      7 tb_s = 1     -3 s_res = 0     -3
+
+[3305] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  3306000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -8 tb_s = 0     -4 s_res = 0     -4
+
+Time =  3316000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -7 tb_s = 0     -5 s_res = 0     -5
+
+Time =  3326000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -6 tb_s = 0     -6 s_res = 0     -6
+
+Time =  3336000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -5 tb_s = 0     -7 s_res = 0     -7
+
+Time =  3346000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -4 tb_s = 0     -8 s_res = 0     -8
+
+Time =  3356000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -3 tb_s = 0      7 s_res = 0      7
+
+Time =  3366000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -2 tb_s = 0      6 s_res = 0      6
+
+Time =  3376000 subb_a = 0 subb_b = 1 tb_a =      4 tb_b =     -1 tb_s = 0      5 s_res = 0      5
+
+Time =  3386000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      0 tb_s = 0      5 s_res = 1      5
+
+[3395] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  3396000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      1 tb_s = 0      4 s_res = 1      4
+
+[3405] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  3406000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      2 tb_s = 0      3 s_res = 1      3
+
+[3415] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  3416000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      3 tb_s = 0      2 s_res = 1      2
+
+[3425] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  3426000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      4 tb_s = 0      1 s_res = 1      1
+
+[3435] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  3436000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      5 tb_s = 0      0 s_res = 1      0
+
+[3445] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  3446000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      6 tb_s = 1     -1 s_res = 0     -1
+
+[3455] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  3456000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =      7 tb_s = 1     -2 s_res = 0     -2
+
+[3465] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  3466000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -8 tb_s = 0     -3 s_res = 0     -3
+
+Time =  3476000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -7 tb_s = 0     -4 s_res = 0     -4
+
+Time =  3486000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -6 tb_s = 0     -5 s_res = 0     -5
+
+Time =  3496000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -5 tb_s = 0     -6 s_res = 0     -6
+
+Time =  3506000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -4 tb_s = 0     -7 s_res = 0     -7
+
+Time =  3516000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -3 tb_s = 0     -8 s_res = 0     -8
+
+Time =  3526000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -2 tb_s = 0      7 s_res = 0      7
+
+Time =  3536000 subb_a = 0 subb_b = 1 tb_a =      5 tb_b =     -1 tb_s = 0      6 s_res = 0      6
+
+Time =  3546000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      0 tb_s = 0      6 s_res = 1      6
+
+[3555] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  3556000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      1 tb_s = 0      5 s_res = 1      5
+
+[3565] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  3566000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      2 tb_s = 0      4 s_res = 1      4
+
+[3575] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  3576000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      3 tb_s = 0      3 s_res = 1      3
+
+[3585] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  3586000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      4 tb_s = 0      2 s_res = 1      2
+
+[3595] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  3596000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      5 tb_s = 0      1 s_res = 1      1
+
+[3605] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  3606000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      6 tb_s = 0      0 s_res = 1      0
+
+[3615] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  3616000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =      7 tb_s = 1     -1 s_res = 0     -1
+
+[3625] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  3626000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -8 tb_s = 0     -2 s_res = 0     -2
+
+Time =  3636000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -7 tb_s = 0     -3 s_res = 0     -3
+
+Time =  3646000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -6 tb_s = 0     -4 s_res = 0     -4
+
+Time =  3656000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -5 tb_s = 0     -5 s_res = 0     -5
+
+Time =  3666000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -4 tb_s = 0     -6 s_res = 0     -6
+
+Time =  3676000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -3 tb_s = 0     -7 s_res = 0     -7
+
+Time =  3686000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -2 tb_s = 0     -8 s_res = 0     -8
+
+Time =  3696000 subb_a = 0 subb_b = 1 tb_a =      6 tb_b =     -1 tb_s = 0      7 s_res = 0      7
+
+Time =  3706000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      0 tb_s = 0      7 s_res = 1      7
+
+[3715] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  3716000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      1 tb_s = 0      6 s_res = 1      6
+
+[3725] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  3726000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      2 tb_s = 0      5 s_res = 1      5
+
+[3735] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  3736000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      3 tb_s = 0      4 s_res = 1      4
+
+[3745] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  3746000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      4 tb_s = 0      3 s_res = 1      3
+
+[3755] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  3756000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      5 tb_s = 0      2 s_res = 1      2
+
+[3765] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  3766000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      6 tb_s = 0      1 s_res = 1      1
+
+[3775] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  3776000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =      7 tb_s = 0      0 s_res = 1      0
+
+[3785] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  3786000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -8 tb_s = 0     -1 s_res = 0     -1
+
+Time =  3796000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -7 tb_s = 0     -2 s_res = 0     -2
+
+Time =  3806000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -6 tb_s = 0     -3 s_res = 0     -3
+
+Time =  3816000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -5 tb_s = 0     -4 s_res = 0     -4
+
+Time =  3826000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -4 tb_s = 0     -5 s_res = 0     -5
+
+Time =  3836000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -3 tb_s = 0     -6 s_res = 0     -6
+
+Time =  3846000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -2 tb_s = 0     -7 s_res = 0     -7
+
+Time =  3856000 subb_a = 0 subb_b = 1 tb_a =      7 tb_b =     -1 tb_s = 0     -8 s_res = 0     -8
+
+Time =  3866000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      0 tb_s = 1     -8 s_res = 1     -8
+
+Time =  3876000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      1 tb_s = 1      7 s_res = 1      7
+
+Time =  3886000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      2 tb_s = 1      6 s_res = 1      6
+
+Time =  3896000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      3 tb_s = 1      5 s_res = 1      5
+
+Time =  3906000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      4 tb_s = 1      4 s_res = 1      4
+
+Time =  3916000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      5 tb_s = 1      3 s_res = 1      3
+
+Time =  3926000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      6 tb_s = 1      2 s_res = 1      2
+
+Time =  3936000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =      7 tb_s = 1      1 s_res = 1      1
+
+Time =  3946000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -8 tb_s = 0      0 s_res = 1      0
+
+[3955] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  3956000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -7 tb_s = 1     -1 s_res = 0     -1
+
+[3965] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  3966000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -6 tb_s = 1     -2 s_res = 0     -2
+
+[3975] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  3976000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -5 tb_s = 1     -3 s_res = 0     -3
+
+[3985] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  3986000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -4 tb_s = 1     -4 s_res = 0     -4
+
+[3995] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  3996000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -3 tb_s = 1     -5 s_res = 0     -5
+
+[4005] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  4006000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -2 tb_s = 1     -6 s_res = 0     -6
+
+[4015] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  4016000 subb_a = 0 subb_b = 1 tb_a =     -8 tb_b =     -1 tb_s = 1     -7 s_res = 0     -7
+
+[4025] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  4026000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      0 tb_s = 1     -7 s_res = 1     -7
+
+Time =  4036000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      1 tb_s = 1     -8 s_res = 1     -8
+
+Time =  4046000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      2 tb_s = 1      7 s_res = 1      7
+
+Time =  4056000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      3 tb_s = 1      6 s_res = 1      6
+
+Time =  4066000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      4 tb_s = 1      5 s_res = 1      5
+
+Time =  4076000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      5 tb_s = 1      4 s_res = 1      4
+
+Time =  4086000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      6 tb_s = 1      3 s_res = 1      3
+
+Time =  4096000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =      7 tb_s = 1      2 s_res = 1      2
+
+Time =  4106000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -8 tb_s = 0      1 s_res = 1      1
+
+[4115] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  4116000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -7 tb_s = 0      0 s_res = 1      0
+
+[4125] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  4126000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -6 tb_s = 1     -1 s_res = 0     -1
+
+[4135] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  4136000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -5 tb_s = 1     -2 s_res = 0     -2
+
+[4145] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  4146000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -4 tb_s = 1     -3 s_res = 0     -3
+
+[4155] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  4156000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -3 tb_s = 1     -4 s_res = 0     -4
+
+[4165] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  4166000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -2 tb_s = 1     -5 s_res = 0     -5
+
+[4175] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  4176000 subb_a = 0 subb_b = 1 tb_a =     -7 tb_b =     -1 tb_s = 1     -6 s_res = 0     -6
+
+[4185] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  4186000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      0 tb_s = 1     -6 s_res = 1     -6
+
+Time =  4196000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      1 tb_s = 1     -7 s_res = 1     -7
+
+Time =  4206000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      2 tb_s = 1     -8 s_res = 1     -8
+
+Time =  4216000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      3 tb_s = 1      7 s_res = 1      7
+
+Time =  4226000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      4 tb_s = 1      6 s_res = 1      6
+
+Time =  4236000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      5 tb_s = 1      5 s_res = 1      5
+
+Time =  4246000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      6 tb_s = 1      4 s_res = 1      4
+
+Time =  4256000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =      7 tb_s = 1      3 s_res = 1      3
+
+Time =  4266000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -8 tb_s = 0      2 s_res = 1      2
+
+[4275] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  4276000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -7 tb_s = 0      1 s_res = 1      1
+
+[4285] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  4286000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -6 tb_s = 0      0 s_res = 1      0
+
+[4295] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  4296000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -5 tb_s = 1     -1 s_res = 0     -1
+
+[4305] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  4306000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -4 tb_s = 1     -2 s_res = 0     -2
+
+[4315] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  4316000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -3 tb_s = 1     -3 s_res = 0     -3
+
+[4325] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  4326000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -2 tb_s = 1     -4 s_res = 0     -4
+
+[4335] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  4336000 subb_a = 0 subb_b = 1 tb_a =     -6 tb_b =     -1 tb_s = 1     -5 s_res = 0     -5
+
+[4345] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  4346000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      0 tb_s = 1     -5 s_res = 1     -5
+
+Time =  4356000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      1 tb_s = 1     -6 s_res = 1     -6
+
+Time =  4366000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      2 tb_s = 1     -7 s_res = 1     -7
+
+Time =  4376000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      3 tb_s = 1     -8 s_res = 1     -8
+
+Time =  4386000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      4 tb_s = 1      7 s_res = 1      7
+
+Time =  4396000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      5 tb_s = 1      6 s_res = 1      6
+
+Time =  4406000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      6 tb_s = 1      5 s_res = 1      5
+
+Time =  4416000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =      7 tb_s = 1      4 s_res = 1      4
+
+Time =  4426000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -8 tb_s = 0      3 s_res = 1      3
+
+[4435] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  4436000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -7 tb_s = 0      2 s_res = 1      2
+
+[4445] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  4446000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -6 tb_s = 0      1 s_res = 1      1
+
+[4455] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  4456000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -5 tb_s = 0      0 s_res = 1      0
+
+[4465] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  4466000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -4 tb_s = 1     -1 s_res = 0     -1
+
+[4475] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  4476000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -3 tb_s = 1     -2 s_res = 0     -2
+
+[4485] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  4486000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -2 tb_s = 1     -3 s_res = 0     -3
+
+[4495] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  4496000 subb_a = 0 subb_b = 1 tb_a =     -5 tb_b =     -1 tb_s = 1     -4 s_res = 0     -4
+
+[4505] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  4506000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      0 tb_s = 1     -4 s_res = 1     -4
+
+Time =  4516000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      1 tb_s = 1     -5 s_res = 1     -5
+
+Time =  4526000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      2 tb_s = 1     -6 s_res = 1     -6
+
+Time =  4536000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      3 tb_s = 1     -7 s_res = 1     -7
+
+Time =  4546000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      4 tb_s = 1     -8 s_res = 1     -8
+
+Time =  4556000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      5 tb_s = 1      7 s_res = 1      7
+
+Time =  4566000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      6 tb_s = 1      6 s_res = 1      6
+
+Time =  4576000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =      7 tb_s = 1      5 s_res = 1      5
+
+Time =  4586000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -8 tb_s = 0      4 s_res = 1      4
+
+[4595] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  4596000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -7 tb_s = 0      3 s_res = 1      3
+
+[4605] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  4606000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -6 tb_s = 0      2 s_res = 1      2
+
+[4615] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  4616000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -5 tb_s = 0      1 s_res = 1      1
+
+[4625] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  4626000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -4 tb_s = 0      0 s_res = 1      0
+
+[4635] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  4636000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -3 tb_s = 1     -1 s_res = 0     -1
+
+[4645] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  4646000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -2 tb_s = 1     -2 s_res = 0     -2
+
+[4655] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  4656000 subb_a = 0 subb_b = 1 tb_a =     -4 tb_b =     -1 tb_s = 1     -3 s_res = 0     -3
+
+[4665] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  4666000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      0 tb_s = 1     -3 s_res = 1     -3
+
+Time =  4676000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      1 tb_s = 1     -4 s_res = 1     -4
+
+Time =  4686000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      2 tb_s = 1     -5 s_res = 1     -5
+
+Time =  4696000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      3 tb_s = 1     -6 s_res = 1     -6
+
+Time =  4706000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      4 tb_s = 1     -7 s_res = 1     -7
+
+Time =  4716000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      5 tb_s = 1     -8 s_res = 1     -8
+
+Time =  4726000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      6 tb_s = 1      7 s_res = 1      7
+
+Time =  4736000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =      7 tb_s = 1      6 s_res = 1      6
+
+Time =  4746000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -8 tb_s = 0      5 s_res = 1      5
+
+[4755] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  4756000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -7 tb_s = 0      4 s_res = 1      4
+
+[4765] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  4766000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -6 tb_s = 0      3 s_res = 1      3
+
+[4775] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  4776000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -5 tb_s = 0      2 s_res = 1      2
+
+[4785] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  4786000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -4 tb_s = 0      1 s_res = 1      1
+
+[4795] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  4796000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -3 tb_s = 0      0 s_res = 1      0
+
+[4805] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  4806000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -2 tb_s = 1     -1 s_res = 0     -1
+
+[4815] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  4816000 subb_a = 0 subb_b = 1 tb_a =     -3 tb_b =     -1 tb_s = 1     -2 s_res = 0     -2
+
+[4825] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  4826000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      0 tb_s = 1     -2 s_res = 1     -2
+
+Time =  4836000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      1 tb_s = 1     -3 s_res = 1     -3
+
+Time =  4846000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      2 tb_s = 1     -4 s_res = 1     -4
+
+Time =  4856000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      3 tb_s = 1     -5 s_res = 1     -5
+
+Time =  4866000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      4 tb_s = 1     -6 s_res = 1     -6
+
+Time =  4876000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      5 tb_s = 1     -7 s_res = 1     -7
+
+Time =  4886000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      6 tb_s = 1     -8 s_res = 1     -8
+
+Time =  4896000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =      7 tb_s = 1      7 s_res = 1      7
+
+Time =  4906000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -8 tb_s = 0      6 s_res = 1      6
+
+[4915] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  4916000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -7 tb_s = 0      5 s_res = 1      5
+
+[4925] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  4926000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -6 tb_s = 0      4 s_res = 1      4
+
+[4935] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  4936000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -5 tb_s = 0      3 s_res = 1      3
+
+[4945] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  4946000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -4 tb_s = 0      2 s_res = 1      2
+
+[4955] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  4956000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -3 tb_s = 0      1 s_res = 1      1
+
+[4965] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  4966000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -2 tb_s = 0      0 s_res = 1      0
+
+[4975] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  4976000 subb_a = 0 subb_b = 1 tb_a =     -2 tb_b =     -1 tb_s = 1     -1 s_res = 0     -1
+
+[4985] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  4986000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      0 tb_s = 1     -1 s_res = 1     -1
+
+Time =  4996000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      1 tb_s = 1     -2 s_res = 1     -2
+
+Time =  5006000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      2 tb_s = 1     -3 s_res = 1     -3
+
+Time =  5016000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      3 tb_s = 1     -4 s_res = 1     -4
+
+Time =  5026000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      4 tb_s = 1     -5 s_res = 1     -5
+
+Time =  5036000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      5 tb_s = 1     -6 s_res = 1     -6
+
+Time =  5046000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      6 tb_s = 1     -7 s_res = 1     -7
+
+Time =  5056000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =      7 tb_s = 1     -8 s_res = 1     -8
+
+Time =  5066000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -8 tb_s = 0      7 s_res = 1      7
+
+[5075] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  5076000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -7 tb_s = 0      6 s_res = 1      6
+
+[5085] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  5086000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -6 tb_s = 0      5 s_res = 1      5
+
+[5095] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  5096000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -5 tb_s = 0      4 s_res = 1      4
+
+[5105] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  5106000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -4 tb_s = 0      3 s_res = 1      3
+
+[5115] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  5116000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -3 tb_s = 0      2 s_res = 1      2
+
+[5125] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  5126000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -2 tb_s = 0      1 s_res = 1      1
+
+[5135] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  5136000 subb_a = 0 subb_b = 1 tb_a =     -1 tb_b =     -1 tb_s = 0      0 s_res = 1      0
+
+[5145] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  5146000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 1      0
+
+[5155] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  5156000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      1 tb_s = 0      1 s_res = 1      1
+
+[5165] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  5166000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      2 tb_s = 0      2 s_res = 1      2
+
+[5175] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  5176000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      3 tb_s = 0      3 s_res = 1      3
+
+[5185] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  5186000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      4 tb_s = 0      4 s_res = 1      4
+
+[5195] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  5196000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      5 tb_s = 0      5 s_res = 1      5
+
+[5205] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  5206000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      6 tb_s = 0      6 s_res = 1      6
+
+[5215] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  5216000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =      7 tb_s = 0      7 s_res = 1      7
+
+[5225] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  5226000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -8 tb_s = 1     -8 s_res = 1     -8
+
+Time =  5236000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -7 tb_s = 1     -7 s_res = 1     -7
+
+Time =  5246000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -6 tb_s = 1     -6 s_res = 1     -6
+
+Time =  5256000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -5 tb_s = 1     -5 s_res = 1     -5
+
+Time =  5266000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -4 tb_s = 1     -4 s_res = 1     -4
+
+Time =  5276000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -3 tb_s = 1     -3 s_res = 1     -3
+
+Time =  5286000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -2 tb_s = 1     -2 s_res = 1     -2
+
+Time =  5296000 subb_a = 1 subb_b = 0 tb_a =      0 tb_b =     -1 tb_s = 1     -1 s_res = 1     -1
+
+Time =  5306000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      0 tb_s = 1     -1 s_res = 0     -1
+
+[5315] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  5316000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+[5325] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  5326000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+[5335] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  5336000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      3 tb_s = 0      2 s_res = 1      2
+
+[5345] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  5346000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      4 tb_s = 0      3 s_res = 1      3
+
+[5355] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  5356000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      4 s_res = 1      4
+
+[5365] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  5366000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 0      5 s_res = 1      5
+
+[5375] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  5376000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 0      6 s_res = 1      6
+
+[5385] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  5386000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -8 tb_s = 1      7 s_res = 1      7
+
+Time =  5396000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -7 tb_s = 1     -8 s_res = 1     -8
+
+Time =  5406000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -6 tb_s = 1     -7 s_res = 1     -7
+
+Time =  5416000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -5 tb_s = 1     -6 s_res = 1     -6
+
+Time =  5426000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -4 tb_s = 1     -5 s_res = 1     -5
+
+Time =  5436000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -3 tb_s = 1     -4 s_res = 1     -4
+
+Time =  5446000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -2 tb_s = 1     -3 s_res = 1     -3
+
+Time =  5456000 subb_a = 1 subb_b = 0 tb_a =      1 tb_b =     -1 tb_s = 1     -2 s_res = 1     -2
+
+Time =  5466000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      0 tb_s = 1     -2 s_res = 0     -2
+
+[5475] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  5476000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      1 tb_s = 1     -1 s_res = 0     -1
+
+[5485] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  5486000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+[5495] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  5496000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      3 tb_s = 0      1 s_res = 1      1
+
+[5505] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  5506000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      4 tb_s = 0      2 s_res = 1      2
+
+[5515] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  5516000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      5 tb_s = 0      3 s_res = 1      3
+
+[5525] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  5526000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      6 tb_s = 0      4 s_res = 1      4
+
+[5535] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  5536000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =      7 tb_s = 0      5 s_res = 1      5
+
+[5545] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  5546000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -8 tb_s = 1      6 s_res = 1      6
+
+Time =  5556000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -7 tb_s = 1      7 s_res = 1      7
+
+Time =  5566000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -6 tb_s = 1     -8 s_res = 1     -8
+
+Time =  5576000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -5 tb_s = 1     -7 s_res = 1     -7
+
+Time =  5586000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -4 tb_s = 1     -6 s_res = 1     -6
+
+Time =  5596000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -3 tb_s = 1     -5 s_res = 1     -5
+
+Time =  5606000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -2 tb_s = 1     -4 s_res = 1     -4
+
+Time =  5616000 subb_a = 1 subb_b = 0 tb_a =      2 tb_b =     -1 tb_s = 1     -3 s_res = 1     -3
+
+Time =  5626000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      0 tb_s = 1     -3 s_res = 0     -3
+
+[5635] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  5636000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      1 tb_s = 1     -2 s_res = 0     -2
+
+[5645] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  5646000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      2 tb_s = 1     -1 s_res = 0     -1
+
+[5655] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  5656000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+[5665] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  5666000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      4 tb_s = 0      1 s_res = 1      1
+
+[5675] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  5676000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      5 tb_s = 0      2 s_res = 1      2
+
+[5685] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  5686000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      6 tb_s = 0      3 s_res = 1      3
+
+[5695] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  5696000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =      7 tb_s = 0      4 s_res = 1      4
+
+[5705] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  5706000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -8 tb_s = 1      5 s_res = 1      5
+
+Time =  5716000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -7 tb_s = 1      6 s_res = 1      6
+
+Time =  5726000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -6 tb_s = 1      7 s_res = 1      7
+
+Time =  5736000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -5 tb_s = 1     -8 s_res = 1     -8
+
+Time =  5746000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -4 tb_s = 1     -7 s_res = 1     -7
+
+Time =  5756000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -3 tb_s = 1     -6 s_res = 1     -6
+
+Time =  5766000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -2 tb_s = 1     -5 s_res = 1     -5
+
+Time =  5776000 subb_a = 1 subb_b = 0 tb_a =      3 tb_b =     -1 tb_s = 1     -4 s_res = 1     -4
+
+Time =  5786000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      0 tb_s = 1     -4 s_res = 0     -4
+
+[5795] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  5796000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      1 tb_s = 1     -3 s_res = 0     -3
+
+[5805] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  5806000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      2 tb_s = 1     -2 s_res = 0     -2
+
+[5815] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  5816000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      3 tb_s = 1     -1 s_res = 0     -1
+
+[5825] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  5826000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      4 tb_s = 0      0 s_res = 1      0
+
+[5835] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  5836000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      5 tb_s = 0      1 s_res = 1      1
+
+[5845] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  5846000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      6 tb_s = 0      2 s_res = 1      2
+
+[5855] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  5856000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =      7 tb_s = 0      3 s_res = 1      3
+
+[5865] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  5866000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -8 tb_s = 1      4 s_res = 1      4
+
+Time =  5876000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -7 tb_s = 1      5 s_res = 1      5
+
+Time =  5886000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -6 tb_s = 1      6 s_res = 1      6
+
+Time =  5896000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -5 tb_s = 1      7 s_res = 1      7
+
+Time =  5906000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -4 tb_s = 1     -8 s_res = 1     -8
+
+Time =  5916000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -3 tb_s = 1     -7 s_res = 1     -7
+
+Time =  5926000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -2 tb_s = 1     -6 s_res = 1     -6
+
+Time =  5936000 subb_a = 1 subb_b = 0 tb_a =      4 tb_b =     -1 tb_s = 1     -5 s_res = 1     -5
+
+Time =  5946000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      0 tb_s = 1     -5 s_res = 0     -5
+
+[5955] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  5956000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      1 tb_s = 1     -4 s_res = 0     -4
+
+[5965] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  5966000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      2 tb_s = 1     -3 s_res = 0     -3
+
+[5975] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  5976000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      3 tb_s = 1     -2 s_res = 0     -2
+
+[5985] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  5986000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      4 tb_s = 1     -1 s_res = 0     -1
+
+[5995] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  5996000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      5 tb_s = 0      0 s_res = 1      0
+
+[6005] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  6006000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      6 tb_s = 0      1 s_res = 1      1
+
+[6015] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  6016000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =      7 tb_s = 0      2 s_res = 1      2
+
+[6025] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  6026000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -8 tb_s = 1      3 s_res = 1      3
+
+Time =  6036000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -7 tb_s = 1      4 s_res = 1      4
+
+Time =  6046000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -6 tb_s = 1      5 s_res = 1      5
+
+Time =  6056000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -5 tb_s = 1      6 s_res = 1      6
+
+Time =  6066000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -4 tb_s = 1      7 s_res = 1      7
+
+Time =  6076000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -3 tb_s = 1     -8 s_res = 1     -8
+
+Time =  6086000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -2 tb_s = 1     -7 s_res = 1     -7
+
+Time =  6096000 subb_a = 1 subb_b = 0 tb_a =      5 tb_b =     -1 tb_s = 1     -6 s_res = 1     -6
+
+Time =  6106000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      0 tb_s = 1     -6 s_res = 0     -6
+
+[6115] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  6116000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      1 tb_s = 1     -5 s_res = 0     -5
+
+[6125] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  6126000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      2 tb_s = 1     -4 s_res = 0     -4
+
+[6135] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  6136000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      3 tb_s = 1     -3 s_res = 0     -3
+
+[6145] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  6146000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      4 tb_s = 1     -2 s_res = 0     -2
+
+[6155] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  6156000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      5 tb_s = 1     -1 s_res = 0     -1
+
+[6165] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  6166000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      6 tb_s = 0      0 s_res = 1      0
+
+[6175] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  6176000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =      7 tb_s = 0      1 s_res = 1      1
+
+[6185] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  6186000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -8 tb_s = 1      2 s_res = 1      2
+
+Time =  6196000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -7 tb_s = 1      3 s_res = 1      3
+
+Time =  6206000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -6 tb_s = 1      4 s_res = 1      4
+
+Time =  6216000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -5 tb_s = 1      5 s_res = 1      5
+
+Time =  6226000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -4 tb_s = 1      6 s_res = 1      6
+
+Time =  6236000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -3 tb_s = 1      7 s_res = 1      7
+
+Time =  6246000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -2 tb_s = 1     -8 s_res = 1     -8
+
+Time =  6256000 subb_a = 1 subb_b = 0 tb_a =      6 tb_b =     -1 tb_s = 1     -7 s_res = 1     -7
+
+Time =  6266000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      0 tb_s = 1     -7 s_res = 0     -7
+
+[6275] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  6276000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      1 tb_s = 1     -6 s_res = 0     -6
+
+[6285] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  6286000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      2 tb_s = 1     -5 s_res = 0     -5
+
+[6295] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  6296000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      3 tb_s = 1     -4 s_res = 0     -4
+
+[6305] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  6306000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      4 tb_s = 1     -3 s_res = 0     -3
+
+[6315] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  6316000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      5 tb_s = 1     -2 s_res = 0     -2
+
+[6325] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  6326000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      6 tb_s = 1     -1 s_res = 0     -1
+
+[6335] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  6336000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =      7 tb_s = 0      0 s_res = 1      0
+
+[6345] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  6346000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -8 tb_s = 1      1 s_res = 1      1
+
+Time =  6356000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -7 tb_s = 1      2 s_res = 1      2
+
+Time =  6366000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -6 tb_s = 1      3 s_res = 1      3
+
+Time =  6376000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -5 tb_s = 1      4 s_res = 1      4
+
+Time =  6386000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -4 tb_s = 1      5 s_res = 1      5
+
+Time =  6396000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -3 tb_s = 1      6 s_res = 1      6
+
+Time =  6406000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -2 tb_s = 1      7 s_res = 1      7
+
+Time =  6416000 subb_a = 1 subb_b = 0 tb_a =      7 tb_b =     -1 tb_s = 1     -8 s_res = 1     -8
+
+Time =  6426000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      0 tb_s = 0     -8 s_res = 0     -8
+
+Time =  6436000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      1 tb_s = 0     -7 s_res = 0     -7
+
+Time =  6446000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      2 tb_s = 0     -6 s_res = 0     -6
+
+Time =  6456000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      3 tb_s = 0     -5 s_res = 0     -5
+
+Time =  6466000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      4 tb_s = 0     -4 s_res = 0     -4
+
+Time =  6476000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      5 tb_s = 0     -3 s_res = 0     -3
+
+Time =  6486000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      6 tb_s = 0     -2 s_res = 0     -2
+
+Time =  6496000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =      7 tb_s = 0     -1 s_res = 0     -1
+
+Time =  6506000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -8 tb_s = 0      0 s_res = 1      0
+
+[6515] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  6516000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -7 tb_s = 0      1 s_res = 1      1
+
+[6525] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  6526000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -6 tb_s = 0      2 s_res = 1      2
+
+[6535] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  6536000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -5 tb_s = 0      3 s_res = 1      3
+
+[6545] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  6546000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -4 tb_s = 0      4 s_res = 1      4
+
+[6555] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  6556000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -3 tb_s = 0      5 s_res = 1      5
+
+[6565] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  6566000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -2 tb_s = 0      6 s_res = 1      6
+
+[6575] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  6576000 subb_a = 1 subb_b = 0 tb_a =     -8 tb_b =     -1 tb_s = 0      7 s_res = 1      7
+
+[6585] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  6586000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      0 tb_s = 0      7 s_res = 0      7
+
+Time =  6596000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      1 tb_s = 0     -8 s_res = 0     -8
+
+Time =  6606000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      2 tb_s = 0     -7 s_res = 0     -7
+
+Time =  6616000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      3 tb_s = 0     -6 s_res = 0     -6
+
+Time =  6626000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      4 tb_s = 0     -5 s_res = 0     -5
+
+Time =  6636000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      5 tb_s = 0     -4 s_res = 0     -4
+
+Time =  6646000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      6 tb_s = 0     -3 s_res = 0     -3
+
+Time =  6656000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =      7 tb_s = 0     -2 s_res = 0     -2
+
+Time =  6666000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -8 tb_s = 1     -1 s_res = 0     -1
+
+[6675] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  6676000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -7 tb_s = 0      0 s_res = 1      0
+
+[6685] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  6686000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -6 tb_s = 0      1 s_res = 1      1
+
+[6695] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  6696000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -5 tb_s = 0      2 s_res = 1      2
+
+[6705] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  6706000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -4 tb_s = 0      3 s_res = 1      3
+
+[6715] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  6716000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -3 tb_s = 0      4 s_res = 1      4
+
+[6725] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  6726000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -2 tb_s = 0      5 s_res = 1      5
+
+[6735] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  6736000 subb_a = 1 subb_b = 0 tb_a =     -7 tb_b =     -1 tb_s = 0      6 s_res = 1      6
+
+[6745] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  6746000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      0 tb_s = 0      6 s_res = 0      6
+
+Time =  6756000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      1 tb_s = 0      7 s_res = 0      7
+
+Time =  6766000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      2 tb_s = 0     -8 s_res = 0     -8
+
+Time =  6776000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      3 tb_s = 0     -7 s_res = 0     -7
+
+Time =  6786000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      4 tb_s = 0     -6 s_res = 0     -6
+
+Time =  6796000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      5 tb_s = 0     -5 s_res = 0     -5
+
+Time =  6806000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      6 tb_s = 0     -4 s_res = 0     -4
+
+Time =  6816000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =      7 tb_s = 0     -3 s_res = 0     -3
+
+Time =  6826000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -8 tb_s = 1     -2 s_res = 0     -2
+
+[6835] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  6836000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -7 tb_s = 1     -1 s_res = 0     -1
+
+[6845] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  6846000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -6 tb_s = 0      0 s_res = 1      0
+
+[6855] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  6856000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -5 tb_s = 0      1 s_res = 1      1
+
+[6865] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  6866000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -4 tb_s = 0      2 s_res = 1      2
+
+[6875] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  6876000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -3 tb_s = 0      3 s_res = 1      3
+
+[6885] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  6886000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -2 tb_s = 0      4 s_res = 1      4
+
+[6895] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  6896000 subb_a = 1 subb_b = 0 tb_a =     -6 tb_b =     -1 tb_s = 0      5 s_res = 1      5
+
+[6905] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  6906000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      0 tb_s = 0      5 s_res = 0      5
+
+Time =  6916000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      1 tb_s = 0      6 s_res = 0      6
+
+Time =  6926000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      2 tb_s = 0      7 s_res = 0      7
+
+Time =  6936000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      3 tb_s = 0     -8 s_res = 0     -8
+
+Time =  6946000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      4 tb_s = 0     -7 s_res = 0     -7
+
+Time =  6956000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      5 tb_s = 0     -6 s_res = 0     -6
+
+Time =  6966000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      6 tb_s = 0     -5 s_res = 0     -5
+
+Time =  6976000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =      7 tb_s = 0     -4 s_res = 0     -4
+
+Time =  6986000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -8 tb_s = 1     -3 s_res = 0     -3
+
+[6995] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  6996000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -7 tb_s = 1     -2 s_res = 0     -2
+
+[7005] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  7006000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -6 tb_s = 1     -1 s_res = 0     -1
+
+[7015] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  7016000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -5 tb_s = 0      0 s_res = 1      0
+
+[7025] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  7026000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -4 tb_s = 0      1 s_res = 1      1
+
+[7035] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  7036000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -3 tb_s = 0      2 s_res = 1      2
+
+[7045] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  7046000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -2 tb_s = 0      3 s_res = 1      3
+
+[7055] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  7056000 subb_a = 1 subb_b = 0 tb_a =     -5 tb_b =     -1 tb_s = 0      4 s_res = 1      4
+
+[7065] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  7066000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      0 tb_s = 0      4 s_res = 0      4
+
+Time =  7076000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      1 tb_s = 0      5 s_res = 0      5
+
+Time =  7086000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      2 tb_s = 0      6 s_res = 0      6
+
+Time =  7096000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      3 tb_s = 0      7 s_res = 0      7
+
+Time =  7106000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      4 tb_s = 0     -8 s_res = 0     -8
+
+Time =  7116000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      5 tb_s = 0     -7 s_res = 0     -7
+
+Time =  7126000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      6 tb_s = 0     -6 s_res = 0     -6
+
+Time =  7136000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =      7 tb_s = 0     -5 s_res = 0     -5
+
+Time =  7146000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -8 tb_s = 1     -4 s_res = 0     -4
+
+[7155] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  7156000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -7 tb_s = 1     -3 s_res = 0     -3
+
+[7165] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  7166000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -6 tb_s = 1     -2 s_res = 0     -2
+
+[7175] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  7176000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -5 tb_s = 1     -1 s_res = 0     -1
+
+[7185] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  7186000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -4 tb_s = 0      0 s_res = 1      0
+
+[7195] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  7196000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -3 tb_s = 0      1 s_res = 1      1
+
+[7205] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  7206000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -2 tb_s = 0      2 s_res = 1      2
+
+[7215] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  7216000 subb_a = 1 subb_b = 0 tb_a =     -4 tb_b =     -1 tb_s = 0      3 s_res = 1      3
+
+[7225] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  7226000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      0 tb_s = 0      3 s_res = 0      3
+
+Time =  7236000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      1 tb_s = 0      4 s_res = 0      4
+
+Time =  7246000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      2 tb_s = 0      5 s_res = 0      5
+
+Time =  7256000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      3 tb_s = 0      6 s_res = 0      6
+
+Time =  7266000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      4 tb_s = 0      7 s_res = 0      7
+
+Time =  7276000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      5 tb_s = 0     -8 s_res = 0     -8
+
+Time =  7286000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      6 tb_s = 0     -7 s_res = 0     -7
+
+Time =  7296000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =      7 tb_s = 0     -6 s_res = 0     -6
+
+Time =  7306000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -8 tb_s = 1     -5 s_res = 0     -5
+
+[7315] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  7316000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -7 tb_s = 1     -4 s_res = 0     -4
+
+[7325] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  7326000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -6 tb_s = 1     -3 s_res = 0     -3
+
+[7335] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  7336000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -5 tb_s = 1     -2 s_res = 0     -2
+
+[7345] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  7346000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -4 tb_s = 1     -1 s_res = 0     -1
+
+[7355] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  7356000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -3 tb_s = 0      0 s_res = 1      0
+
+[7365] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  7366000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -2 tb_s = 0      1 s_res = 1      1
+
+[7375] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  7376000 subb_a = 1 subb_b = 0 tb_a =     -3 tb_b =     -1 tb_s = 0      2 s_res = 1      2
+
+[7385] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  7386000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      0 tb_s = 0      2 s_res = 0      2
+
+Time =  7396000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      1 tb_s = 0      3 s_res = 0      3
+
+Time =  7406000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      2 tb_s = 0      4 s_res = 0      4
+
+Time =  7416000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      3 tb_s = 0      5 s_res = 0      5
+
+Time =  7426000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      4 tb_s = 0      6 s_res = 0      6
+
+Time =  7436000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      5 tb_s = 0      7 s_res = 0      7
+
+Time =  7446000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      6 tb_s = 0     -8 s_res = 0     -8
+
+Time =  7456000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =      7 tb_s = 0     -7 s_res = 0     -7
+
+Time =  7466000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -8 tb_s = 1     -6 s_res = 0     -6
+
+[7475] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  7476000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -7 tb_s = 1     -5 s_res = 0     -5
+
+[7485] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  7486000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -6 tb_s = 1     -4 s_res = 0     -4
+
+[7495] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  7496000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -5 tb_s = 1     -3 s_res = 0     -3
+
+[7505] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  7506000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -4 tb_s = 1     -2 s_res = 0     -2
+
+[7515] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  7516000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -3 tb_s = 1     -1 s_res = 0     -1
+
+[7525] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  7526000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -2 tb_s = 0      0 s_res = 1      0
+
+[7535] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  7536000 subb_a = 1 subb_b = 0 tb_a =     -2 tb_b =     -1 tb_s = 0      1 s_res = 1      1
+
+[7545] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  7546000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      0 tb_s = 0      1 s_res = 0      1
+
+Time =  7556000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      1 tb_s = 0      2 s_res = 0      2
+
+Time =  7566000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      2 tb_s = 0      3 s_res = 0      3
+
+Time =  7576000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      3 tb_s = 0      4 s_res = 0      4
+
+Time =  7586000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      4 tb_s = 0      5 s_res = 0      5
+
+Time =  7596000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      5 tb_s = 0      6 s_res = 0      6
+
+Time =  7606000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      6 tb_s = 0      7 s_res = 0      7
+
+Time =  7616000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =      7 tb_s = 0     -8 s_res = 0     -8
+
+Time =  7626000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -8 tb_s = 1     -7 s_res = 0     -7
+
+[7635] WARNING: 	Expected result: 1 1001
+			Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  7636000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -7 tb_s = 1     -6 s_res = 0     -6
+
+[7645] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  7646000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -6 tb_s = 1     -5 s_res = 0     -5
+
+[7655] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  7656000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -5 tb_s = 1     -4 s_res = 0     -4
+
+[7665] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  7666000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -4 tb_s = 1     -3 s_res = 0     -3
+
+[7675] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  7676000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -3 tb_s = 1     -2 s_res = 0     -2
+
+[7685] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  7686000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -2 tb_s = 1     -1 s_res = 0     -1
+
+[7695] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  7696000 subb_a = 1 subb_b = 0 tb_a =     -1 tb_b =     -1 tb_s = 0      0 s_res = 1      0
+
+[7705] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  7706000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 1      0
+
+[7715] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  7716000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      1 tb_s = 1     -1 s_res = 1     -1
+
+Time =  7726000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      2 tb_s = 1     -2 s_res = 1     -2
+
+Time =  7736000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      3 tb_s = 1     -3 s_res = 1     -3
+
+Time =  7746000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      4 tb_s = 1     -4 s_res = 1     -4
+
+Time =  7756000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      5 tb_s = 1     -5 s_res = 1     -5
+
+Time =  7766000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      6 tb_s = 1     -6 s_res = 1     -6
+
+Time =  7776000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =      7 tb_s = 1     -7 s_res = 1     -7
+
+Time =  7786000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -8 tb_s = 0     -8 s_res = 1     -8
+
+[7795] WARNING: 	Expected result: 0 1000
+			Obtained result: 1 1000		. Instance: tb_add_subb
+Time =  7796000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -7 tb_s = 0      7 s_res = 1      7
+
+[7805] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  7806000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -6 tb_s = 0      6 s_res = 1      6
+
+[7815] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  7816000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -5 tb_s = 0      5 s_res = 1      5
+
+[7825] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  7826000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -4 tb_s = 0      4 s_res = 1      4
+
+[7835] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  7836000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -3 tb_s = 0      3 s_res = 1      3
+
+[7845] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  7846000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -2 tb_s = 0      2 s_res = 1      2
+
+[7855] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  7856000 subb_a = 1 subb_b = 1 tb_a =      0 tb_b =     -1 tb_s = 0      1 s_res = 1      1
+
+[7865] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  7866000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      0 tb_s = 1     -1 s_res = 1     -1
+
+Time =  7876000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      1 tb_s = 1     -2 s_res = 1     -2
+
+Time =  7886000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      2 tb_s = 1     -3 s_res = 1     -3
+
+Time =  7896000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      3 tb_s = 1     -4 s_res = 1     -4
+
+Time =  7906000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      4 tb_s = 1     -5 s_res = 1     -5
+
+Time =  7916000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      5 tb_s = 1     -6 s_res = 1     -6
+
+Time =  7926000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      6 tb_s = 1     -7 s_res = 1     -7
+
+Time =  7936000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      7 tb_s = 1     -8 s_res = 1     -8
+
+Time =  7946000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -8 tb_s = 0      7 s_res = 1      7
+
+[7955] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  7956000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -7 tb_s = 0      6 s_res = 1      6
+
+[7965] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  7966000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -6 tb_s = 0      5 s_res = 1      5
+
+[7975] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  7976000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -5 tb_s = 0      4 s_res = 1      4
+
+[7985] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  7986000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -4 tb_s = 0      3 s_res = 1      3
+
+[7995] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  7996000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -3 tb_s = 0      2 s_res = 1      2
+
+[8005] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  8006000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -2 tb_s = 0      1 s_res = 1      1
+
+[8015] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8016000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =     -1 tb_s = 0      0 s_res = 1      0
+
+[8025] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8026000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      0 tb_s = 1     -2 s_res = 1     -2
+
+Time =  8036000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      1 tb_s = 1     -3 s_res = 1     -3
+
+Time =  8046000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      2 tb_s = 1     -4 s_res = 1     -4
+
+Time =  8056000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      3 tb_s = 1     -5 s_res = 1     -5
+
+Time =  8066000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      4 tb_s = 1     -6 s_res = 1     -6
+
+Time =  8076000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      5 tb_s = 1     -7 s_res = 1     -7
+
+Time =  8086000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      6 tb_s = 1     -8 s_res = 1     -8
+
+Time =  8096000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      7 tb_s = 1      7 s_res = 1      7
+
+Time =  8106000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -8 tb_s = 0      6 s_res = 1      6
+
+[8115] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  8116000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -7 tb_s = 0      5 s_res = 1      5
+
+[8125] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  8126000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -6 tb_s = 0      4 s_res = 1      4
+
+[8135] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  8136000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -5 tb_s = 0      3 s_res = 1      3
+
+[8145] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  8146000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -4 tb_s = 0      2 s_res = 1      2
+
+[8155] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  8156000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -3 tb_s = 0      1 s_res = 1      1
+
+[8165] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8166000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -2 tb_s = 0      0 s_res = 1      0
+
+[8175] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8176000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =     -1 tb_s = 1     -1 s_res = 0     -1
+
+[8185] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  8186000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      0 tb_s = 1     -3 s_res = 1     -3
+
+Time =  8196000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      1 tb_s = 1     -4 s_res = 1     -4
+
+Time =  8206000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      2 tb_s = 1     -5 s_res = 1     -5
+
+Time =  8216000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      3 tb_s = 1     -6 s_res = 1     -6
+
+Time =  8226000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      4 tb_s = 1     -7 s_res = 1     -7
+
+Time =  8236000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      5 tb_s = 1     -8 s_res = 1     -8
+
+Time =  8246000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      6 tb_s = 1      7 s_res = 1      7
+
+Time =  8256000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      7 tb_s = 1      6 s_res = 1      6
+
+Time =  8266000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -8 tb_s = 0      5 s_res = 1      5
+
+[8275] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  8276000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -7 tb_s = 0      4 s_res = 1      4
+
+[8285] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  8286000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -6 tb_s = 0      3 s_res = 1      3
+
+[8295] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  8296000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -5 tb_s = 0      2 s_res = 1      2
+
+[8305] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  8306000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -4 tb_s = 0      1 s_res = 1      1
+
+[8315] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8316000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -3 tb_s = 0      0 s_res = 1      0
+
+[8325] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8326000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -2 tb_s = 1     -1 s_res = 0     -1
+
+[8335] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  8336000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =     -1 tb_s = 1     -2 s_res = 0     -2
+
+[8345] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  8346000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      0 tb_s = 1     -4 s_res = 1     -4
+
+Time =  8356000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      1 tb_s = 1     -5 s_res = 1     -5
+
+Time =  8366000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      2 tb_s = 1     -6 s_res = 1     -6
+
+Time =  8376000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      3 tb_s = 1     -7 s_res = 1     -7
+
+Time =  8386000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      4 tb_s = 1     -8 s_res = 1     -8
+
+Time =  8396000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      5 tb_s = 1      7 s_res = 1      7
+
+Time =  8406000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      6 tb_s = 1      6 s_res = 1      6
+
+Time =  8416000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =      7 tb_s = 1      5 s_res = 1      5
+
+Time =  8426000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -8 tb_s = 0      4 s_res = 1      4
+
+[8435] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  8436000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -7 tb_s = 0      3 s_res = 1      3
+
+[8445] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  8446000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -6 tb_s = 0      2 s_res = 1      2
+
+[8455] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  8456000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -5 tb_s = 0      1 s_res = 1      1
+
+[8465] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8466000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -4 tb_s = 0      0 s_res = 1      0
+
+[8475] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8476000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -3 tb_s = 1     -1 s_res = 0     -1
+
+[8485] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  8486000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -2 tb_s = 1     -2 s_res = 0     -2
+
+[8495] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  8496000 subb_a = 1 subb_b = 1 tb_a =      4 tb_b =     -1 tb_s = 1     -3 s_res = 0     -3
+
+[8505] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  8506000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      0 tb_s = 1     -5 s_res = 1     -5
+
+Time =  8516000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      1 tb_s = 1     -6 s_res = 1     -6
+
+Time =  8526000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      2 tb_s = 1     -7 s_res = 1     -7
+
+Time =  8536000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      3 tb_s = 1     -8 s_res = 1     -8
+
+Time =  8546000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      4 tb_s = 1      7 s_res = 1      7
+
+Time =  8556000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      5 tb_s = 1      6 s_res = 1      6
+
+Time =  8566000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      6 tb_s = 1      5 s_res = 1      5
+
+Time =  8576000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =      7 tb_s = 1      4 s_res = 1      4
+
+Time =  8586000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -8 tb_s = 0      3 s_res = 1      3
+
+[8595] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  8596000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -7 tb_s = 0      2 s_res = 1      2
+
+[8605] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  8606000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -6 tb_s = 0      1 s_res = 1      1
+
+[8615] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8616000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -5 tb_s = 0      0 s_res = 1      0
+
+[8625] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8626000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -4 tb_s = 1     -1 s_res = 0     -1
+
+[8635] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  8636000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -3 tb_s = 1     -2 s_res = 0     -2
+
+[8645] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  8646000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -2 tb_s = 1     -3 s_res = 0     -3
+
+[8655] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  8656000 subb_a = 1 subb_b = 1 tb_a =      5 tb_b =     -1 tb_s = 1     -4 s_res = 0     -4
+
+[8665] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  8666000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      0 tb_s = 1     -6 s_res = 1     -6
+
+Time =  8676000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      1 tb_s = 1     -7 s_res = 1     -7
+
+Time =  8686000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      2 tb_s = 1     -8 s_res = 1     -8
+
+Time =  8696000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      3 tb_s = 1      7 s_res = 1      7
+
+Time =  8706000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      4 tb_s = 1      6 s_res = 1      6
+
+Time =  8716000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      5 tb_s = 1      5 s_res = 1      5
+
+Time =  8726000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      6 tb_s = 1      4 s_res = 1      4
+
+Time =  8736000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =      7 tb_s = 1      3 s_res = 1      3
+
+Time =  8746000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -8 tb_s = 0      2 s_res = 1      2
+
+[8755] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  8756000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -7 tb_s = 0      1 s_res = 1      1
+
+[8765] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8766000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -6 tb_s = 0      0 s_res = 1      0
+
+[8775] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8776000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -5 tb_s = 1     -1 s_res = 0     -1
+
+[8785] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  8786000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -4 tb_s = 1     -2 s_res = 0     -2
+
+[8795] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  8796000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -3 tb_s = 1     -3 s_res = 0     -3
+
+[8805] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  8806000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -2 tb_s = 1     -4 s_res = 0     -4
+
+[8815] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  8816000 subb_a = 1 subb_b = 1 tb_a =      6 tb_b =     -1 tb_s = 1     -5 s_res = 0     -5
+
+[8825] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  8826000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      0 tb_s = 1     -7 s_res = 1     -7
+
+Time =  8836000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      1 tb_s = 1     -8 s_res = 1     -8
+
+Time =  8846000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      2 tb_s = 1      7 s_res = 1      7
+
+Time =  8856000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      3 tb_s = 1      6 s_res = 1      6
+
+Time =  8866000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      4 tb_s = 1      5 s_res = 1      5
+
+Time =  8876000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      5 tb_s = 1      4 s_res = 1      4
+
+Time =  8886000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      6 tb_s = 1      3 s_res = 1      3
+
+Time =  8896000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =      7 tb_s = 1      2 s_res = 1      2
+
+Time =  8906000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -8 tb_s = 0      1 s_res = 1      1
+
+[8915] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  8916000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -7 tb_s = 0      0 s_res = 1      0
+
+[8925] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  8926000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -6 tb_s = 1     -1 s_res = 0     -1
+
+[8935] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  8936000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -5 tb_s = 1     -2 s_res = 0     -2
+
+[8945] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  8946000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -4 tb_s = 1     -3 s_res = 0     -3
+
+[8955] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  8956000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -3 tb_s = 1     -4 s_res = 0     -4
+
+[8965] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  8966000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -2 tb_s = 1     -5 s_res = 0     -5
+
+[8975] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  8976000 subb_a = 1 subb_b = 1 tb_a =      7 tb_b =     -1 tb_s = 1     -6 s_res = 0     -6
+
+[8985] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  8986000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      0 tb_s = 0     -8 s_res = 1     -8
+
+[8995] WARNING: 	Expected result: 0 1000
+			Obtained result: 1 1000		. Instance: tb_add_subb
+Time =  8996000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      1 tb_s = 0      7 s_res = 1      7
+
+[9005] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  9006000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      2 tb_s = 0      6 s_res = 1      6
+
+[9015] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  9016000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      3 tb_s = 0      5 s_res = 1      5
+
+[9025] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  9026000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      4 tb_s = 0      4 s_res = 1      4
+
+[9035] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  9036000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      5 tb_s = 0      3 s_res = 1      3
+
+[9045] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  9046000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      6 tb_s = 0      2 s_res = 1      2
+
+[9055] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9056000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =      7 tb_s = 0      1 s_res = 1      1
+
+[9065] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9066000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -8 tb_s = 1      0 s_res = 1      0
+
+Time =  9076000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -7 tb_s = 0     -1 s_res = 0     -1
+
+Time =  9086000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -6 tb_s = 0     -2 s_res = 0     -2
+
+Time =  9096000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -5 tb_s = 0     -3 s_res = 0     -3
+
+Time =  9106000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -4 tb_s = 0     -4 s_res = 0     -4
+
+Time =  9116000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -3 tb_s = 0     -5 s_res = 0     -5
+
+Time =  9126000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -2 tb_s = 0     -6 s_res = 0     -6
+
+Time =  9136000 subb_a = 1 subb_b = 1 tb_a =     -8 tb_b =     -1 tb_s = 0     -7 s_res = 0     -7
+
+Time =  9146000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      0 tb_s = 0      7 s_res = 1      7
+
+[9155] WARNING: 	Expected result: 0 0111
+			Obtained result: 1 0111		. Instance: tb_add_subb
+Time =  9156000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      1 tb_s = 0      6 s_res = 1      6
+
+[9165] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  9166000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      2 tb_s = 0      5 s_res = 1      5
+
+[9175] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  9176000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      3 tb_s = 0      4 s_res = 1      4
+
+[9185] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  9186000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      4 tb_s = 0      3 s_res = 1      3
+
+[9195] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  9196000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      5 tb_s = 0      2 s_res = 1      2
+
+[9205] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9206000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      6 tb_s = 0      1 s_res = 1      1
+
+[9215] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9216000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =      7 tb_s = 0      0 s_res = 1      0
+
+[9225] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  9226000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -8 tb_s = 0     -1 s_res = 0     -1
+
+Time =  9236000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -7 tb_s = 0     -2 s_res = 0     -2
+
+Time =  9246000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -6 tb_s = 0     -3 s_res = 0     -3
+
+Time =  9256000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -5 tb_s = 0     -4 s_res = 0     -4
+
+Time =  9266000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -4 tb_s = 0     -5 s_res = 0     -5
+
+Time =  9276000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -3 tb_s = 0     -6 s_res = 0     -6
+
+Time =  9286000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -2 tb_s = 0     -7 s_res = 0     -7
+
+Time =  9296000 subb_a = 1 subb_b = 1 tb_a =     -7 tb_b =     -1 tb_s = 0     -8 s_res = 0     -8
+
+Time =  9306000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      0 tb_s = 0      6 s_res = 1      6
+
+[9315] WARNING: 	Expected result: 0 0110
+			Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  9316000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      1 tb_s = 0      5 s_res = 1      5
+
+[9325] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  9326000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      2 tb_s = 0      4 s_res = 1      4
+
+[9335] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  9336000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      3 tb_s = 0      3 s_res = 1      3
+
+[9345] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  9346000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      4 tb_s = 0      2 s_res = 1      2
+
+[9355] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9356000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      5 tb_s = 0      1 s_res = 1      1
+
+[9365] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9366000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      6 tb_s = 0      0 s_res = 1      0
+
+[9375] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  9376000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =      7 tb_s = 1     -1 s_res = 0     -1
+
+[9385] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  9386000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -8 tb_s = 0     -2 s_res = 0     -2
+
+Time =  9396000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -7 tb_s = 0     -3 s_res = 0     -3
+
+Time =  9406000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -6 tb_s = 0     -4 s_res = 0     -4
+
+Time =  9416000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -5 tb_s = 0     -5 s_res = 0     -5
+
+Time =  9426000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -4 tb_s = 0     -6 s_res = 0     -6
+
+Time =  9436000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -3 tb_s = 0     -7 s_res = 0     -7
+
+Time =  9446000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -2 tb_s = 0     -8 s_res = 0     -8
+
+Time =  9456000 subb_a = 1 subb_b = 1 tb_a =     -6 tb_b =     -1 tb_s = 0      7 s_res = 0      7
+
+Time =  9466000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      0 tb_s = 0      5 s_res = 1      5
+
+[9475] WARNING: 	Expected result: 0 0101
+			Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  9476000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      1 tb_s = 0      4 s_res = 1      4
+
+[9485] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  9486000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      2 tb_s = 0      3 s_res = 1      3
+
+[9495] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  9496000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      3 tb_s = 0      2 s_res = 1      2
+
+[9505] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9506000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      4 tb_s = 0      1 s_res = 1      1
+
+[9515] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9516000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      5 tb_s = 0      0 s_res = 1      0
+
+[9525] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  9526000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      6 tb_s = 1     -1 s_res = 0     -1
+
+[9535] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  9536000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =      7 tb_s = 1     -2 s_res = 0     -2
+
+[9545] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  9546000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -8 tb_s = 0     -3 s_res = 0     -3
+
+Time =  9556000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -7 tb_s = 0     -4 s_res = 0     -4
+
+Time =  9566000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -6 tb_s = 0     -5 s_res = 0     -5
+
+Time =  9576000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -5 tb_s = 0     -6 s_res = 0     -6
+
+Time =  9586000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -4 tb_s = 0     -7 s_res = 0     -7
+
+Time =  9596000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -3 tb_s = 0     -8 s_res = 0     -8
+
+Time =  9606000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -2 tb_s = 0      7 s_res = 0      7
+
+Time =  9616000 subb_a = 1 subb_b = 1 tb_a =     -5 tb_b =     -1 tb_s = 0      6 s_res = 0      6
+
+Time =  9626000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      0 tb_s = 0      4 s_res = 1      4
+
+[9635] WARNING: 	Expected result: 0 0100
+			Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  9636000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      1 tb_s = 0      3 s_res = 1      3
+
+[9645] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  9646000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      2 tb_s = 0      2 s_res = 1      2
+
+[9655] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9656000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      3 tb_s = 0      1 s_res = 1      1
+
+[9665] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9666000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      4 tb_s = 0      0 s_res = 1      0
+
+[9675] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  9676000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      5 tb_s = 1     -1 s_res = 0     -1
+
+[9685] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  9686000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      6 tb_s = 1     -2 s_res = 0     -2
+
+[9695] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  9696000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =      7 tb_s = 1     -3 s_res = 0     -3
+
+[9705] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  9706000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -8 tb_s = 0     -4 s_res = 0     -4
+
+Time =  9716000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -7 tb_s = 0     -5 s_res = 0     -5
+
+Time =  9726000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -6 tb_s = 0     -6 s_res = 0     -6
+
+Time =  9736000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -5 tb_s = 0     -7 s_res = 0     -7
+
+Time =  9746000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -4 tb_s = 0     -8 s_res = 0     -8
+
+Time =  9756000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -3 tb_s = 0      7 s_res = 0      7
+
+Time =  9766000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -2 tb_s = 0      6 s_res = 0      6
+
+Time =  9776000 subb_a = 1 subb_b = 1 tb_a =     -4 tb_b =     -1 tb_s = 0      5 s_res = 0      5
+
+Time =  9786000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      0 tb_s = 0      3 s_res = 1      3
+
+[9795] WARNING: 	Expected result: 0 0011
+			Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  9796000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      1 tb_s = 0      2 s_res = 1      2
+
+[9805] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9806000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+[9815] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9816000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+[9825] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  9826000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      4 tb_s = 1     -1 s_res = 0     -1
+
+[9835] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  9836000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      5 tb_s = 1     -2 s_res = 0     -2
+
+[9845] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  9846000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      6 tb_s = 1     -3 s_res = 0     -3
+
+[9855] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  9856000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =      7 tb_s = 1     -4 s_res = 0     -4
+
+[9865] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  9866000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -8 tb_s = 0     -5 s_res = 0     -5
+
+Time =  9876000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -7 tb_s = 0     -6 s_res = 0     -6
+
+Time =  9886000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -6 tb_s = 0     -7 s_res = 0     -7
+
+Time =  9896000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -5 tb_s = 0     -8 s_res = 0     -8
+
+Time =  9906000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -4 tb_s = 0      7 s_res = 0      7
+
+Time =  9916000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -3 tb_s = 0      6 s_res = 0      6
+
+Time =  9926000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -2 tb_s = 0      5 s_res = 0      5
+
+Time =  9936000 subb_a = 1 subb_b = 1 tb_a =     -3 tb_b =     -1 tb_s = 0      4 s_res = 0      4
+
+Time =  9946000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      0 tb_s = 0      2 s_res = 1      2
+
+[9955] WARNING: 	Expected result: 0 0010
+			Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  9956000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      1 tb_s = 0      1 s_res = 1      1
+
+[9965] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  9966000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+[9975] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  9976000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      3 tb_s = 1     -1 s_res = 0     -1
+
+[9985] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  9986000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      4 tb_s = 1     -2 s_res = 0     -2
+
+[9995] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  9996000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      5 tb_s = 1     -3 s_res = 0     -3
+
+[10005] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time = 10006000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      6 tb_s = 1     -4 s_res = 0     -4
+
+[10015] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time = 10016000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =      7 tb_s = 1     -5 s_res = 0     -5
+
+[10025] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time = 10026000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -8 tb_s = 0     -6 s_res = 0     -6
+
+Time = 10036000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -7 tb_s = 0     -7 s_res = 0     -7
+
+Time = 10046000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -6 tb_s = 0     -8 s_res = 0     -8
+
+Time = 10056000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -5 tb_s = 0      7 s_res = 0      7
+
+Time = 10066000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -4 tb_s = 0      6 s_res = 0      6
+
+Time = 10076000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -3 tb_s = 0      5 s_res = 0      5
+
+Time = 10086000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -2 tb_s = 0      4 s_res = 0      4
+
+Time = 10096000 subb_a = 1 subb_b = 1 tb_a =     -2 tb_b =     -1 tb_s = 0      3 s_res = 0      3
+
+Time = 10106000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      0 tb_s = 0      1 s_res = 1      1
+
+[10115] WARNING: 	Expected result: 0 0001
+			Obtained result: 1 0001		. Instance: tb_add_subb
+Time = 10116000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+[10125] WARNING: 	Expected result: 0 0000
+			Obtained result: 1 0000		. Instance: tb_add_subb
+Time = 10126000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      2 tb_s = 1     -1 s_res = 0     -1
+
+[10135] WARNING: 	Expected result: 1 1111
+			Obtained result: 0 1111		. Instance: tb_add_subb
+Time = 10136000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      3 tb_s = 1     -2 s_res = 0     -2
+
+[10145] WARNING: 	Expected result: 1 1110
+			Obtained result: 0 1110		. Instance: tb_add_subb
+Time = 10146000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      4 tb_s = 1     -3 s_res = 0     -3
+
+[10155] WARNING: 	Expected result: 1 1101
+			Obtained result: 0 1101		. Instance: tb_add_subb
+Time = 10156000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      5 tb_s = 1     -4 s_res = 0     -4
+
+[10165] WARNING: 	Expected result: 1 1100
+			Obtained result: 0 1100		. Instance: tb_add_subb
+Time = 10166000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      6 tb_s = 1     -5 s_res = 0     -5
+
+[10175] WARNING: 	Expected result: 1 1011
+			Obtained result: 0 1011		. Instance: tb_add_subb
+Time = 10176000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =      7 tb_s = 1     -6 s_res = 0     -6
+
+[10185] WARNING: 	Expected result: 1 1010
+			Obtained result: 0 1010		. Instance: tb_add_subb
+Time = 10186000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -8 tb_s = 0     -7 s_res = 0     -7
+
+Time = 10196000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -7 tb_s = 0     -8 s_res = 0     -8
+
+Time = 10206000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -6 tb_s = 0      7 s_res = 0      7
+
+Time = 10216000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -5 tb_s = 0      6 s_res = 0      6
+
+Time = 10226000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -4 tb_s = 0      5 s_res = 0      5
+
+Time = 10236000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -3 tb_s = 0      4 s_res = 0      4
+
+Time = 10246000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -2 tb_s = 0      3 s_res = 0      3
+
+Time = 10256000 subb_a = 1 subb_b = 1 tb_a =     -1 tb_b =     -1 tb_s = 0      2 s_res = 0      2
 
 
-TIME     : 106
-WARNINGS : 0
+
+TIME     : 10266
+WARNINGS : 513
 ERRORS   : 0
 INFOS    : 0
 NOTES    : 0
-MESSAGES : 0
-TESTSEED : 740784910
+MESSAGES : 513
+TESTSEED : 856244686
 
 
 ............. TEST PASSED .............
@@ -47,9 +3105,9 @@ TESTSEED : 740784910
 .......................................
 
 
-$finish called from file "./temp/tb_add_subb.v", line 295.
-$finish at simulation time               106000
+$finish called from file "./temp/tb_add_subb.v", line 301.
+$finish at simulation time             10266000
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 106000 ps
-CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
-Thu Jun  9 23:21:59 2016
+Time: 10266000 ps
+CPU Time:      0.290 seconds;       Data structure size:   0.1Mb
+Fri Jun 10 17:43:04 2016

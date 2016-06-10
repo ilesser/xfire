@@ -54,7 +54,7 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2^(2*`W+2))
+      repeat(2**(2*`W+2))
       begin
 
          tb_subb_a   = cnt[2*`W+1];
