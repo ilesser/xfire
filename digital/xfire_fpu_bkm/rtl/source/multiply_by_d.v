@@ -72,6 +72,15 @@ module multiply_by_d #(
 // z * d = z_dx    = (x + j y) dx                      if dx != 0 ^ dy == 0
 // z * d = z_dy    = (-y + j x) dy                     if dx == 0 ^ dy != 0
 // *****************************************************************************
+//Complex multiplication normally involves four multiplications and two additions.
+//(a+bi)(c+di)=(ac-bd)+(bc+ad)j.
+// By 1805 Gauss had discovered a way of reducing the number of multiplications to three
+// The product (a + bi) · (c + di) can be calculated in the following way.
+//k1 = c · (a + b)
+//k2 = a · (d − c)
+//k3 = b · (c + d)
+//Real part = k1 − k3
+//Imaginary part = k1 + k2.
 
    // -----------------------------------------------------
    // Internal signals
