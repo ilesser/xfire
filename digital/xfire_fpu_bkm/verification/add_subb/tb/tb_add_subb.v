@@ -109,9 +109,16 @@ module tb_add_subb ();
    // -----------------------------------------------------
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_c != c_res || tb_s != s_res) begin
-            `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
-            $finish();
+         if (tb_s != s_res) begin
+            `ERR_MSG4(\tExpected result: %b %b\n\t\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+         end
+      end
+   end
+
+   always @(posedge clk) begin
+      if (ena == 1'b1) begin
+         if (tb_c != c_res) begin
+            `WARN_MSG4(\tExpected result: %b %b\n\t\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
          end
       end
    end
