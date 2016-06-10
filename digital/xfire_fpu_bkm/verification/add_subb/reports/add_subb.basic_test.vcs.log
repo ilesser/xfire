@@ -8,7 +8,7 @@ Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precisio
 -l ./reports/add_subb.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all \
 -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Thu May 26 18:02:59 2016
+            Version I-2014.03 -- Thu Jun  9 23:27:20 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -23,10 +23,12 @@ Parsing design file './temp/bkm.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm.v'.
 Parsing design file './temp/tb_add_subb.v'
+Parsing included file '/usr/repos/ip_library/simlib/simlib_defs.vh'.
+Back to file './temp/tb_add_subb.v'.
 
 Warning-[DCTTSW] Decimal constant truncated
   Constant '16' is truncated to 4 bits: 0.
-  "./temp/tb_add_subb.v", 893
+  "./temp/tb_add_subb.v", 929
   Source info:       load_operands(1'b0,  1'b0,    -`W'd8, -`W'd8, 1'b0, 
   -`W'd16);
 
@@ -99,13 +101,12 @@ Top Level Modules:
        xfire_fpu_bkm
        fadder
        get_d_n
-       simlib_clk_osc
        bkm_step
        csd2bin
        bin2csd
 TimeScale is 1 ns / 1 ps
 Starting vcs inline pass...
-16 modules and 0 UDP read.
+15 modules and 0 UDP read.
 recompiling module tb_add_subb
 recompiling module bkm_fixed
 recompiling module add_subb
@@ -114,14 +115,13 @@ recompiling module complex_csd_add_subb
 recompiling module xfire_fpu_bkm
 recompiling module fadder
 recompiling module get_d_n
-recompiling module simlib_clk_osc
 recompiling module bkm_step
 recompiling module multiply_by_d
 recompiling module complex_add_subb
 recompiling module csd2bin
 recompiling module barrel_shifter
 recompiling module bin2csd
-All of 16 modules done
+All of 15 modules done
 rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
 ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
 --no-whole-archive
@@ -137,4 +137,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: 2.840 seconds to compile + .159 seconds to elab + .144 seconds to link
+CPU time: 2.814 seconds to compile + .156 seconds to elab + .135 seconds to link
