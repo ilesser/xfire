@@ -1,0 +1,55 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.seq_test.simv.log +TESTSEED=740784910 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Jun  9 23:21 2016
+ucli% run
+
+*******************************************************
+Test Seed:   740784910
+*******************************************************
+
+Time =        0 subb_a = x subb_b = x tb_a =           x tb_b =           x tb_s = x           x s_res = x           x
+
+Time =    26000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 0      0
+
+Time =    36000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      1 tb_s = 0      1 s_res = 0      1
+
+Time =    46000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      2 tb_s = 0      2 s_res = 0      2
+
+Time =    56000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      3 tb_s = 0      3 s_res = 0      3
+
+Time =    66000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      4 tb_s = 0      4 s_res = 0      4
+
+Time =    76000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      5 tb_s = 0      5 s_res = 0      5
+
+Time =    86000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      6 tb_s = 0      6 s_res = 0      6
+
+Time =    96000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      7 tb_s = 0      7 s_res = 0      7
+
+
+
+TIME     : 106
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 740784910
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_add_subb.v", line 295.
+$finish at simulation time               106000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 106000 ps
+CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
+Thu Jun  9 23:21:59 2016

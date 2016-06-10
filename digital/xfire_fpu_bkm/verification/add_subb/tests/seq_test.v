@@ -45,22 +45,39 @@ task seq_test;
 
    begin
 
-      $dumpfile("../waves/tb_add_subb_seq_test.vcd");
-      $dumpvars();
+      ena         = 1'b0;
+      rst         = 1'b0;
+      run_clk(1);
+      rst         = 1'b1;
+      run_clk(1);
+      rst         = 1'b0;
+      run_clk(1);
+      ena         = 1'b1;
 
-      tb_subb_a   = cnt[2*`W+1];
-      tb_subb_b   = cnt[2*`W];
-      tb_a        = cnt[2*`W-1:`W];
-      tb_b        = cnt[`W-1:0];
+      repeat(2^(2*`W+2))
+      begin
 
-      always @(*) begin
+         tb_subb_a   = cnt[2*`W+1];
+         tb_subb_b   = cnt[2*`W];
+         tb_a        = cnt[2*`W-1:`W];
+         tb_b        = cnt[`W-1:0];
+
          case ({tb_subb_a, tb_subb_b})
             2'b00 : {tb_c, tb_s} =  tb_a + tb_b;
             2'b01 : {tb_c, tb_s} =  tb_a - tb_b;
             2'b10 : {tb_c, tb_s} = -tb_a + tb_b;
             2'b11 : {tb_c, tb_s} = -tb_a - tb_b;
          endcase
+
+         run_clk(1);
+
+         //if (tb_c != c_res || tb_s != s_res) begin
+         //   `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+         //   $finish();
+         //end
+
       end
+
    end
 
 // *****************************************************************************
