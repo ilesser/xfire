@@ -32,6 +32,7 @@
 `timescale 1ns/1ps
 `define W 4
 
+`include "/usr/repos/ip_library/simlib/simlib_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -55,7 +56,7 @@ module tb_add_subb ();
    reg   signed   [W-1:0]  tb_b;
    reg                     tb_c;
    reg   signed   [W-1:0]  tb_s;
-   reg            [`CNT_SIZE-1:0]   cnt;
+   reg            [CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -68,9 +69,26 @@ module tb_add_subb ();
    // -----------------------------------------------------
    // Transactors
    // -----------------------------------------------------
+   simlib_clk_osc #(
+      // ----------------------------------------------
+      // Parameters
+      // ----------------------------------------------
+      .CLK_PERIOD_NS    (`SIM_CLK_PERIOD_NS)
+   ) clk_osc (
+      // ----------------------------------------------
+      // Ports in
+      // ----------------------------------------------
+      .stop             (1'b0),
+      // ----------------------------------------------
+      // Ports out
+      // ----------------------------------------------
+      .clk_out          (clk)
+   );
+
    always @(posedge clk)
-       if (reset) begin
-          cnt <= {`CNT_SIZE{1'b0}} ;
+       if (rst) begin
+          cnt <= {CNT_SIZE{1'b0}} ;
+          //cnt <= `CNT_SIZE'd0;
        end else if (ena) begin
           cnt <= cnt + 1;
        end
@@ -79,20 +97,24 @@ module tb_add_subb ();
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
-   $monitor("Time = %8t subb_a = %b subb_b = %b tb_a = %6d tb_b = %6d tb_s = %b %6d s_res = %b %6d\n",$time, tb_subb_a, tb_subb_b, tb_a, tb_b, tb_c, tb_s, c_res, s_res);
-
-   always @(posedge clk) begin
-      if (tb_c != c_res || tb_s != s_res) begin
-         `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
-         $display("");
-         $finish();
-      end
+   initial begin
+      $monitor("Time = %8t subb_a = %b subb_b = %b tb_a = %6d tb_b = %6d tb_s = %b %6d s_res = %b %6d\n",$time, tb_subb_a, tb_subb_b, tb_a, tb_b, tb_c, tb_s, c_res, s_res);
+      $dumpfile("../waves/tb_add_subb.vcd");
+      $dumpvars();
    end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
+   always @(posedge clk) begin
+      if (ena == 1'b1) begin
+         if (tb_c != c_res || tb_s != s_res) begin
+            `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            $finish();
+         end
+      end
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
