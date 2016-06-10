@@ -45,10 +45,6 @@ task basic_test;
 
    begin
 
-      //$monitor("Time = %8t subb_a = %b subb_b = %b tb_a = %6d tb_b = %6d tb_s = %b %6d s_res = %b %6d\n",$time, tb_subb_a, tb_subb_b, tb_a, tb_b, tb_c, tb_s, c_res, s_res);
-      $dumpfile("../waves/tb_add_subb_basic_test.vcd");
-      $dumpvars();
-
       // operands   subb_a subb_b      a        b     c       s
       load_operands(1'b0,  1'b0,     `W'd0,  `W'd0, 1'b0,  `W'd0);
       load_operands(1'b0,  1'b0,     `W'd0,  `W'd1, 1'b0,  `W'd1);
@@ -393,15 +389,8 @@ task load_operands;
       tb_b        = b;
       tb_c        = c;
       tb_s        = s;
-      //#1
+
       run_clk(1);
-
-
-      //if (tb_c != c_res || tb_s != s_res) begin
-      //   `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
-      //   $display("");
-      //   $finish();
-      //end
 
    end
 
