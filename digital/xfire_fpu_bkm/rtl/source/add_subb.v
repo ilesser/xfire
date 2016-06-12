@@ -157,11 +157,13 @@ module add_subb #(
 
    // Report carry if any of c or cp is 1
    always @(*) begin
-      //c = {cc[W] , cp[W]};
-      c = cc[W] | cp[W];
-      //c = cc[W] & cp[W];
-      //c = cc[W] ^ cp[W];
-      //c = cc[W] + cp[W];
+      //c = {cc[W] , cp[W]};  //512 W
+      //c = cc[W] | cp[W];    //513 W
+      //c = cc[W] & cp[W];    //483 W
+      //c = cc[W] ^ cp[W];    //512 W
+      //c = cc[W] + cp[W];    //512 W
+      c = cc[W];            //512 W
+      //c = cp[W];            //484 W
    end
    // -----------------------------------------------------
 
