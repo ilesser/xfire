@@ -60,7 +60,7 @@ module tb_add_subb ();
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Testbecnch wiring
+   // Testbench wiring
    // -----------------------------------------------------
    wire                    c_res;
    wire  signed   [W-1:0]  s_res;
@@ -110,7 +110,8 @@ module tb_add_subb ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_s != s_res) begin
-            `ERR_MSG4(\tExpected result: %b %b\n\t\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            `ERR_MSG4(Different sum! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            $finish();
          end
       end
    end
@@ -118,7 +119,10 @@ module tb_add_subb ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_c != c_res) begin
-            `WARN_MSG4(\tExpected result: %b %b\n\t\t\tObtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            $display("\t\t\t\t\t\t    %b", tb_a);
+            $display("\t\t\t\t\t\t  + %b", tb_b);
+            $display("\t\t\t\t\t\t --------");
+            `WARN_MSG4(Different carry! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
          end
       end
    end
