@@ -30,6 +30,15 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
+`define W 5
+`define W2 `W*2
+`define CNT_SIZE `W
+
+`define CSD_0  2'b00
+`define CSD_p1 2'b01
+`define CSD_m1 2'b10
+
+`include "/usr/repos/ip_library/simlib/simlib_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -44,15 +53,68 @@ module tb_bin2csd ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam        W=5;
-   reg   [W-1:0]     tb_x;
-   reg   [2*W-1:0]   res;
+   localparam              W = `W;
+   localparam              CNT_SIZE = `CNT_SIZE;
+   reg                     clk, rst, ena;
+   reg   [W-1:0]           tb_x;
+   reg   [W-1:0]           cnt;
+   reg   [2*W-1:0]         res;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Testbecnch wiring
+   // Testbench wiring
    // -----------------------------------------------------
    wire  [2*W-1:0]   wire_y;
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Transactors
+   // -----------------------------------------------------
+   simlib_clk_osc #(
+      // ----------------------------------------------
+      // Parameters
+      // ----------------------------------------------
+      .CLK_PERIOD_NS    (`SIM_CLK_PERIOD_NS)
+   ) clk_osc (
+      // ----------------------------------------------
+      // Ports in
+      // ----------------------------------------------
+      .stop             (1'b0),
+      // ----------------------------------------------
+      // Ports out
+      // ----------------------------------------------
+      .clk_out          (clk)
+   );
+
+   always @(posedge clk)
+       if (rst) begin
+          cnt <= {CNT_SIZE{1'b0}} ;
+       end else if (ena) begin
+          cnt <= cnt + 1;
+       end
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Monitors
+   // -----------------------------------------------------
+   initial begin
+      $monitor("Time = %8t tb_x = %b \twire_y = %b \n\t\t\t\tres    = %b\n\n",$time, tb_x, wire_y, res);
+      $dumpfile("../waves/tb_csd_add_subb.vcd");
+      $dumpvars();
+   end
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Checkers
+   // -----------------------------------------------------
+   always @(posedge clk) begin
+      if (ena == 1'b1) begin
+         if (res != wire_y) begin
+            `ERR_MSG2(Different conversion!\tExpected result:\t%b\n\t\t\t\t\tObtained result:\t%b, res, wire_y);
+            //$finish();
+         end
+      end
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
