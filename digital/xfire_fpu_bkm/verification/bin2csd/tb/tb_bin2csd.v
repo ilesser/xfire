@@ -38,7 +38,7 @@
 `define CSD_p1 2'b01
 `define CSD_m1 2'b10
 
-`include "/usr/repos/ip_library/simlib/simlib_defs.vh"
+`include "/home/ilesser/simlib/simlib_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -99,7 +99,7 @@ module tb_bin2csd ();
    // -----------------------------------------------------
    initial begin
       $monitor("Time = %8t tb_x = %b \twire_y = %b \n\t\t\t\tres    = %b\n\n",$time, tb_x, wire_y, res);
-      $dumpfile("../waves/tb_csd_add_subb.vcd");
+      $dumpfile("../waves/tb_bin2csd.vcd");
       $dumpvars();
    end
    // -----------------------------------------------------
