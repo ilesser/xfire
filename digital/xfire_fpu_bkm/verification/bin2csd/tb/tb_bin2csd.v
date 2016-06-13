@@ -111,7 +111,7 @@ module tb_bin2csd ();
       if (ena == 1'b1) begin
          if (res != wire_y) begin
             `ERR_MSG2(Different conversion!\tExpected result:\t%b\n\t\t\t\t\tObtained result:\t%b, res, wire_y);
-            //$finish();
+            finish_sim();
          end
       end
    end
