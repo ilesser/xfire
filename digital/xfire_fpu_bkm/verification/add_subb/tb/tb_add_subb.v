@@ -32,7 +32,7 @@
 `timescale 1ns/1ps
 `define W 4
 
-`include "/usr/repos/ip_library/simlib/simlib_defs.vh"
+`include "/home/ilesser/simlib/simlib_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -110,7 +110,9 @@ module tb_add_subb ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_s != s_res) begin
-            `ERR_MSG4(Different sum! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            //`ERR_MSG4(Different sum! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            $display("[%0d] ERROR: Different sum! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t. Instance: %m",$time, tb_c, tb_s, c_res, s_res);
+            add_error();
             $finish();
          end
       end
@@ -122,7 +124,9 @@ module tb_add_subb ();
             $display("\t\t\t\t\t\t    %b", tb_a);
             $display("\t\t\t\t\t\t  + %b", tb_b);
             $display("\t\t\t\t\t\t --------");
-            `WARN_MSG4(Different carry! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            //`WARN_MSG4(Different carry! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t, tb_c, tb_s, c_res, s_res);
+            $display("[%0d] WARNING: Different carry! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t. Instance: %m",$time, tb_c, tb_s, c_res, s_res);
+            add_warning();
          end
       end
    end
