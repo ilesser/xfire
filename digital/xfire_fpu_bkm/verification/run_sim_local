@@ -77,12 +77,21 @@ if [ -f ../../../../docs/proj_info.txt ]; then
 fi
 # -----------------------------
 
+# -----------------------------
+# Get simlib path
+# -----------------------------
+host_name=`hostname`
+user=`id -un`
 if [ ${institution} == "FIUBA" ]; then
    simlib_path="/usr/repos/ip_library/simlib"
 fi
 if [ ${institution} == "UTN-FRBA" ]; then
    simlib_path=""
 fi
+if [ ${host_name} != "micro0.fi.uba.ar" ]; then
+   simlib_path="/home/${user}/simlib/"
+fi
+# -----------------------------
 
 # Default values
 test_name=""
@@ -462,22 +471,6 @@ monitors_list_v=`find ./monitors/ -type f -name "*.v"`
 monitors_list_vh=`find ./monitors/ -type f -name "*.vh"`
 transactors_list_v=`find ./transactors/ -type f -name "*.v"`
 transactors_list_vh=`find ./transactors/ -type f -name "*.vh"`
-
-#for f in ${tasks_list_v}
-#do
-   #if [ -f ${f} ]; then
-      #cat ${f} >> ./temp/tb_${block_name}.v
-      #cp ${f} ./temp/
-   #fi
-#done
-
-#for f in ${funcs_list_v}
-#do
-#   if [ -f ${f} ]; then
-#      #cat ${f} >> ./temp/tb_${block_name}.v
-#      cp ${f} ./temp/
-#   fi
-#done
 
 for f in ${simlib_list_v}
 do
