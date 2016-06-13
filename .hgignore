@@ -7,3 +7,5 @@ syntax: glob
 digital/*/rtl/html/html
 digital/*/verification/*/temp
 digital/*/verification/*/waves
+digital/*/verification/*/reports/*.log
+digital/*/verification/*/reports/*.history
