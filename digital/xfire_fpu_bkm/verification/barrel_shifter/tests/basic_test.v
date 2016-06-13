@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-06-13 - ilesser - Added clk to simulation.
 //    - 2016-04-25 - ilesser - Original version.
 //
 // -----------------------------------------------------------------------------
@@ -53,24 +54,53 @@ task basic_test;
 
    begin
 
-      $monitor("Time = %8t dir = %b op = %b shift_t = %b sel = %h in = %h\n\t\texpected = %h\n\t\tobtained = %h",$time, tb_dir, tb_op, tb_shift_t, tb_sel, tb_in, tb_out, wire_out);
-      $dumpfile("../waves/tb_barrel_shifter_basic_test.vcd");
-      $dumpvars();
-
+      ena = 1'b1;
+      rst = 1'b0;
+      run_clk(1);
 
       //                      dir         op          shift_t      sel   in  out
       load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   0, 0   );
       load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   1, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   2, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   3, 3   );
       load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   4, 4   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,  -4,-4   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,  16, 8   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 262 );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 65  );
-      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 4192);
-      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   0, 524, 524 );
-      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 1048);
-      load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   6, 524, 3144);
-
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   5, 5   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   6, 6   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   7, 7   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   8, 8   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   9, 9   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,  10,10   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   0, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   1, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   2, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   3, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   4, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   5, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   6, 3   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   7, 3   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   8, 4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   9, 4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,  10, 5   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   0, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   1, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   2, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   3, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   4, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   5, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   6, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   7, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   8, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   9, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,  10, 2   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   4, 4   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,  -4,-4   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,  16, 8   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 262 );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 65  );
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 4192);
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   0, 524, 524 );
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 1048);
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   6, 524, 3144);
 
    end
 
@@ -114,11 +144,7 @@ task load_barrel_shifter;
       tb_in       = in;
       tb_out      = out;
 
-      #1;
-      if ( wire_out !== tb_out ) begin
-         `ERR_MSG2(Expected result: %b\n\t   Obtained result: %b\t, tb_out, wire_out);
-         $display("");
-      end
+      run_clk(1);
 
    end
 
