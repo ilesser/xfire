@@ -37,6 +37,7 @@
 // History:
 // --------
 //
+//    - 2016-06-13 - ilesser   - Cosmetic changes
 //    - 2016-04-25 - ilesser   - Initial version
 //
 // -----------------------------------------------------------------------------
@@ -103,18 +104,14 @@ module barrel_shifter #(
 
             always @(*) begin
 
-               muxs[i][j]     = sel[j] ? in1[i][j] : in0[i][j];
-
+               // Select in0 input from previous mux
                in0[i][j]   = muxs[i][j+1];
 
-               //in1[i][j]   = (i <= (W-1)-2^j) ? muxs[i+2^j][j+1] : op ? muxs[i-(W-1)+2^j-1][j+1] : s;
-               if (i <= (W-1)-2^j) begin
-                  in1[i][j] = muxs[i+2^j][j+1];
-               end
-               if (i >  (W-1)-2^j) begin
-                  in1[i][j] = op ? muxs[i-(W-1)+2^j-1][j+1] : s;
-               end
+               // Select in1 from (i+2^j) mod W  mux if its a rotation or from s if its a shift
+               in1[i][j]   = (i <= (W-1)-2**j) ? muxs[i+(2**j)][j+1] : op ? muxs[i-(W-1)+(2**j)-1][j+1] : s;
 
+               // Connect mux in0 and in1 with sel[j]
+               muxs[i][j]  = sel[j] ? in1[i][j] : in0[i][j];
 
             end // always
 

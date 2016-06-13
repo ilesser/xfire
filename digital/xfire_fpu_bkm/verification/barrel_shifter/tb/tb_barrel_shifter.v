@@ -30,7 +30,10 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
+`define W 8
+`define LOG2W 3
 
+`include "/home/ilesser/simlib/simlib_defs.vh"
 // *****************************************************************************
 // Interface
 // *****************************************************************************
@@ -44,50 +47,96 @@ module tb_barrel_shifter ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam        W     = 64;
-   localparam        LOG2W = 6;
-   reg               tb_dir;
-   reg               tb_op;
-   reg               tb_shift_t;
-   reg   [LOG2W-1:0] tb_sel;
-   reg   [W-1:0]     tb_in;
-   reg   [W-1:0]     tb_out;
+   localparam              W        = `W;
+   localparam              LOG2W    = `LOG2W;
+   localparam              CNT_SIZE = 1+1+1+`LOG2W+`W;
+   reg                     clk, rst, ena;
+   reg                     err,war;
+   reg   [CNT_SIZE-1:0]    cnt;
+   reg                     tb_dir;
+   reg                     tb_op;
+   reg                     tb_shift_t;
+   reg   [LOG2W-1:0]       tb_sel;
+   reg   signed    [W-1:0] tb_in;
+   reg   signed    [W-1:0] tb_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  [W-1:0]     wire_out;
+   wire  signed    [W-1:0] wire_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Transactors
    // -----------------------------------------------------
+   simlib_clk_osc #(
+      // ----------------------------------------------
+      // Parameters
+      // ----------------------------------------------
+      .CLK_PERIOD_NS    (`SIM_CLK_PERIOD_NS)
+   ) clk_osc (
+      // ----------------------------------------------
+      // Ports in
+      // ----------------------------------------------
+      .stop             (1'b0),
+      // ----------------------------------------------
+      // Ports out
+      // ----------------------------------------------
+      .clk_out          (clk)
+   );
+
+   always @(posedge clk)
+       if (rst) begin
+          cnt <= {CNT_SIZE{1'b0}};
+       end else if (ena) begin
+          cnt <= cnt + 1;
+       end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
+   initial begin
+      $monitor("Time = %8t tb_dir = %b tb_op_x = %b tb_shift_t = %b tb_sel = %d tb_in = %d tb_out = %d wire_out = %d\n",$time, tb_dir, tb_op, tb_shift_t, tb_sel, tb_in, tb_out, wire_out);
+      $dumpfile("../waves/tb_barrel_shifter.vcd");
+      $dumpvars();
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
+   always @(posedge clk) begin
+      if (ena == 1'b1) begin
+         if (tb_out != wire_out) begin
+            $display("\t\t\t\t\t\t    %b", tb_in );
+            $display("\t\t\t\t\t\t    %b", tb_sel);
+            $display("\t\t\t\t\t\t -------------");
+            $display("[%0d] ERROR: Different result!\tExpected result: %b\n\t\t\t\tObtained result: %b\t\t. Instance: %m",$time, tb_out, wire_out);
+            add_error();
+            err = 1'b1;
+            //finish_sim();
+         end
+         else
+            err = 1'b0;
+      end
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
    barrel_shifter #(
-      .W(W),
-      .LOG2W(LOG2W)
+      .W             (W),
+      .LOG2W         (LOG2W)
    ) duv (
-      .dir(tb_dir),
-      .op(tb_op),
-      .shift_t(tb_shift_t),
-      .sel(tb_sel),
-      .in(tb_in),
-      .out(wire_out)
+      .dir           (tb_dir),
+      .op            (tb_op),
+      .shift_t       (tb_shift_t),
+      .sel           (tb_sel),
+      .in            (tb_in),
+      .out           (wire_out)
    );
    // -----------------------------------------------------
 
