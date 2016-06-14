@@ -85,7 +85,9 @@ module barrel_shifter #(
 
    // Select the bit that gets shifted in from the left
    always @(*) begin
-      s = shift_t ? in[W-1] : 1'b0;
+      // If shifting left put 1'b0.
+      // If shifting right and arithmetic put in[W-1] if logic put 1'b0
+      s = dir ? 1'b0 : shift_t ? in[W-1] : 1'b0;
    end
 
    genvar i,j;
