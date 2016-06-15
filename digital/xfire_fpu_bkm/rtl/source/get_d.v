@@ -114,8 +114,10 @@ module get_d #(
       u_i               =  u[W-1:4];
       u_d               =  u[3:0];
       u_negative        =  u[W-1];
-      u_less_than_m1    = &u_i;
-      u_higher_than_p1  =  u_i[0];
+      u_less_than_m1    =  u_i == {W-4{1'b1}};  //&u_i;
+      u_higher_than_p1  =  u_i >= (W-4)'d1;     //u_i[0] & !u_negative;
+      u_range_m1_0      =  u_i == -1;
+      u_range_0_p1      =  u_i == 0;
    end
 
    always @(*) begin
