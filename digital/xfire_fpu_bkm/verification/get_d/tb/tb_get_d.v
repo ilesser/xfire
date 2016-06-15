@@ -28,14 +28,17 @@
 //
 // -----------------------------------------------------------------------------
 
-`define SIM_CLK_PERIOD_NS XXXXX
+`define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`include "XXXXXXXX.vh"
+`define W 8
+
+`include "bkm_defs.vh"
+`include "/home/ilesser/simlib/simlib_defs.vh"
 
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module tb_get_d_n ();
+module tb_get_d ();
 // *****************************************************************************
 
 // *****************************************************************************
@@ -45,58 +48,103 @@ module tb_get_d_n ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   reg  [XXXXX-1:0]  tb_XXXXX;
-   reg  [XXXXX-1:0]  tb_XXXXX;
+   localparam                    W = `W;
+   localparam                    CNT_SIZE = 2 * `W + 1;
+   reg                           clk, rst, ena;
+   reg                           err_x, err_y;
+   reg            [CNT_SIZE-1:0] cnt;
+   reg                           tb_mode;
+   reg   signed   [W-1:0]        tb_u;
+   reg   signed   [W-1:0]        tb_v;
+   reg   signed   [1:0]          tb_d_x;
+   reg   signed   [1:0]          tb_d_y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Testbecnch wiring
+   // Testbench wiring
    // -----------------------------------------------------
-   wire [XXXXX-1:0]  wire_XXXXX;
-   wire [XXXXX-1:0]  wire_XXXXX;
+   wire  signed   [1:0]          res_d_x;
+   wire  signed   [1:0]          res_d_y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Transactors
    // -----------------------------------------------------
-   <transactor_name> <transactor_name> (
-      <port_mapping>
+   simlib_clk_osc #(
+      // ----------------------------------------------
+      // Parameters
+      // ----------------------------------------------
+      .CLK_PERIOD_NS    (`SIM_CLK_PERIOD_NS)
+   ) clk_osc (
+      // ----------------------------------------------
+      // Ports in
+      // ----------------------------------------------
+      .stop             (1'b0),
+      // ----------------------------------------------
+      // Ports out
+      // ----------------------------------------------
+      .clk_out          (clk)
    );
 
-   <transactor_name> <transactor_name> (
-      <port_mapping>
-   );
+   always @(posedge clk)
+       if (rst) begin
+          cnt  <= {2*W+1{1'b0}};
+       end else if (ena) begin
+          cnt <= cnt + 1;
+       end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
-   <monitor_name> <monitor_name> (
-      <port_mapping>
-   );
-
-   <monitor_name> <monitor_name> (
-      <port_mapping>
-   );
+   initial begin
+      $monitor("Time = %8t tb_u = %d tb_v = %d tb_d_x = %d tb_d_y = %d res_d_x = %d res_d_y = %d\n",$time, tb_u, tb_v, tb_d_x, tb_d_y, res_d_x, res_d_y);
+      $dumpfile("../waves/tb_get_d_n.vcd");
+      $dumpvars();
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
-   <checker_name> <checker_name> (
-      <port_mapping>
-   );
+   always @(posedge clk) begin
+      if (ena == 1'b1) begin
+         if (tb_d_x != res_d_x) begin
+            $display("[%0d] ERROR: Different d_x! Expected result: %d \n\t\t\t\t Obtained result: %d\t\t. Instance: %m",$time, tb_d_x, res_d_x);
+            add_error();
+            err_x = 1'b1;
+            //finish_sim();
+         end
+         else
+            err_x = 1'b0;
+      end
+   end
 
-   <checker_name> <checker_name> (
-      <port_mapping>
-   );
+   always @(posedge clk) begin
+      if (ena == 1'b1) begin
+         if (tb_d_y != res_d_y) begin
+            $display("[%0d] ERROR: Different d_y! Expected result: %d \n\t\t\t\t Obtained result: %d\t\t. Instance: %m",$time, tb_d_y, res_d_y);
+            add_error();
+            err_y = 1'b1;
+            //finish_sim();
+         end
+         else
+            err_y = 1'b0;
+      end
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   <block_name> duv (
-      <port_mapping>
+   get_d #(
+      .W(W)
+   ) duv (
+      .mode    (tb_mode),
+      .u       (tb_u),
+      .v       (tb_v),
+      .d_x     (res_d_x),
+      .d_y     (res_d_y)
    );
    // -----------------------------------------------------
 
