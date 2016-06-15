@@ -93,6 +93,16 @@ if [ ${host_name} != "micro0.fi.uba.ar" ]; then
 fi
 # -----------------------------
 
+# ------------------------------------------------------------
+# Set default tool to vcs if in micro0 else to irun
+# ------------------------------------------------------------
+if [ ${host_name} == "micro0.fi.uba.ar" ]; then
+   tool="vcs"
+else
+   tool="irun"
+fi
+# ------------------------------------------------------------
+
 # Default values
 test_name=""
 waves="yes"
@@ -100,7 +110,7 @@ rseed=$(trim "$(od -N4 -An -tu4 /dev/urandom)")  # Generate a random number from
 model="rtl"
 delay="max"
 verbosity="low"
-tool="vcs"
+
 wv_format="vcd"
 path=`pwd`
 block_name=`echo ${path} | gawk '{print $(NF-0)}' FS="/"`
