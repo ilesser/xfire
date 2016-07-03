@@ -1,0 +1,609 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.basic_test.simv.log +TESTSEED=26857634 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Jun  9 23:27 2016
+ucli% run
+
+*******************************************************
+Test Seed:    26857634
+*******************************************************
+
+Time =        0 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 0      0
+
+Time =     6000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      1 tb_s = 0      1 s_res = 0      1
+
+Time =    16000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      2 tb_s = 0      2 s_res = 0      2
+
+Time =    26000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      3 tb_s = 0      3 s_res = 0      3
+
+Time =    36000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      4 tb_s = 0      4 s_res = 0      4
+
+Time =    46000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      5 tb_s = 0      5 s_res = 0      5
+
+Time =    56000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      6 tb_s = 0      6 s_res = 0      6
+
+Time =    66000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      7 tb_s = 0      7 s_res = 0      7
+
+Time =    76000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -1 tb_s = 0     -1 s_res = 0     -1
+
+Time =    86000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -2 tb_s = 0     -2 s_res = 0     -2
+
+Time =    96000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -3 tb_s = 0     -3 s_res = 0     -3
+
+Time =   106000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -4 tb_s = 0     -4 s_res = 0     -4
+
+Time =   116000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -5 tb_s = 0     -5 s_res = 0     -5
+
+Time =   126000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -6 tb_s = 0     -6 s_res = 0     -6
+
+Time =   136000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -7 tb_s = 0     -7 s_res = 0     -7
+
+Time =   146000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -8 tb_s = 0     -8 s_res = 0     -8
+
+Time =   156000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 0      1
+
+Time =   166000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      1 tb_s = 0      2 s_res = 0      2
+
+Time =   176000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      2 tb_s = 0      3 s_res = 0      3
+
+Time =   186000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      3 tb_s = 0      4 s_res = 0      4
+
+Time =   196000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      4 tb_s = 0      5 s_res = 0      5
+
+Time =   206000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      6 s_res = 0      6
+
+Time =   216000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 0      7 s_res = 0      7
+
+Time =   226000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 1      0 s_res = 0     -8
+
+Time =   236000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -1 tb_s = 0      0 s_res = 1      0
+
+Time =   246000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -2 tb_s = 0     -1 s_res = 0     -1
+
+Time =   256000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -3 tb_s = 0     -2 s_res = 0     -2
+
+Time =   266000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -4 tb_s = 0     -3 s_res = 0     -3
+
+Time =   276000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -5 tb_s = 0     -4 s_res = 0     -4
+
+Time =   286000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -6 tb_s = 0     -5 s_res = 0     -5
+
+Time =   296000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -7 tb_s = 0     -6 s_res = 0     -6
+
+Time =   306000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -8 tb_s = 0     -7 s_res = 0     -7
+
+Time =   316000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 0      2
+
+Time =   326000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      1 tb_s = 0      3 s_res = 0      3
+
+Time =   336000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      2 tb_s = 0      4 s_res = 0      4
+
+Time =   346000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      3 tb_s = 0      5 s_res = 0      5
+
+Time =   356000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      4 tb_s = 0      6 s_res = 0      6
+
+Time =   366000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      5 tb_s = 0      7 s_res = 0      7
+
+Time =   376000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      6 tb_s = 0     -8 s_res = 0     -8
+
+Time =   386000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      7 tb_s = 0     -7 s_res = 0     -7
+
+Time =   396000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -1 tb_s = 0      1 s_res = 1      1
+
+Time =   406000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -2 tb_s = 0      0 s_res = 1      0
+
+Time =   416000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -3 tb_s = 0     -1 s_res = 0     -1
+
+Time =   426000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -4 tb_s = 0     -2 s_res = 0     -2
+
+Time =   436000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -5 tb_s = 0     -3 s_res = 0     -3
+
+Time =   446000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -6 tb_s = 0     -4 s_res = 0     -4
+
+Time =   456000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -7 tb_s = 0     -5 s_res = 0     -5
+
+Time =   466000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -8 tb_s = 0     -6 s_res = 0     -6
+
+Time =   476000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 0      3
+
+Time =   486000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      1 tb_s = 0      4 s_res = 0      4
+
+Time =   496000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      2 tb_s = 0      5 s_res = 0      5
+
+Time =   506000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      3 tb_s = 0      6 s_res = 0      6
+
+Time =   516000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      4 tb_s = 0      7 s_res = 0      7
+
+Time =   526000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      5 tb_s = 0     -8 s_res = 0     -8
+
+Time =   536000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      6 tb_s = 0     -7 s_res = 0     -7
+
+Time =   546000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      7 tb_s = 0     -6 s_res = 0     -6
+
+Time =   556000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -1 tb_s = 0      2 s_res = 1      2
+
+Time =   566000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -2 tb_s = 0      1 s_res = 1      1
+
+Time =   576000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -3 tb_s = 0      0 s_res = 1      0
+
+Time =   586000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -4 tb_s = 0     -1 s_res = 0     -1
+
+Time =   596000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -5 tb_s = 0     -2 s_res = 0     -2
+
+Time =   606000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -6 tb_s = 0     -3 s_res = 0     -3
+
+Time =   616000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -7 tb_s = 0     -4 s_res = 0     -4
+
+Time =   626000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -8 tb_s = 0     -5 s_res = 0     -5
+
+Time =   636000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      0 tb_s = 0      4 s_res = 0      4
+
+Time =   646000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      1 tb_s = 0      5 s_res = 0      5
+
+Time =   656000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      2 tb_s = 0      6 s_res = 0      6
+
+Time =   666000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      3 tb_s = 0      7 s_res = 0      7
+
+Time =   676000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      4 tb_s = 0     -8 s_res = 0     -8
+
+Time =   686000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      5 tb_s = 0     -7 s_res = 0     -7
+
+Time =   696000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      6 tb_s = 0     -6 s_res = 0     -6
+
+Time =   706000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      7 tb_s = 0     -5 s_res = 0     -5
+
+Time =   716000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -1 tb_s = 0      3 s_res = 1      3
+
+Time =   726000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -2 tb_s = 0      2 s_res = 1      2
+
+Time =   736000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -3 tb_s = 0      1 s_res = 1      1
+
+Time =   746000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -4 tb_s = 0      0 s_res = 1      0
+
+Time =   756000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -5 tb_s = 0     -1 s_res = 0     -1
+
+Time =   766000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -6 tb_s = 0     -2 s_res = 0     -2
+
+Time =   776000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -7 tb_s = 0     -3 s_res = 0     -3
+
+Time =   786000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -8 tb_s = 0     -4 s_res = 0     -4
+
+Time =   796000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      0 tb_s = 0      5 s_res = 0      5
+
+Time =   806000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      1 tb_s = 0      6 s_res = 0      6
+
+Time =   816000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      2 tb_s = 0      7 s_res = 0      7
+
+Time =   826000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      3 tb_s = 0     -8 s_res = 0     -8
+
+Time =   836000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      4 tb_s = 0     -7 s_res = 0     -7
+
+Time =   846000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      5 tb_s = 0     -6 s_res = 0     -6
+
+Time =   856000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      6 tb_s = 0     -5 s_res = 0     -5
+
+Time =   866000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      7 tb_s = 0     -4 s_res = 0     -4
+
+Time =   876000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -1 tb_s = 0      4 s_res = 1      4
+
+Time =   886000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -2 tb_s = 0      3 s_res = 1      3
+
+Time =   896000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -3 tb_s = 0      2 s_res = 1      2
+
+Time =   906000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -4 tb_s = 0      1 s_res = 1      1
+
+Time =   916000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -5 tb_s = 0      0 s_res = 1      0
+
+Time =   926000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -6 tb_s = 0     -1 s_res = 0     -1
+
+Time =   936000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -7 tb_s = 0     -2 s_res = 0     -2
+
+Time =   946000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -8 tb_s = 0     -3 s_res = 0     -3
+
+Time =   956000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      0 tb_s = 0      6 s_res = 0      6
+
+Time =   966000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      1 tb_s = 0      7 s_res = 0      7
+
+Time =   976000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      2 tb_s = 0     -8 s_res = 0     -8
+
+Time =   986000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      3 tb_s = 0     -7 s_res = 0     -7
+
+Time =   996000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      4 tb_s = 0     -6 s_res = 0     -6
+
+Time =  1006000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      5 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1016000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      6 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1026000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      7 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1036000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -1 tb_s = 0      5 s_res = 1      5
+
+Time =  1046000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -2 tb_s = 0      4 s_res = 1      4
+
+Time =  1056000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -3 tb_s = 0      3 s_res = 1      3
+
+Time =  1066000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -4 tb_s = 0      2 s_res = 1      2
+
+Time =  1076000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -5 tb_s = 0      1 s_res = 1      1
+
+Time =  1086000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -6 tb_s = 0      0 s_res = 1      0
+
+Time =  1096000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -7 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1106000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -8 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1116000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      0 tb_s = 0      7 s_res = 0      7
+
+Time =  1126000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      1 tb_s = 0     -8 s_res = 0     -8
+
+Time =  1136000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      2 tb_s = 0     -7 s_res = 0     -7
+
+Time =  1146000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      3 tb_s = 0     -6 s_res = 0     -6
+
+Time =  1156000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      4 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1166000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      5 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1176000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      6 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1186000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      7 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1196000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -1 tb_s = 0      6 s_res = 1      6
+
+Time =  1206000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -2 tb_s = 0      5 s_res = 1      5
+
+Time =  1216000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -3 tb_s = 0      4 s_res = 1      4
+
+Time =  1226000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -4 tb_s = 0      3 s_res = 1      3
+
+Time =  1236000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -5 tb_s = 0      2 s_res = 1      2
+
+Time =  1246000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -6 tb_s = 0      1 s_res = 1      1
+
+Time =  1256000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -7 tb_s = 0      0 s_res = 1      0
+
+Time =  1266000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -8 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1276000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      0 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1286000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+Time =  1296000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+Time =  1306000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      3 tb_s = 0      2 s_res = 1      2
+
+Time =  1316000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      4 tb_s = 0      3 s_res = 1      3
+
+Time =  1326000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      5 tb_s = 0      4 s_res = 1      4
+
+Time =  1336000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      6 tb_s = 0      5 s_res = 1      5
+
+Time =  1346000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      7 tb_s = 0      6 s_res = 1      6
+
+Time =  1356000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -1 tb_s = 0     -2 s_res = 1     -2
+
+Time =  1366000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -2 tb_s = 0     -3 s_res = 1     -3
+
+Time =  1376000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -3 tb_s = 0     -4 s_res = 1     -4
+
+Time =  1386000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -4 tb_s = 0     -5 s_res = 1     -5
+
+Time =  1396000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -5 tb_s = 0     -6 s_res = 1     -6
+
+Time =  1406000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -6 tb_s = 0     -7 s_res = 1     -7
+
+Time =  1416000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -7 tb_s = 0     -8 s_res = 1     -8
+
+Time =  1426000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -8 tb_s = 0      7 s_res = 1      7
+
+Time =  1436000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      0 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1446000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      1 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1456000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+Time =  1466000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      3 tb_s = 0      1 s_res = 1      1
+
+Time =  1476000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      4 tb_s = 0      2 s_res = 1      2
+
+Time =  1486000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      5 tb_s = 0      3 s_res = 1      3
+
+Time =  1496000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      6 tb_s = 0      4 s_res = 1      4
+
+Time =  1506000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      7 tb_s = 0      5 s_res = 1      5
+
+Time =  1516000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -1 tb_s = 0     -3 s_res = 1     -3
+
+Time =  1526000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -2 tb_s = 0     -4 s_res = 1     -4
+
+Time =  1536000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -3 tb_s = 0     -5 s_res = 1     -5
+
+Time =  1546000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -4 tb_s = 0     -6 s_res = 1     -6
+
+Time =  1556000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -5 tb_s = 0     -7 s_res = 1     -7
+
+Time =  1566000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -6 tb_s = 0     -8 s_res = 1     -8
+
+Time =  1576000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -7 tb_s = 0      7 s_res = 1      7
+
+Time =  1586000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -8 tb_s = 0      6 s_res = 1      6
+
+Time =  1596000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      0 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1606000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      1 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1616000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      2 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1626000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+Time =  1636000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      4 tb_s = 0      1 s_res = 1      1
+
+Time =  1646000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      5 tb_s = 0      2 s_res = 1      2
+
+Time =  1656000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      6 tb_s = 0      3 s_res = 1      3
+
+Time =  1666000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      7 tb_s = 0      4 s_res = 1      4
+
+Time =  1676000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -1 tb_s = 0     -4 s_res = 1     -4
+
+Time =  1686000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -2 tb_s = 0     -5 s_res = 1     -5
+
+Time =  1696000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -3 tb_s = 0     -6 s_res = 1     -6
+
+Time =  1706000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -4 tb_s = 0     -7 s_res = 1     -7
+
+Time =  1716000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -5 tb_s = 0     -8 s_res = 1     -8
+
+Time =  1726000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -6 tb_s = 0      7 s_res = 1      7
+
+Time =  1736000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -7 tb_s = 0      6 s_res = 1      6
+
+Time =  1746000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -8 tb_s = 0      5 s_res = 1      5
+
+Time =  1756000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      0 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1766000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      1 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1776000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      2 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1786000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      3 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1796000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      4 tb_s = 0      0 s_res = 1      0
+
+Time =  1806000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      5 tb_s = 0      1 s_res = 1      1
+
+Time =  1816000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      6 tb_s = 0      2 s_res = 1      2
+
+Time =  1826000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      7 tb_s = 0      3 s_res = 1      3
+
+Time =  1836000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -1 tb_s = 0     -5 s_res = 1     -5
+
+Time =  1846000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -2 tb_s = 0     -6 s_res = 1     -6
+
+Time =  1856000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -3 tb_s = 0     -7 s_res = 1     -7
+
+Time =  1866000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -4 tb_s = 0     -8 s_res = 1     -8
+
+Time =  1876000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -5 tb_s = 0      7 s_res = 1      7
+
+Time =  1886000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -6 tb_s = 0      6 s_res = 1      6
+
+Time =  1896000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -7 tb_s = 0      5 s_res = 1      5
+
+Time =  1906000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -8 tb_s = 0      4 s_res = 1      4
+
+Time =  1916000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      0 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1926000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      1 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1936000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      2 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1946000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      3 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1956000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      4 tb_s = 0     -1 s_res = 0     -1
+
+Time =  1966000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      5 tb_s = 0      0 s_res = 1      0
+
+Time =  1976000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      6 tb_s = 0      1 s_res = 1      1
+
+Time =  1986000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      7 tb_s = 0      2 s_res = 1      2
+
+Time =  1996000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -1 tb_s = 0     -6 s_res = 1     -6
+
+Time =  2006000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -2 tb_s = 0     -7 s_res = 1     -7
+
+Time =  2016000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -3 tb_s = 0     -8 s_res = 1     -8
+
+Time =  2026000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -4 tb_s = 0      7 s_res = 1      7
+
+Time =  2036000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -5 tb_s = 0      6 s_res = 1      6
+
+Time =  2046000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -6 tb_s = 0      5 s_res = 1      5
+
+Time =  2056000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -7 tb_s = 0      4 s_res = 1      4
+
+Time =  2066000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -8 tb_s = 0      3 s_res = 1      3
+
+Time =  2076000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      0 tb_s = 0     -6 s_res = 0     -6
+
+Time =  2086000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      1 tb_s = 0     -5 s_res = 0     -5
+
+Time =  2096000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      2 tb_s = 0     -4 s_res = 0     -4
+
+Time =  2106000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      3 tb_s = 0     -3 s_res = 0     -3
+
+Time =  2116000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      4 tb_s = 0     -2 s_res = 0     -2
+
+Time =  2126000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      5 tb_s = 0     -1 s_res = 0     -1
+
+Time =  2136000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      6 tb_s = 0      0 s_res = 1      0
+
+Time =  2146000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      7 tb_s = 0      1 s_res = 1      1
+
+Time =  2156000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -1 tb_s = 0     -7 s_res = 1     -7
+
+Time =  2166000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -2 tb_s = 0     -8 s_res = 1     -8
+
+Time =  2176000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -3 tb_s = 0      7 s_res = 1      7
+
+Time =  2186000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -4 tb_s = 0      6 s_res = 1      6
+
+Time =  2196000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -5 tb_s = 0      5 s_res = 1      5
+
+Time =  2206000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -6 tb_s = 0      4 s_res = 1      4
+
+Time =  2216000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -7 tb_s = 0      3 s_res = 1      3
+
+Time =  2226000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -8 tb_s = 0      2 s_res = 1      2
+
+Time =  2236000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      0 tb_s = 0     -7 s_res = 0     -7
+
+Time =  2246000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      1 tb_s = 0     -6 s_res = 0     -6
+
+Time =  2256000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      2 tb_s = 0     -5 s_res = 0     -5
+
+Time =  2266000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      3 tb_s = 0     -4 s_res = 0     -4
+
+Time =  2276000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      4 tb_s = 0     -3 s_res = 0     -3
+
+Time =  2286000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      5 tb_s = 0     -2 s_res = 0     -2
+
+Time =  2296000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      6 tb_s = 0     -1 s_res = 0     -1
+
+Time =  2306000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      7 tb_s = 0      0 s_res = 1      0
+
+Time =  2316000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -1 tb_s = 0     -8 s_res = 1     -8
+
+Time =  2326000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -2 tb_s = 0      7 s_res = 1      7
+
+Time =  2336000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -3 tb_s = 0      6 s_res = 1      6
+
+Time =  2346000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -4 tb_s = 0      5 s_res = 1      5
+
+Time =  2356000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -5 tb_s = 0      4 s_res = 1      4
+
+Time =  2366000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -6 tb_s = 0      3 s_res = 1      3
+
+Time =  2376000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -7 tb_s = 0      2 s_res = 1      2
+
+Time =  2386000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -8 tb_s = 0      1 s_res = 1      1
+
+Time =  2396000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      0 tb_s = 0     -8 s_res = 0     -8
+
+Time =  2406000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      1 tb_s = 0     -7 s_res = 0     -7
+
+Time =  2416000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      2 tb_s = 0     -6 s_res = 0     -6
+
+Time =  2426000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      3 tb_s = 0     -5 s_res = 0     -5
+
+Time =  2436000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      4 tb_s = 0     -4 s_res = 0     -4
+
+Time =  2446000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      5 tb_s = 0     -3 s_res = 0     -3
+
+Time =  2456000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      6 tb_s = 0     -2 s_res = 0     -2
+
+Time =  2466000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      7 tb_s = 0     -1 s_res = 0     -1
+
+Time =  2476000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -1 tb_s = 0      7 s_res = 1      7
+
+Time =  2486000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -2 tb_s = 0      6 s_res = 1      6
+
+Time =  2496000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -3 tb_s = 0      5 s_res = 1      5
+
+Time =  2506000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -4 tb_s = 0      4 s_res = 1      4
+
+Time =  2516000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -5 tb_s = 0      3 s_res = 1      3
+
+Time =  2526000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -6 tb_s = 0      2 s_res = 1      2
+
+Time =  2536000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -7 tb_s = 0      1 s_res = 1      1
+
+Time =  2546000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -8 tb_s = 0      0 s_res = 1      0
+
+Time =  2556000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 1      1
+
+Time =  2566000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+Time =  2576000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      2 tb_s = 0     -1 s_res = 0     -1
+
+Time =  2586000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      3 tb_s = 0     -2 s_res = 0     -2
+
+Time =  2596000 subb_a = 0 subb_b = 1 tb_a =      1 tb_b =      4 tb_s = 0     -3 s_res = 0     -3
+
+Time =  2606000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 1      2
+
+Time =  2616000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      1 tb_s = 0      1 s_res = 1      1
+
+Time =  2626000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+Time =  2636000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      3 tb_s = 0     -1 s_res = 0     -1
+
+Time =  2646000 subb_a = 0 subb_b = 1 tb_a =      2 tb_b =      4 tb_s = 0     -2 s_res = 0     -2
+
+Time =  2656000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 1      3
+
+Time =  2666000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      1 tb_s = 0      2 s_res = 1      2
+
+Time =  2676000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+Time =  2686000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+Time =  2696000 subb_a = 0 subb_b = 1 tb_a =      3 tb_b =      4 tb_s = 0     -1 s_res = 0     -1
+
+Time =  2706000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      0 tb_s = 0     -1 s_res = 1     -1
+
+Time =  2716000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      1 tb_s = 0     -2 s_res = 1     -2
+
+Time =  2726000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      2 tb_s = 0     -3 s_res = 1     -3
+
+Time =  2736000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      3 tb_s = 0     -4 s_res = 1     -4
+
+Time =  2746000 subb_a = 1 subb_b = 1 tb_a =      1 tb_b =      4 tb_s = 0     -5 s_res = 1     -5
+
+Time =  2756000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      0 tb_s = 0     -2 s_res = 1     -2
+
+Time =  2766000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      1 tb_s = 0     -3 s_res = 1     -3
+
+Time =  2776000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      2 tb_s = 0     -4 s_res = 1     -4
+
+Time =  2786000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      3 tb_s = 0     -5 s_res = 1     -5
+
+Time =  2796000 subb_a = 1 subb_b = 1 tb_a =      2 tb_b =      4 tb_s = 0     -6 s_res = 1     -6
+
+Time =  2806000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      0 tb_s = 0     -3 s_res = 1     -3
+
+Time =  2816000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      1 tb_s = 0     -4 s_res = 1     -4
+
+Time =  2826000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      2 tb_s = 0     -5 s_res = 1     -5
+
+Time =  2836000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      3 tb_s = 0     -6 s_res = 1     -6
+
+Time =  2846000 subb_a = 1 subb_b = 1 tb_a =      3 tb_b =      4 tb_s = 0     -7 s_res = 1     -7
+
+
+
+TIME     : 2856
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 26857634
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_add_subb.v", line 295.
+$finish at simulation time              2856000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2856000 ps
+CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
+Thu Jun  9 23:27:24 2016
