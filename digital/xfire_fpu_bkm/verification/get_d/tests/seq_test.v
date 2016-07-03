@@ -57,8 +57,8 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**(2*`W+1))
-      //repeat(2**8)
+      //repeat(2**(2*`W+1))
+      repeat(2**8)
       begin
 
          tb_mode     = cnt[2*`W];
