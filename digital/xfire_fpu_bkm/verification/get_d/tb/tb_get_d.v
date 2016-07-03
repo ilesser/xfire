@@ -50,7 +50,8 @@ module tb_get_d ();
    // -----------------------------------------------------
    localparam                    W = `W;
    localparam                    CNT_SIZE = 2 * `W + 1;
-   reg                           clk, rst, ena;
+   wire                          clk; 
+   reg				 rst, ena;
    reg                           err_x, err_y;
    reg            [CNT_SIZE-1:0] cnt;
    reg                           tb_mode;
