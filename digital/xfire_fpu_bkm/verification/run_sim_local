@@ -98,8 +98,12 @@ fi
 # ------------------------------------------------------------
 if [ ${host_name} == "micro0.fi.uba.ar" ]; then
    tool="vcs"
-else
+elif [ ${host_name} == "zenbook" ]; then
+   tool="iverilog"
+elif [ ${host_name} == "ilesser-l" ]; then
    tool="irun"
+else
+   tool="iverilog"
 fi
 # ------------------------------------------------------------
 
@@ -659,18 +663,21 @@ if [ "${tool}" == "modelsim"  ]; then
 fi
 
 if [ "${tool}" == "iverilog"  ]; then
-#    iverilog \
-#       -g2001 \
-#       -Wall \
-#       $iverilog_defines \
-#       -I ./temp \
-#       -I ../../../rtl/source/ \
-#       $temp_v_list \
-#       -o ./waves/run.out
-   echo "ERROR: Iverilog tool not supported yet."
-   echo ""
-   echo ""
-   exit
+    temp_v_list=`find ./temp/ -type f -name "tb_*.v"`
+    temp_v_list=`find ./temp/ -type f -name "*.v"`
+#temp_v_list="./temp/tb_add_subb.v ./temp/add_subb.v ./temp/simlib_clk_osc.v"
+temp_v_list="./temp/tb_get_d.v ./temp/get_d.v ./temp/simlib_clk_osc.v"
+    iverilog \
+       -g2001 \
+       -Wall \
+       $iverilog_defines \
+       -I ./temp \
+       -I ../../../rtl/source/ \
+       $temp_v_list \
+       -o ./temp/run.out
+
+   cd ./temp
+   ./run.out
 fi
 
 if [ "${tool}" == "vcs" ]; then
