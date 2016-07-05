@@ -95,14 +95,14 @@ module multiply_by_d #(
    wire  [W-1:0]        y_dx_dy;
    reg   [W:0]          cx_dx;
    reg   [W:0]          cy_dx;
-   reg   [W-1:0]        x_dx_inv;
-   reg   [W-1:0]        y_dx_inv;
+   reg   [W-1:0]        x_dx_xor;
+   reg   [W-1:0]        y_dx_xor;
    reg   [W-1:0]        x_dx;
    reg   [W-1:0]        y_dx;
    reg   [W:0]          cx_dy;
    reg   [W:0]          cy_dy;
-   reg   [W-1:0]        x_dy_inv;
-   reg   [W-1:0]        y_dy_inv;
+   reg   [W-1:0]        x_dy_xor;
+   reg   [W-1:0]        y_dy_xor;
    reg   [W-1:0]        x_dy;
    reg   [W-1:0]        y_dy;
    // -----------------------------------------------------
@@ -121,7 +121,7 @@ module multiply_by_d #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // If dx != 0 ^ dy == 0 then
+   // If dx != 0 ^ dy != 0 then
    // z * d = z_dx_dy = (x dx - y dy) + j (x dy + y dx)
    // -----------------------------------------------------
    add_subb #(
@@ -180,11 +180,11 @@ module multiply_by_d #(
          always @(*) begin
             // Ripple carry adder to invert and add 1
             // Invert a and b depending on subb_a and subb_b
-            x_dx_inv[i] = x_in[i] ^ d_x_sign;
-            y_dx_inv[i] = y_in[i] ^ d_x_sign;
+            x_dx_xor[i] = x_in[i] ^ d_x_sign;
+            y_dx_xor[i] = y_in[i] ^ d_x_sign;
 
-            {cx_dx[i+1], x_dx[i]} = x_dx_inv[i] + cx_dx[i];
-            {cy_dx[i+1], y_dx[i]} = y_dx_inv[i] + cy_dx[i];
+            {cx_dx[i+1], x_dx[i]} = x_dx_xor[i] + cx_dx[i];
+            {cy_dx[i+1], y_dx[i]} = y_dx_xor[i] + cy_dx[i];
          end
       end
    endgenerate
@@ -195,20 +195,20 @@ module multiply_by_d #(
    // z * d = z_dy = (-y + j x) dy
    // -----------------------------------------------------
    always @(*) begin
-      cx_dy[0] =~d_y_sign;
-      cy_dy[0] = d_y_sign;
+      cx_dy[0] =~d_y_sign; //1
+      cy_dy[0] = d_y_sign; //0
    end
 
    generate
       for (i=0; i < W; i=i+1) begin
          always @(*) begin
             // Ripple carry adder to invert and add 1
-            // Invert a and b depending on subb_a and subb_b
-            x_dy_inv[i] = y_in[i] ^ ~d_y_sign;
-            y_dy_inv[i] = x_in[i] ^  d_y_sign;
+            // Invert x_dy and y_dy depending on the sign of dy
+            x_dy_xor[i] = y_in[i] ^ ~d_y_sign;  // ^ 1 == inv
+            y_dy_xor[i] = x_in[i] ^  d_y_sign;  // ^ 0 == buff
 
-            {cx_dy[i+1], x_dy[i]} = y_dy_inv[i] + cx_dy[i];
-            {cy_dy[i+1], y_dy[i]} = x_dy_inv[i] + cy_dy[i];
+            {cx_dy[i+1], x_dy[i]} = x_dy_xor[i] + cx_dy[i];
+            {cy_dy[i+1], y_dy[i]} = y_dy_xor[i] + cy_dy[i];
          end
       end
    endgenerate
@@ -221,19 +221,31 @@ module multiply_by_d #(
    // z * d = z_dy    = (-y + j x) dy                     if dx == 0 ^ dy != 0
    // -----------------------------------------------------
    always @(*) begin
-      casex({d_x,d_y})
+      case({d_x,d_y})
          // d is 0
-         4'bX0X0: begin
+         4'b0000, // dx = +0, dy = +0
+         4'b0010, // dx = +0, dy = -0
+         4'b1000, // dx = -0, dy = +0
+         4'b1010: // dx = -0, dy = -0
+                  begin
                      x_out = {W{1'b0}};
                      y_out = {W{1'b0}};
                   end
          // d has only imaginary part
-         4'bX0X1: begin
+         4'b0001, // dx = +0, dy = +1
+         4'b0011, // dx = +0, dy = -1
+         4'b1001, // dx = -0, dy = +1
+         4'b1011: // dx = -0, dy = -1
+                  begin
                      x_out = x_dy;
                      y_out = y_dy;
                   end
          // d has only real part
-         4'bX1X0: begin
+         4'b0100, // dx = +1, dy = +0
+         4'b0110, // dx = +1, dy = -0
+         4'b1100, // dx = -1, dy = +0
+         4'b1110: // dx = -1, dy = -0
+                  begin
                      x_out = x_dx;
                      y_out = y_dx;
                   end
