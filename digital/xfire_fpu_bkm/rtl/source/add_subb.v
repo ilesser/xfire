@@ -114,25 +114,6 @@ module add_subb #(
    // Combinational logic
    // -----------------------------------------------------
 
-// TODO: change architecture to remove this always block to
-//       use bitwise XOR inversion plus some half adders for
-//       the carries.
-
-//   always @(*) begin
-//      if (subb_a == 1'b1) begin
-//         a_inv = ~a+1;
-//      end
-//      else begin
-//         a_inv = a;
-//      end
-//      if (subb_b == 1'b1) begin
-//         b_inv = ~b+1;
-//      end
-//      else begin
-//         b_inv = b;
-//      end
-//   end
-
    // Initial values
    always @(*) begin
       cc[0]  = subb_a;
