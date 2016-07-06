@@ -29,6 +29,8 @@
 // ------
 // Z = L
 // w = 2^1 * (E-1)
+// Z_{n+1} = Z_n - ln(1 + d_n * 2^-n)
+// w_{n+1} = 2 * [ w_n + d_n + d_n * w_n * 2^-n ]
 //
 //                           -n
 // Z     = Z  - ln(1 + d  * 2   )
@@ -62,7 +64,6 @@
 //    - srst      : Active high synchronous reset (logic, 1 bit).
 //
 //  Data inputs:
-//    - start     : Active high start strobe signal (logic, 1 bit).
 //    - mode      : Operation mode (logic, 1 bit).
 //    - format    : Format code (logic, 2 bits).   FF
 //                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
@@ -104,8 +105,8 @@ module bkm_step #(
     // ----------------------------------
     parameter W      = 64,
     parameter LOG2W  = 6,
-    parameter N      = 64,
-    parameter LOG2N  = 6
+    parameter N      = 64,    // TODO: delete??
+    parameter LOG2N  = 6      // TODO: delete??
   ) (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -117,14 +118,18 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    input wire                start,
     input wire                mode,
     input wire [1:0]          format,
-    input wire [LOG2W-1:0]    n,
+    input wire [LOG2N-1:0]    n,
+    input wire [3:0]          d_n,        // d_n is encoded in ones complement
     input wire [2*W-1:0]      X_n,
     input wire [2*W-1:0]      Y_n,
+    input wire [2*W-1:0]      lut_X,
+    input wire [2*W-1:0]      lut_Y,
     input wire [W-1:0]        u_n,
     input wire [W-1:0]        v_n,
+    input wire [W-1:0]        lut_u,
+    input wire [W-1:0]        lut_v,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -143,7 +148,6 @@ module bkm_step #(
    // Internal signals
    // -----------------------------------------------------
    // For the data path
-   wire  [3:0]          d_n;        // d_n is encoded in ones complement
    wire  [1:0]          d_n_x;
    wire  [1:0]          d_n_y;
    wire                 d_n_data_x;
@@ -158,8 +162,6 @@ module bkm_step #(
    reg   [2*W-1:0]      a_y;
    reg   [2*W-1:0]      b_x;
    reg   [2*W-1:0]      b_y;
-   wire  [2*W-1:0]      lut_x;
-   wire  [2*W-1:0]      lut_y;
    wire  [2*W-1:0]      X_n_shifted;
    wire  [2*W-1:0]      Y_n_shifted;
    wire  [2*W-1:0]      X_n_shifted_times_d_n;
@@ -185,8 +187,6 @@ module bkm_step #(
    reg   [W-1:0]        a_v;
    reg   [W-1:0]        b_u;
    reg   [W-1:0]        b_v;
-   wire  [W-1:0]        lut_u;
-   wire  [W-1:0]        lut_v;
    wire  [W-1:0]        u_n_times_d_n;
    wire  [W-1:0]        v_n_times_d_n;
    wire                 c_u;
@@ -325,8 +325,8 @@ module bkm_step #(
                      sign_b_y = 1'b1;  // substract
                      a_x      = X_n;
                      a_y      = Y_n;
-                     b_x      = lut_x;
-                     b_y      = lut_y;
+                     b_x      = lut_X;
+                     b_y      = lut_Y;
                   end
          default:
                   begin
