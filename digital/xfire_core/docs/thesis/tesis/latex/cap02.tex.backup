@@ -58,7 +58,7 @@ En la figura \ref{fig:C02-primer_circuito_integrado} puede verse el primer circu
   \label{fig:C02-primer_circuito_integrado}
 \end{figure}
 
-La ley de Moore, no es una ley en el sentido científico, sino más bien una observación del ritmo de avance de la industria de aquellos momentos. Al momento de publicar esas declaraciones, Moore trabajaba en los Laboratorios de \emph{Fairchild Semiconductor}, donde trabajaba junto a Robert Noyce. Ellos fueron los fundadores de Intel en 1968. El ritmo de crecimiento de la insdustria de los Semiconductores dió lugar así, entre otras cosas, a la creación de los microprocesadores.
+La ley de Moore, no es una ley en el sentido científico, sino más bien una observación del ritmo de avance de la industria de aquellos momentos. Al momento de publicar esas declaraciones, Moore trabajaba en los Laboratorios de Fairchild Semiconductor, donde trabajaba junto a Robert Noyce. Ellos fueron los fundadores de Intel en 1968. El ritmo de crecimiento de la insdustria de los Semiconductores dió lugar así, entre otras cosas, a la creación de los microprocesadores.
 
 \subsection{Microprocesadores}
 
@@ -72,8 +72,8 @@ En 1968, la armada de los Estados Unidos le encomienda a la empresa Garret Air R
   \centering
   \includegraphics[scale=0.5]{./figures/C02-f14_tomcat}
   \captionsetup{justification=centering}
-  \caption{Primer circuito integrado presentado por Texas Instruments, Inc. el 12 de Septiembre de 1958}
-  \label{fig:C02-primer_circuito_integrado}
+  \caption{Grumman F14 Tomcat, avión de combate de la US Navy cuyos sistemas de vuelo eran controlados por la CADC.}
+  \label{fig:C02-f14_tomcat}
 \end{figure}
 
 
@@ -81,14 +81,78 @@ En 1968, la armada de los Estados Unidos le encomienda a la empresa Garret Air R
 
 Un diseño de Lee Boysel\footnote{Nota sobre Lee Boysel} que data del año 1969 dentro de Texas Instruments\footnote{Nota sobre TI}, era un componente de una implementación en partes de un microprocesador de 24 bits, compuesto por tres chips iguales: AL1. Durante un juicio por patentes, se demostró que una sóla AL1 junto con memorias ROM y RAM e I/O era capaz de funcionar como CPU.
 
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{./figures/C02-al1}
+  \captionsetup{justification=centering}
+  \caption{Imágen microscópica de la AL1 desarrollada por Four-Phase Systems Inc..}
+  \label{fig:C02-al1}
+\end{figure}
+
+
 \subsubsection{Pico/General Instruments}
 
-En 1971, Pico y General Instruments (GI) colaboraron en el diseño de circuitos integrados con el objetivo de fabricar una implementación de un diseño de \emph{chip} único para la calculadora Monroe/Litton Royal Digital III Calcultator. Integraba en el mismo \emph{chip}, memoria ROM y RAM. Pico era un emprendimiento de cinco ingenieros de diseño de GI, que tenían la visión de crear esta arquitectura en un único \emph{chip}. Contaban con experiencia previa en diseños de \emph{chipsets} tanto de GI como de Marconi-Elliot\footnote{Nota sobre Marconi-Elliot}. Algunos de ellos habían trabajado para Elliot Automation para crear una computadora de 8 bits en tecnología MOS, y habían ayudado a establecer un laboratorio de investigación en tecnologías MOS en Escocia en el año 1967. El mercado de las calculadoras estaba en pleno auge, con lo cuál estos diseños supusieron un éxito comercial para Pico y GI. GI, por su parte continuó con la innovación en microprocesadores microcontroladores\footnote{Nota sobre diferencia entre microprocesador y microcontrolador} y la división GI Microelectronics se convirtió en 1987 en Microchip PIC microcontroller.
+En 1971, Pico y General Instruments (GI) colaboraron en el diseño de circuitos integrados con el objetivo de fabricar una implementación de un diseño de \emph{chip} único para la calculadora Monroe/Litton Royal Digital III Calcultator. Integraba en el mismo \emph{chip}, memoria ROM y RAM llamado PICO1/GI250. Pico era un emprendimiento de cinco ingenieros de diseño de GI, que tenían la visión de crear esta arquitectura en un único \emph{chip}. Contaban con experiencia previa en diseños de \emph{chipsets} tanto de GI como de Marconi-Elliot\footnote{Nota sobre Marconi-Elliot}. Algunos de ellos habían trabajado para Elliot Automation para crear una computadora de 8 bits en tecnología MOS, y habían ayudado a establecer un laboratorio de investigación en tecnologías MOS en Escocia en el año 1967. El mercado de las calculadoras estaba en pleno auge, con lo cuál estos diseños supusieron un éxito comercial para Pico y GI. GI, por su parte continuó con la innovación en microprocesadores microcontroladores\footnote{Nota sobre diferencia entre microprocesador y microcontrolador} y la división GI Microelectronics se convirtió en 1987 en Microchip PIC microcontroller.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{./figures/C02-pico1_gi250}
+  \captionsetup{justification=centering}
+  \caption{Imágen microscópica del PICO1/GI250- Desarrollo colaborativo entre Pico y General Instruments de \emph{chip} único para la Monroe/Litton Royal Digital III Calcultator.}
+  \label{fig:C02-pico1_gi250}
+\end{figure}
 
 \subsubsection{Intel 4004}
 
-El Intel 4004 es generalmente el reconocido como el primer microprocesador comercial disponible en el mercado. El primer anuncio respecto de este dispositivo data del 15 de Noviembre de 1971, en la publicación Electronic News\footnote{Nota sobre Electronic News}. El diseño nace a partir del requerimiento de una compañía japonesa fabricante de calculadoras llamado Busicom\footnote{Nota sobre Busicom}, que le encomienda a Intel la tarea de desarrollar un \emph{chipset} para calculadoras de escritorio de alto rendimiento. El diseño original requerido por Busicom especificaba un \emph{chipset} compuesto por 7 \emph{chips} diferentes para la realización de una CPU de propósito específico cuyo programa estuviera almacenado en una ROM y sus datos guardados memoria de lectura y escritura implementada con registros de desplazamiento. Intel le asignó el proyecto a Ted Hoff\footnote{Nota sobre Ted Hoff}, quien propuso simplificar el diseño utilizando almacenamiento en memoria RAM dinámica y una arquitectura de CPU de propósito general. El diseño propuesto por Hoff implementaba la solución en 4 \emph{chips}: uno de ROM para almacenar el programa, uno de RAM dinámica para almacenar los datos, un dispositivo sencillo de I/O y una CPU de 4 bits. A pesar de no ser específicamente un diseñador de circuitos integrados, el supuso que se podía integrar todo el CPU en un único \emph{chip}. Estas especificaciones surgieron de la interacción de Hoff con un empleado a su cargo, el ingeniero de software llamado Stanley Mazor\footnote{Nota sobre Stanley Mazor} y un ingeniero de Busicom llamado Masatoshi Shima\footnote{Nota sobre Masatoshi Shima}. Este proyecto se llamó MCS-4 y no fué hasta que Intel contratara al italiano Federico Faggin\emph{Nota sobre Federico Faggin} que empezó a tomar su forma definitiva. Faggin venía de desarollar en 1968 en Fairchild Semiconductor una teconología de compuertas de silicio (SGT o \emph{Silicon Gate Technology}\footnote{Nota sobre SGT, o también llamada Self-aligned Gate}), técnica que se sigue aplicando hoy en día. Faggin también era responsable del desarrollo de la técnica llamada \emph{Random Logic} que permitió la síntesis de descripciones complejas de lógica en hardware sencillo, como compuertas AND y OR. En el momento en el que se estaba desarrollando el proyecto MCS-4, el responsable del área de diseño de MOS de Intel era Leslie L. Vadász, cuya atención estaba enfocada en el mercado de memorias. Fue gracias a esto que le otorgó el liderazgo del proyecto MCS-4 a Faggin, quien fue finalmente el responsable de llevar el proyecto hasta la concepción final del 4004 gracias a la aplicación de las técnicas de diseño y fabricación antes mencionadas. Las primeras unidades del 4004 fueron entregadas a Busicom en Marzo de 1971.
+El Intel 4004 es generalmente el reconocido como el primer microprocesador comercial disponible en el mercado. El primer anuncio respecto de este dispositivo data del 15 de Noviembre de 1971, en la publicación Electronic News\footnote{Nota sobre Electronic News}. El diseño nace a partir del requerimiento de una compañía japonesa fabricante de calculadoras llamado Busicom\footnote{Nota sobre Busicom}, que le encomienda a Intel la tarea de desarrollar un \emph{chipset} para calculadoras de escritorio de alto rendimiento. El diseño original requerido por Busicom especificaba un \emph{chipset} compuesto por 7 \emph{chips} diferentes para la realización de una CPU de propósito específico cuyo programa estuviera almacenado en una ROM y sus datos guardados memoria de lectura y escritura implementada con registros de desplazamiento. Intel le asignó el proyecto a Ted Hoff\footnote{Nota sobre Ted Hoff}, quien propuso simplificar el diseño utilizando almacenamiento en memoria RAM dinámica y una arquitectura de CPU de propósito general. El diseño propuesto por Hoff implementaba la solución en 4 \emph{chips}: uno de ROM para almacenar el programa, uno de RAM dinámica para almacenar los datos, un dispositivo sencillo de I/O y una CPU de 4 bits. A pesar de no ser específicamente un diseñador de circuitos integrados, el supuso que se podía integrar todo el CPU en un único \emph{chip}. Estas especificaciones surgieron de la interacción de Hoff con un empleado a su cargo, el ingeniero de software llamado Stanley Mazor\footnote{Nota sobre Stanley Mazor} y un ingeniero de Busicom llamado Masatoshi Shima\footnote{Nota sobre Masatoshi Shima}. Este proyecto se llamó MCS-4 y no fué hasta que Intel contratara al italiano Federico Faggin\footnote{Nota sobre Federico Faggin} que empezó a tomar su forma definitiva. Faggin venía de desarollar en 1968 en Fairchild Semiconductor una teconología de compuertas de silicio (SGT o \emph{Silicon Gate Technology}\footnote{Nota sobre SGT, o también llamada Self-aligned Gate}), técnica que se sigue aplicando hoy en día. Faggin también era responsable del desarrollo de la técnica llamada \emph{Random Logic} que permitió la síntesis de descripciones complejas de lógica en hardware sencillo, como compuertas AND y OR. En el momento en el que se estaba desarrollando el proyecto MCS-4, el responsable del área de diseño de MOS de Intel era Leslie L. Vadász, cuya atención estaba enfocada en el mercado de memorias. Fue gracias a esto que le otorgó el liderazgo del proyecto MCS-4 a Faggin, quien fue finalmente el responsable de llevar el proyecto hasta la concepción final del 4004 gracias a la aplicación de las técnicas de diseño y fabricación antes mencionadas. Las primeras unidades del 4004 fueron entregadas a Busicom en Marzo de 1971.
 
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{./figures/C02-intel_4004}
+  \captionsetup{justification=centering}
+  \caption{Encapsulado del Intel 4004; que es considerado el primer microprocesador comercial en ser introducido en el mercado.}
+  \label{fig:C02-intel_4004}
+\end{figure}
+
+\section{Evolución hacia las arquitecturas modernas}
+
+En esta sección se estudian las distintas clasificaciones de arquitecturas existentes hoy en día. Luego se detallarán diversas arquitecturas existentes y se las enmarcará dentro de dichas clasificaciones, destacando virtudes y defectos de cada una.
+
+\subsection{Clasificación de las arquitecturas según el acceso a la memoria de instrucciones y datos}
+
+Las instrucciones que ejecuta el procesador, al igual que los datos del programa en ejecución, deben residir en la memoria. De este hecho se desprende que existen -al menos- dos tipos de memorias: de instrucciones, y de datos. El acceso a estas dos memorias puede realizarse a través del mismo \emph{bus}\footnote{Bus: definir bus} o con \emph{buses} separados. Los nombres que la historia les ha provisto a estos dos posibles enfoques, son \emph{von Neumann} para las arquitecturas de \emph{bus} único y \emph{Hardvard} para aquellas de \emph{buses} separados.
+
+\subsubsection{Arquitectura von Neumann}
+
+También conocida como modelo de von Neumann y arquitectura Princeton, este tipo de arquitectura debe su nombre a John von Neumann\footnote{Nota sobre el chango}, quién en el año 1945 describió en el documento inconcluso conocido como \emph{First Draft of a Report on the EDVAC} una arquitectura de computadora electrónica digital para ser implementada con válvulas de vacío. Ésta fue la primera publicación dónde se describe el diseño lógico de una computadora que utilizase el concepto de \emph{stored-program} o programa almacenado. Este diseño, tal como fue llamado por el propio von Neumann, \emph{very high speed automatic digital computing system} o sistema automático digital de cómputo de muy alta velocidad, estaba dividido en 6 componentes:
+\begin{itemize}
+  \item CA: \emph{central arithmetic} o aritmética central
+  \item CC: \emph{central control} o control central
+  \item M: \emph{memory} o memoria
+  \item I: \emph{input} o entrada
+  \item O: \emph{output} o salida
+  \item R: \emph{external memory} o memoria externa
+\end{itemize}
+La memoria almacena tanto números (datos) como órdenes (instrucciones).
+La aritmética central podía realizar sumas, restas, multiplicaciones, divisiones y raices cuadradas. Otras operaciones matemáticas, como logaritmos y funciones trigonométricas se debían realizar utilizando tablas de búsqueda e interpolaciones, posiblemente bicuadráticas. Una decisión de diseño establecida en el documento estableció que multiplicaciones y divisiones podían realizarse mediante tablas logarítmicas, pero para poder mantener dichas tablas pequeñas debería utilizarse interpolaciones, lo cuál a su vez necesita de multiplicaciones, aunque de menor precisión.\\
+Los números se represetaban mediante notación binaria. Estimó que 27 dígitos binarios\footnote{En el documento se hace meción a dígitos binarios y no a \emph{bits}, término que fue acuñado en 1948 por Claude Shannon} deberían ser suficientes, pero redondéo a 30 dígitos, más uno de signo y otro para diferenciar los números de las órdenes, resultando en palabras de 32 dígitos binarios. La aritmética utilizada era complemento a dos para simplificar la operación de resta. Para la multiplicación y la división, propuso ubicar el punto binario luego del bit de signo, lo que implica que el dominio de los operandos y resultados está en el rango -1 a 1, y por lo tanto, los datos y resultados de los programas deberían ser escalados acordemente.\\
+En cuanto al diseño de los circuitos, estableció que deberían utilizarse válvulas de vacío, dejando de lado los relé, dada a la mayor velocidad provista por las primeras. Otras sugerencias involucraban mantener al sistema de cómputo lo más sencillo posible, evitando cualquier tipo de optimización de performance mediante la superposición de operaciones. Las operaciones aritméticas debían realizarse de a un dígito binario a la vez. Estimó el tiempo de la suma de dos dígitos binarios en un microsegundo, por lo tanto la multiplicación de dos números representados por 30 dígitos binarios deberí realizarse en aproximadamente $30^{20}$ microsegundos; lo cuál era mucho más rápido que el tiempo de cualquier dispositivo de cálculo del momento. El diseño estaba basado en lo que Von Neumann llamó ``elemento E'', basándose en el modelo biológico de las neuronas, pero implementado de forma digital planteando que podrían ser fabricados mediante una o dos válvulas. En términos modernos, la forma más sencilla del ``elemento E'' es una compuerta \empm{AND} de dos entradas, con una de sus entradas invertidas, llamada ``entrada de inhibición. Al agregar más entradas a este dispositivo, se establecía un nivel de umbral, el cual al ser superado por la suma de una determinada cantidad de entradas generaba una salida en tanto y en cuanto no se excitara la entrada de inhibición. También estableció que dichos elementos de múltiples entradas podían ser construidos utilizando combinaciones de la versión elemental, pero recomendaba implementarlos por completo utilizando así menos válvulas de vacío con el objetivo de lograr circuitos más sencillos y rápidos, principio que hoy en día se mantiene vigente.\\
+Toda función lógica arbitraria, podía implentarse, entonces, a partir de dichos ''elementos E``. Demostró en este trabajo, cómo implementar circuitos que implementaban las funciones aritméticas, así como elementos de memoria y circuitos de control, sin referirse en ningún momento al término de ''lógica binaria``.\\
+Los ciruitos debían ser sincrónicos, obteniendo la señal de reloj a partir de un circuito oscilador implementado con válvulas y posiblemente controlado mediante cristales osciladores. Los diagramas lógicos incluían los tiempos de demora representados mediante una flecha. Estimó que la velocidad a la que se movía un pulso eléctrico en un cable era de $300 mts/microsegundo$, por lo tanto no debería generar problemas hasta obtener velocidades de reloj de $100MHz$. Tambíen menciona pero no desarrolla la necesidad de contar con mecanismos de detección y correción.\\
+En cuanto a la memoria, in
+
+
+\subsection{Clasificación de las arquitecturas según su conjunto de instrucciones}
+
+\subsection{Taxonomía de Flynn}
+
+Instruction and data streams
+
+
+
+\subsection{El conjunto de instrucciones}
+
+RISC vs CISC
 
 % \chapter{Teoría de los sistemas MIMO}
 % 
