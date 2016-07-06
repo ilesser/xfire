@@ -1,0 +1,117 @@
+\chapter{Introducción al trabajo de tesis}
+
+El presente trabajo se encuentra enfocado en el contexto del diseño de hardware digital. El mismo fue motivado por la necesidad de contar un con núcleo de procesamiento altamente configurable y suficientemente flexible y sencillo para distintas aplicaciones dentro del ámbito de la investigación en los Laboratorios de Microelectrónica y de Sistemas Embebidos; sintetizable en \footnote{\label{FPGA} \emph{Field Programmable Gate Array}. La arquitectura a desarrollar será del tipo RISC\footnote{\label{RISC} \emph{Reduced Instruction Set Computer}.
+
+Desde la aparición de los microprocesadores a mediados de los años 70, la tendencia fue el aumento de la complejidad de las arquitecturas, generando un efecto de ``bola de nieve'', al ir superponiendo capas sobre un núcleo central. Existió, entonces, una reacción adversa a esta tendencia. Por ejemplo, la arquitectura experimental de IBM 801; y también en Berkeley, Patterson y Ditzel fueron los primeros en acuñar el término RISC, para descibir una nueva clase de arquitectura que deshacía el camino del resto de las arquitecturas hasta el momento, conocidas, en contraposición, como CISC\footnote{\label{CISC} \emph{Complex Instruction Set Computer}. Técnica de diseño de unidades de procesamiento basadas en el hecho de que el conjunto de instrucciones debe ser lo más poderoso posible.}. A partir de este antecedente, los principales fabricantes de microprocesadores han lanzado al mercado sus propias implementaciones basadas en los principios establecidos en IBM y Berkeley.
+
+El concepto de las arquitecturas RISC se basa, principalmente, en el hecho de que al simplificar la lógica necesaria para la ejecución de una instrucción permite aumentar la frecuencia de operación de las compuertas que componen la lógica. Además, es posible dividir la ejecución de las instrucciones en etapas sencillas y consecutivas, permitiendo de esta manera implementar fácilmente optimizaciones como, por ejemplo, una arquitectura de \emph{pipeline}\footnote{\label{Pipeline} Técnica de diseño de arquitecturas de computadoras en la que se segmenta la ejecución de las instrucciones en múltiples etapas, permitiendo que múltiples instrucciones estén ejecutándose en paralelo.}. Es por esto que el conjunto de instrucciones es sencillo, permitiendo solamente operaciones básicas entre registros internos del microprocesador. El trabajo realizado por cada instrucción, en general, es menor que el generado por una instrucción CISC, pero se hace de manera sencilla y rápida. Es importante notar que no solamente la ganancia radica en poder aumentar la frecuencia de operación de la lógica, sino que estas condiciones facilitan el desarrollo de diseños de bajo consumo, característica muy valorada en el nicho de los sistemas embebidos.
+
+El mercado de los sistemas embebidos es excesivamente amplio y está inserto en todas las industrias. En un automóvil, por ejemplo, podemos encontrar microprocesadores en el sistema de frenos, en la central de inyección electrónica, en el sistema de entretenimiento y navegación, etc. La otra arista de vital importancia para el mercado de los sistemas embebidos, es el de los dispositivos móviles, donde se vuelve vital el requerimiento de bajo consumo. Estamos viviendo la revolución de IoT\footnote{\label{Internet of Things} Es un concepto que se refiere a la interconexión digital de objetos cotidianos con internet.}, que se trata básicamente de sistemas embebidos autónomos que estan conectados a ``la nube'' y pueden ser monitoreados y controlados remotamente a través de \emph{Internet}.
+
+Dentro del universo de las arquitecturas RISC, actualmente se destacan dos: MIPS y ARM. La primera, fue desarrollada por un grupo de investigadores de la Universidad de Stanford (entre ellos John L. Hennessy, pionero del concepto RISC junto a David Patterson, coautores de la bibliografía más relevante del área). Esta arquitectura, por su sencillez, es la predilecta al momento del desarrollo de cursos enfocados en la enseñanza de arquitectura de computadoras. Si bien MIPS posee gran relevancia académica, es muy popular en el mercado de los microprocesadores en sistemas embebidos como equipos de telecomunicaciones, decodificadores de TV digital, y consolas de entretenimiento, con ejemplos muy conocidos como \emph{Nintendo} y \emph{PlaySation}. ARM, por otro lado, ha ganado una importante porción del mercado de los sistemas embebidos (con un gran aporte de los dispositivos móviles), basando su modelo de negocios en la venta de la propiedad intelectual (IP, \emph{intellectual property}) del diseño de los microprocesadores a las empresas que finalmente producen el microprocesador.
+
+
+\section{Objetivo}
+
+La Tesis tiene como objetivo principal el diseño, la validación e implementación de una arquitectura RISC y su conjunto de instrucciones. 
+
+El enfoque de la tesis se basará en un desarrollo teórico del conjunto de instrucciones y de las características de la arquitectura; y en el desarrollo
+práctico del emulador y la implementación en lenguaje descriptor de hardware.
+
+El concepto central detrás del desarollo será el de \textbf{ortogonalidad}. Esto implica, por una parte, que los bloques constructivos de la arquitectura que se repiten sean independientes e indiferenciables entre sí. Por otra parte, los formatos de las instrucciones, en la medida de lo posible, se diseñaran de manera tal que se pueda mantener el mismo ancho de campo para los datos inmediatos y los desplazamientos (excepto en los casos donde es explícitamente conveniente agrandarlos sin penalizar la complejidad del diseño).
+
+El objetivo perseguido va a ser el de mantener la sencillez y la ortogonalidad, favoreciendo así la simplificación de la implementación. Se trabajará en el desarrollo de la definición de la arquitectura y su conjunto de instrucciones en favor de este objetivo. Se definirá la interfaz física para la conectividad con periféricos, los tipos de datos que maneja la arquitectura, la cantidad y tipos de registros internos, el acceso a memoria de programa y de datos con su organización y modo de direccionamiento, la interfaz con la ALU\footnote{\label{ALU} \emph{Arithmetic Logic Unit}. Bloque constructivo encargado de realizar las operaciones aritmético lógicas sobre los datos.} y la FPU\footnote{\label{FPU} \emph{Floating Point Unit}. Bloque constructivo encargado de realizar las operaciones en punto flotante sobre los datos.}, mecanismos de manejos de excepeciones e interrupciones, modos de operación y manejo de periféricos. Luego se definirá el conjunto de instrucciones que ejecutará la arquitectura.
+
+Una vez definida la arquitectura y su conjunto de instrucciones, se prodecerá a diseñar los vectores de prueba para poder validar las implementaciones. Se desarrollará un emulador de la arquitectura que deberá validar los vectores de prueba diseñados. Una vez concluida esta etapa, se implementará a nivel RTL el diseño en \emph{Verilog}. Este diseño será validado mediante simulaciones y utilizando dispositivos programables. Se validará también contra los vectores de prueba. Se analizarán los recursos utilizados en dispositivos FPGA. Se realizará un análisis comparativo entre la arquitectura desarrollada y otras arquitecturas RISC.
+
+\section{Alcance}
+
+Como resultados a obtener de la tesis se tienen los siguientes:
+
+\begin{itemize}
+    \item Especificación completa de la arquitectura
+    \item Vectores de prueba
+    \item Emulador de la arquitectura
+    \item \emph{IP Core} codificado en el lenguaje \emph{Verilog} de la arquitectura completa
+    \item Resultado de los vectores de prueba tanto en el emulador como en el \emph{IP Core}
+    \item Análisis comparativo entre la arquitectura desarrollada y otras arquitecturas RISC
+    \item Proposición de trabajos futuros y/o mejoras.
+\end{itemize}
+
+\section{Organización del trabajo}
+
+En esta sección se describe la organización de la presente tesis. Con el objetivo de que la misma sea autocontenida, los primeros capítulos se ocupan de presentar las bases o conocimientos necesarios para comprender la totalidad del trabajo.
+
+El desarrollo de la tesis se organiza de la siguiente forma:
+
+\begin{itemize}
+\item En el capítulo 2 se presentará la teoría general de las arquitecturas de procesadores y una revisión histórica sobre el tema. Se estudiará la diferenciación entre los universos de procesadores CISC y RISC y se justificará la elección de diseñar una arquitectura RISC para la tesis. Se presentarán las técnicas de diseño de arquitecturas estudiadas. Además se presentarán reseñas de otras arquitecturas actuales y sus decisiones de diseño, para luego contrastarlas con los objetivos perseguidos por el presente trabajo.
+\item En el capítulo 3 se explicitarán las decisiones de diseño tomadas para la implementación de la arquitectura y se presenterá la especificación completa de la arquitecturael diseño del conjunto de instrucciones de la arquitectura,
+
+
+
+\item En el capítulo 4 se hará referencia a la implementación de la arquitectura seleccionada en Verilog y se desarrollarán los bancos de prueba de simulación para verificar su correcta funcionalidad. Se generará un IP core en RTL para implementar un sistema MIMO. Dicho RTL cumplirá con ciertas condiciones de portabilidad y legibilidad del código, para que el mismo sea efectivamente un IP core.
+\item En el capítulo 5 se experimentará el IP core en un ambiente de simulación y en campo. Se realizará la síntesis del mismo para distintos dispositivos FPGA, y se medirán los recursos utilizados, la máxima frecuencia de operación y la potencia consumida.
+\item En el capítulo 6 se extraerán las conclusiones pertinentes sobre los resultados obtenidos y se propondrán futuras mejoras de la arquitecturas a partir del análisis realizado.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Introducción al trabajo de tesis}
+
+El presente trabajo se encuentra enfocado en el contexto del diseño de hardware digital. El mismo fue motivado por el creciente avance en las nuevas tecnologías implementadas en los sistemas de comunicaciones digitales y en los sistemas \textit{Software Defined Radio}\footnote{\label{SDR}\textit{Software Defined Radio}: Sistema de comunicaciones donde los componentes típicamente implementados en hardware (mezcladores, filtros, amplificadores, moduladores / demoduladores, detectores, etc) son implementados en software}. Los avances en la escala de integración de circuitos integrados ante la constante reducción de las líneas de conducción en los procesos de tratamiento del silicio y el aumento de la frecuencia de operación, hacen que hoy en día sea posible implementar sistemas que en el pasado eran sólo desarrollos teóricos.
+
+En los últimos años, celulares, redes 4G, puntos de acceso de redes inalámbricas tales como Wi-Fi y WiMAX, se encuentran haciendo uso de la tecnología MIMO \footnote{\label{MIMO}\textit{Multiple-input Multiple-output}: Consiste en un sistema de múltiples entradas y salidas, el cual aprovecha fenómenos físicos como la propagación multicamino para incrementar la tasa de transmisión y reducir la tasa de error}. Una de las técnicas para implementar MIMO es el \textit{beamforming} adaptativo, que consiste en la capacidad de separar señales en el dominio del espacio. Este hecho provee un medio para separar la señal deseada de señales de interferencia.
+
+Un \textit{beamformer} adaptativo logra optimizar automáticamente el patrón de un arreglo de múltiples antenas al ajustar el control de los pesos de ponderación hasta que se satisface una determinada función de objetivo preestablecida. Los medios por los cuales esta optimización es lograda están especificados por un algoritmo diseñado para tal propósito. Estos dispositivos utilizan mucha más información disponible en la antena con respecto a un \textit{beamformer} convencional.
+
+El núcleo de un \textit{beamformer} utiliza un sistema de descomposición de matrices para lograr obtener las constantes de ponderación de las señales recibidas en cada antena, siendo la descomposición QR la más utilizada y sobre la cual se basa el presente trabajo.
+
+\section{Objetivo}
+
+La Tesis tiene como objetivo principal diseñar e implementar, en hardware digital, un procesador capaz de resolver un algoritmo utilizado para la descomposición de matrices conocido como RLS-QRD (\textit{Recursive Least Squares - QR Decomposition}). Dicho diseño será realizado a través del uso del lenguaje de descripción de hardware Verilog, y la implementación se obtendrá a través de su síntesis en un dispositivo FPGA \footnote{\label{FPGA}\textit{Field Programmable Gate Array}: dispositivo semiconductor que contiene bloques de lógica cuya interconexión y funcionalidad puede ser configurada ``in situ'' mediante un lenguaje de descripción especializado.}.
+
+El enfoque de la tesis se basará en una parte teórica y una experimental. Se analizarán los modelos y desarrollos algorítmicos para la implementación de una descomposición QR y luego se realizará un análisis para el diseño de un IP core que ponga en práctica uno de ellos. Una vez codificado el hardware, se procederá a realizar su síntesis en un dispositivo FPGA utilizando un kit de desarrollo, se realizarán los bancos de prueba correspondientes y se analizarán los resultados
+obtenidos.
+
+El procesador a implementar será sometido a diferentes pruebas con el objetivo de definir parámetros tales como el error, máxima frecuencia de operación, cantidad de operaciones por segundo y consumo de potencia.
+
+\section{Alcance}
+
+Como resultados a obtener de la presente tesis se tienen los siguientes:
+
+\begin{itemize}
+    \item IP Core codificado en el lenguaje Verilog de un procesador de descomposición QR.
+    \item Resultado de mediciones pertinentes al diseño del procesador.
+    \item Análisis comparativo de procesamiento entre el procesador desarrollado y desarrollos de terceros.
+    \item Proposición de trabajos futuros y/o mejoras.
+\end{itemize}
+
+\newpage
+
+\section{Organización del trabajo}
+
+En esta sección se describe la organización de la presente tesis. Con el objetivo de que la misma sea mínimamente
+autocontenida, los primeros capítulos se ocupan de presentar las bases o conocimientos necesarios para comprender la
+totalidad del trabajo.
+
+El desarrollo de la tesis se organiza de la siguiente forma:
+
+\begin{itemize}
+\item En el capítulo 2 se hará referencia a los conceptos requeridos para comprender la teoría de los sistemas MIMO. Se describirá el contenido teórico requerido para exponer los conceptos de funcionamiento del hardware a desarrollar, el cual se basa en antenas, \textit{beamforming}, criterios para el diseño del filtro adaptativo y algoritmos.
+\item En el capítulo 3 se analizarán las diferentes arquitecturas digitales propuestas para implementar el sistema. Se elegirá una de ellas para realizar el desarrollo en base a un determinado criterio.
+\item En el capítulo 4 se hará referencia a la implementación de la arquitectura seleccionada en Verilog y se desarrollarán los bancos de prueba de simulación para verificar su correcta funcionalidad. Se generará un IP core en RTL para implementar un sistema MIMO. Dicho RTL cumplirá con ciertas condiciones de portabilidad y legibilidad del código, para que el mismo sea efectivamente un IP core.
+\item En el capítulo 5 se experimentará el IP core en un ambiente de simulación y en campo. Se realizará la síntesis del mismo para distintos dispositivos FPGA, y se medirán los recursos utilizados, la máxima frecuencia de operación y la potencia consumida.
+\item En el capítulo 6 se extraerán las conclusiones pertinentes sobre los resultados obtenidos y se propondrán futuras mejoras de la arquitecturas a partir del análisis realizado.
+\end{itemize}
