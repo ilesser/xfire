@@ -49,7 +49,8 @@ module tb_add_subb ();
    // -----------------------------------------------------
    localparam              W = `W;
    localparam              CNT_SIZE = 2 * `W + 2;
-   reg                     clk, rst, ena;
+   wire                    clk;
+   reg                     rst, ena;
    reg                     tb_subb_a;
    reg                     tb_subb_b;
    reg   signed   [W-1:0]  tb_a;
