@@ -3,6 +3,7 @@ syntax: glob
 
 *.directory
 *.swp
+*.simvision*
 
 digital/*/rtl/html/html
 digital/*/verification/*/temp
