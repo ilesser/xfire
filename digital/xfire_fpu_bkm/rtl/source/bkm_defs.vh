@@ -43,8 +43,8 @@
 //                                                 |---> Complex:    0 for complex args, 1 for real args
 // --------------------------------------------------------
 
-`define FORMAT_REAL_32  2'b01
-`define FORMAT_REAL_64  2'b00
+`define FORMAT_REAL_32  2'b00
+`define FORMAT_REAL_64  2'b01
 `define FORMAT_CMPLX_32 2'b10
 `define FORMAT_CMPLX_64 2'b11
 // --------------------------------------------------------
