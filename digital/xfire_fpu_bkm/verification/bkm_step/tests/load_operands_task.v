@@ -28,6 +28,7 @@
 //
 // -----------------------------------------------------------------------------
 
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -57,6 +58,8 @@ task load_operands;
    real                    u_n,     v_n;
    real                    X_np1,   Y_np1;
    real                    u_np1,   v_np1;
+   real                    lut_X,   lut_Y;
+   real                    lut_u,   lut_v;
    // -----------------------------------------------------
 
    begin
@@ -68,6 +71,11 @@ task load_operands;
       tb_Y_n      = cnt[3*`W-1:2*`W];
       tb_u_n      = cnt[2*`W-1:1*`W];
       tb_v_n      = cnt[1*`W-1:0*`W];
+      // TODO: make them variable
+      tb_lut_X    = `W'd1;
+      tb_lut_Y    = `W'd2;
+      tb_lut_u    = `W'd1;
+      tb_lut_v    = `W'd2;
 
       double_word = tb_format[0];
       complex     = tb_format[1];
@@ -75,21 +83,26 @@ task load_operands;
       n   = $itor($signed(tb_n));
 
       if (double_word==1'b1) begin
-         X_n = $itor($signed(tb_X_n));
-         Y_n = $itor($signed(tb_Y_n));
-         u_n = $itor($signed(tb_u_n));
-         v_n = $itor($signed(tb_v_n));
+         X_n   = $itor($signed(tb_X_n));
+         Y_n   = $itor($signed(tb_Y_n));
+         u_n   = $itor($signed(tb_u_n));
+         v_n   = $itor($signed(tb_v_n));
+         lut_X = $itor($signed(tb_lut_X));
+         lut_Y = $itor($signed(tb_lut_Y));
+         lut_u = $itor($signed(tb_lut_u));
+         lut_v = $itor($signed(tb_lut_v));
       end
       else begin
          // TODO: read only the first word
-         X_n = $itor($signed(tb_X_n[`W/2-1:0]));
-         Y_n = $itor($signed(tb_Y_n[`W/2-1:0]));
-         u_n = $itor($signed(tb_u_n[`W/2-1:0]));
-         v_n = $itor($signed(tb_v_n[`W/2-1:0]));
+         X_n   = $itor($signed(tb_X_n[`W/2-1:0]));
+         Y_n   = $itor($signed(tb_Y_n[`W/2-1:0]));
+         u_n   = $itor($signed(tb_u_n[`W/2-1:0]));
+         v_n   = $itor($signed(tb_v_n[`W/2-1:0]));
+         lut_X = $itor($signed(tb_lut_X[`W/2-1:0]));
+         lut_Y = $itor($signed(tb_lut_Y[`W/2-1:0]));
+         lut_u = $itor($signed(tb_lut_u[`W/2-1:0]));
+         lut_v = $itor($signed(tb_lut_v[`W/2-1:0]));
       end
-
-      // TODO: first I'll assume avery value is double word size (64 bit)
-      //       this is format is always FORMAT_REAL_64 or FORMAT_CMPLX_64
 
       if (tb_mode==`MODE_E) begin
       // E-mode
@@ -183,6 +196,7 @@ task load_operands;
       tb_u_np1 = (u_np1);
       tb_v_np1 = (v_np1);
 
+      run_clk(1);
       run_clk(1);
 
    end
