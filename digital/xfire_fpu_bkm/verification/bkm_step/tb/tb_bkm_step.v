@@ -67,6 +67,8 @@ module tb_bkm_step ();
    reg   [W-1:0]           tb_u_n,     tb_v_n;
    reg   [W-1:0]           tb_X_np1,   tb_Y_np1;
    reg   [W-1:0]           tb_u_np1,   tb_v_np1;
+   reg   [W-1:0]           tb_lut_X,   tb_lut_Y;
+   reg   [W-1:0]           tb_lut_u,   tb_lut_v;
    reg   [`CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
 
@@ -78,8 +80,6 @@ module tb_bkm_step ();
    wire  [2*W-1:0]         lut_X_csd,  lut_Y_csd;
    wire  [W-1:0]           res_X_np1,  res_Y_np1;
    wire  [W-1:0]           res_u_np1,  res_v_np1;
-   wire  [W-1:0]           lut_X,      lut_Y;
-   wire  [W-1:0]           lut_u,      lut_v;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -150,7 +150,7 @@ module tb_bkm_step ();
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .x                   (lut_X),
+      .x                   (tb_lut_X),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -166,7 +166,7 @@ module tb_bkm_step ();
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .x                   (lut_Y),
+      .x                   (tb_lut_Y),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -276,11 +276,6 @@ module tb_bkm_step ();
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   assign lut_X = `W'd1;
-   assign lut_Y = `W'd1;
-   assign lut_u = `W'd1;
-   assign lut_v = `W'd1;
-
    bkm_step #(
       .W          (`W),
       .LOG2W      (`LOG2W),
@@ -307,15 +302,15 @@ module tb_bkm_step ();
       .lut_Y      (lut_X_csd),
       .u_n        (tb_u_n),
       .v_n        (tb_v_n),
-      .lut_u      (lut_u),
-      .lut_v      (lut_v),
+      .lut_u      (tb_lut_u),
+      .lut_v      (tb_lut_v),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
       .X_np1      (X_n_csd),
       .Y_np1      (Y_n_csd),
-      .u_np1      (res_u_n),
-      .v_np1      (res_v_n)
+      .u_np1      (res_u_np1),
+      .v_np1      (res_v_np1)
    );
    // -----------------------------------------------------
 
