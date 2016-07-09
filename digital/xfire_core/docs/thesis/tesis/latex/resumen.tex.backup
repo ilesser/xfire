@@ -1,0 +1,31 @@
+\newpage
+\thispagestyle{empty}
+\begin{center} 
+		
+		Universidad de Buenos Aires, Facultad de Ingeniería
+
+\
+
+Diseño, valdiación e implementación de una arquitectura RISC
+
+\
+
+por
+
+\
+
+Luciano César Natale
+
+\
+
+\textbf{Resúmen}
+
+\
+
+\end{center}
+
+El presente trabajo constituye la Tesis de Grado necesaria para obtener el título de Ingeniero Electrónico de la Facultad de Ingeniería de la Universidad de Buenos Aires.
+
+El objetivo de este trabajo es el diseño, la validación y la implementación de una arquitectura RISC para ser utilizado en 
+
+El objetivo de este trabajo es el diseño y la implementación en hardware digital de un procesador de descomposición QR para ser utilizado en el diseño de un filtro para el procesamiento de un \textit{Beamformer} Adaptativo. Se presenta la teoría de base necesaria para poder explicar los desarrollos realizados. Por último, se analizan los resultados obtenidos, se contrastan los mismos contra trabajos similares, y se proponen trabajos futuros.
