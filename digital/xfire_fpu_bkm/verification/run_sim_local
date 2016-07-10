@@ -663,10 +663,7 @@ if [ "${tool}" == "modelsim"  ]; then
 fi
 
 if [ "${tool}" == "iverilog"  ]; then
-    temp_v_list=`find ./temp/ -type f -name "tb_*.v"`
     temp_v_list=`find ./temp/ -type f -name "*.v"`
-#temp_v_list="./temp/tb_add_subb.v ./temp/add_subb.v ./temp/simlib_clk_osc.v"
-temp_v_list="./temp/tb_get_d.v ./temp/get_d.v ./temp/simlib_clk_osc.v"
     iverilog \
        -g2001 \
        -Wall \
