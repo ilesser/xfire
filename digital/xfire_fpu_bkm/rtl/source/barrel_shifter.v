@@ -104,7 +104,8 @@ module barrel_shifter #(
 
          for (j=0; j < LOG2W; j=j+1) begin
 
-            always @(*) begin
+            //always @(*) begin
+            always @(i, j, muxs[i][j+1], muxs[i+(2**j)][j+1], op, muxs[i-(W-1)+(2**j)-1][j+1], s, sel[j], in0[i][j], in1[i][j]) begin
 
                // Select in0 input from previous mux
                in0[i][j]   = muxs[i][j+1];
@@ -120,7 +121,8 @@ module barrel_shifter #(
          end // for j
 
          // Post data reversal
-         always @(*) begin
+         //always @(*) begin
+         always @(i, dir, muxs[W-1-i][0], muxs[i][0]) begin
             out[i] = dir ? muxs[W-1-i][0] : muxs[i][0];
          end
 
