@@ -66,16 +66,17 @@ task load_operands;
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[4*`W+`LOG2N-1:4*`W];
+      tb_n        = cnt[4*`W+2+`LOG2N-1:4*`W+2];
+      tb_d_n      = cnt[4*`W+1:4*`W];
       tb_X_n      = cnt[4*`W-1:3*`W];
       tb_Y_n      = cnt[3*`W-1:2*`W];
       tb_u_n      = cnt[2*`W-1:1*`W];
       tb_v_n      = cnt[1*`W-1:0*`W];
       // TODO: make them variable
-      tb_lut_X    = `W'd1;
-      tb_lut_Y    = `W'd2;
-      tb_lut_u    = `W'd1;
-      tb_lut_v    = `W'd2;
+      tb_lut_X    = `W'd0;
+      tb_lut_Y    = `W'd0;
+      tb_lut_u    = `W'd0;
+      tb_lut_v    = `W'd0;
 
       double_word = tb_format[0];
       complex     = tb_format[1];
@@ -93,7 +94,6 @@ task load_operands;
          lut_v = $itor($signed(tb_lut_v));
       end
       else begin
-         // TODO: read only the first word
          X_n   = $itor($signed(tb_X_n[`W/2-1:0]));
          Y_n   = $itor($signed(tb_Y_n[`W/2-1:0]));
          u_n   = $itor($signed(tb_u_n[`W/2-1:0]));
