@@ -1,14 +1,14 @@
 Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precision_selection.v \
 ./temp/bkm.v ./temp/tb_add_subb.v ./temp/multiply_by_d_csd.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
 ./temp/add_subb.v ./temp/csd_add_subb.v ./temp/complex_csd_add_subb.v ./temp/xfire_fpu_bkm.v \
-./temp/fadder.v ./temp/get_d_n.v ./temp/simlib_clk_osc.v ./temp/bkm_step.v ./temp/multiply_by_d.v \
+./temp/fadder.v ./temp/simlib_clk_osc.v ./temp/bkm_step.v ./temp/multiply_by_d.v \
 ./temp/bkm_range_reduction.v ./temp/bkm_fixed_control_logic.v ./temp/bkm_range_extension.v \
 ./temp/complex_add_subb.v ./temp/csd2bin.v ./temp/output_precision_selection.v ./temp/bkm_pre_step.v \
-./temp/bkm_steps.v ./temp/barrel_shifter.v ./temp/bkm_post_processing.v ./temp/bin2csd.v \
--l ./reports/add_subb.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all \
--sverilog -debug
+./temp/bkm_steps.v ./temp/get_d.v ./temp/barrel_shifter.v ./temp/bkm_post_processing.v \
+./temp/bin2csd.v -l ./reports/add_subb.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait \
++warn=all +lint=PCWM -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Thu Jun  9 23:27:20 2016
+            Version I-2014.03 -- Sat Jul  2 16:50:51 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -23,12 +23,12 @@ Parsing design file './temp/bkm.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm.v'.
 Parsing design file './temp/tb_add_subb.v'
-Parsing included file '/usr/repos/ip_library/simlib/simlib_defs.vh'.
+Parsing included file '/home/ilesser/simlib/simlib_defs.vh'.
 Back to file './temp/tb_add_subb.v'.
 
 Warning-[DCTTSW] Decimal constant truncated
   Constant '16' is truncated to 4 bits: 0.
-  "./temp/tb_add_subb.v", 929
+  "./temp/tb_add_subb.v", 942
   Source info:       load_operands(1'b0,  1'b0,    -`W'd8, -`W'd8, 1'b0, 
   -`W'd16);
 
@@ -54,9 +54,6 @@ Back to file './temp/bkm_fixed_defs.vh'.
 Back to file './temp/xfire_fpu_bkm_defs.vh'.
 Back to file './temp/xfire_fpu_bkm.v'.
 Parsing design file './temp/fadder.v'
-Parsing design file './temp/get_d_n.v'
-Parsing included file './temp/bkm_defs.vh'.
-Back to file './temp/get_d_n.v'.
 Parsing design file './temp/simlib_clk_osc.v'
 Parsing included file './temp/simlib_defs.vh'.
 Back to file './temp/simlib_clk_osc.v'.
@@ -88,53 +85,16 @@ Back to file './temp/bkm_pre_step.v'.
 Parsing design file './temp/bkm_steps.v'
 Parsing included file './temp/bkm_defs.vh'.
 Back to file './temp/bkm_steps.v'.
-Parsing design file './temp/barrel_shifter.v'
-Parsing design file './temp/bkm_post_processing.v'
-Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing design file './temp/get_d.v'
 Parsing included file './temp/bkm_defs.vh'.
-Back to file './temp/bkm_fixed_defs.vh'.
-Back to file './temp/bkm_post_processing.v'.
-Parsing design file './temp/bin2csd.v'
-Top Level Modules:
-       tb_add_subb
-       bkm_fixed
-       xfire_fpu_bkm
-       fadder
-       get_d_n
-       bkm_step
-       csd2bin
-       bin2csd
-TimeScale is 1 ns / 1 ps
-Starting vcs inline pass...
-15 modules and 0 UDP read.
-recompiling module tb_add_subb
-recompiling module bkm_fixed
-recompiling module add_subb
-recompiling module csd_add_subb
-recompiling module complex_csd_add_subb
-recompiling module xfire_fpu_bkm
-recompiling module fadder
-recompiling module get_d_n
-recompiling module bkm_step
-recompiling module multiply_by_d
-recompiling module complex_add_subb
-recompiling module csd2bin
-recompiling module barrel_shifter
-recompiling module bin2csd
-All of 15 modules done
-rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
-ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
---no-whole-archive
-ld -m elf_i386 -shared -o .//../simv.daidir//_csrc0.so 5NrI_d.o 5NrIB_d.o SIM_l.o \
+Back to file './temp/get_d.v'.
 
-if [ -x ../simv ]; then chmod -x ../simv; fi
-g++  -o ../simv  -m32 -m32   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ \
--Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  _csrc1.so _csrc0.so     rmapats_mop.o \
-rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /usr/synopsys/vcs/linux/lib/libvirsim.so \
-/usr/synopsys/vcs/linux/lib/librterrorinf.so /usr/synopsys/vcs/linux/lib/libsnpsmalloc.so \
-/usr/synopsys/vcs/linux/lib/libvcsnew.so /usr/synopsys/vcs/linux/lib/libuclinative.so \
--Wl,-whole-archive /usr/synopsys/vcs/linux/lib/libvcsucli.so -Wl,-no-whole-archive \
-/usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
--ldl -lm  -lc -lpthread -ldl 
-../simv up to date
-CPU time: 2.814 seconds to compile + .156 seconds to elab + .135 seconds to link
+Error-[SE] Syntax error
+  Following verilog source has syntax error :
+  "./temp/get_d.v", 119: token is '1'
+        u_higher_than_p1  =  u_i >= (W-4)'d1;     //u_i[0] & !u_negative;
+                                            ^
+
+1 warning
+1 error
+CPU time: .088 seconds to compile
