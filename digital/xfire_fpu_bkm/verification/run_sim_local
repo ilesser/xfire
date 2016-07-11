@@ -397,7 +397,7 @@ if [ ${tool} == "irun" ]; then
    if [ ${waves} == "yes" ]; then
       if [ ${wv_format} == "shm" ]; then
          echo "database -open -shm -into ${shm_waves} ${test_name} -default" > ./temp/ncsim.tcl
-         echo "probe -create -shm -database ${test_name} -memories -all -tasks -functions -depth all" >> ./temp/ncsim.tcl
+         echo "probe -create -shm -database ${test_name} -variables -memories -all -tasks -functions -depth all" >> ./temp/ncsim.tcl
       fi
       if [ ${wv_format} == "vcd" ]; then
          echo "database -open -vcd -into ${vcd_waves} ${test_name} -default" > ./temp/ncsim.tcl
