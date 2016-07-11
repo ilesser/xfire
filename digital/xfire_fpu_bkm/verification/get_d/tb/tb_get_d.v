@@ -12,25 +12,27 @@
 // Description:
 // ------------
 //
-// XXXXX FILL IN HERE XXXXX
+// Testbench for get_d block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// tb_get_d_n.v
+// tb_get_d.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-05-17 - ilesser - Original version.
+//    - 2016-07-10 - ilesser - Changed architecture and updated limits.
+//    - 2016-05-17 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
 `define W 8
+`define CNT_SIZE `W+1
 
 `include "bkm_defs.vh"
 `include "/home/ilesser/simlib/simlib_defs.vh"
@@ -49,9 +51,9 @@ module tb_get_d ();
    // Testbench controlled variables and signals
    // -----------------------------------------------------
    localparam                    W = `W;
-   localparam                    CNT_SIZE = 2 * `W + 1;
-   wire                          clk; 
-   reg				 rst, ena;
+   localparam                    CNT_SIZE = `CNT_SIZE;
+   wire                          clk;
+   reg                           rst, ena;
    reg                           err_x, err_y;
    reg            [CNT_SIZE-1:0] cnt;
    reg                           tb_mode;
@@ -89,7 +91,7 @@ module tb_get_d ();
 
    always @(posedge clk)
        if (rst) begin
-          cnt  <= {2*W+1{1'b0}};
+          cnt <= `CNT_SIZE'd0;
        end else if (ena) begin
           cnt <= cnt + 1;
        end
