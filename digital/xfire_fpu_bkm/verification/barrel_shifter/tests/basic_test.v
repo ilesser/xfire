@@ -28,14 +28,8 @@
 //    - 2016-04-25 - ilesser - Original version.
 //
 // -----------------------------------------------------------------------------
-`define DIR_RIGHT 1'b0
-`define DIR_LEFT  1'b1
 
-`define OP_SHIFT  1'b0
-`define OP_ROT    1'b1
-
-`define SHIFT_T_LOGIC   1'b0
-`define SHIFT_T_ARITH   1'b1
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -59,48 +53,48 @@ task basic_test;
       run_clk(1);
 
       //                      dir         op          shift_t      sel   in  out
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   0, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   1, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   2, 2   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   3, 3   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   4, 4   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   5, 5   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   6, 6   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   7, 7   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   8, 8   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   9, 9   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,  10,10   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   0, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   1, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   2, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   3, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   4, 2   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   5, 2   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   6, 3   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   7, 3   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   8, 4   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,   9, 4   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,  10, 5   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   0, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   1, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   2, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   3, 0   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   4, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   5, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   6, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   7, 1   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   8, 2   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,   9, 2   );
-      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   2,  10, 2   );
-      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,   4, 4   );
-      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   0,  -4,-4   );
-      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1,  16, 8   );
-      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 262 );
-      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 65  );
-      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   3, 524, 4192);
-      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   0, 524, 524 );
-      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   1, 524, 1048);
-      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_T_ARITH,   6, 524, 3144);
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   0, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   1, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   2, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   3, 3   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   4, 4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   5, 5   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   6, 6   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   7, 7   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   8, 8   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   9, 9   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,  10,10   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   0, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   1, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   2, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   3, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   4, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   5, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   6, 3   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   7, 3   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   8, 4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,   9, 4   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,  10, 5   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   0, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   1, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   2, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   3, 0   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   4, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   5, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   6, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   7, 1   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   8, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,   9, 2   );
+      load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   2,  10, 2   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,   4, 4   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   0,  -4,-4   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1,  16, 8   );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   1, 524, 262 );
+      //load_barrel_shifter( `DIR_RIGHT, `OP_SHIFT,  `SHIFT_ARITH,   3, 524, 65  );
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_ARITH,   3, 524, 4192);
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_ARITH,   0, 524, 524 );
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_ARITH,   1, 524, 1048);
+      //load_barrel_shifter( `DIR_LEFT , `OP_SHIFT,  `SHIFT_ARITH,   6, 524, 3144);
 
    end
 
@@ -119,9 +113,9 @@ task load_barrel_shifter;
    input                dir;
    input                op;
    input                shift_t;
-   input [LOG2W-1:0]    sel;
-   input [W-1:0]        in;
-   input [W-1:0]        out;
+   input [`LOG2W-1:0]   sel;
+   input [`W-1:0]       in;
+   input [`W-1:0]       out;
    // ----------------------------------
 
 // *****************************************************************************

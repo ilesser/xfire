@@ -32,6 +32,7 @@
 `timescale 1ns/1ps
 `define W 8
 `define LOG2W 3
+`define CNT_SIZE 1+1+1+`LOG2W+`W
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 // *****************************************************************************
@@ -47,25 +48,22 @@ module tb_barrel_shifter ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam              W        = `W;
-   localparam              LOG2W    = `LOG2W;
-   localparam              CNT_SIZE = 1+1+1+`LOG2W+`W;
    wire                    clk;
    reg                     rst, ena;
    reg                     err,war;
-   reg   [CNT_SIZE-1:0]    cnt;
+   reg   [`CNT_SIZE-1:0]   cnt;
    reg                     tb_dir;
    reg                     tb_op;
    reg                     tb_shift_t;
-   reg   [LOG2W-1:0]       tb_sel;
-   reg   signed    [W-1:0] tb_in;
-   reg   signed    [W-1:0] tb_out;
+   reg   [`LOG2W-1:0]      tb_sel;
+   reg   signed   [`W-1:0] tb_in;
+   reg   signed   [`W-1:0] tb_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  signed    [W-1:0] wire_out;
+   wire  signed   [`W-1:0] wire_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -89,7 +87,7 @@ module tb_barrel_shifter ();
 
    always @(posedge clk)
        if (rst) begin
-          cnt <= {CNT_SIZE{1'b0}};
+          cnt <= `CNT_SIZE'd0;
        end else if (ena) begin
           cnt <= cnt + 1;
        end
@@ -129,8 +127,8 @@ module tb_barrel_shifter ();
    // Device under verifiacion
    // -----------------------------------------------------
    barrel_shifter #(
-      .W             (W),
-      .LOG2W         (LOG2W)
+      .W             (`W),
+      .LOG2W         (`LOG2W)
    ) duv (
       .dir           (tb_dir),
       .op            (tb_op),
