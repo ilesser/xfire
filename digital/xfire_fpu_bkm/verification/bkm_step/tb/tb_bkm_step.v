@@ -34,7 +34,7 @@
 `define N 8
 `define LOG2W 3
 `define LOG2N 3
-`define CNT_SIZE 1+2+2+`LOG2W+2*`W+2*`W
+`define CNT_SIZE 1+2+2+2+`LOG2W+2*`W+2*`W
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -61,7 +61,8 @@ module tb_bkm_step ();
    reg                     tb_mode;
    reg   [1:0]             tb_format;
    reg   [`LOG2N-1:0]      tb_n;
-   reg   [3:0]             tb_d_n;
+   reg   [1:0]             tb_d_x_n;
+   reg   [1:0]             tb_d_y_n;
    reg   [W-1:0]           tb_X_n,     tb_Y_n;
    reg   [W-1:0]           tb_u_n,     tb_v_n;
    reg   [W-1:0]           tb_X_np1,   tb_Y_np1;
@@ -212,7 +213,7 @@ module tb_bkm_step ();
                "\ttb_mode=%b",   tb_mode,
                "\ttb_format=%b", tb_format,
                "\ttb_n=%b",      tb_n,
-               "\ttb_d_n=%b\n",  tb_d_n,
+               "\ttb_d_x_n=%b\ttb_d_y_n=%b\n",  tb_d_x_n, tb_d_y_n,
                "\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
                "\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
                "\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
@@ -230,7 +231,7 @@ module tb_bkm_step ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_X_np1 != res_X_np1) begin
-            $display("[%0d] ERROR: in X. Expected result: %d\n\t\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
+            $display("[%0d] ERROR: in X.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
             add_error();
             //finish_sim();
             err_X = 1'b1;
@@ -245,7 +246,7 @@ module tb_bkm_step ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_Y_np1 != res_Y_np1) begin
-            $display("[%0d] ERROR: in Y. Expected result: %d\n\t\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
+            $display("[%0d] ERROR: in Y.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
             add_error();
             //finish_sim();
             err_Y = 1'b1;
@@ -260,7 +261,7 @@ module tb_bkm_step ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_u_np1 != res_u_np1) begin
-            $display("[%0d] ERROR: in u. Expected result: %d\n\t\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
+            $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
             add_error();
             //finish_sim();
             err_u = 1'b1;
@@ -275,7 +276,7 @@ module tb_bkm_step ();
    always @(posedge clk) begin
       if (ena == 1'b1) begin
          if (tb_v_np1 != res_v_np1) begin
-            $display("[%0d] ERROR: in v. Expected result: %d\n\t\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
+            $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
             add_error();
             //finish_sim();
             err_v = 1'b1;
@@ -311,7 +312,8 @@ module tb_bkm_step ();
       .mode       (tb_mode),
       .format     (tb_format),
       .n          (tb_n),
-      .d_n        (tb_d_n),
+      .d_x_n      (tb_d_x_n),
+      .d_y_n      (tb_d_y_n),
       .X_n        (X_n_csd),
       .Y_n        (Y_n_csd),
       .lut_X      (lut_X_csd),
@@ -323,8 +325,8 @@ module tb_bkm_step ();
       // ----------------------------------
       // Data outputs
       // ----------------------------------
-      .X_np1      (X_n_csd),
-      .Y_np1      (Y_n_csd),
+      .X_np1      (X_np1_csd),
+      .Y_np1      (Y_np1_csd),
       .u_np1      (res_u_np1),
       .v_np1      (res_v_np1)
    );
