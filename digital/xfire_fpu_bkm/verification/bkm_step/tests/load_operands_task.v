@@ -66,8 +66,9 @@ task load_operands;
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[4*`W+2+`LOG2N-1:4*`W+2];
-      tb_d_n      = cnt[4*`W+1:4*`W];
+      tb_n        = cnt[4*`W+4+`LOG2N-1:4*`W+4];
+      tb_d_x_n    = cnt[4*`W+3:4*`W+2];
+      tb_d_y_n    = cnt[4*`W+1:4*`W];
       tb_X_n      = cnt[4*`W-1:3*`W];
       tb_Y_n      = cnt[3*`W-1:2*`W];
       tb_u_n      = cnt[2*`W-1:1*`W];
