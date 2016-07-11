@@ -37,9 +37,12 @@
 // History:
 // --------
 //
+//    - 2016-07-10 - ilesser - Added defines for d_x/d_y sign and data.
 //    - 2016-05-02 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
+
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -106,8 +109,8 @@ module multiply_by_d_csd #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              ( d_x[1]),
-      .subb_b              (~d_y[1]),
+      .subb_a              ( d_x[`D_SIGN]),
+      .subb_b              (~d_y[`D_SIGN]),
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
@@ -126,8 +129,8 @@ module multiply_by_d_csd #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (d_y[1]),
-      .subb_b              (d_x[1]),
+      .subb_a              (d_y[`D_SIGN]),
+      .subb_b              (d_x[`D_SIGN]),
       .a                   (x_in),
       .b                   (y_in),
     // ----------------------------------
@@ -148,8 +151,8 @@ module multiply_by_d_csd #(
          always @(*) begin
             // Flipping all the bits is equivalent to negation
             // Invert x and y depending on the sign of d_x
-            x_dx[i] = x_in[i] ^ d_x[1];
-            y_dx[i] = y_in[i] ^ d_x[1];
+            x_dx[i] = x_in[i] ^ d_x[`D_SIGN];
+            y_dx[i] = y_in[i] ^ d_x[`D_SIGN];
          end
       end
    endgenerate
@@ -164,8 +167,8 @@ module multiply_by_d_csd #(
          always @(*) begin
             // Flipping all the bits is equivalent to negation
             // Invert x and y depending on the sign of d_y
-            x_dy[i] = y_in[i] ^ ~d_y[1];
-            y_dy[i] = x_in[i] ^  d_y[1];
+            x_dy[i] = y_in[i] ^ ~d_y[`D_SIGN];
+            y_dy[i] = x_in[i] ^  d_y[`D_SIGN];
          end
       end
    endgenerate
@@ -178,21 +181,26 @@ module multiply_by_d_csd #(
    // z * d = z_dy    = (-y + j x) dy                     if dx == 0 ^ dy != 0
    // -----------------------------------------------------
    always @(*) begin
-      casex({d_x,d_y})
-         // If d_x == 0
-         4'b00XX: begin
+      casex({d_x[`D_DATA],d_y[`D_DATA]})
+         // If d_x == 0 ^ d_y != 0
+         2'b01: begin
                      x_out = x_dy;
                      y_out = y_dy;
                   end
-         // If d_y == 0
-         4'bXX00: begin
+         // If d_x != 0 ^ d_y == 0
+         2'b10: begin
                      x_out = x_dx;
                      y_out = y_dx;
                   end
          // If d_x != 0 ^ d_y != 0
-         default: begin
+         2'b11: begin
                      x_out = x_dx_dy;
                      y_out = y_dx_dy;
+                  end
+
+         default: begin
+                     x_out = {W{1'b0}};
+                     y_out = {W{1'b0}};
                   end
       endcase
    end
