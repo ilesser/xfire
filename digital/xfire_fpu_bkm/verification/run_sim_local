@@ -674,7 +674,14 @@ if [ "${tool}" == "iverilog"  ]; then
        -o ./temp/run.out
 
    cd ./temp
-   ./run.out
+   vvp \
+      -l ../reports/${block_name}.${test_name}.${rseed}.log \
+      ./run.out   \
+      +TESTSEED=${rseed} \
+      +VERBOSITY=${verbosity_2}
+   cd ..
+   echo ""
+   echo ""
 fi
 
 if [ "${tool}" == "vcs" ]; then
