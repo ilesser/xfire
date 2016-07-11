@@ -36,6 +36,7 @@
 // History:
 // --------
 //
+//    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-06-15 - ilesser - Renamed get_d and implemented dxy muxing.
 //    - 2016-05-10 - ilesser - Initial version.
 //
@@ -91,20 +92,20 @@ module get_d #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [W-5:0]     u_i;     // Integer part of u
-   reg   [W-5:0]     v_i;     // Integer part of v
-   reg   [3:0]       u_d;     // Decimal part of u
-   reg   [3:0]       v_d;     // Decimal part of v
-   reg               u_negative;
-   reg               u_less_than_m1;
-   reg               u_higher_than_p1;
-   reg               v_negative;
-   reg               v_less_than_m1;
-   reg               v_higher_than_p1;
-   reg           u_range_m1_0;
-   reg           u_range_0_p1;
-   reg           v_range_m1_0;
-   reg           v_range_0_p1;
+   wire  [W-5:0]  u_i;     // Integer part of u
+   wire  [W-5:0]  v_i;     // Integer part of v
+   wire  [3:0]    u_d;     // Decimal part of u
+   wire  [3:0]    v_d;     // Decimal part of v
+   wire           u_negative;
+   wire           u_less_than_m1;
+   wire           u_higher_than_p1;
+   wire           v_negative;
+   wire           v_less_than_m1;
+   wire           v_higher_than_p1;
+   wire           u_range_m1_0;
+   wire           u_range_0_p1;
+   wire           v_range_m1_0;
+   wire           v_range_0_p1;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -114,21 +115,17 @@ module get_d #(
    // -----------------------------------------------------
    // Get the decimal part of u and v
    // -----------------------------------------------------
-   always @(*) begin
-      u_i               =   u[W-1:4];  // Integer part
-      u_d               =   u[3:0];    // Decimal part
-      u_negative        =   u[W-1];
-      u_range_m1_0      =  &u_i;       // All ones
-      u_range_0_p1      = ~|u_i;       // All zeros
-   end
+   assign u_i           =   u[W-1:4];  // Integer part
+   assign u_d           =   u[3:0];    // Decimal part
+   assign u_negative    =   u[W-1];
+   assign u_range_m1_0  =  &u_i;       // All ones
+   assign u_range_0_p1  = ~|u_i;       // All zeros
 
-   always @(*) begin
-      v_i               =   v[W-1:4];  // Integer part
-      v_d               =   v[3:0];    // Decimal part
-      v_negative        =   v[W-1];
-      v_range_m1_0      =  &v_i;       // All ones
-      v_range_0_p1      = ~|v_i;       // All zeros
-   end
+   assign v_i           =   v[W-1:4];  // Integer part
+   assign v_d           =   v[3:0];    // Decimal part
+   assign v_negative    =   v[W-1];
+   assign v_range_m1_0  =  &v_i;       // All ones
+   assign v_range_0_p1  = ~|v_i;       // All zeros
    // -----------------------------------------------------
    // Mux the value of d_n
    // -----------------------------------------------------
