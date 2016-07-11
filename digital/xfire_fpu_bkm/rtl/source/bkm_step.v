@@ -121,7 +121,8 @@ module bkm_step #(
     input wire                mode,
     input wire [1:0]          format,
     input wire [LOG2N-1:0]    n,
-    input wire [3:0]          d_n,        // d_n is encoded in ones complement
+    input wire [1:0]          d_x_n,        // d_n is encoded in ones complement
+    input wire [1:0]          d_y_n,        // d_n is encoded in ones complement
     input wire [2*W-1:0]      X_n,
     input wire [2*W-1:0]      Y_n,
     input wire [2*W-1:0]      lut_X,
@@ -148,8 +149,6 @@ module bkm_step #(
    // Internal signals
    // -----------------------------------------------------
    // For the data path
-   wire  [1:0]          d_n_x;
-   wire  [1:0]          d_n_y;
    wire                 d_n_data_x;
    wire                 d_n_data_y;
    wire                 d_n_sign_x;
@@ -173,8 +172,8 @@ module bkm_step #(
    wire  [2*W-1:0]      s_y;
 
    // For the control path
-   wire  [1:0]          d_n_u;
-   wire  [1:0]          d_n_v;
+   wire  [1:0]          d_u_n;
+   wire  [1:0]          d_v_n;
    wire                 d_n_data_u;
    wire                 d_n_data_v;
    wire                 d_n_sign_u;
@@ -253,29 +252,6 @@ module bkm_step #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Calculate signs and data from d_n
-   // -----------------------------------------------------
-
-   //            real   imag
-   //              |      |
-   //            .---.  .---.
-   //            |   |  |   |
-   //    d_n = [ Xs  Xd Ys  Yd ]
-   assign d_n_x      = d_n[3:2];
-   assign d_n_y      = d_n[1:0];
-   assign d_n_u      = d_n[3:2];
-   assign d_n_v      = d_n[1:0];
-   assign d_n_sign_x = d_n[3];
-   assign d_n_data_x = d_n[2];
-   assign d_n_sign_y = d_n[1];
-   assign d_n_data_y = d_n[0];
-   assign d_n_sign_u = d_n[3];
-   assign d_n_data_u = d_n[2];
-   assign d_n_sign_v = d_n[1];
-   assign d_n_data_v = d_n[0];
-   // -----------------------------------------------------
-
-   // -----------------------------------------------------
    // Multiply by d_n
    // -----------------------------------------------------
    multiply_by_d_csd #(
@@ -287,8 +263,8 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .d_x                 (d_n_x),
-      .d_y                 (d_n_y),
+      .d_x                 (d_x_n),
+      .d_y                 (d_y_n),
       .x_in                (X_n_shifted),
       .y_in                (Y_n_shifted),
     // ----------------------------------
@@ -310,8 +286,8 @@ module bkm_step #(
                      sign_a_y = 1'b0;  // add
                      sign_b_x = 1'b0;  // add
                      sign_b_y = 1'b0;  // add
-                     //sign_b_x = d_n_sign_x;
-                     //sign_b_y = d_n_sign_y;
+                     //sign_b_x = d_x_n[`D_SIGN];
+                     //sign_b_y = d_y_n[`D_SIGN];
                      a_x      = X_n;
                      a_y      = Y_n;
                      b_x      = X_n_shifted_times_d_n;
@@ -392,6 +368,13 @@ module bkm_step #(
 // *****************************************************************************
 
    // -----------------------------------------------------
+   // Calculate decisions for u and v
+   // -----------------------------------------------------
+   assign d_u_n      = d_x_n;
+   assign d_v_n      = d_y_n;
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
    // Multiply by d_n
    // -----------------------------------------------------
    multiply_by_d #(
@@ -403,8 +386,8 @@ module bkm_step #(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .d_x                 (d_n_u),
-      .d_y                 (d_n_v),
+      .d_x                 (d_u_n),
+      .d_y                 (d_v_n),
       .x_in                (u_n),
       .y_in                (v_n),
     // ----------------------------------
@@ -437,10 +420,10 @@ module bkm_step #(
                      sign_a_v = 1'b0;  // add
                      sign_b_u = 1'b0;  // add
                      sign_b_v = 1'b0;  // add
-                     //sign_b_u = d_n_sign_u;
-                     //sign_b_v = d_n_sign_v;
-                     a_u      = u_n + d_n_data_u; // calculate
-                     a_v      = v_n + d_n_data_v; // calculate
+                     //sign_b_u = d_u_n[`D_SIGN];
+                     //sign_b_v = d_v_n[`D_SIGN];
+                     a_u      = u_n + d_u_n[`D_DATA];
+                     a_v      = v_n + d_v_n[`D_DATA];
                      b_u      = u_n_times_d_n;
                      b_v      = v_n_times_d_n;
                   end
