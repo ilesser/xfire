@@ -60,15 +60,18 @@ task dir_test;
       // operands     mode     format            n           X_n      Y_n      u_n      v_n      X_np1    Y_np1    u_np1    v_np1
       //load_directed( `MODE_E, `FORMAT_REAL_64,  `LOG2N'd0,  `W'd0,   `W'd0,   `W'd0,   `W'd0,   `W'd0,   `W'd0,   `W'd0,   `W'd0);
 
-      // operands     mode     format            n             d_n       X_n      Y_n      u_n      v_n
-      load_directed( `MODE_L, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_E, `FORMAT_REAL_32,  `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_E, `FORMAT_REAL_64,  `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_32, `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_REAL_32,  `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_REAL_64,  `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_32, `LOG2N'd000,   2'b00,   `W'd000, `W'd000, `W'd000, `W'd000);
+      // operands     mode     format            n             d_x_n    d_y_n     X_n      Y_n      u_n      v_n
+      load_directed( `MODE_E, `FORMAT_REAL_32 , `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_E, `FORMAT_REAL_64 , `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_E, `FORMAT_CMPLX_32, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_E, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_L, `FORMAT_REAL_32 , `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_L, `FORMAT_REAL_64 , `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_32, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_E, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd000, `W'd000, `W'd000);
+      load_directed( `MODE_E, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd001, `W'd000, `W'd000);
+      load_directed( `MODE_E, `FORMAT_CMPLX_64, `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd002, `W'd000, `W'd000);
    end
 
 // *****************************************************************************
@@ -86,7 +89,8 @@ task load_directed;
    input              mode;
    input [1:0]        format;
    input [`LOG2N-1:0] n;
-   input [1:0]        d_n;
+   input [1:0]        d_x_n;
+   input [1:0]        d_y_n;
    input [`W-1:0]     X_n;
    input [`W-1:0]     Y_n;
    input [`W-1:0]     u_n;
@@ -109,8 +113,9 @@ task load_directed;
 
       dir_cnt[`CNT_SIZE-1]             = mode;
       dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3] = format;
-      dir_cnt[4*`W+2+`LOG2N-1:4*`W+2]  = n;
-      dir_cnt[4*`W+1:4*`W]             = d_n;
+      dir_cnt[4*`W+4+`LOG2N-1:4*`W+4]  = n;
+      dir_cnt[4*`W+3:4*`W+2]           = d_x_n;
+      dir_cnt[4*`W+1:4*`W]             = d_y_n;
       dir_cnt[4*`W-1:3*`W]             = X_n;
       dir_cnt[3*`W-1:2*`W]             = Y_n;
       dir_cnt[2*`W-1:1*`W]             = u_n;
