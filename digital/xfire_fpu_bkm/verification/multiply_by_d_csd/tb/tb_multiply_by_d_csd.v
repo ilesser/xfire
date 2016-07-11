@@ -48,26 +48,23 @@ module tb_multiply_by_d_csd ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam              W = `W;
-   localparam              CNT_SIZE = `CNT_SIZE;
-   wire                    clk;
-   reg                     rst, ena;
-   reg                     err_x, err_y;
-   reg            [1:0]    tb_d_x;
-   reg            [1:0]    tb_d_y;
-   reg   signed   [W-1:0]  tb_x_in;
-   reg   signed   [W-1:0]  tb_y_in;
-   reg   signed   [W-1:0]  tb_x_out;
-   reg   signed   [W-1:0]  tb_y_out;
-
-   reg            [CNT_SIZE-1:0]   cnt;
+   localparam                 W = `W;
+   localparam                 CNT_SIZE = `CNT_SIZE;
+   wire                       clk;
+   reg                        rst, ena;
+   reg       [CNT_SIZE-1:0]   cnt;
+   reg                        err_x,      err_y;
+   reg            [1:0]       tb_d_x,     tb_d_y;
+   reg   signed   [W-1:0]     tb_x_in,    tb_y_in;
+   reg   signed   [W-1:0]     tb_x_out,   tb_y_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  signed   [W-1:0]  res_x;
-   wire  signed   [W-1:0]  res_y;
+   wire  signed   [W-1:0]     res_x,      res_y;
+   wire  signed   [2*W-1:0]   x_in_csd,   y_in_csd;
+   wire  signed   [2*W-1:0]   x_out_csd,  y_out_csd;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
