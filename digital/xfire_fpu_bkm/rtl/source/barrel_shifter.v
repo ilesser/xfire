@@ -37,8 +37,9 @@
 // History:
 // --------
 //
-//    - 2016-06-13 - ilesser   - Cosmetic changes
-//    - 2016-04-25 - ilesser   - Initial version
+//    - 2016-07-11 - ilesser - Removed regs and used wires.
+//    - 2016-06-13 - ilesser - Cosmetic changes
+//    - 2016-04-25 - ilesser - Initial version
 //
 // -----------------------------------------------------------------------------
 
@@ -63,7 +64,7 @@ module barrel_shifter #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [W-1:0]     out
+    output  wire  [W-1:0]     out
   );
 // *****************************************************************************
 
@@ -74,59 +75,75 @@ module barrel_shifter #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   s;
-   reg   in0 [0:W-1][0:LOG2W-1];
-   reg   in1 [0:W-1][0:LOG2W-1];
-   reg   muxs[0:W-1][0:LOG2W];
+   // Every value in the muxs matrix represents a 1 bit 2 to 1 mux
+   // with in0 and in1 its inputs
+
+   //        in0[i][j]   in1[i][j]
+   //            |       |
+   //       +----:-------:----+
+   //        \   0       1   /------ sel[i]
+   //         +------:------+
+   //                |
+   //             muxs[i][j]
+   wire  s;
+   //    cols: j        rows: i
+   wire  [W-1:0]  in0   [0:LOG2W-1];
+   wire  [W-1:0]  in1   [0:LOG2W-1];
+   wire  [W-1:0]  muxs  [0:LOG2W];
+
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
 
    // Select the bit that gets shifted in from the left
-   always @(*) begin
-      // If shifting left put 1'b0.
-      // If shifting right and arithmetic put in[W-1] if logic put 1'b0
-      s = dir ? 1'b0 : shift_t ? in[W-1] : 1'b0;
-   end
+   // If shifting left put 1'b0.
+   // If shifting right and arithmetic put in[W-1] if logic put 1'b0
+   assign s = dir == `DIR_LEFT ? 1'b0 : shift_t == `SHIFT_ARITH ? in[W-1] : 1'b0;
 
    genvar i,j;
    generate
-      for (i=0; i < W; i=i+1) begin
+      for (j=0; j < W; j=j+1) begin
+         // Here is what I have to do for each value of i and j
+         //  i              j
+         //LOG2W    [W-1 W ... 1 0]   connect in[W-1:0] or in[0:W-] to muxs[LOG2W][j]        (pre data reversal)
+         //LOG2W-1  [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
+         //.                .
+         //.                .
+         //.                .
+         //1        [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
+         //0        [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
+         //                           connect muxs[0][W-1:0] or muxs[0][0:W-1] to out[W-1:0] (post data reversal)
 
          // If the direction is 'to left' then I can simply reverse before and after
          // and run a 'to right' shift
-
          // Pre data reversal
-         always @(*) begin
-            muxs[i][LOG2W] = dir ? in[W-1-i] : in[i];
-         end
+         assign muxs[LOG2W][j] = dir == `DIR_LEFT ? in[W-1-j] : in[j];
 
-         for (j=0; j < LOG2W; j=j+1) begin
+         for (i=0; i < LOG2W; i=i+1) begin
 
-            //always @(*) begin
-            always @(i, j, muxs[i][j+1], muxs[i+(2**j)][j+1], op, muxs[i-(W-1)+(2**j)-1][j+1], s, sel[j], in0[i][j], in1[i][j]) begin
+            // Select in0 input from the output from the jth mux of the previous row
+            assign in0[i][j] = muxs[i+1][j];
 
-               // Select in0 input from previous mux
-               in0[i][j]   = muxs[i][j+1];
+            // Select in1
+            if (j <= (W-1)-2**i)
+               // take the input from the (j+2^i)th mux of the previous row
+               assign in1[i][j]  = muxs[i+1][j+(2**i)];
+            else // if i > W-1-2^j
+               // if it is a rotation then take the input from the [(i+2^j) mod W]th mux of the previous row
+               assign in1[i][j]  = (op == `OP_ROT) ? muxs[i+1][j-(W-1)+(2**i)-1]
+               // if it is a shift then take the input from the sign
+                                                      : s;
 
-               // Select in1 from (i+2^j) mod W  mux if its a rotation or from s if its a shift
-               in1[i][j]   = (i <= (W-1)-2**j) ? muxs[i+(2**j)][j+1] : op ? muxs[i-(W-1)+(2**j)-1][j+1] : s;
+            // Connect mux in0 and in1 with sel[i]
+            assign muxs[i][j]  = sel[i] ? in1[i][j] : in0[i][j];
 
-               // Connect mux in0 and in1 with sel[j]
-               muxs[i][j]  = sel[j] ? in1[i][j] : in0[i][j];
-
-            end // always
-
-         end // for j
+         end // for i
 
          // Post data reversal
-         //always @(*) begin
-         always @(i, dir, muxs[W-1-i][0], muxs[i][0]) begin
-            out[i] = dir ? muxs[W-1-i][0] : muxs[i][0];
-         end
+         assign out[j] = dir == `DIR_LEFT ? muxs[0][W-1-j] : muxs[0][j];
 
-      end // for i
+      end // for j
 
    endgenerate
    // -----------------------------------------------------

@@ -33,6 +33,7 @@
 // History:
 // --------
 //
+//    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-05-12 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -56,8 +57,8 @@ module add_subb #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg               c,
-    output  reg   [W-1:0]     s
+    output  wire              c,
+    output  wire  [W-1:0]     s
   );
 // *****************************************************************************
 
@@ -103,11 +104,11 @@ module add_subb #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [W-1:0]  a_inv;// inverted version of a
-   reg   [W-1:0]  b_inv;// inverted version of b
-   reg   [W:0]    cc;   // carry
-   reg   [W:0]    cp;   // partial carry
-   reg   [W-1:0]  p;    // partial sum
+   wire  [W-1:0]  a_inv;// inverted version of a
+   wire  [W-1:0]  b_inv;// inverted version of b
+   wire  [W:0]    cc;   // carry
+   wire  [W:0]    cp;   // partial carry
+   wire  [W-1:0]  p;    // partial sum
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -115,37 +116,29 @@ module add_subb #(
    // -----------------------------------------------------
 
    // Initial values
-   always @(*) begin
-      cc[0]  = subb_a;
-      cp[0] = subb_b;
-   end
+   assign cc[0] = subb_a;
+   assign cp[0] = subb_b;
 
    genvar i;
    generate
       for (i=0; i < W; i=i+1) begin
-         always @(*) begin
+         assign a_inv[i]       =  a[i] ^ subb_a;
+         assign b_inv[i]       =  b[i] ^ subb_b;
 
-            a_inv[i]       =  a[i] ^ subb_a;
-            b_inv[i]       =  b[i] ^ subb_b;
-
-            {cp[i+1],p[i]} =  cc[i] + cp[i];
-            {cc[i+1],s[i]} =  a_inv[i] + b_inv[i] + p[i];
-
-         end
+         assign {cp[i+1],p[i]} =  cc[i] + cp[i];
+         assign {cc[i+1],s[i]} =  a_inv[i] + b_inv[i] + p[i];
       end
    endgenerate
 
 
    // Report carry if any of c or cp is 1
-   always @(*) begin
-      //c = {cc[W] , cp[W]};  //512 W
-      //c = cc[W] | cp[W];    //513 W
-      //c = cc[W] & cp[W];    //483 W
-      //c = cc[W] ^ cp[W];    //512 W
-      //c = cc[W] + cp[W];    //512 W
-      c = cc[W];            //512 W
-      //c = cp[W];            //484 W
-   end
+   //assign c = {cc[W] , cp[W]};  //512 W
+   //assign c = cc[W] | cp[W];    //513 W
+   //assign c = cc[W] & cp[W];    //483 W
+   //assign c = cc[W] ^ cp[W];    //512 W
+   //assign c = cc[W] + cp[W];    //512 W
+   assign c = cc[W];            //512 W
+   //assign c = cp[W];            //484 W
    // -----------------------------------------------------
 
 // *****************************************************************************

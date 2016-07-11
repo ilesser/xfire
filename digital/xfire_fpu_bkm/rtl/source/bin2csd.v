@@ -66,8 +66,9 @@
 // History:
 // --------
 //
-//    - 2016-03-17 - ilesser   - Working version. Using a ripple carry architecture.
-//    - 2016-03-15 - ilesser   - Initial version
+//    - 2016-07-11 - ilesser - Removed regs and used wires.
+//    - 2016-03-17 - ilesser - Working version. Using a ripple carry architecture.
+//    - 2016-03-15 - ilesser - Initial version
 //
 // -----------------------------------------------------------------------------
 
@@ -87,7 +88,7 @@ module bin2csd #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output reg [2*W-1:0]      y
+    output wire[2*W-1:0]      y
   );
 // *****************************************************************************
 
@@ -98,10 +99,10 @@ module bin2csd #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [W-1:0]  h;
-   reg   [W-1:0]  k;
-   reg   [W-1:0]  y_s;
-   reg   [W-1:0]  y_d;
+   wire  [W-1:0]  h;
+   wire  [W-1:0]  k;
+   wire  [W-1:0]  y_s;
+   wire  [W-1:0]  y_d;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -109,59 +110,51 @@ module bin2csd #(
    // -----------------------------------------------------
 
    // i=0 first bit
-   always @(*) begin
-      h[0] = x[0];
-      k[0] = 1'b0;
-   end
+   assign h[0] = x[0];
+   assign k[0] = 1'b0;
 
    genvar i;
    generate
       for (i=0; i < W-1; i=i+1) begin
 
-         always @(*) begin
+         // i is odd
+         if ( i%2 ) begin
 
-            // i is odd
-            if ( i%2 ) begin
-
-               h[i+1] =  h[i]   |  x[i+1];
-               k[i+1] =  k[i]   &  x[i+1];
-               y_s[i] = ~h[i]   &  k[i+1];
-               y_d[i] = ~h[i+1] &  k[i];
-
-            end
-            else begin // i is even
-
-               h[i+1] =  h[i]   &  x[i+1];
-               k[i+1] =  k[i]   |  x[i+1];
-               y_s[i] =  h[i+1] & ~k[i];
-               y_d[i] =  h[i]   & ~k[i+1];
-
-            end
-
-            y[2*i+1:2*i] = {y_s[i], y_d[i]};
+            assign h[i+1] =  h[i]   |  x[i+1];
+            assign k[i+1] =  k[i]   &  x[i+1];
+            assign y_s[i] = ~h[i]   &  k[i+1];
+            assign y_d[i] = ~h[i+1] &  k[i];
 
          end
+         else begin // i is even
+
+            assign h[i+1] =  h[i]   &  x[i+1];
+            assign k[i+1] =  k[i]   |  x[i+1];
+            assign y_s[i] =  h[i+1] & ~k[i];
+            assign y_d[i] =  h[i]   & ~k[i+1];
+
+         end
+
+         assign y[2*i+1:2*i] = {y_s[i], y_d[i]};
 
       end
    endgenerate
 
-   always @(*) begin
-      // i=W-1 last bit
-      if ( (W-1)%2 ) begin // W-1 is odd
+   // i=W-1 last bit
+   if ( (W-1)%2 ) begin // W-1 is odd
 
-         y_s[W-1] =  ~h[W-2] &  k[W-1];
-         y_d[W-1] =  ~h[W-1] &  k[W-2];
+      assign y_s[W-1] =  ~h[W-2] &  k[W-1];
+      assign y_d[W-1] =  ~h[W-1] &  k[W-2];
 
-      end
-      else begin  // W-1 is even
-
-         y_s[W-1] =   h[W-1] & ~k[W-2];
-         y_d[W-1] =   h[W-2] & ~k[W-1];
-
-      end
-
-      y[2*(W-1)+1:2*(W-1)] = {y_s[W-1], y_d[W-1]};
    end
+   else begin  // W-1 is even
+
+      assign y_s[W-1] =   h[W-1] & ~k[W-2];
+      assign y_d[W-1] =   h[W-2] & ~k[W-1];
+
+   end
+
+   assign y[2*(W-1)+1:2*(W-1)] = {y_s[W-1], y_d[W-1]};
    // -----------------------------------------------------
 
 // *****************************************************************************

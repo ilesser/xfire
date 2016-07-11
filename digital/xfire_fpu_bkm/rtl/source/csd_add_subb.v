@@ -53,6 +53,7 @@
 // History:
 // --------
 //
+//    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-04-10 - ilesser - Changed representation to BS (see paper in desc).
 //    - 2016-04-08 - ilesser - Converted to adder/subbstracter.
 //    - 2016-04-08 - ilesser - Original version.
@@ -78,8 +79,8 @@ module csd_add_subb #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [1:0]       c,
-    output  reg   [2*W-1:0]   s
+    output  wire  [1:0]       c,
+    output  wire  [2*W-1:0]   s
   );
 // *****************************************************************************
 
@@ -135,18 +136,18 @@ module csd_add_subb #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [2*W-1:0]   a_inv;// inverted version of a
-   reg   [2*W-1:0]   b_inv;// inverted version of b
-   reg   [W-1:0]     a_s;  // a sign bit
-   reg   [W-1:0]     a_d;  // a data bit
-   reg   [W-1:0]     b_s;  // b sign bit
-   reg   [W-1:0]     b_d;  // b data bit
+   wire  [2*W-1:0]   a_inv;// inverted version of a
+   wire  [2*W-1:0]   b_inv;// inverted version of b
+   wire  [W-1:0]     a_s;  // a sign bit
+   wire  [W-1:0]     a_d;  // a data bit
+   wire  [W-1:0]     b_s;  // b sign bit
+   wire  [W-1:0]     b_d;  // b data bit
    reg   [W:0]       c_s;  // carry sign bit
    reg   [W:0]       c_d;  // carry data bit
-   reg   [W-1:0]     s_s;  // sum sign bit
-   reg   [W-1:0]     s_d;  // sum data bit
-   reg   [W-1:0]     p;    // partial sum
-   //reg   [2*W-1:0]   c;    // carry
+   wire  [W-1:0]     s_s;  // sum sign bit
+   wire  [W-1:0]     s_d;  // sum data bit
+   wire  [W-1:0]     p;    // partial sum
+   //wire  [2*W-1:0]   c;    // carry
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -169,36 +170,32 @@ module csd_add_subb #(
    genvar i;
    generate
       for (i=0; i < W; i=i+1) begin
-         always @(*) begin
 
-            // Flipping all the bits corresponds to the additive inverse of a number in BS
-            // Invert a and b depending on subb_a and subb_b
-            a_inv[2*i+1:2*i] = a[2*i+1:2*i] ^ {2{subb_a}};
-            b_inv[2*i+1:2*i] = b[2*i+1:2*i] ^ {2{subb_b}};
+         // Flipping all the bits corresponds to the additive inverse of a number in BS
+         // Invert a and b depending on subb_a and subb_b
+         assign a_inv[2*i+1:2*i] = a[2*i+1:2*i] ^ {2{subb_a}};
+         assign b_inv[2*i+1:2*i] = b[2*i+1:2*i] ^ {2{subb_b}};
 
-            // Split the CSD numbers into its BS representation
-            // _s stands for sign bit and _d for data bit
-            // See initial description for more information
-            {a_s[i], a_d[i]} = a_inv[2*i+1:2*i];
-            {b_s[i], b_d[i]} = b_inv[2*i+1:2*i];
+         // Split the CSD numbers into its BS representation
+         // _s stands for sign bit and _d for data bit
+         // See initial description for more information
+         assign {a_s[i], a_d[i]} = a_inv[2*i+1:2*i];
+         assign {b_s[i], b_d[i]} = b_inv[2*i+1:2*i];
 
-            // The carry sign bit inverters cancell each other
-            // So I only have to invert the sign bit of a, b ans s
-            {c_s[i+1],   p[i]} = ~a_s[i] + a_d[i] + ~b_s[i];
-            {c_d[i+1], s_s[i]} =             p[i] +  b_d[i] +  c_s[i];
-                       s_d[i]  =                               c_d[i];
+         // The carry sign bit inverters cancell each other
+         // So I only have to invert the sign bit of a, b ans s
+         assign {c_s[i+1],   p[i]} = ~a_s[i] + a_d[i] + ~b_s[i];
+         assign {c_d[i+1], s_s[i]} =             p[i] +  b_d[i] +  c_s[i];
+         assign            s_d[i]  =                               c_d[i];
 
-            s[2*i+1:2*i] = {~s_s[i], s_d[i]};
+         assign s[2*i+1:2*i] = {~s_s[i], s_d[i]};
 
-         end
       end
    endgenerate
 
 
    // I do have to invert the last carry
-   always @(*) begin
-      c[1:0] = {~c_s[W], c_d[W]};
-   end
+   assign c[1:0] = {~c_s[W], c_d[W]};
    // -----------------------------------------------------
 
    // -----------------------------------------------------

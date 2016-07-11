@@ -32,7 +32,8 @@
 // History:
 // --------
 //
-//    - 2016-04-18 - ilesser - Original version.
+//    - 2016-07-11 - ilesser - Removed regs and used wires.
+//    - 2016-04-18 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -52,7 +53,7 @@ module csd2bin #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [W-1:0]     y
+    output  wire  [W-1:0]     y
   );
 // *****************************************************************************
 
@@ -102,31 +103,27 @@ module csd2bin #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [W:0]       c;    // carry
-   reg   [W-1:0]     x_s;  // x sign bit
-   reg   [W-1:0]     x_d;  // x data bit
+   wire  [W:0]       c;    // carry
+   wire  [W-1:0]     x_s;  // x sign bit
+   wire  [W-1:0]     x_d;  // x data bit
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-   always @(1'b1) begin
-      c[0] = 1'b1;
-   end
+   assign c[0] = 1'b1;
 
    genvar i;
    generate
       for (i=0; i < W; i=i+1) begin
-         always @(*) begin
 
-            // Split the CSD numbers into its BS representation
-            // _s stands for sign bit and _d for data bit
-            {x_s[i], x_d[i]}  = x[2*i+1:2*i];
+         // Split the CSD numbers into its BS representation
+         // _s stands for sign bit and _d for data bit
+         assign {x_s[i], x_d[i]}  = x[2*i+1:2*i];
 
-            // Propagate the carry
-            {c[i+1], y[i]}    = !x_s[i] + x_d[i] + c[i];
+         // Propagate the carry
+         assign {c[i+1], y[i]}    = !x_s[i] + x_d[i] + c[i];
 
-         end
       end
    endgenerate
    // -----------------------------------------------------
