@@ -57,15 +57,19 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      //repeat(2**(2*`W+1))
-      repeat(2**8)
+      repeat(2**(`CNT_SIZE))
       begin
 
-         tb_mode     = cnt[2*`W];
-         tb_u[`W-1]  = ~cnt[2*`W-1];
-         tb_u[`W-2:0]= cnt[2*`W-2:`W];
-         tb_v[`W-1]  = cnt[`W-1];
-         tb_v[`W-2:0]= ~cnt[`W-2:0];
+         // The u and v channels are independat of each other
+         // hence I can assign them at the same time
+         //tb_mode        =  cnt[2*`W];
+         //tb_u[`W-1]     = ~cnt[2*`W-1];
+         //tb_u[`W-2:0]   =  cnt[2*`W-2:`W];
+         tb_mode        =  cnt[`W];
+         tb_u[`W-1]     = ~cnt[`W-1];
+         tb_u[`W-2:0]   =  cnt[`W-2:0];
+         tb_v[`W-1]     = ~cnt[`W-1];
+         tb_v[`W-2:0]   =  cnt[`W-2:0];
 
          u_i   = $itor($signed(tb_u[W-1:4]));
          v_i   = $itor($signed(tb_v[W-1:4]));
