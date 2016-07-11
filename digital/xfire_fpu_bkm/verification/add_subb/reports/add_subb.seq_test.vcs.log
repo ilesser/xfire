@@ -8,7 +8,7 @@ Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precisio
 -l ./reports/add_subb.seq_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait +warn=all \
 -sverilog -debug
                          Chronologic VCS (TM)
-            Version I-2014.03 -- Fri Jun 10 17:43:00 2016
+            Version I-2014.03 -- Sun Jun 12 13:52:54 2016
                Copyright (c) 1991-2014 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -130,4 +130,4 @@ rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /
 /usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
 -ldl -lm  -lc -lpthread -ldl 
 ../simv up to date
-CPU time: 2.802 seconds to compile + .158 seconds to elab + .134 seconds to link
+CPU time: 2.856 seconds to compile + .155 seconds to elab + .144 seconds to link
