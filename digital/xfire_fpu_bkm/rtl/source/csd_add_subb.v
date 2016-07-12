@@ -142,8 +142,8 @@ module csd_add_subb #(
    wire  [W-1:0]     a_d;  // a data bit
    wire  [W-1:0]     b_s;  // b sign bit
    wire  [W-1:0]     b_d;  // b data bit
-   reg   [W:0]       c_s;  // carry sign bit
-   reg   [W:0]       c_d;  // carry data bit
+   wire  [W:0]       c_s;  // carry sign bit
+   wire  [W:0]       c_d;  // carry data bit
    wire  [W-1:0]     s_s;  // sum sign bit
    wire  [W-1:0]     s_d;  // sum data bit
    wire  [W-1:0]     p;    // partial sum
@@ -157,15 +157,11 @@ module csd_add_subb #(
    // Initial values
    // CSD 0 = {0,0} o {1,1} in BS but sign digit has to be inverted
    // so the initial carry can be {1,0} or {0,1}
-   always @(*) begin
-      case({a_inv[1:0],b_inv[1:0]})
-         4'b0010: {c_s[0],c_d[0]} = 2'b10;
-         4'b1000: {c_s[0],c_d[0]} = 2'b10;
-         4'b1011: {c_s[0],c_d[0]} = 2'b10;
-         4'b1110: {c_s[0],c_d[0]} = 2'b10;
-         default: {c_s[0],c_d[0]} = 2'b01;
-      endcase
-   end
+   assign {c_s[0],c_d[0]} = {a_inv[1:0],b_inv[1:0]} == 4'b0010 ?  2'b10 :
+                            {a_inv[1:0],b_inv[1:0]} == 4'b1000 ?  2'b10 :
+                            {a_inv[1:0],b_inv[1:0]} == 4'b1011 ?  2'b10 :
+                            {a_inv[1:0],b_inv[1:0]} == 4'b1110 ?  2'b10 :
+                                                                  2'b01 ;
 
    genvar i;
    generate
