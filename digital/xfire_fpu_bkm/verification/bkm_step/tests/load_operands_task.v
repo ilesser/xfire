@@ -66,11 +66,11 @@ task load_operands;
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[4*`W+4+`LOG2N-1:4*`W+4];
-      tb_d_x_n    = cnt[4*`W+3:4*`W+2];
-      tb_d_y_n    = cnt[4*`W+1:4*`W];
-      tb_X_n      = cnt[4*`W-1:3*`W];
-      tb_Y_n      = cnt[3*`W-1:2*`W];
+      tb_n        = cnt[2*`W+4+`LOG2N-1:2*`W+4];
+      tb_d_x_n    = cnt[2*`W+3:2*`W+2];
+      tb_d_y_n    = cnt[2*`W+1:2*`W+0];
+      tb_X_n      = cnt[2*`W-1:1*`W];
+      tb_Y_n      = cnt[1*`W-1:0*`W];
       tb_u_n      = cnt[2*`W-1:1*`W];
       tb_v_n      = cnt[1*`W-1:0*`W];
       // TODO: make them variable
@@ -82,7 +82,15 @@ task load_operands;
       double_word = tb_format[0];
       complex     = tb_format[1];
 
-      n   = $itor($signed(tb_n));
+      n  = $itor($signed(tb_n));
+
+      dx =  tb_d_x_n == 2'b01 ?  1  :
+            tb_d_x_n == 2'b11 ? -1  :
+                                 0  ;
+
+      dy =  tb_d_y_n == 2'b01 ?  1  :
+            tb_d_y_n == 2'b11 ? -1  :
+                                 0  ;
 
       if (double_word==1'b1) begin
          X_n   = $itor($signed(tb_X_n));
@@ -118,10 +126,6 @@ task load_operands;
 
          if (complex==1'b1) begin
 
-            // Calculate dx and dy
-            dx = u_n <= -0.625  ? -1 : u_n >= 0.375  ? 1 : 0;
-            dy = v_n <= -0.8125 ? -1 : v_n >= 0.8125 ? 1 : 0;
-
             // Calculate X and Y
             X_np1 = X_n * (1 + dx * 2**-n) - Y_n * dy * 2**-n;
             Y_np1 = Y_n * (1 + dx * 2**-n) + X_n * dy * 2**-n;
@@ -133,12 +137,8 @@ task load_operands;
          end
          else begin
 
-            // Calculate dx and dy
-            dx = u_n <= -0.625  ? -1 : u_n >= 0.375  ? 1 : 0;
-            dy = 0;
-
             // Calculate X and Y
-            X_np1 = X_n * (1 + dx * 2**-n) - Y_n * dy * 2**-n;
+            X_np1 = X_n * (1 + dx * 2**-n);
             Y_np1 = 0;
 
             // Calculate u and v
@@ -161,10 +161,6 @@ task load_operands;
 
          if (complex==1'b1) begin
 
-            // Calculate dx and dy
-            dx = u_n <= -0.500 ? -1 : u_n >= 0.500 ? 1 : 0;
-            dy = v_n <= -0.500 ? -1 : v_n >= 0.500 ? 1 : 0;
-
             // Calculate X and Y
             X_np1 = X_n - lut_X;
             Y_np1 = Y_n - lut_Y;
@@ -176,16 +172,12 @@ task load_operands;
          end
          else begin
 
-            // Calculate dx and dy
-            dx = u_n <= -0.500 ? -1 : u_n >= 0.500 ? 1 : 0;
-            dy = 0;
-
             // Calculate X and Y
             X_np1 = X_n - lut_X;
             Y_np1 = 0;
 
             // Calculate u and v
-            u_np1 = 2*(u_n + dx) + (dx * u_n - dy * v_n) * 2**(1-n);
+            u_np1 = 2*(u_n + dx) + dx * u_n * 2**(1-n);
             v_np1 = 0;
 
          end
@@ -197,7 +189,6 @@ task load_operands;
       tb_u_np1 = (u_np1);
       tb_v_np1 = (v_np1);
 
-      run_clk(1);
       run_clk(1);
 
    end
