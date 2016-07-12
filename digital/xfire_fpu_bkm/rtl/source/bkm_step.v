@@ -90,7 +90,7 @@
 // History:
 // --------
 //
-//    - 2016-04-23 - ilesser - Original version.
+//    - 2016-04-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -104,9 +104,7 @@ module bkm_step #(
     // Parameters
     // ----------------------------------
     parameter W      = 64,
-    parameter LOG2W  = 6,
-    parameter N      = 64,    // TODO: delete??
-    parameter LOG2N  = 6      // TODO: delete??
+    parameter LOG2W  = 6
   ) (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -282,10 +280,10 @@ module bkm_step #(
       case(mode)
          `MODE_E:
                   begin
-                     sign_a_x = 1'b0;  // add
-                     sign_a_y = 1'b0;  // add
-                     sign_b_x = 1'b0;  // add
-                     sign_b_y = 1'b0;  // add
+                     sign_a_x = `ADD;
+                     sign_a_y = `ADD;
+                     sign_b_x = `ADD;
+                     sign_b_y = `ADD;
                      //sign_b_x = d_x_n[`D_SIGN];
                      //sign_b_y = d_y_n[`D_SIGN];
                      a_x      = X_n;
@@ -295,10 +293,10 @@ module bkm_step #(
                   end
          `MODE_L:
                   begin
-                     sign_a_x = 1'b0;  // add
-                     sign_a_y = 1'b0;  // add
-                     sign_b_x = 1'b1;  // substract
-                     sign_b_y = 1'b1;  // substract
+                     sign_a_x = `ADD;
+                     sign_a_y = `ADD;
+                     sign_b_x = `SUBB;
+                     sign_b_y = `SUBB;
                      a_x      = X_n;
                      a_y      = Y_n;
                      b_x      = lut_X;
@@ -310,12 +308,10 @@ module bkm_step #(
                      sign_a_y = 1'b0;
                      sign_b_x = 1'b0;
                      sign_b_y = 1'b0;
-                     a_x      = X_n;
-                     a_y      = Y_n;
-                     b_x      = X_n_shifted_times_d_n;
-                     b_y      = Y_n_shifted_times_d_n;
-                     //b_x      = {W{1'b0}};
-                     //b_y      = {W{1'b0}};
+                     a_x      = {2*W{1'b0}};
+                     a_y      = {2*W{1'b0}};
+                     b_x      = {2*W{1'b0}};
+                     b_y      = {2*W{1'b0}};
                   end
       endcase
    end
@@ -405,10 +401,10 @@ module bkm_step #(
       case(mode)
          `MODE_E:
                   begin
-                     sign_a_u = 1'b0;  // add
-                     sign_a_v = 1'b0;  // add
-                     sign_b_u = 1'b1;  // substract
-                     sign_b_v = 1'b1;  // substract
+                     sign_a_u = `ADD;
+                     sign_a_v = `ADD;
+                     sign_b_u = `SUBB;
+                     sign_b_v = `SUBB;
                      a_u      = u_n;
                      a_v      = v_n;
                      b_u      = lut_u;
@@ -416,10 +412,10 @@ module bkm_step #(
                   end
          `MODE_L:
                   begin
-                     sign_a_u = 1'b0;  // add
-                     sign_a_v = 1'b0;  // add
-                     sign_b_u = 1'b0;  // add
-                     sign_b_v = 1'b0;  // add
+                     sign_a_u = `ADD;
+                     sign_a_v = `ADD;
+                     sign_b_u = `ADD;
+                     sign_b_v = `ADD;
                      //sign_b_u = d_u_n[`D_SIGN];
                      //sign_b_v = d_v_n[`D_SIGN];
                      a_u      = u_n + d_u_n[`D_DATA];
@@ -431,18 +427,12 @@ module bkm_step #(
                   begin
                      sign_a_u = 1'b0;
                      sign_a_v = 1'b0;
-                     sign_b_u = 1'b1;
-                     sign_b_v = 1'b1;
-                     a_u      = u_n;
-                     a_v      = v_n;
-                     b_u      = lut_u;
-                     b_v      = lut_v;
-                     //sign_b_u = 1'b0;
-                     //sign_b_v = 1'b0;
-                     //a_u      = {W{1'b0}};
-                     //a_v      = {W{1'b0}};
-                     //b_u      = {W{1'b0}};
-                     //b_v      = {W{1'b0}};
+                     sign_b_u = 1'b0;
+                     sign_b_v = 1'b0;
+                     a_u      = {W{1'b0}};
+                     a_v      = {W{1'b0}};
+                     b_u      = {W{1'b0}};
+                     b_v      = {W{1'b0}};
                   end
       endcase
    end
