@@ -671,6 +671,7 @@ if [ "${tool}" == "iverilog"  ]; then
        -I ./temp \
        -I ../../../rtl/source/ \
        $temp_v_list \
+       -s tb_${block_name} \
        -o ./temp/run.out
 
    cd ./temp
