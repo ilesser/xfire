@@ -297,7 +297,6 @@ module tb_bkm_step ();
    bkm_step #(
       .W          (`W),
       .LOG2W      (`LOG2W),
-      .N          (`N),
       .LOG2N      (`LOG2N)
    ) duv (
       // ----------------------------------
