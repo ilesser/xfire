@@ -110,7 +110,7 @@ module tb_add_subb ();
    // -----------------------------------------------------
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_s != s_res) begin
+         if (tb_s !== s_res) begin
             $display("[%0d] ERROR: Different sum! Expected result: %b %b\n\t\t\t\t Obtained result: %b %b\t\t. Instance: %m",$time, tb_c, tb_s, c_res, s_res);
             add_error();
             finish_sim();
@@ -120,7 +120,7 @@ module tb_add_subb ();
 
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_c != c_res) begin
+         if (tb_c !== c_res) begin
             $display("\t\t\t\t\t\t    %b", tb_a);
             $display("\t\t\t\t\t\t  + %b", tb_b);
             $display("\t\t\t\t\t\t --------");

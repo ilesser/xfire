@@ -108,7 +108,7 @@ module tb_barrel_shifter ();
    // -----------------------------------------------------
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_out != wire_out) begin
+         if (tb_out !== wire_out) begin
             $display("\t\t\t\t\t\t    %b", tb_in );
             $display("\t\t\t\t\t\t    %b", tb_sel);
             $display("\t\t\t\t\t\t -------------");
