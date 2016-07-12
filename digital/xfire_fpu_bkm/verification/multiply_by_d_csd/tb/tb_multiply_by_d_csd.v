@@ -173,7 +173,7 @@ module tb_multiply_by_d_csd ();
    // -----------------------------------------------------
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_x_out != res_x) begin
+         if (tb_x_out !== res_x) begin
             $display("[%0d] ERROR: In X. Expected result: %b\n\t\t\t Obtained result: %b\t\t. Instance: %m",$time, tb_x_out, res_x);
             add_error();
             err_x = 1'b1;
@@ -186,7 +186,7 @@ module tb_multiply_by_d_csd ();
 
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_y_out != res_y) begin
+         if (tb_y_out !== res_y) begin
             $display("[%0d] ERROR: In Y. Expected result: %b\n\t\t\t Obtained result: %b\t\t. Instance: %m",$time, tb_y_out, res_y);
             add_error();
             err_y = 1'b1;
