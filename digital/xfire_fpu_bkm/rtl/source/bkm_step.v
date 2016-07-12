@@ -104,7 +104,8 @@ module bkm_step #(
     // Parameters
     // ----------------------------------
     parameter W      = 64,
-    parameter LOG2W  = 6
+    parameter LOG2W  = 6,
+    parameter LOG2N  = 6
   ) (
     // ----------------------------------
     // Clock, reset & enable inputs
