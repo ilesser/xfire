@@ -24,8 +24,8 @@
 //
 //  Data inputs:
 //    - format    : Format code (logic, 2 bits).   FF
-//                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
-//                                                 |---> Complex:    0 for complex args, 1 for real args
+//                                                 ||--> Precision:  0 for word size args,   1 for double word size args
+//                                                 |---> Complex:    0 for real args,        1 for complex args
 //    - X_in    : Real      part of the result input (two's complement, W bits).
 //    - Y_in    : Imaginary part of the result input (two's complement, W bits).
 //
@@ -80,22 +80,22 @@ module output_precision_selection #(
 
    always @(*) begin
       case (format)
-         `FORMAT_REAL_32:
+         `FORMAT_REAL_W:
                         begin
                            X_out = {{W/2{X_in[W/2-1]}},X_in};
                            Y_out = {W{1'b0}};
                         end
-         `FORMAT_REAL_64:
+         `FORMAT_REAL_DW:
                         begin
                            X_out = X_in;
                            Y_out = {W{1'b0}};
                         end
-         `FORMAT_CMPLX_32:
+         `FORMAT_CMPLX_W:
                         begin
                            X_out = {{W/2{X_in[W/2-1]}},X_in};
                            Y_out = {{W/2{Y_in[W/2-1]}},Y_in};
                         end
-         `FORMAT_CMPLX_64:
+         `FORMAT_CMPLX_DW:
                         begin
                            X_out = X_in;
                            Y_out = Y_in;

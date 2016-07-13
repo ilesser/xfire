@@ -18,8 +18,8 @@
 //
 //  Data inputs:
 //    - format    : Format code (logic, 2 bits).   FF
-//                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
-//                                                 |---> Complex:    0 for complex args, 1 for real args
+//                                                 ||--> Precision:  0 for word size args,   1 for double word size args
+//                                                 |---> Complex:    0 for real args,        1 for complex args
 //    - E_x_in    : Real      part of Exponential input (two's complement, W bits).
 //    - E_y_in    : Imaginary part of Exponential input (two's complement, W bits).
 //    - L_x_in    : Real      part of Logarithmic input (two's complement, W bits).
@@ -38,7 +38,8 @@
 // History:
 // --------
 //
-//    - 2016-04-20 - ilesser - Original version.
+//    - 2016-07-13 - ilesser - Renamed FORMAT defs 32/64 to W/DW.
+//    - 2016-04-20 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -82,28 +83,28 @@ module input_precision_selection #(
 
    always @(*) begin
       case (format)
-         `FORMAT_REAL_32:
+         `FORMAT_REAL_W:
                         begin
                            E_x_out = {{W/2{E_x_in[W/2-1]}},E_x_in[W/2-1:0]};
                            E_y_out = {W{1'b0}};
                            L_x_out = {{W/2{L_x_in[W/2-1]}},L_x_in[W/2-1:0]};
                            L_y_out = {W{1'b0}};
                         end
-         `FORMAT_REAL_64:
+         `FORMAT_REAL_DW:
                         begin
                            E_x_out = E_x_in;
                            E_y_out = {W{1'b0}};
                            L_x_out = L_x_in;
                            L_y_out = {W{1'b0}};
                         end
-         `FORMAT_CMPLX_32:
+         `FORMAT_CMPLX_W:
                         begin
                            E_x_out = {{W/2{E_x_in[W/2-1]}},E_x_in[W/2-1:0]};
                            E_y_out = {{W/2{E_y_in[W/2-1]}},E_y_in[W/2-1:0]};
                            L_x_out = {{W/2{L_x_in[W/2-1]}},L_x_in[W/2-1:0]};
                            L_y_out = {{W/2{L_y_in[W/2-1]}},L_y_in[W/2-1:0]};
                         end
-         `FORMAT_CMPLX_64:
+         `FORMAT_CMPLX_DW:
                         begin
                            E_x_out = E_x_in;
                            E_y_out = E_y_in;
