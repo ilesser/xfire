@@ -4,7 +4,7 @@
 // Description:
 // ------------
 //
-// XXXXX FILL IN HERE XXXXX
+// Definitions for bkm.
 //
 // -----------------------------------------------------------------------------
 // File name:
@@ -16,7 +16,9 @@
 // History:
 // --------
 //
-//    - 2016-04-10 - ilesser - Original version.
+//    - 2016-07-13 - ilesser - Renamed FORMAT defs 32/64 to W/DW.
+//    - 2016-07-10 - ilesser - Added ADD/SUBB for adders.
+//    - 2016-04-10 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -39,14 +41,14 @@
 
 // --------------------------------------------------------
 //    - format    : Format code (logic, 2 bits).   FF
-//                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
-//                                                 |---> Complex:    0 for complex args, 1 for real args
+//                                                 ||--> Precision:  0 for word size args,   1 for double word size args
+//                                                 |---> Complex:    0 for real args,        1 for complex args
 // --------------------------------------------------------
 
-`define FORMAT_REAL_32  2'b00
-`define FORMAT_REAL_64  2'b01
-`define FORMAT_CMPLX_32 2'b10
-`define FORMAT_CMPLX_64 2'b11
+`define FORMAT_REAL_W   2'b00
+`define FORMAT_REAL_DW  2'b01
+`define FORMAT_CMPLX_W  2'b10
+`define FORMAT_CMPLX_DW 2'b11
 // --------------------------------------------------------
 
 // --------------------------------------------------------
