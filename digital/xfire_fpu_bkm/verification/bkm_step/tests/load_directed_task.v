@@ -12,26 +12,43 @@
 // Description:
 // ------------
 //
-// Random test for bkm_step block.
+// Load directed operands task for bkm_step block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// rand_test.v
+// load_directed_task.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-07-06 - ilesser - Initial version.
+//    - 2016-07-13 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
+
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-task rand_test;
+task load_directed;
+
+   // ----------------------------------
+   // Data inputs
+   // ----------------------------------
+   input              mode;
+   input [1:0]        format;
+   input [`LOG2N-1:0] n;
+   input [1:0]        d_x_n;
+   input [1:0]        d_y_n;
+   input [`W-1:0]     X_n;
+   input [`W-1:0]     Y_n;
+   input [`W-1:0]     u_n;
+   input [`W-1:0]     v_n;
+   // ----------------------------------
+
 // *****************************************************************************
 
 // *****************************************************************************
@@ -41,67 +58,26 @@ task rand_test;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   reg                rand_mode;
-   reg   [1:0]        rand_format;
-   reg   [`LOG2N-1:0] rand_n;
-   reg   [1:0]        rand_d_x_n;
-   reg   [1:0]        rand_d_y_n;
-   reg   [`W-1:0]     rand_X_n;
-   reg   [`W-1:0]     rand_Y_n;
-   reg   [`W-1:0]     rand_u_n;
-   reg   [`W-1:0]     rand_v_n;
-   reg   [30:0]       cnt1, cnt2;
+   reg   [`CNT_SIZE-1:0] dir_cnt;
    // -----------------------------------------------------
 
    begin
 
-      ena         = 1'b0;
-      arst        = 1'b0;
-      srst        = 1'b0;
-      run_clk(1);
-      arst        = 1'b1;
-      run_clk(1);
-      arst        = 1'b0;
-      run_clk(1);
-      ena         = 1'b1;
+      dir_cnt[`CNT_SIZE-1]             = mode;
+      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3] = format;
+      dir_cnt[2*`W+4+`LOG2N-1:2*`W+4]  = n;
+      dir_cnt[2*`W+3:2*`W+2]           = d_x_n;
+      dir_cnt[2*`W+1:2*`W+0]           = d_y_n;
+      dir_cnt[2*`W-1:1*`W]             = X_n;
+      dir_cnt[1*`W-1:0*`W]             = Y_n;
+      //dir_cnt[2*`W-1:1*`W]             = u_n;
+      //dir_cnt[1*`W-1:0*`W]             = v_n;
 
-      repeat(2**10) begin
-
-         //rand_mode   = constrained_rand_int(0, 1);
-         //rand_format = constrained_rand_int(0, 3);
-         //rand_n      = constrained_rand_int(0, 2**`LOG2N);
-
-         rand_mode   = `MODE_E;
-         rand_format = `FORMAT_CMPLX_DW;
-         rand_n      = 1;
-
-         //rand_d_x_n  = constrained_rand_int(0, 3);
-         //rand_d_y_n  = constrained_rand_int(0, 3);
-         rand_d_x_n  = 2'b00;
-         rand_d_y_n  = 2'b10;
-
-         //rand_X_n    = constrained_rand_int(0, 32);
-         //rand_Y_n    = constrained_rand_int(0, 32);
-         rand_X_n    = constrained_rand_int(0, 2**`W);
-         rand_Y_n    = constrained_rand_int(0, 2**`W);
-
-         load_directed( rand_mode, rand_format,  rand_n, rand_d_x_n,   rand_d_y_n,   rand_X_n,  rand_Y_n,  rand_u_n,  rand_v_n);
-
-      end
-
-
-
-      //repeat(2**(`CNT_SIZE))
-      //repeat(2**14) begin
-      //   cnt1 = constrained_rand_int(0, 2**31);
-      //   cnt2 = constrained_rand_int(0, 2**31);
-      //   load_operands({cnt1, cnt1^cnt2});
-      //end
+      load_operands(dir_cnt);
 
    end
 
 // *****************************************************************************
 
 endtask
-
 

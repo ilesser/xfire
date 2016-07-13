@@ -103,7 +103,6 @@ module tb_bkm_step ();
 
    always @(posedge clk)
        if (arst==1'b1) begin
-          //cnt <= `CNT_SIZE'd0;
           cnt <= {`CNT_SIZE{1'b0}};
        end else if (ena) begin
           cnt <= cnt + 1;
