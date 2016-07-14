@@ -220,8 +220,8 @@ module tb_bkm_step ();
                "\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
             );
 
-      $dumpfile("../waves/tb_bkm_step.vcd");
-      $dumpvars();
+      //$dumpfile("../waves/tb_bkm_step.vcd");
+      //$dumpvars();
    end
    // -----------------------------------------------------
 
