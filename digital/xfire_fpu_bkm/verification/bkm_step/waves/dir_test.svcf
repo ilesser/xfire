@@ -1,4 +1,4 @@
-# SimVision Command Script (Wed Jul 06 08:50:42 PM ART 2016)
+# SimVision Command Script (Thu Jul 14 01:38:45 PM ART 2016)
 #
 # Version 15.20.s002
 #
@@ -27,7 +27,7 @@ preferences set toolbar-txe_waveform_toggle-WaveWindow {
 }
 preferences set toolbar-Standard-WaveWindow {
   usual
-  position -pos 2
+  position -pos 4
 }
 preferences set plugin-enable-groupscope 0
 preferences set plugin-enable-interleaveandcompare 0
@@ -45,13 +45,17 @@ preferences set toolbar-TimeSearch-WatchWindow {
   usual
   shown 0
 }
+preferences set toolbar-Standard-WaveWindow {
+  usual
+  position -pos 2
+}
 
 #
 # Databases
 #
 database require tb_bkm_step -search {
-	./waves/tb_bkm_step.trn
-	/home/public/nacho/docs/facu/xfire/digital/xfire_fpu_bkm/verification/bkm_step/waves/tb_bkm_step.trn
+	./waves/bkm_step.shm/bkm_step.trn
+	/home/public/nacho/docs/facu/xfire/digital/xfire_fpu_bkm/verification/bkm_step/waves/bkm_step.shm/bkm_step.trn
 }
 
 #
@@ -94,25 +98,106 @@ set id [waveform add -signals  {
 	tb_bkm_step::tb_bkm_step.ena
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_X
+	{tb_bkm_step::tb_bkm_step.cnt[25:0]}
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_Y
+	tb_bkm_step::tb_bkm_step.errors
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_u
+	tb_bkm_step::tb_bkm_step.tb_mode
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_v
+	{tb_bkm_step::tb_bkm_step.tb_format[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_n[2:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_d_x_n[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_d_y_n[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_X_n[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_Y_n[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_u_n[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_v_n[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_lut_X[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_lut_Y[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_lut_u[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_lut_v[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_X_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_Y_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_u_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.tb_v_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.res_X_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.res_Y_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.res_u_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.res_v_np1[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.X_n_csd[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.X_np1_csd[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.Y_n_csd[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.Y_np1_csd[15:0]}
+	} ]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.csd2bin_X.c[8:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.csd2bin_X.x[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.csd2bin_X.x_d[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.csd2bin_X.x_s[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.csd2bin_X.y[7:0]}
 	} ]
 
-waveform xview limits 0 186000ps
+waveform xview limits 0 246000ps
 
 #
 # Waveform Window Links
-#
-
-#
-# Layout selection
 #
 

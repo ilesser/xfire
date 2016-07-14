@@ -93,20 +93,6 @@ if [ ${host_name} != "micro0.fi.uba.ar" ]; then
 fi
 # -----------------------------
 
-# ------------------------------------------------------------
-# Set default tool to vcs if in micro0 else to irun
-# ------------------------------------------------------------
-if [ ${host_name} == "micro0.fi.uba.ar" ]; then
-   tool="vcs"
-elif [ ${host_name} == "zenbook" ]; then
-   tool="iverilog"
-elif [ ${host_name} == "ilesser-l" ]; then
-   tool="irun"
-else
-   tool="iverilog"
-fi
-# ------------------------------------------------------------
-
 # Default values
 test_name=""
 waves="yes"
@@ -118,6 +104,25 @@ verbosity="low"
 wv_format="vcd"
 path=`pwd`
 block_name=`echo ${path} | gawk '{print $(NF-0)}' FS="/"`
+
+# ------------------------------------------------------------
+# Set default tool to vcs if in micro0 else to irun
+# ------------------------------------------------------------
+if [ ${host_name} == "micro0.fi.uba.ar" ]; then
+   tool="vcs"
+   wv_format="vpd"
+elif [ ${host_name} == "zenbook" ]; then
+   tool="iverilog"
+   wv_format="lxt"
+elif [ ${host_name} == "ilesser-l.allegro.msad" ]; then
+   tool="irun"
+   wv_format="shm"
+else
+   tool="iverilog"
+   wv_format="vcd"
+fi
+# ------------------------------------------------------------
+
 command_sintax="Usage:
 ------
 ./run_sim TEST=<test_name>
