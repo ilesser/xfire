@@ -69,6 +69,8 @@ module tb_bkm_step ();
    reg   [W-1:0]           tb_u_np1,   tb_v_np1;
    reg   [W-1:0]           tb_lut_X,   tb_lut_Y;
    reg   [W-1:0]           tb_lut_u,   tb_lut_v;
+   reg   [W-1:0]           delta_X,    delta_Y;
+   reg   [W-1:0]           delta_u,    delta_v;
    reg   [`CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
 
@@ -229,61 +231,89 @@ module tb_bkm_step ();
    // Checkers
    // -----------------------------------------------------
    always @(posedge clk) begin
-      if (ena == 1'b1) begin
-         if (tb_X_np1 !== res_X_np1) begin
-            $display("[%0d] ERROR: in X.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
-            add_error();
-            //finish_sim();
-            err_X = 1'b1;
-         end
-         else begin
-            add_note();
-            err_X = 1'b0;
+      if (srst == 1'b1) begin
+         err_X    <= 1'b0;
+         delta_X  <= {W{1'b0}};
+      end
+      else begin
+         if (ena == 1'b1) begin
+            if (tb_X_np1 !== res_X_np1) begin
+               $display("[%0d] ERROR: in X.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
+               add_error();
+               //finish_sim();
+               err_X    <= 1'b1;
+               delta_X  <= tb_X_np1 - res_X_np1;
+            end
+            else begin
+               add_note();
+               err_X    <= 1'b0;
+            end
          end
       end
    end
 
    always @(posedge clk) begin
-      if (ena == 1'b1) begin
-         if (tb_Y_np1 !== res_Y_np1) begin
-            $display("[%0d] ERROR: in Y.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
-            add_error();
-            //finish_sim();
-            err_Y = 1'b1;
-         end
-         else begin
-            add_note();
-            err_Y = 1'b0;
+      if (srst == 1'b1) begin
+         err_Y    <= 1'b0;
+         delta_Y  <= {W{1'b0}};
+      end
+      else begin
+         if (ena == 1'b1) begin
+            if (tb_Y_np1 !== res_Y_np1) begin
+               $display("[%0d] ERROR: in Y.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
+               add_error();
+               //finish_sim();
+               err_Y    <= 1'b1;
+               delta_Y  <= tb_Y_np1 - res_Y_np1;
+            end
+            else begin
+               add_note();
+               err_Y    <= 1'b0;
+            end
          end
       end
    end
 
    always @(posedge clk) begin
-      if (ena == 1'b1) begin
-         if (tb_u_np1 !== res_u_np1) begin
-            $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
-            add_error();
-            //finish_sim();
-            err_u = 1'b1;
-         end
-         else begin
-            add_note();
-            err_u = 1'b0;
+      if (srst == 1'b1) begin
+         err_u    <= 1'b0;
+         delta_u  <= {W{1'b0}};
+      end
+      else begin
+         if (ena == 1'b1) begin
+            if (tb_u_np1 !== res_u_np1) begin
+               $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
+               add_error();
+               //finish_sim();
+               err_u    <= 1'b1;
+               delta_u  <= tb_u_np1 - res_u_np1;
+            end
+            else begin
+               add_note();
+               err_u    <= 1'b0;
+            end
          end
       end
    end
 
    always @(posedge clk) begin
-      if (ena == 1'b1) begin
-         if (tb_v_np1 !== res_v_np1) begin
-            $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
-            add_error();
-            //finish_sim();
-            err_v = 1'b1;
-         end
-         else begin
-            add_note();
-            err_v = 1'b0;
+      if (srst == 1'b1) begin
+         err_v    <= 1'b0;
+         delta_v  <= {W{1'b0}};
+      end
+      else begin
+         if (ena == 1'b1) begin
+            if (tb_v_np1 !== res_v_np1) begin
+               $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
+               add_error();
+               //finish_sim();
+               err_v    <= 1'b1;
+               delta_v  <= tb_v_np1 - res_v_np1;
+            end
+            else begin
+               add_note();
+               err_v    <= 1'b0;
+            end
          end
       end
    end
