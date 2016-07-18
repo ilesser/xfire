@@ -90,6 +90,8 @@
 // History:
 // --------
 //
+//    - 2016-07-18 - ilesser - Added CSD barrel shifter.
+//    - 2016-07-18 - ilesser - Renamed csd_* to *_csd.
 //    - 2016-07-18 - ilesser - Removed regs by wires. Signal definition clean up.
 //    - 2016-04-23 - ilesser - Initial version.
 //
@@ -197,20 +199,20 @@ module bkm_step #(
    // -----------------------------------------------------
    // Barrel shifter for X
    // -----------------------------------------------------
-   barrel_shifter #(
+   barrel_shifter_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (2*W),
-      .LOG2W               (LOG2W+1)
-   ) barrel_shifter_x(
+      .W                   (W),
+      .LOG2W               (LOG2W)
+   ) barrel_shifter_csd_x(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (`DIR_RIGHT),
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_ARITH),
-      .sel                 ({n,1'b0}), // select with 2*n
+      .sel                 (n),
       .in                  (X_n),
     // ----------------------------------
     // Data outputs
@@ -222,20 +224,20 @@ module bkm_step #(
    // -----------------------------------------------------
    // Barrel shifter for Y
    // -----------------------------------------------------
-   barrel_shifter #(
+   barrel_shifter_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (2*W),
-      .LOG2W               (LOG2W+1)
-   ) barrel_shifter_y(
+      .W                   (W),
+      .LOG2W               (LOG2W)
+   ) barrel_shifter_csd_y(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (`DIR_RIGHT),
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_ARITH),
-      .sel                 ({n,1'b0}), // select with 2*n
+      .sel                 (n),
       .in                  (Y_n),
     // ----------------------------------
     // Data outputs
@@ -288,12 +290,12 @@ module bkm_step #(
    // -----------------------------------------------------
    // CSD adder
    // -----------------------------------------------------
-   complex_csd_add_subb #(
+   complex_add_subb_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) complex_csd_add_subb (
+   ) complex_add_subb_csd (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
