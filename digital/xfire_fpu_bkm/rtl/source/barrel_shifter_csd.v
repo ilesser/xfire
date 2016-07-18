@@ -4,155 +4,138 @@
 // Description:
 // ------------
 //
-// Cannonic Signed Digit (CSD) complex adder/substractor using borrow save representation.
-//
-//
-// Borrow save:
-//
-//    y  = { y , y }      s stands for sign and d for data
-//     BS     s   d
-//
-//    y  =  y - y
-//     csd   d   s
-//
-// BS Digit |  CSD Value
-// ---------|------------
-// 00       |  0
-// 01       | +1
-// 10       | -1
-// 11       |  0
+// Barrel shifter in CSD
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// complex_csd_add_subb.v
+// barrel_shifter_csd.v
 //
 // -----------------------------------------------------------------------------
 // Interface:
 // ----------
 //
+//  Clock, reset & enable inputs:
+//    - None
+//
 //  Data inputs:
-//    - subb_a_x  : Add(0)/sub(1) real part of a (logic, 1 bit).
-//    - subb_a_y  : Add(0)/sub(1) imag part of a (logic, 1 bit).
-//    - subb_b_x  : Add(0)/sub(1) real part of b (logic, 1 bit).
-//    - subb_b_y  : Add(0)/sub(1) imag part of b (logic, 1 bit).
-//    - a_x       : Real part of summand a (CSD, 2*W bits).
-//    - a_y       : Imaginary part of summand a (CSD, 2*W bits).
-//    - b_x       : Real part of summand b (CSD, 2*W bits).
-//    - b_y       : Imaginary part of summand b (CSD, 2*W bits).
+//    - dir       : Direction of the shift: 1 for left      0 for right    (logic, 1 bit).
+//    - op        : Operation of the shift: 1 for rotation  0 for shifting (logic, 1 bit).
+//    - shift_t   : Type of the shift:      1 for aritmetic 0 for logic    (logic, 1 bit).
+//    - sel       : Shift selector (unsigned, LOG2W bits).
+//    - in        : Input to shift (CSD, 2*W bits).
 //
 //  Data outputs:
-//    - c_x       : Real part of the carry of the result   (CSD, 2 bits).
-//    - c_y       : Imaginary part of the carry of the result   (CSD, 2 bits).
-//    - s_x       : Result s_x = (-1)^subb_a * a_x + (-1)^subb_b * b_x (CSD, 2*W bits).
-//    - s_y       : Result s_y = (-1)^subb_a * a_y + (-1)^subb_b * b_y (CSD, 2*W bits).
+//    - out       : Shifted result (CSD, 2*W bits).
 //
 //  Parameters:
 //    - W         : Word width (natural, default: 64).
+//    - LOG2W     : Logarithm of base 2 of the word width (natural, default: 6).
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-05-02 - ilesser - Initial version.
+//    - 2016-07-18 - ilesser - Initial version
 //
 // -----------------------------------------------------------------------------
+
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module complex_csd_add_subb #(
+module barrel_shifter_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64
+    parameter W      = 64,
+    parameter LOG2W  = 6
   ) (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-    input   wire              subb_a_x,
-    input   wire              subb_a_y,
-    input   wire              subb_b_x,
-    input   wire              subb_b_y,
-    input   wire  [2*W-1:0]   a_x,
-    input   wire  [2*W-1:0]   a_y,
-    input   wire  [2*W-1:0]   b_x,
-    input   wire  [2*W-1:0]   b_y,
+    input   wire              dir,
+    input   wire              op,
+    input   wire              shift_t,
+    input   wire  [LOG2W-1:0] sel,
+    input   wire  [2*W-1:0]   in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  wire  [1:0]       c_x,
-    output  wire  [1:0]       c_y,
-    output  wire  [2*W-1:0]   s_x,
-    output  wire  [2*W-1:0]   s_y
+    output  wire  [2*W-1:0]   out
   );
 // *****************************************************************************
 
 // *****************************************************************************
 // Architecture
 // *****************************************************************************
-// This architecture uses two csd_add_subb blocks to implement the complex adder.
-// *****************************************************************************
 
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   wire  [1:0]       c, s;
+   wire  [2*W-1:0]   shifted
    // -----------------------------------------------------
+
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // X Adder/subb
+   // Regular barrel shifter
    // -----------------------------------------------------
-   csd_add_subb #(
+   barrel_shifter #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
-   ) csd_add_subb_x (
+      .W                   (2*W),
+      .LOG2W               (LOG2W+1)
+   ) barrel_shifter(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (subb_a_x),
-      .subb_b              (subb_b_x),
-      .a                   (a_x),
-      .b                   (b_x),
+      .dir                 (dir),
+      .op                  (op),
+      .shift_t             (shift_t),
+      .sel                 ({sel,1'b0}), // select with 2*sel
+      .in                  (in),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .c                   (c_x),
-      .s                   (s_x)
+      .out                 (shifted)
    );
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Y Adder/subb
+   // 1 CSD bit substracter
    // -----------------------------------------------------
-   csd_add_subb #(
+   add_subb_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
-   ) csd_add_subb_y (
+      .W                   (1)
+   ) add_subb_csd (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .subb_a              (subb_a_y),
-      .subb_b              (subb_b_y),
-      .a                   (a_y),
-      .b                   (b_y),
+      .subb_a              (`ADD),
+      .subb_b              (`SUBB),
+      .a                   (shifted[1:0]),
+      .b                   (`CSD_p1),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .c                   (c_y),
-      .s                   (s_y)
+      .c                   (c),
+      .s                   (s)
    );
    // -----------------------------------------------------
 
-   // -----------------------------------------------------
+   // Compensate rotation by subbstracting one LSB
+   assign out = {shifted[2*W-1:2], s};
+
 
 // *****************************************************************************
 

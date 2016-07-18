@@ -30,7 +30,7 @@
 // File name:
 // ----------
 //
-// csd_add_subb.v
+// add_subb_csd.v
 //
 // -----------------------------------------------------------------------------
 // Interface:
@@ -53,6 +53,7 @@
 // History:
 // --------
 //
+//    - 2016-07-18 - ilesser - Renamed add_subb_csd.
 //    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-04-10 - ilesser - Changed representation to BS (see paper in desc).
 //    - 2016-04-08 - ilesser - Converted to adder/subbstracter.
@@ -63,7 +64,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module csd_add_subb #(
+module add_subb_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
@@ -157,6 +158,7 @@ module csd_add_subb #(
    // Initial values
    // CSD 0 = {0,0} o {1,1} in BS but sign digit has to be inverted
    // so the initial carry can be {1,0} or {0,1}
+   // TODO: define constants for these values
    assign {c_s[0],c_d[0]} = {a_inv[1:0],b_inv[1:0]} == 4'b0010 ?  2'b10 :
                             {a_inv[1:0],b_inv[1:0]} == 4'b1000 ?  2'b10 :
                             {a_inv[1:0],b_inv[1:0]} == 4'b1011 ?  2'b10 :

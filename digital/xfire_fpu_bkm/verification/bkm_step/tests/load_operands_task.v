@@ -121,7 +121,7 @@ task load_operands;
       // Z_{n+1} = Z_n * (1 + d_n * 2^-n)
       // Z_{n+1} = (X_n + j Y_n) * (1 + dxn * 2^-n + j * dyn * 2^-n)
       // X_{n+1} = X_n * (1 + dxn * 2^-n) - Y_n * dyn * 2^-n)
-      // Y_{n+1} = X_n * (1 + dxn * 2^-n) + X_n * dyn * 2^-n)
+      // Y_{n+1} = Y_n * (1 + dxn * 2^-n) + X_n * dyn * 2^-n)
       // w_{n+1} = 2 w_n - 2^(n+1) * ln(1 + d_n * 2^-n)
 
          if (complex==1'b1) begin
@@ -131,8 +131,8 @@ task load_operands;
             Y_np1 = Y_n * (1 + dx * 2**-n) + X_n * dy * 2**-n;
 
             // Calculate u and v
-            u_np1 = 2 * u_n - lut_u * 2**-n;
-            v_np1 = 2 * v_n - lut_v * 2**-n;
+            u_np1 = 2 * (u_n - lut_u);
+            v_np1 = 2 * (v_n - lut_v);
 
          end
          else begin
@@ -142,7 +142,7 @@ task load_operands;
             Y_np1 = 0;
 
             // Calculate u and v
-            u_np1 = 2 * u_n - lut_u * 2**-n;
+            u_np1 = 2 * (u_n - lut_u);
             v_np1 = 0;
 
          end
@@ -166,8 +166,8 @@ task load_operands;
             Y_np1 = Y_n - lut_Y;
 
             // Calculate u and v
-            u_np1 = 2*(u_n + dx) + (dx * u_n - dy * v_n) * 2**(1-n);
-            v_np1 = 2*(v_n + dy) + (dx * v_n + dy * u_n) * 2**(1-n);
+            u_np1 = 2*(u_n + dx + (dx * u_n - dy * v_n) * 2**(-n));
+            v_np1 = 2*(v_n + dy + (dx * v_n + dy * u_n) * 2**(-n));
 
          end
          else begin
@@ -177,17 +177,23 @@ task load_operands;
             Y_np1 = 0;
 
             // Calculate u and v
-            u_np1 = 2*(u_n + dx) + dx * u_n * 2**(1-n);
+            u_np1 = 2*(u_n + dx + dx * u_n * 2**(-n));
             v_np1 = 0;
 
          end
 
       end
 
-      tb_X_np1 = (X_np1);
+      //tb_X_np1 = (X_np1);
       tb_Y_np1 = (Y_np1);
       tb_u_np1 = (u_np1);
       tb_v_np1 = (v_np1);
+
+      tb_X_np1 = $rtoi(X_np1+1.0-1.0);
+      //tb_X_np1 = (X_np1+1.0-1.0);
+      //tb_Y_np1 = (Y_np1+1.0-1.0);
+      //tb_u_np1 = (u_np1+1.0-1.0);
+      //tb_v_np1 = (v_np1+1.0-1.0);
 
       run_clk(1);
 
