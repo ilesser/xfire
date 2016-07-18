@@ -30,7 +30,7 @@
 // File name:
 // ----------
 //
-// csd_add_subb.v
+// add_subb_csd.v
 //
 // -----------------------------------------------------------------------------
 // Interface:
@@ -53,6 +53,7 @@
 // History:
 // --------
 //
+//    - 2016-07-18 - ilesser - Renamed add_subb_csd.
 //    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-04-10 - ilesser - Changed representation to BS (see paper in desc).
 //    - 2016-04-08 - ilesser - Converted to adder/subbstracter.
@@ -63,7 +64,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module csd_add_subb #(
+module add_subb_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
