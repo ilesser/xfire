@@ -1,0 +1,15 @@
+* Comentarios: // single line o /* */ multiline
+* Preprocesor: #
+  - include
+  - define
+  - ifdef
+  - ifndef
+  - endif
+  - if
+  - elif
+* Label: xxx:
+* Registers: r0 - r31, f0 - f31, s0 - s8
+* Delimitador de fin de instrucción: ;
+* .data_ascii .data_asciiz .data_byte .data_half .data_word
+* .base_address
+* .offset_address

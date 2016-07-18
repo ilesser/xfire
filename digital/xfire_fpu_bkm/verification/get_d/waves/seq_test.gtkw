@@ -1,0 +1,78 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Mon Jul 11 00:19:00 2016
+[*]
+[dumpfile] "/home/ilesser/Documentos/xfire/digital/xfire_fpu_bkm/verification/get_d/waves/tb_get_d_n.vcd"
+[dumpfile_mtime] "Mon Jul 11 00:16:54 2016"
+[dumpfile_size] 294278
+[savefile] "/home/ilesser/Documentos/xfire/digital/xfire_fpu_bkm/verification/get_d/waves/seq_test.gtkw"
+[timestart] 978500
+[size] 1680 938
+[pos] -1 -1
+*-16.195000 1094700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_get_d.
+[sst_width] 210
+[signals_width] 160
+[sst_expanded] 1
+[sst_vpaned_height] 311
+@28
+tb_get_d.rst
+tb_get_d.ena
+tb_get_d.clk_osc.clk_out
+@22
+tb_get_d.cnt[16:0]
+@28
+tb_get_d.tb_mode
+@22
+tb_get_d.tb_u[7:0]
+tb_get_d.tb_v[7:0]
+@200
+-u channel
+@22
+tb_get_d.duv.u[7:0]
+@420
+tb_get_d.duv.u_i[3:0]
+@8420
+tb_get_d.duv.u_i[3:0]
+@20000
+-
+@24
+tb_get_d.duv.u_d[3:0]
+@8024
+tb_get_d.duv.u_d[3:0]
+@20000
+-
+@28
+tb_get_d.duv.u_negative
+tb_get_d.duv.u_range_m1_0
+tb_get_d.duv.u_range_0_p1
+tb_get_d.err_x
+tb_get_d.tb_d_x[1:0]
+tb_get_d.res_d_x[1:0]
+@200
+-
+-
+-v channel
+@22
+tb_get_d.duv.v[7:0]
+@420
+tb_get_d.duv.v_i[3:0]
+@8420
+tb_get_d.duv.v_i[3:0]
+@20000
+-
+@24
+tb_get_d.duv.v_d[3:0]
+@8024
+tb_get_d.duv.v_d[3:0]
+@20000
+-
+@28
+tb_get_d.duv.v_negative
+tb_get_d.duv.v_range_m1_0
+tb_get_d.duv.v_range_0_p1
+tb_get_d.err_y
+tb_get_d.tb_d_y[1:0]
+tb_get_d.res_d_y[1:0]
+[pattern_trace] 1
+[pattern_trace] 0

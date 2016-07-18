@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cp ./latex/*.tex ./
+pdflatex ./bkm.tex
+pdflatex ./bkm.tex
+rm -f *.log
+rm -f *.aux
+rm -f *.tex
+rm -f *.sty
+rm -f *.out
+rm -f *.lot
+rm -f *.lof
+rm -f *.toc
+rm -f *.idx
+mv bkm.pdf ./pdf/bkm.pdf
+
+# Open it in okular
+open=`ps -fe | grep "okular ./pdf/bkm.pdf" | grep -vc grep`
+if [ $open -eq 0 ]; then
+   okular ./pdf/bkm.pdf &
+fi

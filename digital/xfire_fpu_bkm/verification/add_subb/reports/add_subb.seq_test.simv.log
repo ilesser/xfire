@@ -1,0 +1,1191 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/add_subb.seq_test.simv.log +TESTSEED=1692600079 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Jun 12 13:52 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1692600079
+*******************************************************
+
+Time =        0 subb_a = x subb_b = x tb_a =           x tb_b =           x tb_s = x           x s_res = x           x
+
+Time =    26000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      0 tb_s = 0      0 s_res = 0      0
+
+Time =    36000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      1 tb_s = 0      1 s_res = 0      1
+
+Time =    46000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      2 tb_s = 0      2 s_res = 0      2
+
+Time =    56000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      3 tb_s = 0      3 s_res = 0      3
+
+Time =    66000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      4 tb_s = 0      4 s_res = 0      4
+
+Time =    76000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      5 tb_s = 0      5 s_res = 0      5
+
+Time =    86000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      6 tb_s = 0      6 s_res = 0      6
+
+Time =    96000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =      7 tb_s = 0      7 s_res = 0      7
+
+Time =   106000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -8 tb_s = 1     -8 s_res = 0     -8
+
+						    0000
+						  + 1000
+						 --------
+[115] WARNING: Different carry! Expected result: 1 1000
+				 Obtained result: 0 1000		. Instance: tb_add_subb
+Time =   116000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -7 tb_s = 1     -7 s_res = 0     -7
+
+						    0000
+						  + 1001
+						 --------
+[125] WARNING: Different carry! Expected result: 1 1001
+				 Obtained result: 0 1001		. Instance: tb_add_subb
+Time =   126000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -6 tb_s = 1     -6 s_res = 0     -6
+
+						    0000
+						  + 1010
+						 --------
+[135] WARNING: Different carry! Expected result: 1 1010
+				 Obtained result: 0 1010		. Instance: tb_add_subb
+Time =   136000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -5 tb_s = 1     -5 s_res = 0     -5
+
+						    0000
+						  + 1011
+						 --------
+[145] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   146000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -4 tb_s = 1     -4 s_res = 0     -4
+
+						    0000
+						  + 1100
+						 --------
+[155] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   156000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -3 tb_s = 1     -3 s_res = 0     -3
+
+						    0000
+						  + 1101
+						 --------
+[165] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   166000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -2 tb_s = 1     -2 s_res = 0     -2
+
+						    0000
+						  + 1110
+						 --------
+[175] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   176000 subb_a = 0 subb_b = 0 tb_a =      0 tb_b =     -1 tb_s = 1     -1 s_res = 0     -1
+
+						    0000
+						  + 1111
+						 --------
+[185] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   186000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      0 tb_s = 0      1 s_res = 0      1
+
+Time =   196000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      1 tb_s = 0      2 s_res = 0      2
+
+Time =   206000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      2 tb_s = 0      3 s_res = 0      3
+
+Time =   216000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      3 tb_s = 0      4 s_res = 0      4
+
+Time =   226000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      4 tb_s = 0      5 s_res = 0      5
+
+Time =   236000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      5 tb_s = 0      6 s_res = 0      6
+
+Time =   246000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      6 tb_s = 0      7 s_res = 0      7
+
+Time =   256000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =      7 tb_s = 0     -8 s_res = 0     -8
+
+Time =   266000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -8 tb_s = 1     -7 s_res = 0     -7
+
+						    0001
+						  + 1000
+						 --------
+[275] WARNING: Different carry! Expected result: 1 1001
+				 Obtained result: 0 1001		. Instance: tb_add_subb
+Time =   276000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -7 tb_s = 1     -6 s_res = 0     -6
+
+						    0001
+						  + 1001
+						 --------
+[285] WARNING: Different carry! Expected result: 1 1010
+				 Obtained result: 0 1010		. Instance: tb_add_subb
+Time =   286000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -6 tb_s = 1     -5 s_res = 0     -5
+
+						    0001
+						  + 1010
+						 --------
+[295] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   296000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -5 tb_s = 1     -4 s_res = 0     -4
+
+						    0001
+						  + 1011
+						 --------
+[305] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   306000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -4 tb_s = 1     -3 s_res = 0     -3
+
+						    0001
+						  + 1100
+						 --------
+[315] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   316000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -3 tb_s = 1     -2 s_res = 0     -2
+
+						    0001
+						  + 1101
+						 --------
+[325] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   326000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -2 tb_s = 1     -1 s_res = 0     -1
+
+						    0001
+						  + 1110
+						 --------
+[335] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   336000 subb_a = 0 subb_b = 0 tb_a =      1 tb_b =     -1 tb_s = 0      0 s_res = 1      0
+
+						    0001
+						  + 1111
+						 --------
+[345] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   346000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      0 tb_s = 0      2 s_res = 0      2
+
+Time =   356000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      1 tb_s = 0      3 s_res = 0      3
+
+Time =   366000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      2 tb_s = 0      4 s_res = 0      4
+
+Time =   376000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      3 tb_s = 0      5 s_res = 0      5
+
+Time =   386000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      4 tb_s = 0      6 s_res = 0      6
+
+Time =   396000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      5 tb_s = 0      7 s_res = 0      7
+
+Time =   406000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      6 tb_s = 0     -8 s_res = 0     -8
+
+Time =   416000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =      7 tb_s = 0     -7 s_res = 0     -7
+
+Time =   426000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -8 tb_s = 1     -6 s_res = 0     -6
+
+						    0010
+						  + 1000
+						 --------
+[435] WARNING: Different carry! Expected result: 1 1010
+				 Obtained result: 0 1010		. Instance: tb_add_subb
+Time =   436000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -7 tb_s = 1     -5 s_res = 0     -5
+
+						    0010
+						  + 1001
+						 --------
+[445] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   446000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -6 tb_s = 1     -4 s_res = 0     -4
+
+						    0010
+						  + 1010
+						 --------
+[455] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   456000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -5 tb_s = 1     -3 s_res = 0     -3
+
+						    0010
+						  + 1011
+						 --------
+[465] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   466000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -4 tb_s = 1     -2 s_res = 0     -2
+
+						    0010
+						  + 1100
+						 --------
+[475] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   476000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -3 tb_s = 1     -1 s_res = 0     -1
+
+						    0010
+						  + 1101
+						 --------
+[485] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   486000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -2 tb_s = 0      0 s_res = 1      0
+
+						    0010
+						  + 1110
+						 --------
+[495] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   496000 subb_a = 0 subb_b = 0 tb_a =      2 tb_b =     -1 tb_s = 0      1 s_res = 1      1
+
+						    0010
+						  + 1111
+						 --------
+[505] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   506000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      0 tb_s = 0      3 s_res = 0      3
+
+Time =   516000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      1 tb_s = 0      4 s_res = 0      4
+
+Time =   526000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      2 tb_s = 0      5 s_res = 0      5
+
+Time =   536000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      3 tb_s = 0      6 s_res = 0      6
+
+Time =   546000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      4 tb_s = 0      7 s_res = 0      7
+
+Time =   556000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      5 tb_s = 0     -8 s_res = 0     -8
+
+Time =   566000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      6 tb_s = 0     -7 s_res = 0     -7
+
+Time =   576000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =      7 tb_s = 0     -6 s_res = 0     -6
+
+Time =   586000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -8 tb_s = 1     -5 s_res = 0     -5
+
+						    0011
+						  + 1000
+						 --------
+[595] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =   596000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -7 tb_s = 1     -4 s_res = 0     -4
+
+						    0011
+						  + 1001
+						 --------
+[605] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   606000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -6 tb_s = 1     -3 s_res = 0     -3
+
+						    0011
+						  + 1010
+						 --------
+[615] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   616000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -5 tb_s = 1     -2 s_res = 0     -2
+
+						    0011
+						  + 1011
+						 --------
+[625] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   626000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -4 tb_s = 1     -1 s_res = 0     -1
+
+						    0011
+						  + 1100
+						 --------
+[635] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   636000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -3 tb_s = 0      0 s_res = 1      0
+
+						    0011
+						  + 1101
+						 --------
+[645] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   646000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -2 tb_s = 0      1 s_res = 1      1
+
+						    0011
+						  + 1110
+						 --------
+[655] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   656000 subb_a = 0 subb_b = 0 tb_a =      3 tb_b =     -1 tb_s = 0      2 s_res = 1      2
+
+						    0011
+						  + 1111
+						 --------
+[665] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =   666000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      0 tb_s = 0      4 s_res = 0      4
+
+Time =   676000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      1 tb_s = 0      5 s_res = 0      5
+
+Time =   686000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      2 tb_s = 0      6 s_res = 0      6
+
+Time =   696000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      3 tb_s = 0      7 s_res = 0      7
+
+Time =   706000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      4 tb_s = 0     -8 s_res = 0     -8
+
+Time =   716000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      5 tb_s = 0     -7 s_res = 0     -7
+
+Time =   726000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      6 tb_s = 0     -6 s_res = 0     -6
+
+Time =   736000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =      7 tb_s = 0     -5 s_res = 0     -5
+
+Time =   746000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -8 tb_s = 1     -4 s_res = 0     -4
+
+						    0100
+						  + 1000
+						 --------
+[755] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =   756000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -7 tb_s = 1     -3 s_res = 0     -3
+
+						    0100
+						  + 1001
+						 --------
+[765] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   766000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -6 tb_s = 1     -2 s_res = 0     -2
+
+						    0100
+						  + 1010
+						 --------
+[775] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   776000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -5 tb_s = 1     -1 s_res = 0     -1
+
+						    0100
+						  + 1011
+						 --------
+[785] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   786000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -4 tb_s = 0      0 s_res = 1      0
+
+						    0100
+						  + 1100
+						 --------
+[795] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   796000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -3 tb_s = 0      1 s_res = 1      1
+
+						    0100
+						  + 1101
+						 --------
+[805] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   806000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -2 tb_s = 0      2 s_res = 1      2
+
+						    0100
+						  + 1110
+						 --------
+[815] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =   816000 subb_a = 0 subb_b = 0 tb_a =      4 tb_b =     -1 tb_s = 0      3 s_res = 1      3
+
+						    0100
+						  + 1111
+						 --------
+[825] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =   826000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      0 tb_s = 0      5 s_res = 0      5
+
+Time =   836000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      1 tb_s = 0      6 s_res = 0      6
+
+Time =   846000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      2 tb_s = 0      7 s_res = 0      7
+
+Time =   856000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      3 tb_s = 0     -8 s_res = 0     -8
+
+Time =   866000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      4 tb_s = 0     -7 s_res = 0     -7
+
+Time =   876000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      5 tb_s = 0     -6 s_res = 0     -6
+
+Time =   886000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      6 tb_s = 0     -5 s_res = 0     -5
+
+Time =   896000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =      7 tb_s = 0     -4 s_res = 0     -4
+
+Time =   906000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -8 tb_s = 1     -3 s_res = 0     -3
+
+						    0101
+						  + 1000
+						 --------
+[915] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =   916000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -7 tb_s = 1     -2 s_res = 0     -2
+
+						    0101
+						  + 1001
+						 --------
+[925] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =   926000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -6 tb_s = 1     -1 s_res = 0     -1
+
+						    0101
+						  + 1010
+						 --------
+[935] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =   936000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -5 tb_s = 0      0 s_res = 1      0
+
+						    0101
+						  + 1011
+						 --------
+[945] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =   946000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -4 tb_s = 0      1 s_res = 1      1
+
+						    0101
+						  + 1100
+						 --------
+[955] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =   956000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -3 tb_s = 0      2 s_res = 1      2
+
+						    0101
+						  + 1101
+						 --------
+[965] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =   966000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -2 tb_s = 0      3 s_res = 1      3
+
+						    0101
+						  + 1110
+						 --------
+[975] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =   976000 subb_a = 0 subb_b = 0 tb_a =      5 tb_b =     -1 tb_s = 0      4 s_res = 1      4
+
+						    0101
+						  + 1111
+						 --------
+[985] WARNING: Different carry! Expected result: 0 0100
+				 Obtained result: 1 0100		. Instance: tb_add_subb
+Time =   986000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      0 tb_s = 0      6 s_res = 0      6
+
+Time =   996000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      1 tb_s = 0      7 s_res = 0      7
+
+Time =  1006000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      2 tb_s = 0     -8 s_res = 0     -8
+
+Time =  1016000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      3 tb_s = 0     -7 s_res = 0     -7
+
+Time =  1026000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      4 tb_s = 0     -6 s_res = 0     -6
+
+Time =  1036000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      5 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1046000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      6 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1056000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =      7 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1066000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -8 tb_s = 1     -2 s_res = 0     -2
+
+						    0110
+						  + 1000
+						 --------
+[1075] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1076000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -7 tb_s = 1     -1 s_res = 0     -1
+
+						    0110
+						  + 1001
+						 --------
+[1085] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1086000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -6 tb_s = 0      0 s_res = 1      0
+
+						    0110
+						  + 1010
+						 --------
+[1095] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1096000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -5 tb_s = 0      1 s_res = 1      1
+
+						    0110
+						  + 1011
+						 --------
+[1105] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1106000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -4 tb_s = 0      2 s_res = 1      2
+
+						    0110
+						  + 1100
+						 --------
+[1115] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  1116000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -3 tb_s = 0      3 s_res = 1      3
+
+						    0110
+						  + 1101
+						 --------
+[1125] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  1126000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -2 tb_s = 0      4 s_res = 1      4
+
+						    0110
+						  + 1110
+						 --------
+[1135] WARNING: Different carry! Expected result: 0 0100
+				 Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  1136000 subb_a = 0 subb_b = 0 tb_a =      6 tb_b =     -1 tb_s = 0      5 s_res = 1      5
+
+						    0110
+						  + 1111
+						 --------
+[1145] WARNING: Different carry! Expected result: 0 0101
+				 Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  1146000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      0 tb_s = 0      7 s_res = 0      7
+
+Time =  1156000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      1 tb_s = 0     -8 s_res = 0     -8
+
+Time =  1166000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      2 tb_s = 0     -7 s_res = 0     -7
+
+Time =  1176000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      3 tb_s = 0     -6 s_res = 0     -6
+
+Time =  1186000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      4 tb_s = 0     -5 s_res = 0     -5
+
+Time =  1196000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      5 tb_s = 0     -4 s_res = 0     -4
+
+Time =  1206000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      6 tb_s = 0     -3 s_res = 0     -3
+
+Time =  1216000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =      7 tb_s = 0     -2 s_res = 0     -2
+
+Time =  1226000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -8 tb_s = 1     -1 s_res = 0     -1
+
+						    0111
+						  + 1000
+						 --------
+[1235] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1236000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -7 tb_s = 0      0 s_res = 1      0
+
+						    0111
+						  + 1001
+						 --------
+[1245] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1246000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -6 tb_s = 0      1 s_res = 1      1
+
+						    0111
+						  + 1010
+						 --------
+[1255] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1256000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -5 tb_s = 0      2 s_res = 1      2
+
+						    0111
+						  + 1011
+						 --------
+[1265] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  1266000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -4 tb_s = 0      3 s_res = 1      3
+
+						    0111
+						  + 1100
+						 --------
+[1275] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  1276000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -3 tb_s = 0      4 s_res = 1      4
+
+						    0111
+						  + 1101
+						 --------
+[1285] WARNING: Different carry! Expected result: 0 0100
+				 Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  1286000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -2 tb_s = 0      5 s_res = 1      5
+
+						    0111
+						  + 1110
+						 --------
+[1295] WARNING: Different carry! Expected result: 0 0101
+				 Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  1296000 subb_a = 0 subb_b = 0 tb_a =      7 tb_b =     -1 tb_s = 0      6 s_res = 1      6
+
+						    0111
+						  + 1111
+						 --------
+[1305] WARNING: Different carry! Expected result: 0 0110
+				 Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  1306000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      0 tb_s = 1     -8 s_res = 0     -8
+
+						    1000
+						  + 0000
+						 --------
+[1315] WARNING: Different carry! Expected result: 1 1000
+				 Obtained result: 0 1000		. Instance: tb_add_subb
+Time =  1316000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      1 tb_s = 1     -7 s_res = 0     -7
+
+						    1000
+						  + 0001
+						 --------
+[1325] WARNING: Different carry! Expected result: 1 1001
+				 Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  1326000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      2 tb_s = 1     -6 s_res = 0     -6
+
+						    1000
+						  + 0010
+						 --------
+[1335] WARNING: Different carry! Expected result: 1 1010
+				 Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  1336000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      3 tb_s = 1     -5 s_res = 0     -5
+
+						    1000
+						  + 0011
+						 --------
+[1345] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1346000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      4 tb_s = 1     -4 s_res = 0     -4
+
+						    1000
+						  + 0100
+						 --------
+[1355] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1356000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      5 tb_s = 1     -3 s_res = 0     -3
+
+						    1000
+						  + 0101
+						 --------
+[1365] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1366000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      6 tb_s = 1     -2 s_res = 0     -2
+
+						    1000
+						  + 0110
+						 --------
+[1375] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1376000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =      7 tb_s = 1     -1 s_res = 0     -1
+
+						    1000
+						  + 0111
+						 --------
+[1385] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1386000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -8 tb_s = 1      0 s_res = 1      0
+
+Time =  1396000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -7 tb_s = 1      1 s_res = 1      1
+
+Time =  1406000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -6 tb_s = 1      2 s_res = 1      2
+
+Time =  1416000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -5 tb_s = 1      3 s_res = 1      3
+
+Time =  1426000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -4 tb_s = 1      4 s_res = 1      4
+
+Time =  1436000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -3 tb_s = 1      5 s_res = 1      5
+
+Time =  1446000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -2 tb_s = 1      6 s_res = 1      6
+
+Time =  1456000 subb_a = 0 subb_b = 0 tb_a =     -8 tb_b =     -1 tb_s = 1      7 s_res = 1      7
+
+Time =  1466000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      0 tb_s = 1     -7 s_res = 0     -7
+
+						    1001
+						  + 0000
+						 --------
+[1475] WARNING: Different carry! Expected result: 1 1001
+				 Obtained result: 0 1001		. Instance: tb_add_subb
+Time =  1476000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      1 tb_s = 1     -6 s_res = 0     -6
+
+						    1001
+						  + 0001
+						 --------
+[1485] WARNING: Different carry! Expected result: 1 1010
+				 Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  1486000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      2 tb_s = 1     -5 s_res = 0     -5
+
+						    1001
+						  + 0010
+						 --------
+[1495] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1496000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      3 tb_s = 1     -4 s_res = 0     -4
+
+						    1001
+						  + 0011
+						 --------
+[1505] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1506000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      4 tb_s = 1     -3 s_res = 0     -3
+
+						    1001
+						  + 0100
+						 --------
+[1515] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1516000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      5 tb_s = 1     -2 s_res = 0     -2
+
+						    1001
+						  + 0101
+						 --------
+[1525] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1526000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      6 tb_s = 1     -1 s_res = 0     -1
+
+						    1001
+						  + 0110
+						 --------
+[1535] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1536000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =      7 tb_s = 0      0 s_res = 1      0
+
+						    1001
+						  + 0111
+						 --------
+[1545] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1546000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -8 tb_s = 1      1 s_res = 1      1
+
+Time =  1556000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -7 tb_s = 1      2 s_res = 1      2
+
+Time =  1566000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -6 tb_s = 1      3 s_res = 1      3
+
+Time =  1576000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -5 tb_s = 1      4 s_res = 1      4
+
+Time =  1586000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -4 tb_s = 1      5 s_res = 1      5
+
+Time =  1596000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -3 tb_s = 1      6 s_res = 1      6
+
+Time =  1606000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -2 tb_s = 1      7 s_res = 1      7
+
+Time =  1616000 subb_a = 0 subb_b = 0 tb_a =     -7 tb_b =     -1 tb_s = 1     -8 s_res = 1     -8
+
+Time =  1626000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      0 tb_s = 1     -6 s_res = 0     -6
+
+						    1010
+						  + 0000
+						 --------
+[1635] WARNING: Different carry! Expected result: 1 1010
+				 Obtained result: 0 1010		. Instance: tb_add_subb
+Time =  1636000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      1 tb_s = 1     -5 s_res = 0     -5
+
+						    1010
+						  + 0001
+						 --------
+[1645] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1646000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      2 tb_s = 1     -4 s_res = 0     -4
+
+						    1010
+						  + 0010
+						 --------
+[1655] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1656000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      3 tb_s = 1     -3 s_res = 0     -3
+
+						    1010
+						  + 0011
+						 --------
+[1665] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1666000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      4 tb_s = 1     -2 s_res = 0     -2
+
+						    1010
+						  + 0100
+						 --------
+[1675] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1676000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      5 tb_s = 1     -1 s_res = 0     -1
+
+						    1010
+						  + 0101
+						 --------
+[1685] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1686000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      6 tb_s = 0      0 s_res = 1      0
+
+						    1010
+						  + 0110
+						 --------
+[1695] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1696000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =      7 tb_s = 0      1 s_res = 1      1
+
+						    1010
+						  + 0111
+						 --------
+[1705] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1706000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -8 tb_s = 1      2 s_res = 1      2
+
+Time =  1716000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -7 tb_s = 1      3 s_res = 1      3
+
+Time =  1726000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -6 tb_s = 1      4 s_res = 1      4
+
+Time =  1736000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -5 tb_s = 1      5 s_res = 1      5
+
+Time =  1746000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -4 tb_s = 1      6 s_res = 1      6
+
+Time =  1756000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -3 tb_s = 1      7 s_res = 1      7
+
+Time =  1766000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -2 tb_s = 1     -8 s_res = 1     -8
+
+Time =  1776000 subb_a = 0 subb_b = 0 tb_a =     -6 tb_b =     -1 tb_s = 1     -7 s_res = 1     -7
+
+Time =  1786000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      0 tb_s = 1     -5 s_res = 0     -5
+
+						    1011
+						  + 0000
+						 --------
+[1795] WARNING: Different carry! Expected result: 1 1011
+				 Obtained result: 0 1011		. Instance: tb_add_subb
+Time =  1796000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      1 tb_s = 1     -4 s_res = 0     -4
+
+						    1011
+						  + 0001
+						 --------
+[1805] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1806000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      2 tb_s = 1     -3 s_res = 0     -3
+
+						    1011
+						  + 0010
+						 --------
+[1815] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1816000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      3 tb_s = 1     -2 s_res = 0     -2
+
+						    1011
+						  + 0011
+						 --------
+[1825] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1826000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      4 tb_s = 1     -1 s_res = 0     -1
+
+						    1011
+						  + 0100
+						 --------
+[1835] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1836000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      5 tb_s = 0      0 s_res = 1      0
+
+						    1011
+						  + 0101
+						 --------
+[1845] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1846000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      6 tb_s = 0      1 s_res = 1      1
+
+						    1011
+						  + 0110
+						 --------
+[1855] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  1856000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =      7 tb_s = 0      2 s_res = 1      2
+
+						    1011
+						  + 0111
+						 --------
+[1865] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  1866000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -8 tb_s = 1      3 s_res = 1      3
+
+Time =  1876000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -7 tb_s = 1      4 s_res = 1      4
+
+Time =  1886000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -6 tb_s = 1      5 s_res = 1      5
+
+Time =  1896000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -5 tb_s = 1      6 s_res = 1      6
+
+Time =  1906000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -4 tb_s = 1      7 s_res = 1      7
+
+Time =  1916000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -3 tb_s = 1     -8 s_res = 1     -8
+
+Time =  1926000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -2 tb_s = 1     -7 s_res = 1     -7
+
+Time =  1936000 subb_a = 0 subb_b = 0 tb_a =     -5 tb_b =     -1 tb_s = 1     -6 s_res = 1     -6
+
+Time =  1946000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      0 tb_s = 1     -4 s_res = 0     -4
+
+						    1100
+						  + 0000
+						 --------
+[1955] WARNING: Different carry! Expected result: 1 1100
+				 Obtained result: 0 1100		. Instance: tb_add_subb
+Time =  1956000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      1 tb_s = 1     -3 s_res = 0     -3
+
+						    1100
+						  + 0001
+						 --------
+[1965] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  1966000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      2 tb_s = 1     -2 s_res = 0     -2
+
+						    1100
+						  + 0010
+						 --------
+[1975] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  1976000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      3 tb_s = 1     -1 s_res = 0     -1
+
+						    1100
+						  + 0011
+						 --------
+[1985] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  1986000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      4 tb_s = 0      0 s_res = 1      0
+
+						    1100
+						  + 0100
+						 --------
+[1995] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  1996000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      5 tb_s = 0      1 s_res = 1      1
+
+						    1100
+						  + 0101
+						 --------
+[2005] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2006000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      6 tb_s = 0      2 s_res = 1      2
+
+						    1100
+						  + 0110
+						 --------
+[2015] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2016000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =      7 tb_s = 0      3 s_res = 1      3
+
+						    1100
+						  + 0111
+						 --------
+[2025] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2026000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -8 tb_s = 1      4 s_res = 1      4
+
+Time =  2036000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -7 tb_s = 1      5 s_res = 1      5
+
+Time =  2046000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -6 tb_s = 1      6 s_res = 1      6
+
+Time =  2056000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -5 tb_s = 1      7 s_res = 1      7
+
+Time =  2066000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -4 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2076000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -3 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2086000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -2 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2096000 subb_a = 0 subb_b = 0 tb_a =     -4 tb_b =     -1 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2106000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      0 tb_s = 1     -3 s_res = 0     -3
+
+						    1101
+						  + 0000
+						 --------
+[2115] WARNING: Different carry! Expected result: 1 1101
+				 Obtained result: 0 1101		. Instance: tb_add_subb
+Time =  2116000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      1 tb_s = 1     -2 s_res = 0     -2
+
+						    1101
+						  + 0001
+						 --------
+[2125] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2126000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      2 tb_s = 1     -1 s_res = 0     -1
+
+						    1101
+						  + 0010
+						 --------
+[2135] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2136000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      3 tb_s = 0      0 s_res = 1      0
+
+						    1101
+						  + 0011
+						 --------
+[2145] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2146000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      4 tb_s = 0      1 s_res = 1      1
+
+						    1101
+						  + 0100
+						 --------
+[2155] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2156000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      5 tb_s = 0      2 s_res = 1      2
+
+						    1101
+						  + 0101
+						 --------
+[2165] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2166000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      6 tb_s = 0      3 s_res = 1      3
+
+						    1101
+						  + 0110
+						 --------
+[2175] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2176000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =      7 tb_s = 0      4 s_res = 1      4
+
+						    1101
+						  + 0111
+						 --------
+[2185] WARNING: Different carry! Expected result: 0 0100
+				 Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  2186000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -8 tb_s = 1      5 s_res = 1      5
+
+Time =  2196000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -7 tb_s = 1      6 s_res = 1      6
+
+Time =  2206000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -6 tb_s = 1      7 s_res = 1      7
+
+Time =  2216000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -5 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2226000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -4 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2236000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -3 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2246000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -2 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2256000 subb_a = 0 subb_b = 0 tb_a =     -3 tb_b =     -1 tb_s = 1     -4 s_res = 1     -4
+
+Time =  2266000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      0 tb_s = 1     -2 s_res = 0     -2
+
+						    1110
+						  + 0000
+						 --------
+[2275] WARNING: Different carry! Expected result: 1 1110
+				 Obtained result: 0 1110		. Instance: tb_add_subb
+Time =  2276000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      1 tb_s = 1     -1 s_res = 0     -1
+
+						    1110
+						  + 0001
+						 --------
+[2285] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2286000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      2 tb_s = 0      0 s_res = 1      0
+
+						    1110
+						  + 0010
+						 --------
+[2295] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2296000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      3 tb_s = 0      1 s_res = 1      1
+
+						    1110
+						  + 0011
+						 --------
+[2305] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2306000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      4 tb_s = 0      2 s_res = 1      2
+
+						    1110
+						  + 0100
+						 --------
+[2315] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2316000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      5 tb_s = 0      3 s_res = 1      3
+
+						    1110
+						  + 0101
+						 --------
+[2325] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2326000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      6 tb_s = 0      4 s_res = 1      4
+
+						    1110
+						  + 0110
+						 --------
+[2335] WARNING: Different carry! Expected result: 0 0100
+				 Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  2336000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =      7 tb_s = 0      5 s_res = 1      5
+
+						    1110
+						  + 0111
+						 --------
+[2345] WARNING: Different carry! Expected result: 0 0101
+				 Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  2346000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -8 tb_s = 1      6 s_res = 1      6
+
+Time =  2356000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -7 tb_s = 1      7 s_res = 1      7
+
+Time =  2366000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -6 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2376000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -5 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2386000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -4 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2396000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -3 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2406000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -2 tb_s = 1     -4 s_res = 1     -4
+
+Time =  2416000 subb_a = 0 subb_b = 0 tb_a =     -2 tb_b =     -1 tb_s = 1     -3 s_res = 1     -3
+
+Time =  2426000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      0 tb_s = 1     -1 s_res = 0     -1
+
+						    1111
+						  + 0000
+						 --------
+[2435] WARNING: Different carry! Expected result: 1 1111
+				 Obtained result: 0 1111		. Instance: tb_add_subb
+Time =  2436000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      1 tb_s = 0      0 s_res = 1      0
+
+						    1111
+						  + 0001
+						 --------
+[2445] WARNING: Different carry! Expected result: 0 0000
+				 Obtained result: 1 0000		. Instance: tb_add_subb
+Time =  2446000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      2 tb_s = 0      1 s_res = 1      1
+
+						    1111
+						  + 0010
+						 --------
+[2455] WARNING: Different carry! Expected result: 0 0001
+				 Obtained result: 1 0001		. Instance: tb_add_subb
+Time =  2456000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      3 tb_s = 0      2 s_res = 1      2
+
+						    1111
+						  + 0011
+						 --------
+[2465] WARNING: Different carry! Expected result: 0 0010
+				 Obtained result: 1 0010		. Instance: tb_add_subb
+Time =  2466000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      4 tb_s = 0      3 s_res = 1      3
+
+						    1111
+						  + 0100
+						 --------
+[2475] WARNING: Different carry! Expected result: 0 0011
+				 Obtained result: 1 0011		. Instance: tb_add_subb
+Time =  2476000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      5 tb_s = 0      4 s_res = 1      4
+
+						    1111
+						  + 0101
+						 --------
+[2485] WARNING: Different carry! Expected result: 0 0100
+				 Obtained result: 1 0100		. Instance: tb_add_subb
+Time =  2486000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      6 tb_s = 0      5 s_res = 1      5
+
+						    1111
+						  + 0110
+						 --------
+[2495] WARNING: Different carry! Expected result: 0 0101
+				 Obtained result: 1 0101		. Instance: tb_add_subb
+Time =  2496000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =      7 tb_s = 0      6 s_res = 1      6
+
+						    1111
+						  + 0111
+						 --------
+[2505] WARNING: Different carry! Expected result: 0 0110
+				 Obtained result: 1 0110		. Instance: tb_add_subb
+Time =  2506000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -8 tb_s = 1      7 s_res = 1      7
+
+Time =  2516000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -7 tb_s = 1     -8 s_res = 1     -8
+
+Time =  2526000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -6 tb_s = 1     -7 s_res = 1     -7
+
+Time =  2536000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -5 tb_s = 1     -6 s_res = 1     -6
+
+Time =  2546000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -4 tb_s = 1     -5 s_res = 1     -5
+
+Time =  2556000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -3 tb_s = 1     -4 s_res = 1     -4
+
+Time =  2566000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -2 tb_s = 1     -3 s_res = 1     -3
+
+Time =  2576000 subb_a = 0 subb_b = 0 tb_a =     -1 tb_b =     -1 tb_s = 1     -2 s_res = 1     -2
+
+
+
+TIME     : 2586
+WARNINGS : 128
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 128
+TESTSEED : 1692600079
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_add_subb.v", line 306.
+$finish at simulation time              2586000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2586000 ps
+CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
+Sun Jun 12 13:52:58 2016
