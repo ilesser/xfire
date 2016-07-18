@@ -28,6 +28,8 @@
 //
 // -----------------------------------------------------------------------------
 
+`include "bkm_defs.vh"
+
 // *****************************************************************************
 // Interface
 // *****************************************************************************
@@ -60,30 +62,30 @@ task rand_test;
       srst        = 1'b0;
       run_clk(1);
       arst        = 1'b1;
+      srst        = 1'b1;
       run_clk(1);
       arst        = 1'b0;
+      srst        = 1'b0;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**10) begin
+      repeat(2**4) begin
 
-         //rand_mode   = constrained_rand_int(0, 1);
-         //rand_format = constrained_rand_int(0, 3);
-         //rand_n      = constrained_rand_int(0, 2**`LOG2N);
+         rand_mode   = constrained_rand_int(0, 1);
+         rand_format = constrained_rand_int(0, 3);
+         rand_n      = constrained_rand_int(0, 2**`LOG2N);
+         rand_d_x_n  = constrained_rand_int(0, 3);
+         rand_d_y_n  = constrained_rand_int(0, 3);
+         rand_X_n    = constrained_rand_int(0, 2**`W);
+         rand_Y_n    = constrained_rand_int(0, 2**`W);
 
          rand_mode   = `MODE_E;
          rand_format = `FORMAT_CMPLX_DW;
          rand_n      = 1;
-
-         //rand_d_x_n  = constrained_rand_int(0, 3);
-         //rand_d_y_n  = constrained_rand_int(0, 3);
-         rand_d_x_n  = 2'b00;
-         rand_d_y_n  = 2'b10;
-
-         //rand_X_n    = constrained_rand_int(0, 32);
-         //rand_Y_n    = constrained_rand_int(0, 32);
-         rand_X_n    = constrained_rand_int(0, 2**`W);
-         rand_Y_n    = constrained_rand_int(0, 2**`W);
+         rand_d_x_n  = 2'b01;
+         rand_d_y_n  = 2'b00;
+         rand_X_n    = constrained_rand_int(0, 18);
+         rand_Y_n    = constrained_rand_int(0, 18);
 
          load_directed( rand_mode, rand_format,  rand_n, rand_d_x_n,   rand_d_y_n,   rand_X_n,  rand_Y_n,  rand_u_n,  rand_v_n);
 
@@ -105,3 +107,25 @@ task rand_test;
 endtask
 
 
+// Summary
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  date  |  mode  |  format   |  n  |  d_x   |  d_y   |  X_n   |  Y_n   |  res_X |  res_Y |  res_u |  res_v |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   E    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   E    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   E    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   L    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  FAIL  |  FAIL  |  u and v fail when d_x = d_y = 2'b11-- > FIXED: there was a problem with the w_n + d_n part
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   L    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  FAIL  |  FAIL  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   L    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  FAIL  |  FAIL  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/18 |   L    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  FAIL  |  FAIL  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  07/00 |        |           |     |        |        |        |        |        |        |        |        |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
