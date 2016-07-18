@@ -157,6 +157,7 @@ module csd_add_subb #(
    // Initial values
    // CSD 0 = {0,0} o {1,1} in BS but sign digit has to be inverted
    // so the initial carry can be {1,0} or {0,1}
+   // TODO: define constants for these values
    assign {c_s[0],c_d[0]} = {a_inv[1:0],b_inv[1:0]} == 4'b0010 ?  2'b10 :
                             {a_inv[1:0],b_inv[1:0]} == 4'b1000 ?  2'b10 :
                             {a_inv[1:0],b_inv[1:0]} == 4'b1011 ?  2'b10 :
