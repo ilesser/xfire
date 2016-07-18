@@ -91,6 +91,9 @@ module tb_barrel_shifter ();
        end else if (ena) begin
           cnt <= cnt + 1;
        end
+
+   // TODO: add bin2csd and csd2bin to check it works for csd numbers
+
    // -----------------------------------------------------
 
    // -----------------------------------------------------
