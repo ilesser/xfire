@@ -37,6 +37,7 @@
 // History:
 // --------
 //
+//    - 2016-07-18 - ilesser - Renamed csd_* to *_csd.
 //    - 2016-07-10 - ilesser - Added defines for d_x/d_y sign and data.
 //    - 2016-05-02 - ilesser - Initial version.
 //
@@ -100,12 +101,12 @@ module multiply_by_d_csd #(
    // If dx != 0 ^ dy == 0 then
    // z * d = z_dx_dy = (x dx - y dy) + j (x dy + y dx)
    // -----------------------------------------------------
-   csd_add_subb #(
+   add_subb_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) csd_add_subb_x (
+   ) add_subb_csd_x (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
@@ -120,12 +121,12 @@ module multiply_by_d_csd #(
       .s                   (x_dx_dy)
    );
 
-   csd_add_subb #(
+   add_subb_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W)
-   ) csd_add_subb_y (
+   ) add_subb_csd_y (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
