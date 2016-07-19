@@ -85,6 +85,7 @@ task load_operands;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
+   reg   [1:0] lsb;
    // -----------------------------------------------------
 
    begin
@@ -92,24 +93,37 @@ task load_operands;
       tb_dir      = cnt[`W+`LOG2W+2];
       tb_op       = cnt[`W+`LOG2W+1];
       tb_shift_t  = cnt[`W+`LOG2W];
-      //tb_dir      = 1'b1;
-      //tb_op       = 1'b1;
-      //tb_shift_t  = 1'b1;
       tb_sel      = cnt[`W+`LOG2W-1:`W];
       tb_in       = cnt[`W-1:0];
 
+      //tb_dir      = `DIR_RIGHT;
+      //tb_op       = `OP_SHIFT;
+      //tb_shift_t  = `SHIFT_ARITH;
+      //tb_sel      = `LOG2W'd1;
+      //tb_in       = `W'd0;
+
       case (cnt[`W+`LOG2W+2:`W+`LOG2W])
-        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = srl(tb_in, tb_sel);
+        //{`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = srl(tb_in, tb_sel);
+        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sra(tb_in, tb_sel);
         {`DIR_RIGHT, `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sra(tb_in, tb_sel);
         {`DIR_RIGHT, `OP_ROT  , `SHIFT_LOGIC}:  tb_out = ror(tb_in, tb_sel);
         {`DIR_RIGHT, `OP_ROT  , `SHIFT_ARITH}:  tb_out = ror(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sll(tb_in, tb_sel);
+        //{`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sll(tb_in, tb_sel);
+        {`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sla(tb_in, tb_sel);
         {`DIR_LEFT , `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sla(tb_in, tb_sel);
         {`DIR_LEFT , `OP_ROT  , `SHIFT_LOGIC}:  tb_out = rol(tb_in, tb_sel);
         {`DIR_LEFT , `OP_ROT  , `SHIFT_ARITH}:  tb_out = rol(tb_in, tb_sel);
       endcase
 
+      lsb = in_csd[1:0];
+
+
       run_clk(1);
+
+      if( lsb == `CSD_0_0 || lsb == `CSD_0_1 )
+         $display("tb_in=%6d in_csd = %b lsb = %b is EVEN", tb_in, in_csd, lsb);
+      else
+         $display("tb_in=%6d in_csd = %b lsb = %b is ODD", tb_in, in_csd, lsb);
 
    end
 
