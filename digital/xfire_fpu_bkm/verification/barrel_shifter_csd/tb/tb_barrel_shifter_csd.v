@@ -48,22 +48,23 @@ module tb_barrel_shifter_csd ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   wire                    clk;
-   reg                     rst, ena;
-   reg                     err,war;
-   reg   [`CNT_SIZE-1:0]   cnt;
-   reg                     tb_dir;
-   reg                     tb_op;
-   reg                     tb_shift_t;
-   reg   [`LOG2W-1:0]      tb_sel;
-   reg   signed   [`W-1:0] tb_in;
-   reg   signed   [`W-1:0] tb_out;
+   wire                       clk;
+   reg                        rst, ena;
+   reg                        err,war;
+   reg   [`CNT_SIZE-1:0]      cnt;
+   reg                        tb_dir;
+   reg                        tb_op;
+   reg                        tb_shift_t;
+   reg   [`LOG2W-1:0]         tb_sel;
+   reg   signed   [`W-1:0]    tb_in;
+   reg   signed   [`W-1:0]    tb_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  signed   [`W-1:0] wire_out;
+   wire           [2*`W-1:0]  in_csd, out_csd;
+   wire  signed   [`W-1:0]    res_out;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -92,7 +93,37 @@ module tb_barrel_shifter_csd ();
           cnt <= cnt + 1;
        end
 
-   // TODO: add bin2csd and csd2bin to check it works for csd numbers
+   bin2csd #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (`W)
+   ) bin2csd (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .x                   (tb_in),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      .y                   (in_csd)
+   );
+
+   csd2bin #(
+    // ----------------------------------
+    // Parameters
+    // ----------------------------------
+      .W                   (`W)
+   ) csd2bin (
+    // ----------------------------------
+    // Data inputs
+    // ----------------------------------
+      .x                   (out_csd),
+    // ----------------------------------
+    // Data outputs
+    // ----------------------------------
+      .y                   (res_out)
+   );
 
    // -----------------------------------------------------
 
@@ -100,7 +131,7 @@ module tb_barrel_shifter_csd ();
    // Monitors
    // -----------------------------------------------------
    initial begin
-      $monitor("Time = %8t tb_dir = %b tb_op_x = %b tb_shift_t = %b tb_sel = %d tb_in = %d tb_out = %d wire_out = %d\n",$time, tb_dir, tb_op, tb_shift_t, tb_sel, tb_in, tb_out, wire_out);
+      $monitor("Time = %8t tb_dir = %b tb_op_x = %b tb_shift_t = %b tb_sel = %d tb_in = %d tb_out = %d res_out = %d\n",$time, tb_dir, tb_op, tb_shift_t, tb_sel, tb_in, tb_out, res_out);
       $dumpfile("../waves/tb_barrel_shifter.vcd");
       $dumpvars();
    end
@@ -111,11 +142,11 @@ module tb_barrel_shifter_csd ();
    // -----------------------------------------------------
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (tb_out !== wire_out) begin
+         if (tb_out !== res_out) begin
             $display("\t\t\t\t\t\t    %b", tb_in );
             $display("\t\t\t\t\t\t    %b", tb_sel);
             $display("\t\t\t\t\t\t -------------");
-            $display("[%0d] ERROR: Different result!\tExpected result: %b\n\t\t\t\tObtained result: %b\t\t. Instance: %m",$time, tb_out, wire_out);
+            $display("[%0d] ERROR: Different result!\tExpected result: %b\n\t\t\t\tObtained result: %b\t\t. Instance: %m",$time, tb_out, res_out);
             add_error();
             err = 1'b1;
             //finish_sim();
@@ -137,8 +168,8 @@ module tb_barrel_shifter_csd ();
       .op            (tb_op),
       .shift_t       (tb_shift_t),
       .sel           (tb_sel),
-      .in            (tb_in),
-      .out           (wire_out)
+      .in            (in_csd),
+      .out           (out_csd)
    );
    // -----------------------------------------------------
 

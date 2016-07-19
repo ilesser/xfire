@@ -152,7 +152,7 @@ task load_operands_test;
 
       //if (s_res != s) begin
       if (c_res != c || s_res != s) begin
-         `ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, c, s, c_res, s_res);
+         //`ERR_MSG4(\tExpected result: %b %b\n\t\tObtained result: %b %b\t\t, c, s, c_res, s_res);
          $display("");
       end
 
