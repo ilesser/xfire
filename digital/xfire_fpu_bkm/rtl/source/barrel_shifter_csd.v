@@ -37,7 +37,8 @@
 // History:
 // --------
 //
-//    - 2016-07-18 - ilesser - Initial version
+//    - 2016-07-19 - ilesser - Changed decision logic.
+//    - 2016-07-18 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -71,12 +72,16 @@ module barrel_shifter_csd #(
 // *****************************************************************************
 // Architecture
 // *****************************************************************************
+// TODO: try adding 1 to the lsb before shifting, that might save us the logic
+//       used to decide
 
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   wire              in_odd;
    wire  [1:0]       c, s, comp;
-   wire  [2*W-1:0]   shifted;
+   wire  [1:0]       in_lsb, shifted_lsb;
+   wire  [2*W-1:0]   shifted, shifted_comp;
    // -----------------------------------------------------
 
 
@@ -112,6 +117,7 @@ module barrel_shifter_csd #(
    // -----------------------------------------------------
    // 1 CSD bit substracter
    // -----------------------------------------------------
+
    add_subb_csd #(
     // ----------------------------------
     // Parameters
@@ -122,8 +128,8 @@ module barrel_shifter_csd #(
     // Data inputs
     // ----------------------------------
       .subb_a              (`ADD),
-      .subb_b              (`SUBB),
-      .a                   (shifted[1:0]),
+      .subb_b              (`ADD),
+      .a                   (shifted_lsb),
       .b                   (comp),
     // ----------------------------------
     // Data outputs
@@ -134,14 +140,23 @@ module barrel_shifter_csd #(
    // -----------------------------------------------------
 
    // Compensate rotation by adding/subbstracting one LSB
-   // TODO: find out how to do it
-   assign comp = shifted[1:0] == `CSD_0_0 ?  `CSD_p1                 :
-                 shifted[1:0] == `CSD_0_1 ?  `CSD_m1                 :
-                                             `CSD_0_0                ;
 
-   assign out  = shifted[1:0] == `CSD_0_0 ?  {shifted[2*W-1:2], s}   :
-                 shifted[1:0] == `CSD_0_1 ?  {shifted[2*W-1:2], s}   :
-                                             shifted                 ;
+   // LSB of barrel shifter input and output
+   assign in_lsb        = in[1:0];
+   assign shifted_lsb   = shifted[1:0];
+   assign shifted_comp  = {shifted[2*W-1:2], s};
+   assign in_odd        = in_lsb == `CSD_p1 || in_lsb == `CSD_m1;
+
+   assign comp = in_lsb;
+   //assign comp = in_lsb == `CSD_p1  ?  `CSD_m1  :
+                 //in_lsb == `CSD_m1  ?  `CSD_p1  :
+                                       //`CSD_0_0 ;
+
+   assign out  = sel    == {LOG2W{1'b0}}  ?  shifted        :
+                 in_lsb == `CSD_m1        ?  shifted_comp   :
+                                             shifted        ;
+
+   //assign out = shifted;
 
 
 // *****************************************************************************
