@@ -1,0 +1,89 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/bin2csd.basic_test.simv.log +TESTSEED=3128254898 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Jun 12 19:31 2016
+ucli% run
+
+*******************************************************
+Test Seed:  1166712398
+*******************************************************
+
+Time =        0 tb_x = 00000 	wire_y = 0000000000 
+				res    = 0000000000
+
+
+Time =     6000 tb_x = 00001 	wire_y = 0000000001 
+				res    = 0000000101
+
+
+Time =    16000 tb_x = 00010 	wire_y = 0000000100 
+				res    = 0000000000
+
+
+Time =    26000 tb_x = 00100 	wire_y = 0000010000 
+				res    = 0000000000
+
+
+Time =    36000 tb_x = 01000 	wire_y = 0001000000 
+				res    = 0000000000
+
+
+Time =    46000 tb_x = 10000 	wire_y = 1000000000 
+				res    = 0000000000
+
+
+Time =    56000 tb_x = 00110 	wire_y = 0001001000 
+				res    = 0000000000
+
+
+Time =    66000 tb_x = 00111 	wire_y = 0001000010 
+				res    = 0000001010
+
+
+Time =    76000 tb_x = 10111 	wire_y = 0010000010 
+				res    = 0000001010
+
+
+Time =    86000 tb_x = 11111 	wire_y = 0000000010 
+				res    = 0000001010
+
+
+Time =    96000 tb_x = 00011 	wire_y = 0000010010 
+				res    = 0000001010
+
+
+Time =   106000 tb_x = 01011 	wire_y = 0100100010 
+				res    = 0000001010
+
+
+Time =   116000 tb_x = 00111 	wire_y = 0001000010 
+				res    = 0001000010
+
+
+
+
+TIME     : 126
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 1166712398
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_bin2csd.v", line 298.
+$finish at simulation time               126000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 126000 ps
+CPU Time:      0.280 seconds;       Data structure size:   0.1Mb
+Sun Jun 12 19:31:38 2016

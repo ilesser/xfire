@@ -1,0 +1,13 @@
+DEFINE cmrf7sf /usr/pdks/IBM_7RF/kit/analog/cmrf7sf6AM
+DEFINE std_cells_7rf /usr/pdks/IBM_7RF/kit/analog/std_cells
+DEFINE ext_cells_7rf /usr/pdks/IBM_7RF/kit/analog/ext_cells
+DEFINE esd7rf /usr/pdks/IBM_7RF/kit/analog/esd7rf
+DEFINE short_io /usr/pdks/IBM_7RF/kit/analog/short_io
+DEFINE wide_io /usr/pdks/IBM_7RF/kit/analog/wide_io
+DEFINE US_8ths /usr/pdks/IBM_7RF/kit/analog/US_8ths
+DEFINE basic /usr/synopsys/I-2013.12-SP2-4/custom_designer/auxx/samples/basic
+DEFINE synps_AnalogLib /usr/synopsys/I-2013.12-SP2-4/custom_designer/auxx/samples/analogLib
+DEFINE xfire ../oa_proj_lib/xfire
+DEFINE digtop_xfire ../oa_proj_lib/digtop_xfire
+DEFINE xfire_core ../oa_proj_lib/xfire_core
+DEFINE xfire_fpucordic ../oa_proj_lib/xfire_fpucordic
