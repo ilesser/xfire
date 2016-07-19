@@ -99,14 +99,14 @@ task load_operands;
       tb_in       = cnt[`W-1:0];
 
       case (cnt[`W+`LOG2W+2:`W+`LOG2W])
-        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_T_LOGIC}:  tb_out = srl(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_T_ARITH}:  tb_out = sra(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_ROT  , `SHIFT_T_LOGIC}:  tb_out = ror(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_ROT  , `SHIFT_T_ARITH}:  tb_out = ror(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_SHIFT, `SHIFT_T_LOGIC}:  tb_out = sll(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_SHIFT, `SHIFT_T_ARITH}:  tb_out = sla(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_ROT  , `SHIFT_T_LOGIC}:  tb_out = rol(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_ROT  , `SHIFT_T_ARITH}:  tb_out = rol(tb_in, tb_sel);
+        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = srl(tb_in, tb_sel);
+        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sra(tb_in, tb_sel);
+        {`DIR_RIGHT, `OP_ROT  , `SHIFT_LOGIC}:  tb_out = ror(tb_in, tb_sel);
+        {`DIR_RIGHT, `OP_ROT  , `SHIFT_ARITH}:  tb_out = ror(tb_in, tb_sel);
+        {`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sll(tb_in, tb_sel);
+        {`DIR_LEFT , `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sla(tb_in, tb_sel);
+        {`DIR_LEFT , `OP_ROT  , `SHIFT_LOGIC}:  tb_out = rol(tb_in, tb_sel);
+        {`DIR_LEFT , `OP_ROT  , `SHIFT_ARITH}:  tb_out = rol(tb_in, tb_sel);
       endcase
 
       run_clk(1);

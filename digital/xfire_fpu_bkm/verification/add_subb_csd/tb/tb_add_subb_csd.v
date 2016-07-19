@@ -12,19 +12,20 @@
 // Description:
 // ------------
 //
-// Testbench for csd_add_subb block.
+// Testbench for add_subb_csd block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// tb_csd_add_subb.v
+// tb_add_subb_csd.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-04-16 - ilesser - Original version.
+//    - 2016-07-18 - ilesser - Renamed to add_subb_csd.
+//    - 2016-07-18 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -37,7 +38,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module tb_csd_add_subb ();
+module tb_add_subb_csd ();
 // *****************************************************************************
 
 // *****************************************************************************
@@ -49,7 +50,8 @@ module tb_csd_add_subb ();
    // -----------------------------------------------------
    localparam              W = `W;
    localparam              CNT_SIZE = `CNT_SIZE;
-   reg                     clk, rst, ena;
+   wire                    clk;
+   reg                     rst, ena;
    reg                     tb_subb_x;
    reg                     tb_subb_y;
    reg   [W-1:0]           tb_x_bin;
@@ -150,7 +152,7 @@ module tb_csd_add_subb ();
    // Monitors
    // -----------------------------------------------------
    initial begin
-      $monitor("Time = %8t tb_subb_x = %b tb_subb_x = %b tb_x_bin = %6d tb_y_bin = %6d tb_z_bin = %b %6d z_bin = %b %6d\n",$time, tb_subb_x, tb_subb_y, tb_x_bin, tb_y_bin, tb_c_bin, tb_z_bin, c_bin, z_bin);
+      $monitor("Time = %8t tb_subb_x = %b tb_subb_y = %b tb_x_bin = %6d tb_y_bin = %6d tb_z_bin = %b %6d z_bin = %b %6d\n",$time, tb_subb_x, tb_subb_y, tb_x_bin, tb_y_bin, tb_c_bin, tb_z_bin, c_bin, z_bin);
       $dumpfile("../waves/tb_csd_add_subb.vcd");
       $dumpvars();
    end
@@ -188,7 +190,7 @@ module tb_csd_add_subb ();
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   csd_add_subb #(
+   add_subb_csd #(
       .W(W)
    ) duv (
       .subb_a  (tb_subb_x),

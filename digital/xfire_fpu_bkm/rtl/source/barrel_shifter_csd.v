@@ -75,8 +75,8 @@ module barrel_shifter_csd #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [1:0]       c, s;
-   wire  [2*W-1:0]   shifted
+   wire  [1:0]       c, s, comp;
+   wire  [2*W-1:0]   shifted;
    // -----------------------------------------------------
 
 
@@ -93,7 +93,7 @@ module barrel_shifter_csd #(
     // ----------------------------------
       .W                   (2*W),
       .LOG2W               (LOG2W+1)
-   ) barrel_shifter(
+   ) barrel_shifter (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
@@ -124,7 +124,7 @@ module barrel_shifter_csd #(
       .subb_a              (`ADD),
       .subb_b              (`SUBB),
       .a                   (shifted[1:0]),
-      .b                   (`CSD_p1),
+      .b                   (comp),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -133,8 +133,15 @@ module barrel_shifter_csd #(
    );
    // -----------------------------------------------------
 
-   // Compensate rotation by subbstracting one LSB
-   assign out = {shifted[2*W-1:2], s};
+   // Compensate rotation by adding/subbstracting one LSB
+   // TODO: find out how to do it
+   assign comp = shifted[1:0] == `CSD_0_0 ?  `CSD_p1                 :
+                 shifted[1:0] == `CSD_0_1 ?  `CSD_m1                 :
+                                             `CSD_0_0                ;
+
+   assign out  = shifted[1:0] == `CSD_0_0 ?  {shifted[2*W-1:2], s}   :
+                 shifted[1:0] == `CSD_0_1 ?  {shifted[2*W-1:2], s}   :
+                                             shifted                 ;
 
 
 // *****************************************************************************

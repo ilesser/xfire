@@ -59,6 +59,12 @@ task load_operands;
          2'b11 : {tb_c_bin, tb_z_bin} = -tb_x_bin - tb_y_bin;
       endcase
 
+      //assign {tb_c_bin, tb_z_bin} = {tb_subb_x, tb_subb_x} == 2'b00  ?  tb_x_bin + tb_y_bin  :
+                                    //{tb_subb_x, tb_subb_x} == 2'b01  ?  tb_x_bin + tb_y_bin  :
+                                    //{tb_subb_x, tb_subb_x} == 2'b10  ?  tb_x_bin + tb_y_bin  :
+                                    //{tb_subb_x, tb_subb_x} == 2'b11  ?  tb_x_bin + tb_y_bin  :
+                                                                        //{2'b00, {`W{1'b0}}}  ;
+
       run_clk(1);
 
    end
