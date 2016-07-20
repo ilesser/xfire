@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-07-19 - ilesser - Deleted op and shift_t inputs.
 //    - 2016-07-18 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -32,7 +33,7 @@
 `timescale 1ns/1ps
 `define W 8
 `define LOG2W 3
-`define CNT_SIZE 1+1+1+`LOG2W+`W
+`define CNT_SIZE 1+`LOG2W+`W
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 // *****************************************************************************
@@ -165,8 +166,8 @@ module tb_barrel_shifter_csd ();
       .LOG2W         (`LOG2W)
    ) duv (
       .dir           (tb_dir),
-      .op            (tb_op),
-      .shift_t       (tb_shift_t),
+      //.op            (tb_op),
+      //.shift_t       (tb_shift_t),
       .sel           (tb_sel),
       .in            (in_csd),
       .out           (out_csd)

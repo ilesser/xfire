@@ -73,7 +73,7 @@ task load_operands;
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input [2+`LOG2W+`W:0]   cnt;
+   input [`CNT_SIZE-1:0]   cnt;
    // ----------------------------------
 
 // *****************************************************************************
@@ -90,9 +90,9 @@ task load_operands;
 
    begin
 
-      tb_dir      = cnt[`W+`LOG2W+2];
-      tb_op       = cnt[`W+`LOG2W+1];
-      tb_shift_t  = cnt[`W+`LOG2W];
+      tb_dir      = cnt[`CNT_SIZE-1];
+      //tb_op       = cnt[`W+`LOG2W+1];
+      //tb_shift_t  = cnt[`W+`LOG2W];
       tb_sel      = cnt[`W+`LOG2W-1:`W];
       tb_in       = cnt[`W-1:0];
 
@@ -102,17 +102,22 @@ task load_operands;
       //tb_sel      = `LOG2W'd1;
       //tb_in       = `W'd0;
 
-      case (cnt[`W+`LOG2W+2:`W+`LOG2W])
-        //{`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = srl(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sra(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sra(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_ROT  , `SHIFT_LOGIC}:  tb_out = ror(tb_in, tb_sel);
-        {`DIR_RIGHT, `OP_ROT  , `SHIFT_ARITH}:  tb_out = ror(tb_in, tb_sel);
-        //{`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sll(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sla(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sla(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_ROT  , `SHIFT_LOGIC}:  tb_out = rol(tb_in, tb_sel);
-        {`DIR_LEFT , `OP_ROT  , `SHIFT_ARITH}:  tb_out = rol(tb_in, tb_sel);
+      //case (cnt[`W+`LOG2W+2:`W+`LOG2W])
+        ////{`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = srl(tb_in, tb_sel);
+        //{`DIR_RIGHT, `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sra(tb_in, tb_sel);
+        //{`DIR_RIGHT, `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sra(tb_in, tb_sel);
+        //{`DIR_RIGHT, `OP_ROT  , `SHIFT_LOGIC}:  tb_out = ror(tb_in, tb_sel);
+        //{`DIR_RIGHT, `OP_ROT  , `SHIFT_ARITH}:  tb_out = ror(tb_in, tb_sel);
+        ////{`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sll(tb_in, tb_sel);
+        //{`DIR_LEFT , `OP_SHIFT, `SHIFT_LOGIC}:  tb_out = sla(tb_in, tb_sel);
+        //{`DIR_LEFT , `OP_SHIFT, `SHIFT_ARITH}:  tb_out = sla(tb_in, tb_sel);
+        //{`DIR_LEFT , `OP_ROT  , `SHIFT_LOGIC}:  tb_out = rol(tb_in, tb_sel);
+        //{`DIR_LEFT , `OP_ROT  , `SHIFT_ARITH}:  tb_out = rol(tb_in, tb_sel);
+      //endcase
+
+      case (tb_dir)
+         `DIR_RIGHT: tb_out = sra(tb_in, tb_sel);
+         `DIR_LEFT : tb_out = sla(tb_in, tb_sel);
       endcase
 
       lsb = in_csd[1:0];
