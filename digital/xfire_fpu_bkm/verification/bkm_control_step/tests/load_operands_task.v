@@ -63,14 +63,14 @@ task load_operands;
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[2*`W+4+`LOG2N-1:2*`W+4];
-      tb_d_u_n    = cnt[2*`W+3:2*`W+2];
-      tb_d_v_n    = cnt[2*`W+1:2*`W+0];
-      tb_u_n      = cnt[2*`W-1:1*`W];
-      tb_v_n      = cnt[1*`W-1:0*`W];
+      tb_n        = cnt[2*`W/4+4+`LOG2N-1:2*`W/4+4];
+      tb_d_u_n    = cnt[2*`W/4+3:2*`W/4+2];
+      tb_d_v_n    = cnt[2*`W/4+1:2*`W/4+0];
+      tb_u_n      = cnt[2*`W/4-1:1*`W/4];
+      tb_v_n      = cnt[1*`W/4-1:0*`W/4];
       // TODO: make them variable
-      tb_lut_u    = `W'd0;
-      tb_lut_v    = `W'd0;
+      tb_lut_u    = {`W/4{1'b0}};
+      tb_lut_v    = {`W/4{1'b0}};
 
       double_word = tb_format[0];
       complex     = tb_format[1];
@@ -127,19 +127,33 @@ task load_operands;
       // w = 2^1 * (E-1)
       // w_{n+1} = 2 * [ w_n + d_n + d_n * w_n * 2^-n ]
 
-      // d_n * w_n = (dx + j dy) * (u + j v) = (dx*u-dy*v) + j (dx*v+dy*u)
+      // d_n * w_n = (du + j dv) * (u + j v) = (du*u-dv*v) + j (du*v+dv*u)
 
          if (complex==1'b1) begin
 
             // Calculate u and v
-            u_np1 = 2*(u_n + dx + (dx * u_n - dy * v_n) * 2**(-n));
-            v_np1 = 2*(v_n + dy + (dx * v_n + dy * u_n) * 2**(-n));
+            u_np1 = 2*(u_n + du + $rtoi((du * u_n - dv * v_n) * 2**(-n)));
+            v_np1 = 2*(v_n + dv + $rtoi((du * v_n + dv * u_n) * 2**(-n)));
+
+            // if n=0 ^ du=0 ^ dv=+-1 then
+            //u_np1 = 2*(u_n +  0 - dv * v_n);
+            //v_np1 = 2*(v_n + dv + dv * u_n);
+
+            // if n=0 ^ du=+-1 ^ dv=0 then
+            //u_np1 = 2*(u_n + du + du * u_n);
+            //v_np1 = 2*(v_n +  0 + du * v_n);
+
+            // if n=1 ^ du=0 ^ dv=+-1 then
+            //u_np1 = 2*(u_n +  0 - dv * v_n * 2**(-1));
+            //v_np1 = 2*(v_n + dv + dv * u_n * 2**(-1));
+
+
 
          end
          else begin
 
             // Calculate u and v
-            u_np1 = 2*(u_n + dx + dx * u_n * 2**(-n));
+            u_np1 = 2*(u_n + du + du * u_n * 2**(-n));
             v_np1 = 0;
 
          end

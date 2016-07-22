@@ -12,7 +12,7 @@
 // Description:
 // ------------
 //
-// Load directed operands task for bkm_step block.
+// Load directed operands task for bkm_control_step block.
 //
 // -----------------------------------------------------------------------------
 // File name:
@@ -24,7 +24,7 @@
 // History:
 // --------
 //
-//    - 2016-07-13 - ilesser - Initial version.
+//    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -41,12 +41,10 @@ task load_directed;
    input              mode;
    input [1:0]        format;
    input [`LOG2N-1:0] n;
-   input [1:0]        d_x_n;
-   input [1:0]        d_y_n;
-   input [`W-1:0]     X_n;
-   input [`W-1:0]     Y_n;
-   input [`W-1:0]     u_n;
-   input [`W-1:0]     v_n;
+   input [1:0]        d_u_n;
+   input [1:0]        d_v_n;
+   input [`W/4-1:0]   u_n;
+   input [`W/4-1:0]   v_n;
    // ----------------------------------
 
 // *****************************************************************************
@@ -63,15 +61,13 @@ task load_directed;
 
    begin
 
-      dir_cnt[`CNT_SIZE-1]             = mode;
-      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3] = format;
-      dir_cnt[2*`W+4+`LOG2N-1:2*`W+4]  = n;
-      dir_cnt[2*`W+3:2*`W+2]           = d_x_n;
-      dir_cnt[2*`W+1:2*`W+0]           = d_y_n;
-      dir_cnt[2*`W-1:1*`W]             = X_n;
-      dir_cnt[1*`W-1:0*`W]             = Y_n;
-      //dir_cnt[2*`W-1:1*`W]             = u_n;
-      //dir_cnt[1*`W-1:0*`W]             = v_n;
+      dir_cnt[`CNT_SIZE-1]                = mode;
+      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3]    = format;
+      dir_cnt[2*`W/4+4+`LOG2N-1:2*`W/4+4] = n;
+      dir_cnt[2*`W/4+3:2*`W/4+2]          = d_u_n;
+      dir_cnt[2*`W/4+1:2*`W/4+0]          = d_v_n;
+      dir_cnt[2*`W/4-1:1*`W/4]            = u_n;
+      dir_cnt[1*`W/4-1:0*`W/4]            = v_n;
 
       load_operands(dir_cnt);
 

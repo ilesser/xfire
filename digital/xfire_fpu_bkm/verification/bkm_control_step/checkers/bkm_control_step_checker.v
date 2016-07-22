@@ -42,26 +42,26 @@ module bkm_control_step_checker #(
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
-   input wire               clk,
-   input wire               arst,
-   input wire               srst,
-   input wire               enable,
+   input wire              clk,
+   input wire              arst,
+   input wire              srst,
+   input wire              enable,
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input wire  [W-1:0]      tb_u_np1,
-   input wire  [W-1:0]      tb_v_np1,
-   input wire  [W-1:0]      res_u_np1,
-   input wire  [W-1:0]      res_v_np1,
+   input wire  [W/4-1:0]   tb_u_np1,
+   input wire  [W/4-1:0]   tb_v_np1,
+   input wire  [W/4-1:0]   res_u_np1,
+   input wire  [W/4-1:0]   res_v_np1,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output reg                war_u,
-   output reg                war_v,
-   output reg                err_u,
-   output reg                err_v,
-   output reg   [W-1:0]      delta_u,
-   output reg   [W-1:0]      delta_v
+   output reg              war_u,
+   output reg              war_v,
+   output reg              err_u,
+   output reg              err_v,
+   output reg   [W/4-1:0]  delta_u,
+   output reg   [W/4-1:0]  delta_v
    );
 // *****************************************************************************
 
@@ -80,7 +80,7 @@ module bkm_control_step_checker #(
    always @(posedge clk) begin
       if (srst == 1'b1) begin
          err_u    <= 1'b0;
-         delta_u  <= {W{1'b0}};
+         delta_u  <= {W/4{1'b0}};
       end
       else begin
          if (enable == 1'b1) begin
@@ -94,6 +94,7 @@ module bkm_control_step_checker #(
             else begin
                add_note();
                err_u    <= 1'b0;
+               delta_u  <= {W/4{1'b0}};
             end
          end
       end
@@ -102,7 +103,7 @@ module bkm_control_step_checker #(
    always @(posedge clk) begin
       if (srst == 1'b1) begin
          err_v    <= 1'b0;
-         delta_v  <= {W{1'b0}};
+         delta_v  <= {W/4{1'b0}};
       end
       else begin
          if (enable == 1'b1) begin
@@ -116,6 +117,7 @@ module bkm_control_step_checker #(
             else begin
                add_note();
                err_v    <= 1'b0;
+               delta_v  <= {W/4{1'b0}};
             end
          end
       end

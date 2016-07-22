@@ -12,7 +12,7 @@
 // Description:
 // ------------
 //
-// Sequential test for bkm_step block.
+// Sequential test for bkm_control_step block.
 //
 // -----------------------------------------------------------------------------
 // File name:
@@ -24,7 +24,7 @@
 // History:
 // --------
 //
-//    - 2016-07-06 - ilesser - Initial version.
+//    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
