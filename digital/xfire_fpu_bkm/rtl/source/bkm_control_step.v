@@ -101,19 +101,19 @@ module bkm_control_step #(
     // Data inputs
     // ----------------------------------
     input wire                mode,
-    input wire [1:0]          format,
-    input wire [LOG2N-1:0]    n,
-    input wire [1:0]          d_u_n,        // d_n is encoded in ones complement
-    input wire [1:0]          d_v_n,        // d_n is encoded in ones complement
-    input wire [W/4-1:0]      u_n,
-    input wire [W/4-1:0]      v_n,
-    input wire [W/4-1:0]      lut_u,
-    input wire [W/4-1:0]      lut_v,
+    input wire    [1:0]       format,
+    input wire    [LOG2N-1:0] n,
+    input wire    [1:0]       d_u_n,        // d_n is encoded in ones complement
+    input wire    [1:0]       d_v_n,        // d_n is encoded in ones complement
+    input wire    [W/4-1:0]   u_n,
+    input wire    [W/4-1:0]   v_n,
+    input wire    [W/4-1:0]   lut_u,
+    input wire    [W/4-1:0]   lut_v,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output reg [W/4-1:0]      u_np1,
-    output reg [W/4-1:0]      v_np1
+    output wire   [W/4-1:0]   u_np1,
+    output wire   [W/4-1:0]   v_np1
   );
 // *****************************************************************************
 
@@ -151,8 +151,8 @@ module bkm_control_step #(
    wire  [W/4-1:0]      b_v;
    wire  [W/4-1:0]      u_n_plus_d_u_n;
    wire  [W/4-1:0]      v_n_plus_d_v_n;
-   wire  [W/4-1:0]      u_n_times_d_u_n;
-   wire  [W/4-1:0]      v_n_times_d_v_n;
+   wire  [W/4-1:0]      u_n_times_d_n;
+   wire  [W/4-1:0]      v_n_times_d_n;
    wire                 c_u;
    wire                 c_v;
    wire  [W/4-1:0]      s_u;
@@ -184,8 +184,8 @@ module bkm_control_step #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .x_out               (u_n_times_d_u_n),
-      .y_out               (v_n_times_d_v_n)
+      .x_out               (u_n_times_d_n),
+      .y_out               (v_n_times_d_n)
    );
    // -----------------------------------------------------
 
@@ -208,8 +208,8 @@ module bkm_control_step #(
    assign   sign_b_v       =  mode == `MODE_E   ?  `SUBB    :  `ADD              ;
    assign   a_u            =  mode == `MODE_E   ?   u_n     :   u_n_plus_d_u_n   ;
    assign   a_v            =  mode == `MODE_E   ?   v_n     :   v_n_plus_d_v_n   ;
-   assign   b_u            =  mode == `MODE_E   ?   lut_u   :   u_n_times_d_u_n  ;
-   assign   b_v            =  mode == `MODE_E   ?   lut_v   :   v_n_times_d_v_n  ;
+   assign   b_u            =  mode == `MODE_E   ?   lut_u   :   u_n_times_d_n    ;
+   assign   b_v            =  mode == `MODE_E   ?   lut_v   :   v_n_times_d_n    ;
    //       +--------------+--------------------+-----------+--------------------+
 
    // -----------------------------------------------------

@@ -30,11 +30,11 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 8
-`define N 8
-`define LOG2W 3
-`define LOG2N 3
-`define CNT_SIZE 1+2+2+2+`LOG2W+2*`W
+`define W 64
+`define N 64
+`define LOG2W 6
+`define LOG2N 6
+`define CNT_SIZE 1+2+2+2+`LOG2N+2*`W/4
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -59,24 +59,21 @@ module tb_bkm_control_step ();
    reg   [`LOG2N-1:0]      tb_n;
    reg   [1:0]             tb_d_u_n;
    reg   [1:0]             tb_d_v_n;
-   reg   [W-1:0]           tb_u_n,     tb_v_n;
-   reg   [W-1:0]           tb_lut_u,   tb_lut_v;
-   reg   [W-1:0]           tb_u_np1,   tb_v_np1;
+   reg   [W/4-1:0]         tb_u_n,     tb_v_n;
+   reg   [W/4-1:0]         tb_lut_u,   tb_lut_v;
+   reg   [W/4-1:0]         tb_u_np1,   tb_v_np1;
    reg   [`CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  [2*W-1:0]         u_n_csd,    v_n_csd;
-   wire  [2*W-1:0]         u_np1_csd,  v_np1_csd;
-   wire  [2*W-1:0]         lut_u_csd,  lut_v_csd;
-   wire  [W-1:0]           res_u_np1,  res_v_np1;
+   wire  [W/4-1:0]         res_u_np1,  res_v_np1;
 
    // Checker wiring
    wire                    err_u,   err_v;
    wire                    war_u,   war_v;
-   wire  [W-1:0]           delta_u, delta_v;
+   wire  [W/4-1:0]         delta_u, delta_v;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -128,10 +125,8 @@ module tb_bkm_control_step ();
    // Checkers
    // -----------------------------------------------------
    bkm_control_step_checker #(
-      .W          (`W),
-      .LOG2W      (`LOG2W),
-      .LOG2N      (`LOG2N)
-   ) checker (
+      .W          (`W)
+   ) duv_checker (
       // ----------------------------------
       // Clock, reset & enable inputs
       // ----------------------------------
@@ -181,15 +176,15 @@ module tb_bkm_control_step ();
       .n          (tb_n),
       .d_u_n      (tb_d_u_n),
       .d_v_n      (tb_d_v_n),
-      .u_n        (u_n_csd),
-      .v_n        (v_n_csd),
-      .lut_u      (lut_u_csd),
-      .lut_v      (lut_v_csd),
+      .u_n        (tb_u_n),
+      .v_n        (tb_v_n),
+      .lut_u      (tb_lut_u),
+      .lut_v      (tb_lut_v),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
-      .u_np1      (u_np1_csd),
-      .v_np1      (v_np1_csd)
+      .u_np1      (res_u_np1),
+      .v_np1      (res_v_np1)
    );
    // -----------------------------------------------------
 
