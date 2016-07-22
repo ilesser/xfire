@@ -12,13 +12,13 @@
 // Description:
 // ------------
 //
-// Checker for bkm_data_step block.
+// Checker for bkm_control_step block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// bkm_data_step_checker.v
+// bkm_control_step_checker.v
 //
 // -----------------------------------------------------------------------------
 // History:
@@ -33,7 +33,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module bkm_data_step_checker #(
+module bkm_control_step_checker #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
@@ -49,19 +49,19 @@ module bkm_data_step_checker #(
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input wire  [W-1:0]      tb_X_np1,
-   input wire  [W-1:0]      tb_Y_np1,
-   input wire  [W-1:0]      res_X_np1,
-   input wire  [W-1:0]      res_Y_np1,
+   input wire  [W-1:0]      tb_u_np1,
+   input wire  [W-1:0]      tb_v_np1,
+   input wire  [W-1:0]      res_u_np1,
+   input wire  [W-1:0]      res_v_np1,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output reg                war_X,
-   output reg                war_Y,
-   output reg                err_X,
-   output reg                err_Y,
-   output reg   [W-1:0]      delta_X,
-   output reg   [W-1:0]      delta_Y
+   output reg                war_u,
+   output reg                war_v,
+   output reg                err_u,
+   output reg                err_v,
+   output reg   [W-1:0]      delta_u,
+   output reg   [W-1:0]      delta_v
    );
 // *****************************************************************************
 
@@ -74,26 +74,26 @@ module bkm_data_step_checker #(
    // -----------------------------------------------------
    // -----------------------------------------------------
 
-   assign war_X = 1'b0;
-   assign war_Y = 1'b0;
+   assign war_u = 1'b0;
+   assign war_v = 1'b0;
 
    always @(posedge clk) begin
       if (srst == 1'b1) begin
-         err_X    <= 1'b0;
-         delta_X  <= {W{1'b0}};
+         err_u    <= 1'b0;
+         delta_u  <= {W{1'b0}};
       end
       else begin
          if (enable == 1'b1) begin
-            if (tb_X_np1 !== res_X_np1) begin
-               $display("[%0d] ERROR: in X.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
+            if (tb_u_np1 !== res_u_np1) begin
+               $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
                add_error();
                //finish_sim();
-               err_X    <= 1'b1;
-               delta_X  <= tb_X_np1 - res_X_np1;
+               err_u    <= 1'b1;
+               delta_u  <= tb_u_np1 - res_u_np1;
             end
             else begin
                add_note();
-               err_X    <= 1'b0;
+               err_u    <= 1'b0;
             end
          end
       end
@@ -101,21 +101,21 @@ module bkm_data_step_checker #(
 
    always @(posedge clk) begin
       if (srst == 1'b1) begin
-         err_Y    <= 1'b0;
-         delta_Y  <= {W{1'b0}};
+         err_v    <= 1'b0;
+         delta_v  <= {W{1'b0}};
       end
       else begin
          if (enable == 1'b1) begin
-            if (tb_Y_np1 !== res_Y_np1) begin
-               $display("[%0d] ERROR: in Y.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
+            if (tb_v_np1 !== res_v_np1) begin
+               $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
                add_error();
                //finish_sim();
-               err_Y    <= 1'b1;
-               delta_Y  <= tb_Y_np1 - res_Y_np1;
+               err_v    <= 1'b1;
+               delta_v  <= tb_v_np1 - res_v_np1;
             end
             else begin
                add_note();
-               err_Y    <= 1'b0;
+               err_v    <= 1'b0;
             end
          end
       end
