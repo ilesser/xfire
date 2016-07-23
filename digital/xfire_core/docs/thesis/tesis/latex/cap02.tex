@@ -50,7 +50,7 @@ los mecanismos necesarios para extraerlos del sistema.\\
 En este contexto la unidad de procesamiento es la encargada de recibir las
 instrucciones y datos, ejecutar las operaciones para finalmente presentar los
 resultados.\\
-Un microprocesadores es -en efecto- una implementación de un sistema de
+Un microprocesadores es ---en efecto--- una implementación de un sistema de
 procesamiento. El sustento físico de dicha implementación es la
 microelectrónica. En las siguientes secciones de este capítulo, se repasará el
 marco histórico en el que surgen los microprocesadores y las arquitecturas
@@ -97,7 +97,7 @@ de la especie en un mundo en el que la misma se encontraba en clara desventaja.
 En este contexto, el ser humano ha sido capaz de generar un desarollo
 tecnológico, que hoy en día es vertiginoso.\\
 
-\subsection{La Máquina de Turing}
+\subsection{La ``Máquina de Turing''}
 
 Alan Mathison Turing\footnote{Alan Mathison Turing (23 June 1912 – 7 June 1954):
 típicamente considerado el padre de las ciencias de la computación y de la
@@ -122,7 +122,7 @@ Turing, a su vez probando que el ``problema de decisión'' (entscheidungsproblem
 no tenía solución, al probar que el ``Halting Problem'' (Problema de Parada)
 para las Máquinas de Turing es indeterminado según el problema de decisión. En
 otras palabras, para un problema de este tipo, está indeterminado el hecho de
-que la máquina termine de computar. Es así que la Maquina de Turing fué capaz de
+que la máquina termine de computar. Es así que la Máquina de Turing fué capaz de
 demostrar las limitaciones del poder de cómputo. El modelo de acceso de datos e
 instrucciones era secuencial, lo cuál es minimalista, pero no apto para
 implementaciones prácticas. La teoría de autómatas es la rama de la ciencia que
@@ -204,9 +204,9 @@ argentina es de $30\,\mathrm{GW}$.
 
 Los semiconductores son materiales, que como bien indica su nombre, no son del
 todo conductores. En ellos, la capacidad de conducir una corriente eléctrica
-puede ser manipulada de diversas maneras. En 1931 Wolfgang Pauli -quien en 1945
-fue premiado con el Nobel de Física- enunció: ``Uno no debería trabajar en
-semiconductores, eso es un lío deleznable, quién sabe si realmente existen''.
+puede ser manipulada de diversas maneras. En 1931 Wolfgang Pauli ---quien en 
+1945 fue premiado con el Nobel de Física--- enunció: ``Uno no debería trabajar 
+en semiconductores, eso es un lío deleznable, quién sabe si realmente existen''.
 Nada más alejado de la realidad que hoy nos rodea. Los materiales
 semiconductores permitieron la creación de los transistores y posteriormente los
 circuitos integrados, dispositivos que iniciaron la revolución digital. Los
@@ -465,7 +465,7 @@ instrucciones y datos}
 
 Las instrucciones que ejecuta el procesador, al igual que los datos del programa
 en ejecución, deben residir en la memoria. De este hecho se desprende que
-existen -al menos- dos tipos de memorias: de instrucciones, y de datos. El
+existen ---al menos--- dos tipos de memorias: de instrucciones, y de datos. El
 acceso a estas dos memorias puede realizarse a través del mismo
 \emph{bus}\footnote{Bus: definir bus} o con \emph{buses} separados. Los nombres
 que la historia les ha provisto a estos dos posibles enfoques, son
@@ -558,15 +558,19 @@ Tambíen menciona pero no desarrolla la necesidad de contar con mecanismos de
 detección y correción.\\
 En cuanto a la memoria, que es donde entra la clasificación discutida en esta
 sección, von Neumann estableció que la memoria es uniforme, conteniendo tanto
-los números (datos) como las órdenes (instrucciones). Citando su trabajo:\\
-``El dispositivo requiere una memoria considerable. A pesar de que pareciese que
-distintas partes de la memoria tiene que realizar funciones que difieren en su
-naturaleza y considerablemente en su propósito, resulta tentador tratar a toda
-la memoria con un sólo órgano, y hacer que sus partes sean tan intercambiables
-como sea posible para todas las funciones que deban realizar''
-\cite[sección, 2.5]{vonNeumann}\\
-``Lás órdenes recibidas por CC vienen de M, es decir, el mismo lugar donde se
-almacenan los datos numéricos''\cite[sección, 14.0]{vonNeumann}.\\
+los números (datos) como las órdenes (instrucciones). Citando su trabajo:
+\begin{quote}
+  El dispositivo requiere una memoria considerable. A pesar de que pareciese 
+  que distintas partes de la memoria tiene que realizar funciones que difieren 
+  en su naturaleza y considerablemente en su propósito, resulta tentador tratar 
+  a toda la memoria con un sólo órgano, y hacer que sus partes sean tan 
+  intercambiables como sea posible para todas las funciones que deban realizar. 
+  \cite[sección, 2.5]{vonNeumann}
+\end{quote}
+\begin{quote}
+  Lás órdenes recibidas por CC vienen de M, es decir, el mismo lugar donde se
+  almacenan los datos numéricos.\cite[sección, 14.0]{vonNeumann}.
+\end{quote}
 Él concluyó que la memoria sería el subsistema más grande y abarcativo de la
 máquina. Basándose en diversos problemas matemáticos, incluyendo la resolución
 de ecuaciones diferenciales parciales y ordinarias, ordenamientos y experimentos
@@ -794,8 +798,16 @@ emérito de la universidad de Stanford que propuso la llamada ``Taxonomía de
 Flynn'' para clasificar las arquitecturas de computadoras en el año 1966}, 
 estableciendo los efectos que pueden surgir de explotar el paralelismo tanto en 
 los hilos de instrucciones como en los de datos. Se puede tener hilos únicos o 
-múltiples para cada uno de ellos. En la tabla \ref{tbl:flynn_taxonomy} se 
-muestran todas las posibles combinaciones con sus siglas en Inglés.
+múltiples para cada uno de ellos. Es estas definiciones, Flynn estableció que 
+una máquina identifica los siguientes conceptos:
+\begin{itemize}
+  \item CU: \emph{contro unit} o unidad de control
+  \item PE: \emph{processing element} o elemento de procesamiento
+  \item IS: \emph{instruction stream} o hilo de instrucciones
+  \item DS: \emph{data stream} o hilo de datos  
+\end{itemize}
+Al combinar hilos sencillos y múltiples de datos e instrucciones se da lugar, 
+entonces, a cuatro tipo de arquitecturas (ver tabla \ref{tbl:flynn_taxonomy}).
 \begin{table}
   \begin{tabu} to \textwidth {X[l]cc}
     \toprule
@@ -803,18 +815,84 @@ muestran todas las posibles combinaciones con sus siglas en Inglés.
 de instrucciones\\
     \midrule
     Hilo simple de datos	& SISD				& MISD\\
-    Hilo múltiple de datos	& MISD				& MIMD\\
+    Hilo múltiple de datos	& SIMD				& MIMD\\
     \bottomrule
   \end{tabu}
   \caption{Taxonomía de Flynn}
   \label{tbl:flynn_taxonomy}
 \end{table}
-Las distintas combinaciones dan lugar, entonces, a cuatro tipo de arquitecturas.
 
-\subsection{SISD: Simple Instruction Simple Data}
+\subsubsection{SISD: Simple Instruction Simple Data}
 
 Resultante de combinar un único hilo de control con un único hilo de datos, 
-este tipo de arquitectura no explota ningún paralelismo. SEGUIR
+este tipo de arquitectura no explota ningún paralelismo en una máquina 
+completamente secuencial. Una única CU obtiene un único IS de 
+memoria. La CU genera las señales de control necesarias para excitar a un 
+único PE sobre un único DS, es decir, una operación a la vez.\\
+Un ejemplo de esta arquitectura son los procesadores de las antiguas 
+computadoras personales.
+
+\subsubsection{SIMD: Simple Instruction Multiple Data}
+
+En este tipo de arquitecturas, sige existiendo un único hilo de control, pero 
+los datos que afectan las instrucciones provienen de distintos hilos de datos. 
+La CU trabaja con las instrucciones de un único IS y general las señales de 
+control necesarias para que mútiples PE procesen los datos provenientes de 
+múltiples DS. Es un tipo de máquina que es naturalmente paralelizable.\\
+Ejemplos de este tipo de arquitecturas son los procesadores matriciales y las 
+unidades de procesamiento gráficas (GPU). Cabe destacar que los antiguos 
+procesadores de PC, en un determinado momento incorporaron instrucciones 
+específicas con el que lograban este comportamiento, tales como las extensiones 
+multimedia (MMX) que Intel incluyó en su línea de procesadores Pentium a 
+mediados de los años '90.
+
+\subsubsection{MISD: Múltiple Instruction Simple Data}
+
+Se trata de arquitecturas en el que diversos hilos de control actuan sobre un 
+único hilo de datos. No se trata de un tipo común de arquitecturas, si no más 
+bien de un tipo específico utilizado en sistemas tolerantes a fallas. Diversos 
+sistemas heterogéneos operan sobre el mismo hilo de datos y deben arribar al 
+mismo resultado. Es decir que diversas CU toman instrucciones de diversos IS 
+controlando múltiples PE que actuan sobre un único DS.\\
+Ejemplos de este tipo de máquinas pueden ser las computadoras de control de 
+vuelo de aeronaves y naves espaciales o cohetes; es decir aplicaciones de 
+misión crítica que poseen sistemas redundantes y decisores.
+
+\subsubsection{MIMD: Multiple Instruction Multiple Data}
+
+Se trata de arquitecturas donde múltiples procesadores simultáneamente ejecutan 
+diversos hilos de instrucciones sobre diversos hilos de datos. Es decir que 
+diversas CU toman instrucciones de diversos IS para excitar a diversos PE que 
+actúan sobre diversos DS.\\
+Los procesadores multinúcleo y los sistemas distribuidos son ejemplos de éste 
+tipo de máquinas, y pueden utilizar tanto un espacio de memoria compartido, así 
+como uno distribuído.
+\begin{figure}
+  \centering
+  \begin{subfigure}{0.4\textwidth}
+    \input{./figures/C02-sisd.tex}
+    %\captionsetup{justification=centering}
+    \caption{SISD}
+    \label{fig:sisd}
+  \end{subfigure}
+  \begin{subfigure}{0.4\textwidth}
+    \input{./figures/C02-sisd.tex}
+    \caption{SIMD}
+    \label{fig:simd}
+  \end{subfigure}
+  \begin{subfigure}{0.4\textwidth}
+    \input{./figures/C02-sisd.tex}
+    \caption{MISD}
+    \label{fig:misd}
+  \end{subfigure}
+  \begin{subfigure}{0.4\textwidth}
+    \input{./figures/C02-sisd.tex}
+    \caption{MIMD}
+    \label{fig:mimd}
+  \end{subfigure}
+  \caption{Diagramas de la taxonomía de Flynn}
+  \label{fig:flynn_taxonomy}
+\end{figure}
 
 
 \subsection{Clasificación de las arquitecturas según su conjunto de 
