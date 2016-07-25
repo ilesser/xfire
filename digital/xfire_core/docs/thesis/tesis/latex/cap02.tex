@@ -1,4 +1,5 @@
 \chapter{Marco teório: arquitectura de procesadores}
+\label{ch:theory}
 
 En líneas generales un procesador es un sistema que permite, por un lado
 ingresar instrucciones y datos obteniendo en consecuencia los resultados de
@@ -57,6 +58,7 @@ marco histórico en el que surgen los microprocesadores y las arquitecturas
 asociadas.
 
 \section{Perspectiva histórica}
+\label{sec:theory-history}
 
 Desde épocas remotas, el hombre se ha destacado en el mundo animal por su
 capacidad de modificar su entorno para resolver problemas recurrentes. Es esta
@@ -98,6 +100,7 @@ En este contexto, el ser humano ha sido capaz de generar un desarollo
 tecnológico, que hoy en día es vertiginoso.\\
 
 \subsection{La ``Máquina de Turing''}
+\label{subsec:theory-history-turing}
 
 Alan Mathison Turing\footnote{Alan Mathison Turing (23 June 1912 – 7 June 1954):
 típicamente considerado el padre de las ciencias de la computación y de la
@@ -131,6 +134,7 @@ establece así la propiedad de que un sistema arbitrario de instrucciones sea
 ``Turing-Completo''.
 
 \subsection{La revolución digital}
+\label{subsec:theory-history-digital_revolution}
 
 La revolución digital es considerada la tercera revolución industrial, dando
 orígen a la llamada ``Era de la Información''. Sus comienzos se remontan a fines
@@ -201,6 +205,7 @@ argentina es de $30\,\mathrm{GW}$.
 \end{figure}
 
 \subsection{Silicio, dispositivos semiconductores y transistores}
+\label{subsec:theory-history-semiconductors}
 
 Los semiconductores son materiales, que como bien indica su nombre, no son del
 todo conductores. En ellos, la capacidad de conducir una corriente eléctrica
@@ -226,6 +231,7 @@ produjeron en el órden de $10^{19}$ transistores, según declaraciones de la
 clave de semejante número en la producción son los circuitos integrados.
 
 \subsection{Circuitos integrados y tencología CMOS}
+\label{subsec:theory-history-ic}
 
 En la figura \ref{fig:C02-primer_circuito_integrado} puede verse el primer
 circuito integrado de la historia. Medía aproximadamente media pulgada de ancho
@@ -302,6 +308,7 @@ semiconductores dió lugar así, entre otras cosas, a la creación de los
 microprocesadores.
 
 \subsection{Microprocesadores}
+\label{subsec:theory-history-microprocessor}
 
 Los microprocesadores surgen como consecuencia del alto nivel de integración y
 complejidad que la tencología de circuitos integrados permitieron alcanzar. Una
@@ -322,6 +329,7 @@ de discusiones y distintas vertientes y prácticas a seguir. Los primeros diseñ
 de los que se tenga registro en órden cronológico, fueron:
 
 \subsubsection{CADC}
+\label{subsubsec:theory-history-microprocessor-cadc}
 
 En 1968, la armada de los Estados Unidos de América le encomienda a la empresa
 Garret AiResearch\footnote{Garret AiResearch: fundada en 1936 en Los Ángeles por
@@ -357,6 +365,7 @@ Los responsables del diseño fueron Ray Holt y Steve Geller.
 
 
 \subsubsection{Four-Phase Systems AL1}
+\label{subsubsec:theory-history-microprocessor-al1}
 
 Un diseño de Lee Boysel que data del año 1969 dentro de Texas
 Instruments\footnote{Nota sobre TI}, era un componente de una implementación en
@@ -375,6 +384,7 @@ ROM y RAM e I/O era capaz de funcionar como CPU.
 
 
 \subsubsection{Pico/General Instruments}
+\label{subsubsec:theory-history-microprocessor-pico-gi}
 
 En 1971, Pico y General Instruments (GI) colaboraron en el diseño de circuitos
 integrados con el objetivo de fabricar una implementación de un diseño de
@@ -402,6 +412,7 @@ Microelectronics se convirtió en 1987 en Microchip PIC Microcontroller.
 \end{figure}
 
 \subsubsection{Intel 4004}
+\label{subsubsec:theory-history-microprocessor-4004}
 
 El Intel 4004 es generalmente el reconocido como el primer microprocesador
 comercial disponible en el mercado. El primer anuncio respecto de este
@@ -447,6 +458,7 @@ a Busicom en Marzo de 1971.
 \end{figure}
 
 \section{Evolución hacia las arquitecturas modernas}
+\label{sec:theory-modern}
 
 El concepto moderno de las arquitecturas se basa en las máquinas que almacenan
 tanto el programa que se ejecuta, como los datos que se manjan en memoria de
@@ -462,6 +474,7 @@ se las enmarcará dentro de dichas clasificaciones.
 
 \subsection{Clasificación de las arquitecturas según el acceso a la memoria de 
 instrucciones y datos}
+\label{subsec:theory-modern-memory_access}
 
 Las instrucciones que ejecuta el procesador, al igual que los datos del programa
 en ejecución, deben residir en la memoria. De este hecho se desprende que
@@ -473,6 +486,7 @@ que la historia les ha provisto a estos dos posibles enfoques, son
 para aquellas de \emph{buses} separados.
 
 \subsubsection{Arquitectura von Neumann}
+\label{subsubsec:theory-modern-memory_access-von_neumann}
 
 También conocida como modelo de von Neumann y arquitectura Princeton, este tipo
 de arquitectura debe su nombre a John von Neumann\footnote{Nota sobre el
@@ -600,6 +614,7 @@ dígitos sin especificar para propósitos futuros y mayor direccionamiento de
 memoria.
 
 \subsubsection{Arquitectura Harvard}
+\label{subsubsec:theory-modern-memory_access-harvard}
 
 Este tipo de arquitectura, ve sus orígenes en un desarrollo propuesto por el Dr.
 Howard Aiken\footnote{Nota sobre Aiken} en la universidad de Harvard en el año
@@ -653,6 +668,7 @@ magnético; el tipo de memoria de acceso aleatorio predominante entre 1955 y
 1975.
 
 \subsubsection{Harvard vs. von Neumann y Harvard modificada}
+\label{subsubsec:theory-modern-memory_access-modified_harvard}
 
 Como fue establecido al principio de esta sección, lo que diferencia estas dos
 arquitecturas es el acceso a los datos y a las instrucciones. La arquitectura
@@ -675,6 +691,7 @@ Típicamente, en las máquinas modernas, se implementas arquitecturas Harvard
 modificadas. Estas modificaciones pueden ser de diversos tipos:
 
 \paragraph{Arquitectura de caché separado}
+\label{par:theory-modern-memory_access-modified_harvard-split_cache}
 
 Es la modificación más común sobre la arquitectura Harvard, se construye una
 jerarquía de memoria donde el nivel más cercano al núcleo de procesamiento
@@ -689,6 +706,7 @@ para la mayoría de los programadores, excepto aquellos casos en los que es
 necesario el manejo de técnicas como por ejemplo, la coherencia de caches.
 
 \paragraph{Acesso a instrucciones como datos}
+\label{par:theory-modern-memory_access-modified_harvard-instructions_as_data}
 
 Un arquitectura que provea esta solución matiene la naturaleza de espacios de
 direcciones separados de la arquitectura Harvard, pero incluye operaciones
@@ -713,6 +731,7 @@ medios de acceso para actualizaciones de software/firmware y reemplaza a las
 EEPROM.
 
 \paragraph{Ejecucion de datos}
+\label{par:theory-modern-memory_access-modified_harvard-data_execution}
 
 Algunas arquitecturas pueden obtener sus instrucciones desde cualquier segmento
 de memoria con la limitación de que no podrá acceder simultáneamente para leer
@@ -721,12 +740,14 @@ comportamiento, se direccionan los buses tanto de datos como de instrucciones
 sobre distintos segmentos físicos de una misma memoria.
 
 \paragraph{Características de las arquitecturas Harvard modificadas}
+\label{par:theory-modern-memory_access-modified_harvard-characteristitcs}
 
 Tres características pueden ser utilizadas para diferenciar a este tipo de
 arquitectura de las Harvard puras y de las von Neumann:\\
 
 \subparagraph{Las memorias de datos e instrucciones ocupan diferentes espacios
 de direccionamiento}
+\label{subpar:theory-modern-memory_access-modified_harvard-characteristitcs-1}
 
 Para las máquinas puramente Harvard, hay una dirección ``cero'' de instrucciones
 en el espacio de direcciones de las instrucciones y una dirección ``cero'' de
@@ -745,6 +766,7 @@ puramente Harvard de este último tipo de Harvard modificadas.
 
 \subparagraph{Las memorias de datos e instrucciones tienen conexiones físicas
 separadas hacia el núcleo de procesamiento}
+\label{subpar:theory-modern-memory_access-modified_harvard-characteristitcs-2}
 
 Este es el motivo principal por el que existen las arquitecturas Harvard (tanto
 puras como modificadas), y por qué coexisten con las más generales y flexibles
@@ -765,6 +787,7 @@ como Harvard puras en este ámbito.
 
 \subparagraph{Las memorias de datos e instrucciones pueden ser accedidas de
 diferentes formas}
+\label{subpar:theory-modern-memory_access-modified_harvard-characteristitcs-3}
 
 Las máquinas Harvard puras, al tener distintos espacios de memoria para datos e
 instrucciones, pueden acceder a dichas memorias de distintas maneras. Puede ser
@@ -774,6 +797,7 @@ arquitectura von Neumann ni en una Harvard modificada de cache separado, dado
 que ambos espacios de memoria deben estar superpuestos.
 
 \subsubsection{Aplicaciones de esta clasificación en la actualidad}
+\label{subsubsec:theory-modern-memory_access-current_aplications}
 
 En áreas específicas donde un memoria cache es prohibitiva (puede ser el caso de
 los DSP por el determinismo necesario para las diversas operaciones, o de
@@ -789,6 +813,7 @@ extensiones propietarias, aunque hoy en día ya existen estandarizaciones para
 los llamados procesares embebidos.
 
 \subsection{Taxonomía de Flynn}
+\label{subsec:theory-modern-flynn_taxonomy}
 
 La taxonomía de Flynn es una clasificación de las arquitecturas basada en la 
 cantidad de ``hilos'' de control y de datos que soporta el 
@@ -822,7 +847,8 @@ de instrucciones\\
   \label{tbl:flynn_taxonomy}
 \end{table}
 
-\subsubsection{SISD: Simple Instruction Simple Data}
+\subsubsection{SISD: Simple Instruction stream, Simple Data stream}
+\label{subsubsec:theory-modern-flynn_taxonomy-SISD}
 
 Resultante de combinar un único hilo de control con un único hilo de datos, 
 este tipo de arquitectura no explota ningún paralelismo en una máquina 
@@ -832,7 +858,8 @@ memoria. La CU genera las señales de control necesarias para excitar a un
 Un ejemplo de esta arquitectura son los procesadores de las antiguas 
 computadoras personales.
 
-\subsubsection{SIMD: Simple Instruction Multiple Data}
+\subsubsection{SIMD: Simple Instruction stream, Multiple Data stream}
+\label{subsubsec:theory-modern-flynn_taxonomy-SIMD}
 
 En este tipo de arquitecturas, sige existiendo un único hilo de control, pero 
 los datos que afectan las instrucciones provienen de distintos hilos de datos. 
@@ -846,7 +873,8 @@ específicas con el que lograban este comportamiento, tales como las extensiones
 multimedia (MMX) que Intel incluyó en su línea de procesadores Pentium a 
 mediados de los años '90.
 
-\subsubsection{MISD: Múltiple Instruction Simple Data}
+\subsubsection{MISD: Múltiple Instruction stream, Simple Data stream}
+\label{subsubsec:theory-modern-flynn_taxonomy-MISD}
 
 Se trata de arquitecturas en el que diversos hilos de control actuan sobre un 
 único hilo de datos. No se trata de un tipo común de arquitecturas, si no más 
@@ -858,7 +886,8 @@ Ejemplos de este tipo de máquinas pueden ser las computadoras de control de
 vuelo de aeronaves y naves espaciales o cohetes; es decir aplicaciones de 
 misión crítica que poseen sistemas redundantes y decisores.
 
-\subsubsection{MIMD: Multiple Instruction Multiple Data}
+\subsubsection{MIMD: Multiple Instruction stream, Multiple Data stream}
+\label{subsubsec:theory-modern-flynn_taxonomy-MIMD}
 
 Se trata de arquitecturas donde múltiples procesadores simultáneamente ejecutan 
 diversos hilos de instrucciones sobre diversos hilos de datos. Es decir que 
@@ -867,26 +896,25 @@ actúan sobre diversos DS.\\
 Los procesadores multinúcleo y los sistemas distribuidos son ejemplos de éste 
 tipo de máquinas, y pueden utilizar tanto un espacio de memoria compartido, así 
 como uno distribuído.
+% TODO: Revisar por qué las últimas dos figuras no quedan bien armadas.
 \begin{figure}
-  \centering
-  \begin{subfigure}{0.4\textwidth}
+  \begin{subfigure}{0.35\textwidth}
     \input{./figures/C02-sisd.tex}
-    %\captionsetup{justification=centering}
     \caption{SISD}
     \label{fig:sisd}
   \end{subfigure}
-  \begin{subfigure}{0.4\textwidth}
-    \input{./figures/C02-sisd.tex}
+  \begin{subfigure}{0.35\textwidth}
+    \input{./figures/C02-simd.tex}
     \caption{SIMD}
     \label{fig:simd}
   \end{subfigure}
-  \begin{subfigure}{0.4\textwidth}
-    \input{./figures/C02-sisd.tex}
+  \begin{subfigure}{0.35\textwidth}
+    \input{./figures/C02-misd.tex}
     \caption{MISD}
     \label{fig:misd}
   \end{subfigure}
-  \begin{subfigure}{0.4\textwidth}
-    \input{./figures/C02-sisd.tex}
+  \begin{subfigure}{0.35\textwidth}
+    \input{./figures/C02-mimd.tex}
     \caption{MIMD}
     \label{fig:mimd}
   \end{subfigure}
@@ -894,9 +922,71 @@ como uno distribuído.
   \label{fig:flynn_taxonomy}
 \end{figure}
 
+\subsubsection{Actualización de la taxonomía de Flynn}
+\label{subsubsec:theory-modern-flynn_taxonomy-today}
+
+Con el advenimiento de las arquitecturas multinúcleo ---hoy en día la mayoría 
+de las arquitecturas utilizadas en microprocesadores y microcontroladores son 
+multinúcleo--- la taxonomía de Flynn ha recibido una actualización para la 
+categoría MIMD, basándose en el programa al que pertenencen los hilos de datos 
+e instrucciones en cuestión. Estos grupos son conocidos como ``Single Program, 
+Multiple Data Streams'' (SPMD) y ``Multiple Programs, Multiple Data Streams'' 
+(MPMD).
+
+\paragraph{SPMD: Single Program, Multiple Data streams}
+\label{par:theory-modern-flynn_taxonomy-today-SPMD}
+
+Esta clasificación modela múltiples procesadores autónomos que simultánemente 
+ejecutan el mismo programa (pero en punto independientes, a diferencia de la 
+naturaleza secuencial de SIMD) en diversos hilos de datos del programa. En sí, 
+no es sólo la naturaleza de la arquitectura lo que da lugar a este tipo, si no 
+que además involucra al modelo de programación utilizado.
+
+\paragraph{MPMD: Multiple Programs, Multiple Data streams}
+\label{par:theory-modern-flynn_taxonomy-today-MPMD}
+
+También se trata de un modelo que involucra tanto a la arquitectura como al 
+diseño del software que se ejecuta. En este caso, múltiples procesadores 
+ejectuan simultáneamente al menos dos programas independientes. Típicamente, 
+estos sistemas eligen un nodo que administra como los demás nodos ejecutan el 
+resto de los programas con diversas estrategias y modelos de programación.
 
 \subsection{Clasificación de las arquitecturas según su conjunto de 
 instrucciones}
+\label{subsec:theory-modern-isa_class}
+
+Esta clasificación quizá sea la más importante en el desarrollo del presente 
+trabajo dado que el conjunto de instrucciones de la arquitectura define por sí 
+mismo el modelo lógico de la misma.\\
+El \emph{Instruction Set Architecture} ---o sencillamente ISA--- de una 
+arquitectura, puede pertenecer a dos categorías principales: CISC o RISC. Cabe 
+destacar que no son sencillamente categorías, si no más bien se tratan de dos 
+posiciones filosóficas opuestas en cuanto a lo que al diseño de arquitecturas 
+concierne, tal como fuese anticipado al comienzo del capítulo \ref{ch:intro}.
+
+\subsubsection{CISC: Complex Instruction Set Computer}
+\label{subsubsec:theory-modern-isa_class-cisc}
+
+El enfoque CISC de las arquitecturas se basa en crear un conjunto de 
+instrucciones poderoso y abarcativo. Tal conjunto de instrucciones permite 
+realizar operaciones complejas a bajo nivel, es decir, directamente en el 
+lenguaje de la máquina. Es así que el lenguaje de dar soporte a múltiples 
+operaciones sobre múltiples tipos de datos; con la consecuente complejidad del 
+hardware subyacente para soportar dichas operaciones. Dada la muliplicidad de 
+operaciones y tipos de datos que debe soportar este tipo de arquitecturas, su 
+lenguaje será un reflejo de esta complejidad, es por eso que típicamente, el 
+ancho de palabra natural de la arquitectura no es suficiente para incluir todas 
+las instrucciones que soporta, en consecuencia, suelen utilizarse formatos de 
+instrucciones en los que una instrucción puede estar distribuida a lo largo de 
+múltiples palabras; y esto suma a la complejidad del hardware necesario para 
+decodificar dicho tipo de instrucciones.\\
+Puede verse en retrospectiva que los fundamentos que respaldan este tipo de 
+arquitecturas SEGUIR
+
+
+\subsubsection{RISC: Reduced Instruction Set Computer}
+\label{subsubsec:theory-modern-isa_class-risc}
+
 
 RISC vs CISC
 
