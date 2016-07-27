@@ -63,14 +63,13 @@ task load_operands;
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[2*`W/4+4+`LOG2N-1:2*`W/4+4];
-      tb_d_u_n    = cnt[2*`W/4+3:2*`W/4+2];
-      tb_d_v_n    = cnt[2*`W/4+1:2*`W/4+0];
-      tb_u_n      = cnt[2*`W/4-1:1*`W/4];
-      tb_v_n      = cnt[1*`W/4-1:0*`W/4];
-      // TODO: make them variable
-      tb_lut_u    = {`W/4{1'b0}};
-      tb_lut_v    = {`W/4{1'b0}};
+      tb_n        = cnt[4*`W/4+4+`LOG2N-1:4*`W/4+4];
+      tb_d_u_n    = cnt[4*`W/4+3         :4*`W/4+2];
+      tb_d_v_n    = cnt[4*`W/4+1         :4*`W/4+0];
+      tb_u_n      = cnt[4*`W/4-1         :3*`W/4];
+      tb_v_n      = cnt[3*`W/4-1         :2*`W/4];
+      tb_lut_u_n  = cnt[2*`W/4-1         :1*`W/4];
+      tb_lut_v_n  = cnt[1*`W/4-1         :0*`W/4];
 
       double_word = tb_format[0];
       complex     = tb_format[1];
@@ -88,14 +87,14 @@ task load_operands;
       if (double_word==1'b1) begin
          u_n   = $itor($signed(tb_u_n));
          v_n   = $itor($signed(tb_v_n));
-         lut_u = $itor($signed(tb_lut_u));
-         lut_v = $itor($signed(tb_lut_v));
+         lut_u = $itor($signed(tb_lut_u_n));
+         lut_v = $itor($signed(tb_lut_v_n));
       end
       else begin
          u_n   = $itor($signed(tb_u_n[`W/4/2-1:0]));
          v_n   = $itor($signed(tb_v_n[`W/4/2-1:0]));
-         lut_u = $itor($signed(tb_lut_u[`W/4/2-1:0]));
-         lut_v = $itor($signed(tb_lut_v[`W/4/2-1:0]));
+         lut_u = $itor($signed(tb_lut_u_n[`W/4/2-1:0]));
+         lut_v = $itor($signed(tb_lut_v_n[`W/4/2-1:0]));
       end
 
       if (tb_mode==`MODE_E) begin
