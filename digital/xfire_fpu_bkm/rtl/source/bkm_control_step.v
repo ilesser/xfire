@@ -107,8 +107,8 @@ module bkm_control_step #(
     input wire    [1:0]       d_v_n,        // d_n is encoded in ones complement
     input wire    [W/4-1:0]   u_n,
     input wire    [W/4-1:0]   v_n,
-    input wire    [W/4-1:0]   lut_u,
-    input wire    [W/4-1:0]   lut_v,
+    input wire    [W/4-1:0]   lut_u_n,
+    input wire    [W/4-1:0]   lut_v_n,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -131,8 +131,8 @@ module bkm_control_step #(
 //             |           CONTROL STEP         |
 // u_n    ---->+                                +---->   u_np1
 // v_n    ---->+                                +---->   v_np1
-// lut_u  ---->+                                |
-// lut_v  ---->+                                |
+// lut_u_n---->+                                |
+// lut_v_n---->+                                |
 //             |                                |
 //             +--------------------------------+
 //
@@ -141,6 +141,12 @@ module bkm_control_step #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   wire  [W/4-1:0]      u_n_plus_d_u_n;
+   wire  [W/4-1:0]      v_n_plus_d_v_n;
+   wire  [W/4-1:0]      u_n_times_d_n;
+   wire  [W/4-1:0]      v_n_times_d_n;
+   wire  [W/4-1:0]      u_n_times_d_n_div_2_n;
+   wire  [W/4-1:0]      v_n_times_d_n_div_2_n;
    wire                 sign_a_u;
    wire                 sign_a_v;
    wire                 sign_b_u;
@@ -149,21 +155,21 @@ module bkm_control_step #(
    wire  [W/4-1:0]      a_v;
    wire  [W/4-1:0]      b_u;
    wire  [W/4-1:0]      b_v;
-   wire  [W/4-1:0]      u_n_plus_d_u_n;
-   wire  [W/4-1:0]      v_n_plus_d_v_n;
-   wire  [W/4-1:0]      u_n_times_d_n;
-   wire  [W/4-1:0]      v_n_times_d_n;
    wire                 c_u;
    wire                 c_v;
    wire  [W/4-1:0]      s_u;
    wire  [W/4-1:0]      s_v;
-   wire  [W/4-1:0]      b_u_shifted;
-   wire  [W/4-1:0]      b_v_shifted;
    // -----------------------------------------------------
 
 // *****************************************************************************
 // CONTROL PATH
 // *****************************************************************************
+
+   // TODO: think of a better implementation for this
+   assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  u_n - d_u_n[`D_DATA] :  u_n + d_u_n[`D_DATA] ;
+   assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  v_n - d_v_n[`D_DATA] :  v_n + d_v_n[`D_DATA] ;
+   //assign   u_n_plus_d_u_n =  d_u_n != 2'b10    ?  u_n + d_u_n :  u_n   ;
+   //assign   v_n_plus_d_v_n =  d_v_n != 2'b10    ?  v_n + d_v_n :  v_n   ;
 
    // -----------------------------------------------------
    // Multiply by d_n
@@ -189,29 +195,6 @@ module bkm_control_step #(
    );
    // -----------------------------------------------------
 
-   // TODO: think of a better implementation for this
-   assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  u_n - d_u_n[`D_DATA] :  u_n + d_u_n[`D_DATA] ;
-   assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  v_n - d_v_n[`D_DATA] :  v_n + d_v_n[`D_DATA] ;
-   //assign   u_n_plus_d_u_n =  d_u_n != 2'b10    ?  u_n + d_u_n :  u_n   ;
-   //assign   v_n_plus_d_v_n =  d_v_n != 2'b10    ?  v_n + d_v_n :  v_n   ;
-
-   //       +--------------------------------------------------------------------+
-   //       | Mux the inputs of the two's complement complex adder               |
-   //       +--------------+--------------------+-----------+--------------------+
-   //       | Adder inputs |  mode              |  MODE_E   |  MODE_L            |
-   //       +--------------+--------------------+-----------+--------------------+
-   assign   sign_a_u       =  mode == `MODE_E   ?  `ADD     :  `ADD              ;
-   assign   sign_a_v       =  mode == `MODE_E   ?  `ADD     :  `ADD              ;
-   //assign sign_b_u       =  mode == `MODE_E   ?  `SUBB    :  d_u_n[`D_SIGN]    ;
-   //assign sign_b_v       =  mode == `MODE_E   ?  `SUBB    :  d_v_n[`D_SIGN]    ;
-   assign   sign_b_u       =  mode == `MODE_E   ?  `SUBB    :  `ADD              ;
-   assign   sign_b_v       =  mode == `MODE_E   ?  `SUBB    :  `ADD              ;
-   assign   a_u            =  mode == `MODE_E   ?   u_n     :   u_n_plus_d_u_n   ;
-   assign   a_v            =  mode == `MODE_E   ?   v_n     :   v_n_plus_d_v_n   ;
-   assign   b_u            =  mode == `MODE_E   ?   lut_u   :   u_n_times_d_n    ;
-   assign   b_v            =  mode == `MODE_E   ?   lut_v   :   v_n_times_d_n    ;
-   //       +--------------+--------------------+-----------+--------------------+
-
    // -----------------------------------------------------
    // Barrel shifter for u
    // -----------------------------------------------------
@@ -229,11 +212,11 @@ module bkm_control_step #(
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_ARITH),
       .sel                 (n),
-      .in                  (b_u),
+      .in                  (u_n_times_d_n),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .out                 (b_u_shifted)
+      .out                 (u_n_times_d_n_div_2_n)
    );
    // -----------------------------------------------------
 
@@ -254,13 +237,28 @@ module bkm_control_step #(
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_ARITH),
       .sel                 (n),
-      .in                  (b_v),
+      .in                  (v_n_times_d_n),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .out                 (b_v_shifted)
+      .out                 (v_n_times_d_n_div_2_n)
    );
    // -----------------------------------------------------
+
+   //       +--------------------------------------------------------------------------+
+   //       | Mux the inputs of the two's complement complex adder                     |
+   //       +--------------+--------------------+-----------+--------------------------+
+   //       | Adder inputs |  mode              |  MODE_E   |  MODE_L                  |
+   //       +--------------+--------------------+-----------+--------------------------+
+   assign   sign_a_u       =  mode == `MODE_E   ?  `ADD     :  `ADD                    ;
+   assign   sign_a_v       =  mode == `MODE_E   ?  `ADD     :  `ADD                    ;
+   assign   sign_b_u       =  mode == `MODE_E   ?  `SUBB    :  `ADD                    ;
+   assign   sign_b_v       =  mode == `MODE_E   ?  `SUBB    :  `ADD                    ;
+   assign   a_u            =  mode == `MODE_E   ?   u_n     :   u_n_plus_d_u_n         ;
+   assign   a_v            =  mode == `MODE_E   ?   v_n     :   v_n_plus_d_v_n         ;
+   assign   b_u            =  mode == `MODE_E   ?   lut_u_n :   u_n_times_d_n_div_2_n  ;
+   assign   b_v            =  mode == `MODE_E   ?   lut_v_n :   v_n_times_d_n_div_2_n  ;
+   //       +--------------+--------------------+-----------+--------------------------+
 
    // -----------------------------------------------------
    // Complex adder for w_n
@@ -280,8 +278,8 @@ module bkm_control_step #(
       .subb_b_y            (sign_b_v),
       .a_x                 (a_u),
       .a_y                 (a_v),
-      .b_x                 (b_u_shifted),
-      .b_y                 (b_v_shifted),
+      .b_x                 (b_u),
+      .b_y                 (b_v),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
