@@ -57,6 +57,10 @@ task load_operands;
    real                    u_n,     v_n;
    real                    u_np1,   v_np1;
    real                    lut_u,   lut_v;
+
+   real     u_n_plus_d_u_n_r,          v_n_plus_d_v_n_r;
+   real     u_n_times_d_n_r,           v_n_times_d_n_r;
+   real     u_n_times_d_n_div_2_n_r,   v_n_times_d_n_div_2_n_r;
    // -----------------------------------------------------
 
    begin
@@ -133,6 +137,16 @@ task load_operands;
             // Calculate u and v
             u_np1 = 2*(u_n + du + $rtoi((du * u_n - dv * v_n) * 2**(-n)));
             v_np1 = 2*(v_n + dv + $rtoi((du * v_n + dv * u_n) * 2**(-n)));
+
+            u_n_plus_d_u_n_r  = u_n + du;
+            v_n_plus_d_v_n_r  = v_n + dv;
+
+            u_n_times_d_n_r   = du * u_n - dv * v_n;
+            v_n_times_d_n_r   = du * v_n + dv * u_n;
+
+            u_n_times_d_n_div_2_n_r = $rtoi(u_n_times_d_n_r/2**n);
+            v_n_times_d_n_div_2_n_r = $rtoi(v_n_times_d_n_r/2**n);
+
 
             // if n=0 ^ du=0 ^ dv=+-1 then
             //u_np1 = 2*(u_n +  0 - dv * v_n);
