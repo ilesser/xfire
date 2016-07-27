@@ -34,7 +34,7 @@
 `define N 64
 `define LOG2W 6
 `define LOG2N 6
-`define CNT_SIZE 1+2+2+2+`LOG2N+2*`W/4
+`define CNT_SIZE 1+2+2+2+`LOG2N+4*`W/4
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -60,7 +60,7 @@ module tb_bkm_control_step ();
    reg   [1:0]             tb_d_u_n;
    reg   [1:0]             tb_d_v_n;
    reg   [W/4-1:0]         tb_u_n,     tb_v_n;
-   reg   [W/4-1:0]         tb_lut_u,   tb_lut_v;
+   reg   [W/4-1:0]         tb_lut_u_n, tb_lut_v_n;
    reg   [W/4-1:0]         tb_u_np1,   tb_v_np1;
    reg   [`CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
@@ -178,8 +178,8 @@ module tb_bkm_control_step ();
       .d_v_n      (tb_d_v_n),
       .u_n        (tb_u_n),
       .v_n        (tb_v_n),
-      .lut_u      (tb_lut_u),
-      .lut_v      (tb_lut_v),
+      .lut_u_n    (tb_lut_u_n),
+      .lut_v_n    (tb_lut_v_n),
       // ----------------------------------
       // Data outputs
       // ----------------------------------

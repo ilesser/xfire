@@ -50,6 +50,8 @@ task rand_test;
    reg   [1:0]        rand_d_v_n;
    reg   [`W/4-1:0]   rand_u_n;
    reg   [`W/4-1:0]   rand_v_n;
+   reg   [`W/4-1:0]   rand_lut_u_n;
+   reg   [`W/4-1:0]   rand_lut_v_n;
    reg   [30:0]       cnt1, cnt2;
    // -----------------------------------------------------
 
@@ -69,23 +71,27 @@ task rand_test;
 
       repeat(2**7) begin
 
-         rand_mode   = constrained_rand_int(0, 1);
-         rand_format = constrained_rand_int(0, 3);
-         rand_n      = constrained_rand_int(0, 2**`LOG2N);
-         rand_d_u_n  = constrained_rand_int(0, 3);
-         rand_d_v_n  = constrained_rand_int(0, 3);
-         rand_u_n    = constrained_rand_int(0, 2**(`W/4));
-         rand_v_n    = constrained_rand_int(0, 2**(`W/4));
+         rand_mode      = constrained_rand_int(0, 1);
+         rand_format    = constrained_rand_int(0, 3);
+         rand_n         = constrained_rand_int(0, 2**`LOG2N);
+         rand_d_u_n     = constrained_rand_int(0, 3);
+         rand_d_v_n     = constrained_rand_int(0, 3);
+         rand_u_n       = constrained_rand_int(0, 2**(`W/4));
+         rand_v_n       = constrained_rand_int(0, 2**(`W/4));
+         rand_lut_u_n   = constrained_rand_int(0, 2**(`W/4));
+         rand_lut_v_n   = constrained_rand_int(0, 2**(`W/4));
 
-         rand_mode   = `MODE_L;
-         rand_format = `FORMAT_CMPLX_DW;
-         rand_n      = 1;
-         rand_d_u_n  = 2'b00;
-         rand_d_v_n  = 2'b01;
-         rand_u_n    = constrained_rand_int(0, 100);
-         rand_v_n    = constrained_rand_int(0, 100);
+         rand_mode      = `MODE_E;
+         rand_format    = `FORMAT_CMPLX_DW;
+         //rand_n         = 1;
+         //rand_d_u_n     = 2'b00;
+         //rand_d_v_n     = 2'b01;
+         //rand_u_n       = constrained_rand_int(0, 100);
+         //rand_v_n       = constrained_rand_int(0, 100);
+         //rand_lut_u_n   = constrained_rand_int(0, 100);
+         //rand_lut_v_n   = constrained_rand_int(0, 100);
 
-         load_directed( rand_mode, rand_format,  rand_n, rand_d_u_n,   rand_d_v_n,   rand_u_n,  rand_v_n);
+         load_directed( rand_mode, rand_format,  rand_n, rand_d_u_n,   rand_d_v_n,   rand_u_n,  rand_v_n,   rand_lut_u_n,  rand_lut_v_n);
 
       end
 
@@ -127,5 +133,5 @@ endtask
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
 // |  07/xx |   L    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/00 |        |           |     |        |        |        |        |        |        |
+// |  07/27 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  con 2^17 repeticiones despues de arreglar el bug de w_n_times_d_n_div_2_n
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
