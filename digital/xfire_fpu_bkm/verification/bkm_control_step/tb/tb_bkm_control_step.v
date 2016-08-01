@@ -31,10 +31,14 @@
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
 `define W 64
+`define WC 16
 `define N 64
 `define LOG2W 6
 `define LOG2N 6
-`define CNT_SIZE 1+2+2+2+`LOG2N+4*`W/4
+`define M_SIZE 1
+`define F_SIZE 2
+`define D_SIZE 2
+`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`WC)
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -116,8 +120,8 @@ module tb_bkm_control_step ();
                "\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
             );
 
-      //$dumpfile("../waves/tb_bkm_control_step.vcd");
-      //$dumpvars();
+      $dumpfile("../waves/tb_bkm_control_step.vcd");
+      $dumpvars();
    end
    // -----------------------------------------------------
 

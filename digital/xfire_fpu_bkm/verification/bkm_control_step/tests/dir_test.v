@@ -29,6 +29,9 @@
 // -----------------------------------------------------------------------------
 
 `include "bkm_defs.vh"
+   `define WW `W/4
+   `define AA 16
+   `define AA `W/4
 
 // *****************************************************************************
 // Interface
@@ -43,6 +46,7 @@ task dir_test;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
+   //localparam  WW = `W/4;
    // -----------------------------------------------------
 
    begin
@@ -86,17 +90,17 @@ task dir_test;
 
 
       // operands     mode     format            n             d_u_n    d_v_n     u_n      v_n        lut_u_n    lut_v_n
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd004, `W/4'd006, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd005, `W/4'd001, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd005, `W/4'd003, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd005, `W/4'd005, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd005, `W/4'd007, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd005, `W/4'd009, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd007, `W/4'd001, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd007, `W/4'd003, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd007, `W/4'd005, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd007, `W/4'd007, `W/4'd000, `W/4'd000);
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W/4'd007, `W/4'd009, `W/4'd000, `W/4'd000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b01, `WC'd037, `WC'd036, `WC'd017, `WC'd020);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b10, `WC'd019, `WC'd051, `WC'd079, `WC'd024);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b11, `WC'd035, `WC'd016, `WC'd085, `WC'd062);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b00, `WC'd079, `WC'd018, `WC'd002, `WC'd069);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b00,   2'b11, `WC'd002, `WC'd016, `WC'd046, `WC'd012);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `WC'd005, `WC'd009, `WC'd000, `WC'd000);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `WC'd007, `WC'd001, `WC'd000, `WC'd000);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `WC'd007, `WC'd003, `WC'd000, `WC'd000);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `WC'd007, `WC'd005, `WC'd000, `WC'd000);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `WC'd007, `WC'd007, `WC'd000, `WC'd000);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `WC'd007, `WC'd009, `WC'd000, `WC'd000);
 
       //arst        = 1'b1;
       //run_clk(1);

@@ -53,10 +53,15 @@ task load_operands;
    reg                     double_word;
    reg                     complex;
    real                    n;
-   real                    du,      dv;
-   real                    u_n,     v_n;
-   real                    u_np1,   v_np1;
-   real                    lut_u,   lut_v;
+   real                    du,                        dv;
+   real                    u_n,                       v_n;
+   real                    u_np1,                     v_np1;
+   real                    lut_u,                     lut_v;
+   real                    u_n_plus_d_u_n_r,          v_n_plus_d_v_n_r;
+   real                    u_n_times_d_n_r,           v_n_times_d_n_r;
+   real                    u_n_times_d_n_div_2_n_r,   v_n_times_d_n_div_2_n_r;
+   real                    sign_u,                    sign_v;
+   real test_u, test_v;
    // -----------------------------------------------------
 
    begin
@@ -128,11 +133,40 @@ task load_operands;
 
       // d_n * w_n = (du + j dv) * (u + j v) = (du*u-dv*v) + j (du*v+dv*u)
 
+
+         // Calculate u and v
+
+         u_n_plus_d_u_n_r        = u_n + du;
+         u_n_times_d_n_r         = (du * u_n - dv * v_n);
+
+         v_n_plus_d_v_n_r        = v_n + dv;
+         v_n_times_d_n_r         = (du * v_n + dv * u_n);
+
+         //u_n_times_d_n_div_2_n_r =      ((u_n_times_d_n_r + 0) * 2**(-n));
+         //v_n_times_d_n_div_2_n_r =      ((v_n_times_d_n_r + 0) * 2**(-n));
+         //u_n_times_d_n_div_2_n_r = $rtoi((u_n_times_d_n_r + 0) * 2**(-n));
+         //v_n_times_d_n_div_2_n_r = $rtoi((v_n_times_d_n_r + 0) * 2**(-n));
+
+         sign_u = u_n_times_d_n_r >= 0 ? 0.0 : 1.0;
+         sign_v = v_n_times_d_n_r >= 0 ? 0.0 : 1.0;
+
+         //u_n_times_d_n_div_2_n_r = $rtoi((u_n_times_d_n_r + (-1)**(sign_u)) * 2**(-n));
+         //v_n_times_d_n_div_2_n_r = $rtoi((v_n_times_d_n_r + (-1)**(sign_v)) * 2**(-n));
+         //u_n_times_d_n_div_2_n_r = u_n_times_d_n_r >= 0  ?  $rtoi((u_n_times_d_n_r            ) * 2**(-n)):
+                                                            //$rtoi((u_n_times_d_n_r - 1        ) * 2**(-n));
+         //v_n_times_d_n_div_2_n_r = v_n_times_d_n_r >= 0  ?  $rtoi((v_n_times_d_n_r            ) * 2**(-n)):
+                                                            //$rtoi((v_n_times_d_n_r - 1        ) * 2**(-n));
+
+         //TODO: this is ok but not fixed
+         u_n_times_d_n_div_2_n_r = $rtoi(div_2_n(u_n_times_d_n_r, n));
+         v_n_times_d_n_div_2_n_r = $rtoi(div_2_n(v_n_times_d_n_r, n));
+
          if (complex==1'b1) begin
 
-            // Calculate u and v
-            u_np1 = 2*(u_n + du + $rtoi((du * u_n - dv * v_n) * 2**(-n)));
-            v_np1 = 2*(v_n + dv + $rtoi((du * v_n + dv * u_n) * 2**(-n)));
+            //u_np1 = 2*(u_n + du + $rtoi((du * u_n - dv * v_n) * 2**(-n)));
+            //v_np1 = 2*(v_n + dv + $rtoi((du * v_n + dv * u_n) * 2**(-n)));
+            u_np1 = 2*( u_n_plus_d_u_n_r + u_n_times_d_n_div_2_n_r );
+            v_np1 = 2*( v_n_plus_d_v_n_r + v_n_times_d_n_div_2_n_r );
 
             // if n=0 ^ du=0 ^ dv=+-1 then
             //u_np1 = 2*(u_n +  0 - dv * v_n);
@@ -146,13 +180,11 @@ task load_operands;
             //u_np1 = 2*(u_n +  0 - dv * v_n * 2**(-1));
             //v_np1 = 2*(v_n + dv + dv * u_n * 2**(-1));
 
-
-
          end
          else begin
 
             // Calculate u and v
-            u_np1 = 2*(u_n + du + du * u_n * 2**(-n));
+            u_np1 = 2*( u_n_plus_d_u_n_r + u_n_times_d_n_div_2_n_r );
             v_np1 = 0;
 
          end
@@ -173,3 +205,47 @@ task load_operands;
 
 endtask
 
+function real div_2_n;
+   input real x;
+   input real n;
+   begin
+      if (n == 0.0) begin
+         div_2_n = x;
+      end
+      else begin
+         x = 2 * x;
+         x = x/(2**n);
+         if (x%2 == 0) begin
+            // even
+            div_2_n = x/2;
+         end
+         else begin
+            //odd
+            div_2_n = (x-1)/2;
+         end
+      end
+   end
+endfunction
+
+//task div_by_2_n;
+   //input real x;
+   //input real n;
+   //output real div_2_n;
+   //begin
+      //if (n == 0.0) begin
+         //div_2_n = x;
+      //end
+      //else begin
+         //x = 2 * x;
+         //x = x/(2**n);
+         //if (x%2 == 0) begin
+            //// even
+            //div_2_n = x/2;
+         //end
+         //else begin
+            ////odd
+            //div_2_n = (x-1)/2;
+         //end
+      //end
+   //end
+//endtask

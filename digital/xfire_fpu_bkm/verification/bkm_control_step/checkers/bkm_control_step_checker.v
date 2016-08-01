@@ -60,8 +60,8 @@ module bkm_control_step_checker #(
    output reg              war_v,
    output reg              err_u,
    output reg              err_v,
-   output reg   [W/4-1:0]  delta_u,
-   output reg   [W/4-1:0]  delta_v
+   output wire [W/4-1:0]   delta_u,
+   output wire [W/4-1:0]   delta_v
    );
 // *****************************************************************************
 
@@ -72,29 +72,43 @@ module bkm_control_step_checker #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   real     delta_u_r,     delta_v_r;
    // -----------------------------------------------------
 
-   assign war_u = 1'b0;
-   assign war_v = 1'b0;
+   assign delta_u = delta_u_r;
+   assign delta_v = delta_v_r;
 
    always @(posedge clk) begin
       if (srst == 1'b1) begin
-         err_u    <= 1'b0;
-         delta_u  <= {W/4{1'b0}};
+         err_u       <= 1'b0;
+         war_u       <= 1'b0;
+         delta_u_r   <= 0;
       end
       else begin
          if (enable == 1'b1) begin
             if (tb_u_np1 !== res_u_np1) begin
-               $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
-               add_error();
-               //finish_sim();
-               err_u    <= 1'b1;
-               delta_u  <= tb_u_np1 - res_u_np1;
+               delta_u_r   <= $signed(tb_u_np1 - res_u_np1);
+               //if ((delta_u_r > W'd1) || (delta_u_r < -W'd1)) begin
+               // TODO: make this report an error if |delta| > 1 or a warning otherwise
+               //       the idea is the get a warning if the delta is only 1 LSB
+               if (delta_u_r > 1 || delta_u_r < -1) begin
+                  $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
+                  add_error();
+                  err_u    <= 1'b1;
+                  war_u    <= 1'b0;
+                  //finish_sim();
+               end
+               else begin
+                  add_warning();
+                  err_u    <= 1'b0;
+                  war_u    <= 1'b1;
+               end
             end
             else begin
                add_note();
-               err_u    <= 1'b0;
-               delta_u  <= {W/4{1'b0}};
+               err_u       <= 1'b0;
+               war_u       <= 1'b0;
+               delta_u_r   <= 0;
             end
          end
       end
@@ -103,21 +117,32 @@ module bkm_control_step_checker #(
    always @(posedge clk) begin
       if (srst == 1'b1) begin
          err_v    <= 1'b0;
-         delta_v  <= {W/4{1'b0}};
+         war_v    <= 1'b0;
+         delta_v_r   <= {W/4{1'b0}};
       end
       else begin
          if (enable == 1'b1) begin
             if (tb_v_np1 !== res_v_np1) begin
-               $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
-               add_error();
-               //finish_sim();
-               err_v    <= 1'b1;
-               delta_v  <= tb_v_np1 - res_v_np1;
+               delta_v_r   <= $signed(tb_v_np1 - res_v_np1);
+               //if (delta_v_r > W'd1 || delta_v_r < -W'd1) begin
+               if (delta_v_r > 1 || delta_v_r < -1) begin
+                  $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
+                  add_error();
+                  err_v    <= 1'b1;
+                  war_v    <= 1'b0;
+                  //finish_sim();
+               end
+               else begin
+                  add_warning();
+                  err_v    <= 1'b0;
+                  war_v    <= 1'b1;
+               end
             end
             else begin
                add_note();
-               err_v    <= 1'b0;
-               delta_v  <= {W/4{1'b0}};
+               err_v       <= 1'b0;
+               war_v       <= 1'b0;
+               delta_v_r   <= 0;
             end
          end
       end
