@@ -951,6 +951,29 @@ ejectuan simultáneamente al menos dos programas independientes. Típicamente,
 estos sistemas eligen un nodo que administra como los demás nodos ejecutan el 
 resto de los programas con diversas estrategias y modelos de programación.
 
+\subsection{Clasificación de las arquitecturas según el manejo de los datos}
+\label{subsec:theory-modern-data_managment}
+
+Tal como fuese indicado al comienzo del presente capítulo, la unidad de 
+procesamiento, recibe datos e intrucciones y genera resultados. Para poder 
+realizar este trabajo, la arquitectura debe ser capaz de leer de la memoria 
+datos y luego volcar los resultados a la misma. En este proceso, hay diversos 
+mecanismos por el cual las instrucciones pueden obtenera esta información y 
+devolverla luego del procesamiento para un posterior uso en el programa o 
+generar salidas en el sistema.\\
+Es así que las instrucciones de la arquitectura, podrían operar directamente 
+sobre los datos en memoria y escribir los resultados en la misma; hacer uso de 
+estructuras de hardware intermedias para almacenar los datos temporalmente para 
+su procesamiento y posterior almacenamiento o una combinación de estas 
+alternativas.
+
+\subsubsection{Load / Store}
+
+\subsubsection{Stack}
+
+\subsubsection{Register / Register}
+
+
 \subsection{Clasificación de las arquitecturas según su conjunto de 
 instrucciones}
 \label{subsec:theory-modern-isa_class}
@@ -962,31 +985,56 @@ El \emph{Instruction Set Architecture} ---o sencillamente ISA--- de una
 arquitectura, puede pertenecer a dos categorías principales: CISC o RISC. Cabe 
 destacar que no son sencillamente categorías, si no más bien se tratan de dos 
 posiciones filosóficas opuestas en cuanto a lo que al diseño de arquitecturas 
-concierne, tal como fuese anticipado al comienzo del capítulo \ref{ch:intro}.
+concierne, tal como fuese anticipado al comienzo del capítulo \ref{ch:intro}. 
+Estas posiciones pueden diferenciarse en cuanto al lugar donde está puesto el 
+énfasis: la filosofía CISC enfatiza el poder de procesamiento del hardware y la 
+filosfía RISC el del software a través de un hardware básico y sencillo, pero 
+rápido. 
 
 \subsubsection{CISC: Complex Instruction Set Computer}
 \label{subsubsec:theory-modern-isa_class-cisc}
 
-El enfoque CISC de las arquitecturas se basa en crear un conjunto de 
+Dado que en la filosofía CISC, el enfoque está centrado en el poder del 
+hardware de la arquitectura, el objetivo se centra en crear un conjunto de 
 instrucciones poderoso y abarcativo. Tal conjunto de instrucciones permite 
 realizar operaciones complejas a bajo nivel, es decir, directamente en el 
-lenguaje de la máquina. Es así que el lenguaje de dar soporte a múltiples 
-operaciones sobre múltiples tipos de datos; con la consecuente complejidad del 
-hardware subyacente para soportar dichas operaciones. Dada la muliplicidad de 
-operaciones y tipos de datos que debe soportar este tipo de arquitecturas, su 
-lenguaje será un reflejo de esta complejidad, es por eso que típicamente, el 
+lenguaje de la máquina. Es así que el lenguaje debe dar soporte a múltiples 
+operaciones sobre distintos tipos de datos con diversos modos de 
+direccionamiento; con la consecuente complejidad del hardware subyacente para 
+soportar dichas operaciones. Dada la muliplicidad de operaciones, tipos de 
+datos y modos de direccionamiento que debe soportar este tipo de arquitecturas, 
+su lenguaje será un reflejo de esta complejidad, es por eso que típicamente, el 
 ancho de palabra natural de la arquitectura no es suficiente para incluir todas 
 las instrucciones que soporta, en consecuencia, suelen utilizarse formatos de 
 instrucciones en los que una instrucción puede estar distribuida a lo largo de 
 múltiples palabras; y esto suma a la complejidad del hardware necesario para 
-decodificar dicho tipo de instrucciones.\\
-Puede verse en retrospectiva que los fundamentos que respaldan este tipo de 
-arquitecturas SEGUIR
-
+decodificar dicho tipo de instrucciones. Típicamente, en un hardware de este 
+tipo las instrucciones pueden demandar varios ciclos de reloj para generar un 
+resultado, pero siendo este resultado producto de un trabajo complejo sobre 
+los datos. En consecuencia, el código a nivel 
+\emph{assembler}\footnote{Assembler o lenguaje ensamblador: es el lenguaje de 
+máquina de una determinada arquitectura.} generado por un compilador de un 
+lenguaje de más alto nivel, tenderá a ser compacto dado el poder de cómputo 
+elevado que tienen las instrucciones de este tipo de arquitecturas. 
 
 \subsubsection{RISC: Reduced Instruction Set Computer}
 \label{subsubsec:theory-modern-isa_class-risc}
 
+Cómo fuese mencionado antes, la filosofía RISC pone el enfoque en el poder del 
+software, dejando que el hardware sólo se encargue de operaciones básicas sobre 
+los datos. El conjunto de instrucciones, en este caso, será reducido y 
+soportará operaciones sencillas sobre tipos de datos compatibles entre sí y en 
+general se contará con algunos pocos modos de direccionamiento. Es así que el 
+hardware necesario para implementar las operaciones de una ISA RISC será 
+sencillo, transfiriendo así la responsabilidad de la generación de resultados 
+de operaciones más complejas al software. Es por esto que los programas en 
+lenguaje de máquina tenderán a ser más extensos que su contraparte CISC. Es 
+aquí que cobra importancia la tecnología de los compiladores para poder 
+soportar optimizaciones razonables en este tipo de arquitecturas. El beneficio 
+que trae la implementación de este tipo de arquitecturas radica en la sencillez 
+del hardware, algo que quizá a simple vista parezca trivial, pero que en la 
+práctica acarrea consecuencias deseables para la aplicación de mejoras en el 
+hardware. 
 
 RISC vs CISC
 
