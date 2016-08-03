@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-03 - ilesser - Copied from bkm_control_step test.
 //    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -53,29 +54,31 @@ task load_operands;
    reg                     double_word;
    reg                     complex;
    real                    n;
-   real                    dx,      dy;
-   real                    X_n,     Y_n;
-   real                    X_np1,   Y_np1;
-   real                    lut_X,   lut_Y;
+   real                    dx,                        dy;
+   real                    X_n,                       Y_n;
+   real                    X_n_plus_d_x_n_r,          Y_n_plus_d_y_n_r;
+   real                    X_n_times_d_n_r,           Y_n_times_d_n_r;
+   real                    X_n_times_d_n_div_2_n_r,   Y_n_times_d_n_div_2_n_r;
+   real                    X_np1,                     Y_np1;
+   real                    lut_X,                     lut_Y;
    // -----------------------------------------------------
 
    begin
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[2*`W+4+`LOG2N-1:2*`W+4];
-      tb_d_x_n    = cnt[2*`W+3:2*`W+2];
-      tb_d_y_n    = cnt[2*`W+1:2*`W+0];
-      tb_X_n      = cnt[2*`W-1:1*`W];
-      tb_Y_n      = cnt[1*`W-1:0*`W];
-      // TODO: make them variable
-      tb_lut_X    = `W'd0;
-      tb_lut_Y    = `W'd0;
+      tb_n        = cnt[4*`W+4+`LOG2N-1:4*`W+4];
+      tb_d_x_n    = cnt[4*`W+3         :4*`W+2];
+      tb_d_y_n    = cnt[4*`W+1         :4*`W+0];
+      tb_X_n      = cnt[4*`W-1         :3*`W];
+      tb_Y_n      = cnt[3*`W-1         :2*`W];
+      tb_lut_X    = cnt[2*`W-1         :1*`W];
+      tb_lut_Y    = cnt[1*`W-1         :0*`W];
 
       double_word = tb_format[0];
       complex     = tb_format[1];
 
-      n  = $itor($signed(tb_n));
+      n  = $itor(tb_n);
 
       dx =  tb_d_x_n == 2'b01 ?  1  :
             tb_d_x_n == 2'b11 ? -1  :
@@ -103,21 +106,36 @@ task load_operands;
       // ------
       // Z = E
       // Z_{n+1} = Z_n * (1 + d_n * 2^-n)
+      // Z_{n+1} = Z_n + Z_n * d_n * 2^-n
       // Z_{n+1} = (X_n + j Y_n) * (1 + dxn * 2^-n + j * dyn * 2^-n)
       // X_{n+1} = X_n * (1 + dxn * 2^-n) - Y_n * dyn * 2^-n)
       // Y_{n+1} = Y_n * (1 + dxn * 2^-n) + X_n * dyn * 2^-n)
 
+         // Calculate X and Y
+
+         X_n_plus_d_x_n_r        = X_n + dx;
+         X_n_times_d_n_r         = (dx * X_n - dy * Y_n);
+
+         Y_n_plus_d_y_n_r        = Y_n + dy;
+         Y_n_times_d_n_r         = (dx * Y_n + dy * X_n);
+
+         X_n_times_d_n_div_2_n_r = $rtoi(div_2_n(X_n_times_d_n_r, n));
+         Y_n_times_d_n_div_2_n_r = $rtoi(div_2_n(Y_n_times_d_n_r, n));
+
          if (complex==1'b1) begin
 
             // Calculate X and Y
-            X_np1 = X_n * (1 + dx * 2**-n) - Y_n * dy * 2**-n;
-            Y_np1 = Y_n * (1 + dx * 2**-n) + X_n * dy * 2**-n;
+            //X_np1 = X_n * (1 + dx * 2**-n) - Y_n * dy * 2**-n;
+            //Y_np1 = Y_n * (1 + dx * 2**-n) + X_n * dy * 2**-n;
+            X_np1 = X_n + X_n_times_d_n_div_2_n_r;
+            Y_np1 = Y_n + Y_n_times_d_n_div_2_n_r;
 
          end
          else begin
 
             // Calculate X and Y
-            X_np1 = X_n * (1 + dx * 2**-n);
+            //X_np1 = X_n * (1 + dx * 2**-n);
+            X_np1 = X_n + X_n_times_d_n_div_2_n_r;
             Y_np1 = 0;
 
          end
@@ -129,8 +147,6 @@ task load_operands;
       // ------
       // Z = L
       // Z_{n+1} = Z_n - ln(1 + d_n * 2^-n)
-
-      // d_n * w_n = (dx + j dy) * (u + j v) = (dx*u-dy*v) + j (dx*v+dy*u)
 
          if (complex==1'b1) begin
 
@@ -149,12 +165,8 @@ task load_operands;
 
       end
 
-      //tb_X_np1 = (X_np1);
-      tb_Y_np1 = (Y_np1);
-
-      tb_X_np1 = $rtoi(X_np1+1.0-1.0);
-      //tb_X_np1 = (X_np1+1.0-1.0);
-      //tb_Y_np1 = (Y_np1+1.0-1.0);
+      tb_X_np1 = X_np1;
+      tb_Y_np1 = Y_np1;
 
       run_clk(1);
 
@@ -164,3 +176,20 @@ task load_operands;
 
 endtask
 
+function real div_2_n;
+   input real x;
+   input real n;
+   real i,y;
+   begin
+      y = x;
+      if (n>0) begin
+         for (i=0; i<n; i=i+1) begin
+            if ($rtoi(y)%2 == 0)
+               y = y/2;
+            else
+               y = (y-1)/2;
+         end
+      end
+      div_2_n = y;
+   end
+endfunction
