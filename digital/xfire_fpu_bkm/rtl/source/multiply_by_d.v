@@ -19,7 +19,7 @@
 //
 //  Data inputs:
 //    - d_x       : Real part of d (one's complement, 2 bits).
-//    - d_y       : Imag part of d (ones's complement, 2 bits).
+//    - d_y       : Imag part of d (one's complement, 2 bits).
 //    - x_in      : Real part of z (two's complement, W bits).
 //    - y_in      : Imag part of z (two's complement, W bits).
 //
@@ -34,9 +34,12 @@
 // History:
 // --------
 //
+//    - 2016-08-02 - ilesser - Added defines.
 //    - 2016-05-02 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
+
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -114,10 +117,10 @@ module multiply_by_d #(
    // -----------------------------------------------------
    // Obtain d signs and data
    // -----------------------------------------------------
-   assign d_x_sign = d_x[1];
-   assign d_x_data = d_x[0];
-   assign d_y_sign = d_y[1];
-   assign d_y_data = d_y[0];
+   assign d_x_sign = d_x[`D_SIGN];
+   assign d_x_data = d_x[`D_DATA];
+   assign d_y_sign = d_y[`D_SIGN];
+   assign d_y_data = d_y[`D_DATA];
    // -----------------------------------------------------
 
    // -----------------------------------------------------
