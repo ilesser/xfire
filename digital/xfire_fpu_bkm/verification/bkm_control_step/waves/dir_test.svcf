@@ -1,4 +1,4 @@
-# SimVision Command Script (Wed Jul 27 07:29:12 PM ART 2016)
+# SimVision Command Script (Tue Aug 02 09:23:15 PM ART 2016)
 #
 # Version 15.20.s002
 #
@@ -72,14 +72,14 @@ if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1680x978+0+0}] !=
 }
 window target "Waveform 1" on
 waveform using {Waveform 1}
-waveform sidebar select designbrowser
+waveform sidebar visibility partial
 waveform set \
     -primarycursor TimeA \
     -signalnames name \
-    -signalwidth 200 \
+    -signalwidth 278 \
     -units ns \
-    -valuewidth 124
-waveform baseline set -time 0
+    -valuewidth 177
+waveform baseline set -time 33,075,000ps
 
 set id [waveform add -signals  {
 	bkm_control_step::tb_bkm_control_step.arst
@@ -94,8 +94,25 @@ set id [waveform add -signals  {
 	bkm_control_step::tb_bkm_control_step.ena
 	} ]
 set id [waveform add -signals  {
-	{bkm_control_step::tb_bkm_control_step.cnt[76:0]}
+	{bkm_control_step::tb_bkm_control_step.cnt_load[74:0]}
 	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 75]
+waveform format $id2 -radix %b
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.cnt_step[74:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.cnt[74:0]}
+	} ]
+waveform format $id -radix %x
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 75]
+waveform format $id2 -radix %b
+set id2 [lindex [waveform hierarchy content $id] 76]
+waveform format $id2 -radix %b
+waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	bkm_control_step::tb_bkm_control_step.err_u
 	} ]
@@ -126,9 +143,12 @@ set id [waveform add -signals  {
 	} ]
 waveform format $id -radix %b
 set id [waveform add -signals  {
-	{bkm_control_step::tb_bkm_control_step.tb_n[5:0]}
+	{bkm_control_step::tb_bkm_control_step.tb_n[3:0]}
 	} ]
 waveform format $id -radix %d
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -radix %b
 waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	{bkm_control_step::tb_bkm_control_step.tb_d_u_n[1:0]}
@@ -141,29 +161,58 @@ set id [waveform add -signals  {
 waveform format $id -radix %b
 waveform hierarchy collapse $id
 set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.tb_u_n)
-	} ]
-set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.tb_lut_u_n)
 	} ]
-set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.res_u_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.tb_u_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.tb_v_n)
-	} ]
+waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.tb_lut_v_n)
 	} ]
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.tb_u_n)
+	} ]
+waveform hierarchy collapse $id
+waveform axis range $id -for default -min -31945 -max 32644 -scale linear
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.res_u_np1)
+	} ]
+waveform format $id -color #0000ff
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.tb_u_np1)
+	} ]
+waveform format $id -color #0000ff
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.tb_v_n)
+	} ]
+waveform hierarchy collapse $id
+waveform axis range $id -for default -min -100 -max 98 -scale linear
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.res_v_np1)
 	} ]
+waveform format $id -color #0000ff
+waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.tb_v_np1)
 	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.err_u
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.war_u
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.err_v
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.war_v
+	} ]
+waveform format $id -color #ffff00
 set id [waveform add -cdivider divider]
 set id [waveform add -signals  {
 	bkm_control_step::tb_bkm_control_step.duv.mode
@@ -173,9 +222,40 @@ set id [waveform add -signals  {
 	} ]
 waveform format $id -radix %b
 set id [waveform add -signals  {
-	{bkm_control_step::tb_bkm_control_step.duv.n[5:0]}
+	{bkm_control_step::tb_bkm_control_step.duv.n[3:0]}
 	} ]
 waveform format $id -radix %d
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -radix %b
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.duv.d_u_n[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.duv.d_v_n[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.duv.u_n)
+	} ]
+waveform format $id -color #ff00ff
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.u_n
+	} ]
+waveform format $id -trace digital -color #ff00ff
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.duv.u_n_plus_d_u_n)
+	} ]
+waveform format $id -color #ff9900
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.u_n_plus_d_u_n_r
+	} ]
+waveform format $id -trace digital -color #ff9900
+waveform axis range $id -for default -min -1 -max 1 -scale linear
 set id [waveform add -signals  {
 	{bkm_control_step::tb_bkm_control_step.duv.d_u_n[1:0]}
 	} ]
@@ -185,19 +265,64 @@ set id [waveform add -signals  {
 	} ]
 waveform format $id -radix %b
 set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.duv.u_n)
+	signed(bkm_control_step::tb_bkm_control_step.duv.u_n_times_d_n)
 	} ]
+waveform format $id -color #9900ff
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.u_n_times_d_n_r
+	} ]
+waveform format $id -trace digital -color #9900ff
+waveform axis range $id -for default -min -16879 -max 18466 -scale linear
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.duv.u_n_times_d_n_div_2_n)
+	} ]
+waveform format $id -color #ff9900
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.u_n_times_d_n_div_2_n_r
+	} ]
+waveform format $id -trace digital -color #ff9900
+waveform axis range $id -for default -min -131 -max 144 -scale linear
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.err_u
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.war_u
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.delta_u)
+	} ]
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.duv_checker.delta_u_r
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min 0 -max 2 -scale linear
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.duv_checker.neq_u
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.res_u_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.tb_u_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -cdivider divider]
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.duv.v_n)
 	} ]
+waveform format $id -color #9900ff
+waveform hierarchy collapse $id
 set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.duv.u_n_plus_d_u_n)
-	} ]
-set id [waveform add -signals  {
-	bkm_control_step::tb_bkm_control_step.load_operands.u_n_plus_d_u_n_r
+	bkm_control_step::tb_bkm_control_step.load_operands.v_n
 	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+waveform axis range $id -for default -min 85 -max 939 -scale linear
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.duv.v_n_plus_d_v_n)
 	} ]
@@ -207,40 +332,68 @@ set id [waveform add -signals  {
 waveform format $id -trace digital
 waveform axis range $id -for default -min -1 -max 1 -scale linear
 set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.duv.u_n_times_d_n)
+	{bkm_control_step::tb_bkm_control_step.duv.d_u_n[1:0]}
 	} ]
+waveform format $id -radix %b
 set id [waveform add -signals  {
-	bkm_control_step::tb_bkm_control_step.load_operands.u_n_times_d_n_r
+	{bkm_control_step::tb_bkm_control_step.duv.d_v_n[1:0]}
 	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -16879 -max 18466 -scale linear
+waveform format $id -radix %b
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.duv.v_n_times_d_n)
 	} ]
+waveform format $id -color #0000ff
 set id [waveform add -signals  {
 	bkm_control_step::tb_bkm_control_step.load_operands.v_n_times_d_n_r
 	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -18956 -max 24761 -scale linear
-set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.duv.u_n_times_d_n_div_2_n)
-	} ]
-set id [waveform add -signals  {
-	bkm_control_step::tb_bkm_control_step.load_operands.u_n_times_d_n_div_2_n_r
-	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -131 -max 144 -scale linear
-set id [waveform add -signals  {
-	signed(bkm_control_step::tb_bkm_control_step.duv.v_n_times_d_n_div_2_n)
-	} ]
+waveform format $id -trace digital -color #0000ff
+waveform axis range $id -for default -min -1 -max 1 -scale linear
 set id [waveform add -signals  {
 	bkm_control_step::tb_bkm_control_step.load_operands.v_n_times_d_n_div_2_n_r
 	} ]
+waveform format $id -trace digital -color #ff0099
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.duv.v_n_times_d_n_div_2_n)
+	} ]
+waveform format $id -color #ff0099
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.res_v_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.tb_v_np1)
+	} ]
+waveform format $id -color #0000ff
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.err_v
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.war_v
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -signals  {
+	signed(bkm_control_step::tb_bkm_control_step.delta_v)
+	} ]
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.duv_checker.delta_v_r
+	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -148 -max 193 -scale linear
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.duv_checker.neq_v
+	} ]
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.duv_checker.clk
+	} ]
+set id [waveform add -cdivider divider]
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.duv.a_u)
 	} ]
+waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.duv.a_v)
 	} ]
@@ -267,8 +420,59 @@ set id [waveform add -signals  {
 	signed(bkm_control_step::tb_bkm_control_step.duv.b_u)
 	} ]
 waveform format $id -radix %b
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.du
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.dv
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.u_n
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -30259 -max 29978 -scale linear
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_operands.v_n
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -19561 -max 28084 -scale linear
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.d_u_n[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.d_v_n[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.dir_cnt[74:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.format[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.lut_u_n[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.lut_v_n[15:0]}
+	} ]
+set id [waveform add -signals  {
+	bkm_control_step::tb_bkm_control_step.load_directed.mode
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.n[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.u_n[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_control_step::tb_bkm_control_step.load_directed.v_n[15:0]}
+	} ]
 
-waveform xview limits 122.159ns 139.011ns
+waveform xview limits 1021.51ns 1148.491ns
 
 #
 # Waveform Window Links

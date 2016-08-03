@@ -73,6 +73,7 @@
 // History:
 // --------
 //
+//    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-27 - ilesser - BUG1: Fixed.
 //    - 2016-07-22 - ilesser - Initial version.
 //
@@ -106,15 +107,15 @@ module bkm_control_step #(
     input wire    [LOG2N-1:0] n,
     input wire    [1:0]       d_u_n,        // d_n is encoded in ones complement
     input wire    [1:0]       d_v_n,        // d_n is encoded in ones complement
-    input wire    [W/4-1:0]   u_n,
-    input wire    [W/4-1:0]   v_n,
-    input wire    [W/4-1:0]   lut_u_n,
-    input wire    [W/4-1:0]   lut_v_n,
+    input wire    [W-1:0]     u_n,
+    input wire    [W-1:0]     v_n,
+    input wire    [W-1:0]     lut_u_n,
+    input wire    [W-1:0]     lut_v_n,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output wire   [W/4-1:0]   u_np1,
-    output wire   [W/4-1:0]   v_np1
+    output wire   [W-1:0]     u_np1,
+    output wire   [W-1:0]     v_np1
   );
 // *****************************************************************************
 
@@ -142,24 +143,24 @@ module bkm_control_step #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [W/4-1:0]      u_n_plus_d_u_n;
-   wire  [W/4-1:0]      v_n_plus_d_v_n;
-   wire  [W/4-1:0]      u_n_times_d_n;
-   wire  [W/4-1:0]      v_n_times_d_n;
-   wire  [W/4-1:0]      u_n_times_d_n_div_2_n;
-   wire  [W/4-1:0]      v_n_times_d_n_div_2_n;
-   wire                 sign_a_u;
-   wire                 sign_a_v;
-   wire                 sign_b_u;
-   wire                 sign_b_v;
-   wire  [W/4-1:0]      a_u;
-   wire  [W/4-1:0]      a_v;
-   wire  [W/4-1:0]      b_u;
-   wire  [W/4-1:0]      b_v;
-   wire                 c_u;
-   wire                 c_v;
-   wire  [W/4-1:0]      s_u;
-   wire  [W/4-1:0]      s_v;
+   wire  [W-1:0]     u_n_plus_d_u_n;
+   wire  [W-1:0]     v_n_plus_d_v_n;
+   wire  [W-1:0]     u_n_times_d_n;
+   wire  [W-1:0]     v_n_times_d_n;
+   wire  [W-1:0]     u_n_times_d_n_div_2_n;
+   wire  [W-1:0]     v_n_times_d_n_div_2_n;
+   wire              sign_a_u;
+   wire              sign_a_v;
+   wire              sign_b_u;
+   wire              sign_b_v;
+   wire  [W-1:0]     a_u;
+   wire  [W-1:0]     a_v;
+   wire  [W-1:0]     b_u;
+   wire  [W-1:0]     b_v;
+   wire              c_u;
+   wire              c_v;
+   wire  [W-1:0]     s_u;
+   wire  [W-1:0]     s_v;
    // -----------------------------------------------------
 
 // *****************************************************************************
@@ -179,7 +180,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W/4)
+      .W                   (W)
    ) multiply_by_d (
     // ----------------------------------
     // Data inputs
@@ -203,8 +204,8 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W/4),
-      .LOG2W               (LOG2W-2)
+      .W                   (W),
+      .LOG2W               (LOG2W)
    ) barrel_shifter_u (
     // ----------------------------------
     // Data inputs
@@ -228,8 +229,8 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W/4),
-      .LOG2W               (LOG2W-2)
+      .W                   (W),
+      .LOG2W               (LOG2W)
    ) barrel_shifter_v (
     // ----------------------------------
     // Data inputs
@@ -268,7 +269,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W/4)
+      .W                   (W)
    ) complex_add_sub (
     // ----------------------------------
     // Data inputs

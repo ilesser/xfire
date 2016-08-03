@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -43,16 +44,16 @@ task rand_test;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   reg                rand_mode;
-   reg   [1:0]        rand_format;
-   reg   [`LOG2N-1:0] rand_n;
-   reg   [1:0]        rand_d_u_n;
-   reg   [1:0]        rand_d_v_n;
-   reg   [`WC-1:0]   rand_u_n;
-   reg   [`WC-1:0]   rand_v_n;
-   reg   [`WC-1:0]   rand_lut_u_n;
-   reg   [`WC-1:0]   rand_lut_v_n;
-   reg   [30:0]       cnt1, cnt2;
+   reg                  rand_mode;
+   reg   [1:0]          rand_format;
+   reg   [`LOG2N-1:0]   rand_n;
+   reg   [1:0]          rand_d_u_n;
+   reg   [1:0]          rand_d_v_n;
+   reg   [`W-1:0]       rand_u_n;
+   reg   [`W-1:0]       rand_v_n;
+   reg   [`W-1:0]       rand_lut_u_n;
+   reg   [`W-1:0]       rand_lut_v_n;
+   reg   [30:0]         cnt1, cnt2;
    // -----------------------------------------------------
 
    begin
@@ -60,6 +61,8 @@ task rand_test;
       ena         = 1'b0;
       arst        = 1'b0;
       srst        = 1'b0;
+      load        = 1'b0;
+      cnt_step    = 1;
       run_clk(1);
       arst        = 1'b1;
       srst        = 1'b1;
@@ -69,25 +72,27 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**08) begin
+      repeat(2**13) begin
 
          rand_mode      = constrained_rand_int(0, 2**`M_SIZE-1);
          rand_format    = constrained_rand_int(0, 2**`F_SIZE-1);
          rand_n         = constrained_rand_int(0, 2**`LOG2N-1);
          rand_d_u_n     = constrained_rand_int(0, 2**`D_SIZE-1);
          rand_d_v_n     = constrained_rand_int(0, 2**`D_SIZE-1);
-         rand_u_n       = constrained_rand_int(0, 2**(`WC)-1);
-         rand_v_n       = constrained_rand_int(0, 2**(`WC)-1);
-         rand_lut_u_n   = constrained_rand_int(0, 2**(`WC)-1);
-         rand_lut_v_n   = constrained_rand_int(0, 2**(`WC)-1);
+         rand_u_n       = constrained_rand_int(0, 2**(`W)-1);
+         rand_v_n       = constrained_rand_int(0, 2**(`W)-1);
+         rand_lut_u_n   = constrained_rand_int(0, 2**(`W)-1);
+         rand_lut_v_n   = constrained_rand_int(0, 2**(`W)-1);
 
          rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
-         rand_n         = 2;
+         rand_n         = 04;
+         //rand_n         = constrained_rand_int(0, (2**2)-1);
          //rand_d_u_n     = 2'b00;
          //rand_d_v_n     = 2'b01;
-         //rand_u_n       = constrained_rand_int(0, 100);
-         //rand_v_n       = constrained_rand_int(0, 100);
+         //rand_u_n       = constrained_rand_int(2**15-1, 2**16-1);
+         //rand_v_n       = constrained_rand_int(2**15-1, 2**16-1);
+         //rand_v_n       = constrained_rand_int(-100, 100);
          //rand_lut_u_n   = constrained_rand_int(0, 100);
          //rand_lut_v_n   = constrained_rand_int(0, 100);
 

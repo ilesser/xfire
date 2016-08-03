@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -68,18 +69,18 @@ task load_operands;
 
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[4*`W/4+4+`LOG2N-1:4*`W/4+4];
-      tb_d_u_n    = cnt[4*`W/4+3         :4*`W/4+2];
-      tb_d_v_n    = cnt[4*`W/4+1         :4*`W/4+0];
-      tb_u_n      = cnt[4*`W/4-1         :3*`W/4];
-      tb_v_n      = cnt[3*`W/4-1         :2*`W/4];
-      tb_lut_u_n  = cnt[2*`W/4-1         :1*`W/4];
-      tb_lut_v_n  = cnt[1*`W/4-1         :0*`W/4];
+      tb_n        = cnt[4*`W+4+`LOG2N-1:4*`W+4];
+      tb_d_u_n    = cnt[4*`W+3         :4*`W+2];
+      tb_d_v_n    = cnt[4*`W+1         :4*`W+0];
+      tb_u_n      = cnt[4*`W-1         :3*`W];
+      tb_v_n      = cnt[3*`W-1         :2*`W];
+      tb_lut_u_n  = cnt[2*`W-1         :1*`W];
+      tb_lut_v_n  = cnt[1*`W-1         :0*`W];
 
       double_word = tb_format[0];
       complex     = tb_format[1];
 
-      n  = $itor($signed(tb_n));
+      n  = $itor(tb_n);
 
       du =  tb_d_u_n == 2'b01 ?  1  :
             tb_d_u_n == 2'b11 ? -1  :
@@ -96,10 +97,10 @@ task load_operands;
          lut_v = $itor($signed(tb_lut_v_n));
       end
       else begin
-         u_n   = $itor($signed(tb_u_n[`W/4/2-1:0]));
-         v_n   = $itor($signed(tb_v_n[`W/4/2-1:0]));
-         lut_u = $itor($signed(tb_lut_u_n[`W/4/2-1:0]));
-         lut_v = $itor($signed(tb_lut_v_n[`W/4/2-1:0]));
+         u_n   = $itor($signed(tb_u_n[`W/2-1:0]));
+         v_n   = $itor($signed(tb_v_n[`W/2-1:0]));
+         lut_u = $itor($signed(tb_lut_u_n[`W/2-1:0]));
+         lut_v = $itor($signed(tb_lut_v_n[`W/2-1:0]));
       end
 
       if (tb_mode==`MODE_E) begin
@@ -208,44 +209,17 @@ endtask
 function real div_2_n;
    input real x;
    input real n;
+   real i,y;
    begin
-      if (n == 0.0) begin
-         div_2_n = x;
-      end
-      else begin
-         x = 2 * x;
-         x = x/(2**n);
-         if (x%2 == 0) begin
-            // even
-            div_2_n = x/2;
-         end
-         else begin
-            //odd
-            div_2_n = (x-1)/2;
+      y = x;
+      if (n>0) begin
+         for (i=0; i<n; i=i+1) begin
+            if ($rtoi(y)%2 == 0)
+               y = y/2;
+            else
+               y = (y-1)/2;
          end
       end
+      div_2_n = y;
    end
 endfunction
-
-//task div_by_2_n;
-   //input real x;
-   //input real n;
-   //output real div_2_n;
-   //begin
-      //if (n == 0.0) begin
-         //div_2_n = x;
-      //end
-      //else begin
-         //x = 2 * x;
-         //x = x/(2**n);
-         //if (x%2 == 0) begin
-            //// even
-            //div_2_n = x/2;
-         //end
-         //else begin
-            ////odd
-            //div_2_n = (x-1)/2;
-         //end
-      //end
-   //end
-//endtask
