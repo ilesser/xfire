@@ -73,6 +73,7 @@
 // History:
 // --------
 //
+//    - 2016-08-03 - ilesser - BUG3: Increased wordsize for internal signals 
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-27 - ilesser - BUG1: Fixed.
 //    - 2016-07-22 - ilesser - Initial version.
@@ -143,24 +144,24 @@ module bkm_control_step #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [W-1:0]     u_n_plus_d_u_n;
-   wire  [W-1:0]     v_n_plus_d_v_n;
-   wire  [W-1:0]     u_n_times_d_n;
-   wire  [W-1:0]     v_n_times_d_n;
-   wire  [W-1:0]     u_n_times_d_n_div_2_n;
-   wire  [W-1:0]     v_n_times_d_n_div_2_n;
+   wire  [W:0]       u_n_plus_d_u_n;
+   wire  [W:0]       v_n_plus_d_v_n;
+   wire  [W:0]       u_n_times_d_n;
+   wire  [W:0]       v_n_times_d_n;
+   wire  [W:0]       u_n_times_d_n_div_2_n;
+   wire  [W:0]       v_n_times_d_n_div_2_n;
    wire              sign_a_u;
    wire              sign_a_v;
    wire              sign_b_u;
    wire              sign_b_v;
-   wire  [W-1:0]     a_u;
-   wire  [W-1:0]     a_v;
-   wire  [W-1:0]     b_u;
-   wire  [W-1:0]     b_v;
+   wire  [W:0]       a_u;
+   wire  [W:0]       a_v;
+   wire  [W:0]       b_u;
+   wire  [W:0]       b_v;
    wire              c_u;
    wire              c_v;
-   wire  [W-1:0]     s_u;
-   wire  [W-1:0]     s_v;
+   wire  [W:0]       s_u;
+   wire  [W:0]       s_v;
    // -----------------------------------------------------
 
 // *****************************************************************************
@@ -168,8 +169,9 @@ module bkm_control_step #(
 // *****************************************************************************
 
    // TODO: think of a better implementation for this
-   assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  u_n - d_u_n[`D_DATA] :  u_n + d_u_n[`D_DATA] ;
-   assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  v_n - d_v_n[`D_DATA] :  v_n + d_v_n[`D_DATA] ;
+   //       a better way could be to add a carry in input to the add_subb used below
+   assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  {u_n[W-1], u_n} - d_u_n[`D_DATA] :  {u_n[W-1], u_n} + d_u_n[`D_DATA] ;
+   assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  {v_n[W-1], v_n} - d_v_n[`D_DATA] :  {v_n[W-1], v_n} + d_v_n[`D_DATA] ;
    //assign   u_n_plus_d_u_n =  d_u_n != 2'b10    ?  u_n + d_u_n :  u_n   ;
    //assign   v_n_plus_d_v_n =  d_v_n != 2'b10    ?  v_n + d_v_n :  v_n   ;
 
@@ -180,15 +182,15 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (W+1)
    ) multiply_by_d (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .d_x                 (d_u_n),
       .d_y                 (d_v_n),
-      .x_in                (u_n),
-      .y_in                (v_n),
+      .x_in                ({u_n[W-1], u_n}),
+      .y_in                ({v_n[W-1], v_n}),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -204,8 +206,8 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W)
+      .W                   (W+1),
+      .LOG2W               (LOG2W+1)
    ) barrel_shifter_u (
     // ----------------------------------
     // Data inputs
@@ -213,7 +215,7 @@ module bkm_control_step #(
       .dir                 (`DIR_RIGHT),
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_ARITH),
-      .sel                 (n),
+      .sel                 ({1'b0,n}),
       .in                  (u_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -229,8 +231,8 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W)
+      .W                   (W+1),
+      .LOG2W               (LOG2W+1)
    ) barrel_shifter_v (
     // ----------------------------------
     // Data inputs
@@ -238,7 +240,7 @@ module bkm_control_step #(
       .dir                 (`DIR_RIGHT),
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_ARITH),
-      .sel                 (n),
+      .sel                 ({1'b0,n}),
       .in                  (v_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -269,7 +271,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (W+1)
    ) complex_add_sub (
     // ----------------------------------
     // Data inputs
