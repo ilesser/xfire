@@ -54,9 +54,31 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      //repeat(80)
-      repeat(2**(`CNT_SIZE))
-         load_operands(cnt);
+      //             d_x      d_y      x           y
+      load_operands({2'b01,   2'b00, `W'd32767,  `W'd00016});
+      load_operands({2'b01,   2'b01, `W'd32767,  `W'd00016});
+      load_operands({2'b01,   2'b10, `W'd32767,  `W'd00016});
+      load_operands({2'b01,   2'b11, `W'd32767,  `W'd00016});
+      load_operands({2'b11,   2'b00, `W'd32767,  `W'd00016});
+      load_operands({2'b11,   2'b01, `W'd32767,  `W'd00016});
+      load_operands({2'b11,   2'b10, `W'd32767,  `W'd00016});
+      load_operands({2'b11,   2'b11, `W'd32767,  `W'd00016});
+
+      load_operands({2'b01,   2'b00,-`W'd32768,  `W'd00016});
+      load_operands({2'b01,   2'b01,-`W'd32768,  `W'd00016});
+      load_operands({2'b01,   2'b10,-`W'd32768,  `W'd00016});
+      load_operands({2'b01,   2'b11,-`W'd32768,  `W'd00016});
+      load_operands({2'b11,   2'b00,-`W'd32768,  `W'd00016});
+      load_operands({2'b11,   2'b01,-`W'd32768,  `W'd00016});
+      load_operands({2'b11,   2'b10,-`W'd32768,  `W'd00016});
+      load_operands({2'b11,   2'b11,-`W'd32768,  `W'd00016});
+
+      repeat(2**4) begin
+         repeat(2**`W)
+            load_operands(cnt);
+         repeat(2**`W)
+            load_operands(cnt);
+      end
 
    end
 
@@ -93,13 +115,11 @@ task load_operands;
 
       tb_d_x      = cnt[2*`W+3:2*`W+2];
       tb_d_y      = cnt[2*`W+1:2*`W];
-      tb_x_in     = cnt[2*`W-1:`W];
-      tb_y_in     = cnt[`W-1:0];
+      tb_x_in     = cnt[2*`W-1:1*`W];
+      tb_y_in     = cnt[1*`W-1:0*`W];
 
       xi = $itor($signed(tb_x_in));
       yi = $itor($signed(tb_y_in));
-      //dx = $itor($signed(tb_d_x));
-      //dy = $itor($signed(tb_d_y));
 
       case(tb_d_x)
          2'b00:   dx = +0.0;
@@ -129,8 +149,6 @@ task load_operands;
       $display("zo = (%.2f*%.2f - %.2f*%.2f) + j (%.2f*%.2f + %.2f*%.2f)", dx, xi, dy, yi, dy, xi, dx, yi);
       $display("zo = (      %.2f     ) + j (      %.2f     )", xo, yo);
 
-      //tb_x_out = $realtobits(xo);
-      //tb_y_out = $realtobits(yo);
       tb_x_out = (xo);
       tb_y_out = (yo);
 
