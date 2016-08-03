@@ -854,7 +854,8 @@ Resultante de combinar un único hilo de control con un único hilo de datos,
 este tipo de arquitectura no explota ningún paralelismo en una máquina 
 completamente secuencial. Una única CU obtiene un único IS de 
 memoria. La CU genera las señales de control necesarias para excitar a un 
-único PE sobre un único DS, es decir, una operación a la vez.\\
+único PE sobre un único DS, es decir, una operación a la vez. Ver figura 
+\ref{subfig:sisd}.\\
 Un ejemplo de esta arquitectura son los procesadores de las antiguas 
 computadoras personales.
 
@@ -865,7 +866,8 @@ En este tipo de arquitecturas, sige existiendo un único hilo de control, pero
 los datos que afectan las instrucciones provienen de distintos hilos de datos. 
 La CU trabaja con las instrucciones de un único IS y general las señales de 
 control necesarias para que mútiples PE procesen los datos provenientes de 
-múltiples DS. Es un tipo de máquina que es naturalmente paralelizable.\\
+múltiples DS. Es un tipo de máquina que es naturalmente paralelizable. Ver 
+figura \ref{subfig:simd}.\\
 Ejemplos de este tipo de arquitecturas son los procesadores matriciales y las 
 unidades de procesamiento gráficas (GPU). Cabe destacar que los antiguos 
 procesadores de PC, en un determinado momento incorporaron instrucciones 
@@ -881,7 +883,8 @@ Se trata de arquitecturas en el que diversos hilos de control actuan sobre un
 bien de un tipo específico utilizado en sistemas tolerantes a fallas. Diversos 
 sistemas heterogéneos operan sobre el mismo hilo de datos y deben arribar al 
 mismo resultado. Es decir que diversas CU toman instrucciones de diversos IS 
-controlando múltiples PE que actuan sobre un único DS.\\
+controlando múltiples PE que actuan sobre un único DS. Ver figura 
+\ref{subfig:misd}.\\
 Ejemplos de este tipo de máquinas pueden ser las computadoras de control de 
 vuelo de aeronaves y naves espaciales o cohetes; es decir aplicaciones de 
 misión crítica que poseen sistemas redundantes y decisores.
@@ -892,31 +895,31 @@ misión crítica que poseen sistemas redundantes y decisores.
 Se trata de arquitecturas donde múltiples procesadores simultáneamente ejecutan 
 diversos hilos de instrucciones sobre diversos hilos de datos. Es decir que 
 diversas CU toman instrucciones de diversos IS para excitar a diversos PE que 
-actúan sobre diversos DS.\\
+actúan sobre diversos DS. Ver figura \ref{subfig:mimd}.\\
 Los procesadores multinúcleo y los sistemas distribuidos son ejemplos de éste 
 tipo de máquinas, y pueden utilizar tanto un espacio de memoria compartido, así 
 como uno distribuído.
 % TODO: Revisar por qué las últimas dos figuras no quedan bien armadas.
 \begin{figure}
-  \begin{subfigure}{0.35\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-sisd.tex}
     \caption{SISD}
-    \label{fig:sisd}
+    \label{subfig:sisd}
   \end{subfigure}
-  \begin{subfigure}{0.35\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-simd.tex}
     \caption{SIMD}
-    \label{fig:simd}
+    \label{subfig:simd}
   \end{subfigure}
-  \begin{subfigure}{0.35\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-misd.tex}
     \caption{MISD}
-    \label{fig:misd}
+    \label{subfig:misd}
   \end{subfigure}
-  \begin{subfigure}{0.35\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-mimd.tex}
     \caption{MIMD}
-    \label{fig:mimd}
+    \label{subfig:mimd}
   \end{subfigure}
   \caption{Diagramas de la taxonomía de Flynn}
   \label{fig:flynn_taxonomy}
@@ -968,12 +971,16 @@ sobre los datos en memoria y escribir los resultados en la misma; hacer uso de
 estructuras de hardware intermedias para almacenar los datos temporalmente para 
 su procesamiento y posterior almacenamiento o una combinación de estas 
 alternativas.\\
+Las ventajas, desventajas y particualridades que presentará cada una de las 
+variantes deben ser sopesadas con la tecnología de los compiladores utilizados 
+y las posibilidades de optimización que proveen.\\
 Previo a analizar las alternativas de diseño que se presentan en cuanto al 
 manejo de los datos dentro de la unidad de procesamiento, es conveniete 
 estudiar los diversos modos de direccionamiento que podemos observar en las 
 arquitecturas a través de la historia.
 
 \subsubsection{Modos de direccionamiento}
+\label{subsubsec:theory-modern-data_managment-addressing_modes}
 
 Las instrucciones deben ser capaces de entregarle datos o referencias a los 
 mismos a la unidad de procesamiento. Así mismo, la unidad de procesamiento debe 
@@ -986,9 +993,40 @@ de alguna manera en particular, o sencillamente almacenar el dato en algún
 registro interno.\\
 No sólo son los datos los que deben ser direccionados para ingresar a la unidad 
 de procesamiento; esta también debe ser capaz de obtener las instrucciones de 
-memoria.
+memoria.\\
+En el caso de las instrucciones, el direccionamiento cobra importancia al 
+momento de analizar las instrucciones que modifican el flujo del programa y 
+rompen con la secuencialidad del mismo, o sea las instrucciones de salto 
+condicional e incondicional. Se reconocen principalmente tres variantes:
+\begin{itemize}
+  \item Absoluta o directa: el código de la instrucción lleva embebido 
+directamente la dirección de la instrucción a la que se debe saltar.
+  \item Relativa: el código de la instrucción lleva embebido un desplazamiento 
+respecto de la dirección de la siguiente instrucción a ejecutar, siendo que ese 
+desplazamiento puede ser en ambos sentidos.
+  \item Indirecta: el código de la instrucción lleva embebido el registro que 
+indica a qué dirección debe saltar la ejecución del programa.
+\end{itemize}
+Al analizar los posibles modos de direccionamiento de los datos, surgen más 
+alternativas básicas:
+\begin{itemize}
+  \item Registro: es el utilizado en las operaciones en las cuales todos los 
+operandos se obtienen y escriben desde registros internos.
+  \item Desplazamiento: en este modo de direccionamiento las instrucciones que 
+lo implementan indican la dirección de memoria a la cual acceder utilizando un 
+como base una dirección contenida en un registro a la cual se le suma un 
+desplazamiento que está embebido en la instrucción. Existen diversas variantes 
+de este modo de direccionamiento, algunos de los cuales utilizan índices para 
+recorrer estructuras de memoria más complejas.
+  \item Inmediato: para este caso, la instrucción posee embebido en el código 
+de la operación el dato.
+  \item Implícito: las instrucciones que implementan este modo de 
+direccionamiento sólamente actúan sobre algún dato específico dentro de algún 
+registro interno.
+\end{itemize}
 
 \subsubsection{Accumulator}
+\label{subsubsec:theory-modern-data_managment-accumulator}
 
 Las arquitecturas Accumulator, o de acumulador, también llamadas máquinas de un 
 operando, se caracterizan por tener un registro particular ---típicamente 
@@ -1006,28 +1044,58 @@ internos permiten mayor velocidad de transferencia que la memoria principal
 para explotar la localidad temporal de los datos en el software.
 
 \subsubsection{Stack}
+\label{subsubsec:theory-modern-data_managment-stack}
 
-La estructura ``stack'' o Pila, es una estructura lógica que permite ir 
+La estructura ``stack'' o pila, es una estructura lógica que permite ir 
 apilando y desapilando datos. En una arquitectura de tipo stack, existe este 
 tipo de estructura implementada con registros internos y las operaciones se 
-realizan entre el tope de la pila y el operando de la instrucción y el resultado 
-se almacena en el tope de la pila, o alternativamente la operación se realiza 
-entre los dos elementos superiores de la pila y el resultado se almacena al 
-tope. En ambas variantes, el dato utilizado de la pila es removido del tope de 
-la misma antes de la operación.\\
+realizan entre los dos elementos superiores de la pila y el resultado se 
+almacena al tope. Los datos utilizados son removidos del tope en el proceso. Es 
+evidente la necesidad de instrucciones específicas (o posibles 
+pseudoinstrucciones) para mover datos entre la pila y la memoria. En este 
+escenario, también existirán diversos modos de direccionamiento para los datos. 
+Típicamente, el conjunto de instrucciones notará las operaciones en RPN (Reverse 
+Polish Notation)\footnote{Reverse Polish Notation (Notación Polaca Inversa): 
+DESARROLLAR} y en el código de la operación se elimina la necesidad de 
+explicitar los operandos. Una variación de esta arquitectura puede implementar 
+operaciones entre el tope de pila y otro operando indicado en la instrucción 
+mediante los diversos modos de direccionamiento soportados por tal 
+implementación.\\
 Esta arquitectura tal como la de acumulador también explota la localidad 
 temporal de los datos considerando la secuencialidad de las operaciones sobre 
 los mismos. De hecho, puede considerarse a la arquitectura acumulador como un 
-caso especial de pila con un único lugar.
+caso especial de pila con un único registro que opera contra los operandos 
+indicados en la instrucción.
 
 \subsubsection{Load / Store}
+\label{subsubsec:theory-modern-data_managment-load_store}
 
-
-\subsubsection{Register / Register}
-
+También conocidas como ``Register / Register'' estas arquitecturas 
+implementan múltiples registros internos direccionables y sólo realizan 
+operaciones entre ellos. Además se proveen instrucciones específicas de carga y 
+almacenamiento para mover los datos entre memoria y los registros internos. 
+Dichas instrucciones proveerán los diversos modos de direccionamiento de datos 
+soportados por tal arquitectura.\\
+En implementaciones de este tipo, se resigna por un lado las ventajas que 
+presenta la localidad temporal de los datos en pos de explotar posibilidades 
+del paralelismo a nivel de instrucción, que es tódo un tópico en sí mismo 
+dentro de las optimizaciones posibles de las arquitecturas. Hoy en día, ésta es 
+la elección clásica al momento de desarrollar una arquitectura RISC.
 
 \subsubsection{Register / Memory}
+\label{subsubsec:theory-modern-data_managment-register_memory}
 
+Estas arquitecturas, como lo indica su nombre, permiten que las operaciones 
+sean realizadas en o desde memoria, así como también entre registros. Si además 
+se permite que todos los operandos estén en memoria o en registros o en una 
+combinación de ellos, se las llama ``Register Plus Memory''. También deben 
+proveerse instrucciones que permitan la transferencia de datos de memoria a 
+registros internos y viceversa. Todas las operaciones típicamente se proveerán 
+con diversos modos de direccionamiento.\\
+Claramente de todas las opciones mencionadas, ésta es la más flexible. El costo 
+asociado a esta flexibilidad será el de complejizar el hardware, relegando así 
+oportunidades de optimización del mismo. Típicamente es la elección de las 
+arquitecturas CISC.
 
 \subsection{Clasificación de las arquitecturas según su conjunto de 
 instrucciones}
@@ -1089,9 +1157,47 @@ soportar optimizaciones razonables en este tipo de arquitecturas. El beneficio
 que trae la implementación de este tipo de arquitecturas radica en la sencillez 
 del hardware, algo que quizá a simple vista parezca trivial, pero que en la 
 práctica acarrea consecuencias deseables para la aplicación de mejoras en el 
-hardware. 
+hardware.\\
 
-RISC vs CISC
+\subsection{Elecciones en el diseño propuesto}
+
+Los objetivos prácitcos del presente trabajo de tésis incluyen la necesidad de 
+generar un IP Core con un núcleo de procesamiento sencillo y configurable. 
+Será entonces la sencillez un parámetro con elevado peso específico 
+al momento de tomar decisiones de diseño; es por ésto que la primera, consta en 
+seguir la filosofía RISC para el presente desarrollo.\\
+Tal como marcan las tendencias actuales en el campo de las arquitecturas RISC, 
+se elige el formato Load / Store, siendo ésta la segunda decisión de 
+diseño.\\
+Es oportuno mencionar que el diseño que se propondrá no exigirá definir la 
+cantidad de hilos de instrucciones que soportará esta arquitectura; dejando así 
+librado a la implementación en particular la posibilidad de incluír múltiples 
+núcleos, pero no se soportará el trabajo sobre múltiples hilos de datos por 
+parte de un único elemento de procesamiento; evidenciando que con el mismo IP 
+Core podrán implementarse tanto arquitecturas SISD como MIMD.\\
+Siendo la configurabilidad otro aspecto importante, se eligirá el formato de 
+arquitectura Harvard en lo que al manejo de memoria concierne; una vez más, 
+dejando a merced de la implementación particular las decisiones que conciernen a 
+la jerarquía de memorias; flexibilizando así las posibilidades que pueda 
+entregar el IP Core pudiendo implementar tanto arquitecturas Harvard puras, 
+como modificadas si fuese necesario aprovechar las bondades del modelo de von 
+Neumann.\\
+Tal como fue indicado en \ref{subsubsec:theory-modern-isa_class-risc}, la 
+filosofía RISC pone el énfasis en las posibilidades del software y la 
+tecnología de los compiladores, pero esto no implica que se relaje la 
+complejidad del diseño de la arquitectura en sí, sino que más bien obliga a 
+generar una arquitectura sencilla a la que se le pueda aplicar la mayor 
+cantidad de optimizaciones posibles. No debe confundirse en este punto, 
+sencillez en el diseño con sencillez en el trabajo de diseñar, por el 
+contrario, obtener una arquitectura sencilla obligará a trabajar más en el 
+diseño.
+
+\section{Técnicas y optimizaciones en el diseño de arquitecturas}
+
+
+
+
+\section{Diseño del XFire}
 
 La ISA define el modelo lógico: Tres cosas, los registros, el modelo de la
 memoria y como se relacionan los registros (operaciones).
