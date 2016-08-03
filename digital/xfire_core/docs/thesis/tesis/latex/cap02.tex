@@ -951,7 +951,8 @@ ejectuan simultáneamente al menos dos programas independientes. Típicamente,
 estos sistemas eligen un nodo que administra como los demás nodos ejecutan el 
 resto de los programas con diversas estrategias y modelos de programación.
 
-\subsection{Clasificación de las arquitecturas según el manejo de los datos}
+\subsection{Clasificación de las arquitecturas según el manejo de los datos y 
+cantidad de operandos}
 \label{subsec:theory-modern-data_managment}
 
 Tal como fuese indicado al comienzo del presente capítulo, la unidad de 
@@ -960,18 +961,72 @@ realizar este trabajo, la arquitectura debe ser capaz de leer de la memoria
 datos y luego volcar los resultados a la misma. En este proceso, hay diversos 
 mecanismos por el cual las instrucciones pueden obtenera esta información y 
 devolverla luego del procesamiento para un posterior uso en el programa o 
-generar salidas en el sistema.\\
+generar salidas en el sistema. Inherentemente, se definen la cantidad de 
+operandos que pueden tener las instrucciones de la arquitectura.\\
 Es así que las instrucciones de la arquitectura, podrían operar directamente 
 sobre los datos en memoria y escribir los resultados en la misma; hacer uso de 
 estructuras de hardware intermedias para almacenar los datos temporalmente para 
 su procesamiento y posterior almacenamiento o una combinación de estas 
-alternativas.
+alternativas.\\
+Previo a analizar las alternativas de diseño que se presentan en cuanto al 
+manejo de los datos dentro de la unidad de procesamiento, es conveniete 
+estudiar los diversos modos de direccionamiento que podemos observar en las 
+arquitecturas a través de la historia.
 
-\subsubsection{Load / Store}
+\subsubsection{Modos de direccionamiento}
+
+Las instrucciones deben ser capaces de entregarle datos o referencias a los 
+mismos a la unidad de procesamiento. Así mismo, la unidad de procesamiento debe 
+poder enviar los resultados a alguna salida. Estos mecanismos se conocen como 
+modos de direccionamiento. Para el ingreso de datos, estos pueden estar 
+embebidos en el código de la instrucción, pueden ser representados por su 
+dirección en memoria o estar contenidos en algún registro interno. Para la 
+salida, también podremos enviarlos a alguna dirección de meomoria representada 
+de alguna manera en particular, o sencillamente almacenar el dato en algún 
+registro interno.\\
+No sólo son los datos los que deben ser direccionados para ingresar a la unidad 
+de procesamiento; esta también debe ser capaz de obtener las instrucciones de 
+memoria.
+
+\subsubsection{Accumulator}
+
+Las arquitecturas Accumulator, o de acumulador, también llamadas máquinas de un 
+operando, se caracterizan por tener un registro particular ---típicamente 
+llamado acumulador--- en el que los resultados de las operaciones entre dicho 
+registro y el operando indicado en la instrucción se almacena. El operando 
+puede ser obtenido con los diversos modos de direccionamiento soportado por tal 
+arquitectura.\\
+Esta arquitectura basa su funcionamiento en el hecho de que en general, los 
+programas realizan una secuencia de operaciones sobre los datos. Por lo tanto, 
+si no existiese el acumulador, cada vez que se realiza una operación, se 
+debería guardar el resultado en memoria, para luego volver a obtenerlo para 
+seguir operando. Dado que la tecnología con la que se implementan los registros 
+internos permiten mayor velocidad de transferencia que la memoria principal 
+(más larga y más lenta pero de menor costo), se utiliza este registro especial 
+para explotar la localidad temporal de los datos en el software.
 
 \subsubsection{Stack}
 
+La estructura ``stack'' o Pila, es una estructura lógica que permite ir 
+apilando y desapilando datos. En una arquitectura de tipo stack, existe este 
+tipo de estructura implementada con registros internos y las operaciones se 
+realizan entre el tope de la pila y el operando de la instrucción y el resultado 
+se almacena en el tope de la pila, o alternativamente la operación se realiza 
+entre los dos elementos superiores de la pila y el resultado se almacena al 
+tope. En ambas variantes, el dato utilizado de la pila es removido del tope de 
+la misma antes de la operación.\\
+Esta arquitectura tal como la de acumulador también explota la localidad 
+temporal de los datos considerando la secuencialidad de las operaciones sobre 
+los mismos. De hecho, puede considerarse a la arquitectura acumulador como un 
+caso especial de pila con un único lugar.
+
+\subsubsection{Load / Store}
+
+
 \subsubsection{Register / Register}
+
+
+\subsubsection{Register / Memory}
 
 
 \subsection{Clasificación de las arquitecturas según su conjunto de 
