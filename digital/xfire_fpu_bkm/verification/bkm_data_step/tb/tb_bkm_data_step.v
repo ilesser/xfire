@@ -24,17 +24,21 @@
 // History:
 // --------
 //
+//    - 2016-08-03 - ilesser - Copied from bkm_control_step testbench.
 //    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 8
-`define N 8
-`define LOG2W 3
-`define LOG2N 3
-`define CNT_SIZE 1+2+2+2+`LOG2W+2*`W
+`define W 16
+`define N 16
+`define LOG2W 4
+`define LOG2N 4
+`define M_SIZE 1
+`define F_SIZE 2
+`define D_SIZE 2
+`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`W)
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -51,32 +55,30 @@ module tb_bkm_data_step ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam              W = `W;
    wire                    clk;
-   reg                     arst, srst, ena;
+   reg                     arst, srst, ena, load;
    reg                     tb_mode;
    reg   [1:0]             tb_format;
    reg   [`LOG2N-1:0]      tb_n;
-   reg   [1:0]             tb_d_x_n;
-   reg   [1:0]             tb_d_y_n;
-   reg   [W-1:0]           tb_X_n,     tb_Y_n;
-   reg   [W-1:0]           tb_lut_X,   tb_lut_Y;
-   reg   [W-1:0]           tb_X_np1,   tb_Y_np1;
-   reg   [`CNT_SIZE-1:0]   cnt;
+   reg   [1:0]             tb_d_x_n,   tb_d_y_n;
+   reg   [`W-1:0]          tb_X_n,     tb_Y_n;
+   reg   [`W-1:0]          tb_lut_X,   tb_lut_Y;
+   reg   [`W-1:0]          tb_X_np1,   tb_Y_np1;
+   reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  [2*W-1:0]         X_n_csd,    Y_n_csd;
-   wire  [2*W-1:0]         X_np1_csd,  Y_np1_csd;
-   wire  [2*W-1:0]         lut_X_csd,  lut_Y_csd;
-   wire  [W-1:0]           res_X_np1,  res_Y_np1;
+   wire  [2*`W-1:0]        X_n_csd,    Y_n_csd;
+   wire  [2*`W-1:0]        X_np1_csd,  Y_np1_csd;
+   wire  [2*`W-1:0]        lut_X_csd,  lut_Y_csd;
+   wire  [`W-1:0]          res_X_np1,  res_Y_np1;
 
    // Checker wiring
-   wire                    err_X,   err_Y;
-   wire                    war_X,   war_Y;
-   wire  [W-1:0]           delta_X, delta_Y;
+   wire                    err_X,      err_Y;
+   wire                    war_X,      war_Y;
+   wire  [`W-1:0]          delta_X,    delta_Y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -99,17 +101,21 @@ module tb_bkm_data_step ();
    );
 
    always @(posedge clk)
-       if (arst==1'b1) begin
-          cnt <= {`CNT_SIZE{1'b0}};
-       end else if (ena) begin
-          cnt <= cnt + 1;
+      if (arst==1'b1) begin
+         cnt <= {`CNT_SIZE{1'b0}};
+      end
+      else if (ena) begin
+         if (load)
+            cnt <= cnt_load;
+         else
+          cnt <= cnt + cnt_step;
        end
 
    bin2csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) bin2csd_X (
     // ----------------------------------
     // Data inputs
@@ -125,7 +131,7 @@ module tb_bkm_data_step ();
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) bin2csd_Y (
     // ----------------------------------
     // Data inputs
@@ -141,7 +147,7 @@ module tb_bkm_data_step ();
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) bin2csd_lut_X (
     // ----------------------------------
     // Data inputs
@@ -157,7 +163,7 @@ module tb_bkm_data_step ();
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) bin2csd_lut_Y (
     // ----------------------------------
     // Data inputs
@@ -173,7 +179,7 @@ module tb_bkm_data_step ();
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) csd2bin_X (
     // ----------------------------------
     // Data inputs
@@ -189,7 +195,7 @@ module tb_bkm_data_step ();
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) csd2bin_Y (
     // ----------------------------------
     // Data inputs
@@ -224,10 +230,8 @@ module tb_bkm_data_step ();
    // Checkers
    // -----------------------------------------------------
    bkm_data_step_checker #(
-      .W          (`W),
-      .LOG2W      (`LOG2W),
-      .LOG2N      (`LOG2N)
-   ) checker (
+      .W          (`W)
+   ) duv_checker (
       // ----------------------------------
       // Clock, reset & enable inputs
       // ----------------------------------

@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-03 - ilesser - Copied from bkm_control_step test.
 //    - 2016-07-13 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -45,8 +46,8 @@ task load_directed;
    input [1:0]        d_y_n;
    input [`W-1:0]     X_n;
    input [`W-1:0]     Y_n;
-   input [`W-1:0]     u_n;
-   input [`W-1:0]     v_n;
+   input [`W-1:0]     lut_X_n;
+   input [`W-1:0]     lut_Y_n;
    // ----------------------------------
 
 // *****************************************************************************
@@ -65,13 +66,13 @@ task load_directed;
 
       dir_cnt[`CNT_SIZE-1]             = mode;
       dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3] = format;
-      dir_cnt[2*`W+4+`LOG2N-1:2*`W+4]  = n;
-      dir_cnt[2*`W+3:2*`W+2]           = d_x_n;
-      dir_cnt[2*`W+1:2*`W+0]           = d_y_n;
-      dir_cnt[2*`W-1:1*`W]             = X_n;
-      dir_cnt[1*`W-1:0*`W]             = Y_n;
-      //dir_cnt[2*`W-1:1*`W]             = u_n;
-      //dir_cnt[1*`W-1:0*`W]             = v_n;
+      dir_cnt[4*`W+4+`LOG2N-1:4*`W+4]  = n;
+      dir_cnt[4*`W+3         :4*`W+2]  = d_x_n;
+      dir_cnt[4*`W+1         :4*`W+0]  = d_y_n;
+      dir_cnt[4*`W-1         :3*`W]    = X_n;
+      dir_cnt[3*`W-1         :2*`W]    = Y_n;
+      dir_cnt[2*`W-1         :1*`W]    = lut_X_n;
+      dir_cnt[1*`W-1         :0*`W]    = lut_Y_n;
 
       load_operands(dir_cnt);
 

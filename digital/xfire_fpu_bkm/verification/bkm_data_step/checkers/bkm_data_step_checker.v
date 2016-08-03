@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-03 - ilesser - Copied from bkm_control_step checker.
 //    - 2016-07-22 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -60,8 +61,8 @@ module bkm_data_step_checker #(
    output reg                war_Y,
    output reg                err_X,
    output reg                err_Y,
-   output reg   [W-1:0]      delta_X,
-   output reg   [W-1:0]      delta_Y
+   output wire  [W-1:0]      delta_X,
+   output wire  [W-1:0]      delta_Y
    );
 // *****************************************************************************
 
@@ -72,28 +73,44 @@ module bkm_data_step_checker #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   wire     neq_X,         neq_Y;
+   real     delta_X_r,     delta_Y_r;
    // -----------------------------------------------------
 
-   assign war_X = 1'b0;
-   assign war_Y = 1'b0;
+   assign neq_X      = tb_X_np1 !== res_X_np1;
+   assign neq_Y      = tb_Y_np1 !== res_Y_np1;
+   assign delta_X    = tb_X_np1 - res_X_np1;
+   assign delta_Y    = tb_Y_np1 - res_Y_np1;
+   assign delta_X_r  = $signed(delta_X);
+   assign delta_Y_r  = $signed(delta_Y);
 
    always @(posedge clk) begin
       if (srst == 1'b1) begin
-         err_X    <= 1'b0;
-         delta_X  <= {W{1'b0}};
+         err_X       <= 1'b0;
+         war_X       <= 1'b0;
       end
       else begin
          if (enable == 1'b1) begin
-            if (tb_X_np1 !== res_X_np1) begin
-               $display("[%0d] ERROR: in X.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
-               add_error();
-               //finish_sim();
-               err_X    <= 1'b1;
-               delta_X  <= tb_X_np1 - res_X_np1;
+            if (neq_X == 1'b1) begin
+               // this report an error if |delta| > 1 or a warning otherwise
+               // the idea is the get a warning if the delta is only 1 LSB
+               if (abs(delta_X_r) > 1) begin
+                  $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
+                  add_error();
+                  err_X    <= 1'b1;
+                  war_X    <= 1'b0;
+                  //finish_sim();
+               end
+               else begin
+                  add_warning();
+                  err_X    <= 1'b0;
+                  war_X    <= 1'b1;
+               end
             end
             else begin
                add_note();
-               err_X    <= 1'b0;
+               err_X       <= 1'b0;
+               war_X       <= 1'b0;
             end
          end
       end
@@ -102,20 +119,28 @@ module bkm_data_step_checker #(
    always @(posedge clk) begin
       if (srst == 1'b1) begin
          err_Y    <= 1'b0;
-         delta_Y  <= {W{1'b0}};
+         war_Y    <= 1'b0;
       end
       else begin
          if (enable == 1'b1) begin
-            if (tb_Y_np1 !== res_Y_np1) begin
-               $display("[%0d] ERROR: in Y.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
-               add_error();
-               //finish_sim();
-               err_Y    <= 1'b1;
-               delta_Y  <= tb_Y_np1 - res_Y_np1;
+            if (neq_Y == 1'b1) begin
+               if (abs(delta_Y_r) > 1) begin
+                  $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
+                  add_error();
+                  err_Y    <= 1'b1;
+                  war_Y    <= 1'b0;
+                  //finish_sim();
+               end
+               else begin
+                  add_warning();
+                  err_Y    <= 1'b0;
+                  war_Y    <= 1'b1;
+               end
             end
             else begin
                add_note();
-               err_Y    <= 1'b0;
+               err_Y       <= 1'b0;
+               war_Y       <= 1'b0;
             end
          end
       end
