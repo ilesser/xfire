@@ -1,0 +1,8 @@
+export LASTMETAL=AM
+export BEOL_STACK=6
+export CHECK_RECOMMENDED=OFF
+export IOTYPE=C4_4ON8
+export DSRAM=OFF
+export NO_SUBC_IN_GRLOGIC=TRUE
+export TECHDIR=/usr/pdks/IBM_7RF/mentor/calibre
+export PROCESS_NAME=IBM_7RF

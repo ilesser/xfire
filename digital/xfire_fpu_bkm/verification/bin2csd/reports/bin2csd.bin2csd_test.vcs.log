@@ -1,0 +1,628 @@
+Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/bkm.v ./temp/bkm_fixed.v \
+./temp/xfire_fpucordic.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v ./temp/tb_bin2csd.v \
+./temp/simlib_clk_osc.v ./temp/rbr_add_subb.v ./temp/bin2csd.v -l ./reports/bin2csd.bin2csd_test.vcs.log \
++define+RTL_DEBUG +vcs+lic+wait +warn=all +lint=all -sverilog -debug
+                         Chronologic VCS (TM)
+            Version I-2014.03 -- Sun Apr 10 14:39:17 2016
+               Copyright (c) 1991-2014 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '././temp/bkm.v'
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 60
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file '././temp/bkm.v'.
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 130
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 134
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_fixed.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 59
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 325
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 329
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/xfire_fpucordic.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpucordic.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpucordic.v, 55
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/xfire_fpucordic.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpucordic.vh, 28
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpucordic.vh, 31
+  Verilog compiler directive encountered "`define".
+
+
+Warning-[TMR] Text macro redefined
+./temp/xfire_fpucordic.vh, 31
+  Text macro (OPSIZE) is redefined. The last definition will override previous
+  ones.
+  In ./temp/bkm_fixed_defs.vh, 30, it was defined as 6
+
+Back to file './temp/xfire_fpucordic.v'.
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 290
+  No type is specified for wire 'clk_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 291
+  No type is specified for wire 'start_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 292
+  No type is specified for wire 'arst_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 293
+  No type is specified for wire 'srst_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 294
+  No type is specified for wire 'ena_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 298
+  No type is specified for wire 'format_i'. Default wire type is being applied
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 299
+  No type is specified for wire 'op_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 300
+  No type is specified for wire 'rx_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 301
+  No type is specified for wire 'ry_i'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 357
+  No type is specified for wire 'done_o'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 358
+  No type is specified for wire 'flags_o'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[IWU] Implicit wire is used
+./temp/xfire_fpucordic.v, 390
+  No type is specified for wire 'open'. Default wire type is being applied 
+  according to the IEEE spec.
+  See the Verilog LRM(1364-2005), section 4.5.
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpucordic.v, 556
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpucordic.v, 560
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/xfire_fpu_bkm.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 43
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/xfire_fpu_bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+
+Warning-[TMR] Text macro redefined
+./temp/bkm_fixed_defs.vh, 30
+  Text macro (OPSIZE) is redefined. The last definition will override previous
+  ones.
+  In ./temp/xfire_fpucordic.vh, 31, it was defined as 5
+
+Back to file './temp/xfire_fpu_bkm_defs.vh'.
+Back to file './temp/xfire_fpu_bkm.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 111
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 115
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/fadder.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 86
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 90
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/tb_bin2csd.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 33
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 113
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 114
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 115
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 116
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 117
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 119
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 120
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 121
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 122
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 123
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 124
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 126
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 127
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 128
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 129
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 130
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 132
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 133
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 134
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 135
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 136
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 138
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_bin2csd.v, 386
+  Verilog compiler directive encountered "`define".
+
+Parsing design file './temp/simlib_clk_osc.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_clk_osc.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_clk_osc.v, 45
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/simlib_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 34
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 35
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 38
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 39
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 40
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 41
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 42
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 47
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 48
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 49
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 51
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 52
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 53
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 54
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 55
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 57
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/simlib_clk_osc.v'.
+Parsing design file './temp/rbr_add_subb.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/rbr_add_subb.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/rbr_add_subb.v, 158
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/rbr_add_subb.v, 162
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bin2csd.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 150
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 154
+  Verilog compiler directive encountered "`endif".
+
+Top Level Modules:
+       bkm_fixed
+       xfire_fpucordic
+       xfire_fpu_bkm
+       fadder
+       tb_bin2csd
+       simlib_clk_osc
+       rbr_add_subb
+TimeScale is 1 ns / 1 ps
+
+Error-[URMI] Unresolved modules
+./temp/bkm_fixed.v, 149
+"bkm_pre_processing #(.W(W)) bkm_pre_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_pre_enable),  .start (bkm_pre_start),  .format (bkm_pre_format),  .op (bkm_pre_op),  .x1 (x1),  .y1 (y1),  .x2 (x2),  .y2 (y2),  .x3 (x3),  .y3 (y3),  .E_r (E_r_in),  .E_i (E_i_in),  .L_r (L_r_in),  .L_i (L_i_in),  .done (bkm_pre_done));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/bkm_fixed.v, 229
+"bkm_post_processing #(.W(W)) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .E (E_r_out),  .E (E_i_out),  .L (L_r_out),  .L (L_i_out),  .x (x3),  .y (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/bkm_fixed.v, 265
+"bkm_control_logic #(.W(W)) bkm_control_logic( .clk (clk),  .arst (arst),  .srst (srst),  .enable (enable),  .start (start),  .format (format),  .op (op),  .bkm_pre_done (bkm_pre_done),  .bkm_core_done (bkm_core_done),  .bkm_core_flags (bkm_core_flags),  .bkm_post_done (bkm_post_done),  .bkm_post_flags (bkm_post_flags),  .bkm_pre_enable (bkm_pre_enable),  .bkm_pre_start (bkm_pre_start),  .bkm_pre_format (bkm_pre_format),  .bkm_pre_op (bkm_pre_op),  .bkm_core_enable (bkm_core_enable),  .bkm_core_start (bkm_core_start),  .bkm_core_format (bkm_core_format),  .bkm_core_mode (bkm_core_mode),  .bkm_post_enable (bkm_post_enable),  .bkm_post_start (bkm_post_start),  .bkm_post_format (bkm_post_format),  .bkm_post_op (bkm_post_op),  .flags (flags),  .done (done));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 286
+"top_register_i #(.W(W), .OPSIZE(5)) in_register_0( .clk_i (clk_i),  .start_i (start_i),  .arst_i (arst_i),  .srst_i (srst_i),  .ena_i (ena_i),  .format_i (format_i),  .op_i (op_i),  .rx_i (rx_i),  .ry_i (ry_i),  .start_reg (start_reg),  .format_reg (format_reg),  .op_reg (op_reg),  .rx_reg (rx_reg),  .ry_reg (ry_reg));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 313
+"cordic_float_logic logic_0( .clk_i (clk_i),  .rst_i (arst_i),  .ena_i (ena_i),  .start_i (start_reg),  .clear_i (start_i),  .format_i (format_reg),  .tc_x_done (tc_x_done),  .tc_y_done (tc_y_done),  .tc_z_done (tc_z_done),  .inf_x (inf_x),  .nan_x (nan_x),  .ov32_x (ov32_x),  .ov64_x (ov64_x),  .inf_y (inf_y),  .nan_y (nan_y),  .ov32_y (ov32_y),  .ov64_y (ov64_y),  .cor_done (cor_done),  .cor_ov (cor_ov),  .cor_zero (cor_zero),  .op_i (op_reg),  .format_64 (format_64),  .tc_i_x_start (tc_i_x_start),  .tc_i_y_start (tc_i_y_start),  .tc_o_start (tc_z_start),  .cor_start (cor_start),  .cor_in_sel (cor_in_sel),  .mapped_in_x (mapped_in_x),  .mapped_in_y (mapped_in_y),  .mapped_z (mapped_out),  .f_z (f_z),  .S_z (signed_out),  .cpx_o (cp_x),  .cpy_o (cp_y),  ... "
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 366
+"tc_float_to_fix #(.W(W)) float_to_fixed_X( .clk_i (clk_i),  .rst_i (srst_i),  .ena_i (ena_i),  .x_i (rx_reg),  .in_64 (format_64),  .clear (start_i),  .start (tc_i_x_start),  .fixed (1),  .dec_size (dec_size_x),  .X_out (rx_fix),  .NaN (nan_x),  .Inf (inf_x),  .ov_32 (ov32_x),  .ov_64 (ov64_x),  .zero (open),  .done (tc_x_done));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 399
+"tc_float_to_fix #(.W(W)) float_to_fixed_Y( .clk_i (clk_i),  .rst_i (srst_i),  .ena_i (ena_i),  .x_i (ry_reg),  .in_64 (format_64),  .clear (start_i),  .start (tc_i_y_start),  .fixed (1),  .dec_size (dec_size_y),  .X_out (ry_fix),  .NaN (nan_y),  .Inf (inf_y),  .ov_32 (ov32_y),  .ov_64 (ov64_y),  .zero (open),  .done (tc_y_done));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 432
+"mapper_in_32_64 #(.W(W)) mapper_in_X( .x_i (rx_map_i),  .format_64 (format_64),  .x_o (rx_map_o));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 449
+"mapper_in_32_64 #(.W(W)) mapper_in_Y( .x_i (ry_map_i),  .format_64 (format_64),  .x_o (ry_map_o));"
+  Module definition of above instance is not found in the design.
+
+
+Error-[URMI] Unresolved modules
+./temp/xfire_fpucordic.v, 470
+"cordic_fixed #(.W(W), .LOG2W(LOG2W), .N(N), .LOG2N(LOG2N)) cordic_fixed_0( .clk_i (clk_i),  .arst_i (arst_i),  .srst_i (srst_i),  .ena_i (ena_i),  .start_i (cor_start),  .format_i (format_64),  .op_i (op_reg),  .rx_i (rx_cor),  .ry_i (ry_cor),  .flags_o (cor_flags),  .rz_o (rz_cor),  .done_o (cor_done));"
+  Module definition of above instance is not found in the design.
+
+2 warnings
+10 errors
+CPU time: .061 seconds to compile

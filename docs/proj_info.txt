@@ -1,0 +1,21 @@
++------------------------------------------------------------------------------+
+| Copyright (c) 2016 uLAb - FRBA & Microelectronics Lab. - FIUBA.           |
+| Confidential property of uLAb - FRBA & Microelectronics Lab. - FIUBA         |
+|                                                                              |
+| The use of the software, documentation, methodologies and other              |
+| information contained herein is governed solely by the associated            |
+| license agreements. Any inconsistent use shall be deemed to be a             |
+| misappropriation of the intellectual property of Microelectronics Lab.       |
+| FIUBA and treated accordingly.                                               |
+|                                                                              |
++------------------------------------------------------------------------------+
+
+Project name      :  xfire
+Project starter   :  pdk_admin
+Date              :  2016-03-02
+Process           :  IBM_7RF
+Flavor            :  6AM
+Institution       :  FIUBA
+
+Project created by new_proj tool ver. 1.0.
+
