@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -43,10 +44,10 @@ task load_directed;
    input [`LOG2N-1:0] n;
    input [1:0]        d_u_n;
    input [1:0]        d_v_n;
-   input [`W/4-1:0]   u_n;
-   input [`W/4-1:0]   v_n;
-   input [`W/4-1:0]   lut_u_n;
-   input [`W/4-1:0]   lut_v_n;
+   input [`W-1:0]   u_n;
+   input [`W-1:0]   v_n;
+   input [`W-1:0]   lut_u_n;
+   input [`W-1:0]   lut_v_n;
    // ----------------------------------
 
 // *****************************************************************************
@@ -63,15 +64,15 @@ task load_directed;
 
    begin
 
-      dir_cnt[`CNT_SIZE-1]                = mode;
-      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3]    = format;
-      dir_cnt[4*`W/4+4+`LOG2N-1:4*`W/4+4] = n;
-      dir_cnt[4*`W/4+3         :4*`W/4+2] = d_u_n;
-      dir_cnt[4*`W/4+1         :4*`W/4+0] = d_v_n;
-      dir_cnt[4*`W/4-1         :3*`W/4]   = u_n;
-      dir_cnt[3*`W/4-1         :2*`W/4]   = v_n;
-      dir_cnt[2*`W/4-1         :1*`W/4]   = lut_u_n;
-      dir_cnt[1*`W/4-1         :0*`W/4]   = lut_v_n;
+      dir_cnt[`CNT_SIZE-1]             = mode;
+      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3] = format;
+      dir_cnt[4*`W+4+`LOG2N-1:4*`W+4]  = n;
+      dir_cnt[4*`W+3         :4*`W+2]  = d_u_n;
+      dir_cnt[4*`W+1         :4*`W+0]  = d_v_n;
+      dir_cnt[4*`W-1         :3*`W]    = u_n;
+      dir_cnt[3*`W-1         :2*`W]    = v_n;
+      dir_cnt[2*`W-1         :1*`W]    = lut_u_n;
+      dir_cnt[1*`W-1         :0*`W]    = lut_v_n;
 
       load_operands(dir_cnt);
 
