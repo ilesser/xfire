@@ -72,7 +72,7 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**13) begin
+      repeat(2**12) begin
 
          rand_mode      = constrained_rand_int(0, 2**`M_SIZE-1);
          rand_format    = constrained_rand_int(0, 2**`F_SIZE-1);
@@ -84,12 +84,12 @@ task rand_test;
          rand_lut_u_n   = constrained_rand_int(0, 2**(`W)-1);
          rand_lut_v_n   = constrained_rand_int(0, 2**(`W)-1);
 
-         rand_mode      = `MODE_L;
+         //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
-         rand_n         = 04;
+         //rand_n         = 04;
          //rand_n         = constrained_rand_int(0, (2**2)-1);
          //rand_d_u_n     = 2'b00;
-         //rand_d_v_n     = 2'b01;
+         //rand_d_v_n     = 2'b00;
          //rand_u_n       = constrained_rand_int(2**15-1, 2**16-1);
          //rand_v_n       = constrained_rand_int(2**15-1, 2**16-1);
          //rand_v_n       = constrained_rand_int(-100, 100);
@@ -134,9 +134,7 @@ endtask
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
 // |  07/23 |   L    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  | aca parece fallar xq el modelo no trunca al dividir por dos, siempre el delta del error es 1
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/xx |   L    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/xx |   L    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
 // |  07/27 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  con 2^17 repeticiones despues de arreglar el bug de w_n_times_d_n_div_2_n
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
+// |  08/03 |  rand  |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  After fixing BUGs 1, 2 and 3.
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
