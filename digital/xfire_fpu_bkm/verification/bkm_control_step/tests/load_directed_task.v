@@ -44,10 +44,10 @@ task load_directed;
    input [`LOG2N-1:0] n;
    input [1:0]        d_u_n;
    input [1:0]        d_v_n;
-   input [`W-1:0]   u_n;
-   input [`W-1:0]   v_n;
-   input [`W-1:0]   lut_u_n;
-   input [`W-1:0]   lut_v_n;
+   input [`W-1:0]     u_n;
+   input [`W-1:0]     v_n;
+   input [`W-1:0]     lut_u_n;
+   input [`W-1:0]     lut_v_n;
    // ----------------------------------
 
 // *****************************************************************************
