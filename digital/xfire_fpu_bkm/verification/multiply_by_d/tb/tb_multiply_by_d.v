@@ -30,7 +30,7 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 4
+`define W 16
 `define CNT_SIZE 2*`W+4
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
@@ -102,8 +102,8 @@ module tb_multiply_by_d ();
    // -----------------------------------------------------
    initial begin
       $monitor("Time = %8t tb_d_x = %b tb_d_y = %b tb_x_in = %d tb_y_in = %d tb_x_out = %d tb_y_out = %d res_x = %d res_y = %d\n",$time, tb_d_x, tb_d_y, tb_x_in, tb_y_in, tb_x_out, tb_y_out, res_x, res_y);
-      $dumpfile("../waves/tb_multiply_by_d.vcd");
-      $dumpvars();
+      //$dumpfile("../waves/tb_multiply_by_d.vcd");
+      //$dumpvars();
    end
    // -----------------------------------------------------
 
