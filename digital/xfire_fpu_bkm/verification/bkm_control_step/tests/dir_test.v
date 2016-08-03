@@ -60,85 +60,30 @@ task dir_test;
       run_clk(1);
       ena         = 1'b1;
 
-      // operands     mode     format            n             d_u_n    d_v_n     u_n      v_n
-      //load_directed( `MODE_E, `FORMAT_REAL_W  , `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_E, `FORMAT_REAL_DW , `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_W , `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_L, `FORMAT_REAL_W  , `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_L, `FORMAT_REAL_DW , `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_W , `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
 
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd000);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd001);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd002);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd003);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd004);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd005);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd014);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd000, ``W'd015);
-
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd000);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd001);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd002);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd003);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd004);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd005);
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b00,   2'b00, ``W'd001, ``W'd014);
-
-
-      // operands     mode     format            n             d_u_n    d_v_n     u_n      v_n        lut_u_n    lut_v_n
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b01, `W'd037, `W'd036, `W'd017, `W'd020);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b10, `W'd019, `W'd051, `W'd079, `W'd024);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b11, `W'd035, `W'd016, `W'd085, `W'd062);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b00, `W'd079, `W'd018, `W'd002, `W'd069);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b11, `W'd002, `W'd016, `W'd046, `W'd012);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W'd005, `W'd009, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W'd007, `W'd001, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W'd007, `W'd003, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W'd007, `W'd005, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W'd007, `W'd007, `W'd000, `W'd000);
-      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00, `W'd007, `W'd009, `W'd000, `W'd000);
-
-      //arst        = 1'b1;
-      //run_clk(1);
-      //run_clk(1);
-      //arst        = 1'b0;
-      //run_clk(1);
-
-      // Test E mode for dw complex args
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd000,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd002,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd003,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd004,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd005,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd006,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-      //repeat(2**(2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd007,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-
-      //repeat(2**(`LOG2N+2+2+2*``W))
-         //load_directed( `MODE_E, `FORMAT_CMPLX_DW, cnt[4*``W+4+`LOG2N-1:4*``W+4],   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
-
-
-
-
-      // Test L mode for dw complex args
-      //repeat(2**(2+2+2*``W))
-         // operands     mode     format            n             d_u_n                d_v_n             u_n      v_n
-         //load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   cnt[4*``W+3:4*``W+2],  cnt[4*``W+1:4*``W], cnt[4*``W-1:3*``W+0], cnt[3*``W-1:2*``W+0], cnt[2*``W-1:``W], cnt[``W-1:0]);
+      // operands     mode     format            n             d_u_n    d_v_n     u_n         v_n         lut_u_n     lut_v_n
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b01,  `W'd00037,  `W'd00036,  `W'd00017,  `W'd00020);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b10,  `W'd00019,  `W'd00051,  `W'd00079,  `W'd00024);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b11,  `W'd00035,  `W'd00016,  `W'd00085,  `W'd00062);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b00,  `W'd00079,  `W'd00018,  `W'd00002,  `W'd00069);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b11,  `W'd00002,  `W'd00016,  `W'd00046,  `W'd00012);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd000,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd003,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd008,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd012,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd015,   2'b11,   2'b00, -`W'd32768,  `W'd00016,  `W'd00416,  `W'd00312);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00005,  `W'd00009,  `W'd00000,  `W'd00000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00001,  `W'd00000,  `W'd00000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00003,  `W'd00000,  `W'd00000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00005,  `W'd00000,  `W'd00000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00007,  `W'd00000,  `W'd00000);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00009,  `W'd00000,  `W'd00000);
 
       // operands     mode     format            n             d_u_n    d_v_n    u_n       v_n       lut_u_n   lut_v_n
-      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `W'h0037, `W'h0036, `W'h0017, `W'h0020};
-      cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `W'h0011, `W'h0731, `W'h0000, `W'h0000};
+      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `W'h0000, `W'h0000, `W'h0000, `W'h0000};
+      cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `W'h0000, `W'h0011, `W'h0000, `W'h0000};
 
       run_clk(1);
       arst        = 1'b1;
@@ -150,7 +95,7 @@ task dir_test;
       run_clk(1);
       load        = 1'b0;
 
-      repeat(2**1) begin
+      repeat(2**4) begin
          repeat(2**`W)
             load_operands(cnt);
          repeat(2**`W)
