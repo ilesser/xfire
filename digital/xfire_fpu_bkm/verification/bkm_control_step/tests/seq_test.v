@@ -58,9 +58,9 @@ task seq_test;
       //cnt_step    = 'h00000000;
       //cnt_load    = 76'h1700_0000_0010_2000_0000;
       //cnt_step    = 76'h0000_0000_0001_1000_0000;
-      // operands     mode     format            n             d_u_n    d_v_n    u_n      v_n      lut_u_n  lut_v_n
-      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `W'd037, `W'd036, `W'd017, `W'd020};
-      cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `W'd000, `W'd009, `W'd000, `W'd000};
+      // operands     mode     format            n             d_u_n    d_v_n    u_n       v_n       lut_u_n   lut_v_n
+      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `W'h0037, `W'h0036, `W'h0017, `W'h0020};
+      cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `W'h0000, `W'h0041, `W'h0000, `W'h0000};
       run_clk(1);
       arst        = 1'b1;
       run_clk(1);

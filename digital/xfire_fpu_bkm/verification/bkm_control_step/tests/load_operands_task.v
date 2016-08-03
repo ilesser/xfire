@@ -80,7 +80,7 @@ task load_operands;
       double_word = tb_format[0];
       complex     = tb_format[1];
 
-      n  = $itor($signed(tb_n));
+      n  = $itor(tb_n);
 
       du =  tb_d_u_n == 2'b01 ?  1  :
             tb_d_u_n == 2'b11 ? -1  :
@@ -91,10 +91,10 @@ task load_operands;
                                  0  ;
 
       if (double_word==1'b1) begin
-         u_n   = ($signed(tb_u_n));
-         v_n   = ($signed(tb_v_n));
-         lut_u = ($signed(tb_lut_u_n));
-         lut_v = ($signed(tb_lut_v_n));
+         u_n   = $itor($signed(tb_u_n));
+         v_n   = $itor($signed(tb_v_n));
+         lut_u = $itor($signed(tb_lut_u_n));
+         lut_v = $itor($signed(tb_lut_v_n));
       end
       else begin
          u_n   = $itor($signed(tb_u_n[`W/2-1:0]));
@@ -212,11 +212,13 @@ function real div_2_n;
    real i,y;
    begin
       y = x;
-      for (i=0; i<n; i=i+1) begin
-         if ($rtoi(y)%2 == 0)
-            y = y/2;
-         else
-            y = (y-1)/2;
+      if (n>0) begin
+         for (i=0; i<n; i=i+1) begin
+            if ($rtoi(y)%2 == 0)
+               y = y/2;
+            else
+               y = (y-1)/2;
+         end
       end
       div_2_n = y;
    end
