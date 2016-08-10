@@ -58,6 +58,8 @@ task rand_test;
       ena         = 1'b0;
       arst        = 1'b0;
       srst        = 1'b0;
+      cnt_load    = {`CNT_SIZE{1'b0}};
+      cnt_step    = {`CNT_SIZE{1'b0}};
       run_clk(1);
       arst        = 1'b1;
       srst        = 1'b1;
@@ -67,7 +69,7 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**02) begin
+      repeat(2**12) begin
 
          rand_mode      = constrained_rand_int(0, 2**`M_SIZE-1);
          rand_format    = constrained_rand_int(0, 2**`F_SIZE-1);
@@ -79,18 +81,18 @@ task rand_test;
          rand_lut_X_n   = constrained_rand_int(0, 2**(`W)-1);
          rand_lut_Y_n   = constrained_rand_int(0, 2**(`W)-1);
 
-         rand_mode      = `MODE_E;
+         //rand_mode      = `MODE_E;
          rand_format    = `FORMAT_CMPLX_DW;
-         rand_n         = 1;
-         //rand_n         = constrained_rand_int(0, (2**2)-1);
-         rand_d_x_n     = 2'b01;
-         rand_d_y_n     = 2'b00;
-         rand_X_n       = constrained_rand_int(0, 100);
-         rand_Y_n       = constrained_rand_int(0, 100);
-         rand_lut_X_n   = constrained_rand_int(0, 100);
-         rand_lut_Y_n   = constrained_rand_int(0, 100);
+         //rand_n         = 2;
+         //rand_n         = constrained_rand_int(0, (2**1)-1);
+         //rand_d_x_n     = 2'b01;
+         //rand_d_y_n     = 2'b00;
+         //rand_X_n       = constrained_rand_int(0, 100);
+         //rand_Y_n       = constrained_rand_int(0, 100);
+         //rand_lut_X_n   = constrained_rand_int(0, 100);
+         //rand_lut_Y_n   = constrained_rand_int(0, 100);
 
-         load_directed( rand_mode, rand_format,  rand_n, rand_d_x_n,   rand_d_y_n,   rand_X_n,  rand_Y_n,  rand_X_n,  rand_Y_n);
+         load_directed( rand_mode, rand_format,  rand_n, rand_d_x_n,   rand_d_y_n,   rand_X_n,  rand_Y_n,  rand_lut_X_n,  rand_lut_Y_n);
 
       end
 
@@ -108,25 +110,28 @@ task rand_test;
 endtask
 
 
-// Summary
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  date  |  mode  |  format   |  n  |  d_x   |  d_y   |  X_n   |  Y_n   |  res_X |  res_Y |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   E    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   E    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   E    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   L    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  u and v fail when d_x = d_y = 2'b11-- > FIXED: there was a problem with the w_n + d_n part
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   L    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   L    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/18 |   L    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
-// |  07/00 |        |           |     |        |        |        |        |        |        |
-// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+
+// Summary L mode: PASS (10/08)
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  date  |  mode  |  format   |  n  |  d_x   |  d_y   |  X_n   |  Y_n   |  lut_X |  lut_Y |  res_X |  res_Y |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   L    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   L    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   L    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  | after fixing BUG3
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+
+// Summary E mode: PASS (10/8)
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  date  |  mode  |  format   |  n  |  d_x   |  d_y   |  X_n   |  Y_n   |  lut_X |  lut_Y |  res_X |  res_Y |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   E    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   E    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   E    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  | after fixing BUG3
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/10 |  rand  |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  | run for 2**20 iterations
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
