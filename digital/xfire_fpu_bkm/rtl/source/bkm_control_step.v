@@ -73,6 +73,8 @@
 // History:
 // --------
 //
+//    TODO: implement power savings based on format. Currently it works always
+//          in double word complex format.
 //    - 2016-08-03 - ilesser - BUG3: Increased wordsize for internal signals 
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-27 - ilesser - BUG1: Fixed.
