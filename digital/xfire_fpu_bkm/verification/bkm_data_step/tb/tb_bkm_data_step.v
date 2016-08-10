@@ -212,14 +212,14 @@ module tb_bkm_data_step ();
    // Monitors
    // -----------------------------------------------------
    initial begin
-      $monitor("Time = %8t",                                               $time,
-               "\ttb_mode=%b",                                             tb_mode,
-               "\ttb_format=%b",                                           tb_format,
-               "\ttb_n=%b",                                                tb_n,
-               "\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
-               "\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
-               "\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
-            );
+      //$monitor("Time = %8t",                                               $time,
+               //"\ttb_mode=%b",                                             tb_mode,
+               //"\ttb_format=%b",                                           tb_format,
+               //"\ttb_n=%b",                                                tb_n,
+               //"\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
+               //"\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
+               //"\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
+            //);
 
       //$dumpfile("../waves/tb_bkm_data_step.vcd");
       //$dumpvars();
