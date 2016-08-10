@@ -66,6 +66,9 @@
 // History:
 // --------
 //
+//    TODO: implement power savings based on format. Currently it works always
+//          in double word complex format.
+//    - 2016-08-10 - ilesser - Duplicated BUG3 fix.
 //    - 2016-07-22 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -136,18 +139,18 @@ module bkm_data_step #(
    wire                 sign_a_y;
    wire                 sign_b_x;
    wire                 sign_b_y;
-   wire  [2*W-1:0]      a_x;
-   wire  [2*W-1:0]      a_y;
-   wire  [2*W-1:0]      b_x;
-   wire  [2*W-1:0]      b_y;
-   wire  [2*W-1:0]      X_n_times_d_n;
-   wire  [2*W-1:0]      Y_n_times_d_n;
-   wire  [2*W-1:0]      X_n_times_d_n_div_2_n;
-   wire  [2*W-1:0]      Y_n_times_d_n_div_2_n;
+   wire  [2*W+1:0]      a_x;
+   wire  [2*W+1:0]      a_y;
+   wire  [2*W+1:0]      b_x;
+   wire  [2*W+1:0]      b_y;
+   wire  [2*W+1:0]      X_n_times_d_n;
+   wire  [2*W+1:0]      Y_n_times_d_n;
+   wire  [2*W+1:0]      X_n_times_d_n_div_2_n;
+   wire  [2*W+1:0]      Y_n_times_d_n_div_2_n;
    wire  [1:0]          c_x;
    wire  [1:0]          c_y;
-   wire  [2*W-1:0]      s_x;
-   wire  [2*W-1:0]      s_y;
+   wire  [2*W+1:0]      s_x;
+   wire  [2*W+1:0]      s_y;
    // -----------------------------------------------------
 
 // *****************************************************************************
@@ -161,15 +164,15 @@ module bkm_data_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                  (W)
+      .W                  (W+1)
    ) multiply_by_d_csd (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .d_x                 (d_x_n),
       .d_y                 (d_y_n),
-      .x_in                (X_n),
-      .y_in                (Y_n),
+      .x_in                ({`CSD_0_0, X_n}),
+      .y_in                ({`CSD_0_0, Y_n}),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -185,14 +188,14 @@ module bkm_data_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W)
+      .W                   (W+1),
+      .LOG2W               (LOG2W+1)
    ) barrel_shifter_csd_x(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (`DIR_RIGHT),
-      .sel                 (n),
+      .sel                 ({1'b0,n}),
       .in                  (X_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -208,14 +211,14 @@ module bkm_data_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W)
+      .W                   (W+1),
+      .LOG2W               (LOG2W+1)
    ) barrel_shifter_csd_y(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (`DIR_RIGHT),
-      .sel                 (n),
+      .sel                 ({1'b0,n}),
       .in                  (Y_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -248,7 +251,7 @@ module bkm_data_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (W+1)
    ) complex_add_subb_csd (
     // ----------------------------------
     // Data inputs
