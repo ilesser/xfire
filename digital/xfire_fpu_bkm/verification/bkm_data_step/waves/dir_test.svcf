@@ -1,4 +1,4 @@
-# SimVision Command Script (Wed Aug 03 06:43:04 PM ART 2016)
+# SimVision Command Script (Wed Aug 10 08:47:55 PM ART 2016)
 #
 # Version 15.20.s002
 #
@@ -78,7 +78,7 @@ waveform set \
     -signalnames name \
     -signalwidth 278 \
     -units ns \
-    -valuewidth 177
+    -valuewidth 480
 waveform baseline set -time 33,075,000ps
 
 set id [waveform add -signals  {
@@ -96,7 +96,6 @@ set id [waveform add -signals  {
 set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.cnt_load[74:0]}
 	} ]
-waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.cnt_step[74:0]}
 	} ]
@@ -104,7 +103,6 @@ set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.cnt[74:0]}
 	} ]
 waveform format $id -radix %x
-waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	bkm_data_step::tb_bkm_data_step.err_X
 	} ]
@@ -136,7 +134,139 @@ set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.tb_n[3:0]}
 	} ]
 waveform format $id -radix %d
-waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.tb_d_x_n[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.tb_d_y_n[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_lut_X)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_X_n)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.res_X_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_X_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_lut_Y)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_Y_n)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.res_Y_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_Y_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.err_X
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.war_X
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.err_Y
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.war_Y
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.duv.mode
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.format[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.n[3:0]}
+	} ]
+waveform format $id -radix %d
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.d_x_n[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.d_y_n[1:0]}
+	} ]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.X_n[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.d_x_n[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.lut_X[31:0]}
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.arst
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.srst
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.clk
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.ena
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.cnt_load[74:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.cnt_step[74:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.cnt[74:0]}
+	} ]
+waveform format $id -radix %x
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.err_X
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.err_Y
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.delta_X)
+	} ]
+waveform format $id -radix %d
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.delta_Y)
+	} ]
+waveform format $id -radix %d
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.errors
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.notes
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.tb_mode
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.tb_format[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.tb_n[3:0]}
+	} ]
+waveform format $id -radix %d
 set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.tb_d_x_n[1:0]}
 	} ]
@@ -199,7 +329,6 @@ set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.duv.n[3:0]}
 	} ]
 waveform format $id -radix %d
-waveform hierarchy collapse $id
 set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.duv.d_x_n[1:0]}
 	} ]
@@ -288,13 +417,119 @@ set id [waveform add -signals  {
 	{bkm_data_step::tb_bkm_data_step.load_directed.n[3:0]}
 	} ]
 set id [waveform add -signals  {
-	{bkm_data_step::tb_bkm_data_step.load_directed.u_n[15:0]}
+	{bkm_data_step::tb_bkm_data_step.load_directed.X_n[15:0]}
 	} ]
 set id [waveform add -signals  {
-	{bkm_data_step::tb_bkm_data_step.load_directed.v_n[15:0]}
+	{bkm_data_step::tb_bkm_data_step.load_directed.Y_n[15:0]}
 	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.err_X
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.war_X
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.delta_X)
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.duv_checker.delta_X_r
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min 0 -max 2 -scale linear
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.duv_checker.neq_X
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.res_X_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_X_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.res_Y_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.tb_Y_np1)
+	} ]
+waveform format $id -color #0000ff
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.err_Y
+	} ]
+waveform format $id -color #ff0000
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.war_Y
+	} ]
+waveform format $id -color #ffff00
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.delta_Y)
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.duv_checker.delta_Y_r
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.duv_checker.neq_Y
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.duv_checker.clk
+	} ]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.load_directed.dir_cnt[74:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.load_directed.format[1:0]}
+	} ]
+set id [waveform add -signals  {
+	bkm_data_step::tb_bkm_data_step.load_directed.mode
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.load_directed.n[3:0]}
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.rand_test.rand_lut_X_n)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.rand_test.rand_lut_Y_n)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.rand_test.rand_X_n)
+	} ]
+set id [waveform add -signals  {
+	signed(bkm_data_step::tb_bkm_data_step.rand_test.rand_Y_n)
+	} ]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.X_n[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.Y_n[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.X_n_times_d_n[33:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.X_n_times_d_n_div_2_n[33:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.Y_n_times_d_n[33:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{bkm_data_step::tb_bkm_data_step.duv.Y_n_times_d_n_div_2_n[33:0]}
+	} ]
+waveform format $id -radix %b
 
-waveform xview limits 0 65ns
+waveform xview limits 1099.595ns 1348.291ns
 
 #
 # Waveform Window Links
