@@ -51,19 +51,26 @@ module bkm_control_step_checker #(
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input wire  [W-1:0]   tb_u_np1,
-   input wire  [W-1:0]   tb_v_np1,
-   input wire  [W-1:0]   res_u_np1,
-   input wire  [W-1:0]   res_v_np1,
+   input wire               tb_mode,
+   input wire  [1:0]        tb_format,
+   input wire  [`LOG2N-1:0] tb_n,
+   input wire  [1:0]        tb_d_u_n,
+   input wire  [1:0]        tb_d_v_n,
+   input wire  [W-1:0]      tb_u_n,
+   input wire  [W-1:0]      tb_v_n,
+   input wire  [W-1:0]      tb_u_np1,
+   input wire  [W-1:0]      tb_v_np1,
+   input wire  [W-1:0]      res_u_np1,
+   input wire  [W-1:0]      res_v_np1,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output reg              war_u,
-   output reg              war_v,
-   output reg              err_u,
-   output reg              err_v,
-   output wire [W-1:0]   delta_u,
-   output wire [W-1:0]   delta_v
+   output reg               war_u,
+   output reg               war_v,
+   output reg               err_u,
+   output reg               err_v,
+   output wire [W-1:0]      delta_u,
+   output wire [W-1:0]      delta_v
    );
 // *****************************************************************************
 
@@ -77,6 +84,17 @@ module bkm_control_step_checker #(
    wire     neq_u,         neq_v;
    real     delta_u_r,     delta_v_r;
    // -----------------------------------------------------
+
+   initial begin
+      $monitor("Time = %8t",                                               $time,
+               "\ttb_mode=%b",                                             tb_mode,
+               "\ttb_format=%b",                                           tb_format,
+               "\ttb_n=%b",                                                tb_n,
+               "\ttb_d_u_n=%b\ttb_d_v_n=%b\n",                             tb_d_u_n, tb_d_v_n,
+               "\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
+               "\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
+            );
+   end
 
    assign neq_u      = tb_u_np1 !== res_u_np1;
    assign neq_v      = tb_v_np1 !== res_v_np1;
