@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-11 - ilesser - Added driver and monitor to make tb nicer.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-08-02 - ilesser - Added parallel load to the counter.
 //    - 2016-07-25 - ilesser - Added checker.
@@ -115,19 +116,11 @@ module tb_bkm_control_step ();
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
-   initial begin
-      //$monitor("Time = %8t",                                               $time,
-               //"\ttb_mode=%b",                                             tb_mode,
-               //"\ttb_format=%b",                                           tb_format,
-               //"\ttb_n=%b",                                                tb_n,
-               //"\ttb_d_u_n=%b\ttb_d_v_n=%b\n",                             tb_d_u_n, tb_d_v_n,
-               //"\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
-               //"\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
-            //);
-
+   // Uncomment these lines to add waveforms to iverilog simulation
+   //initial begin
       //$dumpfile("../waves/tb_bkm_control_step.vcd");
       //$dumpvars();
-   end
+   //end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -146,6 +139,13 @@ module tb_bkm_control_step ();
       // ----------------------------------
       // Data inputs
       // ----------------------------------
+      .tb_mode    (tb_mode),
+      .tb_format  (tb_format),
+      .tb_n       (tb_n),
+      .tb_d_u_n   (tb_d_u_n),
+      .tb_d_v_n   (tb_d_v_n),
+      .tb_u_n     (tb_u_n),
+      .tb_v_n     (tb_v_n),
       .tb_u_np1   (tb_u_np1),
       .tb_v_np1   (tb_v_np1),
       .res_u_np1  (res_u_np1),
