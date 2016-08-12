@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-07-06 - ilesser - Added cnt_load and cnt_step vars.
 //    - 2016-07-06 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -48,6 +49,9 @@ task seq_test;
       ena         = 1'b0;
       arst        = 1'b0;
       srst        = 1'b0;
+      load        = 1'b0;
+      cnt_load    = {`CNT_SIZE{1'b0}};
+      cnt_step    = {{`CNT_SIZE-1{1'b0}},1'b1};
       run_clk(1);
       arst        = 1'b1;
       run_clk(1);
@@ -55,8 +59,8 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      //repeat(2**(`CNT_SIZE))
-      repeat(2**8)
+      //repeat(2**14)
+      repeat(2**(`CNT_SIZE))
          load_operands(cnt);
 
    end
