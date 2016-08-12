@@ -53,7 +53,7 @@ task load_operands;
    // -----------------------------------------------------
    reg   double_word;
    reg   complex;
-   real  n;
+   real  nc, nd;
    real  dx,                        dy;
    real  X_n,                       Y_n;
    real  X_n_times_d_n_r,           Y_n_times_d_n_r;
@@ -88,7 +88,9 @@ task load_operands;
       double_word = tb_format[0];
       complex     = tb_format[1];
 
-      n  = $itor(tb_n);
+      // Calculate n values
+      nd = $itor(tb_n);
+      nc = $itor(tb_n[`LOG2N+`LOG2WC-`LOG2WD-1:0]);
 
       dx =  tb_d_x_n == 2'b01 ?  1  :
             tb_d_x_n == 2'b11 ? -1  :
@@ -139,8 +141,8 @@ task load_operands;
 
          Y_n_times_d_n_r         = (dx * Y_n + dy * X_n);
 
-         X_n_times_d_n_div_2_n_r = $rtoi(div_2_n(X_n_times_d_n_r, n));
-         Y_n_times_d_n_div_2_n_r = $rtoi(div_2_n(Y_n_times_d_n_r, n));
+         X_n_times_d_n_div_2_n_r = $rtoi(div_2_n(X_n_times_d_n_r, nd));
+         Y_n_times_d_n_div_2_n_r = $rtoi(div_2_n(Y_n_times_d_n_r, nd));
 
          if (complex==1'b1) begin
 
@@ -188,8 +190,8 @@ task load_operands;
          v_n_plus_d_v_n_r        = v_n + dv;
          v_n_times_d_n_r         = (du * v_n + dv * u_n);
 
-         u_n_times_d_n_div_2_n_r = $rtoi(div_2_n(u_n_times_d_n_r, n));
-         v_n_times_d_n_div_2_n_r = $rtoi(div_2_n(v_n_times_d_n_r, n));
+         u_n_times_d_n_div_2_n_r = $rtoi(div_2_n(u_n_times_d_n_r, nc));
+         v_n_times_d_n_div_2_n_r = $rtoi(div_2_n(v_n_times_d_n_r, nc));
 
 
          if (complex==1'b1) begin
