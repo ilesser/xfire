@@ -24,7 +24,7 @@
 // History:
 // --------
 //
-//    - 2016-07-06 - ilesser - Added cnt_load and cnt_step vars.
+//    - 2016-08-11 - ilesser - Added cnt_load and cnt_step vars.
 //    - 2016-07-06 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
