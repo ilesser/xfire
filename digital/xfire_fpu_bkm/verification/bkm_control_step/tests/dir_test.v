@@ -81,6 +81,12 @@ task dir_test;
       load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00007,  `W'd00000,  `W'd00000);
       load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b01,   2'b00,  `W'd00007,  `W'd00009,  `W'd00000,  `W'd00000);
 
+      // To reproduce BUG11
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b01, -`W'd32768, -`W'd32768,  `W'd01070,  `W'd00310);
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b11, -`W'd32768, -`W'd32768,  `W'd01070,  `W'd00310);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b01, -`W'd32768, -`W'd32768,  `W'd01070,  `W'd00310);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b11, -`W'd32768, -`W'd32768,  `W'd01070,  `W'd00310);
+
       // operands     mode     format            n             d_u_n    d_v_n    u_n       v_n       lut_u_n   lut_v_n
       cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `W'h0000, `W'h0000, `W'h0000, `W'h0000};
       cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `W'h0000, `W'h0011, `W'h0000, `W'h0000};
