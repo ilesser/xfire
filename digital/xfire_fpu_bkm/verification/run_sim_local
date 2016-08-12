@@ -481,16 +481,16 @@ echo "" >> ./temp/tb_${block_name}.v
 echo "endmodule" >> ./temp/tb_${block_name}.v
 echo "" >> ./temp/tb_${block_name}.v
 
-simlib_list_v=`find ${simlib_path} -type f -name "*.v"`
-simlib_list_vh=`find ${simlib_path} -type f -name "*.vh"`
-source_list_v=`find ../../rtl/source/ -type f -name "*.v"`
-source_list_vh=`find ../../rtl/source/ -type f -name "*.vh"`
-checkers_list_v=`find ./checkers/ -type f -name "*.v"`
-checkers_list_vh=`find ./checkers/ -type f -name "*.vh"`
-monitors_list_v=`find ./monitors/ -type f -name "*.v"`
-monitors_list_vh=`find ./monitors/ -type f -name "*.vh"`
-transactors_list_v=`find ./transactors/ -type f -name "*.v"`
-transactors_list_vh=`find ./transactors/ -type f -name "*.vh"`
+simlib_list_v=`find        ${simlib_path}    -name "*.v"`
+simlib_list_vh=`find       ${simlib_path}    -name "*.vh"`
+source_list_v=`find        ../../rtl/source/ -name "*.v"`
+source_list_vh=`find       ../../rtl/source/ -name "*.vh"`
+checkers_list_v=`find      ./checkers/       -name "*.v"`
+checkers_list_vh=`find     ./checkers/       -name "*.vh"`
+monitors_list_v=`find      ./monitors/       -name "*.v"`
+monitors_list_vh=`find     ./monitors/       -name "*.vh"`
+transactors_list_v=`find   ./transactors/    -name "*.v"`
+transactors_list_vh=`find  ./transactors/    -name "*.vh"`
 
 for f in ${simlib_list_v}
 do
