@@ -77,7 +77,7 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**14) begin
+      repeat(2**16) begin
 
          rand_mode      = constrained_rand_int(0, 1);
          rand_format    = constrained_rand_int(0, 3);
@@ -93,19 +93,21 @@ task rand_test;
          rand_lut_u_n   = constrained_rand_int(0, 2**`WC);
          rand_lut_v_n   = constrained_rand_int(0, 2**`WC);
 
-         rand_mode      = `MODE_E;
+         //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
-         rand_n         = 0;
-         rand_d_x_n     = 2'b00;
-         rand_d_y_n     = 2'b00;
-         rand_X_n       = constrained_rand_int(0, 300);
-         rand_Y_n       = constrained_rand_int(0, 300);
-         rand_u_n       = constrained_rand_int(0, 30);
-         rand_v_n       = constrained_rand_int(0, 30);
-         rand_lut_X_n   = constrained_rand_int(0, 300);
-         rand_lut_Y_n   = constrained_rand_int(0, 300);
-         rand_lut_u_n   = constrained_rand_int(0, 30);
-         rand_lut_v_n   = constrained_rand_int(0, 30);
+         //rand_n         = 4;
+         //rand_n         = constrained_rand_int(4,15);
+         //rand_d_x_n     = 2'b00;
+         //rand_d_y_n     = 2'b00;
+         //rand_X_n       = constrained_rand_int(0, 300);
+         //rand_Y_n       = constrained_rand_int(0, 300);
+         //rand_u_n       = constrained_rand_int(0, 30);
+         //rand_v_n       = constrained_rand_int(0, 30);
+         //rand_v_n       = rand_u_n;
+         //rand_lut_X_n   = constrained_rand_int(0, 300);
+         //rand_lut_Y_n   = constrained_rand_int(0, 300);
+         //rand_lut_u_n   = constrained_rand_int(0, 30);
+         //rand_lut_v_n   = constrained_rand_int(0, 30);
 
          load_directed  (
                            rand_mode,
@@ -145,7 +147,25 @@ endtask
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
 // |  date  |  mode  |  format   |  n  |  d_x   |  d_y   |  X_n   |  Y_n   |  res_X |  res_Y |  res_u |  res_v |
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
-// |  08/11 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  FAIL  |  FAIL  |  FAIL  |  FAIL  |
+// |  08/11 |   E    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
-// |  08/00 |        |           |     |        |        |        |        |        |        |        |        |
+// |  08/11 |   E    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   E    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |  rand  |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  FAIL  |  FAIL  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   L    |  CMPLX_DW |  0  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   L    |  CMPLX_DW |  1  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   L    |  CMPLX_DW |  2  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  PASS  |  PASS  |
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   L    |  CMPLX_DW |  3  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  FAIL  |  FAIL  | 5 veces en u y 3 en v
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   L    |  CMPLX_DW |  4  |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  FAIL  |  FAIL  | -8 <= delta_u/v <= 0
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/11 |   L    |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  FAIL  |  FAIL  | -8 <= delta_u/v <= 0
+// +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
+// |  08/12 |  rand  |  CMPLX_DW | rnd |  rand  |  rand  |  rand  |  rand  |  PASS  |  PASS  |  FAIL  |  FAIL  | Found the problem behind BUG7 and found BUG11 ( 4 errors on 2^16 runs).
 // +--------+--------+-----------+-----+--------+--------+--------+--------+--------+--------+--------+--------+
