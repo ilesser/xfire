@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-11 - ilesser - Updated for WD and WC.
 //    - 2016-07-13 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -43,10 +44,14 @@ task load_directed;
    input [`LOG2N-1:0] n;
    input [1:0]        d_x_n;
    input [1:0]        d_y_n;
-   input [`W-1:0]     X_n;
-   input [`W-1:0]     Y_n;
-   input [`W-1:0]     u_n;
-   input [`W-1:0]     v_n;
+   input [`WD-1:0]    X_n;
+   input [`WD-1:0]    Y_n;
+   input [`WC-1:0]    u_n;
+   input [`WC-1:0]    v_n;
+   input [`WD-1:0]    lut_X_n;
+   input [`WD-1:0]    lut_Y_n;
+   input [`WC-1:0]    lut_u_n;
+   input [`WC-1:0]    lut_v_n;
    // ----------------------------------
 
 // *****************************************************************************
@@ -63,15 +68,19 @@ task load_directed;
 
    begin
 
-      dir_cnt[`CNT_SIZE-1]             = mode;
-      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3] = format;
-      dir_cnt[2*`W+4+`LOG2N-1:2*`W+4]  = n;
-      dir_cnt[2*`W+3:2*`W+2]           = d_x_n;
-      dir_cnt[2*`W+1:2*`W+0]           = d_y_n;
-      dir_cnt[2*`W-1:1*`W]             = X_n;
-      dir_cnt[1*`W-1:0*`W]             = Y_n;
-      //dir_cnt[2*`W-1:1*`W]             = u_n;
-      //dir_cnt[1*`W-1:0*`W]             = v_n;
+      dir_cnt[`CNT_SIZE-1]                               =    mode   ;
+      dir_cnt[`CNT_SIZE-2              :`CNT_SIZE-3]     =    format ;
+      dir_cnt[4*`WC+4*`WD+4+`LOG2N-1   :4*`WC+4*`WD+4]   =    n      ;
+      dir_cnt[4*`WC+4*`WD+3            :4*`WC+4*`WD+2]   =    d_x_n  ;
+      dir_cnt[4*`WC+4*`WD+1            :4*`WC+4*`WD+0]   =    d_y_n  ;
+      dir_cnt[4*`WC+4*`WD-1            :4*`WC+3*`WD]     =    X_n    ;
+      dir_cnt[4*`WC+3*`WD-1            :4*`WC+2*`WD]     =    Y_n    ;
+      dir_cnt[4*`WC+2*`WD-1            :3*`WC+2*`WD]     =    u_n    ;
+      dir_cnt[3*`WC+2*`WD-1            :2*`WC+2*`WD]     =    v_n    ;
+      dir_cnt[2*`WC+2*`WD-1            :2*`WC+1*`WD]     =    lut_X_n;
+      dir_cnt[2*`WC+1*`WD-1            :2*`WC]           =    lut_Y_n;
+      dir_cnt[2*`WC-1                  :1*`WC]           =    lut_u_n;
+      dir_cnt[1*`WC-1                  :0*`WC]           =    lut_v_n;
 
       load_operands(dir_cnt);
 
