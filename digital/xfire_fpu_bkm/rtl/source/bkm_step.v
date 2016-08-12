@@ -90,6 +90,7 @@
 // History:
 // --------
 //
+//    - 2016-08-11 - ilesser - Changed architecture: used local params WD and WC.
 //    - 2016-07-23 - ilesser - Changed architecture: created bkm_control_step and bkm_data_step.
 //    - 2016-07-18 - ilesser - Added CSD barrel shifter.
 //    - 2016-07-18 - ilesser - Renamed csd_* to *_csd.
@@ -103,45 +104,56 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module bkm_step #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-    parameter W      = 64,
-    parameter LOG2W  = 6,
-    parameter LOG2N  = 6
-  ) (
-    // ----------------------------------
-    // Clock, reset & enable inputs
-    // ----------------------------------
-    input wire                clk,
-    input wire                arst,
-    input wire                srst,
-    input wire                enable,
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
-    input wire                mode,
-    input wire [1:0]          format,
-    input wire [LOG2N-1:0]    n,
-    input wire [1:0]          d_x_n,        // d_n is encoded in ones complement
-    input wire [1:0]          d_y_n,        // d_n is encoded in ones complement
-    input wire [2*W-1:0]      X_n,
-    input wire [2*W-1:0]      Y_n,
-    input wire [2*W-1:0]      lut_X,
-    input wire [2*W-1:0]      lut_Y,
-    input wire [W/4-1:0]      u_n,
-    input wire [W/4-1:0]      v_n,
-    input wire [W/4-1:0]      lut_u,
-    input wire [W/4-1:0]      lut_v,
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
-    output reg [2*W-1:0]      X_np1,
-    output reg [2*W-1:0]      Y_np1,
-    output reg [W/4-1:0]      u_np1,
-    output reg [W/4-1:0]      v_np1
-  );
+module bkm_step   (
+   clk, arst, srst, enable,
+   mode, format,
+   n, d_x_n, d_y_n,
+   X_n, Y_n, lut_X, lut_Y,
+   u_n, v_n, lut_u, lut_v,
+   X_np1, Y_np1,
+   u_np1, v_np1
+);
+   // ----------------------------------
+   // Parameters
+   // ----------------------------------
+   parameter   W        = 64;
+   parameter   LOG2W    = 6;
+   parameter   LOG2N    = 6;
+   localparam  WC       = W/4;
+   localparam  WD       = W;
+   localparam  LOG2WC   = LOG2W-2;
+   localparam  LOG2WD   = LOG2W;
+   // ----------------------------------
+   // Clock, reset & enable inputs
+   // ----------------------------------
+   input wire                 clk;
+   input wire                 arst;
+   input wire                 srst;
+   input wire                 enable;
+   // ----------------------------------
+   // Data inputs
+   // ----------------------------------
+   input wire                 mode;
+   input wire [1:0]           format;
+   input wire [LOG2N-1:0]     n;
+   input wire [1:0]           d_x_n;        // d_n is encoded in ones complement
+   input wire [1:0]           d_y_n;        // d_n is encoded in ones complement
+   input wire [2*WD-1:0]      X_n;
+   input wire [2*WD-1:0]      Y_n;
+   input wire [2*WD-1:0]      lut_X;
+   input wire [2*WD-1:0]      lut_Y;
+   input wire [WC-1:0]        u_n;
+   input wire [WC-1:0]        v_n;
+   input wire [WC-1:0]        lut_u;
+   input wire [WC-1:0]        lut_v;
+   // ----------------------------------
+   // Data outputs
+   // ----------------------------------
+   output reg [2*WD-1:0]      X_np1;
+   output reg [2*WD-1:0]      Y_np1;
+   output reg [WC-1:0]        u_np1;
+   output reg [WC-1:0]        v_np1;
+
 // *****************************************************************************
 
 // *****************************************************************************
@@ -157,7 +169,7 @@ module bkm_step #(
 // d_v_n  ---->+                                |
 //             |           CONTROL STEP         |
 // u_n    ---->+                                +---->   u_np1
-// v_n    ---->+                                +---->   v_np1
+// v_n    ---->+            SIZE = W/4          +---->   v_np1
 // lut_u  ---->+                                |
 // lut_v  ---->+                                |
 //             |                                |
@@ -171,7 +183,7 @@ module bkm_step #(
 // d_y_n  ---->+                                |
 //             |           DATA STEP            |
 // X_n    ---->+                                +---->   X_np1
-// Y_n    ---->+                                +---->   Y_np1
+// Y_n    ---->+           SIZE = W             +---->   Y_np1
 // lut_X  ---->+                                |
 // lut_Y  ---->+                                |
 //             |                                |
@@ -196,9 +208,9 @@ module bkm_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W),
-      .LOG2N               (LOG2N)
+      .W                   (WC),
+      .LOG2W               (LOG2WC),
+      .LOG2N               (LOG2N-(LOG2WD-LOG2WC))
    ) bkm_control_step (
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -212,13 +224,13 @@ module bkm_step #(
     // ----------------------------------
       .mode                (mode),
       .format              (format),
-      .n                   (n),
+      .n                   (n[LOG2N-2-1:0]),
       .d_u_n               (d_u_n),
       .d_v_n               (d_v_n),
       .u_n                 (u_n),
       .v_n                 (v_n),
-      .lut_u               (lut_u),
-      .lut_v               (lut_v),
+      .lut_u_n             (lut_u),
+      .lut_v_n             (lut_v),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -234,10 +246,10 @@ module bkm_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W),
+      .W                   (WD),
+      .LOG2W               (LOG2WD),
       .LOG2N               (LOG2N),
-      .ARCH                ("2C")
+      .ARCH                ("CSD")
    ) bkm_data_step (
    // ----------------------------------
    // Clock, reset & enable inputs
