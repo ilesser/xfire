@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated to use WD and WC.
 //    - 2016-08-11 - ilesser - Added driver and monitor to make tb nicer.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-08-02 - ilesser - Added parallel load to the counter.
@@ -34,14 +35,18 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define N 16
-`define W 16
-`define LOG2W 4
-`define LOG2N 4
-`define M_SIZE 1
-`define F_SIZE 2
-`define D_SIZE 2
-`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`W)
+`define N      16
+`define W      16
+`define WD     16 //`W
+`define WC      4 //`W/4
+`define LOG2N   4
+`define LOG2W   4
+`define LOG2WD `LOG2W
+`define LOG2WC `LOG2W-2
+`define M_SIZE  1
+`define F_SIZE  2
+`define D_SIZE  2
+`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`WC)
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -65,21 +70,21 @@ module tb_bkm_control_step ();
    reg   [`LOG2N-1:0]      tb_n;
    reg   [1:0]             tb_d_u_n;
    reg   [1:0]             tb_d_v_n;
-   reg   [`W-1:0]          tb_u_n,     tb_v_n;
-   reg   [`W-1:0]          tb_lut_u_n, tb_lut_v_n;
-   reg   [`W-1:0]          tb_u_np1,   tb_v_np1;
+   reg   [`WC-1:0]         tb_u_n,     tb_v_n;
+   reg   [`WC-1:0]         tb_lut_u_n, tb_lut_v_n;
+   reg   [`WC-1:0]         tb_u_np1,   tb_v_np1;
    reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  [`W-1:0]          res_u_np1,  res_v_np1;
+   wire  [`WC-1:0]         res_u_np1,  res_v_np1;
 
    // Checker wiring
    wire                    err_u,   err_v;
    wire                    war_u,   war_v;
-   wire  [`W-1:0]          delta_u, delta_v;
+   wire  [`WC-1:0]         delta_u, delta_v;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -117,17 +122,17 @@ module tb_bkm_control_step ();
    // Monitors
    // -----------------------------------------------------
    // Uncomment these lines to add waveforms to iverilog simulation
-   //initial begin
-      //$dumpfile("../waves/tb_bkm_control_step.vcd");
-      //$dumpvars();
-   //end
+   initial begin
+      $dumpfile("../waves/tb_bkm_control_step.vcd");
+      $dumpvars();
+   end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
    bkm_control_step_checker #(
-      .W          (`W)
+      .W          (`WC)
    ) duv_checker (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -166,7 +171,7 @@ module tb_bkm_control_step ();
    // Device under verifiacion
    // -----------------------------------------------------
    bkm_control_step #(
-      .W          (`W),
+      .W          (`WC),
       .LOG2W      (`LOG2W),
       .LOG2N      (`LOG2N)
    ) duv (
