@@ -37,6 +37,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Changed output to wire.
 //    - 2016-07-19 - ilesser - Deleted op and shift_t inputs.
 //    - 2016-07-19 - ilesser - Changed decision logic.
 //    - 2016-07-18 - ilesser - Initial version.
@@ -69,7 +70,7 @@ module barrel_shifter_csd #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output  reg   [2*W-1:0]   out
+    output  wire  [2*W-1:0]   out
   );
 // *****************************************************************************
 

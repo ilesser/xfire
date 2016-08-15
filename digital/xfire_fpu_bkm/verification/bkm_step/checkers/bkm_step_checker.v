@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Added min and max of delta signals.
 //    - 2016-08-11 - ilesser - Initial version.
 //
@@ -72,16 +73,16 @@ module bkm_step_checker #(
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output reg                war_u,
-   output reg                war_v,
-   output reg                err_u,
-   output reg                err_v,
+   output wire               war_u,
+   output wire               war_v,
+   output wire               err_u,
+   output wire               err_v,
    output wire  [WC-1:0]     delta_u,
    output wire  [WC-1:0]     delta_v,
-   output reg                war_X,
-   output reg                war_Y,
-   output reg                err_X,
-   output reg                err_Y,
+   output wire               war_X,
+   output wire               war_Y,
+   output wire               err_X,
+   output wire               err_Y,
    output wire  [WD-1:0]     delta_X,
    output wire  [WD-1:0]     delta_Y
    );

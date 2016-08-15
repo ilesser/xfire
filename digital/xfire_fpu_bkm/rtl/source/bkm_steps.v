@@ -99,40 +99,53 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module bkm_steps #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-    parameter W      = 64,
-    parameter LOG2W  = 6,
-    parameter N      = 64,
-    parameter LOG2N  = 6
-  ) (
-    // ----------------------------------
-    // Clock, reset & enable inputs
-    // ----------------------------------
-    input wire                   clk,
-    input wire                   arst,
-    input wire                   srst,
-    input wire                   enable,
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
-    input wire                   start,
-    input wire                   mode,
-    input wire    [1:0]          format,
-    input wire    [W-1:0]        X_in,
-    input wire    [W-1:0]        Y_in,
-    input wire    [W-1:0]        u_in,
-    input wire    [W-1:0]        v_in,
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
-    output wire   [W-1:0]        X_out,
-    output wire   [W-1:0]        Y_out,
-    output wire   [`FSIZE-1:0]   flags,
-    output wire                  done
-  );
+module bkm_steps  (
+   clk, arst, srst, enable,
+   start, mode, format,
+   n, d_x_n, d_y_n,
+   X_in, Y_in,
+   u_in, v_in,
+   X_out, Y_out,
+   flags, done
+);
+   // ----------------------------------
+   // Parameters
+   // ----------------------------------
+   parameter   W        = 64;
+   parameter   LOG2W    = 6;
+   parameter   N        = 64;
+   parameter   LOG2N    = 6;
+   localparam  WC       = W/4;
+   localparam  WD       = W;
+   localparam  LOG2WC   = LOG2W-2;
+   localparam  LOG2WD   = LOG2W;
+   // ----------------------------------
+   // Clock, reset & enable inputs
+   // ----------------------------------
+   input wire                    clk;
+   input wire                    arst;
+   input wire                    srst;
+   input wire                    enable;
+   // ----------------------------------
+   // Data inputs
+   // ----------------------------------
+   input    wire                 start;
+   input    wire                 mode;
+   input    wire  [1:0]          format;
+   input    wire  [WD-1:0]       X_in;
+   input    wire  [WD-1:0]       Y_in;
+   input    wire  [WC-1:0]       u_in;
+   input    wire  [WC-1:0]       v_in;
+   // ----------------------------------
+   // Data outputs
+   // ----------------------------------
+   output   wire  [WD-1:0]       X_out;
+   output   wire  [WD-1:0]       Y_out;
+   output   wire  [WC-1:0]       u_out;
+   output   wire  [WC-1:0]       v_out;
+   output   wire  [`FSIZE-1:0]   flags;
+   output   wire                 done;
+
 // *****************************************************************************
 
 // *****************************************************************************
@@ -142,17 +155,17 @@ module bkm_steps #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [LOG2N:0]   n_cnt;
+   reg   [LOG2N:0]   n;
    wire  [1:0]       d_x   [0:N-1];
    wire  [1:0]       d_y   [0:N-1];
-   wire  [2*W-1:0]   lut_X [0:N-1];
-   wire  [2*W-1:0]   lut_Y [0:N-1];
-   wire  [W-1:0]     lut_u [0:N-1];
-   wire  [W-1:0]     lut_v [0:N-1];
-   wire  [2*W-1:0]   X     [0:N];
-   wire  [2*W-1:0]   Y     [0:N];
-   wire  [W-1:0]     u     [0:N];
-   wire  [W-1:0]     v     [0:N];
+   wire  [2*WD-1:0]  lut_X [0:N-1];
+   wire  [2*WD-1:0]  lut_Y [0:N-1];
+   wire  [WC-1:0]    lut_u [0:N-1];
+   wire  [WC-1:0]    lut_v [0:N-1];
+   wire  [2*WD-1:0]  X     [0:N];
+   wire  [2*WD-1:0]  Y     [0:N];
+   wire  [WC-1:0]    u     [0:N];
+   wire  [WC-1:0]    v     [0:N];
    // -----------------------------------------------------
 
 
@@ -240,10 +253,10 @@ module bkm_steps #(
          // ----------------------------------
          // LUT decoder
          // ----------------------------------
-         assign lut_X[n] = {2*W{1'b0}};
-         assign lut_Y[n] = {2*W{1'b0}};
-         assign lut_u[n] = {W{1'b0}};
-         assign lut_v[n] = {W{1'b0}};
+         assign lut_X[n] = {WD{`CSD_0_0}};
+         assign lut_Y[n] = {WD{`CSD_0_0}};
+         assign lut_u[n] = {WC{1'b0}};
+         assign lut_v[n] = {WC{1'b0}};
          //lut_decoder #(
             //.W          (W),
             //.LOG2W      (LOG2W)
@@ -275,46 +288,47 @@ module bkm_steps #(
          // ----------------------------------
          // Step n
          // ----------------------------------
-         assign X[n] = {2*W{1'b0}};
-         assign Y[n] = {2*W{1'b0}};
-         assign u[n] = {W{1'b0}};
-         assign v[n] = {W{1'b0}};
+         //assign X[n] = {2*WD{1'b0}};
+         //assign Y[n] = {2*WD{1'b0}};
+         //assign u[n] = {WC{1'b0}};
+         //assign v[n] = {WC{1'b0}};
          // TODO: when I  uncomment the bkm_step instantiation iverilogs fails to simulate
-         //bkm_step #(
-            //.W          (W),
-            //.LOG2W      (LOG2W)
-         //) bkm_step_n (
-            //// ----------------------------------
-            //// Clock, reset & enable inputs
-            //// ----------------------------------
-            //.clk        (clk),
-            //.arst       (arst),
-            //.srst       (srst),
-            //.enable     (enable),
-            //// ----------------------------------
-            //// Data inputs
-            //// ----------------------------------
-            //.mode       (mode),
-            //.format     (format),
-            //.n          (n),
-            //.d_x_n      (d_x[n]),
-            //.d_y_n      (d_y[n]),
-            //.X_n        (X[n]),
-            //.Y_n        (Y[n]),
-            //.lut_X      (lut_X[n]),
-            //.lut_Y      (lut_Y[n]),
-            //.u_n        (u[n]),
-            //.v_n        (v[n]),
-            //.lut_u      (lut_u[n]),
-            //.lut_v      (lut_v[n]),
-            //// ----------------------------------
-            //// Data outputs
-            //// ----------------------------------
-            //.X_np1      (X[n+1]),
-            //.Y_np1      (Y[n+1]),
-            //.u_np1      (u[n+1]),
-            //.v_np1      (v[n+1])
-         //);
+         bkm_step #(
+            .W          (W),
+            .LOG2W      (LOG2W),
+            .LOG2N      (LOG2N)
+         ) bkm_step_n (
+            // ----------------------------------
+            // Clock, reset & enable inputs
+            // ----------------------------------
+            .clk        (clk),
+            .arst       (arst),
+            .srst       (srst),
+            .enable     (enable),
+            // ----------------------------------
+            // Data inputs
+            // ----------------------------------
+            .mode       (mode),
+            .format     (format),
+            .n          (n),
+            .d_x_n      (d_x[n]),
+            .d_y_n      (d_y[n]),
+            .X_n        (X[n]),
+            .Y_n        (Y[n]),
+            .lut_X      (lut_X[n]),
+            .lut_Y      (lut_Y[n]),
+            .u_n        (u[n]),
+            .v_n        (v[n]),
+            .lut_u      (lut_u[n]),
+            .lut_v      (lut_v[n]),
+            // ----------------------------------
+            // Data outputs
+            // ----------------------------------
+            .X_np1      (X[n+1]),
+            .Y_np1      (Y[n+1]),
+            .u_np1      (u[n+1]),
+            .v_np1      (v[n+1])
+         );
 
       end // for n
 
@@ -324,35 +338,38 @@ module bkm_steps #(
  // Convert outputs to binary
  // -------------------------------------
  // TODO: implement output latching when done==1
+ assign u_out = u[N];
+ assign v_out = v[N];
+
    csd2bin #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
+      // ----------------------------------
+      // Parameters
+      // ----------------------------------
       .W                   (W)
    ) csd2bin_X (
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
       .x                   (X[N]),
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
       .y                   (X_out)
    );
 
    csd2bin #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
+      // ----------------------------------
+      // Parameters
+      // ----------------------------------
       .W                   (W)
    ) csd2bin_Y (
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
       .x                   (Y[N]),
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
       .y                   (Y_out)
    );
  // -------------------------------------

@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated to use WD and WC.
 //    - 2016-08-03 - ilesser - Copied from bkm_control_step rand test.
 //    - 2016-07-06 - ilesser - Initial version.
 //
@@ -48,8 +49,8 @@ task rand_test;
    reg   [1:0]        rand_format;
    reg   [`LOG2N-1:0] rand_n;
    reg   [1:0]        rand_d_x_n,   rand_d_y_n;
-   reg   [`W-1:0]     rand_X_n,     rand_Y_n;
-   reg   [`W-1:0]     rand_lut_X_n, rand_lut_Y_n;
+   reg   [`WD-1:0]    rand_X_n,     rand_Y_n;
+   reg   [`WD-1:0]    rand_lut_X_n, rand_lut_Y_n;
    reg   [30:0]       cnt1, cnt2;
    // -----------------------------------------------------
 
@@ -76,10 +77,10 @@ task rand_test;
          rand_n         = constrained_rand_int(0, 2**`LOG2N-1);
          rand_d_x_n     = constrained_rand_int(0, 2**`D_SIZE-1);
          rand_d_y_n     = constrained_rand_int(0, 2**`D_SIZE-1);
-         rand_X_n       = constrained_rand_int(0, 2**(`W)-1);
-         rand_Y_n       = constrained_rand_int(0, 2**(`W)-1);
-         rand_lut_X_n   = constrained_rand_int(0, 2**(`W)-1);
-         rand_lut_Y_n   = constrained_rand_int(0, 2**(`W)-1);
+         rand_X_n       = constrained_rand_int(0, 2**(`WD)-1);
+         rand_Y_n       = constrained_rand_int(0, 2**(`WD)-1);
+         rand_lut_X_n   = constrained_rand_int(0, 2**(`WD)-1);
+         rand_lut_Y_n   = constrained_rand_int(0, 2**(`WD)-1);
 
          //rand_mode      = `MODE_E;
          rand_format    = `FORMAT_CMPLX_DW;

@@ -12,7 +12,7 @@
 // Description:
 // ------------
 //
-// Load directed operands task for bkm_control_step block.
+// Load directed operands task for bkm_steps block.
 //
 // -----------------------------------------------------------------------------
 // File name:
@@ -24,9 +24,7 @@
 // History:
 // --------
 //
-//    - 2016-08-15 - ilesser - Updated to use WD and WC.
-//    - 2016-08-02 - ilesser - Changed the definition of W.
-//    - 2016-07-23 - ilesser - Initial version.
+//    - 2016-08-15 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -42,13 +40,10 @@ task load_directed;
    // ----------------------------------
    input              mode;
    input [1:0]        format;
-   input [`LOG2N-1:0] n;
-   input [1:0]        d_u_n;
-   input [1:0]        d_v_n;
-   input [`WC-1:0]     u_n;
-   input [`WC-1:0]     v_n;
-   input [`WC-1:0]     lut_u_n;
-   input [`WC-1:0]     lut_v_n;
+   input [`WD-1:0]    X_in;
+   input [`WD-1:0]    Y_in;
+   input [`WC-1:0]    u_in;
+   input [`WC-1:0]    v_in;
    // ----------------------------------
 
 // *****************************************************************************
@@ -65,15 +60,12 @@ task load_directed;
 
    begin
 
-      dir_cnt[`CNT_SIZE-1]                = mode;
-      dir_cnt[`CNT_SIZE-2:`CNT_SIZE-3]    = format;
-      dir_cnt[4*`WC+4+`LOG2N-1:4*`WC+4]   = n;
-      dir_cnt[4*`WC+3         :4*`WC+2]   = d_u_n;
-      dir_cnt[4*`WC+1         :4*`WC+0]   = d_v_n;
-      dir_cnt[4*`WC-1         :3*`WC]     = u_n;
-      dir_cnt[3*`WC-1         :2*`WC]     = v_n;
-      dir_cnt[2*`WC-1         :1*`WC]     = lut_u_n;
-      dir_cnt[1*`WC-1         :0*`WC]     = lut_v_n;
+      dir_cnt[`CNT_SIZE-1]                               =    mode   ;
+      dir_cnt[`CNT_SIZE-2              :`CNT_SIZE-3]     =    format ;
+      dir_cnt[2*`WC+2*`WD-1            :2*`WC+1*`WD]     =    X_in   ;
+      dir_cnt[2*`WC+1*`WD-1            :2*`WC+0*`WD]     =    Y_in   ;
+      dir_cnt[2*`WC+0*`WD-1            :1*`WC+0*`WD]     =    u_in   ;
+      dir_cnt[1*`WC+0*`WD-1            :0*`WC+0*`WD]     =    v_in   ;
 
       load_operands(dir_cnt);
 

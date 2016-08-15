@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated repeat code.
 //    - 2016-07-06 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -45,6 +46,8 @@ task seq_test;
 
    begin
 
+      cnt_load    = {`CNT_SIZE{1'b0}};
+      cnt_step    = {`CNT_SIZE{1'b0}};
       ena         = 1'b0;
       arst        = 1'b0;
       srst        = 1'b0;
@@ -55,9 +58,12 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      //repeat(2**(`CNT_SIZE))
-      repeat(2**8)
-         load_operands(cnt);
+      repeat(2**(`M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N))
+         repeat(2**`WD)
+            repeat(2**`WD)
+               repeat(2**`WD)
+                  repeat(2**`WD)
+                     load_operands(cnt);
 
    end
 
