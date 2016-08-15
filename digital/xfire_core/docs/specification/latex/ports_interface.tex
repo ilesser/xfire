@@ -1,0 +1,49 @@
+\section{Ports Interface}
+\label{sec:ports}
+\begin{table}
+\begin{center}
+\begin{tabu} to \textwidth {|X[l]|X[2.5,l]|X[c]|X[c]|}
+\hline
+\rowfont[c]\bfseries
+Port name & Description & Size (Bits) & Type\\
+\hline
+\hline
+arst         & Asynchronous high level active reset         & 1  & Input   \\
+\hline
+clk          & Posedge active clock                         & 1  & Input   \\
+\hline
+ena          & High level active synchronous enable         & 1  & Input   \\
+\hline
+dm\_wr\_data & Data memory write data bus                   & 32 & Output  \\
+\hline
+dm\_rd\_data & Data memory read data bus                    & 32 & Input   \\
+\hline
+dm\_address  & Data memory address bus                      & 32 & Output  \\
+\hline
+dm\_wr\_ena  & High level active data memory write enable   & 1  & Output  \\
+\hline
+im\_rd\_data & Instruction memory read data bus             & 32 & Input   \\
+\hline
+im\_address  & Instruction memory address bus               & 32 & Output  \\
+\hline
+us           & User/Supervisor execution mode ('1': user, '0': supervisor)  & 1  & Output  \\
+\hline
+pwd          & Peripheral write data                        & 32 & Output  \\
+\hline
+pwd\_wr\_ena & Peripheral write write enable                & 1  & Output  \\
+\hline
+prd          & Peripheral read data                         & 32 & Input   \\
+\hline
+pwa          & Peripheral write address                     & 32 & Output  \\
+\hline
+pra          & Peripheral read address                      & 32 & Output  \\
+\hline
+irq          & High level active interruption request       & 1  & Input   \\
+\hline
+iack         & High level active interruption acknowledge   & 1  & Output   \\
+\hline
+\end{tabu}
+\label{tbl:ports}
+\caption{Processor I/O description.}
+\end{center}
+\end{table}

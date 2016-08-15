@@ -1,0 +1,57 @@
+Lo que quiero:
+
+	- Displacements de 16 bits mínimo.
+	- Inmediatos de 16 bits.
+	- Mantener los decoder que se utilizen para saber qué hacer lo más simple posibles.
+
+Tengo los siguientes "tipos" de instrucciones:
+
+	Tipo 0: No usan registros
+		A: No usan registros
+	Tipo 1: Usan 1 registro
+		A: Como origen de datos
+		B: Como destino de datos
+	Tipo 2: Usan 2 registros
+		A: Uno como origen de datos y uno como destino de datos
+		B: Ambos como origen de datos
+	Tipo 3: Usan 3 registros
+		A: Dos como origen de datos y uno como destino de datos
+
+En esta clasificacion estaba dividido antes el ISA. El tema es que había subdividido en grupos con funciones dentro de cada uno de los subtipos y eso me come muchos bits para el encoding, con el problema adicional de tener longitudes variables en los campos. Lo más crítico sucede con todo lo que es ALU (con inmediatos y register register, que entran dentro los dos últimos tipos, porque era deseable encodear la operación de una manera que salgan los bits derechos indicando que bancos de registros utilizar, con qué precisión y si usan o no el coprocesador cordic. Acá es donde la galleta se volvió inmanejable).
+El tema es tampoco morir en el encoding de MIPS, que aparte tenemos todas las instrucciones que manejan los flags, que sería bastante complicado de encuadrar en el enfoque de MIPS.
+
+Como se dijo antes, lo crítico son las instrucciones que utilizan la ALU dentro de los tipos 2 y 3, dado que hay muuuuchas funciones de esas y aparte hay que proveer un mecanismo sencillo de encoding para saber bancos de registros, precisión etc.
+
+Yo había generado un encoding para lo que es ALU que utiliza 9 bits (un monton), que complica las cosas para el caso de las ALU inmediatas, porque tenemos el siguiente esquema:
+	- 5 bits para registro origen
+	- 5 bits para registro destino
+	- 9 bits si usaramos este encoding
+	- 16 bits para el inmediato
+Esto ya nos da 35 bits. O sea, imposible. Por lo tanto, si queremos tener el immediato de 16 bits, nos quedan 6 bits para encodear toooooda la operación, algo bastante complicado!!! con 6 bits no hacemos nada!!! Peeero eso es lo que hace mips. En 6 bits encodea toda la ISA básicamente. Ojo, una cuestión importante, es que las operaciones inmediatas son re pocas comparadas con todas las demás de ALU que se pueden hacer... Mips usa otros 11 bits en las instrucciones que tienen tres registros para atacar a la ALU. (Excede al encoding de 9 bits que había armado para todo lo que es ALU.
+
+Hago el siguiente conteo de instrucciones que tiene nuestro micro:
+
+Tipo 0A: 3
+Tipo 1A: 17
+Tipo 1B: 6
+Tipo 2A: 57 + 1 (el +1 es por las ALU que usan un registro de origen y otro de destino, por ejemplo invertir y algunas operaciones cordic)
+Tipo 2B: 4
+Tipo 3A: 1 (Son todas ALU que usan el encoding de los otros bits)
+
+Si no hice mal las cuentas: 89, encodeable en 7 bits... me rompe soberanamente los huevos que no entre en 6... Porque eso seguro me rompe el esquema de 16 bits de inmediados en las del tipo 2A... Hay que zippear... Hay 20 que podemos recortar al toque:
+
+Tipo 0 hay una sola, y se usan más bits para ver que es. Total, la única que necesita argumento es el jump absoluto. Tipo 1 también hacemos que haya una sola, y se usan más bits para decodificar de qué se trata. Con eso nos queda:
+
+Tipo 0: 1
+Tipo 1: 1
+Tipo 2A: 58
+Tipo 2B: 4
+Tipo 3A: 1
+
+Eso me da 65... Hay que seguir comprimiendo!
+Tipo 2A están los siguientes subtipos: Moves, Moves con nibbles, Conversiones y Jump reg and link, que pueden ser una sola y decodear de qué se trata en más bits (si se fijan en el encodin anterior tienen un montón de bits en cero!) Eso baja:
+
+Tipo 0: 1
+TIpo 1: 1
+Tipo 2: 33
+TIpo 3: 1

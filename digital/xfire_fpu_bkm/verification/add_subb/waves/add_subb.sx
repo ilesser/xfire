@@ -1,0 +1,42 @@
+### Custom WaveView session file (version H-2013.03-SP1 build 0523) ###
+### saved at 23:22:53 on Thu Jun  9 2016 ###
+wdf 0 "/home/ilesser/repos/xfire/digital/xfire_fpu_bkm/verification/add_subb/waves/tb_add_subb.vcd" load=used 
+scalar list
+waveview_begin 1  stack  offset=0 name_b=253 mntr_b=253 name_width=238 "name=waveview 1" 
+  panel_begin digital pidx=0 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/ena" disp=show 
+  panel_end
+  panel_begin digital pidx=1 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/rst" disp=show 
+  panel_end
+  panel_begin digital pidx=2 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/clk" disp=show 
+  panel_end
+  panel_begin digital pidx=3 spath=true marker=on vecname=cnt[9:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/cnt[9:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=4 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/tb_subb_a" disp=show 
+  panel_end
+  panel_begin digital pidx=5 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/tb_subb_b" disp=show 
+  panel_end
+  panel_begin digital pidx=6 spath=true marker=on vecname=tb_a[3:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/tb_a[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=7 spath=true marker=on vecname=tb_b[3:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/tb_b[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=8 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/tb_c" disp=show 
+  panel_end
+  panel_begin digital pidx=9 spath=true marker=on vecname=tb_s[3:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_add_subb/tb_s[3:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=10 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=20 "name=tb_add_subb/c_res" disp=show 
+  panel_end
+  panel_begin digital pidx=11 spath=true marker=on vecname=s_res[3:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=20 "name=tb_add_subb/s_res[3:0]" disp=show 
+  panel_end
+waveview_end

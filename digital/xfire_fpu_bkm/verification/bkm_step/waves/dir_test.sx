@@ -1,0 +1,75 @@
+### Custom WaveView session file (version H-2013.03-SP1 build 0523) ###
+### saved at 16:39:52 on Wed Jul 13 2016 ###
+wdf 0 "/home/ilesser/repos/xfire/digital/xfire_fpu_bkm/verification/bkm_step/waves/tb_bkm_step.vcd" load=used 
+scalar list
+waveview_begin 1  stack  offset=0 name_b=263 mntr_b=263 name_width=248 "name=waveview 1" 
+  panel_begin digital pidx=0 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/arst" disp=show 
+  panel_end
+  panel_begin digital pidx=1 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/srst" disp=show 
+  panel_end
+  panel_begin digital pidx=2 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=20 "name=tb_bkm_step/clk" disp=show 
+  panel_end
+  panel_begin digital pidx=3 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/ena" disp=show 
+  panel_end
+  panel_begin digital pidx=4 spath=true marker=on vecname=cnt[25:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/cnt[25:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=5 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/err_X" disp=show 
+  panel_end
+  panel_begin digital pidx=6 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/err_Y" disp=show 
+  panel_end
+  panel_begin digital pidx=7 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/err_u" disp=show 
+  panel_end
+  panel_begin digital pidx=8 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/err_v" disp=show 
+  panel_end
+  panel_begin digital pidx=9 spath=true marker=on vecname=errors radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=5 "name=tb_bkm_step/errors" disp=show 
+  panel_end
+  panel_begin digital pidx=10 spath=true marker=on radix=bin 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_mode" disp=show 
+  panel_end
+  panel_begin digital pidx=11 spath=true marker=on vecname=tb_format[1:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_format[1:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=12 spath=true marker=on vecname=tb_n[2:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_n[2:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=13 spath=true marker=on vecname=tb_d_x_n[1:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_d_x_n[1:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=14 spath=true marker=on vecname=tb_d_y_n[1:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_d_y_n[1:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=15 spath=true marker=on vecname=tb_lut_X[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_lut_X[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=16 spath=true marker=on vecname=tb_lut_Y[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_lut_Y[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=17 spath=true marker=on vecname=tb_X_n[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_X_n[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=18 spath=true marker=on vecname=tb_Y_n[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_Y_n[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=19 spath=true marker=on vecname=tb_X_np1[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_X_np1[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=20 spath=true marker=on vecname=res_X_np1[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=20 "name=tb_bkm_step/res_X_np1[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=21 spath=true marker=on vecname=tb_Y_np1[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=9 "name=tb_bkm_step/tb_Y_np1[7:0]" disp=show 
+  panel_end
+  panel_begin digital pidx=22 spath=true marker=on vecname=res_Y_np1[7:0] radix=hex 
+    line src=wdf lidx=0 fidx=0 "delim=/" sigtype=20 "name=tb_bkm_step/res_Y_np1[7:0]" disp=show 
+  panel_end
+waveview_end
