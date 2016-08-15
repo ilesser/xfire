@@ -62,8 +62,8 @@ task dir_test;
       ena         = 1'b1;
 
       // operands     mode     format            n           d_x_n  d_y_n      X_n         Y_n         u_n         v_n         lut_X_n     lut_Y_n     lut_u_n     lut_v_n
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd002, 2'b11, 2'b01, `WD'd00037, `WD'd00036, `WC'd00037, `WC'd00036, `WD'd00017, `WD'd00020, `WC'd00017, `WC'd00020);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002, 2'b11, 2'b01, `WD'd00033, `WD'd00039, `WC'd00040, `WC'd00028, `WD'd00007, `WD'd00020, `WC'd00017, `WC'd00023);
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `LOG2N'd002, 2'b11, 2'b01, `WD'd00037, `WD'd00036, `WC'd00007, `WC'd00006, `WD'd00017, `WD'd00020, `WC'd00007, `WC'd00005);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002, 2'b11, 2'b01, `WD'd00033, `WD'd00039, `WC'd00001, `WC'd00008, `WD'd00007, `WD'd00020, `WC'd00007, `WC'd00003);
 
       // operands     mode     format            n           d_x_n  d_y_n      X_n         Y_n         u_n         v_n         lut_X_n     lut_Y_n     lut_u_n     lut_v_n
       cnt_load =   { `MODE_E, `FORMAT_CMPLX_W , `LOG2N'd003, 2'b10, 2'b11, `WD'd00008, `WD'd00004, `WC'd00002, `WC'd00001, `WD'd00008, `WD'd00004, `WC'd00002, `WC'd00001};

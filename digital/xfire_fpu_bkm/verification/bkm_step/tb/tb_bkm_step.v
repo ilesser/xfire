@@ -60,10 +60,10 @@ module tb_bkm_step ();
    // -----------------------------------------------------
    wire                    clk;
    reg                     arst, srst, ena, load;
-   reg                     err_X,         err_Y;
-   reg                     war_X,         war_Y;
-   reg                     err_u,         err_v;
-   reg                     war_u,         war_v;
+   wire                    err_X,         err_Y;
+   wire                    war_X,         war_Y;
+   wire                    err_u,         err_v;
+   wire                    war_u,         war_v;
    reg                     tb_mode;
    reg   [1:0]             tb_format;
    reg   [`LOG2N-1:0]      tb_n;
@@ -71,11 +71,11 @@ module tb_bkm_step ();
    reg   [`WD-1:0]         tb_X_n,        tb_Y_n;
    reg   [`WD-1:0]         tb_lut_X_n,    tb_lut_Y_n;
    reg   [`WD-1:0]         tb_X_np1,      tb_Y_np1;
-   reg   [`WD-1:0]         delta_X,       delta_Y;
+   wire  [`WD-1:0]         delta_X,       delta_Y;
    reg   [`WC-1:0]         tb_u_n,        tb_v_n;
    reg   [`WC-1:0]         tb_lut_u_n,    tb_lut_v_n;
    reg   [`WC-1:0]         tb_u_np1,      tb_v_np1;
-   reg   [`WC-1:0]         delta_u,       delta_v;
+   wire  [`WC-1:0]         delta_u,       delta_v;
    reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 

@@ -133,26 +133,26 @@ module bkm_step   (
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input wire                 mode;
-   input wire [1:0]           format;
-   input wire [LOG2N-1:0]     n;
-   input wire [1:0]           d_x_n;        // d_n is encoded in ones complement
-   input wire [1:0]           d_y_n;        // d_n is encoded in ones complement
-   input wire [2*WD-1:0]      X_n;
-   input wire [2*WD-1:0]      Y_n;
-   input wire [2*WD-1:0]      lut_X;
-   input wire [2*WD-1:0]      lut_Y;
-   input wire [WC-1:0]        u_n;
-   input wire [WC-1:0]        v_n;
-   input wire [WC-1:0]        lut_u;
-   input wire [WC-1:0]        lut_v;
+   input  wire                mode;
+   input  wire [1:0]          format;
+   input  wire [LOG2N-1:0]    n;
+   input  wire [1:0]          d_x_n;        // d_n is encoded in ones complement
+   input  wire [1:0]          d_y_n;        // d_n is encoded in ones complement
+   input  wire [2*WD-1:0]     X_n;
+   input  wire [2*WD-1:0]     Y_n;
+   input  wire [2*WD-1:0]     lut_X;
+   input  wire [2*WD-1:0]     lut_Y;
+   input  wire [WC-1:0]       u_n;
+   input  wire [WC-1:0]       v_n;
+   input  wire [WC-1:0]       lut_u;
+   input  wire [WC-1:0]       lut_v;
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output reg [2*WD-1:0]      X_np1;
-   output reg [2*WD-1:0]      Y_np1;
-   output reg [WC-1:0]        u_np1;
-   output reg [WC-1:0]        v_np1;
+   output wire [2*WD-1:0]     X_np1;
+   output wire [2*WD-1:0]     Y_np1;
+   output wire [WC-1:0]       u_np1;
+   output wire [WC-1:0]       v_np1;
 
 // *****************************************************************************
 
