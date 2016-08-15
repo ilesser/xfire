@@ -68,6 +68,7 @@
 //
 //    TODO: implement power savings based on format. Currently it works always
 //          in double word complex format.
+//    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-10 - ilesser - Duplicated BUG3 fix.
 //    - 2016-07-22 - ilesser - Initial version.
 //

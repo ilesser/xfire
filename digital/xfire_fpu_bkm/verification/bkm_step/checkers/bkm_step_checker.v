@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Added min and max of delta signals.
 //    - 2016-08-11 - ilesser - Initial version.
 //

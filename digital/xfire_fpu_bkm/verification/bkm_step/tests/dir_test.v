@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Put control path values in range.
 //    - 2016-08-11 - ilesser - Updated for WD and WC.
 //    - 2016-07-06 - ilesser - Initial version.
 //
