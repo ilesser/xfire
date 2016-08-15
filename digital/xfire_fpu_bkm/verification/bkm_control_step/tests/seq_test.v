@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated to use WD and WC.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-23 - ilesser - Initial version.
 //
@@ -52,8 +53,8 @@ task seq_test;
       arst        = 1'b0;
       srst        = 1'b0;
       load        = 1'b0;
-      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `W'h0000, `W'h0000, `W'h0000, `W'h0000};
-      cnt_step    = {`M_SIZE'd0,      2'b00   , `LOG2N'd000,   2'b00,   2'b00, `W'h0000, `W'h0001, `W'h0000, `W'h0000};
+      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `WC'h0000, `WC'h0000, `WC'h0000, `WC'h0000};
+      cnt_step    = {`M_SIZE'd0,      2'b00   , `LOG2N'd000,   2'b00,   2'b00, `WC'h0000, `WC'h0001, `WC'h0000, `WC'h0000};
       run_clk(1);
       arst        = 1'b1;
       run_clk(1);
@@ -65,10 +66,10 @@ task seq_test;
       load        = 1'b0;
 
       repeat(2**(`M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N))
-         repeat(2**`W)
-            repeat(2**`W)
-               repeat(2**`W)
-                  repeat(2**`W)
+         repeat(2**`WC)
+            repeat(2**`WC)
+               repeat(2**`WC)
+                  repeat(2**`WC)
                      load_operands(cnt);
 
    end

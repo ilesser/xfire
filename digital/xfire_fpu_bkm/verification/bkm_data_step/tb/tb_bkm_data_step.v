@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated to use WD and WC.
 //    - 2016-08-11 - ilesser - Added driver and monitor to make tb nicer.
 //    - 2016-08-03 - ilesser - Copied from bkm_control_step testbench.
 //    - 2016-07-23 - ilesser - Initial version.
@@ -32,14 +33,18 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 16
-`define N 16
-`define LOG2W 4
-`define LOG2N 4
-`define M_SIZE 1
-`define F_SIZE 2
-`define D_SIZE 2
-`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`W)
+`define N      16
+`define W      16
+`define WD     16 //`W
+`define WC      4 //`W/4
+`define LOG2N   4
+`define LOG2W   4
+`define LOG2WD `LOG2W
+`define LOG2WC `LOG2W-2
+`define M_SIZE  1
+`define F_SIZE  2
+`define D_SIZE  2
+`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`WD)
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -62,24 +67,24 @@ module tb_bkm_data_step ();
    reg   [1:0]             tb_format;
    reg   [`LOG2N-1:0]      tb_n;
    reg   [1:0]             tb_d_x_n,   tb_d_y_n;
-   reg   [`W-1:0]          tb_X_n,     tb_Y_n;
-   reg   [`W-1:0]          tb_lut_X,   tb_lut_Y;
-   reg   [`W-1:0]          tb_X_np1,   tb_Y_np1;
+   reg   [`WD-1:0]         tb_X_n,     tb_Y_n;
+   reg   [`WD-1:0]         tb_lut_X_n, tb_lut_Y_n;
+   reg   [`WD-1:0]         tb_X_np1,   tb_Y_np1;
    reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  [2*`W-1:0]        X_n_csd,    Y_n_csd;
-   wire  [2*`W-1:0]        X_np1_csd,  Y_np1_csd;
-   wire  [2*`W-1:0]        lut_X_csd,  lut_Y_csd;
-   wire  [`W-1:0]          res_X_np1,  res_Y_np1;
+   wire  [2*`WD-1:0]       X_n_csd,    Y_n_csd;
+   wire  [2*`WD-1:0]       X_np1_csd,  Y_np1_csd;
+   wire  [2*`WD-1:0]       lut_X_csd,  lut_Y_csd;
+   wire  [`WD-1:0]         res_X_np1,  res_Y_np1;
 
    // Checker wiring
    wire                    err_X,      err_Y;
    wire                    war_X,      war_Y;
-   wire  [`W-1:0]          delta_X,    delta_Y;
+   wire  [`WD-1:0]         delta_X,    delta_Y;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -117,7 +122,7 @@ module tb_bkm_data_step ();
    // Drivers
    // -----------------------------------------------------
    bkm_data_step_driver #(
-      .W          (`W)
+      .W          (`WD)
    ) duv_driver (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -131,8 +136,8 @@ module tb_bkm_data_step ();
       // ----------------------------------
       .tb_X_n     (tb_X_n),
       .tb_Y_n     (tb_Y_n),
-      .tb_lut_X   (tb_lut_X),
-      .tb_lut_Y   (tb_lut_Y),
+      .tb_lut_X   (tb_lut_X_n),
+      .tb_lut_Y   (tb_lut_Y_n),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
@@ -147,7 +152,7 @@ module tb_bkm_data_step ();
    // Monitors
    // -----------------------------------------------------
    bkm_data_step_monitor #(
-      .W          (`W)
+      .W          (`WD)
    ) duv_monitor (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -179,7 +184,7 @@ module tb_bkm_data_step ();
    // Checkers
    // -----------------------------------------------------
    bkm_data_step_checker #(
-      .W          (`W)
+      .W          (`WD)
    ) duv_checker (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -218,7 +223,7 @@ module tb_bkm_data_step ();
    // Device under verifiacion
    // -----------------------------------------------------
    bkm_data_step #(
-      .W          (`W),
+      .W          (`WD),
       .LOG2W      (`LOG2W),
       .LOG2N      (`LOG2N)
    ) duv (
