@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Deleted unused regs.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-08-02 - ilesser - BUG2 fixed: solved problem with deltas, err and war.
 //    - 2016-07-22 - ilesser - Initial version.
@@ -82,7 +83,6 @@ module bkm_control_step_checker #(
    // Internal signals
    // -----------------------------------------------------
    wire     neq_u,         neq_v;
-   real     delta_u_r,     delta_v_r;
    // -----------------------------------------------------
 
    initial begin
@@ -100,8 +100,6 @@ module bkm_control_step_checker #(
    assign neq_v      = tb_v_np1 !== res_v_np1;
    assign delta_u    = tb_u_np1 - res_u_np1;
    assign delta_v    = tb_v_np1 - res_v_np1;
-   assign delta_u_r  = $signed(delta_u);
-   assign delta_v_r  = $signed(delta_v);
 
    always @(posedge clk) begin
       if (srst == 1'b1) begin
@@ -113,7 +111,7 @@ module bkm_control_step_checker #(
             if (neq_u == 1'b1) begin
                // this report an error if |delta| > 1 or a warning otherwise
                // the idea is the get a warning if the delta is only 1 LSB
-               if (abs(delta_u_r) > 1) begin
+               if (abs($signed(delta_u)) > 1) begin
                   $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
                   add_error();
                   err_u    <= 1'b1;
@@ -143,7 +141,7 @@ module bkm_control_step_checker #(
       else begin
          if (enable == 1'b1) begin
             if (neq_v == 1'b1) begin
-               if (abs(delta_v_r) > 1) begin
+               if (abs($signed(delta_v)) > 1) begin
                   $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
                   add_error();
                   err_v    <= 1'b1;

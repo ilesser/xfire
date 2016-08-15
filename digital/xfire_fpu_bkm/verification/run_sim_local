@@ -452,8 +452,8 @@ do
    fi
 done
 
-tasks_list_v=`find ./tests/ -type f -name "*_task.v"`
-funcs_list_v=`find ./tests/ -type f -name "*_func.v"`
+tasks_list_v=`find ./tests/ -name "*_task.v"`
+funcs_list_v=`find ./tests/ -name "*_func.v"`
 
 echo "" >> ./temp/tb_${block_name}.v
 cat ./tests/${test_name}.v >> ./temp/tb_${block_name}.v

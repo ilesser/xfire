@@ -24,6 +24,8 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Modified architecture to use a task to calculate
+//                             the results.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-23 - ilesser - Initial version.
 //
@@ -62,141 +64,49 @@ task load_operands;
    real                    u_n_times_d_n_r,           v_n_times_d_n_r;
    real                    u_n_times_d_n_div_2_n_r,   v_n_times_d_n_div_2_n_r;
    real                    sign_u,                    sign_v;
-   real test_u, test_v;
+   reg      [`WD-1:0]      dummy_X_n,                 dummy_Y_n;
+   reg      [`WD-1:0]      dummy_lut_X_n,             dummy_lut_Y_n;
+   reg      [`WD-1:0]      dummy_X_np1,               dummy_Y_np1;
    // -----------------------------------------------------
 
    begin
 
+      // Assign values to testbench
       tb_mode     = cnt[`CNT_SIZE-1];
       tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[4*`W+4+`LOG2N-1:4*`W+4];
-      tb_d_u_n    = cnt[4*`W+3         :4*`W+2];
-      tb_d_v_n    = cnt[4*`W+1         :4*`W+0];
-      tb_u_n      = cnt[4*`W-1         :3*`W];
-      tb_v_n      = cnt[3*`W-1         :2*`W];
-      tb_lut_u_n  = cnt[2*`W-1         :1*`W];
-      tb_lut_v_n  = cnt[1*`W-1         :0*`W];
+      tb_n        = cnt[4*`WC+4+`LOG2N-1:4*`WC+4];
+      tb_d_u_n    = cnt[4*`WC+3         :4*`WC+2];
+      tb_d_v_n    = cnt[4*`WC+1         :4*`WC+0];
+      tb_u_n      = cnt[4*`WC-1         :3*`WC];
+      tb_v_n      = cnt[3*`WC-1         :2*`WC];
+      tb_lut_u_n  = cnt[2*`WC-1         :1*`WC];
+      tb_lut_v_n  = cnt[1*`WC-1         :0*`WC];
 
-      double_word = tb_format[0];
-      complex     = tb_format[1];
+      // Assign dummy values
+      dummy_X_n      = {`WD{1'b0}};
+      dummy_Y_n      = {`WD{1'b0}};
+      dummy_lut_X_n  = {`WD{1'b0}};
+      dummy_lut_Y_n  = {`WD{1'b0}};
 
-      n  = $itor(tb_n);
-
-      du =  tb_d_u_n == 2'b01 ?  1  :
-            tb_d_u_n == 2'b11 ? -1  :
-                                 0  ;
-
-      dv =  tb_d_v_n == 2'b01 ?  1  :
-            tb_d_v_n == 2'b11 ? -1  :
-                                 0  ;
-
-      if (double_word==1'b1) begin
-         u_n   = $itor($signed(tb_u_n));
-         v_n   = $itor($signed(tb_v_n));
-         lut_u = $itor($signed(tb_lut_u_n));
-         lut_v = $itor($signed(tb_lut_v_n));
-      end
-      else begin
-         u_n   = $itor($signed(tb_u_n[`W/2-1:0]));
-         v_n   = $itor($signed(tb_v_n[`W/2-1:0]));
-         lut_u = $itor($signed(tb_lut_u_n[`W/2-1:0]));
-         lut_v = $itor($signed(tb_lut_v_n[`W/2-1:0]));
-      end
-
-      if (tb_mode==`MODE_E) begin
-      // E-mode
-      // ------
-      // w = 2^1 * L
-      // w_{n+1} = 2 w_n - 2^(n+1) * ln(1 + d_n * 2^-n)
-
-         if (complex==1'b1) begin
-
-            // Calculate u and v
-            u_np1 = 2 * (u_n - lut_u);
-            v_np1 = 2 * (v_n - lut_v);
-
-         end
-         else begin
-
-            // Calculate u and v
-            u_np1 = 2 * (u_n - lut_u);
-            v_np1 = 0;
-
-         end
-
-      end
-      //else if (tb_mode==`MODE_L) begin
-      else begin
-      // L-mode
-      // ------
-      // w = 2^1 * (E-1)
-      // w_{n+1} = 2 * [ w_n + d_n + d_n * w_n * 2^-n ]
-
-      // d_n * w_n = (du + j dv) * (u + j v) = (du*u-dv*v) + j (du*v+dv*u)
-
-
-         // Calculate u and v
-
-         u_n_plus_d_u_n_r        = u_n + du;
-         u_n_times_d_n_r         = (du * u_n - dv * v_n);
-
-         v_n_plus_d_v_n_r        = v_n + dv;
-         v_n_times_d_n_r         = (du * v_n + dv * u_n);
-
-         //u_n_times_d_n_div_2_n_r =      ((u_n_times_d_n_r + 0) * 2**(-n));
-         //v_n_times_d_n_div_2_n_r =      ((v_n_times_d_n_r + 0) * 2**(-n));
-         //u_n_times_d_n_div_2_n_r = $rtoi((u_n_times_d_n_r + 0) * 2**(-n));
-         //v_n_times_d_n_div_2_n_r = $rtoi((v_n_times_d_n_r + 0) * 2**(-n));
-
-         sign_u = u_n_times_d_n_r >= 0 ? 0.0 : 1.0;
-         sign_v = v_n_times_d_n_r >= 0 ? 0.0 : 1.0;
-
-         //u_n_times_d_n_div_2_n_r = $rtoi((u_n_times_d_n_r + (-1)**(sign_u)) * 2**(-n));
-         //v_n_times_d_n_div_2_n_r = $rtoi((v_n_times_d_n_r + (-1)**(sign_v)) * 2**(-n));
-         //u_n_times_d_n_div_2_n_r = u_n_times_d_n_r >= 0  ?  $rtoi((u_n_times_d_n_r            ) * 2**(-n)):
-                                                            //$rtoi((u_n_times_d_n_r - 1        ) * 2**(-n));
-         //v_n_times_d_n_div_2_n_r = v_n_times_d_n_r >= 0  ?  $rtoi((v_n_times_d_n_r            ) * 2**(-n)):
-                                                            //$rtoi((v_n_times_d_n_r - 1        ) * 2**(-n));
-
-         //TODO: this is ok but not fixed
-         u_n_times_d_n_div_2_n_r = $rtoi(div_2_n(u_n_times_d_n_r, n));
-         v_n_times_d_n_div_2_n_r = $rtoi(div_2_n(v_n_times_d_n_r, n));
-
-         if (complex==1'b1) begin
-
-            //u_np1 = 2*(u_n + du + $rtoi((du * u_n - dv * v_n) * 2**(-n)));
-            //v_np1 = 2*(v_n + dv + $rtoi((du * v_n + dv * u_n) * 2**(-n)));
-            u_np1 = 2*( u_n_plus_d_u_n_r + u_n_times_d_n_div_2_n_r );
-            v_np1 = 2*( v_n_plus_d_v_n_r + v_n_times_d_n_div_2_n_r );
-
-            // if n=0 ^ du=0 ^ dv=+-1 then
-            //u_np1 = 2*(u_n +  0 - dv * v_n);
-            //v_np1 = 2*(v_n + dv + dv * u_n);
-
-            // if n=0 ^ du=+-1 ^ dv=0 then
-            //u_np1 = 2*(u_n + du + du * u_n);
-            //v_np1 = 2*(v_n +  0 + du * v_n);
-
-            // if n=1 ^ du=0 ^ dv=+-1 then
-            //u_np1 = 2*(u_n +  0 - dv * v_n * 2**(-1));
-            //v_np1 = 2*(v_n + dv + dv * u_n * 2**(-1));
-
-         end
-         else begin
-
-            // Calculate u and v
-            u_np1 = 2*( u_n_plus_d_u_n_r + u_n_times_d_n_div_2_n_r );
-            v_np1 = 0;
-
-         end
-
-      end
-
-      tb_u_np1 = (u_np1);
-      tb_v_np1 = (v_np1);
-
-      //tb_u_np1 = (u_np1+1.0-1.0);
-      //tb_v_np1 = (v_np1+1.0-1.0);
+      // Calculate the results
+      bkm_step (
+         // ----------------------------------
+         // Data inputs
+         // ----------------------------------
+         tb_mode      ,
+         tb_format    ,
+         tb_n         ,
+         tb_d_u_n     , tb_d_u_n     ,
+         dummy_X_n    , dummy_Y_n    ,
+         tb_u_n       , tb_v_n       ,
+         dummy_lut_X_n, dummy_lut_Y_n,
+         tb_lut_v_n   , tb_lut_v_n   ,
+         // ----------------------------------
+         // Data outputs
+         // ----------------------------------
+         dummy_X_np1  , dummy_X_np1  ,
+         tb_u_np1     , tb_v_np1
+      );
 
       run_clk(1);
 
@@ -205,21 +115,3 @@ task load_operands;
 // *****************************************************************************
 
 endtask
-
-function real div_2_n;
-   input real x;
-   input real n;
-   real i,y;
-   begin
-      y = x;
-      if (n>0) begin
-         for (i=0; i<n; i=i+1) begin
-            if ($rtoi(y)%2 == 0)
-               y = y/2;
-            else
-               y = (y-1)/2;
-         end
-      end
-      div_2_n = y;
-   end
-endfunction
