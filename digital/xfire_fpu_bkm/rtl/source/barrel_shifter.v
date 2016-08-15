@@ -133,16 +133,16 @@ module barrel_shifter #(
             assign in0[i][j] = muxs[i+1][j];
 
             // Select in1
-            if (j <= (W-1)-2**i)
+            if (j <= (W-1)-2**i) begin
                // take the input from the (j+2^i)th mux of the previous row
                assign in1[i][j]  = muxs[i+1][j+(2**i)];
-
-            //else // if j > W-1-2^i
-            if (j > (W-1)-2**i)
+            end
+            else if (j > (W-1)-2**i) begin
                // if it is a rotation then take the input from the [(i+2^j) mod W]th mux of the previous row
-               assign in1[i][j]  = (op == `OP_ROT) ? muxs[i+1][j-(W-1)+(2**i)-1]
+               assign in1[i][j]  = (op == `OP_ROT) ?  muxs[i+1][j-(W-1)+(2**i)-1]
                // if it is a shift then take the input from the sign
                                                       : s;
+            end
 
             // Connect mux in0 and in1 with sel[i]
             assign muxs[i][j]  = sel[i] ? in1[i][j] : in0[i][j];
