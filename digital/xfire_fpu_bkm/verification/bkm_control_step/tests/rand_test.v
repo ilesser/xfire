@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated to use WD and WC.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-07-23 - ilesser - Initial version.
 //
@@ -47,12 +48,9 @@ task rand_test;
    reg                  rand_mode;
    reg   [1:0]          rand_format;
    reg   [`LOG2N-1:0]   rand_n;
-   reg   [1:0]          rand_d_u_n;
-   reg   [1:0]          rand_d_v_n;
-   reg   [`W-1:0]       rand_u_n;
-   reg   [`W-1:0]       rand_v_n;
-   reg   [`W-1:0]       rand_lut_u_n;
-   reg   [`W-1:0]       rand_lut_v_n;
+   reg   [1:0]          rand_d_u_n,    rand_d_v_n;;
+   reg   [`WC-1:0]      rand_u_n,      rand_v_n;
+   reg   [`WC-1:0]      rand_lut_u_n,  rand_lut_v_n;
    reg   [30:0]         cnt1, cnt2;
    // -----------------------------------------------------
 
@@ -79,10 +77,10 @@ task rand_test;
          rand_n         = constrained_rand_int(0, 2**`LOG2N-1);
          rand_d_u_n     = constrained_rand_int(0, 2**`D_SIZE-1);
          rand_d_v_n     = constrained_rand_int(0, 2**`D_SIZE-1);
-         rand_u_n       = constrained_rand_int(0, 2**(`W)-1);
-         rand_v_n       = constrained_rand_int(0, 2**(`W)-1);
-         rand_lut_u_n   = constrained_rand_int(0, 2**(`W)-1);
-         rand_lut_v_n   = constrained_rand_int(0, 2**(`W)-1);
+         rand_u_n       = constrained_rand_int(0, 2**(`WC)-1);
+         rand_v_n       = constrained_rand_int(0, 2**(`WC)-1);
+         rand_lut_u_n   = constrained_rand_int(0, 2**(`WC)-1);
+         rand_lut_v_n   = constrained_rand_int(0, 2**(`WC)-1);
 
          //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
