@@ -109,12 +109,17 @@ module barrel_shifter #(
          // Here is what I have to do for each value of i and j
          //  i              j
          //LOG2W    [W-1 W ... 1 0]   connect in[W-1:0] or in[0:W-] to muxs[LOG2W][j]        (pre data reversal)
-         //LOG2W-1  [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
+         //LOG2W-1  [W-1 W ... 1 0]   connect in0[LOG2W-1][j] or in1[LOG2W-1][j] to muxs[LOG2W-1][j]
+         //LOG2W-2  [W-1 W ... 1 0]   connect in0[LOG2W-2][j] or in1[LOG2W-2][j] to muxs[LOG2W-2][j]
          //.                .
          //.                .
          //.                .
-         //1        [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
-         //0        [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
+         //i        [W-1 W ... 1 0]   connect in0[i][j] or in1[i][j] to muxs[i][j]
+         //.                .
+         //.                .
+         //.                .
+         //1        [W-1 W ... 1 0]   connect in0[1][j] or in1[1][j] to muxs[1][j]
+         //0        [W-1 W ... 1 0]   connect in0[0][j] or in1[0][j] to muxs[0][j]
          //                           connect muxs[0][W-1:0] or muxs[0][0:W-1] to out[W-1:0] (post data reversal)
 
          // If the direction is 'to left' then I can simply reverse before and after
@@ -131,7 +136,9 @@ module barrel_shifter #(
             if (j <= (W-1)-2**i)
                // take the input from the (j+2^i)th mux of the previous row
                assign in1[i][j]  = muxs[i+1][j+(2**i)];
-            else // if i > W-1-2^j
+
+            //else // if j > W-1-2^i
+            if (j > (W-1)-2**i)
                // if it is a rotation then take the input from the [(i+2^j) mod W]th mux of the previous row
                assign in1[i][j]  = (op == `OP_ROT) ? muxs[i+1][j-(W-1)+(2**i)-1]
                // if it is a shift then take the input from the sign

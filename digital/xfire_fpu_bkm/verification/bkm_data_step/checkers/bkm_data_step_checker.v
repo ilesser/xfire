@@ -81,7 +81,7 @@ module bkm_data_step_checker #(
    // Internal signals
    // -----------------------------------------------------
    wire     neq_X,         neq_Y;
-   real     delta_X_r,     delta_Y_r;
+   //real     delta_X_r,     delta_Y_r;
    // -----------------------------------------------------
 
    initial begin
@@ -99,8 +99,8 @@ module bkm_data_step_checker #(
    assign neq_Y      = tb_Y_np1 !== res_Y_np1;
    assign delta_X    = tb_X_np1 - res_X_np1;
    assign delta_Y    = tb_Y_np1 - res_Y_np1;
-   assign delta_X_r  = $signed(delta_X);
-   assign delta_Y_r  = $signed(delta_Y);
+   //delta_X_r  = $signed(delta_X);
+   //delta_Y_r  = $signed(delta_Y);
 
    always @(posedge clk) begin
       if (srst == 1'b1) begin
@@ -112,7 +112,8 @@ module bkm_data_step_checker #(
             if (neq_X == 1'b1) begin
                // this report an error if |delta| > 1 or a warning otherwise
                // the idea is the get a warning if the delta is only 1 LSB
-               if (abs(delta_X_r) > 1) begin
+               if (abs($signed(delta_X)) > 1) begin
+               //if (abs(delta_X_r) > 1) begin
                   $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
                   add_error();
                   err_X    <= 1'b1;
@@ -142,7 +143,8 @@ module bkm_data_step_checker #(
       else begin
          if (enable == 1'b1) begin
             if (neq_Y == 1'b1) begin
-               if (abs(delta_Y_r) > 1) begin
+               if (abs($signed(delta_Y)) > 1) begin
+               //if (abs(delta_Y_r) > 1) begin
                   $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
                   add_error();
                   err_Y    <= 1'b1;
