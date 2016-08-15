@@ -37,6 +37,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Changed output to wire.
 //    - 2016-07-19 - ilesser - Deleted op and shift_t inputs.
 //    - 2016-07-19 - ilesser - Changed decision logic.
 //    - 2016-07-18 - ilesser - Initial version.

@@ -90,6 +90,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Changed architecture: used local params WD and WC.
 //    - 2016-07-23 - ilesser - Changed architecture: created bkm_control_step and bkm_data_step.
 //    - 2016-07-18 - ilesser - Added CSD barrel shifter.

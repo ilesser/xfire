@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Changed architecture. Now I have a task that calculates a single step.
 //    - 2016-08-11 - ilesser - Updated for WD and WC.
 //    - 2016-07-06 - ilesser - Initial version.
 //
