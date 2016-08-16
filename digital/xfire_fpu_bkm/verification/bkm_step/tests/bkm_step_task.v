@@ -96,7 +96,8 @@ task bkm_step;
 
       // Calculate n values
       nd = $itor(n);
-      nc = $itor(n[`LOG2N+`LOG2WC-`LOG2WD-1:0]);
+      //nc = $itor(n[`LOG2N+`LOG2WC-`LOG2WD-1:0]);
+      nc = $itor(n);
 
       dx =  d_x_n == 2'b01 ?  1  :
             d_x_n == 2'b11 ? -1  :
