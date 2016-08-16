@@ -35,12 +35,12 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define N      16
-`define W      16
-`define WD     16 //`W
-`define WC      4 //`W/4
-`define LOG2N   4
-`define LOG2W   4
+`define N      64
+`define W      64
+`define WD     64 //`W
+`define WC     16 //`W/4
+`define LOG2N   6
+`define LOG2W   6
 `define LOG2WD `LOG2W
 `define LOG2WC `LOG2W-2
 `define M_SIZE  1
@@ -70,6 +70,9 @@ module tb_bkm_control_step ();
    reg   [`LOG2N-1:0]      tb_n;
    reg   [1:0]             tb_d_u_n;
    reg   [1:0]             tb_d_v_n;
+   //TODO:  change the size of the instantiation to have 2 more bits.
+   //       In that way it will simulate the actual instatiation in the BKM
+   //       The idea is to be able to account for overflow in the accumulation
    reg   [`WC-1:0]         tb_u_n,     tb_v_n;
    reg   [`WC-1:0]         tb_lut_u_n, tb_lut_v_n;
    reg   [`WC-1:0]         tb_u_np1,   tb_v_np1;
