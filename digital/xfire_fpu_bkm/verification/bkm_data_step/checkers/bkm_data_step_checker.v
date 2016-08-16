@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Added LOG2N parameter.
 //    - 2016-08-15 - ilesser - Deleted unused regs.
 //    - 2016-08-03 - ilesser - Copied from bkm_control_step checker.
 //    - 2016-07-22 - ilesser - Initial version.
@@ -39,7 +40,8 @@ module bkm_data_step_checker #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter W       = 64
+   parameter W       = 64,
+   parameter LOG2N   = 6
    ) (
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -53,7 +55,7 @@ module bkm_data_step_checker #(
    // ----------------------------------
    input wire               tb_mode,
    input wire  [1:0]        tb_format,
-   input wire  [`LOG2N-1:0] tb_n,
+   input wire  [LOG2N-1:0]  tb_n,
    input wire  [1:0]        tb_d_x_n,
    input wire  [1:0]        tb_d_y_n,
    input wire  [W-1:0]      tb_X_n,

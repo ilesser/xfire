@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Added LOG2N parameter.
 //    - 2016-08-15 - ilesser - Deleted unused regs.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
 //    - 2016-08-02 - ilesser - BUG2 fixed: solved problem with deltas, err and war.
@@ -40,7 +41,8 @@ module bkm_control_step_checker #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter W       = 64
+   parameter W       = 64,
+   parameter LOG2N   = 6
    ) (
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -54,7 +56,7 @@ module bkm_control_step_checker #(
    // ----------------------------------
    input wire               tb_mode,
    input wire  [1:0]        tb_format,
-   input wire  [`LOG2N-1:0] tb_n,
+   input wire  [LOG2N-1:0]  tb_n,
    input wire  [1:0]        tb_d_u_n,
    input wire  [1:0]        tb_d_v_n,
    input wire  [W-1:0]      tb_u_n,

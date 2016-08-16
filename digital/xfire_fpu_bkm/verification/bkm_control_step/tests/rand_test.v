@@ -48,7 +48,7 @@ task rand_test;
    reg                  rand_mode;
    reg   [1:0]          rand_format;
    reg   [`LOG2N-1:0]   rand_n;
-   reg   [1:0]          rand_d_u_n,    rand_d_v_n;;
+   reg   [1:0]          rand_d_u_n,    rand_d_v_n;
    reg   [`WC-1:0]      rand_u_n,      rand_v_n;
    reg   [`WC-1:0]      rand_lut_u_n,  rand_lut_v_n;
    reg   [30:0]         cnt1, cnt2;
@@ -70,7 +70,7 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**12) begin
+      repeat(2**02) begin
 
          rand_mode      = constrained_rand_int(0, 2**`M_SIZE-1);
          rand_format    = constrained_rand_int(0, 2**`F_SIZE-1);

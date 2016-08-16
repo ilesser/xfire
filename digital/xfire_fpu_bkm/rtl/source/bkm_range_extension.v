@@ -48,7 +48,8 @@
 // History:
 // --------
 //
-//    - 2016-04-23 - ilesser - Original version.
+//    - 2016-08-15 - ilesser - Updated parameters to work with W, WD and WC.
+//    - 2016-04-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -61,6 +62,7 @@ module bkm_range_extension #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
+    parameter WD     = 64,
     parameter W      = 64
   ) (
     // ----------------------------------
@@ -76,13 +78,13 @@ module bkm_range_extension #(
     input wire                start,
     input wire                mode,
     input wire [1:0]          format,
-    input wire [W-1:0]        a,
-    input wire [W-1:0]        b,
-    input wire [W-1:0]        k1,
-    input wire [W-1:0]        k2,
-    input wire [W-1:0]        k3,
-    input wire [W-1:0]        X_in,
-    input wire [W-1:0]        Y_in,
+    input wire [WD-1:0]        a,
+    input wire [WD-1:0]        b,
+    input wire [WD-1:0]        k1,
+    input wire [WD-1:0]        k2,
+    input wire [WD-1:0]        k3,
+    input wire [WD-1:0]        X_in,
+    input wire [WD-1:0]        Y_in,
     input wire [`FSIZE-1:0]   flags_in,
     // ----------------------------------
     // Data outputs

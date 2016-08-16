@@ -52,7 +52,8 @@
 // History:
 // --------
 //
-//    - 2016-04-23 - ilesser - Original version.
+//    - 2016-08-15 - ilesser - Updated parameters to work with W, WD and WC.
+//    - 2016-04-23 - ilesser - Iniital version.
 //
 // -----------------------------------------------------------------------------
 
@@ -65,7 +66,8 @@ module bkm_range_reduction #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64
+    parameter W      = 64,
+    parameter WD     = 64
   ) (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -87,15 +89,15 @@ module bkm_range_reduction #(
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output reg  [W-1:0]       E_x_out,
-    output reg  [W-1:0]       E_y_out,
-    output reg  [W-1:0]       L_x_out,
-    output reg  [W-1:0]       L_y_out,
-    output reg  [W-1:0]       a,
-    output reg  [W-1:0]       b,
-    output reg  [W-1:0]       k1,
-    output reg  [W-1:0]       k2,
-    output reg  [W-1:0]       k3,
+    output reg  [WD-1:0]      E_x_out,
+    output reg  [WD-1:0]      E_y_out,
+    output reg  [WD-1:0]      L_x_out,
+    output reg  [WD-1:0]      L_y_out,
+    output reg  [WD-1:0]      a,
+    output reg  [WD-1:0]      b,
+    output reg  [WD-1:0]      k1,
+    output reg  [WD-1:0]      k2,
+    output reg  [WD-1:0]      k3,
     output reg                done
   );
 // *****************************************************************************
@@ -113,27 +115,27 @@ module bkm_range_reduction #(
    always @(posedge clk or posedge arst) begin
       if (arst) begin
          done    <= 1'b0;
-         E_x_out <= {W{1'b0}};
-         E_y_out <= {W{1'b0}};
-         L_x_out <= {W{1'b0}};
-         L_y_out <= {W{1'b0}};
-         a       <= {W{1'b0}};
-         b       <= {W{1'b0}};
-         k1      <= {W{1'b0}};
-         k2      <= {W{1'b0}};
-         k3      <= {W{1'b0}};
+         E_x_out <= {WD{1'b0}};
+         E_y_out <= {WD{1'b0}};
+         L_x_out <= {WD{1'b0}};
+         L_y_out <= {WD{1'b0}};
+         a       <= {WD{1'b0}};
+         b       <= {WD{1'b0}};
+         k1      <= {WD{1'b0}};
+         k2      <= {WD{1'b0}};
+         k3      <= {WD{1'b0}};
       end
       else if (srst) begin
          done    <= 1'b0;
-         E_x_out <= {W{1'b0}};
-         E_y_out <= {W{1'b0}};
-         L_x_out <= {W{1'b0}};
-         L_y_out <= {W{1'b0}};
-         a       <= {W{1'b0}};
-         b       <= {W{1'b0}};
-         k1      <= {W{1'b0}};
-         k2      <= {W{1'b0}};
-         k3      <= {W{1'b0}};
+         E_x_out <= {WD{1'b0}};
+         E_y_out <= {WD{1'b0}};
+         L_x_out <= {WD{1'b0}};
+         L_y_out <= {WD{1'b0}};
+         a       <= {WD{1'b0}};
+         b       <= {WD{1'b0}};
+         k1      <= {WD{1'b0}};
+         k2      <= {WD{1'b0}};
+         k3      <= {WD{1'b0}};
       end
       else if (enable) begin
          done    <= start;
@@ -141,11 +143,11 @@ module bkm_range_reduction #(
          E_y_out <= E_y_in;
          L_x_out <= L_x_in;
          L_y_out <= L_y_in;
-         a       <= {W{1'b0}};
-         b       <= {W{1'b0}};
-         k1      <= {W{1'b0}};
-         k2      <= {W{1'b0}};
-         k3      <= {W{1'b0}};
+         a       <= {WD{1'b0}};
+         b       <= {WD{1'b0}};
+         k1      <= {WD{1'b0}};
+         k2      <= {WD{1'b0}};
+         k3      <= {WD{1'b0}};
       end
    end
 

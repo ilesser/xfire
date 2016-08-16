@@ -132,7 +132,8 @@ module tb_bkm_control_step ();
    // Checkers
    // -----------------------------------------------------
    bkm_control_step_checker #(
-      .W          (`WC)
+      .W          (`WC),
+      .LOG2N      (`LOG2N)
    ) duv_checker (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -172,7 +173,7 @@ module tb_bkm_control_step ();
    // -----------------------------------------------------
    bkm_control_step #(
       .W          (`WC),
-      .LOG2W      (`LOG2W),
+      .LOG2W      (`LOG2WC),
       .LOG2N      (`LOG2N)
    ) duv (
       // ----------------------------------

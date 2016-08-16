@@ -53,6 +53,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated parameters to work with W, WD and WC.
 //    - 2016-04-19 - ilesser - Built architecture scafold.
 //    - 2016-04-04 - ilesser - Original version.
 //
@@ -106,6 +107,12 @@ module bkm #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   // Local parameters
+   localparam  WC       = W/4;
+   localparam  WD       = W;
+   localparam  LOG2WC   = LOG2W-2;
+   localparam  LOG2WD   = LOG2W;
+
    // Input register
    reg                  input_reg_enable;
    reg                  mode_latched;
@@ -122,37 +129,41 @@ module bkm #(
    wire  [W-1:0]        L_y_prec_in;
 
    // BKM Range reduction
+   // entra en W y sale en WD
    reg                  range_red_enable;
    reg                  range_red_start;
    wire                 range_red_done;
-   wire  [W-1:0]        E_x_0;
-   wire  [W-1:0]        E_y_0;
-   wire  [W-1:0]        L_x_0;
-   wire  [W-1:0]        L_y_0;
-   wire  [W-1:0]        a;
-   wire  [W-1:0]        b;
-   wire  [W-1:0]        k1;
-   wire  [W-1:0]        k2;
-   wire  [W-1:0]        k3;
+   wire  [WD-1:0]       E_x_0;
+   wire  [WD-1:0]       E_y_0;
+   wire  [WD-1:0]       L_x_0;
+   wire  [WD-1:0]       L_y_0;
+   wire  [WD-1:0]       a;
+   wire  [WD-1:0]       b;
+   wire  [WD-1:0]       k1;
+   wire  [WD-1:0]       k2;
+   wire  [WD-1:0]       k3;
 
    // BKM Pre step
    reg                  bkm_pre_step_enable;
    reg                  bkm_pre_step_start;
    wire                 bkm_pre_step_done;
-   wire  [W-1:0]        X_1;
-   wire  [W-1:0]        Y_1;
-   wire  [W-1:0]        u_1;
-   wire  [W-1:0]        v_1;
+   wire  [WD-1:0]       X_1;
+   wire  [WD-1:0]       Y_1;
+   wire  [WC-1:0]       u_1;
+   wire  [WC-1:0]       v_1;
 
    // BKM Steps
    reg                  bkm_steps_enable;
    reg                  bkm_steps_start;
    wire                 bkm_steps_done;
    wire  [`FSIZE-1:0]   bkm_steps_flags;
-   wire  [W-1:0]        X_N;
-   wire  [W-1:0]        Y_N;
+   wire  [WD-1:0]       X_N;
+   wire  [WD-1:0]       Y_N;
+   wire  [WC-1:0]       u_N;
+   wire  [WC-1:0]       v_N;
 
    // BKM Range extension
+   // entra en WD y sale en W
    reg                  range_ext_enable;
    reg                  range_ext_start;
    wire                 range_ext_done;
@@ -252,7 +263,8 @@ module bkm #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (W),
+      .WD                  (WD)
    ) bkm_range_reduction (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -294,7 +306,8 @@ module bkm #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .WD                  (WD),
+      .WC                  (WC)
    ) bkm_pre_step (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -334,10 +347,12 @@ module bkm #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W),
-      .LOG2W               (LOG2W),
       .N                   (N),
-      .LOG2N               (LOG2N)
+      .LOG2N               (LOG2N),
+      .WD                  (WD),
+      .LOG2WD              (LOG2WD),
+      .WC                  (WC),
+      .LOG2WC              (LOG2WC)
    ) bkm_steps (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -361,6 +376,8 @@ module bkm #(
     // ----------------------------------
       .X_out               (X_N),
       .Y_out               (Y_N),
+      .u_out               (u_N),
+      .v_out               (v_N),
       .flags               (bkm_steps_flags),
       .done                (bkm_steps_done)
    );
@@ -373,6 +390,7 @@ module bkm #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
+      .WD                  (WD),
       .W                   (W)
    ) bkm_range_extension (
     // ----------------------------------

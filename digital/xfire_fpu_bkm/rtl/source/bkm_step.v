@@ -68,28 +68,30 @@
 //    - format    : Format code (logic, 2 bits).   FF
 //                                                 ||--> Precision:  0 for 64 bit, 1 for 32 bit
 //                                                 |---> Complex:    0 for complex args, 1 for real args
-//    - X_in      : Real      part of the data input (two's complement, W bits).
-//    - Y_in      : Imaginary part of the data input (two's complement, W bits).
-//    - u_in      : Real      part of the control input (two's complement, W bits).
-//    - v_in      : Imaginary part of the control input (two's complement, W bits).
+//    - X_in      : Real      part of the data input (two's complement, WD bits).
+//    - Y_in      : Imaginary part of the data input (two's complement, WD bits).
+//    - u_in      : Real      part of the control input (two's complement, WC bits).
+//    - v_in      : Imaginary part of the control input (two's complement, WC bits).
 //
 //  Data outputs:
-//    - X_out     : Real      part of the result (two's complement, W bits).
-//    - Y_out     : Imaginary part of the result (two's complement, W bits).
+//    - X_out     : Real      part of the result (two's complement, WD bits).
+//    - Y_out     : Imaginary part of the result (two's complement, WC bits).
 //    - flags     : Result flags (logic, 4 bits).
 //    - done      : Active high done strobe signal (logic, 1 bit).
 //
 //  Parameters:
-//    - W         : Word width (natural, default: 64).
-//    - LOG2W     : Logarithm of base 2 of the word width (natural, default: 6).
+//    - WD        : Word width for data channel (natural, default: 64).
+//    - WC        : Word width for control channel (natural, default: 16).
+//    - LOG2WD    : Logarithm of base 2 of the word width of the data channel (natural, default: 6).
+//    - LOG2WC    : Logarithm of base 2 of the word width of the control channel (natural, default: 4).
 //    - N         : Number of steps in the cordic algorithm (natural, default: 64).
-//    - LOG2N     : Logarithm of base 2 of the number of steps in the cordic
-//                  algorithm (natural, default 6).
+//    - LOG2N     : Logarithm of base 2 of the number of steps in the bkm algorithm (natural, default 6).
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Replaced W paramer with WD and WC.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Changed architecture: used local params WD and WC.
 //    - 2016-07-23 - ilesser - Changed architecture: created bkm_control_step and bkm_data_step.
@@ -117,13 +119,11 @@ module bkm_step   (
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter   W        = 64;
-   parameter   LOG2W    = 6;
+   parameter   WC       = 64;
+   parameter   WD       = 16;
+   parameter   LOG2WC   = 6;
+   parameter   LOG2WD   = 4;
    parameter   LOG2N    = 6;
-   localparam  WC       = W/4;
-   localparam  WD       = W;
-   localparam  LOG2WC   = LOG2W-2;
-   localparam  LOG2WD   = LOG2W;
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
@@ -170,7 +170,7 @@ module bkm_step   (
 // d_v_n  ---->+                                |
 //             |           CONTROL STEP         |
 // u_n    ---->+                                +---->   u_np1
-// v_n    ---->+            SIZE = W/4          +---->   v_np1
+// v_n    ---->+            SIZE = WC           +---->   v_np1
 // lut_u  ---->+                                |
 // lut_v  ---->+                                |
 //             |                                |
@@ -184,7 +184,7 @@ module bkm_step   (
 // d_y_n  ---->+                                |
 //             |           DATA STEP            |
 // X_n    ---->+                                +---->   X_np1
-// Y_n    ---->+           SIZE = W             +---->   Y_np1
+// Y_n    ---->+           SIZE = WD            +---->   Y_np1
 // lut_X  ---->+                                |
 // lut_Y  ---->+                                |
 //             |                                |
