@@ -70,17 +70,17 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**02) begin
+      repeat(2**10) begin
 
          rand_mode      = constrained_rand_int(0, 2**`M_SIZE-1);
          rand_format    = constrained_rand_int(0, 2**`F_SIZE-1);
          rand_n         = constrained_rand_int(0, 2**`LOG2N-1);
          rand_d_u_n     = constrained_rand_int(0, 2**`D_SIZE-1);
          rand_d_v_n     = constrained_rand_int(0, 2**`D_SIZE-1);
-         rand_u_n       = constrained_rand_int(0, 2**(`WC)-1);
-         rand_v_n       = constrained_rand_int(0, 2**(`WC)-1);
-         rand_lut_u_n   = constrained_rand_int(0, 2**(`WC)-1);
-         rand_lut_v_n   = constrained_rand_int(0, 2**(`WC)-1);
+         rand_u_n       = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
+         rand_v_n       = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
+         rand_lut_u_n   = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
+         rand_lut_v_n   = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
 
          //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
@@ -90,11 +90,19 @@ task rand_test;
          //rand_d_v_n     = 2'b00;
          //rand_u_n       = constrained_rand_int(2**15-1, 2**16-1);
          //rand_v_n       = constrained_rand_int(2**15-1, 2**16-1);
+         //rand_u_n       = constrained_rand_int(-100, 100);
          //rand_v_n       = constrained_rand_int(-100, 100);
-         //rand_lut_u_n   = constrained_rand_int(0, 100);
-         //rand_lut_v_n   = constrained_rand_int(0, 100);
+         //rand_lut_u_n   = constrained_rand_int(-100, 100);
+         //rand_lut_v_n   = constrained_rand_int(-100, 100);
 
-         load_directed( rand_mode, rand_format,  rand_n, rand_d_u_n,   rand_d_v_n,   rand_u_n,  rand_v_n,   rand_lut_u_n,  rand_lut_v_n);
+         load_directed(
+                        rand_mode,
+                        rand_format,
+                        rand_n,
+                        rand_d_u_n,    rand_d_v_n,
+                        rand_u_n,      rand_v_n,
+                        rand_lut_u_n,  rand_lut_v_n
+                     );
 
       end
 
