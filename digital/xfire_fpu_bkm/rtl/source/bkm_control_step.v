@@ -11,6 +11,7 @@
 // w = 2^1 * L
 // w_{n+1} = 2 w_n - 2^(n+1) * ln(1 + d_n * 2^-n)
 //
+//               _                              _
 //              |        n                  -n   |
 // w     =  2 * |  w  - 2   *  ln(1 + d  * 2   ) |
 //  n+1         |_  n                  n        _|
@@ -162,8 +163,8 @@ module bkm_control_step #(
    wire  [W:0]       b_v;
    wire              c_u;
    wire              c_v;
-   wire  [W:0]       s_u;
-   wire  [W:0]       s_v;
+   wire  [W+1:0]     s_u;
+   wire  [W+1:0]     s_v;
    // -----------------------------------------------------
 
 // *****************************************************************************
@@ -174,6 +175,8 @@ module bkm_control_step #(
    //       a better way could be to add a carry in input to the add_subb used below
    assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  {u_n[W-1], u_n} - d_u_n[`D_DATA] :  {u_n[W-1], u_n} + d_u_n[`D_DATA] ;
    assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  {v_n[W-1], v_n} - d_v_n[`D_DATA] :  {v_n[W-1], v_n} + d_v_n[`D_DATA] ;
+   //assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  u_n - d_u_n[`D_DATA] :  u_n + d_u_n[`D_DATA] ;
+   //assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  v_n - d_v_n[`D_DATA] :  v_n + d_v_n[`D_DATA] ;
    //assign   u_n_plus_d_u_n =  d_u_n != 2'b10    ?  u_n + d_u_n :  u_n   ;
    //assign   v_n_plus_d_v_n =  d_v_n != 2'b10    ?  v_n + d_v_n :  v_n   ;
 
@@ -193,6 +196,8 @@ module bkm_control_step #(
       .d_y                 (d_v_n),
       .x_in                ({u_n[W-1], u_n}),
       .y_in                ({v_n[W-1], v_n}),
+      //.x_in                (u_n),
+      //.y_in                (v_n),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -202,22 +207,20 @@ module bkm_control_step #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Barrel shifter for u
+   // Divide by 2^n
    // -----------------------------------------------------
-   barrel_shifter #(
+   div_by_2_n #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W+1),
-      .LOG2W               (LOG2W+1)
-   ) barrel_shifter_u (
+      .LOG2W               (LOG2W+1),
+      .LOG2N               (LOG2N)
+   ) div_by_2_n_u (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .dir                 (`DIR_RIGHT),
-      .op                  (`OP_SHIFT),
-      .shift_t             (`SHIFT_ARITH),
-      .sel                 ({1'b0,n}),
+      .n                   (n),
       .in                  (u_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -227,22 +230,20 @@ module bkm_control_step #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Barrel shifter for v
+   // Divide by 2^n
    // -----------------------------------------------------
-   barrel_shifter #(
+   div_by_2_n #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (W+1),
-      .LOG2W               (LOG2W+1)
-   ) barrel_shifter_v (
+      .LOG2W               (LOG2W+1),
+      .LOG2N               (LOG2N)
+   ) div_by_2_n_v (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .dir                 (`DIR_RIGHT),
-      .op                  (`OP_SHIFT),
-      .shift_t             (`SHIFT_ARITH),
-      .sel                 ({1'b0,n}),
+      .n                   (n),
       .in                  (v_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -273,7 +274,10 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W+1)
+      .W                   (W+1+1)     //TODO: I am adding 2 numbers of (W+1)
+
+      // TODO: tengo q agregarle 3 bits de guarda?
+
    ) complex_add_sub (
     // ----------------------------------
     // Data inputs
@@ -282,10 +286,10 @@ module bkm_control_step #(
       .subb_a_y            (sign_a_v),
       .subb_b_x            (sign_b_u),
       .subb_b_y            (sign_b_v),
-      .a_x                 (a_u),
-      .a_y                 (a_v),
-      .b_x                 (b_u),
-      .b_y                 (b_v),
+      .a_x                 ({a_u[W], a_u}),
+      .a_y                 ({a_v[W], a_v}),
+      .b_x                 ({b_u[W], b_u}),
+      .b_y                 ({b_v[W], b_v}),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
