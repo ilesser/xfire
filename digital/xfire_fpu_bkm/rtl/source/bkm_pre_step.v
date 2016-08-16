@@ -65,8 +65,9 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Updated parameters to work with W, WD and WC.
 //    - 2016-05-01 - ilesser - Renamed pre step, changed control path to w = u+jv
-//    - 2016-04-23 - ilesser - Original version.
+//    - 2016-04-23 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -79,7 +80,8 @@ module bkm_pre_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64
+    parameter WD     = 64,
+    parameter WC     = 16
   ) (
     // ----------------------------------
     // Clock, reset & enable inputs
@@ -94,17 +96,17 @@ module bkm_pre_step #(
     input wire                start,
     input wire                mode,
     input wire [1:0]          format,
-    input wire [W-1:0]        E_x_in,
-    input wire [W-1:0]        E_y_in,
-    input wire [W-1:0]        L_x_in,
-    input wire [W-1:0]        L_y_in,
+    input wire [WD-1:0]       E_x_in,
+    input wire [WD-1:0]       E_y_in,
+    input wire [WD-1:0]       L_x_in,
+    input wire [WD-1:0]       L_y_in,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-    output reg [W-1:0]        X_out,
-    output reg [W-1:0]        Y_out,
-    output reg [W-1:0]        u_out,
-    output reg [W-1:0]        v_out,
+    output reg [WD-1:0]       X_out,
+    output reg [WD-1:0]       Y_out,
+    output reg [WC-1:0]       u_out,
+    output reg [WC-1:0]       v_out,
     output reg                done
   );
 // *****************************************************************************
@@ -122,17 +124,17 @@ module bkm_pre_step #(
    always @(posedge clk or posedge arst) begin
       if (arst) begin
          done    <= 1'b0;
-         X_out   <= {W{1'b0}};
-         Y_out   <= {W{1'b0}};
-         u_out   <= {W{1'b0}};
-         v_out   <= {W{1'b0}};
+         X_out   <= {WD{1'b0}};
+         Y_out   <= {WD{1'b0}};
+         u_out   <= {WC{1'b0}};
+         v_out   <= {WC{1'b0}};
       end
       else if (srst) begin
          done    <= 1'b0;
-         X_out   <= {W{1'b0}};
-         Y_out   <= {W{1'b0}};
-         u_out   <= {W{1'b0}};
-         v_out   <= {W{1'b0}};
+         X_out   <= {WD{1'b0}};
+         Y_out   <= {WD{1'b0}};
+         u_out   <= {WC{1'b0}};
+         v_out   <= {WC{1'b0}};
       end
       else if (enable) begin
          done    <= start;
@@ -149,15 +151,15 @@ module bkm_pre_step #(
                   X_out   <= L_x_in;
                   Y_out   <= L_y_in;
                   // TODO esta resta de aca se podria hacer muy facil en CSD
-                  u_out   <= (E_x_in-{{W-1{1'b0}},1'b1})*2;
+                  u_out   <= (E_x_in-{{WD-1{1'b0}},1'b1})*2;
                   v_out   <= E_y_in*2;
                end
             default:
                begin
-                  X_out   <= {W{1'b0}};
-                  Y_out   <= {W{1'b0}};
-                  u_out   <= {W{1'b0}};
-                  v_out   <= {W{1'b0}};
+                  X_out   <= {WD{1'b0}};
+                  Y_out   <= {WD{1'b0}};
+                  u_out   <= {WC{1'b0}};
+                  v_out   <= {WC{1'b0}};
                end
          endcase
       end

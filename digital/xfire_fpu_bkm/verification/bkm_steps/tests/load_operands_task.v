@@ -87,6 +87,13 @@ task load_operands;
 
       run_clk(1);
 
+      // Wait for done to rise
+      //while(res_done != 1'b1);
+
+      // Wait N clocks for results
+      repeat(`N)
+         @(posedge clk);
+
    end
 
 // *****************************************************************************

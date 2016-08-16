@@ -102,23 +102,21 @@
 module bkm_steps  (
    clk, arst, srst, enable,
    start, mode, format,
-   n, d_x_n, d_y_n,
    X_in, Y_in,
    u_in, v_in,
    X_out, Y_out,
+   u_out, v_out,
    flags, done
 );
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter   W        = 64;
-   parameter   LOG2W    = 6;
    parameter   N        = 64;
    parameter   LOG2N    = 6;
-   localparam  WC       = W/4;
-   localparam  WD       = W;
-   localparam  LOG2WC   = LOG2W-2;
-   localparam  LOG2WD   = LOG2W;
+   parameter   WC       = 64;
+   parameter   WD       = 16;
+   parameter   LOG2WC   = 6;
+   parameter   LOG2WD   = 4;
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
@@ -155,7 +153,7 @@ module bkm_steps  (
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg   [LOG2N:0]   n;
+   reg   [LOG2N:0]   n_cnt;
    wire  [1:0]       d_x   [0:N-1];
    wire  [1:0]       d_y   [0:N-1];
    wire  [2*WD-1:0]  lut_X [0:N-1];
@@ -170,6 +168,9 @@ module bkm_steps  (
 
 
    // TODO: implement JK flop for the ena = f(start, done)
+
+
+   // TODO: this uses a cnt to overflow for the done
    always @(posedge clk or posedge arst) begin
       if (arst) begin
          n_cnt <= {LOG2N{1'b0}};
@@ -181,8 +182,9 @@ module bkm_steps  (
          n_cnt <= n_cnt + 1;
       end
    end
-   assign flags = {`FSIZE{1'b0}};
    assign done  = n_cnt[LOG2N];
+
+   assign flags = {`FSIZE{1'b0}};
 
  // -------------------------------------
  // Convert inputs to CSD
@@ -192,7 +194,7 @@ module bkm_steps  (
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (WD)
    ) bin2csd_X (
     // ----------------------------------
     // Data inputs
@@ -208,7 +210,7 @@ module bkm_steps  (
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (WD)
    ) bin2csd_Y (
     // ----------------------------------
     // Data inputs
@@ -232,10 +234,8 @@ module bkm_steps  (
          // ----------------------------------
          // Get d_n
          // ----------------------------------
-         //assign d_x[n] = 2'b00;
-         //assign d_y[n] = 2'b00;
          get_d #(
-            .W          (W)
+            .W          (WC)
          ) get_d_n (
             // ----------------------------------
             // Data inputs
@@ -294,8 +294,10 @@ module bkm_steps  (
          //assign v[n] = {WC{1'b0}};
          // TODO: when I  uncomment the bkm_step instantiation iverilogs fails to simulate
          bkm_step #(
-            .W          (W),
-            .LOG2W      (LOG2W),
+            .WD         (WD),
+            .WC         (WC),
+            .LOG2WD     (LOG2WD),
+            .LOG2WC     (LOG2WC),
             .LOG2N      (LOG2N)
          ) bkm_step_n (
             // ----------------------------------
@@ -311,23 +313,16 @@ module bkm_steps  (
             .mode       (mode),
             .format     (format),
             .n          (n),
-            .d_x_n      (d_x[n]),
-            .d_y_n      (d_y[n]),
-            .X_n        (X[n]),
-            .Y_n        (Y[n]),
-            .lut_X      (lut_X[n]),
-            .lut_Y      (lut_Y[n]),
-            .u_n        (u[n]),
-            .v_n        (v[n]),
-            .lut_u      (lut_u[n]),
-            .lut_v      (lut_v[n]),
+            .d_x_n      (  d_x[n]),    .d_y_n      (  d_y[n]),
+            .X_n        (    X[n]),    .Y_n        (    Y[n]),
+            .lut_X      (lut_X[n]),    .lut_Y      (lut_Y[n]),
+            .u_n        (    u[n]),    .v_n        (    v[n]),
+            .lut_u      (lut_u[n]),    .lut_v      (lut_v[n]),
             // ----------------------------------
             // Data outputs
             // ----------------------------------
-            .X_np1      (X[n+1]),
-            .Y_np1      (Y[n+1]),
-            .u_np1      (u[n+1]),
-            .v_np1      (v[n+1])
+            .X_np1      (    X[n+1]),  .Y_np1      (    Y[n+1]),
+            .u_np1      (    u[n+1]),  .v_np1      (    v[n+1])
          );
 
       end // for n
@@ -345,7 +340,7 @@ module bkm_steps  (
       // ----------------------------------
       // Parameters
       // ----------------------------------
-      .W                   (W)
+      .W                   (WD)
    ) csd2bin_X (
       // ----------------------------------
       // Data inputs
@@ -361,7 +356,7 @@ module bkm_steps  (
       // ----------------------------------
       // Parameters
       // ----------------------------------
-      .W                   (W)
+      .W                   (WD)
    ) csd2bin_Y (
       // ----------------------------------
       // Data inputs

@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-15 - ilesser - Added LOG2N parameter to checkers.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Added min and max of delta signals.
 //    - 2016-08-11 - ilesser - Initial version.
@@ -186,7 +187,8 @@ module bkm_step_checker #(
    end
 
    bkm_control_step_checker #(
-      .W          (WC)
+      .W          (WC),
+      .LOG2N      (LOG2N)
    ) bkm_control_checker (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -221,7 +223,8 @@ module bkm_step_checker #(
    );
 
    bkm_data_step_checker #(
-      .W          (WD)
+      .W          (WD),
+      .LOG2N      (LOG2N)
    ) bkm_data_checker (
       // ----------------------------------
       // Clock, reset & enable inputs

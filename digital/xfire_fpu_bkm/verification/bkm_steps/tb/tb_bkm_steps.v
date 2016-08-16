@@ -30,14 +30,14 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 16
-`define LOG2W 4
-`define WD 16  //`W
-`define WC 4   //`W/4
+`define W 32
+`define LOG2W 5
+`define WD 32  //`W
+`define WC 8   //`W/4
 `define LOG2WC `LOG2W-2
 `define LOG2WD `LOG2W
-`define N 16
-`define LOG2N 4
+`define N 32
+`define LOG2N 5
 `define M_SIZE 1
 `define F_SIZE 2
 `define D_SIZE 2
@@ -60,24 +60,25 @@ module tb_bkm_steps ();
    // -----------------------------------------------------
    wire                    clk;
    reg                     arst, srst, ena, load;
-   reg                     err_X,         err_Y;
-   reg                     war_X,         war_Y;
-   reg                     err_u,         err_v;
-   reg                     war_u,         war_v;
+   reg                     tb_start;
    reg                     tb_mode;
    reg   [1:0]             tb_format;
    reg   [`WD-1:0]         tb_X_in,       tb_Y_in;
    reg   [`WD-1:0]         tb_X_out,      tb_Y_out;
-   reg   [`WD-1:0]         delta_X,       delta_Y;
    reg   [`WC-1:0]         tb_u_in,       tb_v_in;
    reg   [`WC-1:0]         tb_u_out,      tb_v_out;
-   reg   [`WC-1:0]         delta_u,       delta_v;
    reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
+   wire                    err_X,         err_Y;
+   wire                    war_X,         war_Y;
+   wire                    err_u,         err_v;
+   wire                    war_u,         war_v;
+   wire  [`WD-1:0]         delta_X,       delta_Y;
+   wire  [`WC-1:0]         delta_u,       delta_v;
    wire  [`WD-1:0]         res_X_out,     res_Y_out;
    wire  [`WC-1:0]         res_u_out,     res_v_out;
    // -----------------------------------------------------
@@ -200,7 +201,7 @@ module tb_bkm_steps ();
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   bkm_step #(
+   bkm_steps #(
       .W          (`W),
       .LOG2W      (`LOG2W),
       .N          (`N),
@@ -216,6 +217,7 @@ module tb_bkm_steps ();
       // ----------------------------------
       // Data inputs
       // ----------------------------------
+      .start      (tb_start),
       .mode       (tb_mode),
       .format     (tb_format),
       .X_in       (tb_X_in),

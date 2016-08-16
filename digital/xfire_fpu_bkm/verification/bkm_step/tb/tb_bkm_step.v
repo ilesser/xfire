@@ -33,10 +33,10 @@
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
 `define N      16
+`define LOG2N   4
 `define W      16
 `define WD     16 //`W
 `define WC      4 //`W/4
-`define LOG2N   4
 `define LOG2W   4
 `define LOG2WD `LOG2W
 `define LOG2WC `LOG2W-2
@@ -240,8 +240,10 @@ module tb_bkm_step ();
    // Device under verifiacion
    // -----------------------------------------------------
    bkm_step #(
-      .W          (`W),
-      .LOG2W      (`LOG2W),
+      .WC         (`WC),
+      .WD         (`WD),
+      .LOG2WC     (`LOG2WC),
+      .LOG2WD     (`LOG2WD),
       .LOG2N      (`LOG2N)
    ) duv (
       // ----------------------------------
