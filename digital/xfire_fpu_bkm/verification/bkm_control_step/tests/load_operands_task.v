@@ -96,15 +96,15 @@ task load_operands;
          tb_mode      ,
          tb_format    ,
          tb_n         ,
-         tb_d_u_n     , tb_d_u_n     ,
+         tb_d_u_n     , tb_d_v_n     ,
          dummy_X_n    , dummy_Y_n    ,
          tb_u_n       , tb_v_n       ,
          dummy_lut_X_n, dummy_lut_Y_n,
-         tb_lut_v_n   , tb_lut_v_n   ,
+         tb_lut_u_n   , tb_lut_v_n   ,
          // ----------------------------------
          // Data outputs
          // ----------------------------------
-         dummy_X_np1  , dummy_X_np1  ,
+         dummy_X_np1  , dummy_Y_np1  ,
          tb_u_np1     , tb_v_np1
       );
 
