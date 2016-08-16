@@ -108,10 +108,26 @@ module bkm #(
    // Internal signals
    // -----------------------------------------------------
    // Local parameters
-   localparam  WC       = W/4;
-   localparam  WD       = W;
-   localparam  LOG2WC   = LOG2W-2;
-   localparam  LOG2WD   = LOG2W;
+   // La entrada seria  con W=64 y representaria un numero en 11Q53
+   //                   con W=32 y representaria un numero en  9Q23
+   // TODO: WD necesita dos bits de guarda superiores, uno al multipicar por d_n y otro al acumularlo.
+   // TODO: WC tiene q tener una resolucion de 4 bits (??averiguar) en la parte decimal
+   //       mas tres bits de guarda por todo el proceso de BKM por lo que seria 14Q4 (12Q4)
+   //       (necesita uno mas que WD xq multiplica todo por 2)
+   //
+   //    Upper guard bits are to avoid overflow.
+   //    Lower guard bits are to preserve the data value after dividing by 2^n
+   //
+   //                   +-----------+-----------+--------+
+   //                   |  Upper    |  Word     |  Lower |
+   //                   |  guard    |  size     |  guard |
+   //                   |  bits     |           |  bits  |
+   //                   +-----------+-----------+--------+
+   localparam  WD       = 2         +  W        +  LOG2W ;
+   localparam  LOG2WD   = 1         +  LOG2W    +  0     ;  // TODO the lower guard bits are harcodfed???
+   localparam  WC       = 3         +  W/4      +  1     ;
+   localparam  LOG2WC   = 1         +  LOG2W-2  +  0     ;
+   //                   +-----------+-----------+--------+
 
    // Input register
    reg                  input_reg_enable;
