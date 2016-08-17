@@ -70,17 +70,19 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**10) begin
+      repeat(2**14) begin
 
          rand_mode      = constrained_rand_int(0, 2**`M_SIZE-1);
          rand_format    = constrained_rand_int(0, 2**`F_SIZE-1);
          rand_n         = constrained_rand_int(0, 2**`LOG2N-1);
          rand_d_u_n     = constrained_rand_int(0, 2**`D_SIZE-1);
          rand_d_v_n     = constrained_rand_int(0, 2**`D_SIZE-1);
-         rand_u_n       = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
-         rand_v_n       = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
-         rand_lut_u_n   = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
-         rand_lut_v_n   = constrained_rand_int(-2**(`WC-1), 2**(`WC-1)-1);
+
+         // Limit the input range so that it has 2 guard bits
+         rand_u_n       = constrained_rand_int(-2**(`WC-1-2), 2**(`WC-1-2)-1);
+         rand_v_n       = constrained_rand_int(-2**(`WC-1-2), 2**(`WC-1-2)-1);
+         rand_lut_u_n   = constrained_rand_int(-2**(`WC-1-2), 2**(`WC-1-2)-1);
+         rand_lut_v_n   = constrained_rand_int(-2**(`WC-1-2), 2**(`WC-1-2)-1);
 
          //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;

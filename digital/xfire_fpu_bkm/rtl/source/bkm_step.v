@@ -226,7 +226,8 @@ module bkm_step   (
     // ----------------------------------
       .mode                (mode),
       .format              (format),
-      .n                   (n[LOG2N-(LOG2WD-LOG2WC)-1:0]),
+      //.n                   (n[LOG2N-(LOG2WD-LOG2WC)-1:0]),
+      .n                   (n),
       .d_u_n               (d_u_n),
       .d_v_n               (d_v_n),
       .u_n                 (u_n),

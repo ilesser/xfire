@@ -77,21 +77,22 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**16) begin
+      repeat(2**12) begin
 
          rand_mode      = constrained_rand_int(0, 1);
          rand_format    = constrained_rand_int(0, 3);
          rand_n         = constrained_rand_int(0, 2**`LOG2N);
          rand_d_x_n     = constrained_rand_int(0, 3);
          rand_d_y_n     = constrained_rand_int(0, 3);
-         rand_X_n       = constrained_rand_int(0, 2**`WD);
-         rand_Y_n       = constrained_rand_int(0, 2**`WD);
-         rand_u_n       = constrained_rand_int(0, 2**`WC);
-         rand_v_n       = constrained_rand_int(0, 2**`WC);
-         rand_lut_X_n   = constrained_rand_int(0, 2**`WD);
-         rand_lut_Y_n   = constrained_rand_int(0, 2**`WD);
-         rand_lut_u_n   = constrained_rand_int(0, 2**`WC);
-         rand_lut_v_n   = constrained_rand_int(0, 2**`WC);
+         rand_X_n       = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
+         rand_Y_n       = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
+         rand_lut_X_n   = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
+         rand_lut_Y_n   = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
+         // Limit the input range so that it has 2 guard bits
+         rand_u_n       = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
+         rand_v_n       = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
+         rand_lut_u_n   = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
+         rand_lut_v_n   = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
 
          //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
@@ -113,16 +114,11 @@ task rand_test;
                            rand_mode,
                            rand_format,
                            rand_n,
-                           rand_d_x_n,
-                           rand_d_y_n,
-                           rand_X_n,
-                           rand_Y_n,
-                           rand_u_n,
-                           rand_v_n,
-                           rand_lut_X_n,
-                           rand_lut_Y_n,
-                           rand_lut_u_n,
-                           rand_lut_v_n
+                           rand_d_x_n,    rand_d_y_n,
+                           rand_X_n,      rand_Y_n,
+                           rand_u_n,      rand_v_n,
+                           rand_lut_X_n,  rand_lut_Y_n,
+                           rand_lut_u_n,  rand_lut_v_n
                         );
 
       end
