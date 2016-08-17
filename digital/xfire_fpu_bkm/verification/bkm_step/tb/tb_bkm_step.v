@@ -32,12 +32,12 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define N      16
-`define LOG2N   4
-`define W      16
-`define WD     16 //`W
-`define WC      4 //`W/4
-`define LOG2W   4
+`define N      32
+`define LOG2N   5
+`define W      32
+`define WD     32 //`W
+`define WC      8 //`W/4
+`define LOG2W   5
 `define LOG2WD `LOG2W
 `define LOG2WC `LOG2W-2
 `define M_SIZE  1

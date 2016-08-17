@@ -89,8 +89,8 @@ task dir_test;
       load_directed( `MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd001,   2'b11,   2'b11, -`WC'd32768, -`WC'd32768,  `WC'd01070,  `WC'd00310);
 
       // operands     mode     format            n             d_u_n    d_v_n    u_n       v_n       lut_u_n   lut_v_n
-      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd002,   2'b00,   2'b00, `WC'h0000, `WC'h0000, `WC'h0000, `WC'h0000};
-      cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `WC'h0000, `WC'h0011, `WC'h0000, `WC'h0000};
+      cnt_load    = {`MODE_L, `FORMAT_CMPLX_DW, `LOG2N'd007,   2'b01,   2'b00, `WC'd8024,-`WC'd4744, `WC'h0000, `WC'h0000};
+      cnt_step    = {   1'b0,         2'b00   , `LOG2N'd000,   2'b00,   2'b00, `WC'h0031, `WC'h0011, `WC'h0001, `WC'h0011};
 
       run_clk(1);
       arst        = 1'b1;
@@ -102,13 +102,13 @@ task dir_test;
       run_clk(1);
       load        = 1'b0;
 
-      repeat(2**4) begin
-         repeat(2**`WC)
-            load_operands(cnt);
-         repeat(2**`WC)
-            load_operands(cnt);
-         repeat(2**`WC)
-            load_operands(cnt);
+      repeat(2**1) begin
+         //repeat(2**`WC)
+            //load_operands(cnt);
+         //repeat(2**`WC)
+            //load_operands(cnt);
+         //repeat(2**`WC)
+            //load_operands(cnt);
          repeat(2**`WC)
             load_operands(cnt);
       end

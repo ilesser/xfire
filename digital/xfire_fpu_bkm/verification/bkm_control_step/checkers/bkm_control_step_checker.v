@@ -111,9 +111,9 @@ module bkm_control_step_checker #(
       else begin
          if (enable == 1'b1) begin
             if (neq_u == 1'b1) begin
-               // this report an error if |delta| > 1 or a warning otherwise
+               // this report an error if |delta| > 2 or a warning otherwise
                // the idea is the get a warning if the delta is only 1 LSB
-               if (abs($signed(delta_u)) > 1) begin
+               if (abs($signed(delta_u)) > 2) begin
                   $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
                   add_error();
                   err_u    <= 1'b1;
@@ -143,7 +143,7 @@ module bkm_control_step_checker #(
       else begin
          if (enable == 1'b1) begin
             if (neq_v == 1'b1) begin
-               if (abs($signed(delta_v)) > 1) begin
+               if (abs($signed(delta_v)) > 2) begin
                   $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
                   add_error();
                   err_v    <= 1'b1;
