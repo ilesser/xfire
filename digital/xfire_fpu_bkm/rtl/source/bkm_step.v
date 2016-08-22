@@ -91,6 +91,7 @@
 // History:
 // --------
 //
+//    - 2016-08-22 - ilesser - Fix bug #7 by using the div_by_2_n block in bkm_control_step.
 //    - 2016-08-15 - ilesser - Replaced W paramer with WD and WC.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Changed architecture: used local params WD and WC.
@@ -205,14 +206,13 @@ module bkm_step   (
    // -----------------------------------------------------
    // Control step
    // -----------------------------------------------------
-   // TODO: imlpement a cap value for the division by 2^n for BUG7
    bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
       .W                   (WC),
       .LOG2W               (LOG2WC),
-      .LOG2N               (LOG2N-(LOG2WD-LOG2WC))
+      .LOG2N               (LOG2N)
    ) bkm_control_step (
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -226,7 +226,6 @@ module bkm_step   (
     // ----------------------------------
       .mode                (mode),
       .format              (format),
-      //.n                   (n[LOG2N-(LOG2WD-LOG2WC)-1:0]),
       .n                   (n),
       .d_u_n               (d_u_n),
       .d_v_n               (d_v_n),
