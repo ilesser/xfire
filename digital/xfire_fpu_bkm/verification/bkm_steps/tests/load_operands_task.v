@@ -79,20 +79,24 @@ task load_operands;
       tb_u_in     = cnt[2*`WC+0*`WD-1           :1*`WC+0*`WD];
       tb_v_in     = cnt[1*`WC+0*`WD-1           :0*`WC+0*`WD];
 
+
+
       // Calculate the results
-      //for (i=0; i < N; i=i+1) begin
-
-
-
-
-      run_clk(1);
-
-      // Wait for done to rise
-      //while(res_done != 1'b1);
+      bkm(  tb_mode,
+            tb_format,
+            tb_X_in,
+            tb_Y_in,
+            tb_u_in,
+            tb_v_in,
+            tb_X_out,
+            tb_Y_out,
+            tb_u_out,
+            tb_v_out,
+            tb_flags
+         );
 
       // Wait N clocks for results
-      repeat(`N)
-         @(posedge clk);
+      run_clk(`N);
 
    end
 

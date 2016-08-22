@@ -89,6 +89,7 @@
 // History:
 // --------
 //
+//    - 2016-08-22 - ilesser - Uncommented lut_decoder.
 //    - 2016-07-11 - ilesser - Build an unrolled version.
 //    - 2016-04-23 - ilesser - Initial version.
 //
@@ -253,37 +254,31 @@ module bkm_steps  (
          // ----------------------------------
          // LUT decoder
          // ----------------------------------
-         assign lut_X[n] = {WD{`CSD_0_0}};
-         assign lut_Y[n] = {WD{`CSD_0_0}};
-         assign lut_u[n] = {WC{1'b0}};
-         assign lut_v[n] = {WC{1'b0}};
-         //lut_decoder #(
-            //.W          (W),
-            //.LOG2W      (LOG2W)
-         //) lut_decoder_n (
-            //// ----------------------------------
-            //// Clock, reset & enable inputs
-            //// ----------------------------------
-            //.clk        (clk),
-            //.arst       (arst),
-            //.srst       (srst),
-            //.enable     (enable),
-            //// ----------------------------------
-            //// Data inputs
-            //// ----------------------------------
-            //.mode       (mode),
-            //.format     (format),
-            //.n          (n),
-            //.d_x_n      (d_x[n]),
-            //.d_y_n      (d_y[n]),
-            //// ----------------------------------
-            //// Data outputs
-            //// ----------------------------------
-            //.lut_X      (lut_X[n]),
-            //.lut_Y      (lut_X[n]),
-            //.lut_u      (lut_u[n]),
-            //.lut_v      (lut_v[n])
-         //);
+         //assign lut_X[n] = {WD{`CSD_0_0}};
+         //assign lut_Y[n] = {WD{`CSD_0_0}};
+         //assign lut_u[n] = {WC{1'b0}};
+         //assign lut_v[n] = {WC{1'b0}};
+         lut_decoder #(
+            .WD         (WD),
+            .WC         (WC),
+            .LOG2N      (LOG2N)
+         ) lut_decoder_n (
+            // ----------------------------------
+            // Data inputs
+            // ----------------------------------
+            .mode       (mode),
+            .format     (format),
+            .n          (n),
+            .d_x_n      (d_x[n]),
+            .d_y_n      (d_y[n]),
+            // ----------------------------------
+            // Data outputs
+            // ----------------------------------
+            .lut_X      (lut_X[n]),
+            .lut_Y      (lut_X[n]),
+            .lut_u      (lut_u[n]),
+            .lut_v      (lut_v[n])
+         );
 
          // ----------------------------------
          // Step n
@@ -292,7 +287,6 @@ module bkm_steps  (
          //assign Y[n] = {2*WD{1'b0}};
          //assign u[n] = {WC{1'b0}};
          //assign v[n] = {WC{1'b0}};
-         // TODO: when I  uncomment the bkm_step instantiation iverilogs fails to simulate
          bkm_step #(
             .WD         (WD),
             .WC         (WC),
