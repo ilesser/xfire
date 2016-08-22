@@ -1,0 +1,197 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Tue Aug 16 03:49:29 2016
+[*]
+[dumpfile] "/home/ilesser/Documentos/xfire/digital/xfire_fpu_bkm/verification/bkm_control_step/waves/tb_bkm_control_step.vcd"
+[dumpfile_mtime] "Tue Aug 16 02:33:04 2016"
+[dumpfile_size] 202248
+[savefile] "/home/ilesser/Documentos/xfire/digital/xfire_fpu_bkm/verification/bkm_control_step/waves/bkm_control_step.gtkw"
+[timestart] 30060
+[size] 1800 992
+[pos] -1 -1
+*-12.862549 40820 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_bkm_control_step.
+[treeopen] tb_bkm_control_step.duv.
+[sst_width] 219
+[signals_width] 460
+[sst_expanded] 1
+[sst_vpaned_height] 337
+@28
+tb_bkm_control_step.clk
+tb_bkm_control_step.tb_mode
+tb_bkm_control_step.tb_format[1:0]
+tb_bkm_control_step.tb_d_u_n[1:0]
+tb_bkm_control_step.tb_d_v_n[1:0]
+@200
+-
+@420
+tb_bkm_control_step.tb_v_n[15:0]
+tb_bkm_control_step.tb_u_n[15:0]
+tb_bkm_control_step.tb_lut_u_n[15:0]
+tb_bkm_control_step.tb_u_np1[15:0]
+tb_bkm_control_step.res_u_np1[15:0]
+tb_bkm_control_step.delta_u[15:0]
+@28
+tb_bkm_control_step.war_u
+tb_bkm_control_step.err_u
+@200
+-
+@420
+tb_bkm_control_step.tb_u_n[15:0]
+tb_bkm_control_step.tb_v_n[15:0]
+tb_bkm_control_step.tb_lut_v_n[15:0]
+tb_bkm_control_step.tb_v_np1[15:0]
+tb_bkm_control_step.res_v_np1[15:0]
+tb_bkm_control_step.delta_v[15:0]
+@28
+tb_bkm_control_step.war_v
+tb_bkm_control_step.err_v
+@200
+-
+-
+-MODO E: u_np1 = 2 * ( u_n - lut_u_n )
+@28
+tb_bkm_control_step.duv.mode
+@420
+tb_bkm_control_step.duv.u_n[15:0]
+@28
+tb_bkm_control_step.bkm_step.u_n
+@420
+tb_bkm_control_step.duv.lut_u_n[15:0]
+@28
+tb_bkm_control_step.bkm_step.lut_u_n
+@420
+tb_bkm_control_step.bkm_step.lut_u_n_bin[15:0]
+tb_bkm_control_step.duv.a_u[16:0]
+@c00420
+tb_bkm_control_step.duv.b_u[16:0]
+@28
+(0)tb_bkm_control_step.duv.b_u[16:0]
+(1)tb_bkm_control_step.duv.b_u[16:0]
+(2)tb_bkm_control_step.duv.b_u[16:0]
+(3)tb_bkm_control_step.duv.b_u[16:0]
+(4)tb_bkm_control_step.duv.b_u[16:0]
+(5)tb_bkm_control_step.duv.b_u[16:0]
+(6)tb_bkm_control_step.duv.b_u[16:0]
+(7)tb_bkm_control_step.duv.b_u[16:0]
+(8)tb_bkm_control_step.duv.b_u[16:0]
+(9)tb_bkm_control_step.duv.b_u[16:0]
+(10)tb_bkm_control_step.duv.b_u[16:0]
+(11)tb_bkm_control_step.duv.b_u[16:0]
+(12)tb_bkm_control_step.duv.b_u[16:0]
+(13)tb_bkm_control_step.duv.b_u[16:0]
+(14)tb_bkm_control_step.duv.b_u[16:0]
+(15)tb_bkm_control_step.duv.b_u[16:0]
+(16)tb_bkm_control_step.duv.b_u[16:0]
+@1401200
+-group_end
+@28
+tb_bkm_control_step.duv.c_u
+@420
+tb_bkm_control_step.duv.u_np1[15:0]
+@24
+tb_bkm_control_step.bkm_step.u_np1
+@200
+-MODO E: v_np1 = 2 * ( v_n - lut_v_n )
+@28
+tb_bkm_control_step.duv.mode
+@420
+tb_bkm_control_step.duv.v_n[15:0]
+tb_bkm_control_step.duv.lut_v_n[15:0]
+tb_bkm_control_step.duv.a_v[16:0]
+tb_bkm_control_step.duv.b_v[16:0]
+@28
+tb_bkm_control_step.duv.c_v
+@420
+tb_bkm_control_step.duv.v_np1[15:0]
+tb_bkm_control_step.bkm_step.v_np1
+@200
+-MODO L: u_np1 = 2*( u_n + d_u_n + Re(w_n*d_n)*2^-n )
+@28
+tb_bkm_control_step.duv.mode
+tb_bkm_control_step.bkm_step.d_x_n[1:0]
+tb_bkm_control_step.bkm_step.d_y_n[1:0]
+tb_bkm_control_step.bkm_step.du
+tb_bkm_control_step.bkm_step.dv
+@24
+tb_bkm_control_step.duv.n[5:0]
+@28
+tb_bkm_control_step.bkm_step.nc
+@420
+tb_bkm_control_step.duv.u_n[15:0]
+tb_bkm_control_step.bkm_step.u_n
+tb_bkm_control_step.duv.u_n_plus_d_u_n[16:0]
+tb_bkm_control_step.bkm_step.u_n_plus_d_u_n_r
+tb_bkm_control_step.duv.u_n_times_d_n[16:0]
+tb_bkm_control_step.bkm_step.u_n_times_d_n_r
+tb_bkm_control_step.duv.u_n_times_d_n_div_2_n[16:0]
+tb_bkm_control_step.bkm_step.u_n_times_d_n_div_2_n_r
+tb_bkm_control_step.duv.u_np1[15:0]
+@421
+tb_bkm_control_step.bkm_step.u_np1
+@200
+-
+-MODO L: v_np1 = 2*( v_n + d_v_n + Im(w_n*d_n)*2^-n )
+@28
+tb_bkm_control_step.duv.mode
+tb_bkm_control_step.duv.d_u_n[1:0]
+tb_bkm_control_step.duv.d_v_n[1:0]
+tb_bkm_control_step.bkm_step.du
+tb_bkm_control_step.bkm_step.dv
+@c00024
+tb_bkm_control_step.duv.n[5:0]
+@28
+(0)tb_bkm_control_step.duv.n[5:0]
+(1)tb_bkm_control_step.duv.n[5:0]
+(2)tb_bkm_control_step.duv.n[5:0]
+(3)tb_bkm_control_step.duv.n[5:0]
+(4)tb_bkm_control_step.duv.n[5:0]
+(5)tb_bkm_control_step.duv.n[5:0]
+@1401200
+-group_end
+@28
+tb_bkm_control_step.bkm_step.nc
+@420
+tb_bkm_control_step.duv.v_n[15:0]
+tb_bkm_control_step.bkm_step.v_n
+tb_bkm_control_step.duv.v_n_plus_d_v_n[16:0]
+tb_bkm_control_step.bkm_step.v_n_plus_d_v_n_r
+tb_bkm_control_step.duv.v_n_times_d_n[16:0]
+tb_bkm_control_step.bkm_step.v_n_times_d_n_r
+tb_bkm_control_step.duv.v_n_times_d_n_div_2_n[16:0]
+tb_bkm_control_step.bkm_step.v_n_times_d_n_div_2_n_r
+@c00420
+tb_bkm_control_step.duv.v_np1[15:0]
+@28
+(0)tb_bkm_control_step.duv.v_np1[15:0]
+(1)tb_bkm_control_step.duv.v_np1[15:0]
+(2)tb_bkm_control_step.duv.v_np1[15:0]
+(3)tb_bkm_control_step.duv.v_np1[15:0]
+(4)tb_bkm_control_step.duv.v_np1[15:0]
+(5)tb_bkm_control_step.duv.v_np1[15:0]
+(6)tb_bkm_control_step.duv.v_np1[15:0]
+(7)tb_bkm_control_step.duv.v_np1[15:0]
+(8)tb_bkm_control_step.duv.v_np1[15:0]
+(9)tb_bkm_control_step.duv.v_np1[15:0]
+(10)tb_bkm_control_step.duv.v_np1[15:0]
+(11)tb_bkm_control_step.duv.v_np1[15:0]
+(12)tb_bkm_control_step.duv.v_np1[15:0]
+(13)tb_bkm_control_step.duv.v_np1[15:0]
+(14)tb_bkm_control_step.duv.v_np1[15:0]
+(15)tb_bkm_control_step.duv.v_np1[15:0]
+@1401200
+-group_end
+@420
+tb_bkm_control_step.bkm_step.v_np1
+tb_bkm_control_step.bkm_step.v_np1_bin[15:0]
+@200
+-
+@28
+tb_bkm_control_step.duv.multiply_by_d.d_x[1:0]
+tb_bkm_control_step.duv.multiply_by_d.d_y[1:0]
+@420
+tb_bkm_control_step.duv.multiply_by_d.x_dx_dy[16:0]
+tb_bkm_control_step.duv.multiply_by_d.x_dx[16:0]
+tb_bkm_control_step.duv.multiply_by_d.x_dy[16:0]
+[pattern_trace] 1
+[pattern_trace] 0

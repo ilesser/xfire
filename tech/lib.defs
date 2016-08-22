@@ -1,0 +1,34 @@
+DEFINE cmrf7sf /usr/pdks/IBM_7RF/kit/analog/cmrf7sf6AM
+ASSIGN cmrf7sf libMode readOnly
+
+DEFINE std_cells_7rf /usr/pdks/IBM_7RF/kit/analog/std_cells
+ASSIGN std_cells_7rf libMode readOnly
+
+DEFINE ext_cells_7rf /usr/pdks/IBM_7RF/kit/analog/ext_cells
+ASSIGN ext_cells_7rf libMode readOnly
+
+DEFINE esd7rf /usr/pdks/IBM_7RF/kit/analog/esd7rf
+ASSIGN esd7rf libMode readOnly
+
+DEFINE short_io /usr/pdks/IBM_7RF/kit/analog/short_io
+ASSIGN short_io libMode readOnly
+
+DEFINE wide_io /usr/pdks/IBM_7RF/kit/analog/wide_io
+ASSIGN wide_io libMode readOnly
+
+DEFINE UTN_BA_CELLS /usr/pdks/IBM_7RF/kit/analog/UTN_BA_CELLS
+ASSIGN UTN_BA_CELLS libMode readOnly
+
+DEFINE US_8ths /usr/pdks/IBM_7RF/kit/analog/US_8ths
+ASSIGN US_8ths libMode readOnly
+
+DEFINE basic /usr/synopsys/I-2013.12-SP2-4/custom_designer/auxx/samples/basic
+ASSIGN basic libMode readOnly
+
+DEFINE synps_AnalogLib /usr/synopsys/I-2013.12-SP2-4/custom_designer/auxx/samples/analogLib
+ASSIGN synps_AnalogLib libMode readOnly
+
+DEFINE xfire ../oa_proj_lib/xfire
+DEFINE digtop_xfire ../oa_proj_lib/digtop_xfire
+DEFINE xfire_core ../oa_proj_lib/xfire_core
+DEFINE xfire_fpucordic ../oa_proj_lib/xfire_fpucordic
