@@ -1111,7 +1111,7 @@ posiciones filosóficas opuestas en cuanto a lo que al diseño de arquitecturas
 concierne, tal como fuese anticipado al comienzo del capítulo \ref{ch:intro}. 
 Estas posiciones pueden diferenciarse en cuanto al lugar donde está puesto el 
 énfasis: la filosofía CISC enfatiza el poder de procesamiento del hardware y la 
-filosfía RISC el del software a través de un hardware básico y sencillo, pero 
+filosofía RISC el del software a través de un hardware básico y sencillo, pero 
 rápido. 
 
 \subsubsection{CISC: Complex Instruction Set Computer}
@@ -1192,8 +1192,134 @@ sencillez en el diseño con sencillez en el trabajo de diseñar, por el
 contrario, obtener una arquitectura sencilla obligará a trabajar más en el 
 diseño.
 
-\section{Técnicas y optimizaciones en el diseño de arquitecturas}
+\section{Ecuación de desempeño y ley de Amdahl}
+\label{sec:performance}
 
+Es necesario en este contexto, introducir una medida del desempeño o 
+performance de una máquina que procesa datos. Debe notarse que el desempeño de 
+una máquina varía según el contexto de los programas en ejecución. No es la 
+misma ``clase'' de performance la esperada para un servidor de bases de datos, 
+que para una computadora de escritorio. Es así que queda en evidencia que 
+existen diversos tipos de computadoras, con distintos objetivos, por más de que 
+todas sean consideradas de propósito general. Podemos distinguir en un primer 
+nivel de abstracción, tres grandes grupos:
+\begin{itemize}
+  \item computadoras personales o estaciones de trabajo,
+  \item servidores,
+  \item sistemas embebidos.
+\end{itemize}
+Claramente, el trabajo que se espera, realice cada una de estas variantes, es 
+distinto. Las primeras, deberían ser las más generalistas, mientras que los 
+servidores pueden especializarse en diversas áreas, como por ejemplo, 
+almacenamiento masivo de archivos, servidor web, servidor de base de datos o 
+hypervisor\footnote{Definir hypervisor}; siendo los sistemas embebidos, los mas 
+dificiles de definir de forma general, puesto que la particularidad del sistema 
+---en sentido amplio--- definirá las características del trabajo que debe 
+realizar, como puede ser detección de huellas dactilares en un sistema de 
+control de acceso, tarea que demandará alta capacidad de cómputo para el 
+procesamiento de imágenes, o la gestión de HMI\footnote{Definir HMI} de una 
+máquina industrial.\\
+No obstante resulta imprescindible contar con un método preciso y definido para 
+poder comparar arquitecturas. La métrica definida de forma histórica para tal 
+fin es el tiempo de ejecución que emplea la arquitectura para un determinado 
+programa o tarea. Se define entonces la performance de la máquina como la 
+inversa del tiempo de ejecución de un determinado programa.
+\begin{equation}
+  \label{eq:performance-performance definition}
+  \text{Performance} = \cfrac{1}{\text{Tiempo de ejecución}}
+\end{equation}
+Es de especial interés definir en éste punto al tiempo de ejecución, dado que 
+existen diversas interpretaciones del mismo. La definición más directa es el 
+del tiempo del reloj de pared, también llamado tiempo de respuesta o tiempo 
+transcurrido; en otras palabras, la latencia necesaria para completar la tarea 
+incluyendo las demoras por acceso a disco y memoria, actividades de entrada y 
+salida de datos y el \emph{overhead} asociado al sistema operativo. SEGUIR 
+DEFINIENDO TIEMPOS!!!! Si estuviésemos comparando la máquina $A$ con la máquina 
+$B$ la ecuación \ref{eq:performance-exec_time_ratio} implica que la máquina $A$ 
+es $n$ veces más rápida que la máquina $B$. Referido en términos de 
+performance, la ecuación \ref{eq:performance-performance_ratio}
+\begin{equation}
+  \label{eq:performance-exec_time_ratio}
+  \cfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = n
+\end{equation}
+\begin{equation}
+  \label{eq:performance-performance_ratio}
+  n = \cfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = 
+\cfrac{\cfrac{1}{\text{Performance}_{B}}}{\cfrac{1}{\text{Performance}_{A}}} = 
+\cfrac{\text{Performance}_{A}}{\text{Performance}_{B}}
+\end{equation}
+
+Ahora bien, para que la comparación se válida, el programa que ejecutan ambas 
+arquitecturas, debe ser el mismo, entendiéndose por ésto que:
+\begin{itemize}
+  \item deben generar el mismo resultado a partir del mismo conjunto de 
+datos de entrada,
+  \item el algoritmo implementado para el procesamiento de los datos debe ser 
+el mismo,
+  \item las condiciones de entorno deben ser las mismas (sistema operativo si 
+existiese, carga del sistema, cantidad de software en ejecución en paralelo si 
+lo hubiese, etc).
+\end{itemize}
+Para lograr tal condición será necesario partir de un programa escrito en un 
+lenguaje de más alto nivel que el ensamblador, ya que será el compilador quién 
+decida que instrucciones utilizar a nivel código de máquina para llegar al 
+objetivo.\\
+A lo largo de la historia, se han diseñado diversas pruebas para comparar 
+máquinas denominados bancos de prueba ---\emph{benchmarks} en 
+inglés---. 
+
+
+
+\section{ILP - TLP}
+\label{sec:ilp_tlp}
+
+Instruction Level Parallelism. Thread Level Paralellism. TODO.
+
+\section{Jerarquía de memoria}
+\label{sec:mem_hierarchy}
+
+Localidad espacial y temporal de datos e instrucciones. TODO.
+
+\section{Técnicas y optimizaciones en el diseño de arquitecturas RISC}
+\label{sec:optimizations}
+
+Durante esta sección estudiaremos las diversas optimizaciones implementables en 
+el diseño del hardware de las arquitecturas RISC. Debido a ciertas bondades que 
+propone la filosofía se facilita la implementación de dichas optimizaciones. 
+TODO.\\
+
+Para explotar ILP tenemos:
+\subsection{Pipeline}
+\label{subsec:optimizations-pipeline}
+
+TODO.
+
+\subsection{Forwarding}
+\label{subsec:optimizations-forwarding}
+
+TODO.
+
+\subsection{Predicción de salto}
+\label{subsec:optimizations-branch_prediction}
+
+TODO.
+
+Para explotar TLP tenemos:
+\subsection{Multiple Issue}
+\label{subsec:optimizations-multiple_issue}
+
+TODO.
+
+\subsection{Scalar - Superscalar}
+\label{subsec:optimizations-scalar_superscalar}
+
+TODO.
+
+\subsection{Multicore}
+\label{subsec:optimizations-multicore}
+
+Coherencia de cache?
+TODO.
 
 
 
