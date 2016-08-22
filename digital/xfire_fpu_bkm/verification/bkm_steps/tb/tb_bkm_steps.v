@@ -30,18 +30,20 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 32
-`define LOG2W 5
-`define WD 32  //`W
-`define WC 8   //`W/4
-`define LOG2WC `LOG2W-2
+`define N      32
+`define LOG2N   5
+`define W      32
+`define LOG2W   5
+`define GD      1
+`define GC      2
+`define WD     `W+`GD      //32+1 //`W
+`define WC     `W/4+`GC   //8+2 //`W/4
 `define LOG2WD `LOG2W
-`define N 32
-`define LOG2N 5
-`define M_SIZE 1
-`define F_SIZE 2
-`define D_SIZE 2
-`define CNT_SIZE `M_SIZE+`F_SIZE+`LOG2N+2*(`WC)+2*(`WD)
+`define LOG2WC `LOG2W-2
+`define M_SIZE  1
+`define F_SIZE  2
+`define D_SIZE  2
+`define CNT_SIZE `M_SIZE+`F_SIZE+2*(`WC)+2*(`WD)
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -103,14 +105,14 @@ module tb_bkm_steps ();
    );
 
    always @(posedge clk)
-       if (arst==1'b1) begin
-          cnt <= {`CNT_SIZE{1'b0}};
-       end else if (ena) begin
+      if (arst==1'b1) begin
+         cnt <= {`CNT_SIZE{1'b0}};
+      end else if (ena) begin
          if (load)
             cnt <= cnt_load;
          else
             cnt <= cnt + cnt_step;
-       end
+      end
    // -----------------------------------------------------
 
    // -----------------------------------------------------
