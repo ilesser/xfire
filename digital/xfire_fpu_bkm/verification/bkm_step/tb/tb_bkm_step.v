@@ -24,6 +24,8 @@
 // History:
 // --------
 //
+//    - 2016-08-22 - ilesser - Added guard bits.
+//    - 2016-08-22 - ilesser - Added min/max deltas to tb.
 //    - 2016-08-15 - ilesser - Updated indentation.
 //    - 2016-08-15 - ilesser - Changed some regs to wires.
 //    - 2016-07-06 - ilesser - Initial version.
@@ -35,9 +37,11 @@
 `define N      32
 `define LOG2N   5
 `define W      32
-`define WD     32 //`W
-`define WC      8 //`W/4
 `define LOG2W   5
+`define GD      1
+`define GC      2
+`define WD     `W+`GD      //32+1 //`W
+`define WC     `W/4+`GC   //8+2 //`W/4
 `define LOG2WD `LOG2W
 `define LOG2WC `LOG2W-2
 `define M_SIZE  1
@@ -89,6 +93,10 @@ module tb_bkm_step ();
    wire  [2*`WD-1:0]       lut_X_n_csd,   lut_Y_n_csd;
    wire  [`WD-1:0]         res_X_np1,     res_Y_np1;
    wire  [`WC-1:0]         res_u_np1,     res_v_np1;
+   wire  [`WD-1:0]         min_delta_X,   min_delta_Y;
+   wire  [`WD-1:0]         max_delta_X,   max_delta_Y;
+   wire  [`WC-1:0]         min_delta_u,   min_delta_v;
+   wire  [`WC-1:0]         max_delta_u,   max_delta_v;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -221,18 +229,26 @@ module tb_bkm_step ();
       // ----------------------------------
       // Data outputs
       // ----------------------------------
-      .war_u      (war_u),
-      .war_v      (war_v),
-      .err_u      (err_u),
-      .err_v      (err_v),
-      .delta_u    (delta_u),
-      .delta_v    (delta_v),
-      .war_X      (war_X),
-      .war_Y      (war_Y),
-      .err_X      (err_X),
-      .err_Y      (err_Y),
-      .delta_X    (delta_X),
-      .delta_Y    (delta_Y)
+      .war_u         (war_u),
+      .war_v         (war_v),
+      .err_u         (err_u),
+      .err_v         (err_v),
+      .delta_u       (delta_u),
+      .delta_v       (delta_v),
+      .min_delta_u   (min_delta_u),
+      .min_delta_v   (min_delta_v),
+      .max_delta_u   (max_delta_u),
+      .max_delta_v   (max_delta_v),
+      .war_X         (war_X),
+      .war_Y         (war_Y),
+      .err_X         (err_X),
+      .err_Y         (err_Y),
+      .delta_X       (delta_X),
+      .delta_Y       (delta_Y),
+      .min_delta_X   (min_delta_X),
+      .min_delta_Y   (min_delta_Y),
+      .max_delta_X   (max_delta_X),
+      .max_delta_Y   (max_delta_Y)
    );
    // -----------------------------------------------------
 

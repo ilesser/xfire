@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-22 - ilesser - Added guard bits.
 //    - 2016-08-11 - ilesser - Updated for WD and WC.
 //    - 2016-07-06 - ilesser - Initial version.
 //
@@ -84,15 +85,16 @@ task rand_test;
          rand_n         = constrained_rand_int(0, 2**`LOG2N);
          rand_d_x_n     = constrained_rand_int(0, 3);
          rand_d_y_n     = constrained_rand_int(0, 3);
-         rand_X_n       = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
-         rand_Y_n       = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
-         rand_lut_X_n   = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
-         rand_lut_Y_n   = constrained_rand_int(-1*(2**(`WD-1)), 2**(`WD-1)-1);
+         // Limit the input range so that it has 1 guard bits
+         rand_X_n       = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
+         rand_Y_n       = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
+         rand_lut_X_n   = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
+         rand_lut_Y_n   = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
          // Limit the input range so that it has 2 guard bits
-         rand_u_n       = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
-         rand_v_n       = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
-         rand_lut_u_n   = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
-         rand_lut_v_n   = constrained_rand_int(-1*(2**(`WC-1-1)), 2**(`WC-1-1)-1);
+         rand_u_n       = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
+         rand_v_n       = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
+         rand_lut_u_n   = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
+         rand_lut_v_n   = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
 
          //rand_mode      = `MODE_L;
          rand_format    = `FORMAT_CMPLX_DW;
@@ -100,15 +102,14 @@ task rand_test;
          //rand_n         = constrained_rand_int(4,15);
          //rand_d_x_n     = 2'b00;
          //rand_d_y_n     = 2'b00;
-         //rand_X_n       = constrained_rand_int(0, 300);
-         //rand_Y_n       = constrained_rand_int(0, 300);
-         //rand_u_n       = constrained_rand_int(0, 30);
-         //rand_v_n       = constrained_rand_int(0, 30);
-         //rand_v_n       = rand_u_n;
-         //rand_lut_X_n   = constrained_rand_int(0, 300);
-         //rand_lut_Y_n   = constrained_rand_int(0, 300);
-         //rand_lut_u_n   = constrained_rand_int(0, 30);
-         //rand_lut_v_n   = constrained_rand_int(0, 30);
+         //rand_X_n       = constrained_rand_int(-300, 300);
+         //rand_Y_n       = constrained_rand_int(-300, 300);
+         //rand_lut_X_n   = constrained_rand_int(-300, 300);
+         //rand_lut_Y_n   = constrained_rand_int(-300, 300);
+         //rand_u_n       = constrained_rand_int(-300, 300);
+         //rand_v_n       = constrained_rand_int(-300, 300);
+         //rand_lut_u_n   = constrained_rand_int(-300, 300);
+         //rand_lut_v_n   = constrained_rand_int(-300, 300);
 
          load_directed  (
                            rand_mode,

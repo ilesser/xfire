@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-22 - ilesser - Added min/max deltas as out ports.
 //    - 2016-08-15 - ilesser - Added LOG2N parameter to checkers.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-11 - ilesser - Added min and max of delta signals.
@@ -80,12 +81,20 @@ module bkm_step_checker #(
    output wire               err_v,
    output wire  [WC-1:0]     delta_u,
    output wire  [WC-1:0]     delta_v,
+   output reg   [WC-1:0]     min_delta_u,
+   output reg   [WC-1:0]     min_delta_v,
+   output reg   [WC-1:0]     max_delta_u,
+   output reg   [WC-1:0]     max_delta_v,
    output wire               war_X,
    output wire               war_Y,
    output wire               err_X,
    output wire               err_Y,
    output wire  [WD-1:0]     delta_X,
-   output wire  [WD-1:0]     delta_Y
+   output wire  [WD-1:0]     delta_Y,
+   output reg   [WD-1:0]     min_delta_X,
+   output reg   [WD-1:0]     min_delta_Y,
+   output reg   [WD-1:0]     max_delta_X,
+   output reg   [WD-1:0]     max_delta_Y
    );
 // *****************************************************************************
 
@@ -97,24 +106,20 @@ module bkm_step_checker #(
    // Internal signals
    // -----------------------------------------------------
    wire  [1:0]             tb_d_u_n,      tb_d_v_n;
-   reg   signed [WD-1:0]   max_delta_X,   max_delta_Y;
-   reg   signed [WD-1:0]   min_delta_X,   min_delta_Y;
-   reg   signed [WC-1:0]   max_delta_u,   max_delta_v;
-   reg   signed [WC-1:0]   min_delta_u,   min_delta_v;
    // -----------------------------------------------------
 
-   initial begin
-      $monitor("Time = %8t",                                               $time,
-               "\ttb_mode=%b",                                             tb_mode,
-               "\ttb_format=%b",                                           tb_format,
-               "\ttb_n=%b",                                                tb_n,
-               "\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
-               "\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
-               "\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
-               "\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
-               "\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
-            );
-   end
+   //initial begin
+      //$monitor("Time = %8t",                                               $time,
+               //"\ttb_mode=%b",                                             tb_mode,
+               //"\ttb_format=%b",                                           tb_format,
+               //"\ttb_n=%b",                                                tb_n,
+               //"\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
+               //"\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
+               //"\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
+               //"\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
+               //"\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
+            //);
+   //end
 
    assign tb_d_u_n = tb_d_x_n;
    assign tb_d_v_n = tb_d_y_n;
