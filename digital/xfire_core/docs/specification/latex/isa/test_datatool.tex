@@ -1,0 +1,700 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[verbose=false]{datatool}
+\usepackage{datatool-base}
+\usepackage{tabu}
+\usepackage{ifthen}
+\usepackage{longtable}
+
+%opening
+\title{Test datatool}
+\author{lnatale}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Just for testing datatool package.
+\end{abstract}
+
+\DTLsetseparator{|}
+\DTLloaddb[]{isa}{isa.csv}
+
+\section{Tables}
+\subsection{By Family}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{2}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Control} \and \DTLiseq{\subfamily}{3}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Control instructions}
+  \label{tbl:ctrl_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Memory data transfer} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Memory data transfer} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Memory data transfer} \and \DTLiseq{\subfamily}{2}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Memory data transfer instructions}
+  \label{tbl:mdt_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Register data transfer} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Register data transfer} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Register data transfer instructions}
+  \label{tbl:rdt_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Data type conversion}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Data type conversion instructions}
+  \label{tbl:dtc_instructions}
+  \end{center}
+\end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{0}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow{\\\hline\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	} 
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{1}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{2}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{3}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}
+      \DTLforeach*[\DTLiseq{\family}{Logic} \and \DTLiseq{\subfamily}{4}]
+	{isa}
+	{
+	  \mnemonic=mnemonic,
+	  \args=args,
+	  \description=shortdescription,
+	  \family=family,
+	  \subfamily=subfamily}
+	{
+	  \DTLiffirstrow {\\\hline}{\\} \texttt{\mnemonic} & \texttt{\args} & \description
+	}\\\hline
+    \end{tabu}
+  \caption{Logic instructions}
+  \label{tbl:l_instructions}
+  \end{center}
+\end{table}
+
+% \begin{table}
+%   \begin{center}
+%     \begin{tabu} to \textwidth {|ll|X[l]|}
+%       \hline
+%       \multicolumn{2}{|c|}{Mnemonic} & Description
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{0}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{1}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{2}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{3}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{4}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{5}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{6}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{7}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{8}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{9}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}
+%       \DTLforeach*[\DTLiseq{\family}{Arithmetic} \and \DTLiseq{\subfamily}{10}]{isa}{
+% 	  \mnemonic=mnemonic,
+% 	  \args=args,
+% 	  \description=shortdescription,
+% 	  \family=family,
+% 	  \subfamily=subfamily}
+% 	{
+% 	  \DTLiffirstrow{\\\hline}{\\}
+% 	  \texttt{\mnemonic} & \texttt{\args} & \description
+% 	}\\\hline
+%     \end{tabu}
+%   \caption{Arithmetic instructions}
+%   \label{tbl:a_instructions}
+%   \end{center}
+% \end{table}
+
+\begin{table}
+  \begin{center}
+    \begin{tabu} to \textwidth {|ll|X[l]|}
+      \hline
+      \multicolumn{2}{|c|}{Mnemonic} & Description%
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{0}]{isa}{
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{1}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{2}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+    \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{3}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{4}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{5}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop 
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{6}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{7}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{8}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily}% Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{9}]{isa}{%
+       \mnemonic=mnemonic,
+       \args=args,
+       \description=shortdescription,
+       \family=family,
+       \subfamily=subfamily} % Assign list
+     {%
+       \DTLiffirstrow{\\\hline}{\\}%
+       \texttt{\mnemonic} & \texttt{\args} & \description
+     }% End loop
+     \DTLforeach*[\DTLiseq{\family}{Arithmetic}\and\DTLiseq{\subfamily}{10}]{isa}{%
+        \mnemonic=mnemonic,
+        \args=args,
+        \description=shortdescription,
+        \family=family,
+        \subfamily=subfamily}% Assign list
+      {%
+        \DTLiffirstrow{\\\hline}{\\}%
+        \texttt{\mnemonic} & \texttt{\args} & \description
+      }% End loop
+      \\\hline
+    \end{tabu}
+  \caption{Arithmetic instructions}
+  \label{tbl:a_instructions}
+  \end{center}
+\end{table}
+
+\begin{center}
+  \begin{longtabu} to \textwidth {|ll|X[l]|}
+  \caption{Cordic instructions}
+  \label{tbl:c_instructions}\\
+    \hline
+    \multicolumn{2}{|c|}{Mnemonic} & Description
+    \\\hline
+    \endfirsthead
+    \hline
+    \multicolumn{3}{|c|}{-- Continued from previous page}
+    \\\hline
+    \multicolumn{2}{|c|}{Mnemonic} & Description
+    \\\hline\hline
+    \endhead
+    \hline \multicolumn{3}{|r|}{{Continued on next page}}
+    \\\hline
+    \endfoot
+    \\\hline
+    \endlastfoot
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{0}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{1}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{2}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{3}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{4}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{5}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{6}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{7}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{8}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{9}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{10}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{11}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{12}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{13}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{14}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+    \DTLforeach*[\DTLiseq{\family}{Cordic} \and \DTLiseq{\subfamily}{15}]{isa}{
+	\mnemonic=mnemonic,
+	\args=args,
+	\description=shortdescription,
+	\family=family,
+	\subfamily=subfamily}
+      {
+	\DTLiffirstrow{\\\hline}{\\}
+	\texttt{\mnemonic} & \texttt{\args} & \description
+      }
+  \end{longtabu}
+\end{center}
+
+\section{Listings}
+\subsection{Testing}
+
+\DTLforeach*{isa}{
+\type=type,
+\mnemonic=mnemonic,
+\args=args,
+\shortdescription=shortdescription,
+\description=description,\coding=coding,
+\operation=operation,
+\flags=flags,
+\notes=notes,
+\assemblertranslationsandvalidations=assemblertranslationsandvalidations,
+\cpuvalidations=cpuvalidations}
+{%
+\subsubsection{\mnemonic \enspace - \shortdescription}
+\label{sssec:\mnemonic}
+\begin{tabu} to \textwidth {lcX[l]}
+Mnemonic             & : & \texttt{\mnemonic} \texttt{\args} \\
+Coding               & : & \texttt{\coding} \\
+Operation            & : & \begin{tabu} to \textwidth {X[l]} \operation \end{tabu} \\
+Assember Validations & : & \texttt{\assemblertranslationsandvalidations} \\
+CPU Validations      & : & \texttt{\cpuvalidations} \\
+Affected flags       & : & \begin{tabu} to \textwidth {X[l]} \flags \end{tabu} \\
+Notes                & : & \notes \\
+\end{tabu}
+}\\
+
+\end{document}
