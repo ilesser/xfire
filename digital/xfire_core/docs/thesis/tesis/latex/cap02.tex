@@ -730,7 +730,7 @@ algunos microcontroladores que tienen operaciones para escribir en su memoria
 medios de acceso para actualizaciones de software/firmware y reemplaza a las
 EEPROM.
 
-\paragraph{Ejecucion de datos}
+\paragraph{Ejecución de datos}
 \label{par:theory-modern-memory_access-modified_harvard-data_execution}
 
 Algunas arquitecturas pueden obtener sus instrucciones desde cualquier segmento
@@ -1220,24 +1220,47 @@ control de acceso, tarea que demandará alta capacidad de cómputo para el
 procesamiento de imágenes, o la gestión de HMI\footnote{Definir HMI} de una 
 máquina industrial.\\
 No obstante resulta imprescindible contar con un método preciso y definido para 
-poder comparar arquitecturas. La métrica definida de forma histórica para tal 
-fin es el tiempo de ejecución que emplea la arquitectura para un determinado 
-programa o tarea. Se define entonces la performance de la máquina como la 
-inversa del tiempo de ejecución de un determinado programa.
+poder comparar arquitecturas.
+
+\subsection{Ecuación de desempeño}
+\label{subsec:performance-performance_definition}
+
+La métrica definida de forma histórica para tal fin es el tiempo de ejecución 
+que emplea la arquitectura para un determinado programa o tarea. Se define 
+entonces el desempeño de la máquina como la inversa del tiempo de ejecución de 
+un determinado programa.
 \begin{equation}
-  \label{eq:performance-performance definition}
-  \text{Performance} = \cfrac{1}{\text{Tiempo de ejecución}}
+  \label{eq:performance-performance_definition}
+  \text{desempeño} = \cfrac{1}{\text{Tiempo de ejecución}}
 \end{equation}
 Es de especial interés definir en éste punto al tiempo de ejecución, dado que 
 existen diversas interpretaciones del mismo. La definición más directa es el 
 del tiempo del reloj de pared, también llamado tiempo de respuesta o tiempo 
 transcurrido; en otras palabras, la latencia necesaria para completar la tarea 
 incluyendo las demoras por acceso a disco y memoria, actividades de entrada y 
-salida de datos y el \emph{overhead} asociado al sistema operativo. SEGUIR 
-DEFINIENDO TIEMPOS!!!! Si estuviésemos comparando la máquina $A$ con la máquina 
-$B$ la ecuación \ref{eq:performance-exec_time_ratio} implica que la máquina $A$ 
-es $n$ veces más rápida que la máquina $B$. Referido en términos de 
-performance, la ecuación \ref{eq:performance-performance_ratio}
+salida de datos y el \emph{overhead} asociado al sistema operativo. El 
+problema que existe con ésta definición directa del tiempo de ejecución es que 
+típicamente en una máquina el proceso que estaremos midiendo no será el único 
+proceso que se está ejecutando en un determinado intervalo de tiempo; lo más 
+probable es que exista un sistema operativo que está gestionando múltiples 
+procesos de usuario además de los propios que entre otras cosas será 
+responsable de gestionar el tiempo de procesamiento que se le dedica a cada 
+proceso en ejecución. En esa gestión el sistema operativo irá suspendiendo 
+procesos que quedan a la espera de respuestas de eventos externos o de 
+periféricos y lo más probable es que en dichas condiciones no se minimize el 
+tiempo de pared necesario para ejecutar el programa que estamos utilizando como 
+patrón. Se define entonces el tiempo de CPU, que es el tiempo que la máquina 
+está efectivamente computando sobre el programa en cuestión. Claramente, el 
+tiempo que percibe el usuario no es el de CPU. El problema se solucionará 
+entonces, comparando iguales cargas de trabajo en distintas arquitecturas y 
+midiendo el tiempo de CPU de cada una de ellas. Utilizando la ecuación 
+\ref{eq:performance-performance_definition} obtenemos una poderosa 
+herramienta para comparar arquitecturas. Si estuviésemos comparando la 
+máquina $A$ con la máquina $B$, la ecuación 
+\ref{eq:performance-exec_time_ratio} implica que la máquina $A$ es $n$ veces más 
+rápida que la máquina $B$. Referido en términos de desempeño se transforma en la 
+ecuación \ref{eq:performance-performance_ratio} y decimos que la arquitectura 
+$A$ es $n$ veces más performante que la arquitectura $B$.
 \begin{equation}
   \label{eq:performance-exec_time_ratio}
   \cfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = n
@@ -1245,12 +1268,12 @@ performance, la ecuación \ref{eq:performance-performance_ratio}
 \begin{equation}
   \label{eq:performance-performance_ratio}
   n = \cfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = 
-\cfrac{\cfrac{1}{\text{Performance}_{B}}}{\cfrac{1}{\text{Performance}_{A}}} = 
-\cfrac{\text{Performance}_{A}}{\text{Performance}_{B}}
+\cfrac{\cfrac{1}{\text{Desempeño}_{B}}}{\cfrac{1}{\text{Desempeño}_{A}}} = 
+\cfrac{\text{Desempeño}_{A}}{\text{Desempeño}_{B}}
 \end{equation}
-
-Ahora bien, para que la comparación se válida, el programa que ejecutan ambas 
-arquitecturas, debe ser el mismo, entendiéndose por ésto que:
+Ahora bien, para que la comparación sea válida, el programa que ejecutan ambas 
+arquitecturas debe ser el mismo y en las mismas condiciones, entendiéndose por 
+ésto que:
 \begin{itemize}
   \item deben generar el mismo resultado a partir del mismo conjunto de 
 datos de entrada,
@@ -1263,11 +1286,24 @@ lo hubiese, etc).
 Para lograr tal condición será necesario partir de un programa escrito en un 
 lenguaje de más alto nivel que el ensamblador, ya que será el compilador quién 
 decida que instrucciones utilizar a nivel código de máquina para llegar al 
-objetivo.\\
-A lo largo de la historia, se han diseñado diversas pruebas para comparar 
-máquinas denominados bancos de prueba ---\emph{benchmarks} en 
-inglés---. 
+objetivo.
 
+\subsection{Mediciones de desempeño}
+\label{subsec:perfomance-measuring}
+
+A lo largo de la historia, se han diseñado diversas pruebas para comparar 
+máquinas denominados bancos de prueba ---\emph{benchmarks} en inglés---. 
+Antiguamente, estos se implementaban utilizando ``nucleos'' 
+---\emph{kernels}--- que son pequeñas piezas claves de programas reales, 
+programas maqueta como implementaciones básicas de algoritmos comunes, y los 
+llamados benchmarks sintéticos, que son programas escritos específicamente para 
+emular el comportamiento de aplicaciones reales. Todas estas opciones han 
+quedado desacreditadas puesto que fue posible (y sucedió) ajustar las 
+teconologías de los compiladores para que las arquitecturas ejecutasen estas 
+pruebas de forma rápida, sin que ello reflejara necesariamente el 
+comportamiento frente a aplicaciones reales.
+
+SEGUIR ACÁ!!!
 
 
 \section{ILP - TLP}
