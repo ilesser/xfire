@@ -285,6 +285,10 @@ Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^
 
    %TODO: aca nose si es 4 N o 9/2 N
    En la equaci\'on ~\ref{equ:bkm_constants} podemos observar que la parte real de las constantes posee simer\'ia con respecto a $d_n^i$ y que la parte imaginaria s\'olo depende del valor de $d_n^r$ (su signo puede invertirse en el hardware).
+   XXXXXXXXXXXXXXXXXXXXXXXXXXXX.
+   Entonces para la parte real necesito 3 para $d_n^i=0$ y 3 para $d_n^i=\pm 1$.
+   Para la parte imaginaria solo necesito 3 valores ya que $d_n^i$ no influye.
+   XXXXXXXXXXXXXXXXXXXXXXXXXXXX.
    Siguiendo estas deducciones llegamos a que se necesitan $8 =!= 9$ t\'erminos por cada valor de $n$. Por lo tanto, para obtener aproximadamente $N$ bits de precisi\'on necesitamos almacenar $8=!=9 N$ constantes. Este resultado puede mejorarse observando que si $n > N/2$ entonces $\ln(\cdot)$ y $\arctan(\cdot)$ pueden reemplazarse por $ d_n^r \, 2^{-n+1}$ y $2^{-n}$ con una exactitud de $2^{-N}$ bits.
    Entonces s\'olo necesitamos almacenar $4 N =!= 9/2 N$ constantes.
 
