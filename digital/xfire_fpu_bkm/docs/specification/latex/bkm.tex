@@ -234,15 +234,39 @@ Eligiendo correctamente $d_n$ y $s_{m,n}$ el algoritmo converge (ver tabla ~\ref
 \end{table}
 
 
-\chapter{Algoritmo de Briggs para ln(x)}
+\chapter{M\'etodo de Briggs para calculo de logaritmos}
 
-Si se encuentra una secuencia $d_k$ tal que la productoria de $x$ con $(1+d_k 2^{-k})$ es cercana a 1 entonces vale que:
+XXXXXXXXXXXXXXSi se encuentra una secuencia $d_n$ tal que la productoria de $x$ con $(1+d_n 2^{-n})$ es cercana a 1 entonces vale que:XXXXXXXXXXXX
+
+Briggs uso un metodo especial para calcular logaritmos con mucha precision, pero solo de ciertos valores. En particular calculo todos los valores de la forma
+$1+q 10^{-n}$ siendo $1$ un valor entre 1 y 9. Luego desarollo un m\'etodo para poder calcular el logaritmo de un numero cualquiera en base a tablas ya calculadas.
+
 
 \begin{equation} \label{eq:briggs_ln}
    \begin{subequations}
       \begin{aligned}
-         x \prod_{k=1}^{n} (1+d_k 2^{-k}) \approx 1     \\
-         ln(x) \approx - \sum_{k=1}^{n} \ln(1+d_k 2^{-k})
+         x = x_0 * (1+q_1 10^{-1}) * (1+q_2 10^{-2}) * (1+q_3 10^{-3}) * (1+q_4 10^{-4}) ... \\
+         \ln(x) = \ln(x_0) + \ln(1+q_1 10^{-1}) + \ln(1+q_2 10^{-2}) + \ln(1+q_3 10^{-3}) ...
+      \end{aligned}
+   \end{subequations}
+\end{equation}
+
+\begin{equation} \label{eq:briggs_ln}
+   \begin{subequations}
+      \begin{aligned}
+         x \prod_{n=1}^{N} (1+d_n 2^{-n}) \approx 1     \\
+         \ln(x) \approx - \sum_{n=1}^{N} \ln(1+d_n 2^{-n})
+      \end{aligned}
+   \end{subequations}
+\end{equation}
+
+\begin{equation} \label{eq:briggs_ln}
+   \begin{subequations}
+      \begin{aligned}
+         x_{n+1}  &= x_n \cdot (1 + d_n 2^{-n})  \\
+         L_{n+1}  &= L_n -  \ln(1 + d_n 2^{-n})  \\
+         x_1      &= x  \\
+         L_1      &= 0
       \end{aligned}
    \end{subequations}
 \end{equation}
