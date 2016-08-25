@@ -1218,7 +1218,10 @@ dificiles de definir de forma general, puesto que la particularidad del sistema
 realizar, como puede ser detección de huellas dactilares en un sistema de 
 control de acceso, tarea que demandará alta capacidad de cómputo para el 
 procesamiento de imágenes, o la gestión de HMI\footnote{Definir HMI} de una 
-máquina industrial.\\
+máquina industrial; y también combinaciones de estas funciones y muchas otras 
+más, como pueden encontrarse en un teléfono celular moderno. Dentro del 
+universo de los sistemas embebidos, el de los dispositivos móviles es todo un 
+área por sí sola.\\
 No obstante resulta imprescindible contar con un método preciso y definido para 
 poder comparar arquitecturas.
 
@@ -1231,7 +1234,7 @@ entonces el desempeño de la máquina como la inversa del tiempo de ejecución d
 un determinado programa.
 \begin{equation}
   \label{eq:performance-performance_definition}
-  \text{desempeño} = \cfrac{1}{\text{Tiempo de ejecución}}
+  \text{Desempeño} = \cfrac{1}{\text{Tiempo de ejecución}}
 \end{equation}
 Es de especial interés definir en éste punto al tiempo de ejecución, dado que 
 existen diversas interpretaciones del mismo. La definición más directa es el 
@@ -1298,12 +1301,39 @@ Antiguamente, estos se implementaban utilizando ``nucleos''
 programas maqueta como implementaciones básicas de algoritmos comunes, y los 
 llamados benchmarks sintéticos, que son programas escritos específicamente para 
 emular el comportamiento de aplicaciones reales. Todas estas opciones han 
-quedado desacreditadas puesto que fue posible (y sucedió) ajustar las 
+quedado desacreditadas puesto que fue posible (y ha sucedido) ajustar las 
 teconologías de los compiladores para que las arquitecturas ejecutasen estas 
 pruebas de forma rápida, sin que ello reflejara necesariamente el 
-comportamiento frente a aplicaciones reales.
-
-SEGUIR ACÁ!!!
+comportamiento frente a aplicaciones reales. A pesar de ello, el benchmark 
+sintético ``Dhrystone''\footnote{Referencia a Dhrystone} es uno de los más 
+nombrados a la hora de exponer las virtudes en el desempeño de arquitecturas 
+del mercado de los procesadores embebidos. Como fuese mencionado en 
+\ref{subsec:performance-performance_definition}, las condiciones de entorno en 
+las cuales se deben ejecutar estas pruebas deben estar de cierta forma 
+normalizadas. Las implicancias que esto acarrea afectan por un lado a la 
+compilación de los programas que componen a los bancos de prueba, debido al uso 
+de \emph{flags} o banderas de compilación que pueden generar transformaciones 
+ilegales en algunos programas o disminuir el desempeño en otros. Para 
+restringir estas diferencias y normalizar los resultados de las pruebas, los 
+desarrolladores de \emph{benchmarks} establecen el compilador a utilizar y un 
+set de \emph{flags} común a todos los programas escritos en C\footnote{Lenguaje 
+C} o C++\footnote{Lenguaje C++} ---que son los lenguajes de programación 
+utilizados de forma estándar para estas pruebas junto con 
+Fortran\footnote{Lenguaje Fortran} en algunos casos---. Por otro lado otra 
+pregunta que surge es si se permite la modificación del código fuente. Hay tres 
+enfoques en relación a esta cuestión:
+\begin{itemize}
+  \item no se permite ninguna modificación del código fuente,
+  \item se permiten modificaciones pero son impracticables; por ejemplo, las 
+pruebas de base de datos funcionan sobre programas específicos con millones de 
+líneas de código, cuyos desarrolladores no modifican el código con el objetivo 
+de mejorar el desempeño en alguna arquitectura en particular,
+  \item se permiten modificaciones, en tanto y en cuanto la versión modificada 
+genere exactamente el mismo resultado que la orginal.
+\end{itemize}
+En este contexto, la cuestión clave que deben afrontar los desarrolladores, es 
+si dichas modificaciones reflejarán la realidad y producirán resultados 
+certeros como predictores de la performance real de los equipos.
 
 
 \section{ILP - TLP}
