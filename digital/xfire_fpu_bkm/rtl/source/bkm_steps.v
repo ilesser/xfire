@@ -89,6 +89,7 @@
 // History:
 // --------
 //
+//    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-22 - ilesser - Uncommented lut_decoder.
 //    - 2016-07-11 - ilesser - Build an unrolled version.
 //    - 2016-04-23 - ilesser - Initial version.
@@ -114,10 +115,10 @@ module bkm_steps  (
    // ----------------------------------
    parameter   N        = 64;
    parameter   LOG2N    = 6;
-   parameter   WC       = 64;
-   parameter   WD       = 16;
-   parameter   LOG2WC   = 6;
-   parameter   LOG2WD   = 4;
+   parameter   WD       = 72;
+   parameter   WC       = 21;
+   parameter   LOG2WD   = 7;
+   parameter   LOG2WC   = 5;
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
@@ -268,7 +269,7 @@ module bkm_steps  (
             // ----------------------------------
             .mode       (mode),
             .format     (format),
-            .n          (n),
+            .n          (n[LOG2N-1:0]),
             .d_x_n      (d_x[n]),
             .d_y_n      (d_y[n]),
             // ----------------------------------
@@ -306,7 +307,7 @@ module bkm_steps  (
             // ----------------------------------
             .mode       (mode),
             .format     (format),
-            .n          (n),
+            .n          (n[LOG2N-1:0]),
             .d_x_n      (  d_x[n]),    .d_y_n      (  d_y[n]),
             .X_n        (    X[n]),    .Y_n        (    Y[n]),
             .lut_X      (lut_X[n]),    .lut_Y      (lut_Y[n]),
