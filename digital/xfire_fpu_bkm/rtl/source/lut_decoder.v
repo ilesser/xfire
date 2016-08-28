@@ -65,16 +65,16 @@ module lut_decoder #(
    // ----------------------------------
    input    wire              mode,
    input    wire  [1:0]       format,
-   input    wire  [1:0]       d_x,
-   input    wire  [1:0]       d_y,
+   input    wire  [1:0]       d_x_n,
+   input    wire  [1:0]       d_y_n,
    input    wire  [LOG2N-1:0] n,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output   wire  [2*WD-1:0]  lut_X,
-   output   wire  [2*WD-1:0]  lut_Y,
-   output   wire  [WC-1:0]    lut_u,
-   output   wire  [WC-1:0]    lut_v
+   output   reg   [2*WD-1:0]  lut_X,
+   output   reg   [2*WD-1:0]  lut_Y,
+   output   reg   [WC-1:0]    lut_u,
+   output   reg   [WC-1:0]    lut_v
 );
 // *****************************************************************************
 
@@ -153,7 +153,7 @@ module lut_decoder #(
    //assign lut_u = {WC{1'b1}};
    //assign lut_v = {WC{1'b0}};
 
-   assign d_n = {d_x, d_y};
+   assign d_n = {d_x_n, d_y_n};
 
    // TODO: implement format
    // TODO: implement dependecies on d_y for the real part
