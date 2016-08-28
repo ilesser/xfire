@@ -37,6 +37,7 @@
 // History:
 // --------
 //
+//    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-15 - ilesser - Changed output to wire.
 //    - 2016-07-19 - ilesser - Deleted op and shift_t inputs.
 //    - 2016-07-19 - ilesser - Changed decision logic.
@@ -53,8 +54,8 @@ module barrel_shifter_csd #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64,
-    parameter LOG2W  = 6
+    parameter W      = 73,
+    parameter LOG2W  = 7
   ) (
     // ----------------------------------
     // Data inputs
@@ -94,7 +95,7 @@ module barrel_shifter_csd #(
 
    //wire  [2*W-1:0]   shifted;
    wire  [2*W+1:0]   shifted;
-   wire  [LOG2W+1:0] sel_ext;
+   wire  [LOG2W:0]   sel_ext;
    wire  [2*W+1:0]   in_ext;
    wire  [2*W-1:0]   out_left, out_right;
 
@@ -150,14 +151,12 @@ module barrel_shifter_csd #(
     // Parameters
     // ----------------------------------
       .W                   (2*W+2),
-      .LOG2W               (LOG2W+1+1)
+      .LOG2W               (LOG2W+1)
    ) barrel_shifter (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (dir),
-      //.op                  (op),
-      //.shift_t             (shift_t), TODO
       .op                  (`OP_SHIFT),
       .shift_t             (`SHIFT_LOGIC),
       //.sel                 ({sel,1'b0}), // select with 2*sel
@@ -280,7 +279,7 @@ module barrel_shifter_csd #(
    //assign out_right  = {shifted[2*W+1:4], out_right_lsb};
 
    assign in_ext  = {in, `CSD_0_0};
-   assign sel_ext = ({2'b00, sel} + 0) * 2;
+   assign sel_ext = (sel + 0) * 2;
 
    assign out_right  = shifted[1:0] == `CSD_m1  ?  {shifted[2*W+1:4], `CSD_m1}   :
                                                     shifted[2*W+1:2]             ;

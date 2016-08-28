@@ -37,6 +37,7 @@
 // History:
 // --------
 //
+//    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-15 - ilesser - Initial version
 //
 // -----------------------------------------------------------------------------
@@ -50,8 +51,8 @@ module div_by_2_n #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64,
-    parameter LOG2W  = 6,
+    parameter W      = 21,
+    parameter LOG2W  = 5,
     parameter LOG2N  = 6
   ) (
     // ----------------------------------
