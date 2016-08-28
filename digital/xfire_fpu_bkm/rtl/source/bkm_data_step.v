@@ -68,6 +68,7 @@
 //
 //    TODO: implement power savings based on format. Currently it works always
 //          in double word complex format.
+//    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
 //    - 2016-08-10 - ilesser - Duplicated BUG3 fix.
 //    - 2016-07-22 - ilesser - Initial version.
@@ -83,8 +84,8 @@ module bkm_data_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64,
-    parameter LOG2W  = 6,
+    parameter W      = 72,
+    parameter LOG2W  = 7,
     parameter LOG2N  = 6,
     parameter ARCH   = "CSD"
   ) (
@@ -190,13 +191,13 @@ module bkm_data_step #(
     // Parameters
     // ----------------------------------
       .W                   (W+1),
-      .LOG2W               (LOG2W+1)
+      .LOG2W               (LOG2W)
    ) barrel_shifter_csd_x(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (`DIR_RIGHT),
-      .sel                 ({1'b0,n}),
+      .sel                 ({{(LOG2W-LOG2N){1'b0}},n}),
       .in                  (X_n_times_d_n),
     // ----------------------------------
     // Data outputs
@@ -213,13 +214,13 @@ module bkm_data_step #(
     // Parameters
     // ----------------------------------
       .W                   (W+1),
-      .LOG2W               (LOG2W+1)
+      .LOG2W               (LOG2W)
    ) barrel_shifter_csd_y(
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .dir                 (`DIR_RIGHT),
-      .sel                 ({1'b0,n}),
+      .sel                 ({{(LOG2W-LOG2N){1'b0}},n}),
       .in                  (Y_n_times_d_n),
     // ----------------------------------
     // Data outputs
