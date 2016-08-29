@@ -120,10 +120,10 @@ module bkm_step   (
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter   WC       = 64;
-   parameter   WD       = 16;
-   parameter   LOG2WC   = 6;
-   parameter   LOG2WD   = 4;
+   parameter   WD       = 72;
+   parameter   WC       = 21;
+   parameter   LOG2WD   = 7;
+   parameter   LOG2WC   = 5;
    parameter   LOG2N    = 6;
    // ----------------------------------
    // Clock, reset & enable inputs

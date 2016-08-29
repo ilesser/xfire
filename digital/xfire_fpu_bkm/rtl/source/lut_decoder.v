@@ -43,6 +43,7 @@
 // History:
 // --------
 //
+//    - 2016-08-28 - ilesser - Fixed lut size definitions.
 //    - 2016-08-22 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -65,16 +66,16 @@ module lut_decoder #(
    // ----------------------------------
    input    wire              mode,
    input    wire  [1:0]       format,
-   input    wire  [1:0]       d_x,
-   input    wire  [1:0]       d_y,
+   input    wire  [1:0]       d_x_n,
+   input    wire  [1:0]       d_y_n,
    input    wire  [LOG2N-1:0] n,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output   wire  [2*WD-1:0]  lut_X,
-   output   wire  [2*WD-1:0]  lut_Y,
-   output   wire  [WC-1:0]    lut_u,
-   output   wire  [WC-1:0]    lut_v
+   output   reg   [2*WD-1:0]  lut_X,
+   output   reg   [2*WD-1:0]  lut_Y,
+   output   reg   [WC-1:0]    lut_u,
+   output   reg   [WC-1:0]    lut_v
 );
 // *****************************************************************************
 
@@ -135,12 +136,12 @@ module lut_decoder #(
    // Constants definition
    // -----------------------------------------------------
    // Real part
-   wire [2*WD-1:0]   X  [3:0] [1:(2**LOG2N)];
-   wire [WC-1:0]     u  [3:0] [1:(2**LOG2N)];
+   wire [2*WD-1:0]   X  [0:15] [1:(2**LOG2N)];
+   wire [WC-1:0]     u  [0:15] [1:(2**LOG2N)];
 
    // Imaginary part
-   wire [2*WD-1:0]   Y  [3:0] [1:(2**LOG2N)];
-   wire [WC-1:0]     v  [3:0] [1:(2**LOG2N)];
+   wire [2*WD-1:0]   Y  [0:15] [1:(2**LOG2N)];
+   wire [WC-1:0]     v  [0:15] [1:(2**LOG2N)];
    `include "lut_constants.vh"
    // -----------------------------------------------------
 
@@ -153,7 +154,7 @@ module lut_decoder #(
    //assign lut_u = {WC{1'b1}};
    //assign lut_v = {WC{1'b0}};
 
-   assign d_n = {d_x, d_y};
+   assign d_n = {d_x_n, d_y_n};
 
    // TODO: implement format
    // TODO: implement dependecies on d_y for the real part
