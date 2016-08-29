@@ -113,27 +113,27 @@ module tb_lut_decoder ();
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
-   //lut_decoder_monitor #(
-      //.WD         (`WD)
-   //) duv_monitor (
-      //// ----------------------------------
-      //// Clock, reset & enable inputs
-      //// ----------------------------------
-      //.clk        (clk),
-      //.arst       (arst),
-      //.srst       (srst),
-      //.enable     (ena),
-      //// ----------------------------------
-      //// Data inputs
-      //// ----------------------------------
-      //.lut_X_n_csd(lut_X_n_csd),
-      //.lut_Y_n_csd(lut_Y_n_csd),
-      //// ----------------------------------
-      //// Data outputs
-      //// ----------------------------------
-      //.res_lut_X_n(res_lut_X_n),
-      //.res_lut_Y_n(res_lut_Y_n)
-   //);
+   lut_decoder_monitor #(
+      .W          (`WD)
+   ) duv_monitor (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk        (clk),
+      .arst       (arst),
+      .srst       (srst),
+      .enable     (ena),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .lut_X_n_csd(lut_X_n_csd),
+      .lut_Y_n_csd(lut_Y_n_csd),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .res_lut_X_n(res_lut_X_n),
+      .res_lut_Y_n(res_lut_Y_n)
+   );
 
    // Dump waveforms for iverilog simulation
    `ifdef IVERILOG
@@ -213,7 +213,7 @@ module tb_lut_decoder ();
       // Data outputs
       // ----------------------------------
       .lut_X      (lut_X_n_csd),
-      .lut_Y      (lut_X_n_csd),
+      .lut_Y      (lut_Y_n_csd),
       .lut_u      (res_lut_u_n),
       .lut_v      (res_lut_v_n)
    );
