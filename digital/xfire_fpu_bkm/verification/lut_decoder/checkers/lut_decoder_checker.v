@@ -96,11 +96,11 @@ module lut_decoder_checker #(
                "\ttb_mode=%b",                                             tb_mode,
                "\ttb_format=%b",                                           tb_format,
                "\ttb_n=%b",                                                tb_n,
-               "\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
-               "\ttb_lut_X_n=%6d\ttb_lut_Y_n=%6d\n",                       tb_lut_X_n, tb_lut_Y_n,
-               "\ttb_lut_u_n=%6d\ttb_lut_v_n=%6d\n",                       tb_lut_u_n, tb_lut_v_n,
-               //"\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",               res_X_np1,res_Y_np1,
-               //"\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",               res_u_np1,res_v_np1,
+               "\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n,      tb_d_y_n,
+               "\ttb_lut_X_n=%6d\ttb_lut_Y_n=%6d\n",                       tb_lut_X_n,    tb_lut_Y_n,
+               "\ttb_lut_u_n=%6d\ttb_lut_v_n=%6d\n",                       tb_lut_u_n,    tb_lut_v_n,
+               "\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                 res_lut_X_n,   res_lut_Y_n,
+               "\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                 res_lut_u_n,   res_lut_v_n,
             );
    end
 

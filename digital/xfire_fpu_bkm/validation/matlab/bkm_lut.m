@@ -52,7 +52,7 @@ function [lut_X, lut_Y, lut_u, lut_v]=bkm_lut(N, WD, WC, max_val)
    % the posible values for d are {0, +-1} + j {0, +-1}
    % d = dr + j di
    % being dr the real part and di the imaginary part
-   d  = [ -1 -1-j -j 1-j 1 1+j j -1+j 0];
+   d  = [ 0 1 0 -1 j 1+j j -1+j 0 1 0 -1 -j 1-j -j -1-j];
 
    % TODO: implement this to reduce memory space
    % Since the real part has simmetry with respecto to di
@@ -62,18 +62,46 @@ function [lut_X, lut_Y, lut_u, lut_v]=bkm_lut(N, WD, WC, max_val)
    lut   = log(1+2.^-n*d);
    lut_x = real(lut);
    lut_y = imag(lut);
-   lut_u = lut_x .* repmat( 2.^(n+1), 1, 9 );
-   lut_v = lut_y .* repmat( 2.^(n+1), 1, 9 );
+   lut_u = lut_x .* repmat( 2.^(n+1), 1, length(d) );
+   lut_v = lut_y .* repmat( 2.^(n+1), 1, length(d) );
+
+   max(max(lut_x))
+   min(min(lut_x))
+   max(max(lut_y))
+   min(min(lut_y))
+   max(max(lut_u))
+   min(min(lut_u))
+   max(max(lut_v))
+   min(min(lut_v))
+
+   %     -0.69315 <= lut_x <= 045815          --+
+   %        -pi/4 <= lut_y <= pi/4 = 0.7854     |----> 3 bits for integer part   ==>  -4,-3,-2,-1,0,1,2,3
+   %     -2.77260 <= lut_x <= 2.00              |----> 53 bits for decimal part  ==>   0 .... 1-2^-53
+   %          -pi <= lut_v <= pi = 3.1416     --+
 
    % TODO: implement this to reduce memory space
    % If n > N/2 then real( ln(1+2^(-n)*d) = dr * 2^-n with only 1 bit of error
 
-   % TODO: convert to a 2C representation
    % TODO: convert to a CSD representation
    lut_x = (lut_x / max_val * 2^(WD-1));
    lut_y = (lut_y / max_val * 2^(WD-1));
-   lut_u = (lut_u / max_val * 2^(WC-1));
-   lut_v = (lut_v / max_val * 2^(WC-1));
+
+   % TODO: Convert to a 2C representation with 
+   %lut_u = (lut_u / max_val * 2^(WC-1));
+   %lut_v = (lut_v / max_val * 2^(WC-1));
+   % Take the luts to [-1;1)
+   lut_u = lut_u / max_val;
+   lut_v = lut_v / max_val;
+
+   % Convert them to 2Cs --> [0;2)
+   lut_u = lut_u + ( lut_u < 0 ) * 2;
+   lut_v = lut_v + ( lut_v < 0 ) * 2;
+
+   % Convert to 11Q53 ---> [0;2048)
+   lut_u = lut_u * 512;
+   lut_v = lut_v * 512;
+
+
 
    lut_x = cast( lut_x, lut_class_Z);
    lut_y = cast( lut_y, lut_class_Z);
@@ -88,54 +116,64 @@ function [lut_X, lut_Y, lut_u, lut_v]=bkm_lut(N, WD, WC, max_val)
 
    for i = 1:length(d);
       for n = 1:N;
-         [dx_bin, dy_bin] = get_d(d(i));
-         fprintf( fid, "assign X[4\'b%s%s] [%02d] = %+016d;\n", dx_bin, dy_bin, n, dec2hex( lut_x(n, i), 16 ));
+         %fprintf( fid, "assign X[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( lut_x(n, i), 16 ) );
+         fprintf( fid, "assign X[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + ( 0+i-1)*64, 16 ) );
+         fprintf( fid, "assign Y[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + (15+i-1)*64, 16 ) );
+         fprintf( fid, "assign u[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + (31+i-1)*64, 16 ) );
+         fprintf( fid, "assign v[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + (47+i-1)*64, 16 ) );
       end
    end
 
-   for i = 1:length(d);
-      for n = 1:N;
-         [dx_bin, dy_bin] = get_d(d(i));
-         fprintf( fid, "assign Y[4\'b%s%s] [%02d] = %+016d;\n", dx_bin, dy_bin, n, dec2hex( lut_y(n, i), 16 ) );
-      end
-   end
+   %for i = 1:length(d);
+      %for n = 1:N;
+         %%[dx_bin, dy_bin] = get_d(i);
+         %%fprintf( fid, "assign Y[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, dec2hex( lut_y(n, i), 16 ) );
+         %%fprintf( fid, "assign Y[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, n + (9+i-1)*64);
+      %end
+   %end
 
-   for i = 1:length(d);
-      for n = 1:N;
-         [dx_bin, dy_bin] = get_d(d(i));
-         fprintf( fid, "assign u[4\'b%s%s] [%02d] = %+016d;\n", dx_bin, dy_bin, n, dec2hex( lut_u(n, i), 16 ) );
-      end
-   end
+   %for i = 1:length(d);
+      %for n = 1:N;
+         %%[dx_bin, dy_bin] = get_d(i);
+         %%fprintf( fid, "assign u[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, dec2hex( lut_u(n, i), 16 ) );
+         %%fprintf( fid, "assign u[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, n + (18+i-1)*64);
+      %end
+   %end
 
-   for i = 1:length(d);
-      for n = 1:N;
-         [dx_bin, dy_bin] = get_d(d(i));
-         fprintf( fid, "assign v[4\'b%s%s] [%02d] = %+016d;\n", dx_bin, dy_bin, n, dec2hex( lut_v(n, i), 16 ) );
-      end
-   end
+   %for i = 1:length(d);
+      %for n = 1:N;
+         %[dx_bin, dy_bin] = get_d(i);
+         %fprintf( fid, "assign v[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, dec2hex( lut_v(n, i), 16 ) );
+         %fprintf( fid, "assign v[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, n + (27+i-1)*64);
+      %end
+   %end
 
    fclose(fid);
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
 
-function [dx_bin, dy_bin]=get_d(d)
+function [dx_bin, dy_bin]=get_d(i)
 
-   switch (real(d))
-      case 0
-         dx_bin = '00';
-      case 1
-         dx_bin = '01';
-      case -1
-         dx_bin = '11';
-   end
+   str = dec2bin(i, 4);
+   dy_bin = str(1:2);
+   dx_bin = str(3:4);
 
-   switch (imag(d))
-      case 0
-         dy_bin = '00';
-      case 1
-         dy_bin = '01';
-      case -1
-         dy_bin = '11';
-   end
+   %switch (real(d))
+      %case 0
+         %dx_bin = '00';
+      %case 1
+         %dx_bin = '01';
+      %case -1
+         %dx_bin = '11';
+   %end
+
+   %switch (imag(d))
+      %case 0
+         %dy_bin = '00';
+      %case 1
+         %dy_bin = '01';
+      %case -1
+         %dy_bin = '11';
+   %end
 
 end
