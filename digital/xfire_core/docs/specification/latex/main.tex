@@ -1,0 +1,222 @@
+%------------------------------------
+% To be edited
+%------------------------------------
+\newcommand{\xfire}{X\textsubscript{FIRE} }
+\newcommand{\documentname}{The \xfire Processor\\Architecture Specification}
+\newcommand{\crev}{0.1}
+\newcommand{\documentversion}{Rev. \crev}
+\newcommand{\cryear}{2015}
+\hyphenation{soft-ware hard-ware}
+%------------------------------------
+
+\documentclass[10pt,a4paper]{book}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\addtolength{\headsep}{0.5cm}
+\usepackage[a4paper]{geometry} %,left=2.5cm,right=3.5cm
+\usepackage{listings}
+\lstloadlanguages{VHDL}
+\usepackage[colorlinks=false]{hyperref}
+\usepackage[english, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{rotating}
+\usepackage{color}
+\usepackage{longtable}
+\usepackage{latexsym}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{bytefield}
+\usepackage{float}
+\usepackage{tabu}
+\usepackage{flafter}
+\usepackage{morefloats}
+\usepackage{fixltx2e}
+\usepackage[verbose=false]{datatool}
+\usepackage{datatool-base}
+\usepackage{ifthen}
+\usepackage{booktabs}
+
+% Paquetes matematicos
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+% Config para poder meter footnotes en las tablas:
+
+\pagestyle{fancy}
+
+%\usepackage{anysize}
+%\marginsize{3cm}{4cm}{2.5cm}{3.5cm}
+
+%---- Encabezado y pie de pagina general
+\fancypagestyle{general}{
+   \fancyhf{}
+   \fancyfoot{}
+   \fancyhead{}
+   \fancyhead[LO]{\footnotesize{\leftmark}}
+   \fancyhead[RE]{\footnotesize{\rightmark}}
+   \fancyhead[RO]{\footnotesize{\thepage}}
+   \fancyhead[LE]{\footnotesize{\thepage}}
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{plain}{
+   \fancyhf{}
+   \fancyfoot{}
+   \fancyhead{}
+   \fancyfoot[RO]{\footnotesize{\thepage}}
+   \fancyfoot[LE]{\footnotesize{\thepage}}
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0pt}
+}
+
+%---- Encabezado y pie de pagina de la caratula
+\fancypagestyle{carat} {
+   \fancyhf{}
+   \fancyfoot{}
+   \fancyhead{}
+   \fancyhead[LO]{\scalebox{0.15}{\includegraphics[angle=0]{./figures/logo_lab_ue_3.png}}}
+   \fancyhead[RE]{}
+   \fancyhead[RO]{\scalebox{0.5}{\includegraphics[angle=0]{./figures/logo_fiuba.jpg}}}
+   \fancyhead[LE]{}
+   \fancyhead[CE]{}
+   \fancyfoot[CO]{\textcircled{c} Lab-$\mu$E, FIUBA. \cryear.}
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{1pt}
+}
+
+%---- Quito los encabezados y pies de pagina en las hojas vacias
+\makeatletter
+  \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \vspace*{\fill}
+    \thispagestyle{empty}
+    \newpage
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+%---- Espaciado en el indice entre el numero y el titulo
+\makeatletter
+\renewcommand*{\l@subsection}{\@dottedtocline{1}{3.8em}{3.5em}}
+\renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{3.3em}}
+\renewcommand*{\l@table}{\@dottedtocline{1}{1.5em}{2.8em}}
+\makeatother
+
+%---- Formateo del codigo VHDL
+\lstset{
+   %extendedchars=true,%
+   %labelstep=0,
+   %labelsep=3ex,
+   %frame=trbl,
+   %frameround=tttt,
+   %framespread=-3ex,
+   %framerulecolor=colorFondoListado,
+   %backgroundcolor=colorFondoListado,
+   captionpos=b,
+   breaklines=true,
+   %linewidth=0.98\linewidth,
+   %indent=5ex,
+   tabsize=4,
+   %labelstyle=\small\ttfamily,
+   basicstyle=\scriptsize\sffamily,
+   %numberstyle=\small\sffamily,
+   identifierstyle=\scriptsize\sffamily,
+   commentstyle=\scriptsize\itshape,
+   stringstyle=\scriptsize\sffamily,
+   keywordstyle=\scriptsize\bfseries\sffamily,
+   ndkeywordstyle=\scriptsize\bfseries\sffamily,
+   showstringspaces=false,
+   flexiblecolumns=false
+   visiblespaces=false
+   %stringspaces=false
+}
+
+%---- Encabezado y pie de pagina por defecto
+\pagestyle{general}
+
+%---- Matematica
+% \newtheorem{defi}{Definici\'on}
+% \newtheorem{teor}{Teorema}
+% \newtheorem{prop}{Proposici\'on}
+% \newtheorem{lema}{Lema}
+% \newtheorem{cor}{Corolario}
+% \DeclareMathOperator{\sen}{sen}
+% \DeclareMathOperator{\supr}{sup}
+% \DeclareMathOperator{\sgn}{sgn}
+% \DeclareMathOperator{\lip}{lip}
+% \DeclareMathOperator{\codim}{codim}
+% \DeclareMathOperator{\gen}{gen}
+% \DeclareMathOperator{\im}{Im}
+% \DeclareMathOperator{\nuc}{Nu}
+% \DeclareMathOperator{\ind}{ind}
+% \DeclareMathOperator{\dom}{Dom}
+% \DeclareMathOperator{\real}{Real}
+% \DeclareMathOperator{\imag}{Imag}
+
+%---- Para no separar en SILABAS se activa el comando siguiente
+\hyphenpenalty=10000
+
+\begin{document}
+
+% \renewcommand{\contentsname}{\'Indice}
+% \renewcommand{\partname}{Parte}
+% \renewcommand{\chaptername}{Cap\'itulo}
+% \renewcommand{\appendixname}{Ap\'endice}
+% \renewcommand{\bibname}{Referencias}
+% \renewcommand{\figurename}{Figura}
+% \renewcommand{\listfigurename}{\'Indice de Figuras}
+% \renewcommand{\tablename}{Tabla}
+% \renewcommand{\listtablename}{\'Indice de Tablas}
+
+\include{frontpage}
+\newpage
+\thispagestyle{empty}
+
+\
+
+\include{abstract}
+\newpage
+\thispagestyle{empty}
+
+\
+
+\include{revhist}
+\newpage
+\thispagestyle{empty}
+
+\
+
+\tableofcontents
+\listoffigures
+\listoftables
+\include{./latex/about}
+
+\chapter{Architecture description}
+\include{./latex/data_types}
+\include{./latex/internal_registers}
+\include{./latex/ports_interface}
+\include{./latex/memory_organization}
+\include{./latex/execution}
+\include{./latex/exceptions}
+\include{./latex/modes}
+\include{./latex/peripherals}
+
+% \chapter{Application binary interface}
+% \include{./latex/abi}
+
+\chapter{Detailed instruction set description}
+\include{./latex/isa}
+
+% ---- Adjuntos y anexos
+\newpage
+\thispagestyle{empty}
+
+\include{./latex/todo}
+
+\end{document}

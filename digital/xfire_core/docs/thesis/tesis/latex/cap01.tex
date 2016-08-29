@@ -1,0 +1,178 @@
+\chapter{Introducción al trabajo de tesis}
+\label{ch:intro}
+
+El presente trabajo se encuentra enfocado en el contexto del diseño de hardware
+digital. El mismo fue motivado por la necesidad de contar un con núcleo de
+procesamiento altamente configurable y suficientemente flexible y sencillo para
+distintas aplicaciones dentro del ámbito de la investigación en los Laboratorios
+de Microelectrónica y de Sistemas Embebidos; sintetizable en
+FPGA\footnote{``Field Programmable Gate Array'' (Arreglo de compuertas lógicas
+reprogramables): dispositivo electrónico de lógica programable utilizado para
+prototipar diseños lógicos, así como también en producciones que no justifican
+la fabricación de millones de circuitos idénticos.}. La arquitectura a
+desarrollar será del tipo RISC\footnote{``Reduced Instruction Set Computer''
+(Computadora de conjunto de instrucciones reducido): técnica de diseño de
+unidades de procesamiento basada en el hecho de que un conjunto de instrucciones
+simple provee una mayor performance al ser combinado con una arquitectura capaz
+de ejecutar dichas instrucciones en algunos pocos ciclos de máquina.}.
+
+Desde la aparición de los microprocesadores a mediados de los años 70, la
+tendencia fue el aumento de la complejidad de las arquitecturas, generando un
+efecto de ``bola de nieve'', al ir superponiendo capas sobre un núcleo central.
+Existió, entonces, una reacción adversa a esta tendencia. Por ejemplo, la
+arquitectura experimental de IBM 801; y también en Berkeley, Patterson y Ditzel
+fueron los primeros en acuñar el término RISC, para descibir una nueva clase de
+arquitectura que deshacía el camino del resto de las arquitecturas hasta el
+momento, conocidas, en contraposición, como CISC\footnote{``Complex Instruction
+Set Computer'' (Computadora de conjunto de instrucciones complejo): técnica de
+diseño de unidades de procesamiento basadas en el hecho de que el conjunto de
+instrucciones debe ser lo más poderoso posible.}. A partir de este antecedente,
+los principales fabricantes de microprocesadores han lanzado al mercado sus
+propias implementaciones basadas en los principios establecidos en IBM y
+Berkeley.
+
+El concepto de las arquitecturas RISC se basa, principalmente, en el hecho de
+que al simplificar la lógica necesaria para la ejecución de una instrucción
+permite aumentar la frecuencia de operación de las compuertas que componen la
+lógica. Además, es posible dividir la ejecución de las instrucciones en etapas
+sencillas y consecutivas, permitiendo de esta manera implementar fácilmente
+optimizaciones como, por ejemplo, una arquitectura de
+\emph{pipeline}\footnote{``Pipeline'': técnica de diseño de arquitecturas de
+computadoras en la que se segmenta la ejecución de las instrucciones en
+múltiples etapas, permitiendo que múltiples instrucciones estén ejecutándose en
+paralelo.}. Es por esto que el conjunto de instrucciones es sencillo,
+permitiendo solamente operaciones básicas entre registros internos del
+microprocesador. El trabajo realizado por cada instrucción, en general, es menor
+que el generado por una instrucción CISC, pero se hace de manera sencilla y
+rápida. Es importante notar que no solamente la ganancia radica en poder
+aumentar la frecuencia de operación de la lógica, sino que estas condiciones
+facilitan el desarrollo de diseños de bajo consumo, característica muy valorada
+en el nicho de los sistemas embebidos.
+
+El mercado de los sistemas embebidos es excesivamente amplio y está inserto en
+todas las industrias. En un automóvil, por ejemplo, podemos encontrar
+microprocesadores en el sistema de frenos, en la central de inyección
+electrónica, en el sistema de entretenimiento y navegación, etc. La otra arista
+de vital importancia para el mercado de los sistemas embebidos, es el de los
+dispositivos móviles, donde se vuelve vital el requerimiento de bajo consumo.
+Estamos viviendo la revolución de IoT\footnote{``Internet of Things'' (Internet
+de las cosas): es un concepto que se refiere a la interconexión digital de
+objetos cotidianos con internet.}, que se trata básicamente de sistemas
+embebidos autónomos que estan conectados a ``la nube'' y pueden ser monitoreados
+y controlados remotamente a través de Internet.
+
+Dentro del universo de las arquitecturas RISC, actualmente se destacan dos: MIPS
+y ARM. La primera, fue desarrollada por un grupo de investigadores de la
+Universidad de Stanford (entre ellos John L. Hennessy, pionero del concepto RISC
+junto a David Patterson, coautores de la bibliografía más relevante del área).
+Esta arquitectura, por su sencillez, es la predilecta al momento del desarrollo
+de cursos enfocados en la enseñanza de arquitectura de computadoras. Si bien
+MIPS posee gran relevancia académica, es muy popular en el mercado de los
+microprocesadores en sistemas embebidos como equipos de telecomunicaciones,
+decodificadores de TV digital, y consolas de entretenimiento, con ejemplos muy
+conocidos como \emph{Nintendo} y \emph{PlaySation}. ARM, por otro lado, ha
+ganado una importante porción del mercado de los sistemas embebidos (con un gran
+aporte de los dispositivos móviles), basando su modelo de negocios en la venta
+de la propiedad intelectual (IP, \emph{intellectual property}) del diseño de los
+microprocesadores a las empresas que finalmente producen el microprocesador.
+
+
+\section{Objetivo}
+\label{sec:intro-objective}
+
+La Tesis tiene como objetivo principal el diseño, la validación e implementación
+de una arquitectura RISC y su conjunto de instrucciones. 
+
+El enfoque de la tesis se basará en un desarrollo teórico del conjunto de
+instrucciones y de las características de la arquitectura; y en el desarrollo
+práctico del emulador y la implementación en lenguaje descriptor de hardware.
+
+El concepto central detrás del desarollo será el de \textbf{ortogonalidad}. Esto
+implica, por una parte, que los bloques constructivos de la arquitectura que se
+repiten sean independientes e indiferenciables entre sí. Por otra parte, los
+formatos de las instrucciones, en la medida de lo posible, se diseñaran de
+manera tal que se pueda mantener el mismo ancho de campo para los datos
+inmediatos y los desplazamientos (excepto en los casos donde es explícitamente
+conveniente agrandarlos sin penalizar la complejidad del diseño).
+
+El objetivo perseguido va a ser el de mantener la sencillez y la ortogonalidad,
+favoreciendo así la simplificación de la implementación. Se trabajará en el
+desarrollo de la definición de la arquitectura y su conjunto de instrucciones en
+favor de este objetivo. Se definirá la interfaz física para la conectividad con
+periféricos, los tipos de datos que maneja la arquitectura, la cantidad y tipos
+de registros internos, el acceso a memoria de programa y de datos con su
+organización y modo de direccionamiento, la interfaz con la
+ALU\footnote{``Arithmetic Logic Unit'' (Unidad aritmético-lógica): bloque
+constructivo encargado de realizar las operaciones aritméticas y lógicas sobre
+los datos.} y la FPU\footnote{``Floating Point Unit'' (Unidad de punto
+flotante): bloque constructivo encargado de realizar las operaciones en punto
+flotante sobre los datos.}, mecanismos de manejos de excepeciones e
+interrupciones, modos de operación y manejo de periféricos. Luego se definirá el
+conjunto de instrucciones que ejecutará la arquitectura.
+
+Una vez definida la arquitectura y su conjunto de instrucciones, se prodecerá a
+diseñar los vectores de prueba para poder validar las implementaciones. Se
+desarrollará un emulador de la arquitectura que deberá validar los vectores de
+prueba diseñados. Una vez concluida esta etapa, se implementará a nivel RTL el
+diseño en \emph{Verilog}. Este diseño será validado mediante simulaciones y
+utilizando dispositivos programables. Se validará también contra los vectores de
+prueba. Se analizarán los recursos utilizados en dispositivos FPGA. Se realizará
+un análisis comparativo entre la arquitectura desarrollada y otras arquitecturas
+RISC.
+
+\section{Alcance}
+\label{sec:intro-reach}
+
+Como resultados a obtener de la tesis se tienen los siguientes:
+
+\begin{itemize}
+    \item Especificación completa de la arquitectura
+    \item Vectores de prueba
+    \item Emulador de la arquitectura
+    \item \emph{IP Core} codificado en el lenguaje \emph{Verilog} de la
+      arquitectura completa
+    \item Resultado de los vectores de prueba tanto en el emulador como en el
+      \emph{IP Core}
+    \item Análisis comparativo entre la arquitectura desarrollada y otras
+      arquitecturas RISC
+    \item Proposición de trabajos futuros y/o mejoras.
+\end{itemize}
+
+\section{Organización del trabajo}
+\label{sec:intro-organization}
+
+En esta sección se describe la organización de la presente tesis. Con el
+objetivo de que la misma sea autocontenida, los primeros capítulos se ocupan de
+presentar las bases o conocimientos necesarios para comprender la totalidad del
+trabajo.
+
+El desarrollo de la tesis se organiza de la siguiente forma:
+
+\begin{itemize}
+\item En el capítulo 2 se presentará la teoría general de las arquitecturas de
+  procesadores y una revisión histórica sobre el tema. Se estudiará la
+  diferenciación entre los universos de procesadores CISC y RISC y se
+  justificará la elección de diseñar una arquitectura RISC para la tesis. Se
+  presentarán las técnicas de diseño de arquitecturas estudiadas. Además se
+  presentarán reseñas de otras arquitecturas actuales y sus decisiones de
+  diseño, para luego contrastarlas con los objetivos perseguidos por el
+  presente trabajo.
+\item En el capítulo 3 se presentará la especificación completa de la
+  arquitectura diseñada, explicitando los criterios y las decisiones de diseño
+  tomadas. Además se presentará el diseño de los vectores de prueba que se
+  utilizarán para validar las implementaciones de la arquitectura.
+\item En el capítulo 4 se desarrollarán las implementaciones del emulador de la
+  arquitectura y del \emph{IP Core} en RTL. Dicho RTL cumplirá con ciertas
+  condiciones de portabilidad y legibilidad del código, para que el mismo sea
+  efectivamente un IP core. Se evaluará y validará el \emph{IP Core}
+  utilizando simuladores. Se explicitarán las decisiones de diseño necesarias
+  para pasar de la abstracción del diseño a la implementación real.
+\item En el caítulo 5 se validarán las implementaciones del capítulo 4 mediante
+  los vectores de prueba diseñados para el capítulo 3. El \emph{IP Core} será
+  sintetizado para distintos dispositivos FPGA. Se analizará en cada caso el
+  consumo de recursos utilizados, máxima frecuencia de operación y la potencia
+  consumida
+\item En el capítulo 6 se extraerán las conclusiones pertinentes sobre los
+  resultados obtenidos y se propondrán futuras mejoras de la arquitecturas a
+  partir del análisis realizado.
+\end{itemize}
