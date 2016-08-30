@@ -1,6 +1,21 @@
 function [csd]=dec2csd_hex(x, range, resolution, len)
 % Converts from decimal to a hexadecimal CSD representation.
 
+   switch nargin
+      case 0
+         puts('Error! no value to convert');
+         return
+      case 1
+         range       = 11;
+         resolution  = 62;
+         len         = 37;
+      case 2
+         resolution  = 62;
+         len         = 37;
+      case 3
+         len         = 37;
+   end
+
    % Use 64 bits of precision
    csd_bin = dec2csd( x, range, 64 );
 
