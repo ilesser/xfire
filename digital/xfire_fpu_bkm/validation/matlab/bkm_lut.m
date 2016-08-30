@@ -1,58 +1,41 @@
-function [lut_X, lut_Y, lut_u, lut_v]=bkm_lut(N, WD, WC, max_val)
+function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
+%-------------------------------------------------------------------------------
 % Generates the BKM lut constants.
 %
 %     TODO: add doc
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------------------
+
+   % Version and date
+   version = '1.0';
+   version_date = 'Monday 29 August 2016';
 
    % Initialize variables
    % Fill in unset optional values.
    switch nargin
       case 0
          N        = 64;
-         WD       = 64;
-         WC       = 16;
-         max_val  = 4;
+         WD       = 73;
+         WC       = 21;
+         WI       = 11;
       case 1
-         WD       = 64;
-         WC       = 16;
-         max_val  = 4;
+         WD       = 73;
+         WC       = 21;
+         WI       = 11;
       case 2
-         WC       = 16;
-         max_val  = 4;
+         WC       = 21;
+         WI       = 11;
       case 3
-         max_val  = 4;
+         WI       = 11;
    end
 
-   if ( WD > 0 && WD <= 8 )
-      lut_class_Z = 'int8';
-   elseif ( WD > 8  && WD <= 16 )
-      lut_class_Z = 'int16';
-   elseif ( WD > 16 && WD <= 32 )
-      lut_class_Z = 'int32';
-   elseif ( WD > 32 && WD <= 64 )
-      lut_class_Z = 'int64';
-   end
-
-   if ( WC > 0 && WC <= 8 )
-      lut_class_w = 'int8';
-   elseif ( WC > 8  && WC <= 16 )
-      lut_class_w = 'int16';
-   elseif ( WC > 16 && WC <= 32 )
-      lut_class_w = 'int32';
-   elseif ( WC > 32 && WC <= 64 )
-      lut_class_w = 'int64';
-   end
-
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %---------------------------------------------------------------
    % Calculate the LUT
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %---------------------------------------------------------------
    n  = (1:N)';
 
    % the posible values for d are {0, +-1} + j {0, +-1}
-   % d = dr + j di
-   % being dr the real part and di the imaginary part
-   d  = [ 0 1 0 -1 j 1+j j -1+j 0 1 0 -1 -j 1-j -j -1-j];
+   d  = [ 0 1 -0 -1 j 1+j j -1+j 0 1 -0 -1 -j 1-j -j -1-j];
 
    % TODO: implement this to reduce memory space
    % Since the real part has simmetry with respecto to di
@@ -65,91 +48,72 @@ function [lut_X, lut_Y, lut_u, lut_v]=bkm_lut(N, WD, WC, max_val)
    lut_u = lut_x .* repmat( 2.^(n+1), 1, length(d) );
    lut_v = lut_y .* repmat( 2.^(n+1), 1, length(d) );
 
-   max(max(lut_x))
-   min(min(lut_x))
-   max(max(lut_y))
-   min(min(lut_y))
-   max(max(lut_u))
-   min(min(lut_u))
-   max(max(lut_v))
-   min(min(lut_v))
-
-   %     -0.69315 <= lut_x <= 045815          --+
+   %     -0.69315 <= lut_x <= 0.45815        ---+
    %        -pi/4 <= lut_y <= pi/4 = 0.7854     |----> 3 bits for integer part   ==>  -4,-3,-2,-1,0,1,2,3
-   %     -2.77260 <= lut_x <= 2.00              |----> 53 bits for decimal part  ==>   0 .... 1-2^-53
-   %          -pi <= lut_v <= pi = 3.1416     --+
+   %     -2.77260 <= lut_u <= 2.00              |----> 53 bits for decimal part  ==>   0 .... 1-2^-53
+   %          -pi <= lut_v <= pi = 3.1416    ---+
+   %---------------------------------------------------------------
 
-   % TODO: implement this to reduce memory space
-   % If n > N/2 then real( ln(1+2^(-n)*d) = dr * 2^-n with only 1 bit of error
-
-   % TODO: convert to a CSD representation
-   lut_x = (lut_x / max_val * 2^(WD-1));
-   lut_y = (lut_y / max_val * 2^(WD-1));
-
-   % TODO: Convert to a 2C representation with 
-   %lut_u = (lut_u / max_val * 2^(WC-1));
-   %lut_v = (lut_v / max_val * 2^(WC-1));
-   % Take the luts to [-1;1)
-   lut_u = lut_u / max_val;
-   lut_v = lut_v / max_val;
-
-   % Convert them to 2Cs --> [0;2)
-   lut_u = lut_u + ( lut_u < 0 ) * 2;
-   lut_v = lut_v + ( lut_v < 0 ) * 2;
-
-   % Convert to 11Q53 ---> [0;2048)
-   lut_u = lut_u * 512;
-   lut_v = lut_v * 512;
-
-
-
-   lut_x = cast( lut_x, lut_class_Z);
-   lut_y = cast( lut_y, lut_class_Z);
-   lut_u = cast( lut_u, lut_class_w);
-   lut_v = cast( lut_v, lut_class_w);
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %---------------------------------------------------------------
    % Write them to a file
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %---------------------------------------------------------------
    fid = fopen('../../rtl/source/lut_constants.vh', 'w');
 
+   % Write a header
+   fprintf( fid, '//--------------------------------------------------------------------------------\n');
+   fprintf( fid, '//\n');
+   fprintf( fid, '// BKM LUT automatically generated on %s\n', strftime ("%r (%Z) %A %e %B %Y", localtime (time ())) );
+   fprintf( fid, '// using the bkm_lut.m function. Version = %s, from %s.\n', version, version_date );
+   fprintf( fid, '// Parameters:\n');
+   fprintf( fid, '// Number of steps of the algorithm:   N  = %d\n', N);
+   fprintf( fid, '// Word size of the data channel:      WD = %d\n', WD);
+   fprintf( fid, '// Word size of the control channel:   WC = %d\n', WC);
+   fprintf( fid, '// Integer word size:                  WI = %d\n', WI);
+   fprintf( fid, '//\n');
+   fprintf( fid, '//--------------------------------------------------------------------------------\n');
+
+   % TODO: write a header for lut_x
    for i = 1:length(d);
       for n = 1:N;
-         %fprintf( fid, "assign X[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( lut_x(n, i), 16 ) );
-         fprintf( fid, "assign X[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + ( 0+i-1)*64, 16 ) );
-         fprintf( fid, "assign Y[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + (15+i-1)*64, 16 ) );
-         fprintf( fid, "assign u[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + (31+i-1)*64, 16 ) );
-         fprintf( fid, "assign v[4\'b%s] [%02d] = 64\'h%+016s;\n", dec2bin(i-1, 4), n, dec2hex( (n-1) + (47+i-1)*64, 16 ) );
+         fprintf( fid, "assign X[4\'b%s] [%02d] = %d\'h %037s;  // %+6.16f", dec2bin(i-1, 4), n, 2*WD, dec2csd_hex( lut_x(n, i), WI, WD-WI , 37 ) , lut_x(n,i) );
+         fprintf( fid, ' = 0.5 * ln( 1 + % d * 2^(-%d+1) + (% d^2+% d^2) * 2^(-2*%d) )', real(d(i)), n, real(d(i)), imag(d(i)), n );
+         fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
    end
 
-   %for i = 1:length(d);
-      %for n = 1:N;
-         %%[dx_bin, dy_bin] = get_d(i);
-         %%fprintf( fid, "assign Y[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, dec2hex( lut_y(n, i), 16 ) );
-         %%fprintf( fid, "assign Y[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, n + (9+i-1)*64);
-      %end
-   %end
+   % TODO: write a header for lut_y
+   % TODO: this one has "Insufficient precision to represent this number! if n>=64"
+   %        porque al hacer la cuenta csdigit() necesita al menos 64 bits de precision
+   %        entnoces lo q hay q hacer es convertir con 64 bits de precision y despues tomar los primeros WD-WI
+   for i = 1:length(d);
+      for n = 1:N;
+         fprintf( fid, "assign Y[4\'b%s] [%02d] = %d\'h %037s;  // %+6.16f", dec2bin(i-1, 4), n, 2*WD, dec2csd_hex( lut_y(n,i), WI, WD-WI , 37 ) , lut_y(n,i) );
+         fprintf( fid, ' = % d * atan( 1 / ( % d + 2^%d ) )', imag(d(i)), real(d(i)), n );
+         fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
+      end
+   end
 
-   %for i = 1:length(d);
-      %for n = 1:N;
-         %%[dx_bin, dy_bin] = get_d(i);
-         %%fprintf( fid, "assign u[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, dec2hex( lut_u(n, i), 16 ) );
-         %%fprintf( fid, "assign u[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, n + (18+i-1)*64);
-      %end
-   %end
+   % TODO: write a header for lut_u
+   % TODO: this one has "Insufficient precision to represent this number! > 12"
+   for i = 1:length(d);
+      for n = 1:N;
+         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %07s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2csd_hex( lut_u(n,i), WI, WC-WI , 7 ) , lut_u(n,i) );
+         fprintf( fid, ' = 2^%2d * ln( 1 + % d * 2^(-%2d+1) + (% d^2+% d^2) * 2^(-2*%2d) )', n, real(d(i)), n, real(d(i)), imag(d(i)), n );
+         fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
+      end
+   end
 
-   %for i = 1:length(d);
-      %for n = 1:N;
-         %[dx_bin, dy_bin] = get_d(i);
-         %fprintf( fid, "assign v[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, dec2hex( lut_v(n, i), 16 ) );
-         %fprintf( fid, "assign v[4\'b%s%s] [%02d] = %+016d;\n", dy_bin, dx_bin, n, n + (27+i-1)*64);
-      %end
-   %end
+   % TODO: write a header for lut_v
+   for i = 1:length(d);
+      for n = 1:N;
+         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %07s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2csd_hex( lut_v(n,i), WI, WC-WI , 7 ) , lut_v(n,i) );
+         fprintf( fid, ' = 2^%d * % d * atan( 1 / ( % d + 2^%d ) )', n, imag(d(i)), real(d(i)), n );
+         fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
+      end
+   end
 
    fclose(fid);
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %---------------------------------------------------------------
 end
 
 function [dx_bin, dy_bin]=get_d(i)
@@ -157,23 +121,5 @@ function [dx_bin, dy_bin]=get_d(i)
    str = dec2bin(i, 4);
    dy_bin = str(1:2);
    dx_bin = str(3:4);
-
-   %switch (real(d))
-      %case 0
-         %dx_bin = '00';
-      %case 1
-         %dx_bin = '01';
-      %case -1
-         %dx_bin = '11';
-   %end
-
-   %switch (imag(d))
-      %case 0
-         %dy_bin = '00';
-      %case 1
-         %dy_bin = '01';
-      %case -1
-         %dy_bin = '11';
-   %end
 
 end
