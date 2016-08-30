@@ -1192,7 +1192,7 @@ sencillez en el diseño con sencillez en el trabajo de diseñar, por el
 contrario, obtener una arquitectura sencilla obligará a trabajar más en el 
 diseño.
 
-\section{Ecuación de desempeño y ley de Amdahl}
+\section{Desempeño; mediciones y optimizaciones}
 \label{sec:performance}
 
 Es necesario en este contexto, introducir una medida del desempeño o 
@@ -1206,24 +1206,45 @@ nivel de abstracción, tres grandes grupos:
 \begin{itemize}
   \item computadoras personales o estaciones de trabajo,
   \item servidores,
-  \item sistemas embebidos.
+  \item nodos de clústeres,
+  \item sistemas embebidos,
+  \item dispositivos personales móviles.
 \end{itemize}
 Claramente, el trabajo que se espera, realice cada una de estas variantes, es 
 distinto. Las primeras, deberían ser las más generalistas, mientras que los 
 servidores pueden especializarse en diversas áreas, como por ejemplo, 
 almacenamiento masivo de archivos, servidor web, servidor de base de datos o 
-hypervisor\footnote{Definir hypervisor}; siendo los sistemas embebidos, los mas 
-dificiles de definir de forma general, puesto que la particularidad del sistema 
----en sentido amplio--- definirá las características del trabajo que debe 
-realizar, como puede ser detección de huellas dactilares en un sistema de 
-control de acceso, tarea que demandará alta capacidad de cómputo para el 
-procesamiento de imágenes, o la gestión de HMI\footnote{Definir HMI} de una 
-máquina industrial; y también combinaciones de estas funciones y muchas otras 
-más, como pueden encontrarse en un teléfono celular moderno. Dentro del 
-universo de los sistemas embebidos, el de los dispositivos móviles es todo un 
-área por sí sola.\\
+hypervisor\footnote{Definir hypervisor}, o ya como otro conjunto de este 
+universo, los nodos de clústeres de cómputo; sistemas que interconentan gran 
+cantidad de equipos para proveer infraestructura redunante y de alta 
+disponibilidad para las modernas plataformas de servicios en la nube, que 
+aunque pueden implementarse con computadoras personales o servidores, también 
+existen versiones especializadas. Los sistemas embebidos son los mas dificiles 
+de definir de forma general, puesto que la particularidad del sistema ---en 
+sentido amplio--- definirá las características del trabajo que debe realizar, 
+como puede ser detección de huellas dactilares en un sistema de control de 
+acceso, tarea que demandará alta capacidad de cómputo para el procesamiento de 
+imágenes, o la sencilla gestión del HMI\footnote{Definir HMI} de una máquina 
+industrial, así como los procesadores que controlan electrodomésticos o los 
+sistemas de un automóvil o aeronave; y también combinaciones de estas funciones 
+y muchas otras más, como pueden encontrarse en un teléfono celular moderno. 
+Dentro del universo de los sistemas embebidos, el de los dispositivos móviles es 
+todo un área por sí sola, es por ésto que se los clasifica aparte como 
+dispositivos personales móviles. El principal motivo para diferenciar estos 
+últimos ---muchas veces considerados sistemas embebidos--- es la posibilidad 
+de ejecutar programas desarrollados por terceras partes, y no sólamente el 
+firmware que da el fabricante.\\
 No obstante resulta imprescindible contar con un método preciso y definido para 
-poder comparar arquitecturas.
+poder comparar arquitecturas. Sin embargo, no deben perderse de vista los 
+objetivos principales que persiguen los diseñadores de arquitecturas y las 
+relaciones de compromiso que pueden resumirse como maximizar la performance 
+minimizando el costo y el consumo energético. Los motivos para minimizar el 
+costo son hartos conocidos por la humanidad y el sistema económico que en 
+líneas generales rige en el mundo, pero en la cualquiera de los tipos de 
+computadoras debe minimizar el consumo energético, por dos principales motivos: 
+el costo operativo ---una vez más motivación económica--- y maximizar la 
+autonomía en el caso de dispositivos móviles. Aunque resumidos aquí, son temas 
+extensos que se abordarán a lo largo del capítulo.
 
 \subsection{Ecuación de desempeño}
 \label{subsec:performance-performance_definition}
@@ -1234,7 +1255,7 @@ entonces el desempeño de la máquina como la inversa del tiempo de ejecución d
 un determinado programa.
 \begin{equation}
   \label{eq:performance-performance_definition}
-  \text{Desempeño} = \cfrac{1}{\text{Tiempo de ejecución}}
+  \text{Desempeño} = \dfrac{1}{\text{Tiempo de ejecución}}
 \end{equation}
 Es de especial interés definir en éste punto al tiempo de ejecución, dado que 
 existen diversas interpretaciones del mismo. La definición más directa es el 
@@ -1260,19 +1281,25 @@ midiendo el tiempo de CPU de cada una de ellas. Utilizando la ecuación
 \ref{eq:performance-performance_definition} obtenemos una poderosa 
 herramienta para comparar arquitecturas. Si estuviésemos comparando la 
 máquina $A$ con la máquina $B$, la ecuación 
-\ref{eq:performance-exec_time_ratio} implica que la máquina $A$ es $n$ veces más 
-rápida que la máquina $B$. Referido en términos de desempeño se transforma en la 
+\ref{eq:performance-exec_time_ratio} implica que la máquina $A$ es $n$ veces 
+más 
+rápida que la máquina $B$. Referido en términos de desempeño se transforma en 
+la 
 ecuación \ref{eq:performance-performance_ratio} y decimos que la arquitectura 
 $A$ es $n$ veces más performante que la arquitectura $B$.
 \begin{equation}
   \label{eq:performance-exec_time_ratio}
-  \cfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = n
+  \dfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = n
 \end{equation}
 \begin{equation}
   \label{eq:performance-performance_ratio}
-  n = \cfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = 
-\cfrac{\cfrac{1}{\text{Desempeño}_{B}}}{\cfrac{1}{\text{Desempeño}_{A}}} = 
-\cfrac{\text{Desempeño}_{A}}{\text{Desempeño}_{B}}
+  \begin{split}
+    n & = \dfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de 
+ejecución}_{A}}\\
+    & = 
+\dfrac{\dfrac{1}{\text{Desempeño}_{B}}}{\dfrac{1}{\text{Desempeño}_{A}}}\\
+    & = \dfrac{\text{Desempeño}_{A}}{\text{Desempeño}_{B}}
+  \end{split}
 \end{equation}
 Ahora bien, para que la comparación sea válida, el programa que ejecutan ambas 
 arquitecturas debe ser el mismo y en las mismas condiciones, entendiéndose por 
@@ -1292,7 +1319,7 @@ decida que instrucciones utilizar a nivel código de máquina para llegar al
 objetivo.
 
 \subsection{Mediciones de desempeño}
-\label{subsec:perfomance-measuring}
+\label{subsec:performance-measuring}
 
 A lo largo de la historia, se han diseñado diversas pruebas para comparar 
 máquinas denominados bancos de prueba ---\emph{benchmarks} en inglés---. 
@@ -1333,7 +1360,51 @@ genere exactamente el mismo resultado que la orginal.
 \end{itemize}
 En este contexto, la cuestión clave que deben afrontar los desarrolladores, es 
 si dichas modificaciones reflejarán la realidad y producirán resultados 
-certeros como predictores de la performance real de los equipos.
+certeros como predictores de la performance real de los equipos teniendo en 
+cuenta el mercado objetivo de las arquitecturas que se desean relevar.\\
+No se profundizará en la temática del diseño de \emph{benchmarks} puesto que 
+escapa al alcance de este trabajo, pero sí se desea remarcar la importancia de 
+la necesidad de medir la performance de las arquitecturas con el objetivo de 
+compararlas.
+
+\subsection{Optimizaciones y ley de Amdahl}
+\label{subsec:performance-optimizations_amdahl}
+Dado que se cuenta con un método objetivo y estándar para lograr mediciones de 
+performance se pueden cuantificar las mejoras que se pueden aplicar a una 
+determinada arquitectura; lo que conforma una poderosa herramienta para el 
+diseñador. Como se estableció en \ref{sec:performance}, el desmpeño se 
+relaciona con el tiempo de ejecución de los programas. Ahora bien, si se 
+implementa una mejora en el hardware, el objetivo de la misma será el de 
+disminuir el tiempo de ejecución de los mismos. El término utilizado en inglés 
+es el \emph{speedup} que podría traducirse como ``aceleración''. Definimos de 
+forma genérica el \emph{speedup} en la ecuación \ref{eq:performance-speedup} 
+considerando los tiempos de ejecución antes y después de la mejora:
+\begin{equation}
+  \label{eq:performance-speedup}
+  SU = 
+\dfrac{t_{\text{ejecución}_{\text{viejo}}}}{t_{\text{ejecución}_\text{nuevo}}}
+\end{equation}
+Considerando que la ecuación \ref{eq:performance-speedup} resulta válida al 
+aplicarla a la ejecución de un mismo programa en una versión con y sin mejora, 
+y siendo obvio que su valor debe ser mayor a $1$ puesto que si efectivamente 
+se mejoró la arquitectura, el tiempo nuevo de ejecución debe ser menor al 
+viejo. Ahora bien, una mejora en particular puede afectar a la ejecución de todo 
+un programa, como podría ser elevar la velocidad de reloj de la arquitectura que 
+en consecuencia ejecutaría el programa en cuestión en menos tiempo, o puede 
+afectar sólo a una parte del programa. Considerando que una mejora afecta a una 
+sola parte de un determinado software que se usará como patrón se puede 
+establecer que el \emph{speedup} global es el de la ecuación 
+\ref{eq:performance-global_speedup} REVISAR LA ECUACIÓN!!! está mal expresada:
+\begin{equation}
+  \label{eq:performance-global_speedup}
+  \begin{split}
+    SU_{\text{global}} & = 
+\dfrac{t_{\text{ejecución}_{\text{viejo}}}}{t_{\text{ejecución}_\text{nuevo}}}\\
+  & = \dfrac{ t_{\text{ejecución}_{\text{viejo}}} }{ \left( f_{\text{sin 
+mejora}}  + \dfrac{f_{\text{con mejora}}}{SU_{\text{mejora}}}  \right) 
+t_{\text{ejecución}_{\text{viejo}}} }
+  \end{split}
+\end{equation}
 
 
 \section{ILP - TLP}
