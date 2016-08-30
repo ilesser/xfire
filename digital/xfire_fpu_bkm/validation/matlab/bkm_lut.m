@@ -45,8 +45,23 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    lut   = log(1+2.^-n*d);
    lut_x = real(lut);
    lut_y = imag(lut);
+
    lut_u = lut_x .* repmat( 2.^(n+1), 1, length(d) );
    lut_v = lut_y .* repmat( 2.^(n+1), 1, length(d) );
+
+   % lo llevo a [-1;1)
+   lut_u_hex = lut_u / 2^11;
+   lut_v_hex = lut_v / 2^11;
+   % lo llevo a [0;2)
+   lut_u_hex = lut_u_hex + (lut_u_hex < 0) * 2;
+   lut_v_hex = lut_v_hex + (lut_v_hex < 0) * 2;
+
+   % si quiero WC bits esto lo lleva a [0; 2^WC)
+   lut_u_hex = lut_u_hex * 2^(WC-1);
+   lut_v_hex = lut_v_hex * 2^(WC-1);
+
+   lut_u_hex = fix(lut_u_hex);
+   lut_v_hex = fix(lut_v_hex);
 
    %     -0.69315 <= lut_x <= 0.45815        ---+
    %        -pi/4 <= lut_y <= pi/4 = 0.7854     |----> 3 bits for integer part   ==>  -4,-3,-2,-1,0,1,2,3
@@ -94,10 +109,12 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    end
 
    % TODO: write a header for lut_u
-   % TODO: this one has "Insufficient precision to represent this number! > 12"
+   % First 6 hex digits are the integer part: 21 bits -->  21/4 = 5.25 --> 6
+   w_hex_size = 6;
+
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %07s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2csd_hex( lut_u(n,i), WI, WC-WI , 7 ) , lut_u(n,i) );
+         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %06s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2hex( lut_u_hex(n,i), w_hex_size ) , lut_u(n,i) );
          fprintf( fid, ' = 2^%2d * ln( 1 + % d * 2^(-%2d+1) + (% d^2+% d^2) * 2^(-2*%2d) )', n, real(d(i)), n, real(d(i)), imag(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -106,7 +123,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    % TODO: write a header for lut_v
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %07s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2csd_hex( lut_v(n,i), WI, WC-WI , 7 ) , lut_v(n,i) );
+         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %06s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2hex( lut_v_hex(n,i), w_hex_size ) , lut_v(n,i) );
          fprintf( fid, ' = 2^%d * % d * atan( 1 / ( % d + 2^%d ) )', n, imag(d(i)), real(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
