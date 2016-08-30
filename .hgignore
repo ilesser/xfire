@@ -1,0 +1,13 @@
+# use glob syntax
+syntax: glob
+
+*.directory
+*.swp
+*.simvision*
+
+digital/*/rtl/html/html
+digital/*/verification/*/*.log*
+digital/*/verification/*/temp
+digital/*/verification/*/waves
+digital/*/verification/*/reports/*.log
+digital/*/verification/*/reports/*.history

@@ -1,0 +1,19 @@
+Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precision_selection.v \
+./temp/bkm.v ./temp/multiply_by_d_csd.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
+./temp/add_subb.v ./temp/csd_add_subb.v ./temp/complex_csd_add_subb.v ./temp/xfire_fpu_bkm.v \
+./temp/fadder.v ./temp/get_d_n.v ./temp/simlib_clk_osc.v ./temp/bkm_step.v ./temp/multiply_by_d.v \
+./temp/bkm_range_reduction.v ./temp/bkm_fixed_control_logic.v ./temp/bkm_range_extension.v \
+./temp/complex_add_subb.v ./temp/csd2bin.v ./temp/output_precision_selection.v ./temp/bkm_pre_step.v \
+./temp/bkm_steps.v ./temp/tb_csd_add_subb.v ./temp/barrel_shifter.v ./temp/bkm_post_processing.v \
+./temp/bin2csd.v -l ./reports/csd_add_subb.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait \
++warn=all +lint=PCWM -sverilog -debug
+                         Chronologic VCS (TM)
+            Version I-2014.03 -- Mon Jun 13 09:40:12 2016
+               Copyright (c) 1991-2014 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+CPU time: .041 seconds to compile
