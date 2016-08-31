@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-08-31 - ilesser - Used real values for luts.
 //    - 2016-08-28 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -60,6 +61,22 @@ task load_operands;
       tb_n        = cnt[2*`D_SIZE+`LOG2N-1   :2*`D_SIZE  ];
       tb_d_x_n    = cnt[2*`D_SIZE-1          :1*`D_SIZE  ];
       tb_d_y_n    = cnt[1*`D_SIZE-1          :0*`D_SIZE  ];
+
+      // Get the lut values
+      lut (
+         // ----------------------------------
+         // Data inputs
+         // ----------------------------------
+         tb_mode,
+         tb_format,
+         tb_n,
+         tb_d_x_n,      tb_d_y_n,
+         // ----------------------------------
+         // Data outputs
+         // ----------------------------------
+         tb_lut_X_n,   tb_lut_Y_n,
+         tb_lut_u_n,   tb_lut_v_n
+      );
 
       run_clk(1);
 

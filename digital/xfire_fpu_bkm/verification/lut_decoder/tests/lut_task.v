@@ -12,21 +12,19 @@
 // Description:
 // ------------
 //
-// Load operands task for bkm_step block.
+// Gets the lut values for the BKM algorithm.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// load_operands_task.v
+// lut_task.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-08-15 - ilesser - Changed architecture. Now I have a task that calculates a single step.
-//    - 2016-08-11 - ilesser - Updated for WD and WC.
-//    - 2016-07-06 - ilesser - Initial version.
+//    - 2016-08-31 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -35,12 +33,22 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-task load_operands;
+task lut;
 
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input [`CNT_SIZE-1:0]   cnt;
+   input                   mode;
+   input    [1:0]          format;
+   input    [`LOG2N-1:0]   n_bin;
+   input    [1:0]          d_x_n, d_y_n;
+   // ----------------------------------
+
+   // ----------------------------------
+   // Data outputs
+   // ----------------------------------
+   output   real           lut_X_n, lut_Y_n;
+   output   real           lut_u_n, lut_v_n;
    // ----------------------------------
 
 // *****************************************************************************
@@ -52,40 +60,51 @@ task load_operands;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
+   reg   double_word;
+   reg   complex;
+   real  n;
+   real  dx,      dy;
    // -----------------------------------------------------
 
    begin
 
-      // Apply values to testbench
+      // Decompose format
+      double_word = format[0];
+      complex     = format[1];
 
-      tb_mode     = cnt[`CNT_SIZE-1                ];
-      tb_format   = cnt[`CNT_SIZE-2    :`CNT_SIZE-3];
-      tb_X_in     = cnt[2*`WC+2*`WD-1  :2*`WC+1*`WD];
-      tb_Y_in     = cnt[2*`WC+1*`WD-1  :2*`WC+0*`WD];
-      tb_u_in     = cnt[2*`WC+0*`WD-1  :1*`WC+0*`WD];
-      tb_v_in     = cnt[1*`WC+0*`WD-1  :0*`WC+0*`WD];
+      // Calculate n real value;
+      n = $itor(n_bin+1);
 
-      // Calculate the results
-      bkm (
-         // ----------------------------------
-         // Data inputs
-         // ----------------------------------
-         tb_mode,
-         tb_format,
-         tb_X_in,    tb_Y_in,
-         tb_u_in,    tb_v_in,
-         // ----------------------------------
-         // Data outputs
-         // ----------------------------------
-         tb_X_out,   tb_Y_out,
-         tb_u_out,   tb_v_out,
-         tb_flags
-      );
+      // Get d_n values
+      dx =  d_x_n == 2'b01 ?  1  :
+            d_x_n == 2'b11 ? -1  :
+                              0  ;
 
-      run_clk(1);
+      dy =  d_y_n == 2'b01 ?  1  :
+            d_y_n == 2'b11 ? -1  :
+                              0  ;
+
+      if ( mode == `MODE_E ) begin
+         lut_X_n =        0.0;
+         lut_Y_n =        0.0;
+      end
+      else begin
+         lut_X_n =        0.5 * $ln( 1 + dx * 2.0**(-n+1) + (dx*dx + dy*dy) * 2.0**(-2*n) );
+         lut_Y_n =              dy * $atan( 2.0**(-n) / (1 + dx * 2.0**(-n)) );
+      end
+
+      if ( mode == `MODE_E ) begin
+         lut_u_n = 2.0**n     * $ln( 1 + dx * 2.0**(-n+1) + (dx*dx + dy*dy) * 2.0**(-2*n) );
+         lut_v_n = 2.0**(n+1) * dy * $atan( 2.0**(-n) / (1 + dx * 2.0**(-n)) );
+      end
+      else begin
+         lut_u_n = 0.0;
+         lut_v_n = 0.0;
+      end
 
    end
 
 // *****************************************************************************
 
 endtask
+

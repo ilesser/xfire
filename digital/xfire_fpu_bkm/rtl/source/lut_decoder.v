@@ -43,6 +43,7 @@
 // History:
 // --------
 //
+//    - 2016-08-31 - ilesser - Updated default parameters.
 //    - 2016-08-28 - ilesser - Fixed lut size definitions.
 //    - 2016-08-22 - ilesser - Initial version.
 //
@@ -57,8 +58,8 @@ module lut_decoder #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter WD     = 64,
-   parameter WC     = 64,
+   parameter WD     = 73,
+   parameter WC     = 21,
    parameter LOG2N  = 6
 ) (
    // ----------------------------------
@@ -136,25 +137,24 @@ module lut_decoder #(
    // Constants definition
    // -----------------------------------------------------
    // Real part
-   wire [2*WD-1:0]   X  [0:15] [1:(2**LOG2N)];
-   wire [WC-1:0]     u  [0:15] [1:(2**LOG2N)];
+   wire [2*WD-1:0]   X  [0:15] [0:(2**LOG2N)-1];
+   wire [WC-1:0]     u  [0:15] [0:(2**LOG2N)-1];
 
    // Imaginary part
-   wire [2*WD-1:0]   Y  [0:15] [1:(2**LOG2N)];
-   wire [WC-1:0]     v  [0:15] [1:(2**LOG2N)];
+   wire [2*WD-1:0]   Y  [0:15] [0:(2**LOG2N)-1];
+   wire [WC-1:0]     v  [0:15] [0:(2**LOG2N)-1];
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Constants definition
+   // -----------------------------------------------------
    `include "lut_constants.vh"
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Combinational logic
    // -----------------------------------------------------
-
-   //assign lut_X = {WD{`CSD_0_0}};
-   //assign lut_Y = {WD{`CSD_0_1}};
-   //assign lut_u = {WC{1'b1}};
-   //assign lut_v = {WC{1'b0}};
-
-   assign d_n = {d_x_n, d_y_n};
+   assign d_n = {d_y_n, d_x_n};
 
    // TODO: implement format
    // TODO: implement dependecies on d_y for the real part
@@ -172,7 +172,6 @@ module lut_decoder #(
                //d_y[`D_DATA] == 1'b0 ?  {WC{1'b0}}     :
                                        //v[d_n][n]      ;  // Here d_y = +-1
    end
-
    // -----------------------------------------------------
 
 // *****************************************************************************

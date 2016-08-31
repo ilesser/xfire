@@ -50,8 +50,8 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    lut_v = lut_y .* repmat( 2.^(n+1), 1, length(d) );
 
    % lo llevo a [-1;1)
-   lut_u_hex = lut_u / 2^11;
-   lut_v_hex = lut_v / 2^11;
+   lut_u_hex = lut_u / 2^(WI-1);
+   lut_v_hex = lut_v / 2^(WI-1);
    % lo llevo a [0;2)
    lut_u_hex = lut_u_hex + (lut_u_hex < 0) * 2;
    lut_v_hex = lut_v_hex + (lut_v_hex < 0) * 2;
@@ -90,7 +90,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    % TODO: write a header for lut_x
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign X[4\'b%s] [%02d] = %d\'h %037s;  // %+6.16f", dec2bin(i-1, 4), n, 2*WD, dec2csd_hex( lut_x(n, i), WI, WD-WI , 37 ) , lut_x(n,i) );
+         fprintf( fid, "assign X[4\'b%s] [%02d] = %d\'h %037s;  // %+6.16f", dec2bin(i-1, 4), n-1, 2*WD, dec2csd_hex( lut_x(n, i), WI, WD-WI , 37 ) , lut_x(n,i) );
          fprintf( fid, ' = 0.5 * ln( 1 + % d * 2^(-%d+1) + (% d^2+% d^2) * 2^(-2*%d) )', real(d(i)), n, real(d(i)), imag(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -102,7 +102,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    %        entnoces lo q hay q hacer es convertir con 64 bits de precision y despues tomar los primeros WD-WI
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign Y[4\'b%s] [%02d] = %d\'h %037s;  // %+6.16f", dec2bin(i-1, 4), n, 2*WD, dec2csd_hex( lut_y(n,i), WI, WD-WI , 37 ) , lut_y(n,i) );
+         fprintf( fid, "assign Y[4\'b%s] [%02d] = %d\'h %037s;  // %+6.16f", dec2bin(i-1, 4), n-1, 2*WD, dec2csd_hex( lut_y(n,i), WI, WD-WI , 37 ) , lut_y(n,i) );
          fprintf( fid, ' = % d * atan( 1 / ( % d + 2^%d ) )', imag(d(i)), real(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -114,7 +114,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
 
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %06s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2hex( lut_u_hex(n,i), w_hex_size ) , lut_u(n,i) );
+         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %06s;  // %+6.16f", dec2bin(i-1, 4), n-1, WC, dec2hex( lut_u_hex(n,i), w_hex_size ) , lut_u(n,i) );
          fprintf( fid, ' = 2^%2d * ln( 1 + % d * 2^(-%2d+1) + (% d^2+% d^2) * 2^(-2*%2d) )', n, real(d(i)), n, real(d(i)), imag(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -123,8 +123,8 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    % TODO: write a header for lut_v
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %06s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2hex( lut_v_hex(n,i), w_hex_size ) , lut_v(n,i) );
-         fprintf( fid, ' = 2^%d * % d * atan( 1 / ( % d + 2^%d ) )', n, imag(d(i)), real(d(i)), n );
+         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %06s;  // %+6.16f", dec2bin(i-1, 4), n-1, WC, dec2hex( lut_v_hex(n,i), w_hex_size ) , lut_v(n,i) );
+         fprintf( fid, ' = 2^(%d+1) * % d * atan( 1 / ( % d + 2^%d ) )', n, imag(d(i)), real(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
    end

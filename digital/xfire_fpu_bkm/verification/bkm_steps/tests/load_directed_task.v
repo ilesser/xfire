@@ -60,12 +60,12 @@ task load_directed;
 
    begin
 
-      dir_cnt[`CNT_SIZE-1]                               =    mode   ;
-      dir_cnt[`CNT_SIZE-2              :`CNT_SIZE-3]     =    format ;
-      dir_cnt[2*`WC+2*`WD-1            :2*`WC+1*`WD]     =    X_in   ;
-      dir_cnt[2*`WC+1*`WD-1            :2*`WC+0*`WD]     =    Y_in   ;
-      dir_cnt[2*`WC+0*`WD-1            :1*`WC+0*`WD]     =    u_in   ;
-      dir_cnt[1*`WC+0*`WD-1            :0*`WC+0*`WD]     =    v_in   ;
+      dir_cnt[`CNT_SIZE-1                 ]  =  mode  ;
+      dir_cnt[`CNT_SIZE-2     :`CNT_SIZE-3]  =  format;
+      dir_cnt[2*`WC+2*`WD-1   :2*`WC+1*`WD]  =  X_in  ;
+      dir_cnt[2*`WC+1*`WD-1   :2*`WC+0*`WD]  =  Y_in  ;
+      dir_cnt[2*`WC+0*`WD-1   :1*`WC+0*`WD]  =  u_in  ;
+      dir_cnt[1*`WC+0*`WD-1   :0*`WC+0*`WD]  =  v_in  ;
 
       load_operands(dir_cnt);
 
