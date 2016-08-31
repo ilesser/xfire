@@ -61,8 +61,8 @@ task dir_test;
       ena         = 1'b1;
 
       // operands     mode     format               X_in        Y_in        u_in        v_in
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `WD'd00037, `WD'd00036, `WC'd00037, `WC'd00036);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `WD'd00033, `WD'd00039, `WC'd00040, `WC'd00028);
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `WD'd00037, `WD'd00036, `WC'd0037, `WC'd0036);
+      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `WD'd00033, `WD'd00039, `WC'd0040, `WC'd0028);
 
       //run_clk(1);
       //arst        = 1'b1;

@@ -68,14 +68,14 @@ task bkm_steps;
    reg   double_word;
    reg   complex;
    real  X_int,      Y_int;
-   real  X_dec,      Y_dec;
+   real  X_frac,     Y_frac;
    real  u_int,      v_int;
-   real  u_dec,      v_dec;
-   real  d_x,        d_y   [`N:0];
-   real  X,          Y     [`N:0];
-   real  lut_X,      lut_Y [`N:0];
-   real  u,          v     [`N:0];
-   real  lut_u,      lut_v [`N:0];
+   real  u_frac,     v_frac;
+   real  d_x,        d_y   [1:`N];
+   real  X,          Y     [1:`N];
+   real  lut_X,      lut_Y [1:`N];
+   real  u,          v     [1:`N];
+   real  lut_u,      lut_v [1:`N];
    // -----------------------------------------------------
 
    begin
@@ -84,39 +84,39 @@ task bkm_steps;
       complex     = format[1];
 
       if (double_word==1'b1) begin
-         // Get X and Y integer and decimal parts
-         X_int = $itor($signed(X_in [`WD-1      :`WD-10]));
-         Y_int = $itor($signed(Y_in [`WD-1      :`WD-10]));
-         X_dec = $itor($signed(X_in [`WD-11     :     0]))  / 2**(`WD-10);
-         Y_dec = $itor($signed(Y_in [`WD-11     :     0]))  / 2**(`WD-10);
+         // Get X and Y integer and fractional parts
+         X_int  = $itor($signed(X_in [`WD-1      :`WD-`WI]));
+         Y_int  = $itor($signed(Y_in [`WD-1      :`WD-`WI]));
+         X_frac = $itor($signed(X_in [`WD-`WI-1  :      0]))  / 2**(`WD-`WI);
+         Y_frac = $itor($signed(Y_in [`WD-`WI-1  :      0]))  / 2**(`WD-`WI);
 
-         // Get u and v integer and decimal parts
-         u_int = $itor($signed(tb_u [`WC-1      :     4]));
-         v_int = $itor($signed(tb_v [`WC-1      :     4]));
-         u_dec = $itor(       (tb_u [3          :     0]))  / 2**4;
-         v_dec = $itor(       (tb_v [3          :     0]))  / 2**4;
+         // Get u and v integer and fractional parts
+         u_int  = $itor($signed(tb_u [`WC-1      :`WC-`WI));
+         v_int  = $itor($signed(tb_v [`WC-1      :`WC-`WI));
+         u_frac = $itor(       (tb_u [`WC-`WI-1  :     0]))  / 2**(`WC-`WI);
+         v_frac = $itor(       (tb_v [`WC-`WI-1  :     0]))  / 2**(`WC-`WI);
       end
       else begin
-         // Get u and v integer and decimal parts
-         X_int = $itor($signed(X_in [`WD/2-1    :`WD-10]));
-         Y_int = $itor($signed(Y_in [`WD/2-1    :`WD-10]));
-         X_dec = $itor($signed(X_in [`WD/2-11   :     0]))  / 2**(`WD-10);
-         Y_dec = $itor($signed(Y_in [`WD/2-11   :     0]))  / 2**(`WD-10);
+         // Get u and v integer and fractional parts
+         X_int  = $itor($signed(X_in [`WD/2-1      :`WD/2-`WI]));
+         Y_int  = $itor($signed(Y_in [`WD/2-1      :`WD/2-`WI]));
+         X_frac = $itor($signed(X_in [`WD/2-`WI-1  :      0]))  / 2**(`WD/2-`WI);
+         Y_frac = $itor($signed(Y_in [`WD/2-`WI-1  :      0]))  / 2**(`WD/2-`WI);
 
-         // Get u and v integer and decimal parts
-         u_int = $itor($signed(tb_u [`WC/2-1    :     4]));
-         v_int = $itor($signed(tb_v [`WC/2-1    :     4]));
-         u_dec = $itor(       (tb_u [3          :     0]))  / 2**4;
-         v_dec = $itor(       (tb_v [3          :     0]))  / 2**4;
+         // Get u and v integer and fractional parts
+         u_int  = $itor($signed(tb_u [`WC/2-1      :`WC/2-`WI));
+         v_int  = $itor($signed(tb_v [`WC/2-1      :`WC/2-`WI));
+         u_frac = $itor(       (tb_u [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
+         v_frac = $itor(       (tb_v [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
       end // if (double_word==1'b1)
 
       // Create real numbers
-      X[0]  = X_int + X_dec;
-      Y[0]  = Y_int + Y_dec;
-      u[0]  = u_int + u_dec;
-      v[0]  = v_int + v_dec;
+      X[0]  = X_int + X_frac;
+      Y[0]  = Y_int + Y_frac;
+      u[0]  = u_int + u_frac;
+      v[0]  = v_int + v_frac;
 
-      for( n = 0; n < `N; n = n+1 ) begin
+      for( n = 1; n <= `N; n = n+1 ) begin
 
 
          // Get the d_n value
@@ -133,7 +133,7 @@ task bkm_steps;
          );
 
          // Get the lut values
-         get_lut (
+         lut (
             // ----------------------------------
             // Data inputs
             // ----------------------------------
@@ -173,7 +173,7 @@ task bkm_steps;
       Y_out = Y[`N];
       u_out = u[`N];
       v_out = v[`N];
-      flags = {`FISE{1'b0}};
+      flags = {`FSIZE{1'b0}};
 
    end
 
