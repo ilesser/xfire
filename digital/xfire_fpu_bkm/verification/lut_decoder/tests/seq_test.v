@@ -58,8 +58,7 @@ task seq_test;
       run_clk(1);
       ena         = 1'b1;
 
-      //repeat(2**(`CNT_SIZE))
-      repeat(2**(2))
+      repeat(2**(`CNT_SIZE))
          load_operands(cnt);
 
    end
