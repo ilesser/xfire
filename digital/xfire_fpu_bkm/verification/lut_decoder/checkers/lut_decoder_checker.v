@@ -99,6 +99,7 @@ module lut_decoder_checker #(
    // Internal signals
    // -----------------------------------------------------
    real     n;
+   real     pow_2_mn;
    wire     neq_X,         neq_Y;
    wire     neq_u,         neq_v;
    // -----------------------------------------------------
@@ -116,7 +117,8 @@ module lut_decoder_checker #(
             //);
    //end
 
-   assign n = $itor(n+1);
+   assign n = $itor(tb_n+1);
+   assign pow_2_mn = 2**(-n);
    assign neq_X      = tb_lut_X_n != res_lut_X_n;
    assign neq_Y      = tb_lut_Y_n != res_lut_Y_n;
    assign delta_X    = tb_lut_X_n -  res_lut_X_n;

@@ -12,20 +12,19 @@
 // Description:
 // ------------
 //
-// Load operands task for lut_decoder block.
+// Directed test for lut_decoder block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// load_operands_task.v
+// dir_test.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-08-31 - ilesser - Used real values for luts.
-//    - 2016-08-28 - ilesser - Initial version.
+//    - 2016-09-01 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -34,14 +33,7 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-task load_operands;
-
-   // ----------------------------------
-   // Data inputs
-   // ----------------------------------
-   input [`CNT_SIZE-1:0]   cnt;
-   // ----------------------------------
-
+task dir_test;
 // *****************************************************************************
 
 // *****************************************************************************
@@ -55,33 +47,45 @@ task load_operands;
 
    begin
 
-      // Apply values to testbench
-      tb_mode     = cnt[`CNT_SIZE-1                      ];
-      tb_format   = cnt[`CNT_SIZE-2          :`CNT_SIZE-3];
-      tb_n        = cnt[2*`D_SIZE+`LOG2N-1   :2*`D_SIZE  ];
-      tb_d_y_n    = cnt[2*`D_SIZE-1          :1*`D_SIZE  ];
-      tb_d_x_n    = cnt[1*`D_SIZE-1          :0*`D_SIZE  ];
+      ena         = 1'b0;
+      arst        = 1'b0;
+      srst        = 1'b0;
+      load        = 1'b0;
 
-      // Get the lut values
-      lut (
-         // ----------------------------------
-         // Data inputs
-         // ----------------------------------
-         tb_mode,
-         tb_format,
-         tb_n,
-         tb_d_x_n,      tb_d_y_n,
-         // ----------------------------------
-         // Data outputs
-         // ----------------------------------
-         tb_lut_X_n,   tb_lut_Y_n,
-         tb_lut_u_n,   tb_lut_v_n
-      );
+      // operands     mode     format            n           d_y_n  d_x_n
+      cnt_load =   { `MODE_E, `FORMAT_CMPLX_W , `LOG2N'd000, 2'b00, 2'b00 };
+      cnt_step =   {  1'b0  ,    2'b00        , `LOG2N'd001, 2'b00, 2'b00 };
 
       run_clk(1);
+      arst        = 1'b1;
+      run_clk(1);
+      arst        = 1'b0;
+      ena         = 1'b1;
+
+      repeat(2**`M_SIZE) begin
+         repeat(2**(2*`D_SIZE)) begin
+            // Load the counter
+            arst = 1'b1;
+            run_clk(1);
+            arst = 1'b0;
+            load = 1'b1;
+            run_clk(1);
+            load = 1'b0;
+
+            // Increase just the n variable
+            repeat(2**(`LOG2N)) begin
+               load_operands(cnt);
+            end
+
+            // Increase just the d_n variable
+            cnt_load = cnt_load + 1;
+         end
+         cnt_load = cnt_load + {1'b1, {`CNT_SIZE-1{1'b0}}};
+      end
 
    end
 
 // *****************************************************************************
 
 endtask
+
