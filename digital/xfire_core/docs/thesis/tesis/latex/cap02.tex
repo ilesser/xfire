@@ -1367,7 +1367,7 @@ escapa al alcance de este trabajo, pero sí se desea remarcar la importancia de
 la necesidad de medir la performance de las arquitecturas con el objetivo de 
 compararlas.
 
-\subsection{Optimizaciones y ley de Amdahl}
+\subsection{Optimizaciones y Ley de Amdahl}
 \label{subsec:performance-optimizations_amdahl}
 Dado que se cuenta con un método objetivo y estándar para lograr mediciones de 
 performance se pueden cuantificar las mejoras que se pueden aplicar a una 
@@ -1394,21 +1394,81 @@ en consecuencia ejecutaría el programa en cuestión en menos tiempo, o puede
 afectar sólo a una parte del programa. Considerando que una mejora afecta a una 
 sola parte de un determinado software que se usará como patrón se puede 
 establecer que el \emph{speedup} global es el de la ecuación 
-\ref{eq:performance-global_speedup} REVISAR LA ECUACIÓN!!! está mal expresada:
+\ref{eq:performance-global_speedup} donde $f_{\text{mejora}}$ es la fracción 
+del tiempo orignal de ejecución (viejo) en donde estará activa la mejora:
 \begin{equation}
   \label{eq:performance-global_speedup}
   \begin{split}
     SU_{\text{global}} & = 
-\dfrac{t_{\text{ejecución}_{\text{viejo}}}}{t_{\text{ejecución}_\text{nuevo}}}\\
-  & = \dfrac{ t_{\text{ejecución}_{\text{viejo}}} }{ \left( f_{\text{sin 
-mejora}}  + \dfrac{f_{\text{con mejora}}}{SU_{\text{mejora}}}  \right) 
-t_{\text{ejecución}_{\text{viejo}}} }
+\dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
+t_{\text{ejecución}_\text{nuevo}} }\\
+  & = \dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
+t_{\text{ejecución}_{\text{viejo}}} \left( 1 - f_{\text{mejora}} + 
+\dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } \right) }\\
+  & = \dfrac{ 1 } { 1 - f_{\text{mejora}} + 
+\dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } }
+  \end{split}
+\end{equation}
+\begin{equation}
+  \label{eq:performance-max_speedup}
+  \begin{split}
+    SU_{\text{global}} & = \dfrac{ 1 } { 1 - f_{\text{mejora}} + 
+\dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } }\\
+    SU_{\text{global}} & \underset { SU_{\text{mejora}} 
+\rightarrow \infty } { \longrightarrow } \dfrac{ 1 } { 1 - f_{\text{mejora}} }
+  \end{split}
+\end{equation}
+\begin{equation}
+  \label{eq:performance-min_frac}
+  \begin{split}
+    SU_{\text{global}} & \geqslant SU_{\text{global}_{\text{objetivo}}}\\
+    \dfrac{ 1 } { 1 - f_{\text{mejora}} + \dfrac{ f_{\text{mejora}} } { 
+SU_{\text{mejora}} } } & \geqslant SU_{\text{global}_{\text{objetivo}}}\\
+    1 - f_{\text{mejora}} + \dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } 
+& \leqslant \dfrac{ 1 } { SU_{\text{global}_{\text{objetivo}}} }\\
+    1 - \dfrac{ 1 } { SU_{\text{global}_{\text{objetivo}}} } & \leqslant 
+f_{\text{mejora}} \left( 1 - \dfrac{ 1 } { SU_{\text{mejora}} } \right)\\
+    \dfrac{ 1 - \dfrac{ 1 } { SU_{\text{global}_{\text{objetivo}}} } } { 1 - 
+\dfrac{ 1 } { SU_{\text{mejora}} } } & \leqslant f_{\text{mejora}} =
+f_{\text{mejora}_{\text{min}}}
+  \end{split}
+\end{equation}
+La ecuación \ref{eq:performance-global_speedup} es conocida como la Ley de 
+Amdahl\footnote{Nota sobre Amdahl} y es una fórmula matemática que permite 
+expresar las mejoras de rendimiento en una arquitectura. Podemos extraer dos 
+rápidas conclusiones analisando la expresión: por un lado, dada una parte de 
+código que puede ser optimizado, podemos encontrar el máximo \emph{speedup} que 
+podremos obtener suponiendo que el \emph{speedup} de la mejora en 
+particular es infinito, es decir, suponemos que la mejora se ejecuta en 
+tiempo cero (ver ecuación \ref{eq:performance-max_speedup}); por el otro dada 
+una mejora en particular, podemos averiguar la mínima fracción de tiempo que 
+necesitamos aplicarla para poder cumplir con algún \emph{speedup} global 
+objetivo (ver ecuación \ref{eq:performance-min_frac}).
+En el caso de que existan diversas mejoras y bajo la condición de que las 
+mejores no funcionen en simultáneo en la ejecución del programa, la ecuación 
+\ref{eq:performance-global_speedup} puede reescribirse como en 
+\ref{eq:performance-global_speedup_extended}.
+\begin{equation}
+  \label{eq:performance-global_speedup_extended}
+  \begin{split}
+    SU_{\text{global}} & = 
+\dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
+t_{\text{ejecución}_\text{nuevo}} }\\
+  & = \dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
+t_{\text{ejecución}_{\text{viejo}}} \left[ 1 - \sum \limits_{\text{mejora}_{i}} 
+\left( f_{\text{mejora}_{i}} + \dfrac{ f_{\text{mejora}_{i}} } { 
+SU_{\text{mejora}_{i}} } \right) \right] }\\
+  & = \dfrac{ 1 } { 1 - \sum \limits_{\text{mejora}_{i}} \left(
+f_{\text{mejora}_{i}} + \dfrac{ f_{\text{mejora}_{i}} } { SU_{\text{mejora}_{i}} 
+} \right) }
   \end{split}
 \end{equation}
 
 
-\section{ILP - TLP}
-\label{sec:ilp_tlp}
+\section{Paralelismo}
+\label{sec:paralelismo}
+
+
 
 Instruction Level Parallelism. Thread Level Paralellism. TODO.
 
