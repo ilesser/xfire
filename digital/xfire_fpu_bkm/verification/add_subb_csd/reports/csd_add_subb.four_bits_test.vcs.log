@@ -1,0 +1,1068 @@
+Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/bkm.v ./temp/bkm_fixed.v \
+./temp/bkm_pre_processing.v ./temp/csd_add_subb.v ./temp/xfire_fpu_bkm.v ./temp/fadder.v \
+./temp/simlib_clk_osc.v ./temp/bkm_fixed_control_logic.v ./temp/csd2bin.v ./temp/tb_csd_add_subb.v \
+./temp/bkm_post_processing.v ./temp/bin2csd.v -l ./reports/csd_add_subb.four_bits_test.vcs.log \
++define+RTL_DEBUG +vcs+lic+wait +warn=all +lint=all -sverilog -debug
+                         Chronologic VCS (TM)
+            Version I-2014.03 -- Mon Apr 18 20:54:02 2016
+               Copyright (c) 1991-2014 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '././temp/bkm.v'
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 60
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file '././temp/bkm.v'.
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 130
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+././temp/bkm.v, 134
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_fixed.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 59
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 321
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed.v, 325
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bkm_pre_processing.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 57
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_pre_processing.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 125
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_pre_processing.v, 129
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/csd_add_subb.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd_add_subb.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd_add_subb.v, 286
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd_add_subb.v, 290
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/xfire_fpu_bkm.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 43
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/xfire_fpu_bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/xfire_fpu_bkm_defs.vh'.
+Back to file './temp/xfire_fpu_bkm.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 111
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/xfire_fpu_bkm.v, 115
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/fadder.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 86
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/fadder.v, 90
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/simlib_clk_osc.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_clk_osc.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_clk_osc.v, 45
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/simlib_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 33
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 34
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 35
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 36
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 38
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 39
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 40
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 41
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 42
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 43
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 45
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 46
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 47
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 48
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 49
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 51
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 52
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 53
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 54
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 55
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/simlib_defs.vh, 57
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/simlib_clk_osc.v'.
+Parsing design file './temp/bkm_fixed_control_logic.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 51
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_control_logic.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 131
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_control_logic.v, 135
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/csd2bin.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 138
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/csd2bin.v, 142
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/tb_csd_add_subb.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 32
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 33
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 129
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 130
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 131
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 132
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 133
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 135
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 136
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 137
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 138
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 139
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 140
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 142
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 143
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 144
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 145
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 146
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 148
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 149
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 150
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 151
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 152
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 154
+  Verilog compiler directive encountered "`define".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/tb_csd_add_subb.v, 402
+  Verilog compiler directive encountered "`define".
+
+Parsing design file './temp/bkm_post_processing.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 53
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 27
+  Verilog compiler directive encountered "`include".
+
+Parsing included file './temp/bkm_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_defs.vh, 28
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_fixed_defs.vh'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_fixed_defs.vh, 30
+  Verilog compiler directive encountered "`define".
+
+Back to file './temp/bkm_post_processing.v'.
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 118
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bkm_post_processing.v, 122
+  Verilog compiler directive encountered "`endif".
+
+Parsing design file './temp/bin2csd.v'
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 1
+  Verilog compiler directive encountered "`timescale".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 169
+  Verilog compiler directive encountered "`ifdef".
+
+
+Lint-[VCDE] Compiler directive encountered
+./temp/bin2csd.v, 173
+  Verilog compiler directive encountered "`endif".
+
+Top Level Modules:
+       bkm_fixed
+       xfire_fpu_bkm
+       fadder
+       simlib_clk_osc
+       csd2bin
+       tb_csd_add_subb
+       bin2csd
+TimeScale is 1 ns / 1 ps
+
+Lint-[UI] Unused input
+././temp/bkm.v, 84
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 85
+  Following is an unused input.
+  Source info: mode
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 86
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 87
+  Following is an unused input.
+  Source info: E_r_in
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 88
+  Following is an unused input.
+  Source info: E_i_in
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 89
+  Following is an unused input.
+  Source info: L_r_in
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 90
+  Following is an unused input.
+  Source info: L_i_in
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 94
+  Following is an unused input.
+  Source info: E_r_out
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 95
+  Following is an unused input.
+  Source info: E_i_out
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 96
+  Following is an unused input.
+  Source info: L_r_out
+
+
+Lint-[UI] Unused input
+././temp/bkm.v, 97
+  Following is an unused input.
+  Source info: L_i_out
+
+
+Lint-[ONGS] Output never gets set
+././temp/bkm.v, 98
+"flags"
+  Output port 'flags' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+././temp/bkm.v, 99
+"done"
+  Output port 'done' has never been assigned to any value.
+
+
+Lint-[VNGS] Variable never gets set
+./temp/bkm_fixed.v, 127
+  Following variable has never been set any value.
+  Source info: E_r_out
+
+
+Lint-[VNGS] Variable never gets set
+./temp/bkm_fixed.v, 128
+  Following variable has never been set any value.
+  Source info: E_i_out
+
+
+Lint-[VNGS] Variable never gets set
+./temp/bkm_fixed.v, 129
+  Following variable has never been set any value.
+  Source info: L_r_out
+
+
+Lint-[VNGS] Variable never gets set
+./temp/bkm_fixed.v, 130
+  Following variable has never been set any value.
+  Source info: L_i_out
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 229
+"bkm_post_processing #(W) bkm_post_processign( .clk (clk),  .arst (arst),  .srst (srst),  .enable (bkm_post_enable),  .start (bkm_post_start),  .format (bkm_post_format),  .op (bkm_post_op),  .E_r (E_r_out),  .E_i (E_i_out),  .L_r (L_r_out),  .L_i (L_i_out),  .x (x3),  .y (y3),  .flags (bkm_post_flags),  .done (bkm_post_done));"
+  The following 1-bit expression is connected to 6-bit port "op" of module 
+  "bkm_post_processing", instance "bkm_post_processign".
+  Expression: bkm_post_op
+  The expression is from module bkm_fixed
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/bkm_fixed.v, 261
+"bkm_fixed_control_logic bkm_fixed_control_logic( .clk (clk),  .arst (arst),  .srst (srst),  .enable (enable),  .start (start),  .format (format),  .op (op),  .bkm_pre_done (bkm_pre_done),  .bkm_core_done (bkm_core_done),  .bkm_core_flags (bkm_core_flags),  .bkm_post_done (bkm_post_done),  .bkm_post_flags (bkm_post_flags),  .bkm_pre_enable (bkm_pre_enable),  .bkm_pre_start (bkm_pre_start),  .bkm_pre_format (bkm_pre_format),  .bkm_pre_op (bkm_pre_op),  .bkm_core_enable (bkm_core_enable),  .bkm_core_start (bkm_core_start),  .bkm_core_format (bkm_core_format),  .bkm_core_mode (bkm_core_mode),  .bkm_post_enable (bkm_post_enable),  .bkm_post_start (bkm_post_start),  .bkm_post_format (bkm_post_format),  .bkm_post_op (bkm_post_op),  .flags (flags),  .done (done));"
+  The following 1-bit expression is connected to 6-bit port "bkm_post_op" of 
+  module "bkm_fixed_control_logic", instance "bkm_fixed_control_logic".
+  Expression: bkm_post_op
+  The expression is from module bkm_fixed
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 78
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 79
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 80
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 81
+  Following is an unused input.
+  Source info: x1
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 82
+  Following is an unused input.
+  Source info: y1
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 83
+  Following is an unused input.
+  Source info: x2
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 84
+  Following is an unused input.
+  Source info: y2
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 85
+  Following is an unused input.
+  Source info: x3
+
+
+Lint-[UI] Unused input
+./temp/bkm_pre_processing.v, 86
+  Following is an unused input.
+  Source info: y3
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_pre_processing.v, 90
+"E_r"
+  Output port 'E_r' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_pre_processing.v, 91
+"E_i"
+  Output port 'E_i' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_pre_processing.v, 92
+"L_r"
+  Output port 'L_r' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_pre_processing.v, 93
+"L_i"
+  Output port 'L_i' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_pre_processing.v, 94
+"done"
+  Output port 'done' has never been assigned to any value.
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 67
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 68
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 69
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 71
+  Following is an unused input.
+  Source info: y1
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 72
+  Following is an unused input.
+  Source info: x2
+
+
+Lint-[UI] Unused input
+./temp/xfire_fpu_bkm.v, 73
+  Following is an unused input.
+  Source info: y2
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 77
+"x3"
+  Output port 'x3' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 78
+"y3"
+  Output port 'y3' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 79
+"flags"
+  Output port 'flags' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/xfire_fpu_bkm.v, 80
+"done"
+  Output port 'done' has never been assigned to any value.
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 69
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 70
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 71
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 73
+  Following is an unused input.
+  Source info: bkm_pre_done
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 75
+  Following is an unused input.
+  Source info: bkm_core_done
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 76
+  Following is an unused input.
+  Source info: bkm_core_flags
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 78
+  Following is an unused input.
+  Source info: bkm_post_done
+
+
+Lint-[UI] Unused input
+./temp/bkm_fixed_control_logic.v, 79
+  Following is an unused input.
+  Source info: bkm_post_flags
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 84
+"bkm_pre_enable"
+  Output port 'bkm_pre_enable' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 85
+"bkm_pre_start"
+  Output port 'bkm_pre_start' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 86
+"bkm_pre_format"
+  Output port 'bkm_pre_format' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 87
+"bkm_pre_op"
+  Output port 'bkm_pre_op' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 89
+"bkm_core_enable"
+  Output port 'bkm_core_enable' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 90
+"bkm_core_start"
+  Output port 'bkm_core_start' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 91
+"bkm_core_format"
+  Output port 'bkm_core_format' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 92
+"bkm_core_mode"
+  Output port 'bkm_core_mode' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 94
+"bkm_post_enable"
+  Output port 'bkm_post_enable' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 95
+"bkm_post_start"
+  Output port 'bkm_post_start' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 96
+"bkm_post_format"
+  Output port 'bkm_post_format' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 97
+"bkm_post_op"
+  Output port 'bkm_post_op' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 99
+"flags"
+  Output port 'flags' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_fixed_control_logic.v, 100
+"done"
+  Output port 'done' has never been assigned to any value.
+
+
+Lint-[PCWM-L] Port connection width mismatch
+./temp/tb_csd_add_subb.v, 84
+"csd_add_subb #(W) duv( .subb_a (tb_subb_a),  .subb_b (tb_subb_b),  .a (tb_a),  .b (tb_b),  .c (wire_c),  .s (wire_s));"
+  The following 1-bit expression is connected to 2-bit port "c" of module 
+  "csd_add_subb", instance "duv".
+  Expression: wire_c
+  The expression is from module tb_csd_add_subb
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 74
+  Following is an unused input.
+  Source info: start
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 75
+  Following is an unused input.
+  Source info: format
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 76
+  Following is an unused input.
+  Source info: op
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 77
+  Following is an unused input.
+  Source info: E_r
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 78
+  Following is an unused input.
+  Source info: E_i
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 79
+  Following is an unused input.
+  Source info: L_r
+
+
+Lint-[UI] Unused input
+./temp/bkm_post_processing.v, 80
+  Following is an unused input.
+  Source info: L_i
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_post_processing.v, 84
+"x"
+  Output port 'x' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_post_processing.v, 85
+"y"
+  Output port 'y' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_post_processing.v, 86
+"flags"
+  Output port 'flags' has never been assigned to any value.
+
+
+Lint-[ONGS] Output never gets set
+./temp/bkm_post_processing.v, 87
+"done"
+  Output port 'done' has never been assigned to any value.
+
+Starting vcs inline pass...
+8 modules and 0 UDP read.
+recompiling module bkm_fixed
+recompiling module xfire_fpu_bkm
+recompiling module fadder
+recompiling module simlib_clk_osc
+recompiling module csd2bin
+recompiling module tb_csd_add_subb
+recompiling module bin2csd
+All of 8 modules done
+rm -f _csrc*.so linux_scvhdl_*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -m elf_i386 -shared -o .//../simv.daidir//_csrc1.so --whole-archive _vcsobj_1_1.a \
+--no-whole-archive
+ld -m elf_i386 -shared -o .//../simv.daidir//_csrc0.so 5NrI_d.o 5NrIB_d.o SIM_l.o \
+
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv  -m32 -m32   -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ \
+-Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  _csrc1.so _csrc0.so     rmapats_mop.o \
+rmapats.o rmar.o           /usr/synopsys/vcs/linux/lib/libzerosoft_rt_stubs.so /usr/synopsys/vcs/linux/lib/libvirsim.so \
+/usr/synopsys/vcs/linux/lib/librterrorinf.so /usr/synopsys/vcs/linux/lib/libsnpsmalloc.so \
+/usr/synopsys/vcs/linux/lib/libvcsnew.so /usr/synopsys/vcs/linux/lib/libuclinative.so \
+-Wl,-whole-archive /usr/synopsys/vcs/linux/lib/libvcsucli.so -Wl,-no-whole-archive \
+/usr/synopsys/vcs/linux/lib/vcs_save_restore_new.o /usr/synopsys/vcs/linux/lib/ctype-stubs_32.a \
+-ldl -lm  -lc -lpthread -ldl 
+../simv up to date
+CPU time: .334 seconds to compile + .044 seconds to elab + .113 seconds to link

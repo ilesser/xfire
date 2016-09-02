@@ -1,0 +1,100 @@
+Command: vcs +incdir+./temp +incdir+../../../rtl/source/ ././temp/input_precision_selection.v \
+./temp/bkm.v ./temp/tb_add_subb.v ./temp/multiply_by_d_csd.v ./temp/bkm_fixed.v ./temp/bkm_pre_processing.v \
+./temp/add_subb.v ./temp/csd_add_subb.v ./temp/complex_csd_add_subb.v ./temp/xfire_fpu_bkm.v \
+./temp/fadder.v ./temp/simlib_clk_osc.v ./temp/bkm_step.v ./temp/multiply_by_d.v \
+./temp/bkm_range_reduction.v ./temp/bkm_fixed_control_logic.v ./temp/bkm_range_extension.v \
+./temp/complex_add_subb.v ./temp/csd2bin.v ./temp/output_precision_selection.v ./temp/bkm_pre_step.v \
+./temp/bkm_steps.v ./temp/get_d.v ./temp/barrel_shifter.v ./temp/bkm_post_processing.v \
+./temp/bin2csd.v -l ./reports/add_subb.basic_test.vcs.log +define+RTL_DEBUG +vcs+lic+wait \
++warn=all +lint=PCWM -sverilog -debug
+                         Chronologic VCS (TM)
+            Version I-2014.03 -- Sat Jul  2 16:50:51 2016
+               Copyright (c) 1991-2014 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+Parsing design file '././temp/input_precision_selection.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file '././temp/input_precision_selection.v'.
+Parsing design file './temp/bkm.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm.v'.
+Parsing design file './temp/tb_add_subb.v'
+Parsing included file '/home/ilesser/simlib/simlib_defs.vh'.
+Back to file './temp/tb_add_subb.v'.
+
+Warning-[DCTTSW] Decimal constant truncated
+  Constant '16' is truncated to 4 bits: 0.
+  "./temp/tb_add_subb.v", 942
+  Source info:       load_operands(1'b0,  1'b0,    -`W'd8, -`W'd8, 1'b0, 
+  -`W'd16);
+
+Parsing design file './temp/multiply_by_d_csd.v'
+Parsing design file './temp/bkm_fixed.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_fixed.v'.
+Parsing design file './temp/bkm_pre_processing.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_pre_processing.v'.
+Parsing design file './temp/add_subb.v'
+Parsing design file './temp/csd_add_subb.v'
+Parsing design file './temp/complex_csd_add_subb.v'
+Parsing design file './temp/xfire_fpu_bkm.v'
+Parsing included file './temp/xfire_fpu_bkm_defs.vh'.
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/xfire_fpu_bkm_defs.vh'.
+Back to file './temp/xfire_fpu_bkm.v'.
+Parsing design file './temp/fadder.v'
+Parsing design file './temp/simlib_clk_osc.v'
+Parsing included file './temp/simlib_defs.vh'.
+Back to file './temp/simlib_clk_osc.v'.
+Parsing design file './temp/bkm_step.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_step.v'.
+Parsing design file './temp/multiply_by_d.v'
+Parsing design file './temp/bkm_range_reduction.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_range_reduction.v'.
+Parsing design file './temp/bkm_fixed_control_logic.v'
+Parsing included file './temp/bkm_fixed_defs.vh'.
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_fixed_defs.vh'.
+Back to file './temp/bkm_fixed_control_logic.v'.
+Parsing design file './temp/bkm_range_extension.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_range_extension.v'.
+Parsing design file './temp/complex_add_subb.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/complex_add_subb.v'.
+Parsing design file './temp/csd2bin.v'
+Parsing design file './temp/output_precision_selection.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/output_precision_selection.v'.
+Parsing design file './temp/bkm_pre_step.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_pre_step.v'.
+Parsing design file './temp/bkm_steps.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/bkm_steps.v'.
+Parsing design file './temp/get_d.v'
+Parsing included file './temp/bkm_defs.vh'.
+Back to file './temp/get_d.v'.
+
+Error-[SE] Syntax error
+  Following verilog source has syntax error :
+  "./temp/get_d.v", 119: token is '1'
+        u_higher_than_p1  =  u_i >= (W-4)'d1;     //u_i[0] & !u_negative;
+                                            ^
+
+1 warning
+1 error
+CPU time: .088 seconds to compile
