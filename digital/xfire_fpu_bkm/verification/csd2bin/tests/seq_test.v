@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-03 - ilesser - Changed architecture to automatically generate results.
 //    - 2016-06-13 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -55,7 +56,7 @@ task seq_test;
       ena         = 1'b1;
 
       repeat(2**`CNT_SIZE)
-         load_operands( convert_to_csd(cnt), cnt );
+         load_operands( cnt );
 
    end
 

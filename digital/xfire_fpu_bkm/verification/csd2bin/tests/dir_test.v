@@ -12,26 +12,29 @@
 // Description:
 // ------------
 //
-// Basic test for bin2csd
+// Directed test for csd2bin block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// basic_test.v
+// dir_test.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-04-10 - ilesser - Initial version.
+//    - 2016-09-03 - ilesser - Renamed directed test.
+//    - 2016-09-03 - ilesser - Changed architecture to automatically generate results.
+//    - 2016-04-18 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
+
 
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-task basic_test;
+task dir_test;
 // *****************************************************************************
 
 // *****************************************************************************
@@ -45,20 +48,26 @@ task basic_test;
 
    begin
 
-      $monitor ("Time = %8t tb_x = %b \twire_y = %b \n\t\t\t\tres    = %b\n\n",$time, tb_x, wire_y, res);
-      load_operands(`W'b00000, `W2'b0000000000);  // res = 0
-      load_operands(`W'b00001, `W2'b0000000001);  // res = 1
-      load_operands(`W'b00010, `W2'b0000000100);  // res = 2
-      load_operands(`W'b00100, `W2'b0000010000);  // res = 4
-      load_operands(`W'b01000, `W2'b0001000000);  // res = 8
-      load_operands(`W'b10000, `W2'b1000000000);  // res =-16
-      load_operands(`W'b00110, `W2'b0001001000);  // res = 6 = 8-2
-      load_operands(`W'b00111, `W2'b0001000010);  // res = 7 = 8-1
-      load_operands(`W'b10111, `W2'b0010000010);  // res =-9 =-8-1
-      load_operands(`W'b11111, `W2'b0000000010);  // res = 1
-      load_operands(`W'b00011, `W2'b0000010010);  // res = 3 =-4+1
-      load_operands(`W'b01011, `W2'b0100100010);  // res = 11 = 16-4-1
-      load_operands(`W'b00111, convert_to_csd(`W'b00111));  // res = 1
+      ena = 1'b1;
+      rst = 1'b0;
+      run_clk(1);
+      load_operands(`WCSD'b0000000000);  // res = 0
+      load_operands(`WCSD'b0000000001);  // res = 1
+      load_operands(`WCSD'b0000000100);  // res = 2
+      load_operands(`WCSD'b0000010010);  // res = 3 = 4 - 1
+      load_operands(`WCSD'b0000010000);  // res = 4
+      load_operands(`WCSD'b0000010001);  // res = 5
+      load_operands(`WCSD'b0001001000);  // res = 6 = 8 - 2
+      load_operands(`WCSD'b0001000010);  // res = 7 = 8 - 1
+      load_operands(`WCSD'b0001000000);  // res = 8
+      load_operands(`WCSD'b0000000010);  // res =-1
+      load_operands(`WCSD'b0000001000);  // res =-2
+      load_operands(`WCSD'b0000100000);  // res =-4
+      load_operands(`WCSD'b0010000000);  // res =-8
+      load_operands(`WCSD'b1000000000);  // res =-16
+      load_operands(`WCSD'b0010000010);  // res =-9 =-8-1
+      load_operands(`WCSD'b0000010010);  // res = 3 =-4+1
+      load_operands(`WCSD'b0100100010);  // res = 11 = 16-4-1
 
    end
 

@@ -1,98 +1,89 @@
-Command: ./simv -ucli -do simv.tcl -l ../reports/csd2bin.basic_test.simv.log +TESTSEED=2602093032 +VERBOSITY=0
+Command: ./simv -ucli -do simv.tcl -l ../reports/csd2bin.basic_test.simv.log +TESTSEED=198848159 +VERBOSITY=0
 Chronologic VCS simulator copyright 1991-2014
 Contains Synopsys proprietary information.
-Compiler version I-2014.03; Runtime version I-2014.03;  Apr 18 20:40 2016
+Compiler version I-2014.03; Runtime version I-2014.03;  Sep  3 15:37 2016
+ucli% dump  -add / -aggregates -depth 0
+VCD+ Writer I-2014.03 Copyright (c) 1991-2014 by Synopsys Inc.
+1
 ucli% run
 
 *******************************************************
-Test Seed:  1692874264
+Test Seed:   198848159
 *******************************************************
 
-Time =        0 tb_x = 0000000000 	wire_y = 00000 
-					res    = 00000
+Time =        0 tb_x_bin = xxxxxxxxxx	tb_x_bin =	xxxxx
+					res_x_bin =		xxxxx
 
 
-Time =     1000 tb_x = 0000000001 	wire_y = 00001 
-					res    = 00001
+Time =     6000 tb_x_bin = 0000000000	tb_x_bin =	00000
+					res_x_bin =		00000
 
 
-Time =     2000 tb_x = 0000000100 	wire_y = 00010 
-					res    = 00010
+Time =    16000 tb_x_bin = 0000000010	tb_x_bin =	11111
+					res_x_bin =		11111
 
 
-Time =     3000 tb_x = 0000010010 	wire_y = 00011 
-					res    = 00011
+Time =    26000 tb_x_bin = 0000001000	tb_x_bin =	11110
+					res_x_bin =		11110
 
 
-Time =     4000 tb_x = 0000010000 	wire_y = 00100 
-					res    = 00100
+Time =    36000 tb_x_bin = 0000100100	tb_x_bin =	11110
+					res_x_bin =		11110
 
 
-Time =     5000 tb_x = 0000010001 	wire_y = 00101 
-					res    = 00101
+Time =    46000 tb_x_bin = 0000100000	tb_x_bin =	11100
+					res_x_bin =		11100
 
 
-Time =     6000 tb_x = 0001001000 	wire_y = 00110 
-					res    = 00110
+Time =    56000 tb_x_bin = 0000100010	tb_x_bin =	11011
+					res_x_bin =		11011
 
 
-Time =     7000 tb_x = 0001000010 	wire_y = 00111 
-					res    = 00111
+Time =    66000 tb_x_bin = 0000010000	tb_x_bin =	00100
+					res_x_bin =		00100
 
 
-Time =     8000 tb_x = 0001000000 	wire_y = 01000 
-					res    = 01000
+Time =    76000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
 
 
-Time =     9000 tb_x = 0000000010 	wire_y = 11111 
-					res    = 11111
+Time =    86000 tb_x_bin = 0000000000	tb_x_bin =	00000
+					res_x_bin =		00000
 
 
-Time =    10000 tb_x = 0000001000 	wire_y = 11110 
-					res    = 11110
+Time =    96000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
 
 
-Time =    11000 tb_x = 0000100000 	wire_y = 11100 
-					res    = 11100
+Time =   106000 tb_x_bin = 0000010000	tb_x_bin =	00100
+					res_x_bin =		00100
 
 
-Time =    12000 tb_x = 0010000000 	wire_y = 11000 
-					res    = 11000
+Time =   116000 tb_x_bin = 0000000000	tb_x_bin =	00000
+					res_x_bin =		00000
 
 
-Time =    13000 tb_x = 1000000000 	wire_y = 10000 
-					res    = 10000
+Time =   146000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
 
 
-Time =    14000 tb_x = 0001001000 	wire_y = 00110 
-					res    = 00110
+Time =   156000 tb_x_bin = 0000100100	tb_x_bin =	11110
+					res_x_bin =		11110
 
 
-Time =    15000 tb_x = 0001000010 	wire_y = 00111 
-					res    = 00111
-
-
-Time =    16000 tb_x = 0010000010 	wire_y = 10111 
-					res    = 10111
-
-
-Time =    17000 tb_x = 0000010010 	wire_y = 00011 
-					res    = 00011
-
-
-Time =    18000 tb_x = 0100100010 	wire_y = 01011 
-					res    = 01011
+Time =   166000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
 
 
 
 
-TIME     : 19
+TIME     : 176
 WARNINGS : 0
 ERRORS   : 0
 INFOS    : 0
 NOTES    : 0
 MESSAGES : 0
-TESTSEED : 1692874264
+TESTSEED : 198848159
 
 
 ............. TEST PASSED .............
@@ -105,9 +96,9 @@ TESTSEED : 1692874264
 .......................................
 
 
-$finish called from file "./temp/tb_csd2bin.v", line 253.
-$finish at simulation time                19000
+$finish called from file "./temp/tb_csd2bin.v", line 299.
+$finish at simulation time               176000
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 19000 ps
-CPU Time:      0.160 seconds;       Data structure size:   0.0Mb
-Mon Apr 18 20:40:04 2016
+Time: 176000 ps
+CPU Time:      1.030 seconds;       Data structure size:  53.6Mb
+Sat Sep  3 15:37:54 2016

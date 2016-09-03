@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-03 - ilesser - Changed architecture to automatically generate results.
 //    - 2016-06-13 - ilesser - Added sequential test.
 //    - 2016-04-18 - ilesser - Original version.
 //
@@ -31,13 +32,10 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define W 5
-`define W2 `W*2
-`define CNT_SIZE `W
 
-`define CSD_0  2'b00
-`define CSD_p1 2'b01
-`define CSD_m1 2'b10
+`define W          73
+`define WCSD      146
+`define CNT_SIZE  `WCSD
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -54,18 +52,17 @@ module tb_csd2bin ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   localparam              W=5;
-   localparam              CNT_SIZE = `CNT_SIZE;
-   reg                     clk, rst, ena;
-   reg   [2*W-1:0]         tb_x;
-   reg   [W-1:0]           res;
-   reg   [CNT_SIZE-1:0]    cnt;
+   reg                     rst, ena;
+   reg   [2*`W-1:0]        tb_x_csd;
+   reg   [`W-1:0]          tb_x_bin;
+   reg   [`CNT_SIZE-1:0]   cnt;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Testbecnch wiring
    // -----------------------------------------------------
-   wire  [W-1:0]   wire_y;
+   wire                    clk;
+   wire  [`W-1:0]          res_x_bin;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -89,7 +86,7 @@ module tb_csd2bin ();
 
    always @(posedge clk)
        if (rst) begin
-          cnt <= {CNT_SIZE{1'b0}} ;
+          cnt <= {`CNT_SIZE{1'b0}} ;
        end else if (ena) begin
           cnt <= cnt + 1;
        end
@@ -99,7 +96,7 @@ module tb_csd2bin ();
    // Monitors
    // -----------------------------------------------------
    initial begin
-      $monitor("Time = %8t tb_x = %b\twire_y =\t%b\n\t\t\t\t\tres =\t\t%b\n\n",$time, tb_x, wire_y, res);
+      $monitor("Time = %8t \ntb_x_bin  = %h\ntb_x_bin  = %h\nres_x_bin = %h\n\n",$time, tb_x_csd, tb_x_bin, res_x_bin);
       $dumpfile("../waves/tb_csd2bin.vcd");
       $dumpvars();
    end
@@ -110,9 +107,10 @@ module tb_csd2bin ();
    // -----------------------------------------------------
    always @(posedge clk) begin
       if (ena == 1'b1) begin
-         if (res != wire_y) begin
-            $display("[%0d] ERROR: Different conversion!\tExpected result:\t%b\n\t\t\t\t\tObtained result:\t%b. Instance: %m",$time, res, wire_y);
-            //$finish();
+         if (tb_x_bin !== res_x_bin) begin
+            $display("[%0d] ERROR: Different conversion!\tExpected result:\t%b\n\t\t\t\t\tObtained result:\t%b. Instance: %m",$time, tb_x_bin, res_x_bin);
+            add_error();
+            $finish();
          end
       end
    end
@@ -125,16 +123,16 @@ module tb_csd2bin ();
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W)
+      .W                   (`W)
    ) duv (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
-      .x                   (tb_x),
+      .x                   (tb_x_csd),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
-      .y                   (wire_y)
+      .y                   (res_x_bin)
    );
    // -----------------------------------------------------
 
