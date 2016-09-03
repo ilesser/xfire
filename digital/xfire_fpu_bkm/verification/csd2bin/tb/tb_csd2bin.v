@@ -33,8 +33,8 @@
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
 
-`define W         15
-`define WCSD      2*`W
+`define W          73
+`define WCSD      146
 `define CNT_SIZE  `WCSD
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
@@ -96,7 +96,7 @@ module tb_csd2bin ();
    // Monitors
    // -----------------------------------------------------
    initial begin
-      $monitor("Time = %8t tb_x_bin = %b\ttb_x_bin =\t%b\n\t\t\t\t\tres_x_bin =\t\t%b\n\n",$time, tb_x_csd, tb_x_bin, res_x_bin);
+      $monitor("Time = %8t \ntb_x_bin  = %h\ntb_x_bin  = %h\nres_x_bin = %h\n\n",$time, tb_x_csd, tb_x_bin, res_x_bin);
       $dumpfile("../waves/tb_csd2bin.vcd");
       $dumpvars();
    end
@@ -110,7 +110,7 @@ module tb_csd2bin ();
          if (tb_x_bin !== res_x_bin) begin
             $display("[%0d] ERROR: Different conversion!\tExpected result:\t%b\n\t\t\t\t\tObtained result:\t%b. Instance: %m",$time, tb_x_bin, res_x_bin);
             add_error();
-            //$finish();
+            $finish();
          end
       end
    end
