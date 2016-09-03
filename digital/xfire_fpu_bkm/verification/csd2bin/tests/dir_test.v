@@ -51,23 +51,39 @@ task dir_test;
       ena = 1'b1;
       rst = 1'b0;
       run_clk(1);
-      load_operands(`WCSD'b0000000000);  // res = 0
-      load_operands(`WCSD'b0000000001);  // res = 1
-      load_operands(`WCSD'b0000000100);  // res = 2
-      load_operands(`WCSD'b0000010010);  // res = 3 = 4 - 1
-      load_operands(`WCSD'b0000010000);  // res = 4
-      load_operands(`WCSD'b0000010001);  // res = 5
-      load_operands(`WCSD'b0001001000);  // res = 6 = 8 - 2
-      load_operands(`WCSD'b0001000010);  // res = 7 = 8 - 1
-      load_operands(`WCSD'b0001000000);  // res = 8
-      load_operands(`WCSD'b0000000010);  // res =-1
-      load_operands(`WCSD'b0000001000);  // res =-2
-      load_operands(`WCSD'b0000100000);  // res =-4
-      load_operands(`WCSD'b0010000000);  // res =-8
-      load_operands(`WCSD'b1000000000);  // res =-16
-      load_operands(`WCSD'b0010000010);  // res =-9 =-8-1
-      load_operands(`WCSD'b0000010010);  // res = 3 =-4+1
-      load_operands(`WCSD'b0100100010);  // res = 11 = 16-4-1
+      //load_operands(`WCSD'b0000000000);  // res = 0
+      //load_operands(`WCSD'b0000000001);  // res = 1
+      //load_operands(`WCSD'b0000000100);  // res = 2
+      //load_operands(`WCSD'b0000010010);  // res = 3 = 4 - 1
+      //load_operands(`WCSD'b0000010000);  // res = 4
+      //load_operands(`WCSD'b0000010001);  // res = 5
+      //load_operands(`WCSD'b0001001000);  // res = 6 = 8 - 2
+      //load_operands(`WCSD'b0001000010);  // res = 7 = 8 - 1
+      //load_operands(`WCSD'b0001000000);  // res = 8
+      //load_operands(`WCSD'b0000000010);  // res =-1
+      //load_operands(`WCSD'b0000001000);  // res =-2
+      //load_operands(`WCSD'b0000100000);  // res =-4
+      //load_operands(`WCSD'b0010000000);  // res =-8
+      //load_operands(`WCSD'b1000000000);  // res =-16
+      //load_operands(`WCSD'b0010000010);  // res =-9 =-8-1
+      //load_operands(`WCSD'b0000010010);  // res = 3 =-4+1
+      //load_operands(`WCSD'b0100100010);  // res = 11 = 16-4-1
+      load_operands(                `WCSD'h000000100C041104033000000000000000000);  // 0000F8947AFD7837500  +0.2427539078908503 = 0.5 * ln( 1 +  1 * 2^(-2+1) + ( 1^2+ 1^2) * 2^(-2*2) )   n =  2   d_n = 1+1i 
+      $display("tb_x_csd  = %h\n",  `WCSD'h000000100C041104033000000000000000000);  // 0000F8947AFD7837500  +0.2427539078908503 = 0.5 * ln( 1 +  1 * 2^(-2+1) + ( 1^2+ 1^2) * 2^(-2*2) )   n =  2   d_n = 1+1i 
+      $display("tb_x_bin  = %h\n",  `W'h0000F8947AFD7837500 );                      //                      +0.2427539078908503 = 0.5 * ln( 1 +  1 * 2^(-2+1) + ( 1^2+ 1^2) * 2^(-2*2) )   n =  2   d_n = 1+1i 
+
+      load_operands(                `WCSD'h0000000408044200408208122202120848000);  // 0000789C1DB8ABCB980  +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+      $display("tb_x_csd  = %h\n",  `WCSD'h0000000408044200408208122202120848000);  // 0000789C1DB8ABCB980  +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+      $display("tb_x_bin  = %h\n",  `W'h0000789C1DB8ABCB980 );                      //                      +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+
+      load_operands(                `WCSD'h0000000408044200408200000000000000000);  // 0000789C1DB8ABCB980  +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+      $display("tb_x_csd  = %h\n",  `WCSD'h0000000408044200408200000000000000000);  // 0000789C1DB8ABCB980  +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+      $display("tb_x_bin  = %h\n",  `W'h0000789C1DB8ABCB980 );                      //                      +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+
+      load_operands(                `WCSD'h000000040C04430040C300000000000000000);  // 0000789C1DB8ABCB980  +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+      $display("tb_x_csd  = %h\n",  `WCSD'h000000040C04430040C300000000000000000);  // 0000789C1DB8ABCB980  +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+      $display("tb_x_bin  = %h\n",  `W'h0000789C1DB8ABCB980 );                      //                      +0.1177830356563835 = 0.5 * ln( 1 +  1 * 2^(-3+1) + ( 1^2+ 0^2) * 2^(-2*3) )   n =  3   d_n = 1 
+
 
    end
 
