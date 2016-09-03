@@ -1,0 +1,18 @@
+#!/bin/bash
+
+pdflatex ./Propuesta.tex
+pdflatex ./Propuesta.tex
+rm -f *.log
+rm -f *.aux
+rm -f *.sty
+rm -f *.out
+rm -f *.lot
+rm -f *.lof
+rm -f *.toc
+rm -f *.idx
+
+# Open it in okular
+open=`ps -fe | grep "okular ./Propuesta.pdf" | grep -vc grep`
+if [ $open -eq 0 ]; then
+   okular ./Propuesta.pdf &
+fi

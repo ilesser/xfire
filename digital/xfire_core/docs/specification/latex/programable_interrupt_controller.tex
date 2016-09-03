@@ -1,0 +1,91 @@
+\subsection{Programable Interrupt Controller}
+\label{ssec:pic}
+The PIC provides 256 ($2^{8}$) different maskable sources of interruption. Sources are not fixed, and can be
+anything that needs to be able to interrupt the microprocessor. Handlers for each interruption are software defined. To be able to handle
+an interruption, the PIC must raise its corresponding exception (E30) and the Interruption Exception must be unmasked. The
+interruption handler should be able to verify the source of interruption and execute the corresponding subroutine.
+
+\subsubsection{Registers}
+\label{sssec:registers}
+The PIC provides a set of internal registers used to configure it.
+
+\begin{itemize}
+ \item The interrupt cause register (ICR) is 8 bits wide register that holds the address of the interrupting source.
+ \item The interrupt mask register \#X (IMRX; X=[0-7]) are eight 32 bits wide registers that provide masking mechanism for every source of
+ interruption.
+\end{itemize}
+
+The organization of the PIC's registers is shown in table \ref{tbl:pic_reg_organization}
+
+\begin{table}
+  \begin{center}
+      \begin{bytefield}[bitwidth=0.9em,endianness=big]{40}
+      \bitheader{0-7}\\
+      \bitbox[]{4}{ICR}      & \bitbox[]{28}{}      & \bitbox{8}{}\\
+      \bitbox[]{16}{} \\
+
+      \bitheader{0-31}\\
+      \bitbox[]{4}{IMR0}      & \bitbox[]{4}{}      & \bitbox{4}{MS31} & \bitbox{25}{$\hdots$} & \bitbox{3}{MS0}\\
+      \bitbox[]{4}{}          & \bitbox[]{4}{}      & \bitbox[rl]{32}{}\\
+      \bitbox[]{4}{$\vdots$}  & \bitbox[]{4}{}      & \bitbox[rl]{32}{$\vdots$} \\
+      \bitbox[]{4}{}          & \bitbox[]{4}{}      & \bitbox[rl]{32}{}\\
+      \bitbox[]{4}{IMR7}      & \bitbox[]{4}{}      & \bitbox{5}{MS255}& \bitbox{22}{$\hdots$} & \bitbox{5}{MS223}\\
+      \bitbox[]{40}{} \\
+      \end{bytefield}
+    \caption{PIC registers organization.}
+    \label{tbl:pic_reg_organization}
+  \end{center}
+\end{table}
+
+\subsubsection{Addressing of Registers}
+\label{sssec:pic_reg_addresses}
+PIC registers are set and read while talking to the PIC as any other peripheral. PIC registers addressing is shown in table
+\ref{tbl:pic_reg_addresses}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Register Name} & \textbf{Mapped Address} & \textbf{Size}\\
+    \hline
+    ICR  & 0x00 & 32\\
+    IMR0 & 0x01 & 32\\
+    IMR1 & 0x02 & 32\\
+    IMR2 & 0x03 & 32\\
+    IMR3 & 0x04 & 32\\
+    IMR4 & 0x05 & 32\\
+    IMR5 & 0x06 & 32\\
+    IMR6 & 0x07 & 32\\
+    IMR7 & 0x08 & 32\\
+    \hline
+    \end{tabular}
+  \caption{PIC registers addressing.}
+  \label{tbl:pic_reg_addresses}
+  \end{center}
+\end{table}
+
+\subsubsection{Ports}
+\label{ssec:pic_ports}
+\textcolor{red}{Falta definir bien los puertos del PIC para ver como se comunica con los periféricos. Wishbone??}
+The PIC ports are shown in table \ref{tbl:pic_ports}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|l|l|c|c|}
+    \hline
+    \textbf{Port name} & \textbf{Description} & \textbf{Size (Bits)} & \textbf{Type}\\
+    \hline
+    inputs             & Positive edge & 256 & Input \\
+    enables            & Enable the peripheral to start talking & 256 & Output \\
+    interrupt          & Up when finished and until start is asserted & 1 & Output \\
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{PIC Ports.}
+  \label{tbl:pic_ports}
+\end{table}
+
+\textcolor{red}{Falta definir el mecanismo de comunicacion de los periféricos}.
+
+\textcolor{red}{Incluir diagrama en bloques del PIC}
+

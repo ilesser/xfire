@@ -1,0 +1,145 @@
+The appication binary interface (ABI) covers details such as:
+\begin{itemize}
+\item The sizes, layout, and alignment of data types.
+\item The calling convention, which controls how functions' arguments are passed and return values retrieved;
+for example, whether all parameters are passed on the stack or some are passed in registers, which registers
+are used for which function parameters, and whether the first function parameter passed on the stack is pushed
+first or last onto the stack.
+\item How an application should make system calls to the operating system.
+\item The binary format of object files and program libraries.
+\end{itemize}
+
+This description is focused on ISO/IEC 9899:1990 C language support.
+
+\section{Scalar data types}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{C language type} & \textbf{Size of [bytes]} & \textbf{Aligment [bytes]} & \textbf{CPU equivalent}\\
+    \hline
+    \hline
+    char                   & 1  & 1 & byte \\
+    \hline
+    unsigned char          & 1  & 1 & byte \\
+    \hline
+    short int              & 2  & 2 & half \\
+    \hline
+    unsigned short int     & 2  & 2 & half \\
+    \hline
+    int                    & 4  & 4 & word \\
+    \hline
+    unsigned int           & 4  & 4 & word \\
+    \hline
+    long int               & 8  & 4 & double word \\
+    \hline
+    unsigned long int      & 8  & 4 & double word \\
+    \hline
+    long long int          & 8  & 4 & double word  \\
+    \hline
+    unsigned long long int & 8  & 4 & double word  \\
+    \hline
+    float                  & 4  & 4 & float \\
+    \hline
+    double                 & 8  & 4 & double \\
+    \hline
+    long double            & 8  & 4 & double \\
+    \hline
+    pointer (any type)     & 4  & 4 & word \\
+    \hline
+    \end{tabular}
+  \caption{Data types equivalence.}
+  \label{tbl:abi_data_types}
+  \end{center}
+\end{table}
+A null pointer of any type must be zero.
+
+
+\subsection{Aggregates and Unions}
+Aggregates (structures and arrays) and unions assume the alignment of their most strictly aligned element.
+\begin{itemize}
+\item An array uses the alignment of its elements.
+\item Structures and unions, since their elements may be of different types, can require padding to meet alignment restrictions.
+      Each element is assigned to the lowest aligned address.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{System calls}
+\label{sec:system_calls}
+In the following description \emph{ids} is system call ID.
+
+
+xxxxxxxxx mejorar esto para cuando soporta y no soporta nested exceptions xxxxxxxxxxxxxx
+
+\begin{center}
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Step} & \textbf{Description} & \textbf{Assembly} & \textbf{Registers Status}\\
+\hline
+\hline
+1. & System call ID (\emph{ids}) is saved in rx & \texttt{        movi rx, ids}    & \hspace{20pt}$rx \leftarrow_{32} ids$ \\
+\hline
+2. & Jump to the exception handler routine      & \texttt{        trap}            & \hspace{20pt}$l_{esp}[29:0] \leftarrow_{30} pc + 1$ \\
+   &                                            &                                  & \hspace{20pt}$pc \leftarrow_{30} 31$ \\
+\hline
+3. & Jump                                       & \texttt{    31: jump \$trap}     & \hspace{20pt}$pc \leftarrow_{30} trap$ \\
+\hline
+4. & Jump to system call routine                & \texttt{\$trap: jr rx}           & \hspace{20pt}$pc \leftarrow_{30} pc + ids$ \\
+\hline
+5. & System call routine                        & System call code                 & \\
+\hline
+6. & Return from system call                    & \texttt{rfe}                     & $pc \leftarrow_{30} l_{esp}[29:0]$ \\
+   &                                            &                                  & $mr[32] \leftarrow_{1} 0$ \\
+   &                                            &                                  & $cfg[0] \leftarrow_{1} 1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\subsection{Subroutine calls}
+\label{sec:subroutine_calls}
+In the following description \emph{idr} is subroutine ID.
+
+\begin{center}
+\begin{tabular}{|r|l|l|l|}
+\hline
+\textbf{Step} & \textbf{Description} & \textbf{Assembly} & \textbf{Registers Status}\\
+\hline
+\hline
+1. & Subroutine call ID (\emph{idr}) is saved in rx & \texttt{ jal rx, idr}            & \hspace{20pt}$rx \leftarrow_{32} pc+1$ \\
+   &                                                &                                  & \hspace{20pt}$pc \leftarrow_{30} pc + idr$ \\
+\hline
+3. & Subroutine                                     & User code                        & \\
+\hline
+6. & Return from subroutine                         & \texttt{jr rx}                   & $pc \leftarrow_{30} rx[29:0]$ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

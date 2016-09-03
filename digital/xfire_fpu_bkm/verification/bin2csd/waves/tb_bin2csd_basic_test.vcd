@@ -1,0 +1,726 @@
+$date
+	Sun Apr 17 04:04:50 2016
+$end
+
+$version
+	Synopsys VCS version I-2014.03
+$end
+
+$timescale
+	1ps
+$end
+
+$comment Csum: 1 459b0c9404f335d3 $end
+
+
+$scope module bkm_fixed $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 $ enable $end
+$var wire 1 % start $end
+$var wire 2 & format [1:0] $end
+$var wire 6 ' op [5:0] $end
+$var reg 64 ( x1 [63:0] $end
+$var reg 64 ) y1 [63:0] $end
+$var reg 64 * x2 [63:0] $end
+$var reg 64 + y2 [63:0] $end
+$var reg 64 , x3 [63:0] $end
+$var reg 64 - y3 [63:0] $end
+$var wire 4 . flags [3:0] $end
+$var wire 1 / done $end
+$var wire 1 0 bkm_pre_enable $end
+$var wire 1 1 bkm_pre_start $end
+$var wire 2 2 bkm_pre_format [1:0] $end
+$var wire 6 3 bkm_pre_op [5:0] $end
+$var wire 1 4 bkm_pre_done $end
+$var wire 1 5 bkm_core_enable $end
+$var wire 1 6 bkm_core_start $end
+$var wire 2 7 bkm_core_format [1:0] $end
+$var wire 1 8 bkm_core_mode $end
+$var wire 1 9 bkm_core_done $end
+$var wire 4 : bkm_core_flags [3:0] $end
+$var wire 64 ; E_r_in [63:0] $end
+$var wire 64 < E_i_in [63:0] $end
+$var wire 64 = L_r_in [63:0] $end
+$var wire 64 > L_i_in [63:0] $end
+$var wire 64 ? E_r_out [63:0] $end
+$var wire 64 @ E_i_out [63:0] $end
+$var wire 64 A L_r_out [63:0] $end
+$var wire 64 B L_i_out [63:0] $end
+$var wire 1 C bkm_post_enable $end
+$var wire 1 D bkm_post_start $end
+$var wire 2 E bkm_post_format [1:0] $end
+$var wire 1 F bkm_post_op $end
+$var wire 1 G bkm_post_done $end
+$var wire 4 H bkm_post_flags [3:0] $end
+
+$scope module bkm_pre_processign $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 0 enable $end
+$var wire 1 1 start $end
+$var wire 2 2 format [1:0] $end
+$var wire 6 3 op [5:0] $end
+$var reg 64 I x1 [63:0] $end
+$var reg 64 J y1 [63:0] $end
+$var reg 64 K x2 [63:0] $end
+$var reg 64 L y2 [63:0] $end
+$var reg 64 M x3 [63:0] $end
+$var reg 64 N y3 [63:0] $end
+$var reg 64 O E_r [63:0] $end
+$var reg 64 P E_i [63:0] $end
+$var reg 64 Q L_r [63:0] $end
+$var reg 64 R L_i [63:0] $end
+$var wire 1 4 done $end
+$var reg 64 S dummy [63:0] $end
+$upscope $end
+
+
+$scope module bkm_core $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 5 enable $end
+$var wire 1 6 start $end
+$var wire 1 8 mode $end
+$var wire 2 7 format [1:0] $end
+$var reg 64 T E_r_in [63:0] $end
+$var reg 64 U E_i_in [63:0] $end
+$var reg 64 V L_r_in [63:0] $end
+$var reg 64 W L_i_in [63:0] $end
+$var reg 64 X E_r_out [63:0] $end
+$var reg 64 Y E_i_out [63:0] $end
+$var reg 64 Z L_r_out [63:0] $end
+$var reg 64 [ L_i_out [63:0] $end
+$var wire 4 : flags [3:0] $end
+$var wire 1 9 done $end
+$var reg 64 \ dummy [63:0] $end
+$upscope $end
+
+
+$scope module bkm_post_processign $end
+$var wire 1 ! clk $end
+$var wire 1 " arst $end
+$var wire 1 # srst $end
+$var wire 1 C enable $end
+$var wire 1 D start $end
+$var wire 2 E format [1:0] $end
+$var wire 6 ] op [5:0] $end
+$var reg 64 ^ E_r [63:0] $end
+$var reg 64 _ E_i [63:0] $end
+$var reg 64 ` L_r [63:0] $end
+$var reg 64 a L_i [63:0] $end
+$var reg 64 b x [63:0] $end
+$var reg 64 c y [63:0] $end
+$var wire 4 H flags [3:0] $end
+$var wire 1 G done $end
+$var reg 64 d dummy [63:0] $end
+$upscope $end
+
+
+$scope module bkm_fixed_control_logic $end
+$var reg 1 e clk $end
+$var reg 1 f arst $end
+$var reg 1 g srst $end
+$var reg 1 h enable $end
+$var reg 1 i start $end
+$var reg 2 j format [1:0] $end
+$var reg 6 k op [5:0] $end
+$var reg 1 l bkm_pre_done $end
+$var reg 1 m bkm_core_done $end
+$var reg 4 n bkm_core_flags [3:0] $end
+$var reg 1 o bkm_post_done $end
+$var reg 4 p bkm_post_flags [3:0] $end
+$var reg 1 q bkm_pre_enable $end
+$var reg 1 r bkm_pre_start $end
+$var reg 2 s bkm_pre_format [1:0] $end
+$var reg 6 t bkm_pre_op [5:0] $end
+$var reg 1 u bkm_core_enable $end
+$var reg 1 v bkm_core_start $end
+$var reg 2 w bkm_core_format [1:0] $end
+$var reg 1 x bkm_core_mode $end
+$var reg 1 y bkm_post_enable $end
+$var reg 1 z bkm_post_start $end
+$var reg 2 { bkm_post_format [1:0] $end
+$var reg 6 | bkm_post_op [5:0] $end
+$var reg 4 } flags [3:0] $end
+$var reg 1 ~ done $end
+$var reg 1 "! dummy $end
+$upscope $end
+
+$upscope $end
+
+
+$scope module csd_add_subb $end
+$var wire 1 "" subb_a $end
+$var wire 1 "# subb_b $end
+$var wire 128 "$ a [127:0] $end
+$var wire 128 "% b [127:0] $end
+$var reg 2 "& c [1:0] $end
+$var reg 128 "' s [127:0] $end
+$var reg 128 "( a_inv [127:0] $end
+$var reg 128 ") b_inv [127:0] $end
+$var reg 64 "* a_s [63:0] $end
+$var reg 64 "+ a_d [63:0] $end
+$var reg 64 ", b_s [63:0] $end
+$var reg 64 "- b_d [63:0] $end
+$var reg 65 ". c_s [64:0] $end
+$var reg 65 "/ c_d [64:0] $end
+$var reg 64 "0 s_s [63:0] $end
+$var reg 64 "1 s_d [63:0] $end
+$var reg 64 "2 p [63:0] $end
+$upscope $end
+
+
+$scope module xfire_fpu_bkm $end
+$var wire 1 "3 clk $end
+$var wire 1 "4 arst $end
+$var wire 1 "5 srst $end
+$var wire 1 "6 enable $end
+$var wire 1 "7 start $end
+$var wire 2 "8 format [1:0] $end
+$var wire 6 "9 op [5:0] $end
+$var reg 64 ": x1 [63:0] $end
+$var reg 64 "; y1 [63:0] $end
+$var reg 64 "< x2 [63:0] $end
+$var reg 64 "= y2 [63:0] $end
+$var reg 64 "> x3 [63:0] $end
+$var reg 64 "? y3 [63:0] $end
+$var wire 4 "@ flags [3:0] $end
+$var wire 1 "A done $end
+$var reg 64 "B dummy [63:0] $end
+$upscope $end
+
+
+$scope module fadder $end
+$var wire 1 "C a $end
+$var wire 1 "D b $end
+$var wire 1 "E ci $end
+$var wire 1 "F s $end
+$var wire 1 "G co $end
+$var wire 1 "H w1 $end
+$var wire 1 "I w2 $end
+$var wire 1 "J w3 $end
+$upscope $end
+
+
+$scope module tb_bin2csd $end
+$var reg 5 "K tb_x [4:0] $end
+$var reg 10 "L res [9:0] $end
+$var wire 10 "M wire_y [9:0] $end
+$var reg 1 "N sim_clk $end
+$var integer 32 "O testseed $end
+$var integer 32 "P errors $end
+$var integer 32 "Q messages $end
+$var integer 32 "R warnings $end
+$var integer 32 "S infos $end
+$var integer 32 "T notes $end
+$var integer 32 "U testseed_orig $end
+$var integer 32 "V arg_int $end
+$var integer 32 "W verbosity $end
+
+$scope function constrained_rand_int $end
+$var integer 32 "X constrained_rand_int $end
+$var integer 32 "Y low_limit $end
+$var integer 32 "Z high_limit $end
+$var integer 32 "[ range $end
+$var integer 32 "\ rnd1 $end
+$var integer 32 "] rnd2 $end
+$var integer 32 "^ rnd3 $end
+$upscope $end
+
+
+$scope function abs $end
+$var real 64 "_ abs $end
+$var real 64 "` x $end
+$upscope $end
+
+
+$scope function clog2 $end
+$var integer 32 "a clog2 $end
+$var integer 32 "b x $end
+$var integer 32 "c i $end
+$upscope $end
+
+
+$scope function sin $end
+$var real 64 "d sin $end
+$var real 64 "e x $end
+$var real 64 "f x1 $end
+$var real 64 "g y $end
+$var real 64 "h y2 $end
+$var real 64 "i y3 $end
+$var real 64 "j y5 $end
+$var real 64 "k y7 $end
+$var real 64 "l sum $end
+$var real 64 "m sign $end
+$upscope $end
+
+
+$scope function cos $end
+$var real 64 "n cos $end
+$var real 64 "o x $end
+$upscope $end
+
+
+$scope task add_error $end
+$upscope $end
+
+
+$scope task add_warning $end
+$upscope $end
+
+
+$scope task add_info $end
+$upscope $end
+
+
+$scope task add_note $end
+$upscope $end
+
+
+$scope task test_failed $end
+$upscope $end
+
+
+$scope task test_passed $end
+$upscope $end
+
+
+$scope task finish_sim $end
+$upscope $end
+
+
+$scope task run_clk $end
+$var integer 32 "p clk_cycles $end
+$var integer 32 "q counter $end
+$upscope $end
+
+
+$scope task basic_test $end
+$upscope $end
+
+
+$scope task load_operands $end
+$var reg 5 "r x [4:0] $end
+$var reg 10 "s y [9:0] $end
+$upscope $end
+
+
+$scope module duv $end
+$var wire 5 "t x [4:0] $end
+$var reg 10 "u y [9:0] $end
+$var reg 5 "v h [4:0] $end
+$var reg 5 "w k [4:0] $end
+$var reg 5 "x y_s [4:0] $end
+$var reg 5 "y y_d [4:0] $end
+$upscope $end
+
+$upscope $end
+
+
+$scope module simlib_clk_osc $end
+$var wire 1 "z stop $end
+$var wire 1 "{ clk_out $end
+$var reg 1 "| state $end
+$var reg 1 "} osc_clk $end
+$var reg 1 "~ latched_osc_clk $end
+$upscope $end
+
+$enddefinitions $end
+
+#0
+$dumpvars
+z9
+x5
+x8
+x6
+zf
+zm
+xu
+xx
+xv
+zo
+xy
+xz
+zl
+xq
+xr
+x"!
+zh
+zg
+zi
+zG
+xC
+xF
+xD
+z4
+x0
+x1
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx P
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx <
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz @
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx O
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ;
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz ?
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx R
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx >
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz B
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Q
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx =
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz A
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx U
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz Y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx T
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz X
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx W
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz [
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx V
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+bzzzz :
+bxx 7
+bzzzz n
+bxx w
+bzzzz p
+bxx {
+bxxxxxx |
+bxx s
+bxxxxxx t
+bxxxx }
+bzz j
+bzzzzzz k
+bzzzz H
+bxx E
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz _
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz ^
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz a
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz `
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx d
+b00000x ]
+bxx 2
+bxxxxxx 3
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx I
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx K
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx M
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx J
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx N
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx S
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx b
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx *
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ,
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx )
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx +
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "(
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "*
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "-
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ")
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ",
+bxx "&
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "/
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ".
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "2
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "'
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "1
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "0
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "B
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ":
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "<
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ">
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ";
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "=
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "?
+x"H
+x"I
+x"J
+0"N
+b00000000000000000000000000000000 "V
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "a
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "c
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "b
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "X
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Z
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "Y
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "[
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "\
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "]
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "^
+b00000 "t
+b0000000000 "u
+b00000000000000000000000000000000 "P
+b00000 "v
+b00000000000000000000000000000000 "S
+b00000 "w
+b00000 "r
+b0000000000 "s
+b00000000000000000000000000000000 "Q
+b00000000000000000000000000000000 "T
+b0000000000 "L
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "p
+bxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx "q
+b00000 "K
+b00101000011001010111000100001101 "O
+b00101000011001010111000100001101 "U
+b00000000000000000000000000000000 "W
+b00000000000000000000000000000000 "R
+b0000000000 "M
+b00000 "y
+b00000 "x
+r0.000000000000000  "_
+r0.000000000000000  "`
+r0.000000000000000  "n
+r0.000000000000000  "o
+r0.000000000000000  "m
+r0.000000000000000  "d
+r0.000000000000000  "l
+r0.000000000000000  "e
+r0.000000000000000  "f
+r0.000000000000000  "g
+r0.000000000000000  "h
+r0.000000000000000  "i
+r0.000000000000000  "j
+r0.000000000000000  "k
+z"~
+0"}
+x"|
+x"F
+x"G
+0"{
+ze
+x~
+z!
+z"
+z#
+z$
+z%
+bzz &
+bzzzzzz '
+bxxxx .
+x/
+z""
+z"#
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "$
+bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz "%
+z"3
+z"4
+z"5
+z"6
+z"7
+bzz "8
+bzzzzzz "9
+bzzzz "@
+z"A
+z"C
+z"D
+z"E
+z"z
+$end
+#1000
+b00001 "r
+b0000000001 "s
+b00001 "K
+b00001 "t
+b00001 "v
+b0000000001 "L
+b00001 "y
+b0000000001 "u
+b0000000001 "M
+#2000
+b00010 "r
+b0000000100 "s
+b00010 "K
+b00010 "t
+b00000 "v
+b0000000100 "L
+b00010 "w
+b00000 "y
+b0000000000 "u
+b0000000000 "M
+b00010 "y
+b0000000100 "u
+b0000000100 "M
+#3000
+b00100 "r
+b0000010000 "s
+b00100 "K
+b00100 "t
+b0000010000 "L
+b00100 "v
+b00110 "w
+b00010 "x
+b00000 "y
+b0000001000 "u
+b0000001000 "M
+b00100 "w
+b01100 "w
+b01000 "w
+b00000 "x
+b0000000000 "u
+b0000000000 "M
+b01000 "y
+b0001000000 "u
+b0001000000 "M
+b00000 "w
+b01100 "y
+b0001010000 "u
+b0001010000 "M
+b00100 "y
+b0000010000 "u
+b0000010000 "M
+#4000
+b01000 "r
+b0001000000 "s
+b01000 "K
+b01000 "t
+b0001000000 "L
+b01100 "v
+b10100 "y
+b01000 "w
+b00100 "x
+b10000 "y
+b0000100000 "u
+b0000100000 "M
+b01000 "v
+b11000 "v
+b0100100000 "u
+b0100100000 "M
+b10000 "v
+b00000 "y
+b00000 "x
+b0100000000 "u
+b0100000000 "M
+b00000 "v
+b01000 "y
+b0101000000 "u
+b0101000000 "M
+b0001000000 "u
+b0001000000 "M
+#5000
+1"N
+b10000 "r
+b1000000000 "s
+b10000 "K
+b10000 "t
+b1000000000 "L
+b10000 "v
+b11000 "w
+b00000 "y
+b01000 "x
+b0010000000 "u
+b0010000000 "M
+b10000 "w
+b11000 "x
+b00000 "w
+b10000 "x
+b0000000000 "u
+b0000000000 "M
+b1000000000 "u
+b1000000000 "M
+#6000
+b00110 "r
+b0001001000 "s
+b00110 "K
+b00110 "t
+b0001001000 "L
+b00000 "v
+b00000 "x
+b00100 "v
+b00010 "w
+b0000000000 "u
+b0000000000 "M
+b00100 "y
+b0000010000 "u
+b0000010000 "M
+b00110 "w
+b00010 "x
+b0000011000 "u
+b0000011000 "M
+b01110 "w
+b00000 "y
+b0000001000 "u
+b0000001000 "M
+b01000 "y
+b0001001000 "u
+b0001001000 "M
+#7000
+b00111 "r
+b0001000010 "s
+b00111 "K
+b00111 "t
+b00101 "v
+b0001000010 "L
+b00111 "v
+b00011 "x
+b0001001010 "u
+b0001001010 "M
+b00001 "x
+b0001000010 "u
+b0001000010 "M
+#8000
+b10111 "r
+b0010000010 "s
+b10111 "K
+b10111 "t
+b0010000010 "L
+b10111 "v
+b11110 "w
+b00000 "y
+b01001 "x
+b0010000010 "u
+b0010000010 "M
+#9000
+b11111 "r
+b0000000010 "s
+b11111 "K
+b11111 "t
+b0000000010 "L
+b11111 "v
+b00001 "x
+b0000000010 "u
+b0000000010 "M
+#10000
+0"N
+b00011 "r
+b0000010010 "s
+b00011 "K
+b00011 "t
+b0000010010 "L
+b01110 "w
+b10000 "y
+b10111 "v
+b00000 "y
+b01010 "w
+b00111 "v
+b01000 "y
+b0001000010 "u
+b0001000010 "M
+b00010 "w
+b01100 "y
+b0001010010 "u
+b0001010010 "M
+b00100 "y
+b0000010010 "u
+b0000010010 "M
+#11000
+b01011 "r
+b0100100010 "s
+b01011 "K
+b01011 "t
+b0100100010 "L
+b01111 "v
+b10100 "y
+b01010 "w
+b00101 "x
+b10000 "y
+b0000100010 "u
+b0000100010 "M
+b11111 "v
+b0100100010 "u
+b0100100010 "M

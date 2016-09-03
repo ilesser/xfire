@@ -1,0 +1,20 @@
+
++-----------------------------------------------------------------------------+
+|           CORDIC                     |              BKM                     |
++-----------------------------------------------------------------------------+
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
+|                                      |                                      |
++-----------------------------------------------------------------------------+
+
+The BKM is "more suitable for computations in a redundant number system than the CORDIC...".
+When you come to do the addition in Cordic you need to find the sign of y quite
+often and this means finding the sign of the highest non zero bit in the number
+rather than just looking at the msb as you would with normal 2's complement.
+This searching the number would remove the advantage of the carry free addition.
+
+The BKM algorithm seems to be to get around that problem because you don't use
+a the sign of y for decisions.
