@@ -37,17 +37,18 @@ permite aumentar la frecuencia de operación de las compuertas que componen la
 lógica. Además, es posible dividir la ejecución de las instrucciones en etapas
 sencillas y consecutivas, permitiendo de esta manera implementar fácilmente
 optimizaciones como, por ejemplo, una arquitectura de
-\emph{pipeline}\footnote{``Pipeline'': técnica de diseño de arquitecturas de
-computadoras en la que se segmenta la ejecución de las instrucciones en
-múltiples etapas, permitiendo que múltiples instrucciones estén ejecutándose en
-paralelo.}. Es por esto que el conjunto de instrucciones es sencillo,
-permitiendo solamente operaciones básicas entre registros internos del
-microprocesador. El trabajo realizado por cada instrucción, en general, es menor
-que el generado por una instrucción CISC, pero se hace de manera sencilla y
-rápida. Es importante notar que no solamente la ganancia radica en poder
-aumentar la frecuencia de operación de la lógica, sino que estas condiciones
-facilitan el desarrollo de diseños de bajo consumo, característica muy valorada
-en el nicho de los sistemas embebidos.
+\emph{pipeline}\footnote{``Pipeline'': técnica de optimización en el diseño de 
+arquitecturas de computadoras en la que se segmenta la ejecución de las 
+instrucciones en múltiples etapas, permitiendo que múltiples instrucciones 
+estén ejecutándose en paralelo. Se desarrollará en profundidad en
+\ref{subsubsec:optimizations-ilp-pipeline}}. Es por esto que el conjunto de 
+instrucciones es sencillo, permitiendo solamente operaciones básicas entre 
+registros internos del microprocesador. El trabajo realizado por cada 
+instrucción, en general, es menor que el generado por una instrucción CISC, pero 
+se hace de manera sencilla y rápida. Es importante notar que no solamente la 
+ganancia radica en poder aumentar la frecuencia de operación de la lógica, sino 
+que estas condiciones facilitan el desarrollo de diseños de bajo consumo, 
+característica muy valorada en el nicho de los sistemas embebidos.
 
 El mercado de los sistemas embebidos es excesivamente amplio y está inserto en
 todas las industrias. En un automóvil, por ejemplo, podemos encontrar

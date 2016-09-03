@@ -1534,36 +1534,54 @@ No debe perderse de vista que las arquitecturas modernas en general son
 híbridos de esta clasificación ---combinando las bondades de SISD, SIMD y 
 MIMD---.
 
-\section{Jerarquía de memoria}
-\label{sec:mem_hierarchy}
-
-Localidad espacial y temporal de datos e instrucciones. TODO.
-
-\section{Técnicas y optimizaciones en el diseño de arquitecturas RISC}
+\section{Técnicas de optimización en el diseño de arquitecturas RISC}
 \label{sec:optimizations}
 
 Durante esta sección estudiaremos las diversas optimizaciones implementables en 
-el diseño del hardware de las arquitecturas RISC. Debido a ciertas bondades que 
-propone la filosofía se facilita la implementación de dichas optimizaciones. 
-TODO.\\
+el diseño del hardware de las arquitecturas RISC. Algunas de ellas fueron 
+mencionadas en \ref{sec:parallelism}, otras serán directamente introducidas en 
+esta sección. Debido a ciertas bondades que propone la filosofía se facilita la 
+implementación de las optimizaciones.\\
+Es importante no perder de vista que estas optimizaciones se desarrollaron con 
+el objetivo de explotar algún tipo de paralelismo. Comenzaremos analizando las 
+técnicas que explotan el paralismo a nivel de instrucción.
 
-Para explotar ILP tenemos:
-\subsection{Pipeline}
-\label{subsec:optimizations-pipeline}
+\subsection{Explotando ILP}
+\label{subsec:optimizations-ilp}
+Dentro del universo del ILP encontraremos como básico y principal componente a 
+la técnica de \emph{pipelining} y luego se analizarán distintas técnicas que 
+permiten mejorar el desempeño de una arquitectura \emph{pipeline}.
+
+\subsubsection{Pipeline}
+\label{subsubsec:optimizations-ilp-pipeline}
 
 TODO.
 
-\subsection{Forwarding}
-\label{subsec:optimizations-forwarding}
+\subsubsection{Forwarding}
+\label{subsubsec:optimizations-ilp-forwarding}
 
 TODO.
 
-\subsection{Predicción de salto}
-\label{subsec:optimizations-branch_prediction}
+\subsubsection{Predicción de salto}
+\label{subsubsec:optimizations-ilp-branch_prediction}
 
 TODO.
 
-Para explotar TLP tenemos:
+\subsection{Explotando ThLP}
+\label{subsec:optimizations-thlp}
+
+TODO.
+
+
+
+
+
+
+
+
+
+
+
 \subsection{Multiple Issue}
 \label{subsec:optimizations-multiple_issue}
 
@@ -1580,7 +1598,10 @@ TODO.
 Coherencia de cache?
 TODO.
 
+\section{Jerarquía de memoria}
+\label{sec:mem_hierarchy}
 
+Localidad espacial y temporal de datos e instrucciones. TODO.
 
 \section{Diseño del XFire}
 
