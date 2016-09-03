@@ -1,16 +1,19 @@
 # Begin_DVE_Session_Save_Info
 # DVE full session
-# Saved on Mon Aug 29 00:05:23 2016
+# Saved on Sat Sep 3 20:42:51 2016
 # Designs open: 1
 #   V1: waves/lut_decoder.vpd
 # Toplevel windows open: 2
 # 	TopLevel.1
 # 	TopLevel.2
 #   Source.1: bkm_fixed
-#   Wave.1: 52 signals
-#   Group count = 2
-#   Group tb_top signal count = 35
-#   Group DUV signal count = 17
+#   Wave.1: 50 signals
+#   Group count = 5
+#   Group tb_top signal count = 13
+#   Group lut_X signal count = 12
+#   Group lut_Y signal count = 9
+#   Group lut_u signal count = 8
+#   Group lut_v signal count = 8
 # End_DVE_Session_Save_Info
 
 # DVE version: I-2014.03
@@ -69,7 +72,7 @@ if {![gui_exist_window -window TopLevel.1]} {
 } else { 
     set TopLevel.1 TopLevel.1
 }
-gui_show_window -window ${TopLevel.1} -show_state normal -rect {{2211 23} {3272 571}}
+gui_show_window -window ${TopLevel.1} -show_state maximized -rect {{1800 20} {3399 864}}
 
 # ToolBar settings
 gui_set_toolbar_attributes -toolbar {TimeOperations} -dock_state top
@@ -110,23 +113,23 @@ gui_hide_toolbar -toolbar {Testbench}
 # End ToolBar settings
 
 # Docked window settings
-set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 247]
+set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 246]
 catch { set Hier.1 [gui_share_window -id ${HSPane.1} -type Hier] }
-gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 247
+gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 246
 gui_set_window_pref_key -window ${HSPane.1} -key dock_height -value_type integer -value -1
 gui_set_window_pref_key -window ${HSPane.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 246} {height 278} {dock_state left} {dock_on_new_line true} {child_hier_colhier 168} {child_hier_coltype 100} {child_hier_colpd 0} {child_hier_col1 0} {child_hier_col2 1} {child_hier_col3 -1}}
-set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 689]
+gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 245} {height 601} {dock_state left} {dock_on_new_line true} {child_hier_colhier 168} {child_hier_coltype 100} {child_hier_colpd 0} {child_hier_col1 0} {child_hier_col2 1} {child_hier_col3 -1}}
+set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 688]
 catch { set Data.1 [gui_share_window -id ${DLPane.1} -type Data] }
-gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 689
+gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 688
 gui_set_window_pref_key -window ${DLPane.1} -key dock_height -value_type integer -value 746
 gui_set_window_pref_key -window ${DLPane.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 688} {height 278} {dock_state left} {dock_on_new_line true} {child_data_colvariable 289} {child_data_colvalue 225} {child_data_coltype 165} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
-set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 164]
+gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 687} {height 601} {dock_state left} {dock_on_new_line true} {child_data_colvariable 289} {child_data_colvalue 225} {child_data_coltype 165} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
+set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 163]
 gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer -value 1799
-gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 164
+gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 163
 gui_set_window_pref_key -window ${Console.1} -key dock_offset -value_type integer -value 0
-gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1061} {height 163} {dock_state bottom} {dock_on_new_line true}}
+gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1599} {height 162} {dock_state bottom} {dock_on_new_line true}}
 #### Start - Readjusting docked view's offset / size
 set dockAreaList { top left right bottom }
 foreach dockArea $dockAreaList {
@@ -250,27 +253,43 @@ gui_set_time_units 1ps
 # Global: Signal Compare
 
 # Global: Signal Groups
-gui_load_child_values {tb_lut_decoder.duv}
 gui_load_child_values {tb_lut_decoder}
 
 
-set _session_group_19 tb_top
-gui_sg_create "$_session_group_19"
-set tb_top "$_session_group_19"
+set _session_group_4 tb_top
+gui_sg_create "$_session_group_4"
+set tb_top "$_session_group_4"
 
-gui_sg_addsignal -group "$_session_group_19" { tb_lut_decoder.arst tb_lut_decoder.srst tb_lut_decoder.ena tb_lut_decoder.clk tb_lut_decoder.load tb_lut_decoder.cnt tb_lut_decoder.cnt_load tb_lut_decoder.cnt_step tb_lut_decoder.tb_mode tb_lut_decoder.tb_format tb_lut_decoder.tb_n tb_lut_decoder.tb_d_x_n tb_lut_decoder.tb_d_y_n tb_lut_decoder.tb_lut_X_n tb_lut_decoder.tb_lut_Y_n tb_lut_decoder.tb_lut_u_n tb_lut_decoder.tb_lut_v_n tb_lut_decoder.err_X tb_lut_decoder.err_Y tb_lut_decoder.war_X tb_lut_decoder.war_Y tb_lut_decoder.err_u tb_lut_decoder.err_v tb_lut_decoder.war_u tb_lut_decoder.war_v tb_lut_decoder.lut_X_n_csd tb_lut_decoder.lut_Y_n_csd tb_lut_decoder.delta_X tb_lut_decoder.delta_Y tb_lut_decoder.delta_u tb_lut_decoder.delta_v tb_lut_decoder.res_lut_X_n tb_lut_decoder.res_lut_Y_n tb_lut_decoder.res_lut_u_n tb_lut_decoder.res_lut_v_n }
+gui_sg_addsignal -group "$_session_group_4" { tb_lut_decoder.arst tb_lut_decoder.srst tb_lut_decoder.ena tb_lut_decoder.clk tb_lut_decoder.load tb_lut_decoder.cnt tb_lut_decoder.cnt_load tb_lut_decoder.cnt_step tb_lut_decoder.tb_mode tb_lut_decoder.tb_format tb_lut_decoder.tb_n tb_lut_decoder.tb_d_x_n tb_lut_decoder.tb_d_y_n }
+gui_set_radix -radix {hex} -signals {V1:tb_lut_decoder.tb_d_x_n}
+gui_set_radix -radix {signMagnitude} -signals {V1:tb_lut_decoder.tb_d_x_n}
+gui_set_radix -radix {decimal} -signals {V1:tb_lut_decoder.tb_d_y_n}
+gui_set_radix -radix {signMagnitude} -signals {V1:tb_lut_decoder.tb_d_y_n}
 
-set _session_group_20 DUV
-gui_sg_create "$_session_group_20"
-set DUV "$_session_group_20"
+set _session_group_5 lut_X
+gui_sg_create "$_session_group_5"
+set lut_X "$_session_group_5"
 
-gui_sg_addsignal -group "$_session_group_20" { tb_lut_decoder.duv.mode tb_lut_decoder.duv.format tb_lut_decoder.duv.d_x_n tb_lut_decoder.duv.d_y_n tb_lut_decoder.duv.n tb_lut_decoder.duv.lut_X tb_lut_decoder.duv.lut_Y tb_lut_decoder.duv.lut_u tb_lut_decoder.duv.lut_v tb_lut_decoder.duv.d_n tb_lut_decoder.duv.X tb_lut_decoder.duv.u tb_lut_decoder.duv.Y tb_lut_decoder.duv.v tb_lut_decoder.duv.WD tb_lut_decoder.duv.WC tb_lut_decoder.duv.LOG2N }
-gui_set_radix -radix {decimal} -signals {V1:tb_lut_decoder.duv.WD}
-gui_set_radix -radix {twosComplement} -signals {V1:tb_lut_decoder.duv.WD}
-gui_set_radix -radix {decimal} -signals {V1:tb_lut_decoder.duv.WC}
-gui_set_radix -radix {twosComplement} -signals {V1:tb_lut_decoder.duv.WC}
-gui_set_radix -radix {decimal} -signals {V1:tb_lut_decoder.duv.LOG2N}
-gui_set_radix -radix {twosComplement} -signals {V1:tb_lut_decoder.duv.LOG2N}
+gui_sg_addsignal -group "$_session_group_5" { tb_lut_decoder.err_X tb_lut_decoder.war_X tb_lut_decoder.lut_X_n_csd tb_lut_decoder.delta_X tb_lut_decoder.max_delta_X tb_lut_decoder.max_delta_Y tb_lut_decoder.max_delta_u tb_lut_decoder.max_delta_v tb_lut_decoder.min_delta_X tb_lut_decoder.res_lut_X_n tb_lut_decoder.tb_lut_X_n tb_lut_decoder.duv.X }
+
+set _session_group_6 lut_Y
+gui_sg_create "$_session_group_6"
+set lut_Y "$_session_group_6"
+
+gui_sg_addsignal -group "$_session_group_6" { tb_lut_decoder.err_Y tb_lut_decoder.war_Y tb_lut_decoder.delta_Y tb_lut_decoder.max_delta_Y tb_lut_decoder.min_delta_Y tb_lut_decoder.res_lut_Y_n tb_lut_decoder.tb_lut_Y_n tb_lut_decoder.lut_Y_n_csd tb_lut_decoder.duv.Y }
+
+set _session_group_7 lut_u
+gui_sg_create "$_session_group_7"
+set lut_u "$_session_group_7"
+
+gui_sg_addsignal -group "$_session_group_7" { tb_lut_decoder.err_u tb_lut_decoder.war_u tb_lut_decoder.lut_u_n_bin tb_lut_decoder.delta_u tb_lut_decoder.max_delta_u tb_lut_decoder.min_delta_u tb_lut_decoder.res_lut_u_n tb_lut_decoder.tb_lut_u_n }
+gui_sg_set_analog_property -group "$_session_group_7" -color #ff00ff -pos -1 -origGroup {} V1:tb_lut_decoder.delta_u
+
+set _session_group_8 lut_v
+gui_sg_create "$_session_group_8"
+set lut_v "$_session_group_8"
+
+gui_sg_addsignal -group "$_session_group_8" { tb_lut_decoder.err_v tb_lut_decoder.war_v tb_lut_decoder.lut_v_n_bin tb_lut_decoder.delta_v tb_lut_decoder.max_delta_v tb_lut_decoder.min_delta_v tb_lut_decoder.res_lut_v_n tb_lut_decoder.tb_lut_v_n }
 
 # Global: Highlighting
 
@@ -280,7 +299,7 @@ gui_change_stack_mode -mode list
 # Post database loading setting...
 
 # Restore C1 time
-gui_set_time -C1_only 29363
+gui_set_time -C1_only 6286000
 
 
 
@@ -306,20 +325,19 @@ gui_list_set_filter -id ${Hier.1} -list { {Package 1} {All 0} {Process 1} {VirtP
 gui_list_set_filter -id ${Hier.1} -text {*}
 gui_hier_list_init -id ${Hier.1}
 gui_change_design -id ${Hier.1} -design V1
-catch {gui_list_expand -id ${Hier.1} tb_lut_decoder}
-catch {gui_list_select -id ${Hier.1} {tb_lut_decoder.duv}}
-gui_view_scroll -id ${Hier.1} -vertical -set 0
+catch {gui_list_select -id ${Hier.1} {tb_lut_decoder}}
+gui_view_scroll -id ${Hier.1} -vertical -set 15
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Data 'Data.1'
 gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {LowPower 1} {Parameter 1} {All 1} {Aggregate 1} {LibBaseMember 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {BaseMembers 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
-gui_list_set_filter -id ${Data.1} -text {*}
-gui_list_show_data -id ${Data.1} {tb_lut_decoder.duv}
+gui_list_set_filter -id ${Data.1} -text {*_v*}
+gui_list_show_data -id ${Data.1} {tb_lut_decoder}
 gui_show_window -window ${Data.1}
-catch { gui_list_select -id ${Data.1} {tb_lut_decoder.duv.mode tb_lut_decoder.duv.format tb_lut_decoder.duv.d_x_n tb_lut_decoder.duv.d_y_n tb_lut_decoder.duv.n tb_lut_decoder.duv.lut_X tb_lut_decoder.duv.lut_Y tb_lut_decoder.duv.lut_u tb_lut_decoder.duv.lut_v tb_lut_decoder.duv.d_n tb_lut_decoder.duv.X tb_lut_decoder.duv.u tb_lut_decoder.duv.Y tb_lut_decoder.duv.v tb_lut_decoder.duv.WD tb_lut_decoder.duv.WC tb_lut_decoder.duv.LOG2N }}
+catch { gui_list_select -id ${Data.1} {tb_lut_decoder.err_v tb_lut_decoder.war_v tb_lut_decoder.lut_v_n_bin tb_lut_decoder.delta_v tb_lut_decoder.max_delta_v tb_lut_decoder.min_delta_v tb_lut_decoder.res_lut_v_n tb_lut_decoder.tb_lut_v_n }}
 gui_view_scroll -id ${Data.1} -vertical -set 0
 gui_view_scroll -id ${Data.1} -horizontal -set 0
-gui_view_scroll -id ${Hier.1} -vertical -set 0
+gui_view_scroll -id ${Hier.1} -vertical -set 15
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Source 'Source.1'
@@ -337,13 +355,18 @@ set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
 gui_list_set_height -id Wave -height 25
 set origGroupCreationState [gui_list_create_group_when_add -wave]
 gui_list_create_group_when_add -wave -disable
+gui_marker_create -id ${Wave.1} C2 0
 gui_marker_set_ref -id ${Wave.1}  C1
-gui_wv_zoom_timerange -id ${Wave.1} 0 66000
+gui_wv_zoom_timerange -id ${Wave.1} 0 21136000
 gui_list_add_group -id ${Wave.1} -after {New Group} {tb_top}
-gui_list_add_group -id ${Wave.1} -after {New Group} {DUV}
-gui_list_expand -id ${Wave.1} tb_lut_decoder.duv.u
-gui_list_expand -id ${Wave.1} {tb_lut_decoder.duv.u[0]}
-gui_list_select -id ${Wave.1} {tb_lut_decoder.duv.u }
+gui_list_add_group -id ${Wave.1} -after {New Group} {lut_X}
+gui_list_add_group -id ${Wave.1} -after {New Group} {lut_Y}
+gui_list_add_group -id ${Wave.1} -after {New Group} {lut_u}
+gui_list_add_group -id ${Wave.1} -after {New Group} {lut_v}
+gui_list_collapse -id ${Wave.1} lut_X
+gui_list_collapse -id ${Wave.1} lut_Y
+gui_list_collapse -id ${Wave.1} lut_u
+gui_list_collapse -id ${Wave.1} lut_v
 gui_seek_criteria -id ${Wave.1} {Any Edge}
 
 
@@ -359,21 +382,21 @@ if { $groupExD } {
 }
 gui_list_set_filter -id ${Wave.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {LibBaseMember 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {BaseMembers 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
 gui_list_set_filter -id ${Wave.1} -text {*}
-gui_list_set_insertion_bar  -id ${Wave.1} -group DUV  -position in
+gui_list_set_insertion_bar  -id ${Wave.1} -group lut_u  -position in
 
-gui_marker_move -id ${Wave.1} {C1} 29363
-gui_view_scroll -id ${Wave.1} -vertical -set 1225
+gui_marker_move -id ${Wave.1} {C1} 6286000
+gui_view_scroll -id ${Wave.1} -vertical -set 0
 gui_show_grid -id ${Wave.1} -enable false
 # Restore toplevel window zorder
 # The toplevel window could be closed if it has no view/pane
-if {[gui_exist_window -window ${TopLevel.2}]} {
-	gui_set_active_window -window ${TopLevel.2}
-	gui_set_active_window -window ${Wave.1}
-}
 if {[gui_exist_window -window ${TopLevel.1}]} {
 	gui_set_active_window -window ${TopLevel.1}
 	gui_set_active_window -window ${Source.1}
 	gui_set_active_window -window ${DLPane.1}
+}
+if {[gui_exist_window -window ${TopLevel.2}]} {
+	gui_set_active_window -window ${TopLevel.2}
+	gui_set_active_window -window ${Wave.1}
 }
 #</Session>
 
