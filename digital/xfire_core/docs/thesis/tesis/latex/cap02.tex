@@ -1189,8 +1189,7 @@ complejidad del diseño de la arquitectura en sí, sino que más bien obliga a
 generar una arquitectura sencilla a la que se le pueda aplicar la mayor 
 cantidad de optimizaciones posibles. No debe confundirse en este punto, 
 sencillez en el diseño con sencillez en el trabajo de diseñar, por el 
-contrario, obtener una arquitectura sencilla obligará a trabajar más en el 
-diseño.
+contrario, obtener una arquitectura sencilla obliga a trabajar más en el diseño.
 
 \section{Desempeño; mediciones y optimizaciones}
 \label{sec:performance}
@@ -1244,18 +1243,21 @@ líneas generales rige en el mundo, pero en la cualquiera de los tipos de
 computadoras debe minimizar el consumo energético, por dos principales motivos: 
 el costo operativo ---una vez más motivación económica--- y maximizar la 
 autonomía en el caso de dispositivos móviles. Aunque resumidos aquí, son temas 
-extensos que se abordarán a lo largo del capítulo.
+extensos que se abordarán a lo largo del trabajo.\\
+A lo largo de la sección se irán mencionando distintas técnicas de optimización 
+aplicables al diseño de arquitecturas que serán desarrolladas con mayor
+profundidad en la sección \ref{sec:optimizations}.
 
 \subsection{Ecuación de desempeño}
 \label{subsec:performance-performance_definition}
 
 La métrica definida de forma histórica para tal fin es el tiempo de ejecución 
 que emplea la arquitectura para un determinado programa o tarea. Se define 
-entonces el desempeño de la máquina como la inversa del tiempo de ejecución de 
-un determinado programa.
+entonces el desempeño ($D$) de la máquina como la inversa del tiempo de 
+ejecución ($t_{\text{ex}}$) de un determinado programa.
 \begin{equation}
   \label{eq:performance-performance_definition}
-  \text{Desempeño} = \dfrac{1}{\text{Tiempo de ejecución}}
+  D = \dfrac{1}{t_\text{ex}}
 \end{equation}
 Es de especial interés definir en éste punto al tiempo de ejecución, dado que 
 existen diversas interpretaciones del mismo. La definición más directa es el 
@@ -1280,26 +1282,20 @@ entonces, comparando iguales cargas de trabajo en distintas arquitecturas y
 midiendo el tiempo de CPU de cada una de ellas. Utilizando la ecuación 
 \ref{eq:performance-performance_definition} obtenemos una poderosa 
 herramienta para comparar arquitecturas. Si estuviésemos comparando la 
-máquina $A$ con la máquina $B$, la ecuación 
-\ref{eq:performance-exec_time_ratio} implica que la máquina $A$ es $n$ veces 
-más 
-rápida que la máquina $B$. Referido en términos de desempeño se transforma en 
-la 
-ecuación \ref{eq:performance-performance_ratio} y decimos que la arquitectura 
-$A$ es $n$ veces más performante que la arquitectura $B$.
+máquina A con la máquina B, la ecuación \ref{eq:performance-exec_time_ratio} 
+implica que la máquina A es $n$ veces más rápida que la máquina B. Referido en 
+términos de desempeño se transforma en la ecuación 
+\ref{eq:performance-performance_ratio} y decimos que la arquitectura A es $n$
+veces más performante que la arquitectura B.
 \begin{equation}
   \label{eq:performance-exec_time_ratio}
-  \dfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de ejecución}_{A}} = n
+  \dfrac{ t_{\text{ex}_{\text{B}}} } { t_{\text{ex}_{\text{A}}} } = n
 \end{equation}
 \begin{equation}
   \label{eq:performance-performance_ratio}
-  \begin{split}
-    n & = \dfrac{\text{Tiempo de ejecución}_{B}}{\text{Tiempo de 
-ejecución}_{A}}\\
-    & = 
-\dfrac{\dfrac{1}{\text{Desempeño}_{B}}}{\dfrac{1}{\text{Desempeño}_{A}}}\\
-    & = \dfrac{\text{Desempeño}_{A}}{\text{Desempeño}_{B}}
-  \end{split}
+    n = \dfrac{ t_{\text{ex}_{\text{B}}} } { t_{\text{ex}_{\text{A}}} } = 
+\dfrac{ \dfrac{ 1 } { D_{\text{B}}} } { \dfrac{ 1 } { D_{\text{A}} } } = 
+\dfrac{ D_{\text{A}} } { D_{\text{B}} }
 \end{equation}
 Ahora bien, para que la comparación sea válida, el programa que ejecutan ambas 
 arquitecturas debe ser el mismo y en las mismas condiciones, entendiéndose por 
@@ -1369,6 +1365,7 @@ compararlas.
 
 \subsection{Optimizaciones y Ley de Amdahl}
 \label{subsec:performance-optimizations_amdahl}
+
 Dado que se cuenta con un método objetivo y estándar para lograr mediciones de 
 performance se pueden cuantificar las mejoras que se pueden aplicar a una 
 determinada arquitectura; lo que conforma una poderosa herramienta para el 
@@ -1376,101 +1373,166 @@ diseñador. Como se estableció en \ref{sec:performance}, el desmpeño se
 relaciona con el tiempo de ejecución de los programas. Ahora bien, si se 
 implementa una mejora en el hardware, el objetivo de la misma será el de 
 disminuir el tiempo de ejecución de los mismos. El término utilizado en inglés 
-es el \emph{speedup} que podría traducirse como ``aceleración''. Definimos de 
-forma genérica el \emph{speedup} en la ecuación \ref{eq:performance-speedup} 
-considerando los tiempos de ejecución antes y después de la mejora:
+es el \emph{speedup} ($SU$) que podría traducirse como ``aceleración''. 
+Definimos de forma genérica el \emph{speedup} en la ecuación 
+\ref{eq:performance-speedup} considerando los tiempos de ejecución antes 
+(viejo, indicado como ``v'' en las ecuaciones) y después (nuevo, indicado como 
+``n'' en las ecuaciones) de la mejora:
 \begin{equation}
   \label{eq:performance-speedup}
-  SU = 
-\dfrac{t_{\text{ejecución}_{\text{viejo}}}}{t_{\text{ejecución}_\text{nuevo}}}
+  SU = \dfrac{t_{\text{ex}_{\text{v}}}}{t_{\text{ex}_\text{n}}}
 \end{equation}
 Considerando que la ecuación \ref{eq:performance-speedup} resulta válida al 
 aplicarla a la ejecución de un mismo programa en una versión con y sin mejora, 
 y siendo obvio que su valor debe ser mayor a $1$ puesto que si efectivamente 
 se mejoró la arquitectura, el tiempo nuevo de ejecución debe ser menor al 
-viejo. Ahora bien, una mejora en particular puede afectar a la ejecución de todo 
-un programa, como podría ser elevar la velocidad de reloj de la arquitectura que 
-en consecuencia ejecutaría el programa en cuestión en menos tiempo, o puede 
-afectar sólo a una parte del programa. Considerando que una mejora afecta a una 
-sola parte de un determinado software que se usará como patrón se puede 
-establecer que el \emph{speedup} global es el de la ecuación 
-\ref{eq:performance-global_speedup} donde $f_{\text{mejora}}$ es la fracción 
-del tiempo orignal de ejecución (viejo) en donde estará activa la mejora:
+viejo. Ahora bien, una mejora (m) en particular puede afectar a la ejecución de 
+todo un programa, como podría ser elevar la velocidad de reloj de la 
+arquitectura que en consecuencia ejecutaría el programa en cuestión en menos 
+tiempo, o puede afectar sólo a una parte del programa. Considerando que una 
+mejora afecta a una sola parte de un determinado software que se usará como 
+patrón se puede establecer que el \emph{speedup} global (g) es el de la 
+ecuación \ref{eq:performance-global_speedup} donde $f_{\text{m}}$ es la 
+fracción del tiempo orignal de ejecución (viejo) en donde estará activa la 
+mejora:
 \begin{equation}
   \label{eq:performance-global_speedup}
   \begin{split}
-    SU_{\text{global}} & = 
-\dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
-t_{\text{ejecución}_\text{nuevo}} }\\
-  & = \dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
-t_{\text{ejecución}_{\text{viejo}}} \left( 1 - f_{\text{mejora}} + 
-\dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } \right) }\\
-  & = \dfrac{ 1 } { 1 - f_{\text{mejora}} + 
-\dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } }
+    SU_{\text{g}} & = 
+\dfrac{ t_{\text{ex}_{\text{v}}} } { 
+t_{\text{ex}_\text{n}} }\\
+  & = \dfrac{ t_{\text{ex}_{\text{v}}} } { 
+t_{\text{ex}_{\text{v}}} \left( 1 - f_{\text{m}} + 
+\dfrac{ f_{\text{m}} } { SU_{\text{m}} } \right) }\\
+  & = \dfrac{ 1 } { 1 - f_{\text{m}} + 
+\dfrac{ f_{\text{m}} } { SU_{\text{m}} } }
   \end{split}
 \end{equation}
 \begin{equation}
   \label{eq:performance-max_speedup}
   \begin{split}
-    SU_{\text{global}} & = \dfrac{ 1 } { 1 - f_{\text{mejora}} + 
-\dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } }\\
-    SU_{\text{global}} & \underset { SU_{\text{mejora}} 
-\rightarrow \infty } { \longrightarrow } \dfrac{ 1 } { 1 - f_{\text{mejora}} }
+    SU_{\text{g}} & = \dfrac{ 1 } { 1 - f_{\text{m}} + 
+\dfrac{ f_{\text{m}} } { SU_{\text{m}} } }\\
+    SU_{\text{g}_{\text{MAX}}} & \underset { SU_{\text{m}} 
+\rightarrow \infty } { \longrightarrow } \dfrac{ 1 } { 1 - f_{\text{m}} }
   \end{split}
 \end{equation}
 \begin{equation}
   \label{eq:performance-min_frac}
   \begin{split}
-    SU_{\text{global}} & \geqslant SU_{\text{global}_{\text{objetivo}}}\\
-    \dfrac{ 1 } { 1 - f_{\text{mejora}} + \dfrac{ f_{\text{mejora}} } { 
-SU_{\text{mejora}} } } & \geqslant SU_{\text{global}_{\text{objetivo}}}\\
-    1 - f_{\text{mejora}} + \dfrac{ f_{\text{mejora}} } { SU_{\text{mejora}} } 
-& \leqslant \dfrac{ 1 } { SU_{\text{global}_{\text{objetivo}}} }\\
-    1 - \dfrac{ 1 } { SU_{\text{global}_{\text{objetivo}}} } & \leqslant 
-f_{\text{mejora}} \left( 1 - \dfrac{ 1 } { SU_{\text{mejora}} } \right)\\
-    \dfrac{ 1 - \dfrac{ 1 } { SU_{\text{global}_{\text{objetivo}}} } } { 1 - 
-\dfrac{ 1 } { SU_{\text{mejora}} } } & \leqslant f_{\text{mejora}} =
-f_{\text{mejora}_{\text{min}}}
+    SU_{\text{g}} & \geqslant SU_{\text{g}_{\text{ob}}}\\
+    \dfrac{ 1 } { 1 - f_{\text{m}} + \dfrac{ f_{\text{m}} } { SU_{\text{m}} } } 
+& \geqslant SU_{\text{g}_{\text{ob}}}\\
+    1 - f_{\text{m}} + \dfrac{ f_{\text{m}} } { SU_{\text{m}} } & \leqslant 
+\dfrac{ 1 } { SU_{\text{g}_{\text{ob}}} }\\
+    1 - \dfrac{ 1 } { SU_{\text{g}_{\text{ob}}} } & \leqslant f_{\text{m}} 
+\left( 1 - \dfrac{ 1 } { SU_{\text{m}} } \right)\\
+    \dfrac{ 1 - \dfrac{ 1 } { SU_{\text{g}_{\text{ob}}} } } { 1 - \dfrac{ 1 } { 
+SU_{\text{m}} } } & \leqslant f_{\text{m}} = f_{\text{m}_{\text{min}}}
   \end{split}
 \end{equation}
 La ecuación \ref{eq:performance-global_speedup} es conocida como la Ley de 
 Amdahl\footnote{Nota sobre Amdahl} y es una fórmula matemática que permite 
 expresar las mejoras de rendimiento en una arquitectura. Podemos extraer dos 
 rápidas conclusiones analisando la expresión: por un lado, dada una parte de 
-código que puede ser optimizado, podemos encontrar el máximo \emph{speedup} que 
-podremos obtener suponiendo que el \emph{speedup} de la mejora en 
-particular es infinito, es decir, suponemos que la mejora se ejecuta en 
-tiempo cero (ver ecuación \ref{eq:performance-max_speedup}); por el otro dada 
-una mejora en particular, podemos averiguar la mínima fracción de tiempo que 
+código que puede ser optimizado, podemos encontrar el máximo \emph{speedup} 
+global que podremos obtener suponiendo que el \emph{speedup} de la mejora en 
+particular es infinito, es decir, suponemos que la mejora se ejecuta en tiempo 
+cero (ver ecuación \ref{eq:performance-max_speedup}); por el otro dada una 
+mejora en particular, podemos averiguar la mínima fracción de tiempo que 
 necesitamos aplicarla para poder cumplir con algún \emph{speedup} global 
-objetivo (ver ecuación \ref{eq:performance-min_frac}).
-En el caso de que existan diversas mejoras y bajo la condición de que las 
-mejores no funcionen en simultáneo en la ejecución del programa, la ecuación 
+objetivo (ob) (ver ecuación \ref{eq:performance-min_frac}). En el caso de que 
+existan diversas mejoras y bajo la condición de que las mejores no funcionen en 
+simultáneo en la ejecución del programa, la ecuación 
 \ref{eq:performance-global_speedup} puede reescribirse como en 
 \ref{eq:performance-global_speedup_extended}.
 \begin{equation}
   \label{eq:performance-global_speedup_extended}
   \begin{split}
-    SU_{\text{global}} & = 
-\dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
-t_{\text{ejecución}_\text{nuevo}} }\\
-  & = \dfrac{ t_{\text{ejecución}_{\text{viejo}}} } { 
-t_{\text{ejecución}_{\text{viejo}}} \left[ 1 - \sum \limits_{\text{mejora}_{i}} 
-\left( f_{\text{mejora}_{i}} + \dfrac{ f_{\text{mejora}_{i}} } { 
-SU_{\text{mejora}_{i}} } \right) \right] }\\
-  & = \dfrac{ 1 } { 1 - \sum \limits_{\text{mejora}_{i}} \left(
-f_{\text{mejora}_{i}} + \dfrac{ f_{\text{mejora}_{i}} } { SU_{\text{mejora}_{i}} 
+    SU_{\text{g}} & = 
+\dfrac{ t_{\text{ex}_{\text{v}}} } { 
+t_{\text{ex}_\text{n}} }\\
+  & = \dfrac{ t_{\text{ex}_{\text{v}}} } { 
+t_{\text{ex}_{\text{v}}} \left[ 1 - \sum \limits_{\text{m}_{i}} 
+\left( f_{\text{m}_{i}} + \dfrac{ f_{\text{m}_{i}} } { 
+SU_{\text{m}_{i}} } \right) \right] }\\
+  & = \dfrac{ 1 } { 1 - \sum \limits_{\text{m}_{i}} \left(
+f_{\text{m}_{i}} + \dfrac{ f_{\text{m}_{i}} } { SU_{\text{m}_{i}} 
 } \right) }
   \end{split}
 \end{equation}
 
-
 \section{Paralelismo}
-\label{sec:paralelismo}
+\label{sec:parallelism}
 
-
-
-Instruction Level Parallelism. Thread Level Paralellism. TODO.
+El concepto de paralelismo retoma las ideas de la taxonomía de Flynn vista en 
+\ref{subsec:theory-modern-flynn_taxonomy} y es una problemática que se aborda 
+en distintos niveles. El software tiene básicamente dos tipos de paralelismos:
+\begin{itemize}
+  \item paralelismo a nivel de datos o \emph{data-level parallelism} (DLP): 
+surge dado que múltiples datos pueden ser operados al mismo tiempo,
+  \item paralelismo a nivel de tarea o \emph{task-level parallelism} (TaLP): 
+surge debido a la capacidad de creación de cargas de trabajo que pueden operar 
+independientemente en un entorno controlado por un sistema operativo.
+\end{itemize}
+El hardware puede explotar estos paralelismos para acelerar la ejecución de los 
+programas, y las maneras que tiene de hacerlo son principalmente cuatro:
+\begin{itemize}
+  \item paralelismo a nivel de instrucción o \emph{instruction-level 
+parallelism} (ILP): explota el DLP en baja medida con técnicas de optimización 
+en la compilación del software a través de mecanismos como \emph{pipeline} y 
+\emph{branch-delay slot}, o en mayor medida con técnicas como ejecución 
+especulativa y predicción de saltos,
+  \item arquitecturas vectoriales y procesadores gráficos o \emph{graphic 
+processor units} (GPUs): explotan el DLP al aplicar instrucciones simples a 
+colleciones de datos en paralelo,
+  \item paralelismo a nivel de hilos o \emph{thread-level parallelism} (ThLP): 
+explota tanto DLP como TaLP mediante la utilización de modelos de harwdare con 
+mecanismos específicos que permiten la interacción entre hilos de ejecución 
+paralelos,
+  \item paralelismo a nivel de solicitud o \emph{request-level parallelism} 
+(RLP): explota el paralelismo del software especificando tareas completamente 
+independientes implementadas por el programador o por el sistema operativo.
+\end{itemize}
+Cuando Michael Flynn estudión los mecanismos del paralelismo en el software y 
+el hardware elaboró la clasificación conocida como taxonomía de Flynn 
+(\ref{subsec:theory-modern-flynn_taxonomy}) que seguimos utilizando hoy en día. 
+Dicha clasificación surgió de la observación del paralelismo en los hilos de 
+datos e instrucciones. Relacionando la taxonomía con las clasificaciones de 
+paralelismo vistas en esta sección, podemos analizar cada una de las categorías 
+planteadas por Flynn:
+\begin{itemize}
+  \item SISD: esta categoría es el uniprocesador. Desde la óptica del 
+programador se trata de una máquina estándar secuencial, pero puede explotar el 
+ILP, con técnicas como \emph{pipeline}, \emph{Superscalar} y \emph{speculative 
+execution},
+  \item SIMD: la misma instrucción es ejecutada por múltiples unidades de 
+procesamiento sobre diversos hilos de datos. Estas computaodores explotan el 
+DLP aplicando la misma operación a múltiples datos en paralelo. Cada unidad 
+maneja sus datos independientemente, o sea, su memoria (de ahí el MD del SIMD), 
+pero existe una única memoria de instrucciones y unidad de control que obtiene 
+instrucciones y las ejecuta. Las arquitecturas que explotan de esta manera el 
+paralelismo, son los GPUs y de forma híbrida, las arquitecturas clásicas con 
+conjuntos de instrucciones extendidos para multimedia por ejemplo,
+  \item MISD: no existen ejemplos de multiprocesadores comerciales de este 
+tipo, si no más bien son de aplicaciones específicas como fuese mencionado en 
+\ref{subsubsec:theory-modern-flynn_taxonomy-MISD},
+  \item MIMD: es el caso general hoy en día, con las arquitecturas paralelas. 
+ada procesador obtiene sus instrucciones de un hilo propio y opera sobre sus 
+datos; tratándose, entonces, de una forma de explotar TaLP. En general, MIMD es 
+más flexible que SIMD y por ende más general y aplicable, pero inherentemente 
+más costoso en cuanto a recursos de harwdare, por necesitar replicar múltiples 
+veces circuitos lógicos, para su disponibilidad para cada núcleo de 
+procesamiento. Estas arquitecturas poseen la habilidad de operar múltiples 
+hilos de procesamiento en paralelo, cuyo objetivo puesde ser cooperativo, lo 
+cual indica que explota el ThLP. Además, los \emph{cĺusters} de computadoras se 
+ubican también dentro de esta clasificación donde máquinas independientes, 
+pueden ejecutar múltiples tareas independientes mediante poca comunicación, 
+explotando así el RLP.
+\end{itemize}
+No debe perderse de vista que las arquitecturas modernas en general son 
+híbridos de esta clasificación ---combinando las bondades de SISD, SIMD y 
+MIMD---.
 
 \section{Jerarquía de memoria}
 \label{sec:mem_hierarchy}
