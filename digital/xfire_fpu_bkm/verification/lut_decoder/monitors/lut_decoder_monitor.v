@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-01 - ilesser - Fixed lut_Z fractional calculation.
 //    - 2016-08-31 - ilesser - Used real values for luts.
 //    - 2016-08-28 - ilesser - Initial version.
 //
@@ -85,10 +86,10 @@ module lut_decoder_monitor #(
    assign lut_Y_int  =  $signed(lut_Y_n_bin[WD-1   :WD-WI]);
    assign lut_u_int  =  $signed(lut_u_n_bin[WC-1   :WC-WI]);
    assign lut_v_int  =  $signed(lut_v_n_bin[WC-1   :WC-WI]);
-   assign lut_X_frac =  $itor(  lut_X_n_bin[WD-WI-1:    0]) / 2**(WD-WI);
-   assign lut_Y_frac =  $itor(  lut_Y_n_bin[WD-WI-1:    0]) / 2**(WD-WI);
-   assign lut_u_frac =  $itor(  lut_u_n_bin[WC-WI-1:    0]) / 2**(WC-WI);
-   assign lut_v_frac =  $itor(  lut_v_n_bin[WC-WI-1:    0]) / 2**(WC-WI);
+   assign lut_X_frac =  $itor(  lut_X_n_bin[WD-WI-1:    0]) / 2.0**(WD-WI);
+   assign lut_Y_frac =  $itor(  lut_Y_n_bin[WD-WI-1:    0]) / 2.0**(WD-WI);
+   assign lut_u_frac =  $itor(  lut_u_n_bin[WC-WI-1:    0]) / 2.0**(WC-WI);
+   assign lut_v_frac =  $itor(  lut_v_n_bin[WC-WI-1:    0]) / 2.0**(WC-WI);
 
    assign res_lut_X_n =  lut_X_int + lut_X_frac;
    assign res_lut_Y_n =  lut_Y_int + lut_Y_frac;

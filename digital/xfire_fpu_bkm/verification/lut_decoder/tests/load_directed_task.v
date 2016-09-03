@@ -12,27 +12,39 @@
 // Description:
 // ------------
 //
-// Basic test for csd2bin block.
+// Load directed operands task for lut_decoder block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// basic_test.v
+// load_directed_task.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-04-18 - ilesser - Original version.
+//    - 2016-09-01 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-task basic_test;
+task load_directed;
+
+   // ----------------------------------
+   // Data inputs
+   // ----------------------------------
+   input              mode;
+   input [1:0]        format;
+   input [`LOG2N-1:0] n;
+   input [1:0]        d_y_n;
+   input [1:0]        d_x_n;
+   // ----------------------------------
+
 // *****************************************************************************
 
 // *****************************************************************************
@@ -42,30 +54,18 @@ task basic_test;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
+   reg   [`CNT_SIZE-1:0] dir_cnt;
    // -----------------------------------------------------
 
    begin
 
-      ena = 1'b1;
-      rst = 1'b0;
-      run_clk(1);
-      load_operands(`W2'b0000000000, `W'b00000);  // res = 0
-      load_operands(`W2'b0000000001, `W'b00001);  // res = 1
-      load_operands(`W2'b0000000100, `W'b00010);  // res = 2
-      load_operands(`W2'b0000010010, `W'b00011);  // res = 3 = 4 - 1
-      load_operands(`W2'b0000010000, `W'b00100);  // res = 4
-      load_operands(`W2'b0000010001, `W'b00101);  // res = 5
-      load_operands(`W2'b0001001000, `W'b00110);  // res = 6 = 8 - 2
-      load_operands(`W2'b0001000010, `W'b00111);  // res = 7 = 8 - 1
-      load_operands(`W2'b0001000000, `W'b01000);  // res = 8
-      load_operands(`W2'b0000000010, `W'b11111);  // res =-1
-      load_operands(`W2'b0000001000, `W'b11110);  // res =-2
-      load_operands(`W2'b0000100000, `W'b11100);  // res =-4
-      load_operands(`W2'b0010000000, `W'b11000);  // res =-8
-      load_operands(`W2'b1000000000, `W'b10000);  // res =-16
-      load_operands(`W2'b0010000010, `W'b10111);  // res =-9 =-8-1
-      load_operands(`W2'b0000010010, `W'b00011);  // res = 3 =-4+1
-      load_operands(`W2'b0100100010, `W'b01011);  // res = 11 = 16-4-1
+      dir_cnt[`CNT_SIZE-1]                       = mode    ;
+      dir_cnt[`CNT_SIZE-2          :`CNT_SIZE-3] = format  ;
+      dir_cnt[2*`D_SIZE+`LOG2N-1   :2*`D_SIZE  ] = tb_n    ;
+      dir_cnt[2*`D_SIZE-1          :1*`D_SIZE  ] = tb_d_y_n;
+      dir_cnt[1*`D_SIZE-1          :0*`D_SIZE  ] = tb_d_x_n;
+
+      load_operands(dir_cnt);
 
    end
 

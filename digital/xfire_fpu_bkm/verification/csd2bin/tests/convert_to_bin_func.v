@@ -12,26 +12,27 @@
 // Description:
 // ------------
 //
-// Basic test for bin2csd
+// Convert to bin functin for csd2bin block.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// basic_test.v
+// convert_to_bin_func.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-04-10 - ilesser - Initial version.
+//    - 2016-09-03 - ilesser - Changed architecture to automatically generate results.
+//    - 2016-09-03 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
 // *****************************************************************************
-// Interface
+// Function
 // *****************************************************************************
-task basic_test;
+function [`W-1:0] convert_to_bin;
 // *****************************************************************************
 
 // *****************************************************************************
@@ -41,28 +42,40 @@ task basic_test;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
+   input [`WCSD-1:0] csd;
+   reg   [1:0]       csd_digit_bin[0:`W-1];
+   real              csd_digit[0:`W-1];
+   real              x;
+   integer           i, n;
    // -----------------------------------------------------
 
    begin
 
-      $monitor ("Time = %8t tb_x = %b \twire_y = %b \n\t\t\t\tres    = %b\n\n",$time, tb_x, wire_y, res);
-      load_operands(`W'b00000, `W2'b0000000000);  // res = 0
-      load_operands(`W'b00001, `W2'b0000000001);  // res = 1
-      load_operands(`W'b00010, `W2'b0000000100);  // res = 2
-      load_operands(`W'b00100, `W2'b0000010000);  // res = 4
-      load_operands(`W'b01000, `W2'b0001000000);  // res = 8
-      load_operands(`W'b10000, `W2'b1000000000);  // res =-16
-      load_operands(`W'b00110, `W2'b0001001000);  // res = 6 = 8-2
-      load_operands(`W'b00111, `W2'b0001000010);  // res = 7 = 8-1
-      load_operands(`W'b10111, `W2'b0010000010);  // res =-9 =-8-1
-      load_operands(`W'b11111, `W2'b0000000010);  // res = 1
-      load_operands(`W'b00011, `W2'b0000010010);  // res = 3 =-4+1
-      load_operands(`W'b01011, `W2'b0100100010);  // res = 11 = 16-4-1
-      load_operands(`W'b00111, convert_to_csd(`W'b00111));  // res = 1
+      x = 0.0;
 
+      for(i=0; i < `W; i=i+1) begin
+         // Get the values for each digit
+         csd_digit_bin[i][1] = csd[2*i+1];
+         csd_digit_bin[i][0] = csd[2*i];
+
+         if(      csd_digit_bin[i] == `CSD_m1 ) begin
+            csd_digit[i] = -1.0;
+         end
+         else if( csd_digit_bin[i] == `CSD_p1 ) begin
+            csd_digit[i] = +1.0;
+         end
+         else begin
+            csd_digit[i] = +0.0;
+         end
+
+         // Sum all the digits
+         x = x + csd_digit[i] * 2.0**i;
+      end
+
+      convert_to_bin = x;
    end
 
 // *****************************************************************************
 
-endtask
+endfunction
 
