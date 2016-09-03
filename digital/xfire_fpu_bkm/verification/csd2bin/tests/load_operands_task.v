@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-03 - ilesser - Changed architecture to automatically generate results.
 //    - 2016-06-13 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -42,14 +43,15 @@ task load_operands;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   input [2*`W-1:0]   x;
-   input [`W-1:0]     y;
+   input [2*`W-1:0]   x_csd;
    // -----------------------------------------------------
 
    begin
 
-      tb_x  = x;
-      res   = y;
+      tb_x_csd = x_csd;
+
+
+      tb_x_bin = convert_to_bin(x_csd);
 
       run_clk(1);
 
