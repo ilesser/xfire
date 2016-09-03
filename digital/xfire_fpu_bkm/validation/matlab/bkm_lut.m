@@ -1,32 +1,56 @@
-function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
+function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI, file_name)
 %-------------------------------------------------------------------------------
 % Generates the BKM lut constants.
+%
+% [lut_x, lut_y, lut_u, lut_v]=bkm_lut()
+% [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N)
+% [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD)
+% [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC)
+% [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
+% [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI, file_name)
+%
+%  Default values
+%     N           = 64;    BKM steps.
+%     WD          = 73;    Data channel word size.
+%     WC          = 21;    Control channel word size.
+%     WI          = 11;    Integer word size.
+%     file_name   = '../../rtl/source/lut_constants.vh';
+%
+%
+%
+%
 %
 %     TODO: add doc
 %
 %-------------------------------------------------------------------------------
 
    % Version and date
-   version = '1.0';
-   version_date = 'Monday 29 August 2016';
+   version = '1.1';
+   version_date = 'Saturday 03 September 2016';
 
    % Initialize variables
    % Fill in unset optional values.
    switch nargin
       case 0
-         N        = 64;
-         WD       = 73;
-         WC       = 21;
-         WI       = 11;
+         N           = 64;
+         WD          = 73;
+         WC          = 21;
+         WI          = 11;
+         file_name   = '../../rtl/source/lut_constants.vh';
       case 1
-         WD       = 73;
-         WC       = 21;
-         WI       = 11;
+         WD          = 73;
+         WC          = 21;
+         WI          = 11;
+         file_name   = '../../rtl/source/lut_constants.vh';
       case 2
-         WC       = 21;
-         WI       = 11;
+         WC          = 21;
+         WI          = 11;
+         file_name   = '../../rtl/source/lut_constants.vh';
       case 3
-         WI       = 11;
+         WI          = 11;
+         file_name   = '../../rtl/source/lut_constants.vh';
+      case 4
+         file_name   = '../../rtl/source/lut_constants.vh';
    end
 
    %---------------------------------------------------------------
@@ -82,7 +106,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    %---------------------------------------------------------------
    % Write them to a file
    %---------------------------------------------------------------
-   fid = fopen('../../rtl/source/lut_constants.vh', 'w');
+   fid = fopen(file_name, 'w');
 
    % Write a header
    fprintf( fid, '//--------------------------------------------------------------------------------\n');
@@ -100,6 +124,25 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
    % TODO: write a header for lut_x
    z_hex_size = ceil(WD/4);      %  73 bits -->  73/4 = 18.25 < 19
    z_csd_size = ceil(2*WD/4);    % 146 bits --> 146/4 = 36.50 < 37
+   fprintf( fid, '//\n');
+   fprintf( fid, '//\n');
+   fprintf( fid, '//--------------------------------------------------------------------------------\n');
+   fprintf( fid, '// This LUT uses %d bits which represent %d CSD digits. \n', 2*WD, WD);
+   fprintf( fid, '// They are represented by %d hexadecimal digits. \n', z_csd_size);
+   fprintf( fid, '// After the LUT value you have the digital representation in %d hexadecimal digits. \n', z_hex_size);
+   fprintf( fid, '// Bear in mind that the first hexa digit is only 1 bit wide.\n');
+   fprintf( fid, '// Since we use %d bits for the integer part then the first 3,5 hexa digits represent the integer part. \n', WI);
+   fprintf( fid, '// The rest %2.1f hexa digits represent the fractional part.\n', z_hex_size-3.5 );
+   fprintf( fid, '// Example:\n');
+   for x=2.^(WI-n');
+      fprintf( fid, "//sign X[4\'bXXXX] [XX] = %d\'h %s;  // %s %+6.16f\n", ...
+                                             2*WD, ...
+                                                      dec2csd_hex( x, WI, WD-WI , z_csd_size ) , ...
+                                                            dec2hex( fix(x*2^(WD-WI)), z_hex_size ), ...
+                                                                  x );
+   end
+   fprintf( fid, '//--------------------------------------------------------------------------------\n');
+   fprintf( fid, '//\n');
 
    for i = 1:length(d);
       for n = 1:N;
@@ -109,10 +152,26 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI)
       end
    end
 
-   % TODO: write a header for lut_y
-   % TODO: this one has "Insufficient precision to represent this number! if n>=64"
-   %        porque al hacer la cuenta csdigit() necesita al menos 64 bits de precision
-   %        entnoces lo q hay q hacer es convertir con 64 bits de precision y despues tomar los primeros WD-WI
+   fprintf( fid, '//\n');
+   fprintf( fid, '//\n');
+   fprintf( fid, '//--------------------------------------------------------------------------------\n');
+   fprintf( fid, '// This LUT uses %d bits which represent %d CSD digits. \n', 2*WD, WD);
+   fprintf( fid, '// They are represented by %d hexadecimal digits. \n', z_csd_size);
+   fprintf( fid, '// After the LUT value you have the digital representation in %d hexadecimal digits. \n', z_hex_size);
+   fprintf( fid, '// Bear in mind that the first hexa digit is only 1 bit wide.\n');
+   fprintf( fid, '// Since we use %d bits for the integer part then the first 3,5 hexa digits represent the integer part. \n', WI);
+   fprintf( fid, '// The rest %2.1f hexa digits represent the fractional part.\n', z_hex_size-3.5 );
+   fprintf( fid, '// Example:\n');
+   for x=2.^(WI-n');
+      fprintf( fid, "//sign X[4\'bXXXX] [XX] = %d\'h %s;  // %s %+6.16f\n", ...
+                                             2*WD, ...
+                                                      dec2csd_hex( x, WI, WD-WI , z_csd_size ) , ...
+                                                            dec2hex( fix(x*2^(WD-WI)), z_hex_size ), ...
+                                                                  x );
+   end
+   fprintf( fid, '//--------------------------------------------------------------------------------\n');
+   fprintf( fid, '//\n');
+
    for i = 1:length(d);
       for n = 1:N;
          fprintf( fid, "assign Y[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n-1, 2*WD, dec2csd_hex( lut_y(n,i), WI, WD-WI , z_csd_size ) , lut_y(n,i) );
