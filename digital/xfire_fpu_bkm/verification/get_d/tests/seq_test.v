@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-04 - ilesser - Added parameters for the integer part.
 //    - 2016-06-15 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -43,7 +44,8 @@ task seq_test;
    // -----------------------------------------------------
    real        u,v;
    real        u_i,v_i;    // integer part
-   real        u_d,v_d;    // decimal part
+   real        u_f,v_f;    // fractional part
+   real        d_x_r, d_y_r;
    // -----------------------------------------------------
 
    begin
@@ -62,71 +64,32 @@ task seq_test;
 
          // The u and v channels are independat of each other
          // hence I can assign them at the same time
-         //tb_mode        =  cnt[2*`W];
-         //tb_u[`W-1]     = ~cnt[2*`W-1];
-         //tb_u[`W-2:0]   =  cnt[2*`W-2:`W];
-         tb_mode        =  cnt[`W];
-         tb_u[`W-1]     = ~cnt[`W-1];
-         tb_u[`W-2:0]   =  cnt[`W-2:0];
-         tb_v[`W-1]     = ~cnt[`W-1];
-         tb_v[`W-2:0]   =  cnt[`W-2:0];
+         tb_mode        =  cnt[`WC];
+         tb_u[`WC-1]    = ~cnt[`WC-1];
+         tb_u[`WC-2:0]  =  cnt[`WC-2:0];
+         tb_v[`WC-1]    = ~cnt[`WC-1];
+         tb_v[`WC-2:0]  =  cnt[`WC-2:0];
 
-         u_i   = $itor($signed(tb_u[W-1:4]));
-         v_i   = $itor($signed(tb_v[W-1:4]));
-         u_d   = $itor((tb_u[3:0]))/16;
-         v_d   = $itor((tb_v[3:0]))/16;
-         u     = u_i + u_d;
-         v     = v_i + v_d;
+         u_i   = $itor($signed(tb_u[`WC-1:`WF]));
+         v_i   = $itor($signed(tb_v[`WC-1:`WF]));
+         u_f   = $itor((tb_u[`WF-1:`WF-4]))/2.0**4;
+         v_f   = $itor((tb_v[`WF-1:`WF-4]))/2.0**4;
+         u     = u_i + u_f;
+         v     = v_i + v_f;
 
-         $display("u = %f + %f = %f", u_i, u_d, u);
-         $display("v = %f + %f = %f", v_i, v_d, v);
-
-         if ( tb_mode == `MODE_E ) begin
-
-            // if                u   <= -10/16   then  d_x = -1
-            // if   - 8/16 <=    u   <=   4/16   then  d_x =  0
-            // if     6/16 <=    u               then  d_x = +1
-            if ( u <= -0.625 )
-               tb_d_x = 2'b11;
-            else if ( u >= 0.375)
-               tb_d_x = 2'b01;
-            else
-               tb_d_x = 2'b00;
-
-            // if                v   <= -13/16   then  d_y = -1
-            // if   -12/16 <=    v   <=  12/16   then  d_y =  0
-            // if    13/16 <=    v               then  d_y = +1
-            if ( v <= -0.8125 )
-               tb_d_y = 2'b11;
-            else if ( v >= 0.8125 )
-               tb_d_y = 2'b01;
-            else
-               tb_d_y = 2'b00;
-
-         end
-         else if ( tb_mode == `MODE_L ) begin
-
-            // if                u   <= -8/16    then  d_x = -1
-            // if    -8/16 <     u   <   8/16    then  d_x =  0
-            // if     8/16 <=    u               then  d_x = +1
-            if ( u <= -0.50 )
-               tb_d_x = 2'b11;
-            else if ( u >= 0.50 )
-               tb_d_x = 2'b01;
-            else
-               tb_d_x = 2'b00;
-
-            // if                v   <= -8/16    then  d_y = -1
-            // if    -8/16 <     v   <   8/16    then  d_y =  0
-            // if     8/16 <=    v               then  d_y = +1
-            if ( v <= -0.50 )
-               tb_d_y = 2'b11;
-            else if ( v >= 0.50 )
-               tb_d_y = 2'b01;
-            else
-               tb_d_y = 2'b00;
-
-         end
+         // Get the d_n value
+         get_d_n (
+            // ----------------------------------
+            // Data inputs
+            // ----------------------------------
+            tb_mode,
+            u,       v,
+            // ----------------------------------
+            // Data outputs
+            // ----------------------------------
+            d_x_r,   d_y_r,
+            tb_d_x,  tb_d_y
+         );
 
          run_clk(1);
 
@@ -134,6 +97,18 @@ task seq_test;
 
    end
 
+// *****************************************************************************
+
+// *****************************************************************************
+// Assertions and debugging
+// *****************************************************************************
+`ifdef RTL_DEBUG
+
+   $display("u = %f + %f = %f", u_i, u_f, u);
+   $display("v = %f + %f = %f", v_i, v_f, v);
+
+
+`endif
 // *****************************************************************************
 
 endtask
