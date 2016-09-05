@@ -81,19 +81,26 @@ task load_operands;
 
 
 
-      // Calculate the results
-      bkm(  tb_mode,
-            tb_format,
-            tb_X_in,
-            tb_Y_in,
-            tb_u_in,
-            tb_v_in,
-            tb_X_out,
-            tb_Y_out,
-            tb_u_out,
-            tb_v_out,
-            tb_flags
-         );
+      // Calculate the result of N steps
+      bkm_step(
+         // ----------------------------------
+         // Data inputs
+         // ----------------------------------
+         tb_mode,
+         tb_format,
+         tb_X_in,
+         tb_Y_in,
+         tb_u_in,
+         tb_v_in,
+         // ----------------------------------
+         // Data outputs
+         // ----------------------------------
+         tb_X_out,
+         tb_Y_out,
+         tb_u_out,
+         tb_v_out,
+         tb_flags
+      );
 
       // Wait N clocks for results
       run_clk(`N);
