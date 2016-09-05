@@ -1,11 +1,11 @@
-function [E,L,d,err]=bkm(E1, L1, bkm_mode , N )
+function [Z,w,d,err]=bkm_Z_w(E1, L1, bkm_mode , N )
 % Runs the N steps BKM algorithm for the specified mode with inputs E1 and L1.
 %
-%  [E,L,d,err]=bkm()
-%  [E,L,d,err]=bkm(E1)
-%  [E,L,d,err]=bkm(E1, L1)
-%  [E,L,d,err]=bkm(E1, L1, bkm_mode)
-%  [E,L,d,err]=bkm(E1, L1, bkm_mode, N)
+%  [Z,w,d,err]=bkm()
+%  [Z,w,d,err]=bkm(E1)
+%  [Z,w,d,err]=bkm(E1, L1)
+%  [Z,w,d,err]=bkm(E1, L1, bkm_mode)
+%  [Z,w,d,err]=bkm(E1, L1, bkm_mode, N)
 %
 %  Default values:
 %     E1       = 0;
@@ -109,23 +109,31 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode , N )
    % d is size K1xK2xN
    d = zeros(K1,K2,N);
 
-   % E and L are size K1xK2xN+1
-   E = zeros(K1,K2,N+1);
-   L = zeros(K1,K2,N+1);
+   % Z and w are size K1xK2xN+1
+   Z = zeros(K1,K2,N+1);
+   w = zeros(K1,K2,N+1);
 
    % Initialize first step
-   E(:,:,1) = EE1;
-   L(:,:,1) = LL1;
-
-
-   % Iterate on n
-   for n=(1:N);
-
-      d(:,:,n)    = get_d_n( n, E(:,:,n), L(:,:,n), bkm_mode );
-
-      E(:,:,n+1)  = E(:,:,n) .*   (1 + d(:,:,n) * 2^-n);
-      L(:,:,n+1)  = L(:,:,n) - log(1 + d(:,:,n) * 2^-n);
-
+   if ( bkm_mode == 'E' )
+      % Initial values
+      Z(:,:,1) = EE1;
+      w(:,:,1) = 2*LL1;
+      % Iterate on n
+      for n=(1:N);
+         d(:,:,n)    = get_d_n( n, w(:,:,n), bkm_mode );
+         Z(:,:,n+1)  = Z(:,:,n) .*   (1 + d(:,:,n) * 2^-n);
+         w(:,:,n+1)  = 2*(w(:,:,n) - 2.^n .* log(1 + d(:,:,n) * 2^-n));
+      end
+   elseif ( bkm_mode == 'L' )
+      % Initial values
+      Z(:,:,1) = LL1;
+      w(:,:,1) = 2*EE1-1;
+      % Iterate on n
+      for n=(1:N);
+         d(:,:,n)    = get_d_n( n, w(:,:,n), bkm_mode );
+         Z(:,:,n+1)  = Z(:,:,n) - log(1 + d(:,:,n) * 2^-n);
+         w(:,:,n+1)  = 2 .* ( d(:,:,n) + w(:,:,n) .*   (1 + d(:,:,n) * 2^-n) );
+      end
    end
 
    % Disable broadcasting warning to calculate the error
@@ -134,10 +142,10 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode , N )
    % Calculate error vs ideal value
    if ( bkm_mode == 'E' )
       E_ideal  = repmat( EE1.* exp(LL1), [1 1 N+1]);
-      err      = ( E - E_ideal ) ;
+      err      = ( Z - E_ideal ) ;
    elseif ( bkm_mode == 'L' )
       L_ideal  = repmat( LL1 + log(EE1), [1 1 N+1]);
-      err      = ( L - L_ideal ) ;
+      err      = ( Z - L_ideal ) ;
    end
 
    % Enable broadcasting warning again
@@ -145,9 +153,9 @@ function [E,L,d,err]=bkm(E1, L1, bkm_mode , N )
 
 end
 
-function dn = get_d_n( n, En, Ln, bkm_mode )
+function dn = get_d_n( n, wn, bkm_mode )
 
-   [K1, K2] = size(En);
+   [K1, K2] = size(wn);
 
    drn = zeros(K1,K2);
    din = zeros(K1,K2);
@@ -155,24 +163,30 @@ function dn = get_d_n( n, En, Ln, bkm_mode )
    if ( bkm_mode == 'E' )
 
       % Truncate 2^n * Lx after the 3rd fractional digit
-      Lrn = fix(real(Ln)*2^n*2^3)/2^3;
+      %Lrn = fix(real(Ln)*2^n*2^3)/2^3;
 
       % Truncate 2^n * Ly after the 4th fractional digit
-      Lin = fix(imag(Ln)*2^n*2^4)/2^4;
+      %Lin = fix(imag(Ln)*2^n*2^4)/2^4;
 
-      drn(Lrn <= -5/8              ) = -1;
-      drn(Lrn >= -1/2 & Lrn <= 1/4 ) =  0;
-      drn(Lrn >=  3/8              ) = +1;
+      % Get the new sequence
+      ln = wn;
 
-      din(Lin <= -13/16            ) = -1;
-      din(Lin >= -3/4 & Lin <= 3/4 ) =  0;
-      din(Lin >=  13/16            ) = +1;
+      % Truncate real and imaginary parts after their 4th fractional digit
+      lrn = fix(real(ln)*2^4)/2^4;
+      lin = fix(imag(ln)*2^4)/2^4;
+
+      drn(lrn <= -5/8              ) = -1;
+      drn(lrn >= -1/2 & lrn <= 1/4 ) =  0;
+      drn(lrn >=  3/8              ) = +1;
+
+      din(lin <= -13/16            ) = -1;
+      din(lin >= -3/4 & lin <= 3/4 ) =  0;
+      din(lin >=  13/16            ) = +1;
 
    elseif ( bkm_mode == 'L' )
 
       % Get the new sequence
-      En;
-      en  = 2^n * (En-1);
+      en  = wn;
 
       % Truncate real and imaginary parts after their 4th fractional digit
       ern = fix(real(en)*2^4)/2^4;
