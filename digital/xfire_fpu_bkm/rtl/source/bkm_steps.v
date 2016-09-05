@@ -119,6 +119,11 @@ module bkm_steps  (
    parameter   WC       = 21;
    parameter   LOG2WD   = 7;
    parameter   LOG2WC   = 5;
+   parameter   UGD      = 2;
+   parameter   LGD      = 6;
+   parameter   UGC      = 3;
+   parameter   LGC      = 1;
+   parameter   WI       = 11;
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
@@ -237,7 +242,10 @@ module bkm_steps  (
          // Get d_n
          // ----------------------------------
          get_d #(
-            .W          (WC)
+            .WC         (WC),
+            .UGC        (UGC),
+            .LGC        (LGC),
+            .WI         (WI)
          ) get_d_n (
             // ----------------------------------
             // Data inputs
@@ -255,10 +263,6 @@ module bkm_steps  (
          // ----------------------------------
          // LUT decoder
          // ----------------------------------
-         //assign lut_X[n] = {WD{`CSD_0_0}};
-         //assign lut_Y[n] = {WD{`CSD_0_0}};
-         //assign lut_u[n] = {WC{1'b0}};
-         //assign lut_v[n] = {WC{1'b0}};
          lut_decoder #(
             .WD         (WD),
             .WC         (WC),
@@ -284,10 +288,6 @@ module bkm_steps  (
          // ----------------------------------
          // Step n
          // ----------------------------------
-         //assign X[n] = {2*WD{1'b0}};
-         //assign Y[n] = {2*WD{1'b0}};
-         //assign u[n] = {WC{1'b0}};
-         //assign v[n] = {WC{1'b0}};
          bkm_step #(
             .WD         (WD),
             .WC         (WC),

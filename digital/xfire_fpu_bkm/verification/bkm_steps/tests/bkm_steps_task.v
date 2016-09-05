@@ -12,13 +12,13 @@
 // Description:
 // ------------
 //
-// Performs the calculations of a bkm.
+// Performs the calculations of bkm_steps.
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// bkm_task.v
+// bkm_steps_task.v
 //
 // -----------------------------------------------------------------------------
 // History:
@@ -91,10 +91,10 @@ task bkm_steps;
          Y_frac = $itor($signed(Y_in [`WD-`WI-1  :      0]))  / 2**(`WD-`WI);
 
          // Get u and v integer and fractional parts
-         u_int  = $itor($signed(tb_u [`WC-1      :`WC-`WI));
-         v_int  = $itor($signed(tb_v [`WC-1      :`WC-`WI));
-         u_frac = $itor(       (tb_u [`WC-`WI-1  :     0]))  / 2**(`WC-`WI);
-         v_frac = $itor(       (tb_v [`WC-`WI-1  :     0]))  / 2**(`WC-`WI);
+         u_int  = $itor($signed(u_in [`WC-1      :`WC-`WI]));
+         v_int  = $itor($signed(v_in [`WC-1      :`WC-`WI]));
+         u_frac = $itor(       (u_in [`WC-`WI-1  :      0]))  / 2**(`WC-`WI);
+         v_frac = $itor(       (v_in [`WC-`WI-1  :      0]))  / 2**(`WC-`WI);
       end
       else begin
          // Get u and v integer and fractional parts
@@ -104,10 +104,10 @@ task bkm_steps;
          Y_frac = $itor($signed(Y_in [`WD/2-`WI-1  :      0]))  / 2**(`WD/2-`WI);
 
          // Get u and v integer and fractional parts
-         u_int  = $itor($signed(tb_u [`WC/2-1      :`WC/2-`WI));
-         v_int  = $itor($signed(tb_v [`WC/2-1      :`WC/2-`WI));
-         u_frac = $itor(       (tb_u [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
-         v_frac = $itor(       (tb_v [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
+         u_int  = $itor($signed(u_in [`WC/2-1      :`WC/2-`WI));
+         v_int  = $itor($signed(v_in [`WC/2-1      :`WC/2-`WI));
+         u_frac = $itor(       (u_in [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
+         v_frac = $itor(       (v_in [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
       end // if (double_word==1'b1)
 
       // Create real numbers
@@ -124,12 +124,13 @@ task bkm_steps;
             // ----------------------------------
             // Data inputs
             // ----------------------------------
-            format  ,
-            u[n]    ,   v[n]    ,
+            mode,
+            u[n],       v[n],
             // ----------------------------------
             // Data outputs
             // ----------------------------------
-            d_x[n]  ,    d_y[n]
+            d_x[n],     d_y[n],
+            d_x_bin[n], d_y_bin[n]
          );
 
          // Get the lut values
@@ -181,56 +182,3 @@ task bkm_steps;
 
 endtask
 
-// *****************************************************************************
-// Interface
-// *****************************************************************************
-task get_d_n;
-
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      input             format;
-      input    real     u, v;
-      // ----------------------------------
-
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      output   real     d_x, d_y;
-      // ----------------------------------
-
-// *****************************************************************************
-
-// *****************************************************************************
-// Functionality
-// *****************************************************************************
-
-   // -----------------------------------------------------
-   // Internal variables and signals
-   // -----------------------------------------------------
-
-
-   begin
-      if (mode==`MODE_E) begin
-         // Calculate d_n for E mode
-         d_x = u <= -0.625    ? -1  :
-               u >=  0.375    ?  1  :
-                                 0  ;
-         d_y = v <= -0.8125   ? -1  :
-               v >=  0.8125   ?  1  :
-                                 0  ;
-      end
-      else if ( mode == `MODE_L ) begin
-         // Calculate d_n for L mode
-         d_x = u <= -0.500    ? -1  :
-               u >=  0.500    ?  1  :
-                                 0  ;
-         d_y = v <= -0.500    ? -1  :
-               v >=  0.500    ?  1  :
-                                 0  ;
-      end
-   end
-
-// *****************************************************************************
-
-endtask

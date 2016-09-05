@@ -1,0 +1,1 @@
+../../lut_decoder/tests/lut_task.v

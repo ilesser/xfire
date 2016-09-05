@@ -123,11 +123,18 @@ module bkm #(
    //                   |  guard    |  size     |  guard |
    //                   |  bits     |           |  bits  |
    //                   +-----------+-----------+--------+
-   localparam  WD       = 2         +  W        +  LOG2W ;
+   localparam  UGD      = 2                              ;
+   localparam  LGD      =                          LOG2W ;
+   localparam  UGC      = 3                              ;
+   localparam  LGC      =                          1     ;
+   //                   +-----------+-----------+--------+
+   localparam  WD       = UGD       +  W        +  LGD   ;
    localparam  LOG2WD   = 1         +  LOG2W    +  0     ;  // TODO the lower guard bits are harcodfed???
-   localparam  WC       = 3         +  W/4      +  1     ;
+   localparam  WC       = UGC       +  W/4      +  LGC   ;
    localparam  LOG2WC   = 1         +  LOG2W-2  +  0     ;
    //                   +-----------+-----------+--------+
+
+   localparam  WI       = 11                             ;
 
    // Input register
    reg                  input_reg_enable;
@@ -368,7 +375,12 @@ module bkm #(
       .WD                  (WD),
       .LOG2WD              (LOG2WD),
       .WC                  (WC),
-      .LOG2WC              (LOG2WC)
+      .LOG2WC              (LOG2WC),
+      .UGD                 (UGD),
+      .LGD                 (LGD),
+      .UGC                 (UGC),
+      .LGC                 (LGC),
+      .WI                  (WI)
    ) bkm_steps (
     // ----------------------------------
     // Clock, reset & enable inputs
