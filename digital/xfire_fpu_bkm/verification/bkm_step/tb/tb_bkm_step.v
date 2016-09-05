@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Added parenthesis to parameters.
 //    - 2016-08-22 - ilesser - Added guard bits.
 //    - 2016-08-22 - ilesser - Added min/max deltas to tb.
 //    - 2016-08-15 - ilesser - Updated indentation.
@@ -40,10 +41,10 @@
 `define LOG2W   5
 `define GD      1
 `define GC      2
-`define WD     `W+`GD      //32+1 //`W
-`define WC     `W/4+`GC   //8+2 //`W/4
-`define LOG2WD `LOG2W
-`define LOG2WC `LOG2W-2
+`define WD     (`W+`GD)
+`define WC     (`W/4+`GC)
+`define LOG2WD (`LOG2W+1)
+`define LOG2WC (`LOG2W-2+1)
 `define M_SIZE  1
 `define F_SIZE  2
 `define D_SIZE  2
