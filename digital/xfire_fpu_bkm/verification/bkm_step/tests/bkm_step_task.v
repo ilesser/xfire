@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Fixes bug #15.
 //    - 2016-09-05 - ilesser - Changed bkm_step_task inputs to real type.
 //    - 2016-08-15 - ilesser - Initial version.
 //
@@ -116,8 +117,9 @@ task bkm_step;
 
          Y_n_times_d_n_r         = (dx * Y_n + dy * X_n);
 
-         X_n_times_d_n_div_2_n_r = $rtoi( X_n_times_d_n_r / 2.0**n);
-         Y_n_times_d_n_div_2_n_r = $rtoi( Y_n_times_d_n_r / 2.0**n);
+         // TODO: this will create a 1 LSB error
+         X_n_times_d_n_div_2_n_r = X_n_times_d_n_r / 2.0**n;
+         Y_n_times_d_n_div_2_n_r = Y_n_times_d_n_r / 2.0**n;
 
          if (complex==1'b1) begin
 
@@ -126,8 +128,8 @@ task bkm_step;
             Y_np1 = Y_n + Y_n_times_d_n_div_2_n_r;
 
             // Calculate u and v
-            u_np1 = 2 * (u_n - lut_u_n);
-            v_np1 = 2 * (v_n - lut_v_n);
+            u_np1 = 2 * u_n - lut_u_n;
+            v_np1 = 2 * v_n - lut_v_n;
 
          end
          else begin
@@ -137,7 +139,7 @@ task bkm_step;
             Y_np1 = 0;
 
             // Calculate u and v
-            u_np1 = 2 * (u_n - lut_u_n);
+            u_np1 = 2 * u_n - lut_u_n;
             v_np1 = 0;
 
          end
