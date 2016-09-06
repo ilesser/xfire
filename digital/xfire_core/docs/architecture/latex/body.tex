@@ -1,0 +1,17 @@
+\section{Pipeline Implementation}
+
+In this section the implicances and decisions of a pipelined design will be presented.
+(DEFINIR FLAG DE EXCEPCION!!! Donde??? en registro especial???). 
+(DEFINIR QUE SE HACE CON EL PIPE!!! Se flushea??? Se sigue ejecutando??? que consecuencias trae una u otra??? segun el Patterson, las
+excepeciones son tratadas como un data hazard mas flusheando el pipe).
+
+\subsection{Pipeline structure}
+The execution of the instruction is divided in a five stage pipeline. Stages are:
+
+\begin{enumerate}
+ \item IF: Instruction Fetch
+ \item ID: Instruction Decode
+ \item EX: Execution
+ \item MEM: Memory Access
+ \item WB: Write Back
+\end{enumerate}
