@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-09-03 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -37,7 +38,8 @@ module bkm_steps_monitor #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter WD      = 64
+   parameter WD      = 72,
+   parameter WC      = 21
    ) (
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -49,13 +51,17 @@ module bkm_steps_monitor #(
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input  wire [2*WD-1:0]  X_np1_csd,
-   input  wire [2*WD-1:0]  Y_np1_csd,
+   input  wire [2*WD-1:0]  X_out_csd,
+   input  wire [2*WD-1:0]  Y_out_csd,
+   input  wire [WC-1:0]    u_out_bin,
+   input  wire [WC-1:0]    v_out_bin,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output wire [WD-1:0]    res_X_np1,
-   output wire [WD-1:0]    res_Y_np1
+   output real             res_X_out,
+   output real             res_Y_out,
+   output real             res_u_out,
+   output real             res_v_out
    );
 // *****************************************************************************
 
@@ -67,28 +73,15 @@ module bkm_steps_monitor #(
    // Internal signals
    // -----------------------------------------------------
    // -----------------------------------------------------
+   begin
+      always @(*) begin
+         res_X_out = 0.0;
+         res_Y_out = 0.0;
+         res_u_out = $itor(u_out_bin);
+         res_v_out = $itor(v_out_bin);
+      end
+   end
 
-   bkm_data_step_monitor #(
-      .W          (WD)
-   ) bkm_data_monitor (
-      // ----------------------------------
-      // Clock, reset & enable inputs
-      // ----------------------------------
-      .clk        (clk),
-      .arst       (arst),
-      .srst       (srst),
-      .enable     (enable),
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      .X_np1_csd  (X_np1_csd),
-      .Y_np1_csd  (Y_np1_csd),
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      .res_X_np1  (res_X_np1),
-      .res_Y_np1  (res_Y_np1)
-   );
 // *****************************************************************************
 
 `ifdef RTL_DEBUG
