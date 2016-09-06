@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-09-03 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -51,23 +52,18 @@ module bkm_steps_checker #(
    // ----------------------------------
    // Data inputs
    // ----------------------------------
+   input wire               tb_start,
+   input wire               tb_done,
    input wire               tb_mode,
    input wire  [1:0]        tb_format,
-   input wire  [LOG2N-1:0]  tb_n,
-   input wire  [1:0]        tb_d_x_n,
-   input wire  [1:0]        tb_d_y_n,
-   input wire  [WC-1:0]     tb_u_n,
-   input wire  [WC-1:0]     tb_v_n,
-   input wire  [WC-1:0]     tb_u_np1,
-   input wire  [WC-1:0]     tb_v_np1,
-   input wire  [WC-1:0]     res_u_np1,
-   input wire  [WC-1:0]     res_v_np1,
-   input wire  [WD-1:0]     tb_X_n,
-   input wire  [WD-1:0]     tb_Y_n,
-   input wire  [WD-1:0]     tb_X_np1,
-   input wire  [WD-1:0]     tb_Y_np1,
-   input wire  [WD-1:0]     res_X_np1,
-   input wire  [WD-1:0]     res_Y_np1,
+   input real               tb_u_out,
+   input real               tb_v_out,
+   input real               res_u_out,
+   input real               res_v_out,
+   input real               tb_X_out,
+   input real               tb_Y_out,
+   input real               res_X_out,
+   input real               res_Y_out,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
@@ -75,22 +71,22 @@ module bkm_steps_checker #(
    output wire               war_v,
    output wire               err_u,
    output wire               err_v,
-   output wire  [WC-1:0]     delta_u,
-   output wire  [WC-1:0]     delta_v,
-   output reg   [WC-1:0]     min_delta_u,
-   output reg   [WC-1:0]     min_delta_v,
-   output reg   [WC-1:0]     max_delta_u,
-   output reg   [WC-1:0]     max_delta_v,
+   output real               delta_u,
+   output real               delta_v,
+   output real               max_delta_u,
+   output real               max_delta_v,
+   output real               min_delta_u,
+   output real               min_delta_v,
    output wire               war_X,
    output wire               war_Y,
    output wire               err_X,
    output wire               err_Y,
-   output wire  [WD-1:0]     delta_X,
-   output wire  [WD-1:0]     delta_Y,
-   output reg   [WD-1:0]     min_delta_X,
-   output reg   [WD-1:0]     min_delta_Y,
-   output reg   [WD-1:0]     max_delta_X,
-   output reg   [WD-1:0]     max_delta_Y
+   output real               delta_X,
+   output real               delta_Y,
+   output real               max_delta_X,
+   output real               max_delta_Y,
+   output real               min_delta_X,
+   output real               min_delta_Y
    );
 // *****************************************************************************
 
@@ -101,7 +97,6 @@ module bkm_steps_checker #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [1:0]             tb_d_u_n,      tb_d_v_n;
    // -----------------------------------------------------
 
    //initial begin
@@ -117,147 +112,94 @@ module bkm_steps_checker #(
             //);
    //end
 
-   assign tb_d_u_n = tb_d_x_n;
-   assign tb_d_v_n = tb_d_y_n;
+   assign war_X = 1'b0;
+   assign war_Y = 1'b0;
+   assign war_u = 1'b0;
+   assign war_v = 1'b0;
+   assign err_X = 1'b0;
+   assign err_Y = 1'b0;
+   assign err_u = 1'b0;
+   assign err_v = 1'b0;
+   assign delta_X = 0.0;
+   assign delta_Y = 0.0;
+   assign delta_u = 0.0;
+   assign delta_v = 0.0;
+   assign max_delta_X = 0.0;
+   assign min_delta_X = 0.0;
+   assign max_delta_Y = 0.0;
+   assign min_delta_Y = 0.0;
+   assign max_delta_u = 0.0;
+   assign min_delta_u = 0.0;
+   assign max_delta_v = 0.0;
+   assign min_delta_v = 0.0;
 
-   always @(posedge clk or posedge arst) begin
-      if (arst==1'b1) begin
-         max_delta_X <= {WD{1'b0}};
-         min_delta_X <= {WD{1'b0}};
-         max_delta_Y <= {WD{1'b0}};
-         min_delta_Y <= {WD{1'b0}};
-         max_delta_u <= {WC{1'b0}};
-         min_delta_u <= {WC{1'b0}};
-         max_delta_v <= {WC{1'b0}};
-         min_delta_v <= {WC{1'b0}};
-      end
-      else begin
-         if (srst==1'b1) begin
-            max_delta_X <= {WD{1'b0}};
-            min_delta_X <= {WD{1'b0}};
-            max_delta_Y <= {WD{1'b0}};
-            min_delta_Y <= {WD{1'b0}};
-            max_delta_u <= {WC{1'b0}};
-            min_delta_u <= {WC{1'b0}};
-            max_delta_v <= {WC{1'b0}};
-            min_delta_v <= {WC{1'b0}};
-         end
-         else if (enable==1'b1) begin
-            if ( $signed(delta_X) > $signed(max_delta_X) )
-               max_delta_X <= delta_X;
-            else
-               max_delta_X <= max_delta_X;
+   //always @(posedge clk or posedge arst) begin
+      //if (arst==1'b1) begin
+         //max_delta_X <= 0.0;
+         //min_delta_X <= 0.0;
+         //max_delta_Y <= 0.0;
+         //min_delta_Y <= 0.0;
+         //max_delta_u <= 0.0;
+         //min_delta_u <= 0.0;
+         //max_delta_v <= 0.0;
+         //min_delta_v <= 0.0;
+      //end
+      //else begin
+         //if (srst==1'b1) begin
+            //max_delta_X <= 0.0;
+            //min_delta_X <= 0.0;
+            //max_delta_Y <= 0.0;
+            //min_delta_Y <= 0.0;
+            //max_delta_u <= 0.0;
+            //min_delta_u <= 0.0;
+            //max_delta_v <= 0.0;
+            //min_delta_v <= 0.0;
+         //end
+         //else if (enable==1'b1) begin
+            //if ( $signed(delta_X) > $signed(max_delta_X) )
+               //max_delta_X <= delta_X;
+            //else
+               //max_delta_X <= max_delta_X;
 
-            if ( $signed(delta_X) < $signed(min_delta_X) )
-               min_delta_X <= delta_X;
-            else
-               min_delta_X <= min_delta_X;
+            //if ( $signed(delta_X) < $signed(min_delta_X) )
+               //min_delta_X <= delta_X;
+            //else
+               //min_delta_X <= min_delta_X;
 
-            if ( $signed(delta_Y) < $signed(min_delta_Y) )
-               max_delta_Y <= delta_Y;
-            else
-               max_delta_Y <= max_delta_Y;
+            //if ( $signed(delta_Y) < $signed(min_delta_Y) )
+               //max_delta_Y <= delta_Y;
+            //else
+               //max_delta_Y <= max_delta_Y;
 
-            if ( $signed(delta_Y) < $signed(min_delta_Y) )
-               min_delta_Y <= delta_Y;
-            else
-               min_delta_Y <= min_delta_Y;
+            //if ( $signed(delta_Y) < $signed(min_delta_Y) )
+               //min_delta_Y <= delta_Y;
+            //else
+               //min_delta_Y <= min_delta_Y;
 
-            if ( $signed(delta_u) < $signed(min_delta_u) )
-               max_delta_u <= delta_u;
-            else
-               max_delta_u <= max_delta_u;
+            //if ( $signed(delta_u) < $signed(min_delta_u) )
+               //max_delta_u <= delta_u;
+            //else
+               //max_delta_u <= max_delta_u;
 
-            if ( $signed(delta_u) < $signed(min_delta_u) )
-               min_delta_u <= delta_u;
-            else
-               min_delta_u <= min_delta_u;
+            //if ( $signed(delta_u) < $signed(min_delta_u) )
+               //min_delta_u <= delta_u;
+            //else
+               //min_delta_u <= min_delta_u;
 
-            if ( $signed(delta_v) < $signed(min_delta_v) )
-               max_delta_v <= delta_v;
-            else
-               max_delta_v <= max_delta_v;
+            //if ( $signed(delta_v) < $signed(min_delta_v) )
+               //max_delta_v <= delta_v;
+            //else
+               //max_delta_v <= max_delta_v;
 
-            if ( $signed(delta_v) < $signed(min_delta_v) )
-               min_delta_v <= delta_v;
-            else
-               min_delta_v <= min_delta_v;
+            //if ( $signed(delta_v) < $signed(min_delta_v) )
+               //min_delta_v <= delta_v;
+            //else
+               //min_delta_v <= min_delta_v;
 
-         end
-      end
-   end
+         //end
+      //end
+   //end
 
-   bkm_control_step_checker #(
-      .W          (WC),
-      .LOG2N      (LOG2N)
-   ) bkm_control_checker (
-      // ----------------------------------
-      // Clock, reset & enable inputs
-      // ----------------------------------
-      .clk        (clk),
-      .arst       (arst),
-      .srst       (srst),
-      .enable     (enable),
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      .tb_mode    (tb_mode),
-      .tb_format  (tb_format),
-      .tb_n       (tb_n),
-      .tb_d_u_n   (tb_d_u_n),
-      .tb_d_v_n   (tb_d_v_n),
-      .tb_u_n     (tb_u_n),
-      .tb_v_n     (tb_v_n),
-      .tb_u_np1   (tb_u_np1),
-      .tb_v_np1   (tb_v_np1),
-      .res_u_np1  (res_u_np1),
-      .res_v_np1  (res_v_np1),
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      .war_u      (war_u),
-      .war_v      (war_v),
-      .err_u      (err_u),
-      .err_v      (err_v),
-      .delta_u    (delta_u),
-      .delta_v    (delta_v)
-   );
-
-   bkm_data_step_checker #(
-      .W          (WD),
-      .LOG2N      (LOG2N)
-   ) bkm_data_checker (
-      // ----------------------------------
-      // Clock, reset & enable inputs
-      // ----------------------------------
-      .clk        (clk),
-      .arst       (arst),
-      .srst       (srst),
-      .enable     (enable),
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      .tb_mode    (tb_mode),
-      .tb_format  (tb_format),
-      .tb_n       (tb_n),
-      .tb_d_x_n   (tb_d_x_n),
-      .tb_d_y_n   (tb_d_y_n),
-      .tb_X_n     (tb_X_n),
-      .tb_Y_n     (tb_Y_n),
-      .tb_X_np1   (tb_X_np1),
-      .tb_Y_np1   (tb_Y_np1),
-      .res_X_np1  (res_X_np1),
-      .res_Y_np1  (res_Y_np1),
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      .war_X      (war_X),
-      .war_Y      (war_Y),
-      .err_X      (err_X),
-      .err_Y      (err_Y),
-      .delta_X    (delta_X),
-      .delta_Y    (delta_Y)
-   );
    // -----------------------------------------------------
 
 // *****************************************************************************

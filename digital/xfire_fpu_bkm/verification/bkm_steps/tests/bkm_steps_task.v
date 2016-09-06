@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-08-22 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -40,19 +41,19 @@ task bkm_steps;
    // ----------------------------------
    input                   mode;
    input    [1:0]          format;
-   input    [`WD-1:0]      X_in;
-   input    [`WD-1:0]      Y_in;
-   input    [`WC-1:0]      u_in;
-   input    [`WC-1:0]      v_in;
+   input    real           X_in;
+   input    real           Y_in;
+   input    real           u_in;
+   input    real           v_in;
    // ----------------------------------
 
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output   [`WD-1:0]      X_out;
-   output   [`WD-1:0]      Y_out;
-   output   [`WC-1:0]      u_out;
-   output   [`WC-1:0]      v_out;
+   output   real           X_out;
+   output   real           Y_out;
+   output   real           u_out;
+   output   real           v_out;
    output   [`FSIZE-1:0]   flags;
    // ----------------------------------
 
@@ -65,17 +66,25 @@ task bkm_steps;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   reg   double_word;
-   reg   complex;
-   real  X_int,      Y_int;
-   real  X_frac,     Y_frac;
-   real  u_int,      v_int;
-   real  u_frac,     v_frac;
-   real  d_x,        d_y   [1:`N];
-   real  X,          Y     [1:`N];
-   real  lut_X,      lut_Y [1:`N];
-   real  u,          v     [1:`N];
-   real  lut_u,      lut_v [1:`N];
+   reg         double_word;
+   reg         complex;
+   real        X_int,      Y_int;
+   real        X_frac,     Y_frac;
+   real        u_int,      v_int;
+   real        u_frac,     v_frac;
+   real        d_x      [1:`N];
+   real        d_y      [1:`N];
+   reg   [1:0] d_x_bin  [1:`N];
+   reg   [1:0] d_y_bin  [1:`N];
+   real        X        [1:`N];
+   real        Y        [1:`N];
+   real        u        [1:`N];
+   real        v        [1:`N];
+   real        lut_X    [1:`N];
+   real        lut_Y    [1:`N];
+   real        lut_u    [1:`N];
+   real        lut_v    [1:`N];
+   integer     n;
    // -----------------------------------------------------
 
    begin
@@ -83,40 +92,12 @@ task bkm_steps;
       double_word = format[0];
       complex     = format[1];
 
-      if (double_word==1'b1) begin
-         // Get X and Y integer and fractional parts
-         X_int  = $itor($signed(X_in [`WD-1      :`WD-`WI]));
-         Y_int  = $itor($signed(Y_in [`WD-1      :`WD-`WI]));
-         X_frac = $itor($signed(X_in [`WD-`WI-1  :      0]))  / 2**(`WD-`WI);
-         Y_frac = $itor($signed(Y_in [`WD-`WI-1  :      0]))  / 2**(`WD-`WI);
+      X[1]  = X_in;
+      Y[1]  = Y_in;
+      u[1]  = u_in;
+      v[1]  = v_in;
 
-         // Get u and v integer and fractional parts
-         u_int  = $itor($signed(u_in [`WC-1      :`WC-`WI]));
-         v_int  = $itor($signed(v_in [`WC-1      :`WC-`WI]));
-         u_frac = $itor(       (u_in [`WC-`WI-1  :      0]))  / 2**(`WC-`WI);
-         v_frac = $itor(       (v_in [`WC-`WI-1  :      0]))  / 2**(`WC-`WI);
-      end
-      else begin
-         // Get u and v integer and fractional parts
-         X_int  = $itor($signed(X_in [`WD/2-1      :`WD/2-`WI]));
-         Y_int  = $itor($signed(Y_in [`WD/2-1      :`WD/2-`WI]));
-         X_frac = $itor($signed(X_in [`WD/2-`WI-1  :      0]))  / 2**(`WD/2-`WI);
-         Y_frac = $itor($signed(Y_in [`WD/2-`WI-1  :      0]))  / 2**(`WD/2-`WI);
-
-         // Get u and v integer and fractional parts
-         u_int  = $itor($signed(u_in [`WC/2-1      :`WC/2-`WI));
-         v_int  = $itor($signed(v_in [`WC/2-1      :`WC/2-`WI));
-         u_frac = $itor(       (u_in [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
-         v_frac = $itor(       (v_in [`WC/2-`WI-1  :     0]))  / 2**(`WC/2-`WI);
-      end // if (double_word==1'b1)
-
-      // Create real numbers
-      X[0]  = X_int + X_frac;
-      Y[0]  = Y_int + Y_frac;
-      u[0]  = u_int + u_frac;
-      v[0]  = v_int + v_frac;
-
-      for( n = 1; n <= `N; n = n+1 ) begin
+      for( n = 1; n < `N; n = n+1 ) begin
 
 
          // Get the d_n value
@@ -138,10 +119,10 @@ task bkm_steps;
             // ----------------------------------
             // Data inputs
             // ----------------------------------
-            mode    ,
-            format  ,
-            n       ,
-            d_x[n]  ,    d_y[n] ,
+            mode,
+            format,
+            n,
+            d_x_bin[n], d_y_bin[n],
             // ----------------------------------
             // Data outputs
             // ----------------------------------
@@ -155,20 +136,24 @@ task bkm_steps;
             // ----------------------------------
             // Data inputs
             // ----------------------------------
-            mode    ,
-            format  ,
-            n       ,
-            d_x[n]  ,   d_y[n]  ,
-            X[n]    ,   Y[n]    ,
-            u[n]    ,   v[n]    ,
+            mode,
+            format,
+            n,
+            d_x_bin[n], d_y_bin[n],
+            X[n],       Y[n],
+            u[n],       v[n],
             lut_X[n],   lut_Y[n],
             lut_u[n],   lut_v[n],
             // ----------------------------------
             // Data outputs
             // ----------------------------------
-            X[n+1]  ,   Y[n+1]  ,
-            u[n+1]  ,   v[n+1]
+            X[n+1],     Y[n+1],
+            u[n+1],     v[n+1]
          );
+
+         #1;
+
+      end
 
       X_out = X[`N];
       Y_out = Y[`N];

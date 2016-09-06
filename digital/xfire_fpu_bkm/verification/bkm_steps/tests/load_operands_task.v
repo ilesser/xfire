@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - WIP.
 //    - 2016-08-15 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -72,35 +73,35 @@ task load_operands;
    begin
 
       // Apply stymulus to testbench
-      tb_mode     = cnt[`CNT_SIZE-1];
-      tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_X_in     = cnt[2*`WC+2*`WD-1           :2*`WC+1*`WD];
-      tb_Y_in     = cnt[2*`WC+1*`WD-1           :2*`WC+0*`WD];
-      tb_u_in     = cnt[2*`WC+0*`WD-1           :1*`WC+0*`WD];
-      tb_v_in     = cnt[1*`WC+0*`WD-1           :0*`WC+0*`WD];
+      //tb_mode     = cnt[`CNT_SIZE-1];
+      //tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
+      //tb_X_in     = cnt[2*`WC+2*`WD-1           :2*`WC+1*`WD];
+      //tb_Y_in     = cnt[2*`WC+1*`WD-1           :2*`WC+0*`WD];
+      //tb_u_in     = cnt[2*`WC+0*`WD-1           :1*`WC+0*`WD];
+      //tb_v_in     = cnt[1*`WC+0*`WD-1           :0*`WC+0*`WD];
 
 
 
       // Calculate the result of N steps
-      bkm_step(
-         // ----------------------------------
-         // Data inputs
-         // ----------------------------------
-         tb_mode,
-         tb_format,
-         tb_X_in,
-         tb_Y_in,
-         tb_u_in,
-         tb_v_in,
-         // ----------------------------------
-         // Data outputs
-         // ----------------------------------
-         tb_X_out,
-         tb_Y_out,
-         tb_u_out,
-         tb_v_out,
-         tb_flags
-      );
+      //bkm_steps(
+         //// ----------------------------------
+         //// Data inputs
+         //// ----------------------------------
+         //tb_mode,
+         //tb_format,
+         //tb_X_in,
+         //tb_Y_in,
+         //tb_u_in,
+         //tb_v_in,
+         //// ----------------------------------
+         //// Data outputs
+         //// ----------------------------------
+         //tb_X_out,
+         //tb_Y_out,
+         //tb_u_out,
+         //tb_v_out,
+         //tb_flags
+      //);
 
       // Wait N clocks for results
       run_clk(`N);
