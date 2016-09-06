@@ -146,7 +146,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI, file_name)
 
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign X[4\'b%s] [%02d] = %d\'h %s;  // %s %+6.16f", dec2bin(i-1, 4), n-1, 2*WD, dec2csd_hex( lut_x(n, i), WI, WD-WI , z_csd_size ) , dec2hex( lut_x_hex(n,i), z_hex_size ), lut_x(n,i) );
+         fprintf( fid, "assign X[4\'b%s] [%02d] = %d\'h %s;  // %s %+6.16f", dec2bin(i-1, 4), n, 2*WD, dec2csd_hex( lut_x(n, i), WI, WD-WI , z_csd_size ) , dec2hex( lut_x_hex(n,i), z_hex_size ), lut_x(n,i) );
          fprintf( fid, ' = 0.5 * ln( 1 + % d * 2^(-%d+1) + (% d^2+% d^2) * 2^(-2*%d) )', real(d(i)), n, real(d(i)), imag(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -174,7 +174,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI, file_name)
 
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign Y[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n-1, 2*WD, dec2csd_hex( lut_y(n,i), WI, WD-WI , z_csd_size ) , lut_y(n,i) );
+         fprintf( fid, "assign Y[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n, 2*WD, dec2csd_hex( lut_y(n,i), WI, WD-WI , z_csd_size ) , lut_y(n,i) );
          fprintf( fid, ' = % d * atan( 1 / ( % d + 2^%d ) )', imag(d(i)), real(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -186,7 +186,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI, file_name)
 
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n-1, WC, dec2hex( lut_u_hex(n,i), w_hex_size ) , lut_u(n,i) );
+         fprintf( fid, "assign u[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2hex( lut_u_hex(n,i), w_hex_size ) , lut_u(n,i) );
          fprintf( fid, ' = 2^%2d * ln( 1 + % d * 2^(-%2d+1) + (% d^2+% d^2) * 2^(-2*%2d) )', n, real(d(i)), n, real(d(i)), imag(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
@@ -195,7 +195,7 @@ function [lut_x, lut_y, lut_u, lut_v]=bkm_lut(N, WD, WC, WI, file_name)
    % TODO: write a header for lut_v
    for i = 1:length(d);
       for n = 1:N;
-         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n-1, WC, dec2hex( lut_v_hex(n,i), w_hex_size ) , lut_v(n,i) );
+         fprintf( fid, "assign v[4\'b%s] [%02d] = %d\'h %s;  // %+6.16f", dec2bin(i-1, 4), n, WC, dec2hex( lut_v_hex(n,i), w_hex_size ) , lut_v(n,i) );
          fprintf( fid, ' = 2^(%d+1) * % d * atan( 1 / ( % d + 2^%d ) )', n, imag(d(i)), real(d(i)), n );
          fprintf( fid, '   n = %2d   d_n = %s \n', n, num2str(d(i)) );
       end
