@@ -1548,6 +1548,7 @@ técnicas que explotan el paralismo a nivel de instrucción.
 
 \subsection{Explotando ILP}
 \label{subsec:optimizations-ilp}
+
 Dentro del universo del ILP encontraremos como básico y principal componente a 
 la técnica de \emph{pipelining} y luego se analizarán distintas técnicas que 
 permiten mejorar el desempeño de una arquitectura \emph{pipeline}.
@@ -1555,7 +1556,73 @@ permiten mejorar el desempeño de una arquitectura \emph{pipeline}.
 \subsubsection{Pipeline}
 \label{subsubsec:optimizations-ilp-pipeline}
 
-TODO.
+Todos los procesarodres desde aproximadamente 1985 implementan \emph{pipelining} 
+para solapar y paralelizar la ejecución de instrucciones con el objetivo de 
+mejorar el rendimiento. Esta potencial superposición de la ejecución de las 
+instrucciones es lo que llamamos ILP, dado que ciertas partes de las mismas 
+puede ejecutarse en paralelo. Es importante notar que se menciona ``partes de 
+las instrucciones'', ya que la ejecución de las mismas puede dividirse en 
+etapas, en los que los recursos internos de la arquitectura que se utilizan son 
+independientes. El caso común es hacer la analogía con una línea de montaje en 
+una fábrica, por ejemplo, de automóviles: primero debe fabricarse el chasis, una 
+vez finalizado debemos montar y soldar los paneles de la carrocería para luego 
+pintarlos, luego montar motor, caja de cambios y trenes de rodaje (que 
+probablemente se han fabricado en sendas lineas de montaje independientes), 
+luego se podrán montar paneles internos, tapizados, faros, ruedas, vidrios, 
+cableados y demás componentes menores. Debe ser claro que las etapas descriptas, 
+son independientes en lo que a recursos respecta, es decir, montar componentes 
+menores no utiliza las mismas herramientas de la fábrica que la etapa de pintura 
+o soldadura. Con la ejecución de las instrucciones dentro del microprocesador 
+existe la misma estructura: no es el mismo hardware que se utiliza para obtener 
+una instrucción de la memoria, que el utilizado para realizar, por ejemplo, la 
+suma de dos registros o decidir un salto en el flujo del programa. Así como pasa 
+en la fábrica de autos, que diversas etapas pueden utilizar la misma 
+herramienta, en la ejecución de instrucciones puede suceder que diversas etapas 
+utilicen los mismos recursos de harwdare; en tal caso, deberemos duplicar el 
+hardware para evitar situaciones en la que una etapa quede a la espera de que 
+otra libere los recursos utilizados. Siguiendo con la analogía de la fábrica de 
+automóviles mencionamos que, por ejemplo, motor y caja de cambios pueden 
+provenir de otra línea de montaje. En el caso del microprocesador, la etapa del 
+cálculo de las operaciones aritmético-lógicas puede ser procesada dentro de otro 
+\emph{pipeline}.\\
+Debe resultar natural preguntarse por qué esta técnica mejora la performance. 
+Cabe aclarar que tiempo de ejecución de una instrucción individual no se ve 
+afectado, es decir, la latencia de ejecutar una dada instrucción se mantendrá 
+---idealmente--- constante. Lo que se ve optimizado es la tasa de instrucciones 
+ejecutadas en una unidad de tiempo (llamado \emph{throughput} en inglés), o 
+sea, la cantidad de instrucciones que puede ejecutar la arquitectura por, 
+digamos, segundo. Es importante destacar cómo debe dividirse en etapas la 
+ejecución de las instrucciones. Idealmente, debe cumplirse que:
+\begin{itemize}
+  \item las etapas del \emph{pipepline} están perfectamente balanceadas,
+  \item el \emph{pipeline} siempre tiene todas sus etapas ocupadas.
+\end{itemize}
+Esto es lo que se llama \emph{pipeline} ideal. El balance de las etapas implica 
+que cada una de las etapas demora exactamente lo mismo en ejecutarse. Bajo 
+estas condiciones, podemos calcular el \emph{speedup} de un \emph{pipeline} 
+ideal como lo calculado en la ecuación \ref{eq:optimizations-speedup_ideal_pipe} 
+donde $N$ es la cantidad de etapas en la que se divide la ejecución de las 
+instrucciones. 
+\begin{equation}
+  \label{eq:optimizations-speedup_ideal_pipe}
+  \begin{split}
+    SU_{\text{pipeline}} & = 
+\dfrac{ t_{\text{ex}_{\text{v}}} } { t_{\text{ex}_\text{n}} }\\
+    & = \dfrac{ t_{\text{ex}_{\text{v}}} } { \dfrac{ t_{\text{ex}_{\text{v}}} } 
+{ N } }\\
+    & = N
+  \end{split}
+\end{equation}
+Esto parecería implicar que en cuanto más etapas dividamos la ejecución de las 
+instrucciones, mayor optimización obtendremos. Es cierto; pero debe tenerse en 
+cuenta que la implementación deberá aproximarse lo máximo posible al pipeline 
+ideal, y además, cuanto más etapas se generen, puede complejizarse el harwdare 
+y aumentar la necesidad de multiplicar el mismo, lo que va en contra de 
+mantener acotados los costos y el consumo energético; y más dificil será 
+mantener el balance entre los tiempos de ejecución de las etapas.\\
+Analizaremos ahora las diversas fuentes de problemas que alejarán el diseño de 
+la idealidad del \emph{pipeline}, que los llamaremos ``peligros'' o 
+\emph{hazards}.
 
 \subsubsection{Forwarding}
 \label{subsubsec:optimizations-ilp-forwarding}
