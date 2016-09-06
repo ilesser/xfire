@@ -1487,7 +1487,7 @@ especulativa y predicción de saltos,
 processor units} (GPUs): explotan el DLP al aplicar instrucciones simples a 
 colleciones de datos en paralelo,
   \item paralelismo a nivel de hilos o \emph{thread-level parallelism} (ThLP): 
-explota tanto DLP como TaLP mediante la utilización de modelos de harwdare con 
+explota tanto DLP como TaLP mediante la utilización de modelos de hardware con 
 mecanismos específicos que permiten la interacción entre hilos de ejecución 
 paralelos,
   \item paralelismo a nivel de solicitud o \emph{request-level parallelism} 
@@ -1520,10 +1520,12 @@ tipo, si no más bien son de aplicaciones específicas como fuese mencionado en
   \item MIMD: es el caso general hoy en día, con las arquitecturas paralelas. 
 ada procesador obtiene sus instrucciones de un hilo propio y opera sobre sus 
 datos; tratándose, entonces, de una forma de explotar TaLP. Típicamente, MIMD 
-es más flexible que SIMD y por ende más general y aplicable, pero inherentemente 
-más costoso en cuanto a recursos de harwdare, por necesitar replicar múltiples 
+es más flexible que SIMD y por ende más general y aplicable, pero 
+inherentemente 
+más costoso en cuanto a recursos de hardware, por necesitar replicar múltiples 
 veces circuitos lógicos, para su disponibilidad para cada núcleo de 
-procesamiento. Estas arquitecturas poseen la habilidad de operar múltiples hilos 
+procesamiento. Estas arquitecturas poseen la habilidad de operar múltiples 
+hilos 
 de procesamiento en paralelo, cuyo objetivo puesde ser cooperativo, lo cual 
 indica que explota el ThLP. Además, los \emph{cĺusters} de computadoras se 
 ubican también dentro de esta clasificación donde máquinas independientes, 
@@ -1556,7 +1558,8 @@ permiten mejorar el desempeño de una arquitectura \emph{pipeline}.
 \subsubsection{Pipeline}
 \label{subsubsec:optimizations-ilp-pipeline}
 
-Todos los procesarodres desde aproximadamente 1985 implementan \emph{pipelining} 
+Todos los procesarodres desde aproximadamente 1985 implementan 
+\emph{pipelining} 
 para solapar y paralelizar la ejecución de instrucciones con el objetivo de 
 mejorar el rendimiento. Esta potencial superposición de la ejecución de las 
 instrucciones es lo que llamamos ILP, dado que ciertas partes de las mismas 
@@ -1564,26 +1567,31 @@ puede ejecutarse en paralelo. Es importante notar que se menciona ``partes de
 las instrucciones'', ya que la ejecución de las mismas puede dividirse en 
 etapas, en los que los recursos internos de la arquitectura que se utilizan son 
 independientes. El caso común es hacer la analogía con una línea de montaje en 
-una fábrica, por ejemplo, de automóviles: primero debe fabricarse el chasis, una 
+una fábrica, por ejemplo, de automóviles: primero debe fabricarse el chasis, 
+una 
 vez finalizado debemos montar y soldar los paneles de la carrocería para luego 
 pintarlos, luego montar motor, caja de cambios y trenes de rodaje (que 
 probablemente se han fabricado en sendas lineas de montaje independientes), 
 luego se podrán montar paneles internos, tapizados, faros, ruedas, vidrios, 
-cableados y demás componentes menores. Debe ser claro que las etapas descriptas, 
+cableados y demás componentes menores. Debe ser claro que las etapas 
+descriptas, 
 son independientes en lo que a recursos respecta, es decir, montar componentes 
-menores no utiliza las mismas herramientas de la fábrica que la etapa de pintura 
+menores no utiliza las mismas herramientas de la fábrica que la etapa de 
+pintura 
 o soldadura. Con la ejecución de las instrucciones dentro del microprocesador 
 existe la misma estructura: no es el mismo hardware que se utiliza para obtener 
 una instrucción de la memoria, que el utilizado para realizar, por ejemplo, la 
-suma de dos registros o decidir un salto en el flujo del programa. Así como pasa 
+suma de dos registros o decidir un salto en el flujo del programa. Así como 
+pasa 
 en la fábrica de autos, que diversas etapas pueden utilizar la misma 
 herramienta, en la ejecución de instrucciones puede suceder que diversas etapas 
-utilicen los mismos recursos de harwdare; en tal caso, deberemos duplicar el 
+utilicen los mismos recursos de hardware; en tal caso, deberemos duplicar el 
 hardware para evitar situaciones en la que una etapa quede a la espera de que 
 otra libere los recursos utilizados. Siguiendo con la analogía de la fábrica de 
 automóviles mencionamos que, por ejemplo, motor y caja de cambios pueden 
 provenir de otra línea de montaje. En el caso del microprocesador, la etapa del 
-cálculo de las operaciones aritmético-lógicas puede ser procesada dentro de otro 
+cálculo de las operaciones aritmético-lógicas puede ser procesada dentro de 
+otro 
 \emph{pipeline}.\\
 Debe resultar natural preguntarse por qué esta técnica mejora la performance. 
 Cabe aclarar que tiempo de ejecución de una instrucción individual no se ve 
@@ -1600,7 +1608,8 @@ ejecución de las instrucciones. Idealmente, debe cumplirse que:
 Esto es lo que se llama \emph{pipeline} ideal. El balance de las etapas implica 
 que cada una de las etapas demora exactamente lo mismo en ejecutarse. Bajo 
 estas condiciones, podemos calcular el \emph{speedup} de un \emph{pipeline} 
-ideal como lo calculado en la ecuación \ref{eq:optimizations-speedup_ideal_pipe} 
+ideal como lo calculado en la ecuación 
+\ref{eq:optimizations-speedup_ideal_pipe} 
 donde $N$ es la cantidad de etapas en la que se divide la ejecución de las 
 instrucciones. 
 \begin{equation}
@@ -1616,13 +1625,86 @@ instrucciones.
 Esto parecería implicar que en cuanto más etapas dividamos la ejecución de las 
 instrucciones, mayor optimización obtendremos. Es cierto; pero debe tenerse en 
 cuenta que la implementación deberá aproximarse lo máximo posible al pipeline 
-ideal, y además, cuanto más etapas se generen, puede complejizarse el harwdare 
+ideal, y además, cuanto más etapas se generen, puede complejizarse el hardware 
 y aumentar la necesidad de multiplicar el mismo, lo que va en contra de 
 mantener acotados los costos y el consumo energético; y más dificil será 
 mantener el balance entre los tiempos de ejecución de las etapas.\\
-Analizaremos ahora las diversas fuentes de problemas que alejarán el diseño de 
-la idealidad del \emph{pipeline}, que los llamaremos ``peligros'' o 
-\emph{hazards}.
+Analizaremos ahora las diversas fuentes de problemas que apartarán el diseño de 
+la idealidad que los llamaremos ``peligros'' o \emph{hazards}. Específicamente, 
+se pueden diferenciar diversas clases de peligro relacionadas con tres tipos de 
+dependencias existentes entre las instrucciones:
+\begin{itemize}
+  \item dependencias de recursos,
+  \item dependencias de control,
+  \item dependencias de datos.
+\end{itemize}
+
+\paragraph{Depedencias de recursos}
+\label{par:optimizations-ilp-pipeline-resources_dependencies}
+
+Las depenedencias de recursos surgen de la utilización de ciertos bloques 
+constructivos básicos del hardware por parte de distintas etapas de ejecución 
+de las instrucciones. Este tipo de dependencias generan los peligros homónimos 
+y conforman un problema que debe ser atacado en etapas tempranas del diseño de 
+la arquitectura, debido a que no es posible evitarlas a posteriori en tiempo de 
+compilación y/o ejecución (como sí sucederá con los otros tipos de peligros); 
+básicamente debe pensarse el conjunto de instrucciones de manera tal que exista 
+la mínima cantidad posible de superposición en la utilización de recursos entre 
+las etapas de ejecución de las instrucciones. Si fuese imposible eliminarlas, 
+al momento de la implementación el diseñador se verá obligado a duplicar 
+recursos circuitales, debido a que el costo será menor que la baja en 
+rendimiento asociada a la lógica de control y demoras extras que sería 
+necesario introducir con el objetivo de la correcta ejecución del software.
+
+\paragraph{Dependencias de control}
+\label{par:optimizations-ilp-pipeline-control_dependencies}
+
+El código máquina que se ejecuta en los microprocesadores es esencialmente 
+secuencial, más allá de las abstracciones y los paradigmas de programación 
+utilizados en los lenguajes de programación de nivel superior. Típicamente se 
+ejecuta una instrucción a la vez y al finalizar la ejecución de la misma se 
+continúa con la siguiente en la memoria de instrucciones, avanzando 
+secuencialmente instrucción por instrucción el programa. Este escenario 
+representaría una situación óptima para una implementación con \emph{pipeline}, 
+dado que siempre podríamos ingresar al mismo instrucciones que \emph{deben} ser 
+ejecutadas, acercándonos así al aspecto de \emph{pipeline} ideal en cuanto a 
+tener todas las etapas de nuestra línea de montaje siempre ocupadas. Es 
+evidente que si este fuese el único mecanismo para ``avanzar'' en un programa, 
+el programador se vería limitado en las posibilidades. Es por eso que 
+típicamente, cualquier arquitectura moderna provee instrucciones de salto 
+condicionales e incondicionales con el objetivo de interrumpir y modificar el 
+flujo del código ejecutado; lo que da lugar a la aparición de las dependencias 
+de control y sus peligros asociados.\\
+La cuestión clave de los peligros de control radica en la etapa en la que una 
+determinada instrucción de salto (condicional o incondicional) resuelve si se 
+debe interrumpir o no el flujo del programa. Si la decisión se tomase en la 
+primera etapa, no existiría este tipo de peligros, dado que al terminar la 
+ejecución de esa primera etapa, el hardware ya tendría resuelto cuál es la 
+siguiente instrucción a ejecutar y esa sería la que entra en el pipeline. 
+Pareciese entonces, que sería óptimo entonces decidir si saltar o no en la 
+primera etapa; pero esto no será posible sin sacrificar a cambio diversas 
+relaciones de compromiso, como por ejemplo la posibilidad de dividir la 
+ejecución de las instrucciones en más etapas. Claramente, el problema de 
+decidir el salto en posteriores etapas radica en qué será lo que sucede con 
+las instrucciones que entran al \emph{pipeline} desde que se está ejecutando la 
+instrucción de salto, hasta que se decide el mismo, ya que esas instrucciones 
+pueden ser o nó trabajo útil, pero además, pueden alterar el flujo correcto del 
+programa.\\
+Este tipo de peligros se resolverá, en parte, a partir del diseño del set de 
+instrucciones, trabajando en pos de que los saltos sean resueltos lo más 
+tempranamente posible. No obstante, al momento de la implementación en 
+particular, será muy probable que dicha decisión el hardware la realice en la 
+segunda, tercera o cuarta etapa del pipeline, según el tipo y cantidad de 
+divisiones del \emph{pipeline}; lo que deberá ser resuelto, o bien en tiempo de 
+compilación, o en tiempo de ejecución.
+
+\subparagraph{Branch delay slot}
+
+\subparagraph{Predicción de saltos}
+
+\paragraph{Dependencias de datos}
+\label{par:optimizations-ilp-pipeline-data_dependencies}
+
 
 \subsubsection{Forwarding}
 \label{subsubsec:optimizations-ilp-forwarding}
