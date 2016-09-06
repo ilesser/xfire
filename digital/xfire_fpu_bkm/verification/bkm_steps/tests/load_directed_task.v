@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Defined structure for directed loading.
 //    - 2016-08-15 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -40,10 +41,10 @@ task load_directed;
    // ----------------------------------
    input              mode;
    input [1:0]        format;
-   input [`WD-1:0]    X_in;
-   input [`WD-1:0]    Y_in;
-   input [`WC-1:0]    u_in;
-   input [`WC-1:0]    v_in;
+   input real         X_in;
+   input real         Y_in;
+   input real         u_in;
+   input real         v_in;
    // ----------------------------------
 
 // *****************************************************************************
@@ -60,14 +61,37 @@ task load_directed;
 
    begin
 
-      dir_cnt[`CNT_SIZE-1                 ]  =  mode  ;
-      dir_cnt[`CNT_SIZE-2     :`CNT_SIZE-3]  =  format;
-      dir_cnt[2*`WC+2*`WD-1   :2*`WC+1*`WD]  =  X_in  ;
-      dir_cnt[2*`WC+1*`WD-1   :2*`WC+0*`WD]  =  Y_in  ;
-      dir_cnt[2*`WC+0*`WD-1   :1*`WC+0*`WD]  =  u_in  ;
-      dir_cnt[1*`WC+0*`WD-1   :0*`WC+0*`WD]  =  v_in  ;
+      tb_mode     = mode;
+      tb_format   = format;
+      tb_X_in     = X_in;
+      tb_Y_in     = Y_in;
+      tb_u_in     = u_in;
+      tb_v_in     = v_in;
 
-      load_operands(dir_cnt);
+      // Calculate the result of N steps
+      bkm_steps(
+         // ----------------------------------
+         // Data inputs
+         // ----------------------------------
+         tb_mode,
+         tb_format,
+         tb_X_in,
+         tb_Y_in,
+         tb_u_in,
+         tb_v_in,
+         // ----------------------------------
+         // Data outputs
+         // ----------------------------------
+         tb_X_out,
+         tb_Y_out,
+         tb_u_out,
+         tb_v_out,
+         tb_flags
+      );
+
+      // Wait N clocks for results
+      run_clk(`N);
+
 
    end
 

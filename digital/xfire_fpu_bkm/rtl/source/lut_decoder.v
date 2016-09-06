@@ -43,6 +43,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Fixes bug 14.
 //    - 2016-08-31 - ilesser - Updated default parameters.
 //    - 2016-08-28 - ilesser - Fixed lut size definitions.
 //    - 2016-08-22 - ilesser - Initial version.
@@ -137,12 +138,12 @@ module lut_decoder #(
    // Constants definition
    // -----------------------------------------------------
    // Real part
-   wire [2*WD-1:0]   X  [0:15] [0:(2**LOG2N)-1];
-   wire [WC-1:0]     u  [0:15] [0:(2**LOG2N)-1];
+   wire [2*WD-1:0]   X  [0:15] [1:2**LOG2N];
+   wire [WC-1:0]     u  [0:15] [1:2**LOG2N];
 
    // Imaginary part
-   wire [2*WD-1:0]   Y  [0:15] [0:(2**LOG2N)-1];
-   wire [WC-1:0]     v  [0:15] [0:(2**LOG2N)-1];
+   wire [2*WD-1:0]   Y  [0:15] [1:2**LOG2N];
+   wire [WC-1:0]     v  [0:15] [1:2**LOG2N];
    // -----------------------------------------------------
 
    // -----------------------------------------------------

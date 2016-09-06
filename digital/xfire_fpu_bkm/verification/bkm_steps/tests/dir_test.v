@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Added some initial test values.
 //    - 2016-08-15 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -43,6 +44,10 @@ task dir_test;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
+   real  X_r, X_res, X_f;
+   reg   [`WI-1:0]   X_int;
+   reg   [`WFD-1:0]  X_frac;
+   reg   [`WD-1:0]   X;
    // -----------------------------------------------------
 
    begin
@@ -61,8 +66,20 @@ task dir_test;
       ena         = 1'b1;
 
       // operands     mode     format               X_in        Y_in        u_in        v_in
-      load_directed( `MODE_E, `FORMAT_CMPLX_DW, `WD'd00037, `WD'd00036, `WC'd0037, `WC'd0036);
-      load_directed( `MODE_L, `FORMAT_CMPLX_DW, `WD'd00033, `WD'd00039, `WC'd0040, `WC'd0028);
+      //load_directed( `MODE_E, `FORMAT_CMPLX_DW,  1023.00000,  1023.00000,  1023.0000,  1023.0000);
+      //load_directed( `MODE_L, `FORMAT_CMPLX_DW, -1023.00000, -1023.00000, -1023.0000, -1023.0000);
+
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.0000,     0.0000);  // exp(0.0)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.1000*2,   0.0000);  // exp(0.1)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.2000*2,   0.0000);  // exp(0.2)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.3000*2,   0.0000);  // exp(0.3)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.4000*2,   0.0000);  // exp(0.4)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.5000*2,   0.0000);  // exp(0.5)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.6000*2,   0.0000);  // exp(0.6)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.7000*2,   0.0000);  // exp(0.7)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.8000*2,   0.0000);  // exp(0.8)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.9000*2,   0.0000);  // exp(0.9)
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     1.0000*2,   0.0000);  // exp(1.0)
 
       //run_clk(1);
       //arst        = 1'b1;

@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - WIP: testing bkm_steps_task.
 //    - 2016-08-15 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -31,14 +32,18 @@
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
 `define N      64
-`define LOG2N   6
+`define LOG2N   7
 `define W      64
 `define LOG2W   6
-`define GD      3+`LOG2W
-`define GC      5
-`define WD     `GD+`W
-`define WC     `GC+`W/4
+`define UGD     2
+`define LGD    `LOG2W
+`define WD     (`UGD + `W   + `LGD)
+`define UGC     3
+`define LGC     1
+`define WC     (`UGC + `W/4 + `LGC)
 `define WI     11
+`define WFD    (`WD - `UGD - `WI)
+`define WFC    (`WC - `UGC - `WI)
 `define LOG2WD  1+`LOG2W
 `define LOG2WC  1+`LOG2W-2
 `define M_SIZE  1
@@ -47,6 +52,7 @@
 `define CNT_SIZE `M_SIZE+`F_SIZE+2*(`WC)+2*(`WD)
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
+`include "bkm_defs.vh"
 
 // *****************************************************************************
 // Interface
@@ -61,29 +67,41 @@ module tb_bkm_steps ();
    // -----------------------------------------------------
    // Testbench controlled variables and signals
    // -----------------------------------------------------
-   wire                    clk;
    reg                     arst, srst, ena, load;
+   reg                     float_or_fix;
    reg                     tb_start;
    reg                     tb_mode;
    reg   [1:0]             tb_format;
-   reg   [`WD-1:0]         tb_X_in,       tb_Y_in;
-   reg   [`WD-1:0]         tb_X_out,      tb_Y_out;
-   reg   [`WC-1:0]         tb_u_in,       tb_v_in;
-   reg   [`WC-1:0]         tb_u_out,      tb_v_out;
+   real                    tb_X_in,       tb_Y_in;
+   real                    tb_u_in,       tb_v_in;
+   reg   [`FSIZE-1:0]      tb_flags;
    reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Testbecnch wiring
+   // Testbench wiring
    // -----------------------------------------------------
+   wire                    clk;
+   wire                    tb_done;
    wire                    err_X,         err_Y;
    wire                    war_X,         war_Y;
    wire                    err_u,         err_v;
    wire                    war_u,         war_v;
-   wire  [`WD-1:0]         delta_X,       delta_Y;
-   wire  [`WC-1:0]         delta_u,       delta_v;
-   wire  [`WD-1:0]         res_X_out,     res_Y_out;
-   wire  [`WC-1:0]         res_u_out,     res_v_out;
+   real                    tb_X_out,      tb_Y_out;
+   real                    res_X_out,     res_Y_out;
+   real                    tb_u_out,      tb_v_out;
+   real                    res_u_out,     res_v_out;
+   real                    delta_X,       delta_Y;
+   real                    delta_u,       delta_v;
+   real                    min_delta_X,   min_delta_Y;
+   real                    max_delta_X,   max_delta_Y;
+   real                    min_delta_u,   min_delta_v;
+   real                    max_delta_u,   max_delta_v;
+   wire  [2*`WD-1:0]       X_in_csd,      Y_in_csd;
+   wire  [2*`WD-1:0]       X_out_csd,     Y_out_csd;
+   wire  [`WC-1:0]         u_in_bin,      v_in_bin;
+   wire  [`WC-1:0]         u_out_bin,     v_out_bin;
+   wire  [`FSIZE-1:0]      res_flags;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -117,10 +135,45 @@ module tb_bkm_steps ();
    // -----------------------------------------------------
 
    // -----------------------------------------------------
+   // Drivers
+   // -----------------------------------------------------
+   //bkm_steps_driver #(
+      //.WD         (`WD),
+      //.WC         (`WC)
+   //) duv_driver (
+      //// ----------------------------------
+      //// Clock, reset & enable inputs
+      //// ----------------------------------
+      //.clk        (clk),
+      //.arst       (arst),
+      //.srst       (srst),
+      //.enable     (ena),
+      //// ----------------------------------
+      //// Data inputs
+      //// ----------------------------------
+      //.float_or_fix  (float_or_fix),
+      //.tb_mode    (tb_mode),
+      //.tb_format  (tb_format),
+      //.tb_X_in    (tb_X_in),
+      //.tb_Y_in    (tb_Y_in),
+      //.tb_u_in    (tb_u_in),
+      //.tb_v_in    (tb_v_in),
+      //// ----------------------------------
+      //// Data outputs
+      //// ----------------------------------
+      //.X_in_csd   (X_in_csd),
+      //.Y_in_csd   (Y_in_csd),
+      //.u_in_bin   (u_in_bin),
+      //.v_in_bin   (v_in_bin)
+   //);
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
    //bkm_steps_monitor #(
-      //.WD         (`WD)
+      //.WD         (`WD),
+      //.WC         (`WC)
    //) duv_monitor (
       //// ----------------------------------
       //// Clock, reset & enable inputs
@@ -132,26 +185,32 @@ module tb_bkm_steps ();
       //// ----------------------------------
       //// Data inputs
       //// ----------------------------------
-      //.X_np1_csd  (X_np1_csd),
-      //.Y_np1_csd  (Y_np1_csd),
+      //.X_out_csd  (X_out_csd),
+      //.Y_out_csd  (Y_out_csd),
+      //.u_out_bin  (u_out_bin),
+      //.v_out_bin  (u_out_bin),
       //// ----------------------------------
       //// Data outputs
       //// ----------------------------------
-      //.res_X_np1  (res_X_np1),
-      //.res_Y_np1  (res_Y_np1)
+      //.res_X_out  (res_X_out),
+      //.res_Y_out  (res_Y_out),
+      //.res_u_out  (res_u_out),
+      //.res_v_out  (res_v_out)
    //);
 
-   // Uncomment these lines to add waveforms to iverilog simulation
-   //initial begin
-      //$dumpfile("../waves/tb_bkm_step.vcd");
-      //$dumpvars();
-   //end
+   // Dump waveforms from testbench if using iverilog
+   `ifdef IVERILOG
+      initial begin
+         $dumpfile("../waves/tb_bkm_steps.vcd");
+         $dumpvars();
+      end
+   `endif
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
-   //bkm_step_checker #(
+   //bkm_steps_checker #(
       //.WC         (`WC),
       //.WD         (`WD),
       //.LOG2N      (`LOG2N)
@@ -166,23 +225,18 @@ module tb_bkm_steps ();
       //// ----------------------------------
       //// Data inputs
       //// ----------------------------------
+      //.tb_start   (tb_start),
+      //.tb_done    (tb_done),
       //.tb_mode    (tb_mode),
       //.tb_format  (tb_format),
-      //.tb_n       (tb_n),
-      //.tb_d_x_n   (tb_d_x_n),
-      //.tb_d_y_n   (tb_d_y_n),
-      //.tb_u_n     (tb_u_n),
-      //.tb_v_n     (tb_v_n),
-      //.tb_u_np1   (tb_u_np1),
-      //.tb_v_np1   (tb_v_np1),
-      //.res_u_np1  (res_u_np1),
-      //.res_v_np1  (res_v_np1),
-      //.tb_X_n     (tb_X_n),
-      //.tb_Y_n     (tb_Y_n),
-      //.tb_X_np1   (tb_X_np1),
-      //.tb_Y_np1   (tb_Y_np1),
-      //.res_X_np1  (res_X_np1),
-      //.res_Y_np1  (res_Y_np1),
+      //.tb_u_out   (tb_u_out),
+      //.tb_v_out   (tb_v_out),
+      //.res_u_out  (res_u_out),
+      //.res_v_out  (res_v_out),
+      //.tb_X_out   (tb_X_out),
+      //.tb_Y_out   (tb_Y_out),
+      //.res_X_out  (res_X_out),
+      //.res_Y_out  (res_Y_out),
       //// ----------------------------------
       //// Data outputs
       //// ----------------------------------
@@ -192,51 +246,61 @@ module tb_bkm_steps ();
       //.err_v      (err_v),
       //.delta_u    (delta_u),
       //.delta_v    (delta_v),
+      //.max_delta_u(max_delta_u),
+      //.min_delta_u(min_delta_u),
+      //.max_delta_v(max_delta_v),
+      //.min_delta_v(min_delta_v),
       //.war_X      (war_X),
       //.war_Y      (war_Y),
       //.err_X      (err_X),
       //.err_Y      (err_Y),
       //.delta_X    (delta_X),
-      //.delta_Y    (delta_Y)
+      //.delta_Y    (delta_Y),
+      //.max_delta_X(max_delta_X),
+      //.min_delta_X(min_delta_X),
+      //.max_delta_Y(max_delta_Y),
+      //.min_delta_Y(min_delta_Y)
    //);
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   bkm_steps #(
-      .W          (`W),
-      .LOG2W      (`LOG2W),
-      .N          (`N),
-      .LOG2N      (`LOG2N)
-   ) duv (
-      // ----------------------------------
-      // Clock, reset & enable inputs
-      // ----------------------------------
-      .clk        (clk),
-      .arst       (arst),
-      .srst       (srst),
-      .enable     (ena),
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      .start      (tb_start),
-      .mode       (tb_mode),
-      .format     (tb_format),
-      .X_in       (tb_X_in),
-      .Y_in       (tb_Y_in),
-      .u_in       (tb_u_in),
-      .v_in       (tb_v_in),
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      .X_out      (res_X_out),
-      .Y_out      (res_Y_out),
-      .u_out      (res_u_out),
-      .v_out      (res_v_out),
-      .flags      (res_flags),
-      .done       (res_done)
-   );
+   //bkm_steps #(
+      //.N          (`N),
+      //.LOG2N      (`LOG2N),
+      //.WD         (`WD),
+      //.LOG2WD     (`LOG2WD),
+      //.WC         (`WC),
+      //.LOG2WC     (`LOG2WC)
+   //) duv (
+      //// ----------------------------------
+      //// Clock, reset & enable inputs
+      //// ----------------------------------
+      //.clk        (clk),
+      //.arst       (arst),
+      //.srst       (srst),
+      //.enable     (ena),
+      //// ----------------------------------
+      //// Data inputs
+      //// ----------------------------------
+      //.start      (tb_start),
+      //.mode       (tb_mode),
+      //.format     (tb_format),
+      //.X_in       (X_in_csd),
+      //.Y_in       (Y_in_csd),
+      //.u_in       (u_in_bin),
+      //.v_in       (v_in_bin),
+      //// ----------------------------------
+      //// Data outputs
+      //// ----------------------------------
+      //.X_out      (X_out_csd),
+      //.Y_out      (Y_out_csd),
+      //.u_out      (u_out_bin),
+      //.v_out      (v_out_bin),
+      //.flags      (res_flags),
+      //.done       (res_done)
+   //);
    // -----------------------------------------------------
 
 // *****************************************************************************
