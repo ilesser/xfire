@@ -73,7 +73,7 @@ task lut;
       complex     = format[1];
 
       // Calculate n real value;
-      n = $itor(n_bin+1);
+      n = $itor(n_bin);
 
       // Get d_n values
       dx =  d_x_n == 2'b01 ?  1  :
