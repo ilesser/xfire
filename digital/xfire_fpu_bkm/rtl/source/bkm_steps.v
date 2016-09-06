@@ -89,6 +89,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Removed CSD conversion from this block.
 //    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-22 - ilesser - Uncommented lut_decoder.
 //    - 2016-07-11 - ilesser - Build an unrolled version.
@@ -137,15 +138,15 @@ module bkm_steps  (
    input    wire                 start;
    input    wire                 mode;
    input    wire  [1:0]          format;
-   input    wire  [WD-1:0]       X_in;
-   input    wire  [WD-1:0]       Y_in;
+   input    wire  [2*WD-1:0]     X_in;
+   input    wire  [2*WD-1:0]     Y_in;
    input    wire  [WC-1:0]       u_in;
    input    wire  [WC-1:0]       v_in;
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output   wire  [WD-1:0]       X_out;
-   output   wire  [WD-1:0]       Y_out;
+   output   wire  [2*WD-1:0]     X_out;
+   output   wire  [2*WD-1:0]     Y_out;
    output   wire  [WC-1:0]       u_out;
    output   wire  [WC-1:0]       v_out;
    output   wire  [`FSIZE-1:0]   flags;
@@ -193,44 +194,12 @@ module bkm_steps  (
 
    assign flags = {`FSIZE{1'b0}};
 
- // -------------------------------------
- // Convert inputs to CSD
- // -------------------------------------
- // TODO: implement input latching when start==1
-   bin2csd #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-      .W                   (WD)
-   ) bin2csd_X (
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
-      .x                   (X_in),
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
-      .y                   (X[0])
-   );
-
-   bin2csd #(
-    // ----------------------------------
-    // Parameters
-    // ----------------------------------
-      .W                   (WD)
-   ) bin2csd_Y (
-    // ----------------------------------
-    // Data inputs
-    // ----------------------------------
-      .x                   (Y_in),
-    // ----------------------------------
-    // Data outputs
-    // ----------------------------------
-      .y                   (Y[0])
-   );
- // -------------------------------------
-
-
+   // -------------------------------------
+   // Assign starting values of the algorithm
+   // -------------------------------------
+   // TODO: implement input latching when start==1
+   assign X[0] = X_in;
+   assign Y[0] = Y_in;
    assign u[0] = u_in;
    assign v[0] = v_in;
 
@@ -324,45 +293,15 @@ module bkm_steps  (
 
    endgenerate
 
- // -------------------------------------
- // Convert outputs to binary
- // -------------------------------------
- // TODO: implement output latching when done==1
- assign u_out = u[N];
- assign v_out = v[N];
-
-   csd2bin #(
-      // ----------------------------------
-      // Parameters
-      // ----------------------------------
-      .W                   (WD)
-   ) csd2bin_X (
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      .x                   (X[N]),
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      .y                   (X_out)
-   );
-
-   csd2bin #(
-      // ----------------------------------
-      // Parameters
-      // ----------------------------------
-      .W                   (WD)
-   ) csd2bin_Y (
-      // ----------------------------------
-      // Data inputs
-      // ----------------------------------
-      .x                   (Y[N]),
-      // ----------------------------------
-      // Data outputs
-      // ----------------------------------
-      .y                   (Y_out)
-   );
- // -------------------------------------
+   // -------------------------------------
+   // Assign outputs
+   // -------------------------------------
+   // TODO: implement output latching when done==1
+   assign X_out = X[N];
+   assign Y_out = Y[N];
+   assign u_out = u[N];
+   assign v_out = v[N];
+   // -------------------------------------
 
 // *****************************************************************************
 
