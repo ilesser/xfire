@@ -36,6 +36,7 @@
 // History:
 // --------
 //
+//    - 2016-09-04 - ilesser - Added parameters for the integer part.
 //    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-06-15 - ilesser - Renamed get_d and implemented dxy muxing.
 //    - 2016-05-10 - ilesser - Initial version.
@@ -51,14 +52,17 @@ module get_d #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 64
+    parameter WC     = 21,
+    parameter UGC    = 3,
+    parameter LGC    = 2,
+    parameter WI     = 11
   ) (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
     input wire                mode,
-    input wire [W-1:0]        u,
-    input wire [W-1:0]        v,
+    input wire [WC-1:0]       u,
+    input wire [WC-1:0]       v,
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -88,24 +92,37 @@ module get_d #(
 // if    -8/16 <     v   <   8/16    then  d_y =  0
 // if     8/16 <=    v               then  d_y = +1
 // *****************************************************************************
+//
+//       +--------------------------------+
+//       |              W                 |
+// u =   +--------+--------+--------+-----+
+//       |  UG    |  WI    |  WF    |  LG |
+//       +--------+--------+--------+-----+
+//
+// Default values:
+//
+// u =   UUUIIIIIIIIIIIIIIII.FFFFFLL
+//
+// *****************************************************************************
 
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [W-5:0]  u_i;     // Integer part of u
-   wire  [W-5:0]  v_i;     // Integer part of v
-   wire  [3:0]    u_d;     // Decimal part of u
-   wire  [3:0]    v_d;     // Decimal part of v
-   wire           u_negative;
-   wire           u_less_than_m1;
-   wire           u_higher_than_p1;
-   wire           v_negative;
-   wire           v_less_than_m1;
-   wire           v_higher_than_p1;
-   wire           u_range_m1_0;
-   wire           u_range_0_p1;
-   wire           v_range_m1_0;
-   wire           v_range_0_p1;
+   localparam           WF = WC - UGC - WI;
+   wire  [UGC+WI-1:0]   u_i;     // Integer part of u
+   wire  [UGC+WI-1:0]   v_i;     // Integer part of u
+   wire  [3:0]          u_f;     // Fractional part of u
+   wire  [3:0]          v_f;     // Fractional part of v
+   wire                 u_negative;
+   wire                 u_less_than_m1;
+   wire                 u_higher_than_p1;
+   wire                 v_negative;
+   wire                 v_less_than_m1;
+   wire                 v_higher_than_p1;
+   wire                 u_range_m1_0;
+   wire                 u_range_0_p1;
+   wire                 v_range_m1_0;
+   wire                 v_range_0_p1;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -113,19 +130,19 @@ module get_d #(
    // -----------------------------------------------------
 
    // -----------------------------------------------------
-   // Get the decimal part of u and v
+   // Get the fractional part of u and v
    // -----------------------------------------------------
-   assign u_i           =   u[W-1:4];  // Integer part
-   assign u_d           =   u[3:0];    // Decimal part
-   assign u_negative    =   u[W-1];
-   assign u_range_m1_0  =  &u_i;       // All ones
-   assign u_range_0_p1  = ~|u_i;       // All zeros
+   assign u_i           =   u[WC-1:WF];   // Integer part
+   assign u_f           =   u[WF-1:WF-4]; // Fractional part
+   assign u_negative    =   u[WC-1];
+   assign u_range_m1_0  =  &u_i;          // All ones
+   assign u_range_0_p1  = ~|u_i;          // All zeros
 
-   assign v_i           =   v[W-1:4];  // Integer part
-   assign v_d           =   v[3:0];    // Decimal part
-   assign v_negative    =   v[W-1];
-   assign v_range_m1_0  =  &v_i;       // All ones
-   assign v_range_0_p1  = ~|v_i;       // All zeros
+   assign v_i           =   v[WC-1:WF];   // Integer part
+   assign v_f           =   v[WF-1:WF-4]; // Fractional part
+   assign v_negative    =   v[WC-1];
+   assign v_range_m1_0  =  &v_i;          // All ones
+   assign v_range_0_p1  = ~|v_i;          // All zeros
    // -----------------------------------------------------
    // Mux the value of d_n
    // -----------------------------------------------------
@@ -143,7 +160,7 @@ module get_d #(
                if ( u_negative == 1'b1 ) begin
                   // If u is between -1 and 0 then d_x = 0 | -1
                   if ( u_range_m1_0 == 1'b1 ) begin
-                     if ( u_d <= 4'd6 )
+                     if ( u_f <= 4'd6 )
                         d_x = 2'b11;   // d_x = -1
                      else
                         d_x = 2'b00;   // d_x =  0
@@ -155,7 +172,7 @@ module get_d #(
                else begin
                   // If u is between 0 and 1 then d_x = 0 | 1
                   if ( u_range_0_p1 == 1'b1 ) begin
-                     if ( u_d >= 4'd6 )
+                     if ( u_f >= 4'd6 )
                         d_x = 2'b01;   // d_x =  1
                      else
                         d_x = 2'b00;   // d_x =  0
@@ -174,7 +191,7 @@ module get_d #(
                if ( v_negative == 1'b1 ) begin
                   // If v is between -1 and 0 then d_y = 0 | -1
                   if ( v_range_m1_0 == 1'b1 ) begin
-                     if ( v_d <= 4'd3 )
+                     if ( v_f <= 4'd3 )
                         d_y = 2'b11;   // d_y = -1
                      else
                         d_y = 2'b00;   // d_y =  0
@@ -186,7 +203,7 @@ module get_d #(
                else begin
                   // If v is between 0 and 1 then d_y = 0 | 1
                   if ( v_range_0_p1 == 1'b1 ) begin
-                     if ( v_d <= 4'd12 )
+                     if ( v_f <= 4'd12 )
                         d_y = 2'b00;   // d_y =  0
                      else
                         d_y = 2'b01;   // d_y =  1
@@ -209,7 +226,7 @@ module get_d #(
                if ( u_negative == 1'b1 ) begin
                   // If u is between -1 and 0 then d_x = 0 | -1
                   if ( u_range_m1_0 == 1'b1 ) begin
-                     if ( u_d <= 4'd8 )
+                     if ( u_f <= 4'd8 )
                         d_x = 2'b11;   // d_x = -1
                      else
                         d_x = 2'b00;   // d_x =  0
@@ -221,7 +238,7 @@ module get_d #(
                else begin
                   // If u is between 0 and 1 then d_x = 0 | 1
                   if ( u_range_0_p1 == 1'b1 ) begin
-                     if ( u_d >= 4'd8 )
+                     if ( u_f >= 4'd8 )
                         d_x = 2'b01;   // d_x =  1
                      else
                         d_x = 2'b00;   // d_x =  0
@@ -240,7 +257,7 @@ module get_d #(
                if ( v_negative == 1'b1 ) begin
                   // If v is between -1 and 0 then d_y = 0 | -1
                   if ( v_range_m1_0 == 1'b1 ) begin
-                     if ( v_d <= 4'd8 )
+                     if ( v_f <= 4'd8 )
                         d_y = 2'b11;   // d_y = -1
                      else
                         d_y = 2'b00;   // d_y =  0
@@ -252,7 +269,7 @@ module get_d #(
                else begin
                   // If v is between 0 and 1 then d_y = 0 | 1
                   if ( v_range_0_p1 == 1'b1 ) begin
-                     if ( v_d >= 4'd8 )
+                     if ( v_f >= 4'd8 )
                         d_y = 2'b01;   // d_y =  1
                      else
                         d_y = 2'b00;   // d_y =  0
