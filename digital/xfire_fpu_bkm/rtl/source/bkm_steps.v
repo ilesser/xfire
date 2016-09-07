@@ -89,6 +89,7 @@
 // History:
 // --------
 //
+//    - 2016-09-07 - ilesser - Implemented rolled architcture.
 //    - 2016-09-05 - ilesser - Removed CSD conversion from this block.
 //    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-22 - ilesser - Uncommented lut_decoder.
@@ -159,19 +160,28 @@ module bkm_steps  (
 // *****************************************************************************
 
    // -----------------------------------------------------
-   // Internal signals
+   // Registers
    // -----------------------------------------------------
-   reg   [LOG2N:0]   n_cnt;
-   wire  [1:0]       d_x   [0:N-1];
-   wire  [1:0]       d_y   [0:N-1];
-   wire  [2*WD-1:0]  lut_X [0:N-1];
-   wire  [2*WD-1:0]  lut_Y [0:N-1];
-   wire  [WC-1:0]    lut_u [0:N-1];
-   wire  [WC-1:0]    lut_v [0:N-1];
-   wire  [2*WD-1:0]  X     [0:N];
-   wire  [2*WD-1:0]  Y     [0:N];
-   wire  [WC-1:0]    u     [0:N];
-   wire  [WC-1:0]    v     [0:N];
+   reg   [LOG2N-1:0] n;
+   reg   [2*WD-1:0]  X_n_reg;
+   reg   [2*WD-1:0]  Y_n_reg;
+   reg   [WC-1:0]    u_n_reg;
+   reg   [WC-1:0]    v_n_reg;
+   // -----------------------------------------------------
+
+   // -----------------------------------------------------
+   // Internal wiring
+   // -----------------------------------------------------
+   wire  [1:0]       d_x_n;
+   wire  [1:0]       d_y_n;
+   wire  [2*WD-1:0]  lut_X_n;
+   wire  [2*WD-1:0]  lut_Y_n;
+   wire  [WC-1:0]    lut_u_n;
+   wire  [WC-1:0]    lut_v_n;
+   wire  [2*WD-1:0]  X_n, X_np1;
+   wire  [2*WD-1:0]  Y_n, Y_np1;
+   wire  [WC-1:0]    u_n, u_np1;
+   wire  [WC-1:0]    v_n, v_np1;
    // -----------------------------------------------------
 
 
@@ -181,126 +191,165 @@ module bkm_steps  (
    // TODO: this uses a cnt to overflow for the done
    always @(posedge clk or posedge arst) begin
       if (arst) begin
-         n_cnt <= {LOG2N{1'b0}};
+         n <= {{LOG2N-1{1'b0}}, 1'b1};
       end
-      else if (srst|start) begin
-         n_cnt <= {LOG2N{1'b0}};
-      end
-      else if (enable) begin
-         n_cnt <= n_cnt + 1;
+      else begin
+         if (srst|start) begin
+            n <= {{LOG2N-1{1'b0}}, 1'b1};
+         end
+         else if (enable&~done) begin
+            n <= n + 1;
+         end
       end
    end
-   assign done  = n_cnt[LOG2N];
 
-   assign flags = {`FSIZE{1'b0}};
+   assign done  = n[LOG2N-1];
+
 
    // -------------------------------------
    // Assign starting values of the algorithm
    // -------------------------------------
-   // TODO: implement input latching when start==1
-   assign X[0] = X_in;
-   assign Y[0] = Y_in;
-   assign u[0] = u_in;
-   assign v[0] = v_in;
+   // TODO: implement input latching when start==1 ??
+   //       if the input comes from the previous block registered then I don't need it
+   assign   X_n   = start == 1'b1 ?    X_in  :  X_n_reg;
+   assign   Y_n   = start == 1'b1 ?    Y_in  :  Y_n_reg;
+   assign   u_n   = start == 1'b1 ?    u_in  :  u_n_reg;
+   assign   v_n   = start == 1'b1 ?    v_in  :  v_n_reg;
 
-   genvar n;
-   generate
-      for (n=0; n < N; n=n+1) begin
+   // ----------------------------------
+   // Get d_n
+   // ----------------------------------
+   get_d #(
+      .WC         (WC),
+      .UGC        (UGC),
+      .LGC        (LGC),
+      .WI         (WI)
+   ) get_d_n (
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .mode       (mode),
+      .u          (u_n),
+      .v          (v_n),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .d_x        (d_x_n),
+      .d_y        (d_y_n)
+   );
 
-         // ----------------------------------
-         // Get d_n
-         // ----------------------------------
-         get_d #(
-            .WC         (WC),
-            .UGC        (UGC),
-            .LGC        (LGC),
-            .WI         (WI)
-         ) get_d_n (
-            // ----------------------------------
-            // Data inputs
-            // ----------------------------------
-            .mode       (mode),
-            .u          (u[n]),
-            .v          (v[n]),
-            // ----------------------------------
-            // Data inputs
-            // ----------------------------------
-            .d_x        (d_x[n]),
-            .d_y        (d_y[n])
-         );
+   // ----------------------------------
+   // LUT decoder
+   // ----------------------------------
+   lut_decoder #(
+      .WD         (WD),
+      .WC         (WC),
+      .LOG2N      (LOG2N)
+   ) lut_decoder_n (
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
 
-         // ----------------------------------
-         // LUT decoder
-         // ----------------------------------
-         lut_decoder #(
-            .WD         (WD),
-            .WC         (WC),
-            .LOG2N      (LOG2N)
-         ) lut_decoder_n (
-            // ----------------------------------
-            // Data inputs
-            // ----------------------------------
-            .mode       (mode),
-            .format     (format),
-            .n          (n[LOG2N-1:0]),
-            .d_x_n      (d_x[n]),
-            .d_y_n      (d_y[n]),
-            // ----------------------------------
-            // Data outputs
-            // ----------------------------------
-            .lut_X      (lut_X[n]),
-            .lut_Y      (lut_X[n]),
-            .lut_u      (lut_u[n]),
-            .lut_v      (lut_v[n])
-         );
+      .mode       (mode),
+      .format     (format),
+      .n          (n),
+      .d_x_n      (d_x_n),
+      .d_y_n      (d_y_n),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .lut_X      (lut_X_n),
+      .lut_Y      (lut_Y_n),
+      .lut_u      (lut_u_n),
+      .lut_v      (lut_v_n)
+   );
 
-         // ----------------------------------
-         // Step n
-         // ----------------------------------
-         bkm_step #(
-            .WD         (WD),
-            .WC         (WC),
-            .LOG2WD     (LOG2WD),
-            .LOG2WC     (LOG2WC),
-            .LOG2N      (LOG2N)
-         ) bkm_step_n (
-            // ----------------------------------
-            // Clock, reset & enable inputs
-            // ----------------------------------
-            .clk        (clk),
-            .arst       (arst),
-            .srst       (srst),
-            .enable     (enable),
-            // ----------------------------------
-            // Data inputs
-            // ----------------------------------
-            .mode       (mode),
-            .format     (format),
-            .n          (n[LOG2N-1:0]),
-            .d_x_n      (  d_x[n]),    .d_y_n      (  d_y[n]),
-            .X_n        (    X[n]),    .Y_n        (    Y[n]),
-            .lut_X      (lut_X[n]),    .lut_Y      (lut_Y[n]),
-            .u_n        (    u[n]),    .v_n        (    v[n]),
-            .lut_u      (lut_u[n]),    .lut_v      (lut_v[n]),
-            // ----------------------------------
-            // Data outputs
-            // ----------------------------------
-            .X_np1      (    X[n+1]),  .Y_np1      (    Y[n+1]),
-            .u_np1      (    u[n+1]),  .v_np1      (    v[n+1])
-         );
+   // ----------------------------------
+   // Step n
+   // ----------------------------------
+   bkm_step #(
+      .WD         (WD),
+      .WC         (WC),
+      .LOG2WD     (LOG2WD),
+      .LOG2WC     (LOG2WC),
+      .LOG2N      (LOG2N)
+   ) bkm_step_n (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk        (clk),
+      .arst       (arst),
+      .srst       (srst),
+      .enable     (enable),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .mode       (mode),
+      .format     (format),
+      .n                (n),
+      .d_x_n      (  d_x_n),     .d_y_n      (  d_y_n),
+      .X_n        (    X_n),     .Y_n        (    Y_n),
+      .lut_X      (lut_X_n),     .lut_Y      (lut_Y_n),
+      .u_n        (    u_n),     .v_n        (    v_n),
+      .lut_u      (lut_u_n),     .lut_v      (lut_v_n),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .X_np1      (    X_np1),   .Y_np1      (    Y_np1),
+      .u_np1      (    u_np1),   .v_np1      (    v_np1)
+   );
 
-      end // for n
+   // -------------------------------------
+   // Feedback
+   // -------------------------------------
+   always @(posedge clk or posedge arst) begin
+      if (arst) begin
+         X_n_reg <= {WD{`CSD_0_0}};
+         Y_n_reg <= {WD{`CSD_0_0}};
+         u_n_reg <= {WC{1'b0}};
+         v_n_reg <= {WC{1'b0}};
+      end
+      else begin
+         if (srst) begin
+            X_n_reg <= {WD{`CSD_0_0}};
+            Y_n_reg <= {WD{`CSD_0_0}};
+            u_n_reg <= {WC{1'b0}};
+            v_n_reg <= {WC{1'b0}};
+         end
+         else if (enable) begin
+            if (done == 1'b1) begin
+               X_n_reg <= X_n_reg;
+               Y_n_reg <= Y_n_reg;
+               u_n_reg <= u_n_reg;
+               v_n_reg <= v_n_reg;
+            end
+            else begin
+               X_n_reg <= X_np1;
+               Y_n_reg <= Y_np1;
+               u_n_reg <= u_np1;
+               v_n_reg <= v_np1;
+            end
+         end
+      end
+   end
 
-   endgenerate
 
    // -------------------------------------
    // Assign outputs
    // -------------------------------------
+   assign X_out = X_n_reg;
+   assign Y_out = Y_n_reg;
+   assign u_out = u_n_reg;
+   assign v_out = v_n_reg;
    // TODO: implement output latching when done==1
-   assign X_out = X[N];
-   assign Y_out = Y[N];
-   assign u_out = u[N];
-   assign v_out = v[N];
+   //       if the output comes from the previous block registered then I don't need it
+   //assign X_out = done == 1'b1   ?  X_n_reg  :  {WD{`CSD_0_0}};
+   //assign Y_out = done == 1'b1   ?  Y_n_reg  :  {WD{`CSD_0_0}};
+   //assign u_out = done == 1'b1   ?  u_n_reg  :  {WC{1'b0}};
+   //assign v_out = done == 1'b1   ?  v_n_reg  :  {WC{1'b0}};
+
+   // TODO: implement flags
+   assign flags = {`FSIZE{1'b0}};
    // -------------------------------------
 
 // *****************************************************************************

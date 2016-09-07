@@ -159,6 +159,8 @@ task bkm_steps;
       Y_out = Y[`N];
       u_out = u[`N];
       v_out = v[`N];
+
+      // TODO: implement flags
       flags = {`FSIZE{1'b0}};
 
    end

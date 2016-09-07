@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-07 - ilesser - Fixed u_frac and v_frac assignments.
 //    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-09-04 - ilesser - Initial version.
 //
@@ -99,8 +100,8 @@ module bkm_steps_driver #(
    assign v_int    = $rtoi( tb_v_in );
    assign X_frac   = $rtoi( (tb_X_in - X_int) * 2.0**(WFD) );
    assign Y_frac   = $rtoi( (tb_Y_in - Y_int) * 2.0**(WFD) );
-   assign X_frac   = $rtoi( (tb_u_in - u_int) * 2.0**(WFC) );
-   assign Y_frac   = $rtoi( (tb_v_in - v_int) * 2.0**(WFC) );
+   assign u_frac   = $rtoi( (tb_u_in - u_int) * 2.0**(WFC) );
+   assign v_frac   = $rtoi( (tb_v_in - v_int) * 2.0**(WFC) );
    assign X_in_bin = {X_int, X_frac};
    assign Y_in_bin = {Y_int, Y_frac};
    assign u_in_bin = {u_int, u_frac};

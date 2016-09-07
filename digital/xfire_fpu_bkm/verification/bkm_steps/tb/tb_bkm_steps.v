@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-07 - ilesser - Implemented rolled architcture.
 //    - 2016-09-05 - ilesser - WIP: testing bkm_steps_task.
 //    - 2016-08-15 - ilesser - Initial version.
 //
@@ -82,7 +83,7 @@ module tb_bkm_steps ();
    // Testbench wiring
    // -----------------------------------------------------
    wire                    clk;
-   wire                    tb_done;
+   wire                    res_done;
    wire                    err_X,         err_Y;
    wire                    war_X,         war_Y;
    wire                    err_u,         err_v;
@@ -137,66 +138,66 @@ module tb_bkm_steps ();
    // -----------------------------------------------------
    // Drivers
    // -----------------------------------------------------
-   //bkm_steps_driver #(
-      //.WD         (`WD),
-      //.WC         (`WC)
-   //) duv_driver (
-      //// ----------------------------------
-      //// Clock, reset & enable inputs
-      //// ----------------------------------
-      //.clk        (clk),
-      //.arst       (arst),
-      //.srst       (srst),
-      //.enable     (ena),
-      //// ----------------------------------
-      //// Data inputs
-      //// ----------------------------------
-      //.float_or_fix  (float_or_fix),
-      //.tb_mode    (tb_mode),
-      //.tb_format  (tb_format),
-      //.tb_X_in    (tb_X_in),
-      //.tb_Y_in    (tb_Y_in),
-      //.tb_u_in    (tb_u_in),
-      //.tb_v_in    (tb_v_in),
-      //// ----------------------------------
-      //// Data outputs
-      //// ----------------------------------
-      //.X_in_csd   (X_in_csd),
-      //.Y_in_csd   (Y_in_csd),
-      //.u_in_bin   (u_in_bin),
-      //.v_in_bin   (v_in_bin)
-   //);
+   bkm_steps_driver #(
+      .WD         (`WD),
+      .WC         (`WC)
+   ) duv_driver (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk        (clk),
+      .arst       (arst),
+      .srst       (srst),
+      .enable     (ena),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .float_or_fix  (float_or_fix),
+      .tb_mode    (tb_mode),
+      .tb_format  (tb_format),
+      .tb_X_in    (tb_X_in),
+      .tb_Y_in    (tb_Y_in),
+      .tb_u_in    (tb_u_in),
+      .tb_v_in    (tb_v_in),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .X_in_csd   (X_in_csd),
+      .Y_in_csd   (Y_in_csd),
+      .u_in_bin   (u_in_bin),
+      .v_in_bin   (v_in_bin)
+   );
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Monitors
    // -----------------------------------------------------
-   //bkm_steps_monitor #(
-      //.WD         (`WD),
-      //.WC         (`WC)
-   //) duv_monitor (
-      //// ----------------------------------
-      //// Clock, reset & enable inputs
-      //// ----------------------------------
-      //.clk        (clk),
-      //.arst       (arst),
-      //.srst       (srst),
-      //.enable     (ena),
-      //// ----------------------------------
-      //// Data inputs
-      //// ----------------------------------
-      //.X_out_csd  (X_out_csd),
-      //.Y_out_csd  (Y_out_csd),
-      //.u_out_bin  (u_out_bin),
-      //.v_out_bin  (u_out_bin),
-      //// ----------------------------------
-      //// Data outputs
-      //// ----------------------------------
-      //.res_X_out  (res_X_out),
-      //.res_Y_out  (res_Y_out),
-      //.res_u_out  (res_u_out),
-      //.res_v_out  (res_v_out)
-   //);
+   bkm_steps_monitor #(
+      .WD         (`WD),
+      .WC         (`WC)
+   ) duv_monitor (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk        (clk),
+      .arst       (arst),
+      .srst       (srst),
+      .enable     (ena),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .X_out_csd  (X_out_csd),
+      .Y_out_csd  (Y_out_csd),
+      .u_out_bin  (u_out_bin),
+      .v_out_bin  (u_out_bin),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .res_X_out  (res_X_out),
+      .res_Y_out  (res_Y_out),
+      .res_u_out  (res_u_out),
+      .res_v_out  (res_v_out)
+   );
 
    // Dump waveforms from testbench if using iverilog
    `ifdef IVERILOG
@@ -266,41 +267,41 @@ module tb_bkm_steps ();
    // -----------------------------------------------------
    // Device under verifiacion
    // -----------------------------------------------------
-   //bkm_steps #(
-      //.N          (`N),
-      //.LOG2N      (`LOG2N),
-      //.WD         (`WD),
-      //.LOG2WD     (`LOG2WD),
-      //.WC         (`WC),
-      //.LOG2WC     (`LOG2WC)
-   //) duv (
-      //// ----------------------------------
-      //// Clock, reset & enable inputs
-      //// ----------------------------------
-      //.clk        (clk),
-      //.arst       (arst),
-      //.srst       (srst),
-      //.enable     (ena),
-      //// ----------------------------------
-      //// Data inputs
-      //// ----------------------------------
-      //.start      (tb_start),
-      //.mode       (tb_mode),
-      //.format     (tb_format),
-      //.X_in       (X_in_csd),
-      //.Y_in       (Y_in_csd),
-      //.u_in       (u_in_bin),
-      //.v_in       (v_in_bin),
-      //// ----------------------------------
-      //// Data outputs
-      //// ----------------------------------
-      //.X_out      (X_out_csd),
-      //.Y_out      (Y_out_csd),
-      //.u_out      (u_out_bin),
-      //.v_out      (v_out_bin),
-      //.flags      (res_flags),
-      //.done       (res_done)
-   //);
+   bkm_steps #(
+      .N          (`N),
+      .LOG2N      (`LOG2N),
+      .WD         (`WD),
+      .LOG2WD     (`LOG2WD),
+      .WC         (`WC),
+      .LOG2WC     (`LOG2WC)
+   ) duv (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk        (clk),
+      .arst       (arst),
+      .srst       (srst),
+      .enable     (ena),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .start      (tb_start),
+      .mode       (tb_mode),
+      .format     (tb_format),
+      .X_in       (X_in_csd),
+      .Y_in       (Y_in_csd),
+      .u_in       (u_in_bin),
+      .v_in       (v_in_bin),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .X_out      (X_out_csd),
+      .Y_out      (Y_out_csd),
+      .u_out      (u_out_bin),
+      .v_out      (v_out_bin),
+      .flags      (res_flags),
+      .done       (res_done)
+   );
    // -----------------------------------------------------
 
 // *****************************************************************************

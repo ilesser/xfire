@@ -68,6 +68,12 @@ task load_directed;
       tb_u_in     = u_in;
       tb_v_in     = v_in;
 
+      tb_start    = 1'b0;
+      run_clk(1);
+      tb_start    = 1'b1;
+      run_clk(1);
+      tb_start    = 1'b0;
+
       // Calculate the result of N steps
       bkm_steps(
          // ----------------------------------
@@ -89,8 +95,11 @@ task load_directed;
          tb_flags
       );
 
-      // Wait N clocks for results
-      run_clk(`N);
+      // Wait N-1 clocks for results
+      //run_clk(`N-1);
+
+      // Wait for done signal
+      @(posedge res_done);
 
 
    end
