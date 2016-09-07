@@ -1,0 +1,104 @@
+Command: ./simv -ucli -do simv.tcl -l ../reports/csd2bin.basic_test.simv.log +TESTSEED=198848159 +VERBOSITY=0
+Chronologic VCS simulator copyright 1991-2014
+Contains Synopsys proprietary information.
+Compiler version I-2014.03; Runtime version I-2014.03;  Sep  3 15:37 2016
+ucli% dump  -add / -aggregates -depth 0
+VCD+ Writer I-2014.03 Copyright (c) 1991-2014 by Synopsys Inc.
+1
+ucli% run
+
+*******************************************************
+Test Seed:   198848159
+*******************************************************
+
+Time =        0 tb_x_bin = xxxxxxxxxx	tb_x_bin =	xxxxx
+					res_x_bin =		xxxxx
+
+
+Time =     6000 tb_x_bin = 0000000000	tb_x_bin =	00000
+					res_x_bin =		00000
+
+
+Time =    16000 tb_x_bin = 0000000010	tb_x_bin =	11111
+					res_x_bin =		11111
+
+
+Time =    26000 tb_x_bin = 0000001000	tb_x_bin =	11110
+					res_x_bin =		11110
+
+
+Time =    36000 tb_x_bin = 0000100100	tb_x_bin =	11110
+					res_x_bin =		11110
+
+
+Time =    46000 tb_x_bin = 0000100000	tb_x_bin =	11100
+					res_x_bin =		11100
+
+
+Time =    56000 tb_x_bin = 0000100010	tb_x_bin =	11011
+					res_x_bin =		11011
+
+
+Time =    66000 tb_x_bin = 0000010000	tb_x_bin =	00100
+					res_x_bin =		00100
+
+
+Time =    76000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
+
+
+Time =    86000 tb_x_bin = 0000000000	tb_x_bin =	00000
+					res_x_bin =		00000
+
+
+Time =    96000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
+
+
+Time =   106000 tb_x_bin = 0000010000	tb_x_bin =	00100
+					res_x_bin =		00100
+
+
+Time =   116000 tb_x_bin = 0000000000	tb_x_bin =	00000
+					res_x_bin =		00000
+
+
+Time =   146000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
+
+
+Time =   156000 tb_x_bin = 0000100100	tb_x_bin =	11110
+					res_x_bin =		11110
+
+
+Time =   166000 tb_x_bin = 0000000100	tb_x_bin =	00010
+					res_x_bin =		00010
+
+
+
+
+TIME     : 176
+WARNINGS : 0
+ERRORS   : 0
+INFOS    : 0
+NOTES    : 0
+MESSAGES : 0
+TESTSEED : 198848159
+
+
+............. TEST PASSED .............
+    ____  ___   __________ __________
+   / __ \/   | / ___/ ___// ____/ __ \
+  / /_/ / /| | \__ \\__ \/ __/ / / / /
+ / ____/ ___ |___/ /__/ / /___/ /_/ /
+/_/   /_/  |_/____/____/_____/_____/
+
+.......................................
+
+
+$finish called from file "./temp/tb_csd2bin.v", line 299.
+$finish at simulation time               176000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 176000 ps
+CPU Time:      1.030 seconds;       Data structure size:  53.6Mb
+Sat Sep  3 15:37:54 2016
