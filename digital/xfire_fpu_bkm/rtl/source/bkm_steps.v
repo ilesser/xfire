@@ -89,6 +89,7 @@
 // History:
 // --------
 //
+//    - 2016-09-07 - ilesser - Updated default parameter WC = 20.
 //    - 2016-09-07 - ilesser - Implemented rolled architcture.
 //    - 2016-09-05 - ilesser - Removed CSD conversion from this block.
 //    - 2016-08-28 - ilesser - Updated default parameters.
@@ -118,7 +119,7 @@ module bkm_steps  (
    parameter   N        = 64;
    parameter   LOG2N    = 6;
    parameter   WD       = 72;
-   parameter   WC       = 21;
+   parameter   WC       = 20;
    parameter   LOG2WD   = 7;
    parameter   LOG2WC   = 5;
    parameter   UGD      = 2;

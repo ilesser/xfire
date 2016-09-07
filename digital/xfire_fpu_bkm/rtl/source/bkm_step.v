@@ -91,6 +91,7 @@
 // History:
 // --------
 //
+//    - 2016-09-05 - ilesser - Updated default parameters. WC = 20 LOG2WC = 5
 //    - 2016-08-22 - ilesser - Fix bug #7 by using the div_by_2_n block in bkm_control_step.
 //    - 2016-08-15 - ilesser - Replaced W paramer with WD and WC.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
@@ -121,7 +122,7 @@ module bkm_step   (
    // Parameters
    // ----------------------------------
    parameter   WD       = 72;
-   parameter   WC       = 21;
+   parameter   WC       = 20;
    parameter   LOG2WD   = 7;
    parameter   LOG2WC   = 5;
    parameter   LOG2N    = 6;

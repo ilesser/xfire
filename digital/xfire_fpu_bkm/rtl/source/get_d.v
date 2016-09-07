@@ -36,6 +36,7 @@
 // History:
 // --------
 //
+//    - 2016-09-07 - ilesser - Updated default parameter WC = 20.
 //    - 2016-09-04 - ilesser - Added parameters for the integer part.
 //    - 2016-07-11 - ilesser - Removed regs and used wires.
 //    - 2016-06-15 - ilesser - Renamed get_d and implemented dxy muxing.
@@ -52,9 +53,9 @@ module get_d #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter WC     = 21,
+    parameter WC     = 20,
     parameter UGC    = 3,
-    parameter LGC    = 2,
+    parameter LGC    = 1,
     parameter WI     = 11
   ) (
     // ----------------------------------

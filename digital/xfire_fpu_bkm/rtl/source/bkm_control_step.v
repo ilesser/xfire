@@ -76,6 +76,7 @@
 //
 //    TODO: implement power savings based on format. Currently it works always
 //          in double word complex format.
+//    - 2016-09-05 - ilesser - Updated default parameters. W = 20 LOG2W = 5
 //    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-22 - ilesser - Changed default parameters.
 //    - 2016-08-15 - ilesser - Replaced barrel shifters by div_by_2_n block.
@@ -95,7 +96,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 21,
+    parameter W      = 20,
     parameter LOG2W  = 5,
     parameter LOG2N  = 6
   ) (
