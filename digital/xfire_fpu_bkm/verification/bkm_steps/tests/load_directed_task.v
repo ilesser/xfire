@@ -72,6 +72,9 @@ task load_directed;
       run_clk(1);
       tb_start    = 1'b1;
       run_clk(1);
+      run_clk(1);
+      run_clk(1);
+      run_clk(1);
       tb_start    = 1'b0;
 
       // Calculate the result of N steps

@@ -53,6 +53,7 @@
 // History:
 // --------
 //
+//    - 2016-09-07 - ilesser - Updated default parameter WC = 20.
 //    - 2016-08-15 - ilesser - Updated parameters to work with W, WD and WC.
 //    - 2016-04-19 - ilesser - Built architecture scafold.
 //    - 2016-04-04 - ilesser - Original version.
@@ -123,18 +124,18 @@ module bkm #(
    //                   |  guard    |  size     |  guard |
    //                   |  bits     |           |  bits  |
    //                   +-----------+-----------+--------+
-   localparam  UGD      = 2                              ;
+   localparam  UGD      =     2                          ;
    localparam  LGD      =                          LOG2W ;
-   localparam  UGC      = 3                              ;
-   localparam  LGC      =                          1     ;
+   localparam  UGC      =     3                          ; // TODO: este es 3 o 2??
+   localparam  LGC      =                           1    ;
+   localparam  WI       =                11              ;
    //                   +-----------+-----------+--------+
-   localparam  WD       = UGD       +  W        +  LGD   ;
-   localparam  LOG2WD   = 1         +  LOG2W    +  0     ;  // TODO the lower guard bits are harcodfed???
-   localparam  WC       = UGC       +  W/4      +  LGC   ;
-   localparam  LOG2WC   = 1         +  LOG2W-2  +  0     ;
+   localparam  WD       =    UGD    +     W     +  LGD   ;
+   localparam  LOG2WD   =     1     +   LOG2W   +   0    ;
+   localparam  WC       =    UGC    +  WI + 4   +  LGC   ;
+   localparam  LOG2WC   =     1     +     4     +   0    ;
    //                   +-----------+-----------+--------+
 
-   localparam  WI       = 11                             ;
 
    // Input register
    reg                  input_reg_enable;
