@@ -1,0 +1,1422 @@
+# SimVision Command Script (Mon Sep 05 08:00:37 PM ART 2016)
+#
+# Version 15.20.s002
+#
+# You can restore this configuration with:
+#
+#     simvision -input /home/public/nacho/docs/facu/xfire/digital/xfire_fpu_bkm/verification/bkm_steps/waves/bkm_steps.svcf
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Standard-Console {
+  usual
+  position -pos 1
+}
+preferences set toolbar-Search-Console {
+  usual
+  position -pos 2
+}
+preferences set plugin-enable-svdatabrowser 0
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set toolbar-Standard-WaveWindow {
+  usual
+  position -pos 4
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set whats-new-dont-show-at-startup 1
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+
+#
+# Databases
+#
+database require bkm_steps -search {
+	./waves/bkm_steps.shm/bkm_steps.trn
+	/home/public/nacho/docs/facu/xfire/digital/xfire_fpu_bkm/verification/bkm_steps/waves/bkm_steps.shm/bkm_steps.trn
+}
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1680x978+0+0}] != ""} {
+    window geometry "Waveform 1" 1680x978+0+0
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar select designbrowser
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 25,000ps
+
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.arst
+	} ]
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.srst
+	} ]
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.ena
+	} ]
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.clk
+	} ]
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_start
+	} ]
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_mode
+	} ]
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.tb_format[1:0]}
+	} ]
+waveform format $id -radix %b
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_X_in
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_Y_in
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_u_in
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_v_in
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_X_out
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_Y_out
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_u_out
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_v_out
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.tb_flags[3:0]}
+	} ]
+set id [waveform add -signals  {
+	bkm_steps::tb_bkm_steps.tb_done
+	} ]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.d_x[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.d_y[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.X[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_X[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.Y[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_Y[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.u[1]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.u[3]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.u[2]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.u[4]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.u[5]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_u[1]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_u[2]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_u[3]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_u[4]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_u[5]}
+	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.u[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_u[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.v[1:64]}
+	} ]
+set id [waveform add -signals  {
+	{bkm_steps::tb_bkm_steps.bkm_steps.lut_v[1:64]}
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 8]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 9]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 10]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 11]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 12]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 13]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 14]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 15]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 16]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 17]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 18]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 19]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 20]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 21]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 22]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 23]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 24]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 25]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 26]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 27]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 28]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 29]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 30]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 31]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 32]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 33]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 34]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 35]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 36]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 37]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 38]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 39]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 40]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 41]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 42]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 43]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 44]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 45]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 46]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 47]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 48]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 49]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 50]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 51]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 52]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 53]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 54]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 55]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 56]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 57]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 58]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 59]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 60]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 61]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 62]
+waveform format $id2 -trace digital
+set id2 [lindex [waveform hierarchy content $id] 63]
+waveform format $id2 -trace digital
+waveform hierarchy collapse $id
+set id [waveform add -cdivider divider]
+set id [waveform add -cdivider divider]
+
+waveform xview limits 1059.254ns 2331.754ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Layout selection
+#
+
