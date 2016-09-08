@@ -1696,7 +1696,82 @@ tempranamente posible. No obstante, al momento de la implementación en
 particular, será muy probable que dicha decisión el hardware la realice en la 
 segunda, tercera o cuarta etapa del pipeline, según el tipo y cantidad de 
 divisiones del \emph{pipeline}; lo que deberá ser resuelto, o bien en tiempo de 
-compilación, o en tiempo de ejecución.
+compilación, o en tiempo de ejecución. Cabe destacar que para aprovechar al 
+máximo el diseño de la implementación en particular, el compilador deberá 
+conocer las particualridades de la misma.\\
+Existe también, en el mundo de los microprocesadores, otra fuente de alteración 
+en el órden de ejecución de las instrucciones, que son las excepciones y las 
+interrupciones; si bien puede considerarse a estas últimas como un caso especial 
+de las primeras. Las excepciones pueden considerarse condiciones anormales que 
+al ser detectadas por la arquitectura deben ser atendidas o manejadas. La 
+definición formal de la arquitectura deberá describir el tipo de excepciones 
+que pueden generarse y las herramientas que el hardware proveerá para su 
+correcto tratamiento. La naturaleza de las mismas es asincrónica, es decir que 
+pueden suceder en cualquier momento de la ejecución de un programa, dada por 
+condiciones evaluadas dinámicamente; como por ejemplo la detección de división 
+por cero, o la detección de \emph{carry} u \emph{overflow} en la ALU. Es esta 
+naturaleza asincrónica la que las convierte en otro peligro de control que debe 
+ser tomado en cuenta. Las excepciones tendrán su detección determinada también 
+en alguna etapa del pipeline, pero las fuentes de interrupción externa serán 
+completamente ajenas al funcionamiento interno de la arquitectura; es por esto 
+que la arquitectura deberá proveer hardware específico para detectar las 
+señalizaciones correspondientes y dar lugar al tratamiento de las mismas dentro 
+del ciclo de funcionamiento del hardware.\\
+Nos ocuparemos ahora del tratamiento de estos peligros en el diseño de las 
+arquitecturas.\\
+Una instrucción de salto condicional debe realizar alguna verificación sobre el 
+estado en particular de algún registro o elemento de señalización interno del 
+microprocesador para decidir si debe saltar a la sección de código objetivo o 
+no. Típicamente una instrucción de este tipo tiene dos operandos, la condición, 
+y algún tipo de dato que indique a donde debe saltar la ejecución del programa 
+en el caso asertivo. Si finalmente la evaluación de la condición da como 
+resultado que no debe interrumpirse el flujo normal del programa, la 
+instrucción que deberá ejecutarse es la subsiguiente en memoria de 
+instrucciones. Pero como ya fue discutido, al momento de decidir si saltar o 
+no, es probable que una o más etapas ya estén ocupadas con las instrucciones 
+subsiguientes a la de salto. Si el salto finalmente no es tomado, la solución a 
+este problema es trivial, y no existe peligro, ya que se continúa con la 
+ejecución normal del programa. En cambio, si el salto es tomado debe decidirse 
+que sucede con las instrucciones que ya ingresaron al \emph{pipeline} y no 
+deben ser ejecutadas.\\
+En principio, podría parecer que el esfuerzo de diseño que insumirá implementar 
+soluciones a estos problemas podría ser no justificado. Es por esto que existen 
+estadísticas en las que se miden la cantidad de saltos que realiza un programa 
+promedio y podemos citar como ejemplo CONSEGUIR UN EJEMPLO DE CANTIDAD DE 
+BRANCHES EN UN SOFT.
+
+\subparagraph{Detención del \emph{pipeline}}
+\label{subpar:optimizations-ilp-pipeline-control_dependencies-pipeline_stall}
+
+La solución más básica y rudimentaria a los peligros de control sería detener 
+el procesamiento de instrucciones hasta que el salto sea resuelto ---algo 
+fácilmente implementable introduciendo instrucciones \emph{nop}, es decir 
+\emph{no operation}, que es un tipo especial de instrucción que suele estar 
+provista en todas las arquitecturas con el objetivo de no realizar ningún 
+trabajo--- y recién allí con la dirección de la siguiente instrucción a ejecutar 
+calculada se prosigue a cargar nuevas instrucciones en el \emph{pipeline}. 
+Claramente el problema que intruduce esta técnica es la merma en el rendimiento 
+por consumir ciclos de máquina en no realizar ningún trabajo; pero se trata de 
+una solución muy sencilla de implementar.
+
+\subparagraph{Asumir que los saltos condicionales no son tomados}
+\label{subpar:optimizations-ilp-pipeline-data_dependencies-asume_branch_not_take
+n}
+
+En inglés llamado \emph{assume branch not taken}, se trata de un mecanismo de 
+hardware que descartará el trabajo realizado hasta el momento por las 
+instrucciones ingresadas al \emph{pipeline} posteriores al salto y es una 
+implementación básica y sencilla de una predicción de saltos: El hardware 
+predice que no se va a saltar. El descartar este trabajo puede ser no trivial, 
+dado que dependiendo de la etapa en la que se encuentren las instrucciones 
+pueden haber alterado registros o memoria de datos, cuestiones que deberán ser 
+tenidas en cuenta al momento del diseño de la implementación; es decir, el 
+hardware debe garantizar la correctitudo de los datos contenidos por los 
+registros internos y la memoria al momento de realizar lo que se llama un 
+\emph{flush} o vaciado del \emph{pipeline}.
+
+\subparagraph{Predicción de saltos}
+\label{subpar:optimizations-ilp-pipeline-data_dependencies-branch_prediction}
 
 \subparagraph{Branch delay slot}
 
