@@ -124,17 +124,19 @@ module bkm #(
    //                   |  guard    |  size     |  guard |
    //                   |  bits     |           |  bits  |
    //                   +-----------+-----------+--------+
+   localparam  WI       =                11              ;
    localparam  UGD      =     2                          ;
    localparam  LGD      =                          LOG2W ;
    localparam  UGC      =     3                          ; // TODO: este es 3 o 2??
-   localparam  LGC      =                           1    ;
-   localparam  WI       =                11              ;
+   localparam  LGC      =                           4    ; // log2(WI+4) = log2(11+4) = 3.8.. < 4
    //                   +-----------+-----------+--------+
    localparam  WD       =    UGD    +     W     +  LGD   ;
-   localparam  LOG2WD   =     1     +   LOG2W   +   0    ;
    localparam  WC       =    UGC    +  WI + 4   +  LGC   ;
-   localparam  LOG2WC   =     1     +     4     +   0    ;
    //                   +-----------+-----------+--------+
+
+
+   localparam  LOG2WD   =     1     +   LOG2W;
+   localparam  LOG2WC   =     1     +     4  ;
 
 
    // Input register

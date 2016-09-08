@@ -75,7 +75,7 @@ task dir_test;
 
       //load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.0000,     0.0000);  // 1.0 * exp(0.0)   1.00000000000000
       load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.1000*2,   0.0000);  // 1.0 * exp(0.1)   1.10517091807565
-      //load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.2000*2,   0.0000);  // 1.0 * exp(0.2)   1.22140275816017
+      load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.2000*2,   0.0000);  // 1.0 * exp(0.2)   1.22140275816017
       //load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.3000*2,   0.0000);  // 1.0 * exp(0.3)   1.34985880757600
       //load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.4000*2,   0.0000);  // 1.0 * exp(0.4)   1.49182469764127
       //load_directed( `MODE_E, `FORMAT_CMPLX_DW,     1.00000,     0.00000,     0.5000*2,   0.0000);  // 1.0 * exp(0.5)   1.64872127070013
