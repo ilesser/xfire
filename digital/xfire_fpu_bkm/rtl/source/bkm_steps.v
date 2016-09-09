@@ -186,25 +186,23 @@ module bkm_steps  (
    // -----------------------------------------------------
 
 
-   // TODO: implement JK flop for the ena = f(start, done)
-
-
-   // TODO: this uses a cnt to overflow for the done
+   // -------------------------------------
+   // N counter
+   // -------------------------------------
    always @(posedge clk or posedge arst) begin
       if (arst) begin
          n <= {{LOG2N-1{1'b0}}, 1'b1};
       end
-      else begin
-         if (srst|start) begin
-            n <= {{LOG2N-1{1'b0}}, 1'b1};
-         end
-         else if (enable&~done) begin
-            n <= n + 1;
-         end
+      else if (srst|start) begin
+         n <= {{LOG2N-1{1'b0}}, 1'b1};
+      end
+      else if (enable&~done) begin
+         n <= n + 1;
       end
    end
 
    assign done  = n[LOG2N-1];
+   // -------------------------------------
 
 
    // -------------------------------------
@@ -310,26 +308,24 @@ module bkm_steps  (
          u_n_reg <= {WC{1'b0}};
          v_n_reg <= {WC{1'b0}};
       end
-      else begin
-         if (srst) begin
-            X_n_reg <= {WD{`CSD_0_0}};
-            Y_n_reg <= {WD{`CSD_0_0}};
-            u_n_reg <= {WC{1'b0}};
-            v_n_reg <= {WC{1'b0}};
+      else if (srst) begin
+         X_n_reg <= {WD{`CSD_0_0}};
+         Y_n_reg <= {WD{`CSD_0_0}};
+         u_n_reg <= {WC{1'b0}};
+         v_n_reg <= {WC{1'b0}};
+      end
+      else if (enable) begin
+         if (done == 1'b1) begin
+            X_n_reg <= X_n_reg;
+            Y_n_reg <= Y_n_reg;
+            u_n_reg <= u_n_reg;
+            v_n_reg <= v_n_reg;
          end
-         else if (enable) begin
-            if (done == 1'b1) begin
-               X_n_reg <= X_n_reg;
-               Y_n_reg <= Y_n_reg;
-               u_n_reg <= u_n_reg;
-               v_n_reg <= v_n_reg;
-            end
-            else begin
-               X_n_reg <= X_np1;
-               Y_n_reg <= Y_np1;
-               u_n_reg <= u_np1;
-               v_n_reg <= v_np1;
-            end
+         else begin
+            X_n_reg <= X_np1;
+            Y_n_reg <= Y_np1;
+            u_n_reg <= u_np1;
+            v_n_reg <= v_np1;
          end
       end
    end

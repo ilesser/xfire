@@ -59,8 +59,8 @@ module lut_decoder #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter WD     = 73,
-   parameter WC     = 21,
+   parameter WD     = 72,
+   parameter WC     = 22,
    parameter LOG2N  = 6
 ) (
    // ----------------------------------

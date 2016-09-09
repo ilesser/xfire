@@ -31,11 +31,24 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
+`define W      64
+`define LOG2W   6
 `define WI     11
-`define WD     73
-`define WC     21
+
+`define UGD     2
+`define LGD    `LOG2W
+`define WDI    (`UGD + `WI)
+`define WDF    (`W-`WI+`LGD)
+`define WD     (`WDI + `WDF)
 `define LOG2WD  7
+
+`define UGC     3
+`define LGC     4
+`define WCI    (`UGC + `WI)
+`define WCF    (  4  + `LGD)
+`define WC     (`WCI + `WCF)
 `define LOG2WC  5
+
 `define LOG2N   6
 `define M_SIZE  1
 `define F_SIZE  2

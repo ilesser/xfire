@@ -82,20 +82,24 @@ module lut_decoder_monitor #(
    real           lut_u_frac,    lut_v_frac;
    // -----------------------------------------------------
 
-   assign lut_X_int  =  $signed(lut_X_n_bin[WD-1   :WD-WI]);
-   assign lut_Y_int  =  $signed(lut_Y_n_bin[WD-1   :WD-WI]);
-   assign lut_u_int  =  $signed(lut_u_n_bin[WC-1   :WC-WI]);
-   assign lut_v_int  =  $signed(lut_v_n_bin[WC-1   :WC-WI]);
-   assign lut_X_frac =  $itor(  lut_X_n_bin[WD-WI-1:    0]) / 2.0**(WD-WI);
-   assign lut_Y_frac =  $itor(  lut_Y_n_bin[WD-WI-1:    0]) / 2.0**(WD-WI);
-   assign lut_u_frac =  $itor(  lut_u_n_bin[WC-WI-1:    0]) / 2.0**(WC-WI);
-   assign lut_v_frac =  $itor(  lut_v_n_bin[WC-WI-1:    0]) / 2.0**(WC-WI);
+   //assign lut_X_int  =  $signed(lut_X_n_bin[WD-1   :WD-WI]);
+   //assign lut_Y_int  =  $signed(lut_Y_n_bin[WD-1   :WD-WI]);
+   //assign lut_u_int  =  $signed(lut_u_n_bin[WC-1   :WC-WI]);
+   //assign lut_v_int  =  $signed(lut_v_n_bin[WC-1   :WC-WI]);
+   //assign lut_X_frac =  $itor(  lut_X_n_bin[WD-WI-1:    0]) / 2.0**(WD-WI);
+   //assign lut_Y_frac =  $itor(  lut_Y_n_bin[WD-WI-1:    0]) / 2.0**(WD-WI);
+   //assign lut_u_frac =  $itor(  lut_u_n_bin[WC-WI-1:    0]) / 2.0**(WC-WI);
+   //assign lut_v_frac =  $itor(  lut_v_n_bin[WC-WI-1:    0]) / 2.0**(WC-WI);
 
-   assign res_lut_X_n =  lut_X_int + lut_X_frac;
-   assign res_lut_Y_n =  lut_Y_int + lut_Y_frac;
-   assign res_lut_u_n =  lut_u_int + lut_u_frac;
-   assign res_lut_v_n =  lut_v_int + lut_v_frac;
+   //assign res_lut_X_n =  lut_X_int + lut_X_frac;
+   //assign res_lut_Y_n =  lut_Y_int + lut_Y_frac;
+   //assign res_lut_u_n =  lut_u_int + lut_u_frac;
+   //assign res_lut_v_n =  lut_v_int + lut_v_frac;
 
+   assign res_lut_X_n =     data2real( lut_X_n_bin );
+   assign res_lut_Y_n =     data2real( lut_Y_n_bin );
+   assign res_lut_u_n =  control2real( lut_u_n_bin );
+   assign res_lut_v_n =  control2real( lut_v_n_bin );
 
    csd2bin #(
     // ----------------------------------
