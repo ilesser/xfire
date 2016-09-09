@@ -20,7 +20,7 @@ procesamiento podemos distinguir cuatro componentes:
   \centering
   \input{./figures/C02-sistema_de_procesamiento.tex}
   \captionsetup{justification=centering}
-  \caption{Esquema simplificado de un ``sistema de procesamiento''}
+  \caption{Esquema simplificado de un ``sistema de procesamiento''.}
   \label{fig:C02-sistema_de_procesamiento}
 \end{figure}
 
@@ -200,7 +200,7 @@ argentina es de $30\,\mathrm{GW}$.
   \captionsetup{justification=centering}
   \caption{Primer transistor desarrollado por John Bardeen y Walter 
     Brattain bajo la dirección de William Shockley en los Laboratorios Bell de 
-    AT\&T en el año 1947}.
+    AT\&T en el año 1947.}
   \label{fig:C02-primer_transistor}
 \end{figure}
 
@@ -295,7 +295,7 @@ suplir a la actual. El cumplimiento se ha podido constatar hasta la actualidad.
   \includegraphics[scale=0.5]{./figures/C02-primer_circuito_integrado}
   \captionsetup{justification=centering}
   \caption{Primer circuito integrado presentado por Texas Instruments, Inc. el 
-    12 de Septiembre de 1958}
+    12 de Septiembre de 1958.}
   \label{fig:C02-primer_circuito_integrado}
 \end{figure}
 
@@ -512,7 +512,8 @@ componentes:
   \centering
   \includegraphics[scale=0.25]{./figures/C02-von_neumann_first_draft}
   \captionsetup{justification=centering}
-  \caption{Carátula del escrito de von Neumann First Draft of a Report on the EDVAC}
+  \caption{Carátula del escrito de von Neumann First Draft of a Report on the 
+EDVAC.}
   \label{fig:C02-von_neumann_first_draft}
 \end{figure}
 La memoria almacena tanto números (datos) como órdenes (instrucciones).
@@ -653,7 +654,7 @@ del programa con el principio.\\
   \centering
   \includegraphics[scale=0.05]{./figures/C02-mark_i_instruction_tape}
   \captionsetup{justification=centering}
-  \caption{Cinta de papel perforado con instrucciones de la Mark I}
+  \caption{Cinta de papel perforado con instrucciones de la Mark I.}
   \label{fig:C02-mark_i_instruction_tape}
 \end{figure}
 La Mark I fue sucedida por la Mark II en el año 1948, la Mark III en septiembre
@@ -843,7 +844,7 @@ de instrucciones\\
     Hilo múltiple de datos	& SIMD				& MIMD\\
     \bottomrule
   \end{tabu}
-  \caption{Taxonomía de Flynn}
+  \caption{Taxonomía de Flynn.}
   \label{tbl:flynn_taxonomy}
 \end{table}
 
@@ -899,29 +900,28 @@ actúan sobre diversos DS. Ver figura \ref{subfig:mimd}.\\
 Los procesadores multinúcleo y los sistemas distribuidos son ejemplos de éste 
 tipo de máquinas, y pueden utilizar tanto un espacio de memoria compartido, así 
 como uno distribuído.
-% TODO: Revisar por qué las últimas dos figuras no quedan bien armadas.
 \begin{figure}
   \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-sisd.tex}
-    \caption{SISD}
+    \caption{SISD.}
     \label{subfig:sisd}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-simd.tex}
-    \caption{SIMD}
+    \caption{SIMD.}
     \label{subfig:simd}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-misd.tex}
-    \caption{MISD}
+    \caption{MISD.}
     \label{subfig:misd}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \input{./figures/C02-mimd.tex}
-    \caption{MIMD}
+    \caption{MIMD.}
     \label{subfig:mimd}
   \end{subfigure}
-  \caption{Diagramas de la taxonomía de Flynn}
+  \caption{Diagramas de la taxonomía de Flynn.}
   \label{fig:flynn_taxonomy}
 \end{figure}
 
@@ -1736,46 +1736,94 @@ que sucede con las instrucciones que ya ingresaron al \emph{pipeline} y no
 deben ser ejecutadas.\\
 En principio, podría parecer que el esfuerzo de diseño que insumirá implementar 
 soluciones a estos problemas podría ser no justificado. Es por esto que existen 
-estadísticas en las que se miden la cantidad de saltos que realiza un programa 
+estadísticas en las que se miden la cantidad porcentual de tipos de 
+instrucciones que se ejecutan, en este caso, saltos que realiza un programa 
 promedio y podemos citar como ejemplo CONSEGUIR UN EJEMPLO DE CANTIDAD DE 
 BRANCHES EN UN SOFT.
 
 \subparagraph{Detención del \emph{pipeline}}
 \label{subpar:optimizations-ilp-pipeline-control_dependencies-pipeline_stall}
 
-La solución más básica y rudimentaria a los peligros de control sería detener 
-el procesamiento de instrucciones hasta que el salto sea resuelto ---algo 
-fácilmente implementable introduciendo instrucciones \emph{nop}, es decir 
-\emph{no operation}, que es un tipo especial de instrucción que suele estar 
-provista en todas las arquitecturas con el objetivo de no realizar ningún 
-trabajo--- y recién allí con la dirección de la siguiente instrucción a ejecutar 
-calculada se prosigue a cargar nuevas instrucciones en el \emph{pipeline}. 
-Claramente el problema que intruduce esta técnica es la merma en el rendimiento 
-por consumir ciclos de máquina en no realizar ningún trabajo; pero se trata de 
-una solución muy sencilla de implementar.
-
-\subparagraph{Asumir que los saltos condicionales no son tomados}
-\label{subpar:optimizations-ilp-pipeline-data_dependencies-asume_branch_not_take
-n}
-
-En inglés llamado \emph{assume branch not taken}, se trata de un mecanismo de 
-hardware que descartará el trabajo realizado hasta el momento por las 
-instrucciones ingresadas al \emph{pipeline} posteriores al salto y es una 
-implementación básica y sencilla de una predicción de saltos: El hardware 
-predice que no se va a saltar. El descartar este trabajo puede ser no trivial, 
-dado que dependiendo de la etapa en la que se encuentren las instrucciones 
-pueden haber alterado registros o memoria de datos, cuestiones que deberán ser 
-tenidas en cuenta al momento del diseño de la implementación; es decir, el 
-hardware debe garantizar la correctitudo de los datos contenidos por los 
-registros internos y la memoria al momento de realizar lo que se llama un 
-\emph{flush} o vaciado del \emph{pipeline}.
+A nivel de hardware, la solución más básica y rudimentaria a los peligros de 
+control sería detener el procesamiento de instrucciones hasta que el salto sea 
+resuelto ---algo fácilmente implementable introduciendo instrucciones 
+\emph{nop}, es decir \emph{no operation}, que es un tipo especial de instrucción 
+que suele estar provista en todas las arquitecturas con el objetivo de no 
+realizar ningún trabajo--- y recién allí con la dirección de la siguiente 
+instrucción a ejecutar calculada se prosigue a cargar nuevas instrucciones en el 
+\emph{pipeline}. Claramente el problema que intruduce esta técnica es la merma 
+en el rendimiento por consumir ciclos de máquina en no realizar ningún trabajo; 
+pero se trata de una solución muy sencilla de implementar.
 
 \subparagraph{Predicción de saltos}
 \label{subpar:optimizations-ilp-pipeline-data_dependencies-branch_prediction}
 
-\subparagraph{Branch delay slot}
+Siguiendo con las técnicas implementadas exclusivamente a nivel de hardware, 
+encontramos las técnicas de predicciń de saltos, o en inglés \emph{branch 
+prediction}, surge como una posibilidad de no desaprovechar el trabajo realizado 
+por el \emph{pipeline}, al intentar predecir si se va a saltar o no ante una 
+instrucción de \emph{branch} con el objetivo de instroducir al \emph{pipeline} 
+las instrucciones correspondientes a la predicción. Si la predicción fué 
+erronea, se descartará el trabajo realizado hasta el momento por las 
+instrucciones ingresadas posteriores al salto. El descartar este trabajo puede 
+ser no trivial, dado que dependiendo de la etapa en la que se encuentren las 
+instrucciones pueden haber alterado registros o memoria de datos, cuestiones que 
+deberán ser tenidas en cuenta al momento del diseño de la implementación; es 
+decir, el hardware debe garantizar la correctitud de los datos contenidos por 
+los registros internos y la memoria al momento de realizar lo que se llama un 
+\emph{flush} o vaciado del \emph{pipeline}. Siempre, la idea dentro de este 
+contexto será lograr la predicción durante la primera etapa del 
+\emph{pipeline}, con el objetivo de que en el siguiente ciclo de máquina se 
+obtenga la instrucción del destino predicho. La versión estática más sencilla es 
+asumir que los saltos condicionales no son tomados (en inglés \emph{assume 
+branch not taken}): el hardware predice que no se va a saltar, por lo tanto, al 
+\emph{pipeline} ingresan las instrucciones sucesivas a la instrucción de 
+\emph{branch}, y si finalmente se salta, se procederá al vaciado del 
+\emph{pipeline}.\\
+La predicción dinámica de saltos es más compleja y será muy particular en cada 
+implementación de la arquitectura en cuestión. La implementación más básica 
+utiliza un búfer de predicción o tabla histórica: una pequeña porción de 
+memoria indexada por la parte más baja de la dirección de la instrucción de 
+salto en cuestión contiene un bit de estado que indica si el salto fue tomado o 
+no la última vez que se accedió. La cantidad de filas de esta tabla o 
+búfer será $2^n$ donde $n$ es la cantidad de bits menos significativos tomados 
+de la dirección de las instrucciones de salto, tratandose entonces de un 
+parámetro del diseño, donde se valorará el costo de agregar harware específico 
+para esta tarea. Es el tipo más sencillo de tabla que podemos hallar; no sabemos 
+de hecho si la predicción es correcta o no ---puede haber sido colocada allí por 
+otra instrucción de salto cuya dirección tiene los mismos bits menos 
+significativos--- pero esto no afecta la correctitud. La predicción es sólo una 
+pista que el hardware asumirá correcta, por lo tanto las siguientes 
+instrucciones a cargar en el \emph{pipeline} serán las correspondientes al 
+destino de la misma. Si la predicción resultase incorrecta, se procederá al 
+\emph{flush} y se comezará a cargar el \emph{pipeline} con las instrucciones 
+correctas, al mismo tiempo que se invertirá el bit en la tabla de predicción. 
+Aunque sencilla, esta implementación ---llamada predictor de primer 
+órden--- trae aparejado la incorrectitud de al menos uno pero potencialmente dos 
+predicciónes en cada \emph{loop} de software ---resulta fundamental aclarar que 
+los \emph{loops} son la principal fuente de saltos condicionales en cualquier 
+software. Considérese un \emph{loop} de $n$ iteraciones: al ingresar al mismo, 
+se puede predecir correctamente o no el salto (depende del estado del bit de 
+predicción de la tabla de la última instrucción de salto ubicada allí), luego 
+durante todas las iteraciones intermedias se predecirá correctamente, pero para 
+la última resulta claro que se va a fallar. Es por ello que el siguiente paso es 
+agregar otro bit de estado a la tabla; para cambiar la predicción un salto debe 
+ser predicho dos veces mal. Llamamos a esta solución, predictor de segundo 
+órden. Se logra reducir entonces el impacto de los \emph{loops} en la 
+predicción. La lógica de un predictor de este tipo es sencillamente 
+implementable mediante una máquina de estados. Podemos ver un esquema de un 
+predictor de segundo órden en la figura \ref{fig:C02-second_order_predictor}
 
-\subparagraph{Predicción de saltos}
+\begin{figure}
+  \centering
+  \input{./figures/C02-second_order_predictor.tex}
+  \captionsetup{justification=centering}
+  \caption{Esquema simplificado de un predictor de segundo órden.}
+  \label{fig:C02-second_order_predictor}
+\end{figure}
+
+
+\subparagraph{Branch delay slot}
 
 \paragraph{Dependencias de datos}
 \label{par:optimizations-ilp-pipeline-data_dependencies}
