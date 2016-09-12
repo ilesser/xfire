@@ -1788,7 +1788,7 @@ salto en cuestión contiene un bit de estado que indica si el salto fue tomado o
 no la última vez que se accedió. La cantidad de filas de esta tabla o 
 búfer será $2^n$ donde $n$ es la cantidad de bits menos significativos tomados 
 de la dirección de las instrucciones de salto, tratandose entonces de un 
-parámetro del diseño, donde se valorará el costo de agregar harware específico 
+parámetro del diseño, donde se valorará el costo de agregar hardware específico 
 para esta tarea. Es el tipo más sencillo de tabla que podemos hallar; no sabemos 
 de hecho si la predicción es correcta o no ---puede haber sido colocada allí por 
 otra instrucción de salto cuya dirección tiene los mismos bits menos 
@@ -1851,7 +1851,32 @@ predictores, de la que podemos extraer como conclusión que no se justifica
 utilizar más de 4096 entradas de predictores, por ejemplo, en el caso del 
 predictor global (2,2) utilizar tablas de 1024 entradas indizadas con los 10 
 bits menos significativos de la dirección de la instrucción de salto. Más allá 
-de esa cantidad el predictor deja de sumar eficiencia.
+de esa cantidad, el predictor deja de sumar eficiencia.\\
+La motivación principal para utilizar predictores globales surge del estudio de 
+que los locales de 2 bits fallan en condiciones que se presentan típicamente en 
+el software y se puede lograr mejorar la performance del predictor agregando 
+información global. Los llamados \emph{tournament predictors} logran combinar 
+de forma adaptativa los predictores locales y globales utilizando un sencillo 
+contador saturante de 2 bits (la misma máquina de estados que se utiliza para 
+el predictor de 2 bits) para cada salto, y así poder elegir entre dos diferentes 
+predictores (locales, globales o incluso combinaciones) basándose en cuál fué 
+mas efectivo en las predicciones más recientes. Con éste mecanismo que, aunque 
+complejo en concepto sigue siendo sencillo de implementar a nivel de harwdare, 
+se logra mejorar aún más la precisión de los mecanismos de predicción, elevando 
+a su vez la cota de 4096 entradas. Estudios estadísticos demuestran que la 
+eficiencia máxima de estos predictores se encuentra utilizando entre 8096 y 
+32768 entradas. Las mediciones estadísticas también las encontramos en la cita 
+\cite[sección, 3.3]{caaqa}.\\
+Para poder implementar eficientemente cualquiera de estas técnicas de 
+predicción de saltos, debemos además considerar el cálculo eficiente de la 
+próxima dirección de instrucción a introducir en el \emph{pipeline} dada la 
+predicción. La estructura de hardware que dará soporte físico a esta 
+problemática se llama en inglés \emph{branch target buffer}, es decir búfer de 
+destino de los saltos. Se trata de una tabla que tendrá tres entradas y será 
+indizada por bits menos significativos de la dirección de la instrucción de 
+salto en cuestión. Las tres entradas serán: la dirección de la instrucción de 
+salto, un bit de validez y la dirección predicha. En sí, se trata de un caché 
+de predicciónes. AGREGAR IMAGEN EXPLICANDO EL BTB.
 
 \subparagraph{Branch delay slot}
 
