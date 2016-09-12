@@ -1828,7 +1828,7 @@ desplazamiento: cada vez que se toma o no un salto se ingresa esa información
 en el registro de desplazamiento de $m$ bits, que indiza cuál de las tablas de 
 de $n$ bits debe utilizarse para predecir y luego actualizarse. En la figura 
 \ref{fig:C02-global_predictor_2_2} podemos ver un esquema de un predictor de 
-tal tipo.\\
+tal tipo.
 \begin{figure}
   \centering
   \resizebox{\textwidth}{!}{\input{./figures/C02-second_order_predictor.tex}}
@@ -1843,8 +1843,15 @@ tal tipo.\\
   \caption{Esquema simplificado de un predictor global (2,2).}
   \label{fig:C02-global_predictor_2_2}
 \end{figure}
-HABLAR SOBRE EL LÍMITE ESTADÍSTICO DE 4KB
-
+Estudios estadísticos demuestran que con predictores globales se mejora la 
+tasa de acierto de predicciones. Citando \cite[sección, 3.3]{caaqa} 
+podemos ver los resultados de distintas pruebas del \emph{benchmark} 
+SPEC98\footnote{SPEC98: Explicar} comparando la tasa de acierto de distintos 
+predictores, de la que podemos extraer como conclusión que no se justifica 
+utilizar más de 4096 entradas de predictores, por ejemplo, en el caso del 
+predictor global (2,2) utilizar tablas de 1024 entradas indizadas con los 10 
+bits menos significativos de la dirección de la instrucción de salto. Más allá 
+de esa cantidad el predictor deja de sumar eficiencia.
 
 \subparagraph{Branch delay slot}
 
