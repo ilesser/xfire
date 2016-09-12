@@ -1813,13 +1813,6 @@ segundo órden. Se logra reducir entonces el impacto de los \emph{loops} en la
 predicción. La lógica de un predictor de este tipo es sencillamente 
 implementable mediante una máquina de estados. Podemos ver un esquema de un 
 predictor de segundo órden en la figura \ref{fig:C02-second_order_predictor}.\\
-\begin{figure}
-  \centering
-  \input{./figures/C02-second_order_predictor.tex}
-  \captionsetup{justification=centering}
-  \caption{Esquema simplificado de un predictor de segundo órden.}
-  \label{fig:C02-second_order_predictor}
-\end{figure}
 Configuraciones más avanzadas, utilizan técnicas de predicción estadísticas, 
 llamados predictores correlacionadores o globales o de dos niveles. Estos 
 enfoques basan su principio de funcionamiento en la relación que puede existir 
@@ -1830,7 +1823,27 @@ predictor} como un binomio $(m,n)$, tal predictor utiliza el comportamiento de
 los últimos $m$ saltos para elegir entre $2^{m}$ predictores, cada uno de los 
 cuales es un predictor de $n$ bits, consecuentemente utilizando la historia de 
 saltos que acumula el software en ejecución con el objetivo de mejorar la 
-predicción. EXPLICAR COMO FUNCIONAN
+predicción. El selector es sencillo de implementar con un registro de 
+desplazamiento: cada vez que se toma o no un salto se ingresa esa información 
+en el registro de desplazamiento de $m$ bits, que indiza cuál de las tablas de 
+de $n$ bits debe utilizarse para predecir y luego actualizarse. En la figura 
+\ref{fig:C02-global_predictor_2_2} podemos ver un esquema de un predictor de 
+tal tipo.\\
+\begin{figure}
+  \centering
+  \resizebox{\textwidth}{!}{\input{./figures/C02-second_order_predictor.tex}}
+  \captionsetup{justification=centering}
+  \caption{Esquema simplificado de un predictor de segundo órden.}
+  \label{fig:C02-second_order_predictor}
+\end{figure}
+\begin{figure}
+  \centering
+  \resizebox{\textwidth}{!}{\input{./figures/C02-global_predictor_2_2.tex}}
+  \captionsetup{justification=centering}
+  \caption{Esquema simplificado de un predictor global (2,2).}
+  \label{fig:C02-global_predictor_2_2}
+\end{figure}
+HABLAR SOBRE EL LÍMITE ESTADÍSTICO DE 4KB
 
 
 \subparagraph{Branch delay slot}
