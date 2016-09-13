@@ -1872,11 +1872,20 @@ predicción de saltos, debemos además considerar el cálculo eficiente de la
 próxima dirección de instrucción a introducir en el \emph{pipeline} dada la 
 predicción. La estructura de hardware que dará soporte físico a esta 
 problemática se llama en inglés \emph{branch target buffer}, es decir búfer de 
-destino de los saltos. Se trata de una tabla que tendrá tres entradas y será 
+predicción de saltos. Se trata de una tabla que tendrá tres entradas y será 
 indizada por bits menos significativos de la dirección de la instrucción de 
 salto en cuestión. Las tres entradas serán: la dirección de la instrucción de 
 salto, un bit de validez y la dirección predicha. En sí, se trata de un caché 
-de predicciónes. AGREGAR IMAGEN EXPLICANDO EL BTB.
+de predicciónes. En la figura \ref{fig:C02-btb} podemos visualizar gráficamente 
+el esquema de una implementación de un \emph{branch target buffer}.
+\begin{figure}
+  \centering
+  \resizebox{\textwidth}{!}{\input{./figures/C02-btb.tex}}
+  \captionsetup{justification=centering}
+  \caption{Esquema simplificado de un búfer de 
+predicción de saltos.}
+  \label{fig:C02-btb}
+\end{figure}
 
 \subparagraph{Branch delay slot}
 
