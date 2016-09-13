@@ -1,0 +1,19 @@
+\section{Peripherals}
+\label{sec:peripherals}
+Comunication with peripherals is achieved through interruptions and four special porpouse registers: PWD, PRD, PWA, and PRA.
+
+Whenever a peripheral should be written the sequence that must be followed is:
+\begin{itemize}
+ \item PWA must be set using \emph{movi2s} with the peripheral address.
+ \item PWD must be set using \emph{movi2s} instruction to copy the information from one of the GPR's. Automatically,
+       a strobe is generated on the \emph{pwd\_wr\_ena} output pin signaling the writting operation.
+\end{itemize}
+
+Whenever a peripheral should be read the sequence that must be followed is:
+\begin{itemize}
+ \item PRA must be set by external hardware.
+ \item PRD must be set by external hardware.
+ \item The \emph{irq} line is raised.
+\end{itemize}
+Since the system is synchronous with the CPU clock, the three events avobe can happen at the same time (i.e. in the
+same clock cycle).
