@@ -80,6 +80,7 @@ task dir_test;
             // Increase just the d_n variable
             cnt_load = cnt_load + 1;
          end
+         // Change the mode
          cnt_load = cnt_load + {1'b1, {`CNT_SIZE-1{1'b0}}};
       end
 

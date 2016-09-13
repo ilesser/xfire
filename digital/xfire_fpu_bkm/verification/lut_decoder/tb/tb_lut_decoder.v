@@ -45,7 +45,7 @@
 `define UGC     3
 `define LGC     4
 `define WCI    (`UGC + `WI)
-`define WCF    (  4  + `LGD)
+`define WCF    (  4  + `LGC)
 `define WC     (`WCI + `WCF)
 `define LOG2WC  5
 

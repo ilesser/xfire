@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------
 //
-// BKM LUT automatically generated on 08:41:59 PM (ART) Thursday  8 September 2016
+// BKM LUT automatically generated on 11:23:34 AM (ART) Tuesday 13 September 2016
 // using the bkm_lut.m function. Version = 1.2, from Saturday 08 September 2016.
 // Parameters:
 // Number of steps of the algorithm:            N     = 64
