@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-09-05 - ilesser - Fixes bug #15.
 //    - 2016-09-05 - ilesser - Changed bkm_step_task inputs to real type.
 //    - 2016-08-15 - ilesser - Initial version.
@@ -163,8 +164,8 @@ task bkm_step;
          v_n_plus_d_v_n_r        = v_n + dv;
          v_n_times_d_n_r         = (du * v_n + dv * u_n);
 
-         u_n_times_d_n_div_2_n_r = $rtoi( u_n_times_d_n_r / 2.0**n);
-         v_n_times_d_n_div_2_n_r = $rtoi( v_n_times_d_n_r / 2.0**n);
+         u_n_times_d_n_div_2_n_r = u_n_times_d_n_r / 2.0**n;
+         v_n_times_d_n_div_2_n_r = v_n_times_d_n_r / 2.0**n;
 
 
          if (complex==1'b1) begin

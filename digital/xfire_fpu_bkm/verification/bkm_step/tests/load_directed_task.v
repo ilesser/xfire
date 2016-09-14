@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-08-11 - ilesser - Updated for WD and WC.
 //    - 2016-07-13 - ilesser - Initial version.
 //
@@ -44,14 +45,14 @@ task load_directed;
    input [`LOG2N-1:0] n;
    input [1:0]        d_x_n;
    input [1:0]        d_y_n;
-   input [`WD-1:0]    X_n;
-   input [`WD-1:0]    Y_n;
-   input [`WC-1:0]    u_n;
-   input [`WC-1:0]    v_n;
-   input [`WD-1:0]    lut_X_n;
-   input [`WD-1:0]    lut_Y_n;
-   input [`WC-1:0]    lut_u_n;
-   input [`WC-1:0]    lut_v_n;
+   input real         X_n;
+   input real         Y_n;
+   input real         u_n;
+   input real         v_n;
+   input real         lut_X_n;
+   input real         lut_Y_n;
+   input real         lut_u_n;
+   input real         lut_v_n;
    // ----------------------------------
 
 // *****************************************************************************
@@ -63,26 +64,46 @@ task load_directed;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   reg   [`CNT_SIZE-1:0] dir_cnt;
    // -----------------------------------------------------
 
    begin
 
-      dir_cnt[`CNT_SIZE-1]                               =    mode   ;
-      dir_cnt[`CNT_SIZE-2              :`CNT_SIZE-3]     =    format ;
-      dir_cnt[4*`WC+4*`WD+4+`LOG2N-1   :4*`WC+4*`WD+4]   =    n      ;
-      dir_cnt[4*`WC+4*`WD+3            :4*`WC+4*`WD+2]   =    d_x_n  ;
-      dir_cnt[4*`WC+4*`WD+1            :4*`WC+4*`WD+0]   =    d_y_n  ;
-      dir_cnt[4*`WC+4*`WD-1            :4*`WC+3*`WD]     =    X_n    ;
-      dir_cnt[4*`WC+3*`WD-1            :4*`WC+2*`WD]     =    Y_n    ;
-      dir_cnt[4*`WC+2*`WD-1            :3*`WC+2*`WD]     =    u_n    ;
-      dir_cnt[3*`WC+2*`WD-1            :2*`WC+2*`WD]     =    v_n    ;
-      dir_cnt[2*`WC+2*`WD-1            :2*`WC+1*`WD]     =    lut_X_n;
-      dir_cnt[2*`WC+1*`WD-1            :2*`WC]           =    lut_Y_n;
-      dir_cnt[2*`WC-1                  :1*`WC]           =    lut_u_n;
-      dir_cnt[1*`WC-1                  :0*`WC]           =    lut_v_n;
+      // Apply values to testbench
+      tb_mode     = mode   ;
+      tb_format   = format ;
+      tb_n        = n      ;
+      tb_d_x_n    = d_x_n  ;
+      tb_d_y_n    = d_y_n  ;
+      tb_X_n      = X_n    ;
+      tb_Y_n      = Y_n    ;
+      tb_u_n      = u_n    ;
+      tb_v_n      = v_n    ;
+      tb_lut_X_n  = lut_X_n;
+      tb_lut_Y_n  = lut_Y_n;
+      tb_lut_u_n  = lut_u_n;
+      tb_lut_v_n  = lut_v_n;
 
-      load_operands(dir_cnt);
+      // Calculate the results
+      bkm_step (
+         // ----------------------------------
+         // Data inputs
+         // ----------------------------------
+         tb_mode,
+         tb_format,
+         tb_n,
+         tb_d_x_n,   tb_d_y_n,
+         tb_X_n,     tb_Y_n,
+         tb_u_n,     tb_v_n,
+         tb_lut_X_n, tb_lut_Y_n,
+         tb_lut_u_n, tb_lut_v_n,
+         // ----------------------------------
+         // Data outputs
+         // ----------------------------------
+         tb_X_np1,   tb_Y_np1,
+         tb_u_np1,   tb_v_np1
+      );
+
+      run_clk(1);
 
    end
 
