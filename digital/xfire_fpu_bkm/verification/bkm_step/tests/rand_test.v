@@ -79,7 +79,7 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**10) begin
+      repeat(2**14) begin
 
          rand_mode      = constrained_rand_int(0, 1);
          rand_format    = constrained_rand_int(0, 3);
@@ -88,29 +88,26 @@ task rand_test;
          rand_d_y_n     = constrained_rand_int(0, 3);
 
 
-         rand_X_n       = constrained_rand_real( -2.0,  2.0);
+         // Limit the input range to [-2; 2]
+         //rand_X_n       = constrained_rand_real( -2.0,  2.0);
          //rand_Y_n       = constrained_rand_real( -2.0,  2.0);
-         rand_Y_n = 0.0;
-         rand_lut_X_n   = constrained_rand_real( -2.0,  2.0);
+         //rand_lut_X_n   = constrained_rand_real( -2.0,  2.0);
          //rand_lut_Y_n   = constrained_rand_real( -2.0,  2.0);
-         rand_lut_Y_n = 0.0;
-         rand_u_n       = constrained_rand_real( -2.0,  2.0);
+         //rand_u_n       = constrained_rand_real( -2.0,  2.0);
          //rand_v_n       = constrained_rand_real( -2.0,  2.0);
-         rand_v_n = 0.0;
-         rand_lut_u_n   = constrained_rand_real( -2.0,  2.0);
+         //rand_lut_u_n   = constrained_rand_real( -2.0,  2.0);
          //rand_lut_v_n   = constrained_rand_real( -2.0,  2.0);
-         rand_lut_v_n = 0.0;
 
          // Limit the input range so that it uses only WI integer bits
-         //rand_X_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
-         //rand_Y_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
-         //rand_lut_X_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
-         //rand_lut_Y_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_X_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_Y_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_lut_X_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_lut_Y_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
          // Limit the input range so that it uses only WI integer bits
-         //rand_u_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
-         //rand_v_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
-         //rand_lut_u_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
-         //rand_lut_v_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_u_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_v_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_lut_u_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         rand_lut_v_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
 
          rand_mode      = `MODE_E;
          rand_format    = `FORMAT_CMPLX_DW;
