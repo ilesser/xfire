@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-08-22 - ilesser - Added min/max deltas as out ports.
 //    - 2016-08-15 - ilesser - Added LOG2N parameter to checkers.
 //    - 2016-08-15 - ilesser - Changed outputs to wires.
@@ -60,18 +61,18 @@ module bkm_step_checker #(
    input wire  [LOG2N-1:0]  tb_n,
    input wire  [1:0]        tb_d_x_n,
    input wire  [1:0]        tb_d_y_n,
-   input wire  [WC-1:0]     tb_u_n,
-   input wire  [WC-1:0]     tb_v_n,
-   input wire  [WC-1:0]     tb_u_np1,
-   input wire  [WC-1:0]     tb_v_np1,
-   input wire  [WC-1:0]     res_u_np1,
-   input wire  [WC-1:0]     res_v_np1,
-   input wire  [WD-1:0]     tb_X_n,
-   input wire  [WD-1:0]     tb_Y_n,
-   input wire  [WD-1:0]     tb_X_np1,
-   input wire  [WD-1:0]     tb_Y_np1,
-   input wire  [WD-1:0]     res_X_np1,
-   input wire  [WD-1:0]     res_Y_np1,
+   input real               tb_u_n,
+   input real               tb_v_n,
+   input real               tb_u_np1,
+   input real               tb_v_np1,
+   input real               res_u_np1,
+   input real               res_v_np1,
+   input real               tb_X_n,
+   input real               tb_Y_n,
+   input real               tb_X_np1,
+   input real               tb_Y_np1,
+   input real               res_X_np1,
+   input real               res_Y_np1,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
@@ -79,22 +80,22 @@ module bkm_step_checker #(
    output wire               war_v,
    output wire               err_u,
    output wire               err_v,
-   output wire  [WC-1:0]     delta_u,
-   output wire  [WC-1:0]     delta_v,
-   output reg   [WC-1:0]     min_delta_u,
-   output reg   [WC-1:0]     min_delta_v,
-   output reg   [WC-1:0]     max_delta_u,
-   output reg   [WC-1:0]     max_delta_v,
+   output real               delta_u,
+   output real               delta_v,
+   output real               min_delta_u,
+   output real               min_delta_v,
+   output real               max_delta_u,
+   output real               max_delta_v,
    output wire               war_X,
    output wire               war_Y,
    output wire               err_X,
    output wire               err_Y,
-   output wire  [WD-1:0]     delta_X,
-   output wire  [WD-1:0]     delta_Y,
-   output reg   [WD-1:0]     min_delta_X,
-   output reg   [WD-1:0]     min_delta_Y,
-   output reg   [WD-1:0]     max_delta_X,
-   output reg   [WD-1:0]     max_delta_Y
+   output real               delta_X,
+   output real               delta_Y,
+   output real               min_delta_X,
+   output real               min_delta_Y,
+   output real               max_delta_X,
+   output real               max_delta_Y
    );
 // *****************************************************************************
 
@@ -126,63 +127,63 @@ module bkm_step_checker #(
 
    always @(posedge clk or posedge arst) begin
       if (arst==1'b1) begin
-         max_delta_X <= {WD{1'b0}};
-         min_delta_X <= {WD{1'b0}};
-         max_delta_Y <= {WD{1'b0}};
-         min_delta_Y <= {WD{1'b0}};
-         max_delta_u <= {WC{1'b0}};
-         min_delta_u <= {WC{1'b0}};
-         max_delta_v <= {WC{1'b0}};
-         min_delta_v <= {WC{1'b0}};
+         max_delta_X <= 0.0;
+         min_delta_X <= 0.0;
+         max_delta_Y <= 0.0;
+         min_delta_Y <= 0.0;
+         max_delta_u <= 0.0;
+         min_delta_u <= 0.0;
+         max_delta_v <= 0.0;
+         min_delta_v <= 0.0;
       end
       else begin
          if (srst==1'b1) begin
-            max_delta_X <= {WD{1'b0}};
-            min_delta_X <= {WD{1'b0}};
-            max_delta_Y <= {WD{1'b0}};
-            min_delta_Y <= {WD{1'b0}};
-            max_delta_u <= {WC{1'b0}};
-            min_delta_u <= {WC{1'b0}};
-            max_delta_v <= {WC{1'b0}};
-            min_delta_v <= {WC{1'b0}};
+            max_delta_X <= 0.0;
+            min_delta_X <= 0.0;
+            max_delta_Y <= 0.0;
+            min_delta_Y <= 0.0;
+            max_delta_u <= 0.0;
+            min_delta_u <= 0.0;
+            max_delta_v <= 0.0;
+            min_delta_v <= 0.0;
          end
          else if (enable==1'b1) begin
-            if ( $signed(delta_X) > $signed(max_delta_X) )
+            if ( delta_X > max_delta_X )
                max_delta_X <= delta_X;
             else
                max_delta_X <= max_delta_X;
 
-            if ( $signed(delta_X) < $signed(min_delta_X) )
+            if ( delta_X < min_delta_X )
                min_delta_X <= delta_X;
             else
                min_delta_X <= min_delta_X;
 
-            if ( $signed(delta_Y) < $signed(min_delta_Y) )
+            if ( delta_Y < min_delta_Y )
                max_delta_Y <= delta_Y;
             else
                max_delta_Y <= max_delta_Y;
 
-            if ( $signed(delta_Y) < $signed(min_delta_Y) )
+            if ( delta_Y < min_delta_Y )
                min_delta_Y <= delta_Y;
             else
                min_delta_Y <= min_delta_Y;
 
-            if ( $signed(delta_u) < $signed(min_delta_u) )
+            if ( delta_u < min_delta_u )
                max_delta_u <= delta_u;
             else
                max_delta_u <= max_delta_u;
 
-            if ( $signed(delta_u) < $signed(min_delta_u) )
+            if ( delta_u < min_delta_u )
                min_delta_u <= delta_u;
             else
                min_delta_u <= min_delta_u;
 
-            if ( $signed(delta_v) < $signed(min_delta_v) )
+            if ( delta_v < min_delta_v )
                max_delta_v <= delta_v;
             else
                max_delta_v <= max_delta_v;
 
-            if ( $signed(delta_v) < $signed(min_delta_v) )
+            if ( delta_v < min_delta_v )
                min_delta_v <= delta_v;
             else
                min_delta_v <= min_delta_v;

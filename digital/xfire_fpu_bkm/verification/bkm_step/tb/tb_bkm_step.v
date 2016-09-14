@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-13 - ilesser - Implemented real number model.
 //    - 2016-09-05 - ilesser - Added parenthesis to parameters.
 //    - 2016-08-22 - ilesser - Added guard bits.
 //    - 2016-08-22 - ilesser - Added min/max deltas to tb.
@@ -35,20 +36,30 @@
 
 `define SIM_CLK_PERIOD_NS 10
 `timescale 1ns/1ps
-`define N      32
-`define LOG2N   5
-`define W      32
-`define LOG2W   5
-`define GD      1
-`define GC      2
-`define WD     (`W+`GD)
-`define WC     (`W/4+`GC)
-`define LOG2WD (`LOG2W+1)
-`define LOG2WC (`LOG2W-2+1)
+`define N      64
+`define LOG2N   6
+`define W      64
+`define LOG2W   6
+`define WI     11
+
+`define UGD     2
+`define LGD    `LOG2W
+`define WDI    (`UGD   + `WI )
+`define WDF    (`W-`WI + `LGD)
+`define WD     (`WDI   + `WDF)
+`define LOG2WD  7
+
+`define UGC     3
+`define LGC     4
+`define WCI    (`UGC   + `WI )
+`define WCF    (  4    + `LGC)
+`define WC     (`WCI   + `WCF)
+`define LOG2WC  5
+
 `define M_SIZE  1
 `define F_SIZE  2
 `define D_SIZE  2
-`define CNT_SIZE `M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`WC)+4*(`WD)
+`define CNT_SIZE (`M_SIZE+`F_SIZE+`D_SIZE+`D_SIZE+`LOG2N+4*(`WC)+4*(`WD))
 
 `include "/home/ilesser/simlib/simlib_defs.vh"
 
@@ -75,14 +86,12 @@ module tb_bkm_step ();
    reg   [1:0]             tb_format;
    reg   [`LOG2N-1:0]      tb_n;
    reg   [1:0]             tb_d_x_n,      tb_d_y_n;
-   reg   [`WD-1:0]         tb_X_n,        tb_Y_n;
-   reg   [`WD-1:0]         tb_lut_X_n,    tb_lut_Y_n;
-   reg   [`WD-1:0]         tb_X_np1,      tb_Y_np1;
-   wire  [`WD-1:0]         delta_X,       delta_Y;
-   reg   [`WC-1:0]         tb_u_n,        tb_v_n;
-   reg   [`WC-1:0]         tb_lut_u_n,    tb_lut_v_n;
-   reg   [`WC-1:0]         tb_u_np1,      tb_v_np1;
-   wire  [`WC-1:0]         delta_u,       delta_v;
+   real                    tb_X_n,        tb_Y_n;
+   real                    tb_lut_X_n,    tb_lut_Y_n;
+   real                    tb_X_np1,      tb_Y_np1;
+   real                    tb_u_n,        tb_v_n;
+   real                    tb_lut_u_n,    tb_lut_v_n;
+   real                    tb_u_np1,      tb_v_np1;
    reg   [`CNT_SIZE-1:0]   cnt, cnt_load, cnt_step;
    // -----------------------------------------------------
 
@@ -92,12 +101,18 @@ module tb_bkm_step ();
    wire  [2*`WD-1:0]       X_n_csd,       Y_n_csd;
    wire  [2*`WD-1:0]       X_np1_csd,     Y_np1_csd;
    wire  [2*`WD-1:0]       lut_X_n_csd,   lut_Y_n_csd;
-   wire  [`WD-1:0]         res_X_np1,     res_Y_np1;
-   wire  [`WC-1:0]         res_u_np1,     res_v_np1;
-   wire  [`WD-1:0]         min_delta_X,   min_delta_Y;
-   wire  [`WD-1:0]         max_delta_X,   max_delta_Y;
-   wire  [`WC-1:0]         min_delta_u,   min_delta_v;
-   wire  [`WC-1:0]         max_delta_u,   max_delta_v;
+   real                    res_X_np1,     res_Y_np1;
+   real                    delta_X,       delta_Y;
+   real                    min_delta_X,   min_delta_Y;
+   real                    max_delta_X,   max_delta_Y;
+
+   wire  [`WC-1:0]         u_n_bin,       v_n_bin;
+   wire  [`WC-1:0]         u_np1_bin,     v_np1_bin;
+   wire  [`WC-1:0]         lut_u_n_bin,   lut_v_n_bin;
+   real                    res_u_np1,     res_v_np1;
+   real                    delta_u,       delta_v;
+   real                    min_delta_u,   min_delta_v;
+   real                    max_delta_u,   max_delta_v;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -134,7 +149,9 @@ module tb_bkm_step ();
    // Drivers
    // -----------------------------------------------------
    bkm_step_driver #(
-      .WD         (`WD)
+      .CNT        (`CNT_SIZE),
+      .WD         (`WD),
+      .WC         (`WC)
    ) duv_driver (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -148,15 +165,23 @@ module tb_bkm_step ();
       // ----------------------------------
       .tb_X_n     (tb_X_n),
       .tb_Y_n     (tb_Y_n),
-      .tb_lut_X   (tb_lut_X_n),
-      .tb_lut_Y   (tb_lut_Y_n),
+      .tb_u_n     (tb_u_n),
+      .tb_v_n     (tb_v_n),
+      .tb_lut_X_n (tb_lut_X_n),
+      .tb_lut_Y_n (tb_lut_Y_n),
+      .tb_lut_u_n (tb_lut_u_n),
+      .tb_lut_v_n (tb_lut_v_n),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
       .X_n_csd    (X_n_csd),
       .Y_n_csd    (Y_n_csd),
-      .lut_X_csd  (lut_X_n_csd),
-      .lut_Y_csd  (lut_Y_n_csd)
+      .u_n_bin    (u_n_bin),
+      .v_n_bin    (v_n_bin),
+      .lut_X_n_csd(lut_X_n_csd),
+      .lut_Y_n_csd(lut_Y_n_csd),
+      .lut_u_n_bin(lut_u_n_bin),
+      .lut_v_n_bin(lut_v_n_bin)
    );
    // -----------------------------------------------------
 
@@ -164,7 +189,8 @@ module tb_bkm_step ();
    // Monitors
    // -----------------------------------------------------
    bkm_step_monitor #(
-      .WD         (`WD)
+      .WD         (`WD),
+      .WC         (`WC)
    ) duv_monitor (
       // ----------------------------------
       // Clock, reset & enable inputs
@@ -178,18 +204,24 @@ module tb_bkm_step ();
       // ----------------------------------
       .X_np1_csd  (X_np1_csd),
       .Y_np1_csd  (Y_np1_csd),
+      .u_np1_bin  (u_np1_bin),
+      .v_np1_bin  (v_np1_bin),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
       .res_X_np1  (res_X_np1),
-      .res_Y_np1  (res_Y_np1)
+      .res_Y_np1  (res_Y_np1),
+      .res_u_np1  (res_u_np1),
+      .res_v_np1  (res_v_np1)
    );
 
-   // Uncomment these lines to add waveforms to iverilog simulation
-   //initial begin
-      //$dumpfile("../waves/tb_bkm_step.vcd");
-      //$dumpvars();
-   //end
+   // Dump waveforms from testbench if using iverilog
+   `ifdef IVERILOG
+      initial begin
+         $dumpfile("../waves/tb_bkm_steps.vcd");
+         $dumpvars();
+      end
+   `endif
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -282,17 +314,17 @@ module tb_bkm_step ();
       .Y_n        (Y_n_csd),
       .lut_X      (lut_X_n_csd),
       .lut_Y      (lut_Y_n_csd),
-      .u_n        (tb_u_n),
-      .v_n        (tb_v_n),
-      .lut_u      (tb_lut_u_n),
-      .lut_v      (tb_lut_v_n),
+      .u_n        (u_n_bin),
+      .v_n        (v_n_bin),
+      .lut_u      (lut_u_n_bin),
+      .lut_v      (lut_v_n_bin),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
       .X_np1      (X_np1_csd),
       .Y_np1      (Y_np1_csd),
-      .u_np1      (res_u_np1),
-      .v_np1      (res_v_np1)
+      .u_np1      (u_np1_bin),
+      .v_np1      (v_np1_bin)
    );
    // -----------------------------------------------------
 

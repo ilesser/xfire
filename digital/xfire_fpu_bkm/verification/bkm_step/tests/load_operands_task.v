@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-09-05 - ilesser - Changed bkm_step_task inputs to real type.
 //    - 2016-08-15 - ilesser - Changed architecture. Now I have a task that calculates a single step.
 //    - 2016-08-11 - ilesser - Updated for WD and WC.
@@ -53,52 +54,40 @@ task load_operands;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   real  X_n,                       Y_n;
-   real  X_np1,                     Y_np1;
-   real  lut_X_n,                   lut_Y_n;
-   real  u_n,                       v_n;
-   real  u_np1,                     v_np1;
-   real  lut_u_n,                   lut_v_n;
+   reg   [`WD-1:0]   X_n_bin,       Y_n_bin;
+   reg   [`WD-1:0]   lut_X_n_bin,   lut_Y_n_bin;
+   reg   [`WC-1:0]   u_n_bin,       v_n_bin;
+   reg   [`WC-1:0]   lut_u_n_bin,   lut_v_n_bin;
    // -----------------------------------------------------
 
    begin
 
       // Apply values to testbench
 
-      tb_mode     = cnt[`CNT_SIZE-1];
-      tb_format   = cnt[`CNT_SIZE-2:`CNT_SIZE-3];
-      tb_n        = cnt[4*`WC+4*`WD+4+`LOG2N-1  :4*`WC+4*`WD+4];
-      tb_d_x_n    = cnt[4*`WC+4*`WD+3           :4*`WC+4*`WD+2];
-      tb_d_y_n    = cnt[4*`WC+4*`WD+1           :4*`WC+4*`WD+0];
-      tb_X_n      = cnt[4*`WC+4*`WD-1           :4*`WC+3*`WD];
-      tb_Y_n      = cnt[4*`WC+3*`WD-1           :4*`WC+2*`WD];
-      tb_u_n      = cnt[4*`WC+2*`WD-1           :3*`WC+2*`WD];
-      tb_v_n      = cnt[3*`WC+2*`WD-1           :2*`WC+2*`WD];
-      tb_lut_X_n  = cnt[2*`WC+2*`WD-1           :2*`WC+1*`WD];
-      tb_lut_Y_n  = cnt[2*`WC+1*`WD-1           :2*`WC];
-      tb_lut_u_n  = cnt[2*`WC-1                 :1*`WC];
-      tb_lut_v_n  = cnt[1*`WC-1                 :0*`WC];
+      tb_mode     = cnt[`CNT_SIZE-1                               ];
+      tb_format   = cnt[`CNT_SIZE-2          :`CNT_SIZE-3         ];
 
-      if (tb_format[0]==1'b1) begin
-         X_n      = $itor($signed(tb_X_n    ));
-         Y_n      = $itor($signed(tb_Y_n    ));
-         lut_X_n  = $itor($signed(tb_lut_X_n));
-         lut_Y_n  = $itor($signed(tb_lut_Y_n));
-         u_n      = $itor($signed(tb_u_n    ));
-         v_n      = $itor($signed(tb_v_n    ));
-         lut_u_n  = $itor($signed(tb_lut_u_n));
-         lut_v_n  = $itor($signed(tb_lut_v_n));
-      end
-      else begin
-         X_n      = $itor($signed(tb_X_n     [`WD/2-1:0]));
-         Y_n      = $itor($signed(tb_Y_n     [`WD/2-1:0]));
-         lut_X_n  = $itor($signed(tb_lut_X_n [`WD/2-1:0]));
-         lut_Y_n  = $itor($signed(tb_lut_Y_n [`WD/2-1:0]));
-         u_n      = $itor($signed(tb_u_n     [`WC/2-1:0]));
-         v_n      = $itor($signed(tb_v_n     [`WC/2-1:0]));
-         lut_u_n  = $itor($signed(tb_lut_u_n [`WC/2-1:0]));
-         lut_v_n  = $itor($signed(tb_lut_v_n [`WC/2-1:0]));
-      end // if
+      tb_n        = cnt[`CNT_SIZE-4          :`CNT_SIZE-5-`LOG2N  ];
+      tb_d_x_n    = cnt[`CNT_SIZE-6-`LOG2N   :`CNT_SIZE-7-`LOG2N  ];
+      tb_d_y_n    = cnt[`CNT_SIZE-8-`LOG2N   :`CNT_SIZE-9-`LOG2N  ];
+
+      X_n_bin     = cnt[4*`WC+4*`WD-1           :4*`WC+3*`WD];
+      Y_n_bin     = cnt[4*`WC+3*`WD-1           :4*`WC+2*`WD];
+      u_n_bin     = cnt[4*`WC+2*`WD-1           :3*`WC+2*`WD];
+      v_n_bin     = cnt[3*`WC+2*`WD-1           :2*`WC+2*`WD];
+      lut_X_n_bin = cnt[2*`WC+2*`WD-1           :2*`WC+1*`WD];
+      lut_Y_n_bin = cnt[2*`WC+1*`WD-1           :2*`WC      ];
+      lut_u_n_bin = cnt[2*`WC-1                 :1*`WC      ];
+      lut_v_n_bin = cnt[1*`WC-1                 :0*`WC      ];
+
+      tb_X_n      = data2real   (X_n_bin     );
+      tb_Y_n      = data2real   (Y_n_bin     );
+      tb_u_n      = control2real(u_n_bin     );
+      tb_v_n      = control2real(v_n_bin     );
+      tb_lut_X_n  = data2real   (lut_X_n_bin );
+      tb_lut_Y_n  = data2real   (lut_Y_n_bin );
+      tb_lut_u_n  = control2real(lut_u_n_bin );
+      tb_lut_v_n  = control2real(lut_v_n_bin );
 
       // Calculate the results
       bkm_step (
@@ -109,21 +98,16 @@ task load_operands;
          tb_format,
          tb_n,
          tb_d_x_n,   tb_d_y_n,
-         X_n,        Y_n,
-         u_n,        v_n,
-         lut_X_n,    lut_Y_n,
-         lut_u_n,    lut_v_n,
+         tb_X_n,     tb_Y_n,
+         tb_u_n,     tb_v_n,
+         tb_lut_X_n, tb_lut_Y_n,
+         tb_lut_u_n, tb_lut_v_n,
          // ----------------------------------
          // Data outputs
          // ----------------------------------
-         X_np1,      Y_np1,
-         u_np1,      v_np1
+         tb_X_np1,   tb_Y_np1,
+         tb_u_np1,   tb_v_np1
       );
-
-      tb_X_np1 = X_np1;
-      tb_Y_np1 = Y_np1;
-      tb_u_np1 = u_np1;
-      tb_v_np1 = v_np1;
 
       run_clk(1);
 

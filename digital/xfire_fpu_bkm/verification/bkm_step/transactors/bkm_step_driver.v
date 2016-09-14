@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-13 - ilesser - Implemented real number model.
 //    - 2016-08-11 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -37,7 +38,9 @@ module bkm_step_driver #(
    // ----------------------------------
    // Parameters
    // ----------------------------------
-   parameter WD      = 64
+   parameter CNT     = 389,
+   parameter WD      = 72,
+   parameter WC      = 22
    ) (
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -49,17 +52,25 @@ module bkm_step_driver #(
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input  wire [WD-1:0]    tb_X_n,
-   input  wire [WD-1:0]    tb_Y_n,
-   input  wire [WD-1:0]    tb_lut_X,
-   input  wire [WD-1:0]    tb_lut_Y,
+   input  real             tb_X_n,
+   input  real             tb_Y_n,
+   input  real             tb_u_n,
+   input  real             tb_v_n,
+   input  real             tb_lut_X_n,
+   input  real             tb_lut_Y_n,
+   input  real             tb_lut_u_n,
+   input  real             tb_lut_v_n,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
    output wire [2*WD-1:0]  X_n_csd,
    output wire [2*WD-1:0]  Y_n_csd,
-   output wire [2*WD-1:0]  lut_X_csd,
-   output wire [2*WD-1:0]  lut_Y_csd
+   output wire [WC-1:0]    u_n_bin,
+   output wire [WC-1:0]    v_n_bin,
+   output wire [2*WD-1:0]  lut_X_n_csd,
+   output wire [2*WD-1:0]  lut_Y_n_csd,
+   output wire [WC-1:0]    lut_u_n_bin,
+   output wire [WC-1:0]    lut_v_n_bin
    );
 // *****************************************************************************
 
@@ -70,7 +81,18 @@ module bkm_step_driver #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
+   wire  [WD-1:0]    X_n_bin,       Y_n_bin;
+   wire  [WD-1:0]    lut_X_n_bin,   lut_Y_n_bin;
    // -----------------------------------------------------
+
+   assign X_n_bin     = real2data   ( tb_X_n    );
+   assign Y_n_bin     = real2data   ( tb_Y_n    );
+   assign u_n_bin     = real2control( tb_u_n    );
+   assign v_n_bin     = real2control( tb_v_n    );
+   assign lut_X_n_bin = real2data   ( tb_lut_X_n);
+   assign lut_Y_n_bin = real2data   ( tb_lut_Y_n);
+   assign lut_u_n_bin = real2control( tb_lut_u_n);
+   assign lut_v_n_bin = real2control( tb_lut_v_n);
 
    bkm_data_step_driver #(
       .W          (WD)
@@ -85,17 +107,17 @@ module bkm_step_driver #(
       // ----------------------------------
       // Data inputs
       // ----------------------------------
-      .tb_X_n     (tb_X_n),
-      .tb_Y_n     (tb_Y_n),
-      .tb_lut_X   (tb_lut_X),
-      .tb_lut_Y   (tb_lut_Y),
+      .tb_X_n     (X_n_bin),
+      .tb_Y_n     (Y_n_bin),
+      .tb_lut_X   (lut_X_n_bin),
+      .tb_lut_Y   (lut_Y_n_bin),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
       .X_n_csd    (X_n_csd),
       .Y_n_csd    (Y_n_csd),
-      .lut_X_csd  (lut_X_csd),
-      .lut_Y_csd  (lut_Y_csd)
+      .lut_X_csd  (lut_X_n_csd),
+      .lut_Y_csd  (lut_Y_n_csd)
    );
 
 // *****************************************************************************

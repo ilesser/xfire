@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-08-22 - ilesser - Added guard bits.
 //    - 2016-08-11 - ilesser - Updated for WD and WC.
 //    - 2016-07-06 - ilesser - Initial version.
@@ -50,14 +51,14 @@ task rand_test;
    reg   [`LOG2N-1:0] rand_n;
    reg   [1:0]        rand_d_x_n;
    reg   [1:0]        rand_d_y_n;
-   reg   [`WD-1:0]    rand_X_n;
-   reg   [`WD-1:0]    rand_Y_n;
-   reg   [`WC-1:0]    rand_u_n;
-   reg   [`WC-1:0]    rand_v_n;
-   reg   [`WD-1:0]    rand_lut_X_n;
-   reg   [`WD-1:0]    rand_lut_Y_n;
-   reg   [`WC-1:0]    rand_lut_u_n;
-   reg   [`WC-1:0]    rand_lut_v_n;
+   real               rand_X_n;
+   real               rand_Y_n;
+   real               rand_u_n;
+   real               rand_v_n;
+   real               rand_lut_X_n;
+   real               rand_lut_Y_n;
+   real               rand_lut_u_n;
+   real               rand_lut_v_n;
    reg   [30:0]       cnt1, cnt2;
    // -----------------------------------------------------
 
@@ -78,25 +79,40 @@ task rand_test;
       run_clk(1);
       ena         = 1'b1;
 
-      repeat(2**12) begin
+      repeat(2**10) begin
 
          rand_mode      = constrained_rand_int(0, 1);
          rand_format    = constrained_rand_int(0, 3);
          rand_n         = constrained_rand_int(0, 2**`LOG2N);
          rand_d_x_n     = constrained_rand_int(0, 3);
          rand_d_y_n     = constrained_rand_int(0, 3);
-         // Limit the input range so that it has 1 guard bits
-         rand_X_n       = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
-         rand_Y_n       = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
-         rand_lut_X_n   = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
-         rand_lut_Y_n   = constrained_rand_int(-1*(2**(`WD-1-`GD)), 2**(`WD-1-`GD)-1);
-         // Limit the input range so that it has 2 guard bits
-         rand_u_n       = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
-         rand_v_n       = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
-         rand_lut_u_n   = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
-         rand_lut_v_n   = constrained_rand_int(-1*(2**(`WC-1-`GC)), 2**(`WC-1-`GC)-1);
 
-         //rand_mode      = `MODE_L;
+
+         rand_X_n       = constrained_rand_real( -2.0,  2.0);
+         //rand_Y_n       = constrained_rand_real( -2.0,  2.0);
+         rand_Y_n = 0.0;
+         rand_lut_X_n   = constrained_rand_real( -2.0,  2.0);
+         //rand_lut_Y_n   = constrained_rand_real( -2.0,  2.0);
+         rand_lut_Y_n = 0.0;
+         rand_u_n       = constrained_rand_real( -2.0,  2.0);
+         //rand_v_n       = constrained_rand_real( -2.0,  2.0);
+         rand_v_n = 0.0;
+         rand_lut_u_n   = constrained_rand_real( -2.0,  2.0);
+         //rand_lut_v_n   = constrained_rand_real( -2.0,  2.0);
+         rand_lut_v_n = 0.0;
+
+         // Limit the input range so that it uses only WI integer bits
+         //rand_X_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         //rand_Y_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         //rand_lut_X_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         //rand_lut_Y_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         // Limit the input range so that it uses only WI integer bits
+         //rand_u_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         //rand_v_n       = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         //rand_lut_u_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+         //rand_lut_v_n   = constrained_rand_real(-1*(2.0**(`WI-1)), 2.0**(`WI-1)-1.0);
+
+         rand_mode      = `MODE_E;
          rand_format    = `FORMAT_CMPLX_DW;
          //rand_n         = 4;
          //rand_n         = constrained_rand_int(4,15);
