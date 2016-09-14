@@ -1,4 +1,4 @@
-# SimVision Command Script (Mon Sep 05 07:23:43 PM ART 2016)
+# SimVision Command Script (Wed Sep 14 09:48:49 AM ART 2016)
 #
 # Version 15.20.s002
 #
@@ -44,14 +44,14 @@ preferences set toolbar-SimControl-WatchWindow {
   usual
   shown 0
 }
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  position -pos 1
+}
 preferences set whats-new-dont-show-at-startup 1
 preferences set toolbar-TimeSearch-WatchWindow {
   usual
   shown 0
-}
-preferences set toolbar-WaveZoom-WaveWindow {
-  usual
-  position -pos 1
 }
 preferences set toolbar-Standard-WaveWindow {
   usual
@@ -77,6 +77,83 @@ set expression {(signed(tb_bkm_step::tb_bkm_step.delta_u) / tb_bkm_step::tb_bkm_
 if {[catch {condition new -name  delta_u_div_n -expr $expression}] != ""} {
     condition set -using delta_u_div_n -expr $expression
 }
+#
+# Groups
+#
+catch {group new -name tb_X -overlay 0}
+catch {group new -name tb_Y -overlay 0}
+catch {group new -name tb_u -overlay 0}
+catch {group new -name tb_v -overlay 0}
+group using tb_X
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+     tb_bkm_step::tb_bkm_step.err_X  \
+     tb_bkm_step::tb_bkm_step.war_X  \
+     signed(tb_bkm_step::tb_bkm_step.tb_X_n)  \
+     {tb_bkm_step::tb_bkm_step.load_operands.X_n_bin[71:0]}  \
+     tb_bkm_step::tb_bkm_step.duv_driver.tb_X_n  \
+     {tb_bkm_step::tb_bkm_step.duv_driver.X_n_bin[71:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv_driver.X_n_csd[143:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.X_n[143:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n[143:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n[143:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.d_x_n[1:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.d_y_n[1:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n_times_d_n[145:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n_times_d_n_div_2_n[145:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_np1[143:0]}  \
+     signed(tb_bkm_step::tb_bkm_step.tb_X_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.res_X_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.delta_X)  \
+    {### cdivider}
+group using tb_Y
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+     tb_bkm_step::tb_bkm_step.err_Y  \
+     tb_bkm_step::tb_bkm_step.war_Y  \
+     signed(tb_bkm_step::tb_bkm_step.tb_Y_n)  \
+     signed(tb_bkm_step::tb_bkm_step.tb_Y_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.res_Y_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.delta_Y)  \
+    {### cdivider}
+group using tb_u
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+     tb_bkm_step::tb_bkm_step.err_u  \
+     tb_bkm_step::tb_bkm_step.war_u  \
+     tb_bkm_step::tb_bkm_step.tb_lut_u_n  \
+     {tb_bkm_step::tb_bkm_step.load_operands.u_n_bin[21:0]}  \
+     signed(tb_bkm_step::tb_bkm_step.tb_u_n)  \
+     {tb_bkm_step::tb_bkm_step.duv_driver.u_n_bin[21:0]}  \
+     signed(tb_bkm_step::tb_bkm_step.tb_u_np1)  \
+     {tb_bkm_step::tb_bkm_step.duv.bkm_control_step.u_np1[21:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv.u_np1[21:0]}  \
+     {tb_bkm_step::tb_bkm_step.duv_monitor.u_np1_bin[21:0]}  \
+     signed(tb_bkm_step::tb_bkm_step.res_u_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.delta_u)  \
+    {### cdivider}
+group using tb_v
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+     tb_bkm_step::tb_bkm_step.err_v  \
+     tb_bkm_step::tb_bkm_step.war_v  \
+     signed(tb_bkm_step::tb_bkm_step.tb_v_n)  \
+     signed(tb_bkm_step::tb_bkm_step.tb_v_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.res_v_np1)  \
+     signed(tb_bkm_step::tb_bkm_step.delta_v)  \
+    {### cdivider}
 
 #
 # Mnemonic Maps
@@ -96,13 +173,13 @@ if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1680x978+0+0}] !=
 }
 window target "Waveform 1" on
 waveform using {Waveform 1}
-waveform sidebar select designbrowser
+waveform sidebar visibility partial
 waveform set \
     -primarycursor TimeA \
     -signalnames name \
-    -signalwidth 175 \
+    -signalwidth 235 \
     -units ps \
-    -valuewidth 225
+    -valuewidth 267
 waveform baseline set -time 11,335,000ps
 
 set id [waveform add -signals  {
@@ -118,16 +195,16 @@ set id [waveform add -signals  {
 	tb_bkm_step::tb_bkm_step.clk
 	} ]
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.cnt_load[90:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.cnt[90:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.cnt_step[90:0]}
-	} ]
-set id [waveform add -signals  {
 	tb_bkm_step::tb_bkm_step.load
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.cnt[388:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.cnt_load[388:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.cnt_step[388:0]}
 	} ]
 set id [waveform add -signals  {
 	tb_bkm_step::tb_bkm_step.errors
@@ -152,74 +229,193 @@ set id [waveform add -signals  {
 	} ]
 waveform format $id -radix %b
 set id [waveform add -cdivider divider]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_X
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_X_n)
-	} ]
-waveform hierarchy collapse $id
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_X_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.res_X_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.delta_X)
-	} ]
-set id [waveform add -cdivider divider]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_Y
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_Y_n)
-	} ]
-waveform hierarchy collapse $id
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_Y_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.res_Y_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.delta_Y)
-	} ]
-set id [waveform add -cdivider divider]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_u
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_u_n)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_u_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.res_u_np1)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.delta_u)
-	} ]
-set id [waveform add -cdivider divider]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.err_v
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_v_n)
-	} ]
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.tb_v_np1)
-	} ]
-waveform hierarchy collapse $id
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.res_v_np1)
-	} ]
-waveform hierarchy collapse $id
-set id [waveform add -signals  {
-	signed(tb_bkm_step::tb_bkm_step.delta_v)
-	} ]
-set id [waveform add -cdivider divider]
+
+set groupId0 [waveform add -groups tb_X]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs}  {
+    tb_bkm_step::tb_bkm_step.err_X {}
+    tb_bkm_step::tb_bkm_step.war_X {}
+    signed(tb_bkm_step::tb_bkm_step.tb_X_n) {-trace digital}
+    {tb_bkm_step::tb_bkm_step.load_operands.X_n_bin[71:0]} {}
+    tb_bkm_step::tb_bkm_step.duv_driver.tb_X_n {-trace digital}
+    {tb_bkm_step::tb_bkm_step.duv_driver.X_n_bin[71:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv_driver.X_n_csd[143:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.X_n[143:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n[143:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n[143:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.d_x_n[1:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.d_y_n[1:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n_times_d_n[145:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_n_times_d_n_div_2_n[145:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_data_step.X_np1[143:0]} {}
+    signed(tb_bkm_step::tb_bkm_step.tb_X_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.res_X_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.delta_X) {-trace digital}
+    cdivider {}
+} childcmds {
+    {}
+    {}
+    {
+        set id $gpID0
+        waveform hierarchy expand $id
+        set id2 [lindex [waveform hierarchy content $id] 0]
+        waveform format $id2 -trace analogSampleAndHold
+        waveform hierarchy collapse $id
+    }
+    {
+        set id $gpID0
+        waveform hierarchy collapse $id
+    }
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {
+        set id $gpID0
+        waveform hierarchy expand $id
+        set id2 [lindex [waveform hierarchy content $id] 0]
+        waveform format $id2 -trace analogSampleAndHold
+    }
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+
+set groupId0 [waveform add -groups tb_Y]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs}  {
+    tb_bkm_step::tb_bkm_step.err_Y {}
+    tb_bkm_step::tb_bkm_step.war_Y {}
+    signed(tb_bkm_step::tb_bkm_step.tb_Y_n) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.tb_Y_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.res_Y_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.delta_Y) {-trace digital}
+    cdivider {}
+} childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+waveform hierarchy collapse $groupId0
+
+
+set groupId0 [waveform add -groups tb_u]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs}  {
+    tb_bkm_step::tb_bkm_step.err_u {}
+    tb_bkm_step::tb_bkm_step.war_u {}
+    tb_bkm_step::tb_bkm_step.tb_lut_u_n {-trace digital}
+    {tb_bkm_step::tb_bkm_step.load_operands.u_n_bin[21:0]} {}
+    signed(tb_bkm_step::tb_bkm_step.tb_u_n) {-trace digital}
+    {tb_bkm_step::tb_bkm_step.duv_driver.u_n_bin[21:0]} {}
+    signed(tb_bkm_step::tb_bkm_step.tb_u_np1) {-trace digital}
+    {tb_bkm_step::tb_bkm_step.duv.bkm_control_step.u_np1[21:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv.u_np1[21:0]} {}
+    {tb_bkm_step::tb_bkm_step.duv_monitor.u_np1_bin[21:0]} {}
+    signed(tb_bkm_step::tb_bkm_step.res_u_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.delta_u) {-trace digital}
+    cdivider {}
+} childcmds {
+    {}
+    {}
+    {}
+    {
+        set id $gpID0
+        waveform hierarchy collapse $id
+    }
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+
+set groupId0 [waveform add -groups tb_v]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs}  {
+    tb_bkm_step::tb_bkm_step.err_v {}
+    tb_bkm_step::tb_bkm_step.war_v {}
+    signed(tb_bkm_step::tb_bkm_step.tb_v_n) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.tb_v_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.res_v_np1) {-trace digital}
+    signed(tb_bkm_step::tb_bkm_step.delta_v) {-trace digital}
+    cdivider {}
+} childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+waveform hierarchy collapse $groupId0
+
 set id [waveform add -label bkm_control_step -comment {}]
 set id [waveform add -signals  {
 	{tb_bkm_step::tb_bkm_step.duv.bkm_control_step.format[1:0]}
@@ -241,27 +437,38 @@ set id [waveform add -signals  {
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.lut_u_n)
 	} ]
+waveform format $id -radix %x
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.lut_u_n
+	{tb_bkm_step::tb_bkm_step.duv.bkm_control_step.b_u[21:0]}
 	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.lut_u_n)
+	} ]
+set id [waveform add -signals  {
+	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.b_u)
+	} ]
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.lut_v_n)
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.lut_v_n
-	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
-set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.u_n)
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.u_n
+	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.a_u)
 	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+set id [waveform add -signals  {
+	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.u_n)
+	} ]
+waveform format $id -radix %x
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.duv.bkm_control_step.a_u[21:0]}
+	} ]
+set id [waveform add -signals  {
+	{tb_bkm_step::tb_bkm_step.duv.bkm_control_step.s_u[21:0]}
+	} ]
+set id [waveform add -signals  {
+	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.s_u)
+	} ]
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.u_n_plus_d_u_n)
 	} ]
@@ -275,11 +482,6 @@ set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.v_n)
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.v_n
-	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
-set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.v_n_plus_d_v_n)
 	} ]
 set id [waveform add -signals  {
@@ -292,121 +494,76 @@ set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.u_np1)
 	} ]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.u_np1
-	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
-set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.duv.bkm_control_step.v_np1)
 	} ]
-waveform hierarchy collapse $id
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.v_np1
-	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
 set id [waveform add -cdivider divider]
 set id [waveform add -label load_operands_control -comment {}]
 set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.X_n
-	} ]
-waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 0 -scale linear
-set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_X_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.X_np1
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -2 -max 1 -scale linear
+waveform axis range $id -for default -min 0 -max 1.0369999999999999 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_X_np1)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.Y_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 0 -scale linear
+waveform axis range $id -for default -min 0 -max 0.75 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_Y_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.Y_np1
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -2 -max 0 -scale linear
+waveform axis range $id -for default -min 0 -max 1.036 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_Y_np1)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.lut_X_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 0 -scale linear
+waveform axis range $id -for default -min 0 -max 1.0362499999999999 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_lut_X_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.lut_Y_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 0 -scale linear
+waveform axis range $id -for default -min 0 -max 0.5 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_lut_Y_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.lut_u_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -23803 -max 30145 -scale linear
+waveform axis range $id -for default -min 0 -max 0.02 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_lut_u_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.lut_v_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -29787 -max 23036 -scale linear
+waveform axis range $id -for default -min 0 -max 1.0700000000000001 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_lut_v_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.u_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+waveform axis range $id -for default -min 0 -max 1.05 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_u_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.u_np1
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+waveform axis range $id -for default -min 0 -max 1 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_u_np1)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.v_n
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+waveform axis range $id -for default -min -1.056 -max 1 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_v_n)
 	} ]
-set id [waveform add -signals  {
-	tb_bkm_step::tb_bkm_step.load_operands.v_np1
-	} ]
 waveform format $id -trace digital
-waveform axis range $id -for default -min -1 -max 1 -scale linear
+waveform axis range $id -for default -min 0 -max 0.0060000000000000001 -scale linear
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_v_np1)
 	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1.038 -max 0 -scale linear
 set id [waveform add -cdivider divider]
 set id [waveform add -signals  {
 	signed(tb_bkm_step::tb_bkm_step.tb_X_n)
 	} ]
+waveform format $id -trace digital
+waveform axis range $id -for default -min 0 -max 1.0369999999999999 -scale linear
 set id [waveform add -signals  {
 	{tb_bkm_step::tb_bkm_step.X_n_csd[31:0]}
 	} ]
@@ -420,30 +577,6 @@ set id [waveform add -signals  {
 	} ]
 waveform format $id -radix %b
 set id [waveform add -cdivider divider]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.max_delta_X[15:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.max_delta_Y[15:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.min_delta_X[15:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.min_delta_Y[15:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.max_delta_u[3:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.max_delta_v[3:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.min_delta_u[3:0]}
-	} ]
-set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.duv_checker.min_delta_v[3:0]}
-	} ]
 set id [waveform add -cdivider divider]
 set id [waveform add -signals  {
 	tb_bkm_step::tb_bkm_step.clk
@@ -479,40 +612,40 @@ set id [waveform add -signals  {
 	{tb_bkm_step::tb_bkm_step.tb_d_y_n[1:0]}
 	} ]
 waveform format $id -radix %b
+set id [waveform add -cdivider divider]
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_X_n[15:0]}
+	tb_bkm_step::tb_bkm_step.constrained_rand_real.high_limit
 	} ]
-waveform format $id -radix %x
+waveform format $id -trace digital
+waveform axis range $id -for default -min 0 -max 1023 -scale linear
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_Y_n[15:0]}
+	tb_bkm_step::tb_bkm_step.constrained_rand_real.low_limit
 	} ]
-waveform format $id -radix %x
+waveform format $id -trace digital
+waveform axis range $id -for default -min -1024 -max 0 -scale linear
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_u_n[3:0]}
+	tb_bkm_step::tb_bkm_step.constrained_rand_real.rnd
 	} ]
-waveform format $id -radix %x
+waveform format $id -trace analogSampleAndHold
+waveform axis range $id -for default -min -1.9994991650131828 -max 1.9145782215937026 -scale linear
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_v_n[3:0]}
+	{tb_bkm_step::tb_bkm_step.constrained_rand_real.rnd_exp[10:0]}
 	} ]
-waveform format $id -radix %x
+waveform format $id -radix %d
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_lut_X_n[15:0]}
+	{tb_bkm_step::tb_bkm_step.constrained_rand_real.rnd_ieee754[63:0]}
 	} ]
-waveform format $id -radix %x
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_lut_Y_n[15:0]}
+	{tb_bkm_step::tb_bkm_step.constrained_rand_real.constrained_ieee754[63:0]}
 	} ]
-waveform format $id -radix %x
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_lut_u_n[3:0]}
+	{tb_bkm_step::tb_bkm_step.constrained_rand_real.rnd_man[51:0]}
 	} ]
-waveform format $id -radix %x
 set id [waveform add -signals  {
-	{tb_bkm_step::tb_bkm_step.tb_lut_v_n[3:0]}
+	tb_bkm_step::tb_bkm_step.rand_real.sign
 	} ]
-waveform format $id -radix %x
 
-waveform xview limits 0 40985000ps
+waveform xview limits 0 10325000ps
 waveform set -signalfilter *_u
 
 #
