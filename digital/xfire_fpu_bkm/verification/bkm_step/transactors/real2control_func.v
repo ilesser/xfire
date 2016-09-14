@@ -24,6 +24,9 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Fixed integer part calculation for negative numbers.
+//    - 2016-09-13 - ilesser - Fixed fractional part calculation by substracting
+//                             $rtoi(x_real) instead of x_int.
 //    - 2016-09-09 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
@@ -42,13 +45,19 @@ function [`WC-1:0] real2control;
    // -----------------------------------------------------
    // Internal variables and signals
    // -----------------------------------------------------
-   wire  [`WCI-1:0]  x_int;
-   wire  [`WCF-1:0]  x_frac;
+   reg   [`WCI-1:0]  x_int;
+   reg   [`WCF-1:0]  x_frac;
    // -----------------------------------------------------
-
-   x_int          = $rtoi( x_real );
-   x_frac         = $rtoi( (x_real - x_int) * 2.0**(`WCF) );
-   real2control   =  {x_int, x_frac};
+   begin
+      x_frac         = $rtoi((x_real - $rtoi(x_real)) * 2.0**(`WCF));
+      if(x_real < 0.0 && x_frac != 0.0) begin
+         x_int          = $rtoi(x_real) - 1;
+      end
+      else begin
+         x_int          = $rtoi(x_real);
+      end
+      real2control   =  {x_int, x_frac};
+   end
 
 // *****************************************************************************
 
