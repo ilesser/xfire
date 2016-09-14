@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-08-15 - ilesser - Added LOG2N parameter.
 //    - 2016-08-15 - ilesser - Deleted unused regs.
 //    - 2016-08-03 - ilesser - Copied from bkm_control_step checker.
@@ -58,12 +59,12 @@ module bkm_data_step_checker #(
    input wire  [LOG2N-1:0]  tb_n,
    input wire  [1:0]        tb_d_x_n,
    input wire  [1:0]        tb_d_y_n,
-   input wire  [W-1:0]      tb_X_n,
-   input wire  [W-1:0]      tb_Y_n,
-   input wire  [W-1:0]      tb_X_np1,
-   input wire  [W-1:0]      tb_Y_np1,
-   input wire  [W-1:0]      res_X_np1,
-   input wire  [W-1:0]      res_Y_np1,
+   input real               tb_X_n,
+   input real               tb_Y_n,
+   input real               tb_X_np1,
+   input real               tb_Y_np1,
+   input real               res_X_np1,
+   input real               res_Y_np1,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
@@ -71,8 +72,8 @@ module bkm_data_step_checker #(
    output reg                war_Y,
    output reg                err_X,
    output reg                err_Y,
-   output wire  [W-1:0]      delta_X,
-   output wire  [W-1:0]      delta_Y
+   output real               delta_X,
+   output real               delta_Y
    );
 // *****************************************************************************
 
@@ -86,19 +87,19 @@ module bkm_data_step_checker #(
    wire     neq_X,         neq_Y;
    // -----------------------------------------------------
 
-   initial begin
-      $monitor("Time = %8t",                                               $time,
-               "\ttb_mode=%b",                                             tb_mode,
-               "\ttb_format=%b",                                           tb_format,
-               "\ttb_n=%b",                                                tb_n,
-               "\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
-               "\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
-               "\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
-            );
-   end
+   //initial begin
+      //$monitor("Time = %8t",                                               $time,
+               //"\ttb_mode=%b",                                             tb_mode,
+               //"\ttb_format=%b",                                           tb_format,
+               //"\ttb_n=%b",                                                tb_n,
+               //"\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
+               //"\ttb_X_n=%6f\ttb_Y_n=%6f\t tb_X_np1=%6f\t tb_Y_np1=%6f\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
+               //"\t\t\t\t\tres_X_np1=%6f\tres_Y_np1=%6f\n",                                res_X_np1,res_Y_np1,
+            //);
+   //end
 
-   assign neq_X      = tb_X_np1 !== res_X_np1;
-   assign neq_Y      = tb_Y_np1 !== res_Y_np1;
+   assign neq_X      = tb_X_np1 != res_X_np1;
+   assign neq_Y      = tb_Y_np1 != res_Y_np1;
    assign delta_X    = tb_X_np1 - res_X_np1;
    assign delta_Y    = tb_Y_np1 - res_Y_np1;
 
@@ -112,8 +113,8 @@ module bkm_data_step_checker #(
             if (neq_X == 1'b1) begin
                // this report an error if |delta| > 1 or a warning otherwise
                // the idea is the get a warning if the delta is only 1 LSB
-               if (abs($signed(delta_X)) > 2) begin
-                  $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
+               if (abs(delta_X) > 2.0**(-40)) begin
+                  $display("[%0d] ERROR: in X.\tExpected result: %f\n\t\t\tObtained result: %f\t\t. Instance: %m",$time, tb_X_np1, res_X_np1);
                   add_error();
                   err_X    <= 1'b1;
                   war_X    <= 1'b0;
@@ -142,8 +143,8 @@ module bkm_data_step_checker #(
       else begin
          if (enable == 1'b1) begin
             if (neq_Y == 1'b1) begin
-               if (abs($signed(delta_Y)) > 2) begin
-                  $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
+               if (abs(delta_Y) > 2.0**(-40)) begin
+                  $display("[%0d] ERROR: in Y.\tExpected result: %f\n\t\t\tObtained result: %f\t\t. Instance: %m",$time, tb_Y_np1, res_Y_np1);
                   add_error();
                   err_Y    <= 1'b1;
                   war_Y    <= 1'b0;
