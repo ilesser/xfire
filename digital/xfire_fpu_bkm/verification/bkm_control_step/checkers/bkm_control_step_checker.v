@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Updated to use real number model.
 //    - 2016-08-15 - ilesser - Added LOG2N parameter.
 //    - 2016-08-15 - ilesser - Deleted unused regs.
 //    - 2016-08-02 - ilesser - Changed the definition of W.
@@ -59,12 +60,12 @@ module bkm_control_step_checker #(
    input wire  [LOG2N-1:0]  tb_n,
    input wire  [1:0]        tb_d_u_n,
    input wire  [1:0]        tb_d_v_n,
-   input wire  [W-1:0]      tb_u_n,
-   input wire  [W-1:0]      tb_v_n,
-   input wire  [W-1:0]      tb_u_np1,
-   input wire  [W-1:0]      tb_v_np1,
-   input wire  [W-1:0]      res_u_np1,
-   input wire  [W-1:0]      res_v_np1,
+   input real               tb_u_n,
+   input real               tb_v_n,
+   input real               tb_u_np1,
+   input real               tb_v_np1,
+   input real               res_u_np1,
+   input real               res_v_np1,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
@@ -72,8 +73,8 @@ module bkm_control_step_checker #(
    output reg               war_v,
    output reg               err_u,
    output reg               err_v,
-   output wire [W-1:0]      delta_u,
-   output wire [W-1:0]      delta_v
+   output real              delta_u,
+   output real              delta_v
    );
 // *****************************************************************************
 
@@ -87,19 +88,19 @@ module bkm_control_step_checker #(
    wire     neq_u,         neq_v;
    // -----------------------------------------------------
 
-   initial begin
-      $monitor("Time = %8t",                                               $time,
-               "\ttb_mode=%b",                                             tb_mode,
-               "\ttb_format=%b",                                           tb_format,
-               "\ttb_n=%b",                                                tb_n,
-               "\ttb_d_u_n=%b\ttb_d_v_n=%b\n",                             tb_d_u_n, tb_d_v_n,
-               "\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
-               "\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
-            );
-   end
+   //initial begin
+      //$monitor("Time = %8t",                                               $time,
+               //"\ttb_mode=%b",                                             tb_mode,
+               //"\ttb_format=%b",                                           tb_format,
+               //"\ttb_n=%b",                                                tb_n,
+               //"\ttb_d_u_n=%b\ttb_d_v_n=%b\n",                             tb_d_u_n, tb_d_v_n,
+               //"\ttb_u_n=%6f\ttb_v_n=%6f\t tb_u_np1=%6f\t tb_v_np1=%6f\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
+               //"\t\t\t\t\tres_u_np1=%6f\tres_v_np1=%6f\n",                                res_u_np1,res_v_np1,
+            //);
+   //end
 
-   assign neq_u      = tb_u_np1 !== res_u_np1;
-   assign neq_v      = tb_v_np1 !== res_v_np1;
+   assign neq_u      = tb_u_np1 != res_u_np1;
+   assign neq_v      = tb_v_np1 != res_v_np1;
    assign delta_u    = tb_u_np1 - res_u_np1;
    assign delta_v    = tb_v_np1 - res_v_np1;
 
@@ -113,8 +114,8 @@ module bkm_control_step_checker #(
             if (neq_u == 1'b1) begin
                // this report an error if |delta| > 2 or a warning otherwise
                // the idea is the get a warning if the delta is only 1 LSB
-               if (abs($signed(delta_u)) > 2) begin
-                  $display("[%0d] ERROR: in u.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
+               if (abs(delta_u) > 2**-4) begin
+                  $display("[%0d] ERROR: in u.\tExpected result: %f\n\t\t\tObtained result: %f\t\t. Instance: %m",$time, tb_u_np1, res_u_np1);
                   add_error();
                   err_u    <= 1'b1;
                   war_u    <= 1'b0;
@@ -143,8 +144,8 @@ module bkm_control_step_checker #(
       else begin
          if (enable == 1'b1) begin
             if (neq_v == 1'b1) begin
-               if (abs($signed(delta_v)) > 2) begin
-                  $display("[%0d] ERROR: in v.\tExpected result: %d\n\t\t\tObtained result: %d\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
+               if (abs(delta_v) > 2**-4) begin
+                  $display("[%0d] ERROR: in v.\tExpected result: %f\n\t\t\tObtained result: %f\t\t. Instance: %m",$time, tb_v_np1, res_v_np1);
                   add_error();
                   err_v    <= 1'b1;
                   war_v    <= 1'b0;
