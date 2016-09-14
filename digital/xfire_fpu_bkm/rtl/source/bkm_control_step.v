@@ -76,6 +76,10 @@
 //
 //    TODO: implement power savings based on format. Currently it works always
 //          in double word complex format.
+//    - 2016-09-14 - ilesser - Fixed issue #20.
+//    - 2016-09-14 - ilesser - Removed guard bits from this block since they are
+//                             there already.
+//    - 2016-09-14 - ilesser - Updated default parameters. W = 22 LOG2W = 5
 //    - 2016-09-05 - ilesser - Updated default parameters. W = 20 LOG2W = 5
 //    - 2016-08-28 - ilesser - Updated default parameters.
 //    - 2016-08-22 - ilesser - Changed default parameters.
@@ -96,7 +100,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter W      = 20,
+    parameter W      = 22,
     parameter LOG2W  = 5,
     parameter LOG2N  = 6
   ) (
@@ -151,24 +155,24 @@ module bkm_control_step #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [W:0]       u_n_plus_d_u_n;
-   wire  [W:0]       v_n_plus_d_v_n;
-   wire  [W:0]       u_n_times_d_n;
-   wire  [W:0]       v_n_times_d_n;
-   wire  [W:0]       u_n_times_d_n_div_2_n;
-   wire  [W:0]       v_n_times_d_n_div_2_n;
+   wire  [W-1:0]     u_n_plus_d_u_n;
+   wire  [W-1:0]     v_n_plus_d_v_n;
+   wire  [W-1:0]     u_n_times_d_n;
+   wire  [W-1:0]     v_n_times_d_n;
+   wire  [W-1:0]     u_n_times_d_n_div_2_n;
+   wire  [W-1:0]     v_n_times_d_n_div_2_n;
    wire              sign_a_u;
    wire              sign_a_v;
    wire              sign_b_u;
    wire              sign_b_v;
-   wire  [W:0]       a_u;
-   wire  [W:0]       a_v;
-   wire  [W:0]       b_u;
-   wire  [W:0]       b_v;
+   wire  [W-1:0]     a_u;
+   wire  [W-1:0]     a_v;
+   wire  [W-1:0]     b_u;
+   wire  [W-1:0]     b_v;
    wire              c_u;
    wire              c_v;
-   wire  [W+1:0]     s_u;
-   wire  [W+1:0]     s_v;
+   wire  [W-1:0]     s_u;
+   wire  [W-1:0]     s_v;
    // -----------------------------------------------------
 
 // *****************************************************************************
@@ -177,12 +181,8 @@ module bkm_control_step #(
 
    // TODO: think of a better implementation for this
    //       a better way could be to add a carry in input to the add_subb used below
-   assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  {u_n[W-1], u_n} - d_u_n[`D_DATA] :  {u_n[W-1], u_n} + d_u_n[`D_DATA] ;
-   assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  {v_n[W-1], v_n} - d_v_n[`D_DATA] :  {v_n[W-1], v_n} + d_v_n[`D_DATA] ;
-   //assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  u_n - d_u_n[`D_DATA] :  u_n + d_u_n[`D_DATA] ;
-   //assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  v_n - d_v_n[`D_DATA] :  v_n + d_v_n[`D_DATA] ;
-   //assign   u_n_plus_d_u_n =  d_u_n != 2'b10    ?  u_n + d_u_n :  u_n   ;
-   //assign   v_n_plus_d_v_n =  d_v_n != 2'b10    ?  v_n + d_v_n :  v_n   ;
+   assign   u_n_plus_d_u_n =  d_u_n[`D_SIGN]    ?  u_n - d_u_n[`D_DATA] :  u_n + d_u_n[`D_DATA] ;
+   assign   v_n_plus_d_v_n =  d_v_n[`D_SIGN]    ?  v_n - d_v_n[`D_DATA] :  v_n + d_v_n[`D_DATA] ;
 
    // -----------------------------------------------------
    // Multiply by d_n
@@ -191,17 +191,15 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W+1)
+      .W                   (W)
    ) multiply_by_d (
     // ----------------------------------
     // Data inputs
     // ----------------------------------
       .d_x                 (d_u_n),
       .d_y                 (d_v_n),
-      .x_in                ({u_n[W-1], u_n}),
-      .y_in                ({v_n[W-1], v_n}),
-      //.x_in                (u_n),
-      //.y_in                (v_n),
+      .x_in                (u_n),
+      .y_in                (v_n),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -217,7 +215,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W+1),
+      .W                   (W),
       .LOG2W               (LOG2W),
       .LOG2N               (LOG2N)
    ) div_by_2_n_u (
@@ -240,7 +238,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W+1),
+      .W                   (W),
       .LOG2W               (LOG2W),
       .LOG2N               (LOG2N)
    ) div_by_2_n_v (
@@ -265,8 +263,8 @@ module bkm_control_step #(
    assign   sign_a_v       =  mode == `MODE_E   ?  `ADD     :  `ADD                    ;
    assign   sign_b_u       =  mode == `MODE_E   ?  `SUBB    :  `ADD                    ;
    assign   sign_b_v       =  mode == `MODE_E   ?  `SUBB    :  `ADD                    ;
-   assign   a_u            =  mode == `MODE_E   ?   u_n     :   u_n_plus_d_u_n         ;
-   assign   a_v            =  mode == `MODE_E   ?   v_n     :   v_n_plus_d_v_n         ;
+   assign   a_u            =  mode == `MODE_E   ?   u_n<<1  :   u_n_plus_d_u_n         ;
+   assign   a_v            =  mode == `MODE_E   ?   v_n<<1  :   v_n_plus_d_v_n         ;
    assign   b_u            =  mode == `MODE_E   ?   lut_u_n :   u_n_times_d_n_div_2_n  ;
    assign   b_v            =  mode == `MODE_E   ?   lut_v_n :   v_n_times_d_n_div_2_n  ;
    //       +--------------+--------------------+-----------+--------------------------+
@@ -278,10 +276,7 @@ module bkm_control_step #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-      .W                   (W+1+1)     //TODO: I am adding 2 numbers of (W+1)
-
-      // TODO: tengo q agregarle 3 bits de guarda?
-
+      .W                   (W)
    ) complex_add_sub (
     // ----------------------------------
     // Data inputs
@@ -290,10 +285,10 @@ module bkm_control_step #(
       .subb_a_y            (sign_a_v),
       .subb_b_x            (sign_b_u),
       .subb_b_y            (sign_b_v),
-      .a_x                 ({a_u[W], a_u}),
-      .a_y                 ({a_v[W], a_v}),
-      .b_x                 ({b_u[W], b_u}),
-      .b_y                 ({b_v[W], b_v}),
+      .a_x                 (a_u),
+      .a_y                 (a_v),
+      .b_x                 (b_u),
+      .b_y                 (b_v),
     // ----------------------------------
     // Data outputs
     // ----------------------------------
@@ -307,9 +302,8 @@ module bkm_control_step #(
    // -----------------------------------------------------
    // Output assignment for w_n+1
    // -----------------------------------------------------
-   // Multiply by 2 outputs
-   assign u_np1 = s_u << 1;
-   assign v_np1 = s_v << 1;
+   assign u_np1 = s_u;
+   assign v_np1 = s_v;
    // -----------------------------------------------------
 
 // *****************************************************************************
