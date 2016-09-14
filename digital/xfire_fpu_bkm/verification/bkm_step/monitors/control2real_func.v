@@ -44,10 +44,11 @@ function real control2real;
    // -----------------------------------------------------
    real           x_int, x_frac;
    // -----------------------------------------------------
-
-   x_int          =  $signed(x_bin[`WC-1  :`WC-`WCI]);
-   x_frac         =  $itor(  x_bin[`WCF-1 :       0]) / 2.0**`WCF;
-   control2real   =  x_int + x_frac;
+   begin
+      x_int          =  $signed(x_bin[`WC-1  :`WC-`WCI]);
+      x_frac         =  $itor(  x_bin[`WCF-1 :       0]) / 2.0**`WCF;
+      control2real   =  x_int + x_frac;
+   end
 
 // *****************************************************************************
 
