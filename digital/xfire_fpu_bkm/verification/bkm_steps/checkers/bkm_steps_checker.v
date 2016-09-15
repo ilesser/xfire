@@ -53,7 +53,6 @@ module bkm_steps_checker #(
    // Data inputs
    // ----------------------------------
    input wire               tb_start,
-   input wire               tb_done,
    input wire               tb_mode,
    input wire  [1:0]        tb_format,
    input real               tb_u_out,
@@ -64,6 +63,7 @@ module bkm_steps_checker #(
    input real               tb_Y_out,
    input real               res_X_out,
    input real               res_Y_out,
+   input wire               res_done,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
@@ -99,106 +99,48 @@ module bkm_steps_checker #(
    // -----------------------------------------------------
    // -----------------------------------------------------
 
-   //initial begin
-      //$monitor("Time = %8t",                                               $time,
+   initial begin
+      $monitor("Time = %8t\n",                                               $time,
                //"\ttb_mode=%b",                                             tb_mode,
                //"\ttb_format=%b",                                           tb_format,
-               //"\ttb_n=%b",                                                tb_n,
-               //"\ttb_d_x_n=%b\ttb_d_y_n=%b\n",                             tb_d_x_n, tb_d_y_n,
-               //"\ttb_X_n=%6d\ttb_Y_n=%6d\t tb_X_np1=%6d\t tb_Y_np1=%6d\n", tb_X_n, tb_Y_n, tb_X_np1, tb_Y_np1,
-               //"\t\t\t\t\tres_X_np1=%6d\tres_Y_np1=%6d\n",                                res_X_np1,res_Y_np1,
-               //"\ttb_u_n=%6d\ttb_v_n=%6d\t tb_u_np1=%6d\t tb_v_np1=%6d\n", tb_u_n, tb_v_n, tb_u_np1, tb_v_np1,
-               //"\t\t\t\t\tres_u_np1=%6d\tres_v_np1=%6d\n",                                res_u_np1,res_v_np1,
-            //);
-   //end
+               "\t tb_X_out=%06.16f\t tb_Y_out=%06.16f\n",  tb_X_out, tb_Y_out,
+               "\tres_X_out=%06.16f\tres_Y_out=%06.16f\n", res_X_out,res_Y_out,
+               "\tdelta_X  =%06.16f\tdelta_Y  =%06.16f\n", delta_X,  delta_Y,
+               "\t tb_u_out=%06.16f\t tb_v_out=%06.16f\n",  tb_u_out, tb_v_out,
+               "\tres_u_out=%06.16f\tres_v_out=%06.16f\n", res_u_out,res_v_out,
+            );
+   end
 
-   assign war_X = 1'b0;
-   assign war_Y = 1'b0;
-   assign war_u = 1'b0;
-   assign war_v = 1'b0;
-   assign err_X = 1'b0;
-   assign err_Y = 1'b0;
-   assign err_u = 1'b0;
-   assign err_v = 1'b0;
-   assign delta_X = 0.0;
-   assign delta_Y = 0.0;
-   assign delta_u = 0.0;
-   assign delta_v = 0.0;
-   assign max_delta_X = 0.0;
-   assign min_delta_X = 0.0;
-   assign max_delta_Y = 0.0;
-   assign min_delta_Y = 0.0;
-   assign max_delta_u = 0.0;
-   assign min_delta_u = 0.0;
-   assign max_delta_v = 0.0;
-   assign min_delta_v = 0.0;
+   // -----------------------------------------------------
+   // Min max values
+   // -----------------------------------------------------
+   min_max min_max_X (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk           (clk),
+      .arst          (arst),
+      .srst          (srst),
+      .enable        (enable),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .start         (tb_start),
+      .done          (res_done),
+      .tb            (tb_X_out),
+      .res           (res_X_out),
+      .max_abs_delta (2.0**-12),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .war           (war_X),
+      .err           (err_X),
+      .delta         (delta_X),
+      .min_delta     (min_delta_X),
+      .max_delta     (max_delta_X)
+   );
+   // -----------------------------------------------------
 
-   //always @(posedge clk or posedge arst) begin
-      //if (arst==1'b1) begin
-         //max_delta_X <= 0.0;
-         //min_delta_X <= 0.0;
-         //max_delta_Y <= 0.0;
-         //min_delta_Y <= 0.0;
-         //max_delta_u <= 0.0;
-         //min_delta_u <= 0.0;
-         //max_delta_v <= 0.0;
-         //min_delta_v <= 0.0;
-      //end
-      //else begin
-         //if (srst==1'b1) begin
-            //max_delta_X <= 0.0;
-            //min_delta_X <= 0.0;
-            //max_delta_Y <= 0.0;
-            //min_delta_Y <= 0.0;
-            //max_delta_u <= 0.0;
-            //min_delta_u <= 0.0;
-            //max_delta_v <= 0.0;
-            //min_delta_v <= 0.0;
-         //end
-         //else if (enable==1'b1) begin
-            //if ( $signed(delta_X) > $signed(max_delta_X) )
-               //max_delta_X <= delta_X;
-            //else
-               //max_delta_X <= max_delta_X;
-
-            //if ( $signed(delta_X) < $signed(min_delta_X) )
-               //min_delta_X <= delta_X;
-            //else
-               //min_delta_X <= min_delta_X;
-
-            //if ( $signed(delta_Y) < $signed(min_delta_Y) )
-               //max_delta_Y <= delta_Y;
-            //else
-               //max_delta_Y <= max_delta_Y;
-
-            //if ( $signed(delta_Y) < $signed(min_delta_Y) )
-               //min_delta_Y <= delta_Y;
-            //else
-               //min_delta_Y <= min_delta_Y;
-
-            //if ( $signed(delta_u) < $signed(min_delta_u) )
-               //max_delta_u <= delta_u;
-            //else
-               //max_delta_u <= max_delta_u;
-
-            //if ( $signed(delta_u) < $signed(min_delta_u) )
-               //min_delta_u <= delta_u;
-            //else
-               //min_delta_u <= min_delta_u;
-
-            //if ( $signed(delta_v) < $signed(min_delta_v) )
-               //max_delta_v <= delta_v;
-            //else
-               //max_delta_v <= max_delta_v;
-
-            //if ( $signed(delta_v) < $signed(min_delta_v) )
-               //min_delta_v <= delta_v;
-            //else
-               //min_delta_v <= min_delta_v;
-
-         //end
-      //end
-   //end
 
    // -----------------------------------------------------
 
