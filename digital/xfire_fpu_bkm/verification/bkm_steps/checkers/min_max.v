@@ -12,21 +12,19 @@
 // Description:
 // ------------
 //
-// Monitor for bkm_steps block.
+// Get min and max value of a real variable
 //
 // -----------------------------------------------------------------------------
 // File name:
 // ----------
 //
-// bkm_steps_monitor.v
+// min_max.v
 //
 // -----------------------------------------------------------------------------
 // History:
 // --------
 //
-//    - 2016-09-07 - ilesser - Implemented monitor for bkm_steps.
-//    - 2016-09-05 - ilesser - Changed io ports to real type.
-//    - 2016-09-03 - ilesser - Initial version.
+//    - 2016-09-14 - ilesser - Initial version.
 //
 // -----------------------------------------------------------------------------
 
@@ -35,37 +33,30 @@
 // *****************************************************************************
 // Interface
 // *****************************************************************************
-module bkm_steps_monitor #(
-   // ----------------------------------
-   // Parameters
-   // ----------------------------------
-   parameter WD      = 72,
-   parameter WC      = 21,
-   parameter WI      = 11,
-   parameter WFD     = 59,
-   parameter WFC     =  7
-   ) (
+module min_max (
    // ----------------------------------
    // Clock, reset & enable inputs
    // ----------------------------------
-   input wire              clk,
-   input wire              arst,
-   input wire              srst,
-   input wire              enable,
+   input wire               clk,
+   input wire               arst,
+   input wire               srst,
+   input wire               enable,
    // ----------------------------------
    // Data inputs
    // ----------------------------------
-   input  wire [2*WD-1:0]  X_out_csd,
-   input  wire [2*WD-1:0]  Y_out_csd,
-   input  wire [WC-1:0]    u_out_bin,
-   input  wire [WC-1:0]    v_out_bin,
+   input wire               start,
+   input wire               done,
+   input real               tb,
+   input real               res,
+   input real               max_abs_delta,
    // ----------------------------------
    // Data outputs
    // ----------------------------------
-   output real             res_X_out,
-   output real             res_Y_out,
-   output real             res_u_out,
-   output real             res_v_out
+   output wire               war,
+   output wire               err,
+   output real               delta,
+   output real               min_delta,
+   output real               max_delta
    );
 // *****************************************************************************
 
@@ -76,46 +67,37 @@ module bkm_steps_monitor #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   wire  [WD-1:0]   X_out_bin,  Y_out_bin;
    // -----------------------------------------------------
 
-   assign res_X_out   =  data2real   (  X_out_bin   );
-   assign res_Y_out   =  data2real   (  Y_out_bin   );
-   assign res_u_out   =  control2real(  u_out_bin   );
-   assign res_v_out   =  control2real(  v_out_bin   );
+   assign delta = abs(tb - res);
+   assign war   = tb != res;
+   assign err   = abs(delta) > max_abs_delta;
 
-   csd2bin #(
-   // ----------------------------------
-   // Parameters
-   // ----------------------------------
-      .W                   (WD)
-   ) csd2bin_X (
-   // ----------------------------------
-   // Data inputs
-   // ----------------------------------
-      .x                   (X_out_csd),
-   // ----------------------------------
-   // Data outputs
-   // ----------------------------------
-      .y                   (X_out_bin)
-   );
+   always @(posedge clk or posedge arst) begin
+      if (arst==1'b1) begin
+         max_delta <= 0.0;
+         min_delta <= 0.0;
+      end
+      else begin
+         if (srst) begin
+            max_delta <= 0.0;
+            min_delta <= 0.0;
+         end
+         else if (enable&done==1'b1) begin
+            if ( delta > max_delta )
+               max_delta <= delta;
+            else
+               max_delta <= max_delta;
 
-   csd2bin #(
-   // ----------------------------------
-   // Parameters
-   // ----------------------------------
-      .W                   (WD)
-   ) csd2bin_Y (
-   // ----------------------------------
-   // Data inputs
-   // ----------------------------------
-      .x                   (Y_out_csd),
-   // ----------------------------------
-   // Data outputs
-   // ----------------------------------
-      .y                   (Y_out_bin)
-   );
+            if ( delta < min_delta )
+               min_delta <= delta;
+            else
+               min_delta <= min_delta;
+         end
+      end
+   end
 
+   // -----------------------------------------------------
 
 // *****************************************************************************
 
@@ -131,6 +113,5 @@ module bkm_steps_monitor #(
 // *****************************************************************************
 
 endmodule
-
 
 
