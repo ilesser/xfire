@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Instanciated checker and updated parameters.
 //    - 2016-09-07 - ilesser - Implemented rolled architcture.
 //    - 2016-09-05 - ilesser - WIP: testing bkm_steps_task.
 //    - 2016-08-15 - ilesser - Initial version.
@@ -36,17 +37,22 @@
 `define LOG2N   7
 `define W      64
 `define LOG2W   6
+`define WI     11
+
 `define UGD     2
 `define LGD    `LOG2W
-`define WD     (`UGD + `W   + `LGD)
-`define UGC     3
-`define LGC     1
-`define WC     (`UGC + `W/4 + `LGC)
-`define WI     11
-`define WFD    (`WD - `UGD - `WI)
-`define WFC    (`WC - `UGC - `WI)
+`define WDI    (`UGD   + `WI )
+`define WDF    (`W-`WI + `LGD)
+`define WD     (`WDI   + `WDF)
 `define LOG2WD  1+`LOG2W
-`define LOG2WC  1+`LOG2W-2
+
+`define UGC     3
+`define LGC     4
+`define WCI    (`UGC   + `WI )
+`define WCF    (  4    + `LGC)
+`define WC     (`WCI   + `WCF)
+`define LOG2WC  5
+
 `define M_SIZE  1
 `define F_SIZE  2
 `define D_SIZE  2
@@ -189,7 +195,7 @@ module tb_bkm_steps ();
       .X_out_csd  (X_out_csd),
       .Y_out_csd  (Y_out_csd),
       .u_out_bin  (u_out_bin),
-      .v_out_bin  (u_out_bin),
+      .v_out_bin  (v_out_bin),
       // ----------------------------------
       // Data outputs
       // ----------------------------------
@@ -206,62 +212,70 @@ module tb_bkm_steps ();
          $dumpvars();
       end
    `endif
+/tests/dir_test.v
+--- a/digital/xfire_fpu_bkm/verification/bkm_steps/tests/dir_test.v     Wed Sep 14 21:54:27 2016 -0300
++++ b/digital/xfire_fpu_bkm/verification/bkm_steps/tests/dir_test.v     Wed Sep 14 21:54:31 2016 -0300
+@@ -46,7 +46,7 @@
+    // -----------------------------------------------------
+    real  X_r, X_res, X_f;
+    reg   [`WI-1:0]   X_int;
+-   reg   [`WFD-1:0]  X_frac;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
    // Checkers
    // -----------------------------------------------------
-   //bkm_steps_checker #(
-      //.WC         (`WC),
-      //.WD         (`WD),
-      //.LOG2N      (`LOG2N)
-   //) duv_checker (
-      //// ----------------------------------
-      //// Clock, reset & enable inputs
-      //// ----------------------------------
-      //.clk        (clk),
-      //.arst       (arst),
-      //.srst       (srst),
-      //.enable     (ena),
-      //// ----------------------------------
-      //// Data inputs
-      //// ----------------------------------
-      //.tb_start   (tb_start),
-      //.tb_done    (tb_done),
-      //.tb_mode    (tb_mode),
-      //.tb_format  (tb_format),
-      //.tb_u_out   (tb_u_out),
-      //.tb_v_out   (tb_v_out),
-      //.res_u_out  (res_u_out),
-      //.res_v_out  (res_v_out),
-      //.tb_X_out   (tb_X_out),
-      //.tb_Y_out   (tb_Y_out),
-      //.res_X_out  (res_X_out),
-      //.res_Y_out  (res_Y_out),
-      //// ----------------------------------
-      //// Data outputs
-      //// ----------------------------------
-      //.war_u      (war_u),
-      //.war_v      (war_v),
-      //.err_u      (err_u),
-      //.err_v      (err_v),
-      //.delta_u    (delta_u),
-      //.delta_v    (delta_v),
-      //.max_delta_u(max_delta_u),
-      //.min_delta_u(min_delta_u),
-      //.max_delta_v(max_delta_v),
-      //.min_delta_v(min_delta_v),
-      //.war_X      (war_X),
-      //.war_Y      (war_Y),
-      //.err_X      (err_X),
-      //.err_Y      (err_Y),
-      //.delta_X    (delta_X),
-      //.delta_Y    (delta_Y),
-      //.max_delta_X(max_delta_X),
-      //.min_delta_X(min_delta_X),
-      //.max_delta_Y(max_delta_Y),
-      //.min_delta_Y(min_delta_Y)
-   //);
+   bkm_steps_checker #(
+      .WC         (`WC),
+      .WD         (`WD),
+      .LOG2N      (`LOG2N)
+   ) duv_checker (
+      // ----------------------------------
+      // Clock, reset & enable inputs
+      // ----------------------------------
+      .clk        (clk),
+      .arst       (arst),
+      .srst       (srst),
+      .enable     (ena),
+      // ----------------------------------
+      // Data inputs
+      // ----------------------------------
+      .tb_start   (tb_start),
+      .tb_mode    (tb_mode),
+      .tb_format  (tb_format),
+      .tb_u_out   (tb_u_out),
+      .tb_v_out   (tb_v_out),
+      .res_u_out  (res_u_out),
+      .res_v_out  (res_v_out),
+      .tb_X_out   (tb_X_out),
+      .tb_Y_out   (tb_Y_out),
+      .res_X_out  (res_X_out),
+      .res_Y_out  (res_Y_out),
+      .res_done   (res_done),
+      // ----------------------------------
+      // Data outputs
+      // ----------------------------------
+      .war_u      (war_u),
+      .war_v      (war_v),
+      .err_u      (err_u),
+      .err_v      (err_v),
+      .delta_u    (delta_u),
+      .delta_v    (delta_v),
+      .max_delta_u(max_delta_u),
+      .min_delta_u(min_delta_u),
+      .max_delta_v(max_delta_v),
+      .min_delta_v(min_delta_v),
+      .war_X      (war_X),
+      .war_Y      (war_Y),
+      .err_X      (err_X),
+      .err_Y      (err_Y),
+      .delta_X    (delta_X),
+      .delta_Y    (delta_Y),
+      .max_delta_X(max_delta_X),
+      .min_delta_X(min_delta_X),
+      .max_delta_Y(max_delta_Y),
+      .min_delta_Y(min_delta_Y)
+   );
    // -----------------------------------------------------
 
    // -----------------------------------------------------
