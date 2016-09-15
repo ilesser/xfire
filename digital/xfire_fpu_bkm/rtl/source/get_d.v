@@ -36,6 +36,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Changed get_d parameters.
 //    - 2016-09-07 - ilesser - Updated default parameter WC = 20.
 //    - 2016-09-04 - ilesser - Added parameters for the integer part.
 //    - 2016-07-11 - ilesser - Removed regs and used wires.
@@ -53,10 +54,9 @@ module get_d #(
     // ----------------------------------
     // Parameters
     // ----------------------------------
-    parameter WC     = 20,
-    parameter UGC    = 3,
-    parameter LGC    = 1,
-    parameter WI     = 11
+    parameter WC     = 22,
+    parameter WCI    = 14,
+    parameter WCF    = 8
   ) (
     // ----------------------------------
     // Data inputs
@@ -94,36 +94,37 @@ module get_d #(
 // if     8/16 <=    v               then  d_y = +1
 // *****************************************************************************
 //
-//       +--------------------------------+
-//       |              W                 |
-// u =   +--------+--------+--------+-----+
-//       |  UG    |  WI    |  WF    |  LG |
-//       +--------+--------+--------+-----+
+//       +-----------------------------------+
+//       |              WC                   |
+// u =   +--------+--------+--------+--------+
+//       |  UGC   |  WI    |   4    |  LGC   |
+//       +--------+--------+--------+--------+
+//       |       WCI       |       WCF       |
+//       +--------+--------+--------+--------+
 //
 // Default values:
 //
-// u =   UUUIIIIIIIIIIIIIIII.FFFFFLL
+// u =   UUUIIIIIIIIIII.FFFFLLLL
 //
 // *****************************************************************************
 
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   localparam           WF = WC - UGC - WI;
-   wire  [UGC+WI-1:0]   u_i;     // Integer part of u
-   wire  [UGC+WI-1:0]   v_i;     // Integer part of u
-   wire  [3:0]          u_f;     // Fractional part of u
-   wire  [3:0]          v_f;     // Fractional part of v
-   wire                 u_negative;
-   wire                 u_less_than_m1;
-   wire                 u_higher_than_p1;
-   wire                 v_negative;
-   wire                 v_less_than_m1;
-   wire                 v_higher_than_p1;
-   wire                 u_range_m1_0;
-   wire                 u_range_0_p1;
-   wire                 v_range_m1_0;
-   wire                 v_range_0_p1;
+   wire  [WCI-1:0]   u_i;     // Integer part of u
+   wire  [WCI-1:0]   v_i;     // Integer part of u
+   wire  [3:0]       u_f;     // Fractional part of u
+   wire  [3:0]       v_f;     // Fractional part of v
+   wire              u_negative;
+   wire              u_less_than_m1;
+   wire              u_higher_than_p1;
+   wire              v_negative;
+   wire              v_less_than_m1;
+   wire              v_higher_than_p1;
+   wire              u_range_m1_0;
+   wire              u_range_0_p1;
+   wire              v_range_m1_0;
+   wire              v_range_0_p1;
    // -----------------------------------------------------
 
    // -----------------------------------------------------
@@ -133,17 +134,17 @@ module get_d #(
    // -----------------------------------------------------
    // Get the fractional part of u and v
    // -----------------------------------------------------
-   assign u_i           =   u[WC-1:WF];   // Integer part
-   assign u_f           =   u[WF-1:WF-4]; // Fractional part
+   assign u_i           =   u[WC-1:WCF];     // Integer part
+   assign u_f           =   u[WCF-1:WCF-4];  // Fractional part, get rid of the guard bits
    assign u_negative    =   u[WC-1];
-   assign u_range_m1_0  =  &u_i;          // All ones
-   assign u_range_0_p1  = ~|u_i;          // All zeros
+   assign u_range_m1_0  =  &u_i;             // All ones
+   assign u_range_0_p1  = ~|u_i;             // All zeros
 
-   assign v_i           =   v[WC-1:WF];   // Integer part
-   assign v_f           =   v[WF-1:WF-4]; // Fractional part
+   assign v_i           =   v[WC-1:WCF];     // Integer part
+   assign v_f           =   v[WCF-1:WCF-4];  // Fractional part, get rid of the guard bits
    assign v_negative    =   v[WC-1];
-   assign v_range_m1_0  =  &v_i;          // All ones
-   assign v_range_0_p1  = ~|v_i;          // All zeros
+   assign v_range_m1_0  =  &v_i;             // All ones
+   assign v_range_0_p1  = ~|v_i;             // All zeros
    // -----------------------------------------------------
    // Mux the value of d_n
    // -----------------------------------------------------

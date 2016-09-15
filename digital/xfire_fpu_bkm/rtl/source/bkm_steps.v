@@ -89,6 +89,8 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Changed get_d parameters.
+//    - 2016-09-14 - ilesser - Updated default parameter WC = 20.
 //    - 2016-09-07 - ilesser - Updated default parameter WC = 20.
 //    - 2016-09-07 - ilesser - Implemented rolled architcture.
 //    - 2016-09-05 - ilesser - Removed CSD conversion from this block.
@@ -119,13 +121,13 @@ module bkm_steps  (
    parameter   N        = 64;
    parameter   LOG2N    = 6;
    parameter   WD       = 72;
-   parameter   WC       = 20;
+   parameter   WC       = 22;
    parameter   LOG2WD   = 7;
    parameter   LOG2WC   = 5;
    parameter   UGD      = 2;
    parameter   LGD      = 6;
    parameter   UGC      = 3;
-   parameter   LGC      = 1;
+   parameter   LGC      = 4;
    parameter   WI       = 11;
    // ----------------------------------
    // Clock, reset & enable inputs
@@ -201,6 +203,7 @@ module bkm_steps  (
       end
    end
 
+   // TODO: Should I stop when n=64 or n=65?
    assign done  = n[LOG2N-1];
    // -------------------------------------
 
@@ -220,9 +223,8 @@ module bkm_steps  (
    // ----------------------------------
    get_d #(
       .WC         (WC),
-      .UGC        (UGC),
-      .LGC        (LGC),
-      .WI         (WI)
+      .WCI        (UGC + WI),
+      .WCF        (4 + LGC)
    ) get_d_n (
       // ----------------------------------
       // Data inputs
@@ -322,10 +324,10 @@ module bkm_steps  (
             v_n_reg <= v_n_reg;
          end
          else begin
-            X_n_reg <= X_np1;
-            Y_n_reg <= Y_np1;
-            u_n_reg <= u_np1;
-            v_n_reg <= v_np1;
+            #1 X_n_reg <= X_np1;
+            #1 Y_n_reg <= Y_np1;
+            #1 u_n_reg <= u_np1;
+            #1 v_n_reg <= v_np1;
          end
       end
    end
