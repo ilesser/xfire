@@ -79,13 +79,7 @@ module bkm_steps_driver #(
    // -----------------------------------------------------
    // Internal signals
    // -----------------------------------------------------
-   reg               double_word;
-   reg               complex;
-   wire  [WI-1:0]   X_int,      Y_int;
-   wire  [WFD-1:0]  X_frac,     Y_frac;
    wire  [WD-1:0]   X_in_bin,   Y_in_bin;
-   wire  [WI-1:0]   u_int,      v_int;
-   wire  [WFC-1:0]  u_frac,     v_frac;
    // -----------------------------------------------------
 
    // TODO: Initially all the inputs will come from the tb_Z/w_in in real format
@@ -94,18 +88,10 @@ module bkm_steps_driver #(
    //assign u_in_bin = float_or_fix == 1'b1 ?  u_in_float2bin :  u_in_cnt ;
    //assign v_in_bin = float_or_fix == 1'b1 ?  v_in_float2bin :  v_in_cnt ;
 
-   assign X_int    = $rtoi( tb_X_in );
-   assign Y_int    = $rtoi( tb_Y_in );
-   assign u_int    = $rtoi( tb_u_in );
-   assign v_int    = $rtoi( tb_v_in );
-   assign X_frac   = $rtoi( (tb_X_in - X_int) * 2.0**(WFD) );
-   assign Y_frac   = $rtoi( (tb_Y_in - Y_int) * 2.0**(WFD) );
-   assign u_frac   = $rtoi( (tb_u_in - u_int) * 2.0**(WFC) );
-   assign v_frac   = $rtoi( (tb_v_in - v_int) * 2.0**(WFC) );
-   assign X_in_bin = {X_int, X_frac};
-   assign Y_in_bin = {Y_int, Y_frac};
-   assign u_in_bin = {u_int, u_frac};
-   assign v_in_bin = {v_int, v_frac};
+   assign X_in_bin     = real2data   ( tb_X_in    );
+   assign Y_in_bin     = real2data   ( tb_Y_in    );
+   assign u_in_bin     = real2control( tb_u_in    );
+   assign v_in_bin     = real2control( tb_v_in    );
 
    bin2csd #(
    // ----------------------------------
