@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Instanciated min_max blocks.
 //    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-09-03 - ilesser - Initial version.
 //
@@ -108,6 +109,7 @@ module bkm_steps_checker #(
                "\tdelta_X  =%06.16f\tdelta_Y  =%06.16f\n", delta_X,  delta_Y,
                "\t tb_u_out=%06.16f\t tb_v_out=%06.16f\n",  tb_u_out, tb_v_out,
                "\tres_u_out=%06.16f\tres_v_out=%06.16f\n", res_u_out,res_v_out,
+               "\tdelta_u  =%06.16f\tdelta_v  =%06.16f\n", delta_u,  delta_v,
             );
    end
 

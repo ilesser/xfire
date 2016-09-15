@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Used binary to real functions.
 //    - 2016-09-07 - ilesser - Implemented monitor for bkm_steps.
 //    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-09-03 - ilesser - Initial version.

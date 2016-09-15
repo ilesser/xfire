@@ -24,6 +24,7 @@
 // History:
 // --------
 //
+//    - 2016-09-14 - ilesser - Used real to binary functions.
 //    - 2016-09-07 - ilesser - Fixed u_frac and v_frac assignments.
 //    - 2016-09-05 - ilesser - Changed io ports to real type.
 //    - 2016-09-04 - ilesser - Initial version.
